@@ -7,10 +7,17 @@
     "sw-precache": "^4.2.2"
   },
   "dependencies": {
+    "eclifford-redux-persist": "^3.2.1",
     "material-ui": "^0.17.1",
+    "material-ui-responsive-drawer": "^1.1.12",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-redux": "^5.0.3",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.8",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-responsive": "^4.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
