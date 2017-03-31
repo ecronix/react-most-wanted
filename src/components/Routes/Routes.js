@@ -1,6 +1,6 @@
 import React from 'react';
-import DrawerControls from '../components/DrawerControls/DrawerControls.js';
-import PageNotFound from '../components/PageNotFound/PageNotFound.js';
+import DrawerControls from '../../components/DrawerControls/DrawerControls.js';
+import PageNotFound from '../../components/PageNotFound/PageNotFound.js';
 import { Route , Switch} from 'react-router';
 
 const Routes = (props) => {
