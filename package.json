@@ -10,6 +10,7 @@
     "eclifford-redux-persist": "^3.2.1",
     "material-ui": "^0.17.1",
     "material-ui-responsive-drawer": "^1.1.12",
+    "material-ui-selectable-menu-list": "^1.1.12",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
