@@ -16,3 +16,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# firebase
+/functions
+.firebaserc
+.databse.rules.json
+firebase.json
