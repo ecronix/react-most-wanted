@@ -2,6 +2,7 @@ import React from 'react';
 import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
 import DrawerHeader from '../Drawer/DrawerHeader.js';
 import DrawerContent from '../../containers/Drawer/DrawerContent.js';
+import Routes from '../../routes'
 
 const App = (props) => {
 
@@ -12,7 +13,7 @@ const App = (props) => {
         <DrawerContent/>
       </ResponsiveDrawer>
       <BodyContainer openSecondary={false}>
-        {props.children}
+        <Routes/>
       </BodyContainer>
     </div>
   );

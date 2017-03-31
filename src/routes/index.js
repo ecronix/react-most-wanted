@@ -1,23 +1,18 @@
 import React from 'react';
-import { Route } from 'react-router';
-import App from '../containers/App/App.js';
 import DrawerControls from '../components/DrawerControls/DrawerControls.js';
 import PageNotFound from '../components/PageNotFound/PageNotFound.js';
+import { Route , Switch} from 'react-router';
 
-export default(
-  <Route  >
+const Routes = (props) => {
+  return (
+    <div>
+      <Switch>
+        <Route path="/" exact component={PageNotFound} />
+        <Route path="/drawer_controls" exact component={DrawerControls} />
+        <Route path="/test1" component={PageNotFound} />
+      </Switch>
+    </div>
+  );
+}
 
-    //Application parts wraped into the App container with Responsive Drawer
-    <Route  component={App}>
-      <Route path="/drawer_controls" component={DrawerControls}/>
-      <Route path="/" component={DrawerControls}/>
-      <Route path="*" component={DrawerControls}/>
-      <Route path="/test1" component={PageNotFound}/>
-      <Route path="/test2" component={PageNotFound}/>
-    </Route>
-
-    //Application parts without the App container
-
-
-  </Route>
-);
+export default Routes;

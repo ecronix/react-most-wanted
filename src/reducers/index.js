@@ -6,7 +6,7 @@ import { routerReducer } from 'react-router-redux';
 const reducers = combineReducers({
   browser: responsiveStateReducer,
   responsiveDrawer: responsiveDrawer,
-  routing: routerReducer,
+  router: routerReducer,
 })
 
 export default reducers;

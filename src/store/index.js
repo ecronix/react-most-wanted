@@ -1,12 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux'
 import reducers from '../reducers';
 import { persistStore, autoRehydrate} from 'eclifford-redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
-import { browserHistory } from 'react-router';
-//import { syncReduxAndTitle } from 'redux-title';
 
-export default function configureStore() {
+export default function configureStore(history) {
   let store;
 
   const initState={
@@ -14,7 +12,7 @@ export default function configureStore() {
   };
 
   const middlewares=[
-    routerMiddleware(browserHistory)
+    routerMiddleware(history)
   ];
 
   store = createStore(reducers, initState, compose(
