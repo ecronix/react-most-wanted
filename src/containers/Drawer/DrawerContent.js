@@ -10,6 +10,7 @@ DrawerContent.propTypes = {
   responsiveDrawer: PropTypes.object.isRequired,
   theme: PropTypes.string.isRequired,
   locale: PropTypes.string.isRequired,
+  router: PropTypes.object.isRequired,
   push: PropTypes.func.isRequired,
   setResponsive: PropTypes.func.isRequired,
   updateTheme: PropTypes.func.isRequired,
@@ -17,11 +18,12 @@ DrawerContent.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { responsiveDrawer, theme, locale } = state;
+  const { responsiveDrawer, theme, locale, router } = state;
   return {
     responsiveDrawer,
     theme,
-    locale
+    locale,
+    router
   };
 };
 

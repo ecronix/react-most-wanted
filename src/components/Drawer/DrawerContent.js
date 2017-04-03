@@ -10,14 +10,15 @@ import {injectIntl} from 'react-intl';
 const DrawerContent = (props) => {
 
   const {
-    location,
+    router,
     responsiveDrawer,
     setResponsive,
     theme,
     locale,
     updateTheme,
     updateLocale,
-    intl
+    intl,
+    muiTheme
   }=props;
 
   const handleChange = (event, index) => {
@@ -32,47 +33,49 @@ const DrawerContent = (props) => {
     }
   };
 
-  const themeItems= allThemes.map((theme)=>{
+  const themeItems= allThemes.map((t)=>{
     return {
       value:undefined,
       visible: true,
-      primaryText: intl.formatMessage({id: theme.id}),
-      onTouchTap: ()=>{updateTheme(theme.id)},
-      //leftIcon: <FontIcon className="material-icons" >style</FontIcon>
+      primaryText: intl.formatMessage({id: t.id}),
+      onTouchTap: ()=>{updateTheme(t.id)},
+      rightIcon: <FontIcon
+        className="material-icons"
+        color={t.id===theme?muiTheme.palette.primary1Color:undefined}>
+        style
+      </FontIcon>
     }
   });
 
 
 
-  const localeItems=allLocales.map((localization)=>{
+  const localeItems=allLocales.map((l)=>{
 
     return {
       value:undefined,
       visible: true,
-      primaryText: intl.formatMessage({id: localization.locale}) ,
-      onTouchTap: ()=>{updateLocale(localization.locale)},
-      //leftIcon: <FontIcon className="material-icons" >style</FontIcon>
+      primaryText: intl.formatMessage({id: l.locale}) ,
+      onTouchTap: ()=>{updateLocale(l.locale)},
+      rightIcon: <FontIcon
+        className="material-icons"
+        color={l.locale===locale?muiTheme.palette.primary1Color:undefined}>
+        language
+      </FontIcon>
     }
   });
 
   const menuItems=[
     {
-      value:'/drawer_controls',
+      value:'/dashboard',
       visible: true,
-      primaryText: 'Drawer Controls',
+      primaryText: intl.formatMessage({id: 'dashboard'}),
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
     {
-      value:'/test1',
+      value:'/about',
       visible: true,
-      primaryText: 'test',
-      leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
-    },
-    {
-      value:'/test2',
-      visible: true,
-      primaryText: 'test2',
-      leftIcon: <FontIcon className="material-icons" >transfer_within_a_station</FontIcon>
+      primaryText: intl.formatMessage({id: 'about'}),
+      leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
     },
     {
       divider:true,
@@ -115,7 +118,7 @@ const DrawerContent = (props) => {
       <SelectableMenuList
         items={menuItems}
         onIndexChange={handleChange}
-        index={location?location.pathname:'/'}
+        index={router?router.location.pathname:'/'}
       />
     </div>
   );

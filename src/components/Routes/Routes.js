@@ -1,15 +1,17 @@
 import React from 'react';
-import DrawerControls from '../../components/DrawerControls/DrawerControls.js';
-import PageNotFound from '../../components/PageNotFound/PageNotFound.js';
+import Dashboard from '../../components/Dashboard/Dashboard';
+import About from '../../components/About/About';
+import PageNotFound from '../../components/PageNotFound/PageNotFound';
 import { Route , Switch} from 'react-router';
 
 const Routes = (props) => {
   return (
     <div>
       <Switch>
-        <Route path="/" exact component={DrawerControls} />
-        <Route path="/drawer_controls" exact component={DrawerControls} />
-        <Route path="/test1" component={PageNotFound} />
+        <Route path="/" exact component={Dashboard} />
+        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/about" exact component={About} />
+        <Route path="/*" component={PageNotFound} />
       </Switch>
     </div>
   );

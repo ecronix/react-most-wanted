@@ -1,6 +1,8 @@
 import {defineMessages} from 'react-intl';
 
 const messages=defineMessages({
+  dashboard: 'Dashboard',
+  about: 'Über',
   settings: 'Einstellungen',
   language: 'Sprache',
   theme: 'Thema',
