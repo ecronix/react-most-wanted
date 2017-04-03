@@ -1,33 +1,37 @@
 import { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleDrawerOpen, setResponsive } from 'material-ui-responsive-drawer';
+import { setResponsive } from 'material-ui-responsive-drawer';
+import { setCurrentTheme } from '../../actions/theming';
 import { push } from 'react-router-redux';
 import {DrawerContent} from '../../components/Drawer';
 
 DrawerContent.propTypes = {
-  toggleDrawerOpen: PropTypes.func.isRequired,
   responsiveDrawer: PropTypes.object.isRequired,
+  push: PropTypes.func.isRequired,
+  setResponsive: PropTypes.func.isRequired,
+  setCurrentTheme: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { responsiveDrawer } = state;
+  const { responsiveDrawer, theming } = state;
   return {
-    responsiveDrawer
+    responsiveDrawer,
+    theming
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    toggleDrawerOpen: () => {
-      dispatch(toggleDrawerOpen());
-    },
     push: (path)=>{
       dispatch(push(path))
     },
     setResponsive: (responsive) => {
       dispatch(setResponsive(responsive));
-    }
+    },
+    setCurrentTheme: (theme) => {
+      dispatch(setCurrentTheme(theme));
+    },
   }
 };
 

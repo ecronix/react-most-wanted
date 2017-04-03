@@ -4,6 +4,10 @@
   "private": true,
   "devDependencies": {
     "react-scripts": "0.9.5",
+    "redux-devtools": "^3.3.2",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.2.0",
+    "redux-logger": "^3.0.1",
     "sw-precache": "^4.2.2"
   },
   "dependencies": {

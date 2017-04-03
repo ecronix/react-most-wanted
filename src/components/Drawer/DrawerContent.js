@@ -3,24 +3,37 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import {SelectableMenuList} from 'material-ui-selectable-menu-list';
 import FontIcon from 'material-ui/FontIcon';
 import Toggle from 'material-ui/Toggle';
+import themes from '../../themes';
 
 const DrawerContent = (props) => {
 
-  const { location, responsiveDrawer, setResponsive }=props;
+  const { location, responsiveDrawer, setResponsive, theming, setCurrentTheme }=props;
 
-  console.debug('location', location);
 
   const handleChange = (event, index) => {
     const {push, responsiveDrawer} = props;
+
+    //console.debug('event', event);
 
     if(responsiveDrawer.open && index!==undefined){
       //setDrawerOpen(false);
     }
 
     if(index!==undefined && index!==Object(index)){
+      console.debug('index', index);
       push(index);
     }
   };
+
+  const themeItems=themes.map((theme)=>{
+    return {
+      value:undefined,
+      visible: true,
+      primaryText: theme.label,
+      onTouchTap: ()=>{setCurrentTheme(theme)},
+      //leftIcon: <FontIcon className="material-icons" >style</FontIcon>
+    }
+  });
 
   const menuItems=[
     {
@@ -51,8 +64,9 @@ const DrawerContent = (props) => {
       nestedItems:[
         {
           primaryText: 'Theme',
-          secondaryText: 'default',
+          secondaryText: theming.label,
           leftIcon: <FontIcon className="material-icons" >style</FontIcon>,
+          nestedItems: themeItems,
           //onClick: ()=>{setThemeDialogOpen(true)},
         },
         {
