@@ -9,14 +9,10 @@ import './index.css';
 import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import App from './containers/App/App.js';
+
 const history = createHistory()
-
-//import App from './App';
-import './index.css';
-
-injectTapEventPlugin();
-
 const store = configureStore(history);
+injectTapEventPlugin();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -36,11 +36,12 @@ class DrawerControls extends Component {
     return (
       <div>
         <ResponsiveAppBar
-          title={'Responsive Material-UI Drawer DEMO'}
+          title={'Responsive Material-UI Drawer DEMO5'}
           iconElementRight={
             <FlatButton
               href="https://github.com/TarikHuber/material-ui-responsive-drawer"
               target="_blank"
+              rel="noopener"
               secondary={true}
               icon={
                 <SvgIcon width={22} height={22} viewBox="0 0 1800 1800" >

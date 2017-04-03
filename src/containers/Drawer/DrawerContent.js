@@ -1,8 +1,8 @@
 import { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleDrawerOpen } from 'material-ui-responsive-drawer';
+import { toggleDrawerOpen, setResponsive } from 'material-ui-responsive-drawer';
 import { push } from 'react-router-redux';
-import DrawerContent from '../../components/Drawer/DrawerContent.js';
+import {DrawerContent} from '../../components/Drawer';
 
 DrawerContent.propTypes = {
   toggleDrawerOpen: PropTypes.func.isRequired,
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
     push: (path)=>{
       dispatch(push(path))
     },
+    setResponsive: (responsive) => {
+      dispatch(setResponsive(responsive));
+    }
   }
 };
 

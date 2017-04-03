@@ -2,10 +2,11 @@ import React from 'react';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {SelectableMenuList} from 'material-ui-selectable-menu-list';
 import FontIcon from 'material-ui/FontIcon';
+import Toggle from 'material-ui/Toggle';
 
 const DrawerContent = (props) => {
 
-  const { location }=props;
+  const { location, responsiveDrawer, setResponsive }=props;
 
   console.debug('location', location);
 
@@ -39,6 +40,38 @@ const DrawerContent = (props) => {
       visible: true,
       primaryText: 'test2',
       leftIcon: <FontIcon className="material-icons" >transfer_within_a_station</FontIcon>
+    },
+    {
+      divider:true,
+    },
+    {
+      primaryText: 'Settings',
+      primaryTogglesNestedList: true,
+      leftIcon: <FontIcon className="material-icons" >settings</FontIcon>,
+      nestedItems:[
+        {
+          primaryText: 'Theme',
+          secondaryText: 'default',
+          leftIcon: <FontIcon className="material-icons" >style</FontIcon>,
+          //onClick: ()=>{setThemeDialogOpen(true)},
+        },
+        {
+          primaryText: 'Language',
+          secondaryText: 'default',
+          leftIcon: <FontIcon className="material-icons" >language</FontIcon>,
+          //onClick: ()=>{setIntlDialogOpen(true)},
+        },
+        {
+          primaryText: 'Responsive',
+          leftIcon: <FontIcon className="material-icons" >chrome_reader_mode</FontIcon>,
+          rightToggle: <Toggle
+            toggled={responsiveDrawer.responsive}
+            onToggle={
+              () => {setResponsive(!responsiveDrawer.responsive)}
+            }
+          />,
+        },
+      ]
     },
   ];
 

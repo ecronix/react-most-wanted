@@ -1,7 +1,8 @@
 import React from 'react';
 import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
-import { DrawerHeader, DrawerContent } from '../Drawer';
-import { Routes } from '../Routes'
+import {DrawerHeader} from '../Drawer';
+import {DrawerContent} from '../../containers/Drawer';
+import {Routes} from '../Routes'
 
 const App = (props) => {
 
