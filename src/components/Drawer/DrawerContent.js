@@ -3,34 +3,54 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import {SelectableMenuList} from 'material-ui-selectable-menu-list';
 import FontIcon from 'material-ui/FontIcon';
 import Toggle from 'material-ui/Toggle';
-import themes from '../../themes';
+import allThemes from '../../themes';
+import allLocales from '../../locales';
+import {injectIntl} from 'react-intl';
 
 const DrawerContent = (props) => {
 
-  const { location, responsiveDrawer, setResponsive, theming, setCurrentTheme }=props;
-
+  const {
+    location,
+    responsiveDrawer,
+    setResponsive,
+    theme,
+    locale,
+    updateTheme,
+    updateLocale,
+    intl
+  }=props;
 
   const handleChange = (event, index) => {
     const {push, responsiveDrawer} = props;
-
-    //console.debug('event', event);
 
     if(responsiveDrawer.open && index!==undefined){
       //setDrawerOpen(false);
     }
 
     if(index!==undefined && index!==Object(index)){
-      console.debug('index', index);
       push(index);
     }
   };
 
-  const themeItems=themes.map((theme)=>{
+  const themeItems= allThemes.map((theme)=>{
     return {
       value:undefined,
       visible: true,
-      primaryText: theme.label,
-      onTouchTap: ()=>{setCurrentTheme(theme)},
+      primaryText: intl.formatMessage({id: theme.id}),
+      onTouchTap: ()=>{updateTheme(theme.id)},
+      //leftIcon: <FontIcon className="material-icons" >style</FontIcon>
+    }
+  });
+
+
+
+  const localeItems=allLocales.map((localization)=>{
+
+    return {
+      value:undefined,
+      visible: true,
+      primaryText: intl.formatMessage({id: localization.locale}) ,
+      onTouchTap: ()=>{updateLocale(localization.locale)},
       //leftIcon: <FontIcon className="material-icons" >style</FontIcon>
     }
   });
@@ -58,25 +78,26 @@ const DrawerContent = (props) => {
       divider:true,
     },
     {
-      primaryText: 'Settings',
+      primaryText: intl.formatMessage({id: 'settings'}),
       primaryTogglesNestedList: true,
       leftIcon: <FontIcon className="material-icons" >settings</FontIcon>,
       nestedItems:[
         {
-          primaryText: 'Theme',
-          secondaryText: theming.label,
+          primaryText: intl.formatMessage({id: 'theme'}),
+          secondaryText: intl.formatMessage({id: theme}),
+          primaryTogglesNestedList: true,
           leftIcon: <FontIcon className="material-icons" >style</FontIcon>,
           nestedItems: themeItems,
-          //onClick: ()=>{setThemeDialogOpen(true)},
         },
         {
-          primaryText: 'Language',
-          secondaryText: 'default',
+          primaryText: intl.formatMessage({id: 'language'}),
+          secondaryText: intl.formatMessage({id: locale}),
+          primaryTogglesNestedList: true,
           leftIcon: <FontIcon className="material-icons" >language</FontIcon>,
-          //onClick: ()=>{setIntlDialogOpen(true)},
+          nestedItems: localeItems,
         },
         {
-          primaryText: 'Responsive',
+          primaryText: intl.formatMessage({id: 'responsive'}),
           leftIcon: <FontIcon className="material-icons" >chrome_reader_mode</FontIcon>,
           rightToggle: <Toggle
             toggled={responsiveDrawer.responsive}
@@ -100,4 +121,4 @@ const DrawerContent = (props) => {
   );
 }
 
-export default muiThemeable()(DrawerContent);
+export default injectIntl(muiThemeable()(DrawerContent));

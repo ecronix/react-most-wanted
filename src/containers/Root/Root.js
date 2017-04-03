@@ -1,30 +1,21 @@
 import { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { setCurrentTheme } from '../../actions/theming';
 import { Root } from '../../components/Root';
 
 Root.propTypes = {
-  theming: PropTypes.object.isRequired,
-  setCurrentTheme: PropTypes.func.isRequired,
+  theme: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { theming } = state;
+  const { theme, locale } = state;
   return {
-    theming
+    theme,
+    locale
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-
-  return {
-    setCurrentTheme: (theme) => {
-      dispatch(setCurrentTheme(theme));
-    },
-  }
-};
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Root);

@@ -9,17 +9,31 @@ export default function configureStore(history) {
   let store;
 
   const logger = createLogger({
-    // ...options
+
   });
 
   const initState={
-    //Initial state
   };
 
-  const middlewares=[
-    routerMiddleware(history),
-    logger
-  ];
+  let middlewares=[]
+
+
+  if (process.env.NODE_ENV === 'production') {
+
+    //PROD middlewares
+    middlewares=[
+      routerMiddleware(history)
+    ];
+
+  }else{
+
+    //DEV middlewares
+    middlewares=[
+      routerMiddleware(history),
+      logger
+    ];
+
+  }
 
   store = createStore(reducers, initState, compose(
     applyMiddleware(...middlewares),
@@ -27,10 +41,8 @@ export default function configureStore(history) {
     responsiveStoreEnhancer,
   ));
 
-  //syncReduxAndTitle(store);
-
   try{
-    persistStore(store, { whitelist : ['responsiveDrawer', 'theming']}, ()=>{});
+    persistStore(store, { whitelist : ['responsiveDrawer', 'theme', 'locale']}, ()=>{});
   }catch(e){
 
   }

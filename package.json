@@ -17,6 +17,7 @@
     "material-ui-selectable-menu-list": "^1.1.12",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-intl": "^2.2.3",
     "react-redux": "^5.0.3",
     "react-router": "^4.0.0",
     "react-router-redux": "^5.0.0-alpha.4",

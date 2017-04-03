@@ -1,22 +1,27 @@
 import { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { setResponsive } from 'material-ui-responsive-drawer';
-import { setCurrentTheme } from '../../actions/theming';
+import { updateTheme } from '../../actions/theme';
+import { updateLocale } from '../../actions/locale';
 import { push } from 'react-router-redux';
-import {DrawerContent} from '../../components/Drawer';
+import { DrawerContent } from '../../components/Drawer';
 
 DrawerContent.propTypes = {
   responsiveDrawer: PropTypes.object.isRequired,
+  theme: PropTypes.string.isRequired,
+  locale: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
   setResponsive: PropTypes.func.isRequired,
-  setCurrentTheme: PropTypes.func.isRequired,
+  updateTheme: PropTypes.func.isRequired,
+  updateLocale: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { responsiveDrawer, theming } = state;
+  const { responsiveDrawer, theme, locale } = state;
   return {
     responsiveDrawer,
-    theming
+    theme,
+    locale
   };
 };
 
@@ -29,8 +34,11 @@ const mapDispatchToProps = (dispatch) => {
     setResponsive: (responsive) => {
       dispatch(setResponsive(responsive));
     },
-    setCurrentTheme: (theme) => {
-      dispatch(setCurrentTheme(theme));
+    updateTheme: (theme) => {
+      dispatch(updateTheme(theme));
+    },
+    updateLocale: (locale) => {
+      dispatch(updateLocale(locale));
     },
   }
 };

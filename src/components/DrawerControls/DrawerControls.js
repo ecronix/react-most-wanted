@@ -10,6 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import SvgIcon from 'material-ui/SvgIcon';
+import {FormattedDate, injectIntl, intlShape} from 'react-intl';
 
 const styles={
   body_header:{
@@ -31,7 +32,7 @@ class DrawerControls extends Component {
       responsiveDrawer,
       toggleDrawerDock,
       setResponsive
-    } = this.props
+    } = this.props;
 
     return (
       <div>
@@ -60,6 +61,7 @@ class DrawerControls extends Component {
             primary={true}
             onTouchTap={toggleDrawerOpen}
           />
+          <FormattedDate value={new Date()}/>
           <Toggle
             label={responsiveDrawer.responsive?"Disable responsive":"Enable responsive"}
             labelPosition='right'
@@ -86,6 +88,7 @@ DrawerControls.propTypes = {
   toggleDrawerOpen: PropTypes.func.isRequired,
   toggleDrawerDock: PropTypes.func.isRequired,
   setResponsive: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -113,4 +116,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DrawerControls);
+)(injectIntl(DrawerControls));
