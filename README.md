@@ -1,8 +1,7 @@
-<p>
-<img alt="react-most-wanted" src="public/icons/icon_256x256.png" width="150"></img>
-</p>
+# React Most Wanted
 
 <p>
+<img alt="react-most-wanted" src="public/icons/icon_256x256.png" width="80" />
   <a title='License' href="https://github.com/TarikHuber/react-most-wanted/master/LICENSE" height="18">
     <img src='https://img.shields.io/npm/l/express.svg' />
   </a>
