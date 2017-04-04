@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import reducers from '../reducers';
-import { persistStore, autoRehydrate} from 'eclifford-redux-persist';
+import { persistStore, autoRehydrate} from 'redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
 
 export default function configureStore(history) {

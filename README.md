@@ -1,4 +1,4 @@
-#React Most Wanted
+# React Most Wanted
 
 ## Table of Contents
 
@@ -6,14 +6,17 @@
 - [Features](#features)
 - [Folder Structure](#folder-structure)
 - [Libraries](#libraries)
-  - [react and redux](#react and redux)
+  - [react and redux](#react-and-redux)
   - [create-react-app](#create-react-app)
   - [material-ui](#material-ui)
+  - [react-router-redux](#react-router-redux)
+  - [react-intl](#react-intl)
+  - [redux-persist](#redux-persist)
+  - [material-ui-responsive-drawer](#material-ui-responsive-drawer)
+  - [material-ui-selectable-menu-list](#material-ui-selectable-menu-list)
+  - [redux-logger](#redux-logger)
 - [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
 - [Syntax Highlighting in the Editor](#syntax-highlighting-in-the-editor)
-
-
-
 
 
 ## Description
@@ -21,6 +24,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 It should be a `shell` for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
+
+You can find a example of this project in this [DEMO](https://react-most-wanted.firebaseapp.com/).
+
+I tried to make the project as clean as possible and to use all libraries in they're pure way.
 
 
 ## Features
@@ -30,6 +37,7 @@ It should be a `shell` for my further applications with the minimum features I w
 * *PWA* - has Progressive Web App features
 * *responsive* - included with PWA
 * *material-ui*
+* *routing*
 * *theming*
 * *internationalization*
 
@@ -78,7 +86,7 @@ The folders `locales` and `themes` are used to store data for different locales 
 
 ## Libraries
 
-### react and redux
+### React and Redux
 
 You want to make a web application and use only `react` without any library to manage the state. Hmm... well, I won't say thats madness but... ;) It is possible but you can also go without shoes to work. I'll stay with my confortable `redux` "shoes". There are also other libraries but I think that `redux` is one of the best and if you know that you are building a application that will get bigger and bigger `redux` should be your choise.
 
@@ -107,10 +115,81 @@ This application uses 100% `material-ui`! There are no other libraries for styli
 
 The team around `material-ui` is working in the `@next` branch on a greate new version with lots of modifications and new features and components like `Layouts`. For now it isn't stable so we will stick with the current stable version untill the `@next` brantch is satable enough.
 
+This library gives use all we need for theming our application. All you have to do is to provide some theme in the `themes` folder and update the `index.js` file in the `themes` folder. After that your theme should be visible and ready to use. Just watch how it is done with the `ics_theme`.
+
+### react-router-redux
+
+Every application would need some kind of routing. I desided to use `react-router` in this project and to use the new version 4 for witch the `react-router-redux` is unfortunaly only in alpha state. But the main features are working in the alpha so I desided to use it even it is not released in stable version. Why should I do this when there is the older versio of `react-router` and the stable version of `react-router-redux`. At first it was the old version and when I wanted to try the new one there where so drastical changes that I had to change the complete routing code. The whole concept is different in the version 4. Because of that we are using here the newer version to be prepared for the future.
+
+The main difference is that every `Route` is now a real react component that renders its childs:
+Example in the [Routes.js](https://github.com/TarikHuber/react-most-wanted/blob/master/src/components/Routes/Routes.js) folder.
+```js
+
+<Switch>
+  <Route path="/" exact component={Dashboard} />
+  <Route path="/dashboard" exact component={Dashboard} />
+  <Route path="/about" exact component={About} />
+  <Route path="/*" component={PageNotFound} />
+</Switch>
+
+```
+
+### react-helmet
+
+This library allows us to change the HTML meta data during runtime. With this one we change the title in our application on page change. In the `App.js`, one of the root elements of the project, we use it to change the `theme-color` of our application witch gives a greate user expiriences when changing the application theme.
+
+### react-intl
+
+Internationalization is very importand. Even if you use just a single language your application should be prepared for a more of them. It is easy to aply it from beginning than refactoring the whole application afterwads. `react-intl` has also a huge maintainer Yahoo. It is one of the larges or maby the larges Internationalization library for react so I desided to use it for our application.
+
+There is also a redux project that should make the usage with redux easier but it has a modified `Provider` and I'm not confortable with it to put my application `Provider` in hands of a external library than `react-redux`. Because of that I implemented a simple solution that is very similar to the `theming` solution. You just have to provide the locales in the `locales` folder and to update the `index.js` file in it. Just follow the `de` example.
+
+The only thing you'll have to do more than by the `theming` feature is that you have to add the localisationData in the [Root.js](https://github.com/TarikHuber/react-most-wanted/blob/master/src/components/Root/Root.js) folder:
+
+```js
+
+import {addLocaleData} from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import de from 'react-intl/locale-data/de';
+
+addLocaleData([...en, ...de]);
+
+```
+
+For example after adding the `fr` locale it would look like this:
+
+```js
+
+import {addLocaleData} from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import de from 'react-intl/locale-data/de';
+import fr from 'react-intl/locale-data/fr';
+
+addLocaleData([...en, ...de, ...fr]);
+
+```
+
+### redux-persist
+
+It allows us to save the state to the `localStoreage` or another storage and to rehidrate it on full oage reload or page visit after longer time. It allows us to load the full store even if the client is offline witch is one of the requirements for Pgrogressive Web Apps.
 
 
+### material-ui-responsive-drawer
+
+This library helps us to make the main `Drawer` menu responsible and even to enable or disable the responsive behavior in runtime. It uses the libraries `material-ui` and `redux-responsive`. You can find more about this library [here](https://github.com/TarikHuber/material-ui-responsive-drawer).
+
+I hope that the `@next` branch of `material-ui` has some features that allow us to make the `Drawer` responsible without such libraries.
 
 
-The next feature, or in this case "fatures", would be [PWA](https://developers.google.com/web/progressive-web-apps/) (Progressive Web App) capability. It's not just about making the application work offline. There are lots of other requirements that your application should have without having just PWA in mind. The PWA [checklist](https://developers.google.com/web/progressive-web-apps/checklist) is a great overview of all of them. There is also a greate Chrome plugin [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) that alowes you to check all aspects of PWA for your application in detail.
+### material-ui-selectable-menu-list
 
-One feature that is already in the PWA can be threated seperately. It's the `responsive` feature. I don't have any statistic or some other data but I know one thing: "If I open a web page with my phone this days and it doesn't adopt to my screen size I just leave that **old** thing". For me personaly this is one of the main features that every page that want's to be used in the mobile world, and we all are mobile, should have. There are lots of ways to make your app responsive. Some are using bootstrap with react
+This is also a library that should make our life easier. It also uses `material-ui` as peer dependency. It allows us to send to a single component an array of menu items we would like to have in it and the component renders all of them. You can find more about it [here](https://github.com/TarikHuber/material-ui-selectable-menu-list).
+
+
+### redux-logger
+
+We use the simple `redux-logger` dev library to se how the redux state changes during application usage.
+
+### sw-precache
+
+Is also a dev library that helos us to create a service worker during build proccess. The service worker then allows the user to open our application even if he has no connection. Because the implementation is fully used how it is described in [this](https://github.com/jeffposnick/create-react-pwa) project we leave the detaile explanation to them.

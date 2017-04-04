@@ -4,14 +4,10 @@
   "private": true,
   "devDependencies": {
     "react-scripts": "0.9.5",
-    "redux-devtools": "^3.3.2",
-    "redux-devtools-dock-monitor": "^1.1.1",
-    "redux-devtools-log-monitor": "^1.2.0",
     "redux-logger": "^3.0.1",
     "sw-precache": "^4.2.2"
   },
   "dependencies": {
-    "eclifford-redux-persist": "^3.2.1",
     "material-ui": "^0.17.1",
     "material-ui-responsive-drawer": "^1.1.12",
     "material-ui-selectable-menu-list": "^1.1.12",
@@ -24,6 +20,7 @@
     "react-router-redux": "^5.0.0-alpha.4",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
+    "redux-persist": "^4.6.0",
     "redux-responsive": "^4.1.1"
   },
   "scripts": {
