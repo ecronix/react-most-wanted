@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FlatButton from 'material-ui/FlatButton';
 import {injectIntl, intlShape} from 'react-intl';
-import {GitHubIcon} from '../Icons'
+import {GitHubIcon} from '../Icons';
+import {Helmet} from 'react-helmet';
 
 class Dashboard extends Component {
 
@@ -12,6 +13,9 @@ class Dashboard extends Component {
 
     return (
       <div>
+        <Helmet>
+          <title>{intl.formatMessage({id: 'dashboard'})}</title>
+        </Helmet>
         <ResponsiveAppBar
           title={intl.formatMessage({id: 'dashboard'})}
           iconElementRight={
