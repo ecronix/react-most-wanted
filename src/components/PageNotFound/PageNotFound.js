@@ -1,12 +1,47 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
+import {ReduxIcon} from '../Icons';
+import {injectIntl} from 'react-intl';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ActionHome from 'material-ui/svg-icons/action/home';
+
+const styles={
+  paper:{
+    height: '100%',
+    margin:0,
+    padding: 1
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5
+  },
+  icon: {
+    width:192,
+    height: 192
+  }
+}
+
 
 const PageNotFound = (props) => {
+
+  const { muiTheme, intl }=props;
+
   return (
-    <div>
-      <h3>404 page not found</h3>
-      <p>We are sorry but the page you are looking for does not exist.</p>
-    </div>
+    <Paper  zDepth={1} style={styles.paper}>
+      <div style={styles.container}>
+        <ReduxIcon color={muiTheme.palette.primary2Color} style={styles.icon}/>
+        <h3>{intl.formatMessage({id: 'warning_404_message'})}</h3>
+        <p>{intl.formatMessage({id: 'warning_404_description'})}</p>
+        <FloatingActionButton secondary={true} href='/'>
+          <ActionHome />
+        </FloatingActionButton>
+      </div>
+    </Paper>
   );
 }
 
-export default PageNotFound;
+export default injectIntl(muiThemeable()(PageNotFound));

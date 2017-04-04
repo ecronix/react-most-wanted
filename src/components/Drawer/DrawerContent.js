@@ -22,10 +22,10 @@ const DrawerContent = (props) => {
   }=props;
 
   const handleChange = (event, index) => {
-    const {push, responsiveDrawer} = props;
+    const {push, responsiveDrawer, setDrawerOpen} = props;
 
     if(responsiveDrawer.open && index!==undefined){
-      //setDrawerOpen(false);
+      setDrawerOpen(false);
     }
 
     if(index!==undefined && index!==Object(index)){
@@ -76,6 +76,13 @@ const DrawerContent = (props) => {
       visible: true,
       primaryText: intl.formatMessage({id: 'about'}),
       leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
+    },
+    {
+      value:'/wrong_url',
+      visible: true,
+      primaryText: intl.formatMessage({id: '404'}),
+      secondaryText: intl.formatMessage({id: 'page_not_found_demo'}),
+      leftIcon: <FontIcon className="material-icons" >warning</FontIcon>
     },
     {
       divider:true,
