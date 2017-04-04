@@ -1,5 +1,6 @@
-<img alt="react-most-wanted" src="public/icons/icon_128x128.png" width="300"></img>
-# React Most Wanted
+<p>
+<img alt="react-most-wanted" src="public/icons/icon_256x256.png" width="150"></img>
+</p>
 
 <p>
   <a title='License' href="https://github.com/TarikHuber/react-most-wanted/master/LICENSE" height="18">
