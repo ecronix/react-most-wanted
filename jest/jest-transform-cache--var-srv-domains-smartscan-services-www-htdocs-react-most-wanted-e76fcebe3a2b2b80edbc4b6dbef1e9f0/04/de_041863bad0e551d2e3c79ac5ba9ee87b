@@ -1,0 +1,23 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  app_name: 'React Most Wanted',
+  dashboard: 'Dashboard',
+  about: 'Über',
+  page_not_found_demo: 'Seite nicht gefunden demo',
+  '404': '404',
+  warning_404_message: '404 Seite nicht gefunden',
+  warning_404_description: 'Es tut uns leid aber die angeforderte Seite existiert nicht.',
+  settings: 'Einstellungen',
+  language: 'Sprache',
+  theme: 'Thema',
+  responsive: 'Responsive',
+  en: 'Englisch',
+  de: 'Deutsch',
+  dark: 'Dark',
+  light: 'Light',
+  ics: 'ICS' }); /* istanbul ignore next */exports.default =
+
+
+
+messages;

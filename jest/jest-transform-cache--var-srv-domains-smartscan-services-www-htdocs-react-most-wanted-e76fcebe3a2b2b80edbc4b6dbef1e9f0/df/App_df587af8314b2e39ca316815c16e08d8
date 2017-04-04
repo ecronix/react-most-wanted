@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_react = require('react');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_App = require('../../components/App/App.js'); /* istanbul ignore next */var _App2 = _interopRequireDefault(_App);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/* istanbul ignore next */_App2.default.propTypes = {
+  toggleDrawerOpen: /* istanbul ignore next */_react.PropTypes.func.isRequired,
+  responsiveDrawer: /* istanbul ignore next */_react.PropTypes.object.isRequired };
+
+
+const mapStateToProps = state => {
+  const { responsiveDrawer } = state;
+  return {
+    responsiveDrawer };
+
+};
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    toggleDrawerOpen: () => {
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.toggleDrawerOpen)());
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)( /* istanbul ignore next */_App2.default);

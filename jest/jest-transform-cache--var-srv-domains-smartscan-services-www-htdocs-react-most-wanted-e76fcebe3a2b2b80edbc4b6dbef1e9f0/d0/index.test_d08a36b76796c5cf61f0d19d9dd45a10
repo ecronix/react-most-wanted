@@ -1,0 +1,19 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_locales = require('../../locales'); /* istanbul ignore next */var _locales2 = _interopRequireDefault(_locales);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+describe('locales', () => {
+
+  it('should return locale messages', () => {
+    expect(
+    /* istanbul ignore next */(0, _locales.getLocaleMessages)('de')).
+    toEqual( /* istanbul ignore next */_locales2.default);
+  });
+
+  it('should return deault locale on wrong input', () => {
+    expect(
+    /* istanbul ignore next */(0, _locales.getLocaleMessages)('de2')).
+    toEqual( /* istanbul ignore next */_locales2.default['en']);
+  });
+
+
+});

@@ -1,4 +1,4 @@
-import{ UPDATE_THEME } from '../actions/theme';
+import { UPDATE_THEME } from '../actions/theme';
 
 const theme = (state = 'light' , action) => {
 

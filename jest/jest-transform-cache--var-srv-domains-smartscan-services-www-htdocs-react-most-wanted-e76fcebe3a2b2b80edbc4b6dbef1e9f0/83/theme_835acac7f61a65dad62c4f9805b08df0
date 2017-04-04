@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_theme = require('../actions/theme');
+
+const theme = (state = 'light', action) => {
+
+  switch (action.type) {
+    case 'UPDATE_THEME':
+      return action.theme;
+
+    default:
+      return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+theme;

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "enzyme": "^2.8.0",
+    "react-addons-test-utils": "^15.4.2",
     "react-scripts": "0.9.5",
     "redux-logger": "^3.0.1",
     "sw-precache": "^4.2.2"

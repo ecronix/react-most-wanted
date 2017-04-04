@@ -1,14 +1,14 @@
 import{ UPDATE_LOCALE } from '../actions/locale';
 
-const locales = (state = 'en' , action) => {
+const locale = (state = 'en' , action) => {
 
   switch (action.type) {
     case UPDATE_LOCALE:
-    return action.locale ;
+    return action.locale;
 
     default:
     return state;
   }
 }
 
-export default locales;
+export default locale;

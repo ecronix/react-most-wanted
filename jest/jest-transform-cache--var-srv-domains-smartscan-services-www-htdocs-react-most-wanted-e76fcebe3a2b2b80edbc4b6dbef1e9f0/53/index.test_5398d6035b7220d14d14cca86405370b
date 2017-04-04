@@ -1,0 +1,13 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_locales = require('../../locales');
+var /* istanbul ignore next */_en = require('../../locales/en'); /* istanbul ignore next */var _en2 = _interopRequireDefault(_en);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('locales', () => {
+
+  it('should return locale messages', () => {
+    expect(
+    /* istanbul ignore next */(0, _locales.getLocaleMessages)('en')).
+    toEqual( /* istanbul ignore next */_en2.default);
+  });
+
+
+});

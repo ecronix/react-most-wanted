@@ -1,0 +1,47 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/tests/components/About.test.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_About = require('../../components/About'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function setup() {
+  const props = {
+    intl: jest.fn() };
+
+
+  const enzymeWrapper = /* istanbul ignore next */(0, _enzyme.shallow)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_About.About, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 10 }, __self: this })));
+
+  return {
+    props,
+    enzymeWrapper };
+
+}
+
+describe('components', () => {
+  describe('About', () => {
+    it('should render self and subcomponents', () => {
+      const { enzymeWrapper } = setup();
+
+      /*
+                                         expect(enzymeWrapper.find('header').hasClass('header')).toBe(true)
+                                           expect(enzymeWrapper.find('h1').text()).toBe('todos')
+                                           const todoInputProps = enzymeWrapper.find('TodoTextInput').props()
+                                         expect(todoInputProps.newTodo).toBe(true)
+                                         expect(todoInputProps.placeholder).toEqual('What needs to be done?')
+                                         */
+
+
+    });
+
+    /*
+        it('should call addTodo if length of text is greater than 0', () => {
+          const { enzymeWrapper, props } = setup()
+          const input = enzymeWrapper.find('TodoTextInput')
+          input.props().onSave('')
+          expect(props.addTodo.mock.calls.length).toBe(0)
+          input.props().onSave('Use Redux')
+          expect(props.addTodo.mock.calls.length).toBe(1)
+        })
+        */
+
+
+  });
+});

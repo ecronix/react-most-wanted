@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_locale = require('./locale'); /* istanbul ignore next */var locale = _interopRequireWildcard(_locale); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+describe('locale', () => {
+  it('should create an action to add a todo', () => {
+    const loc = 'de';
+    const expectedAction = {
+      type: locale.UPDATE_LOCALE,
+      loc };
+
+    expect(locale.addTodo(loc)).toEqual(expectedAction);
+  });
+});

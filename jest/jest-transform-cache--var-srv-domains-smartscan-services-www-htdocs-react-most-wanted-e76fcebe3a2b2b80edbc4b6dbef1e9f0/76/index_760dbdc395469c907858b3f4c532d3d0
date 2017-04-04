@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getLocaleMessages = getLocaleMessages;var /* istanbul ignore next */_en = require('./en.js'); /* istanbul ignore next */var _en2 = _interopRequireDefault(_en);var /* istanbul ignore next */_de = require('./de.js'); /* istanbul ignore next */var _de2 = _interopRequireDefault(_de);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const locales = [{ locale: 'en', messages: /* istanbul ignore next */_en2.default }, { locale: 'de', messages: /* istanbul ignore next */_de2.default }];function getLocaleMessages(locale) {
+
+  const localization = locales.find(l => {return l.locale === locale;});
+
+  if (localization) {
+    return localization.messages;
+  }
+
+  //If no locale is found the first one will be returned
+  return locales[0].messages;
+} /* istanbul ignore next */exports.default =
+
+locales;

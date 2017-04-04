@@ -42,7 +42,7 @@ export default function configureStore(history) {
   ));
 
   try{
-    persistStore(store, { whitelist : ['responsiveDrawer', 'theme', 'locale']}, ()=>{});
+    persistStore(store, { }, ()=>{});
   }catch(e){
 
   }

@@ -1,0 +1,26 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Drawer/DrawerHeader.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const DrawerHeader = props => {
+
+  const styles = {
+    header: {
+      backgroundColor: props.muiTheme.palette.primary2Color,
+      color: props.muiTheme.palette.alternateTextColor,
+      padding: 1 },
+
+    header_content: {
+      marginLeft: 20 } };
+
+
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.header, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.header_content, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: undefined }, /* istanbul ignore next */'Material-UI'))));
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _muiThemeable2.default)()(DrawerHeader);

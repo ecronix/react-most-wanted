@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_locale = require('../actions/locale');
+
+const locales = (state = 'en', action) => {
+
+  switch (action.type) {
+    case /* istanbul ignore next */_locale.UPDATE_LOCALE:
+      return action.locale;
+
+    default:
+      return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+locales;

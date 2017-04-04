@@ -1,0 +1,12 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_theme = require('../../actions/theme'); /* istanbul ignore next */var actions = _interopRequireWildcard(_theme); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+describe('action', () => {
+  it('should create an action to add a todo', () => {
+    const theme = 'de';
+    const expectedAction = {
+      type: actions.UPDATE_THEME,
+      theme };
+
+    expect(actions.updateTheme(theme)).toEqual(expectedAction);
+  });
+});

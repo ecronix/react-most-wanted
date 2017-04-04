@@ -1,0 +1,18 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Routes/Routes.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Dashboard = require('../../components/Dashboard/Dashboard'); /* istanbul ignore next */var _Dashboard2 = _interopRequireDefault(_Dashboard);
+var /* istanbul ignore next */_About = require('../../components/About/About'); /* istanbul ignore next */var _About2 = _interopRequireDefault(_About);
+var /* istanbul ignore next */_PageNotFound = require('../../components/PageNotFound/PageNotFound'); /* istanbul ignore next */var _PageNotFound2 = _interopRequireDefault(_PageNotFound);
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const Routes = props => {
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Switch, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 9 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Dashboard2.default, __source: { fileName: _jsxFileName, lineNumber: 10 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/dashboard', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Dashboard2.default, __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/about', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_About2.default, __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/*', component: /* istanbul ignore next */_PageNotFound2.default, __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: undefined })));
+
+
+}; /* istanbul ignore next */exports.default =
+
+Routes;

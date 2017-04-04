@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_theme = require('../../reducers/theme'); /* istanbul ignore next */var _theme2 = _interopRequireDefault(_theme);
+var /* istanbul ignore next */_theme3 = require('../../actions/theme'); /* istanbul ignore next */var _theme4 = _interopRequireDefault(_theme3);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('locale reducer', () => {
+  it('should return the initial state', () => {
+    expect(
+    /* istanbul ignore next */(0, _theme2.default)(undefined, {})).
+    toEqual('light');
+  });
+
+  it('should handle UPDATE_THEME', () => {
+    expect(
+    /* istanbul ignore next */(0, _theme2.default)('dark', {
+      type: /* istanbul ignore next */_theme4.default,
+      locale: 'light' })).
+
+    toEqual('dark');
+  });
+
+
+});

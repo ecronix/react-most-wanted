@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_themes = require('../../themes');
+var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);
+var /* istanbul ignore next */_ics_theme = require('./ics_theme'); /* istanbul ignore next */var _ics_theme2 = _interopRequireDefault(_ics_theme);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('locales', () => {
+
+  it('should return locale messages', () => {
+    expect(
+    /* istanbul ignore next */(0, _themes.getThemeSource)('ics_theme')).
+    toEqual( /* istanbul ignore next */_ics_theme2.default);
+  });
+
+  it('should return deault locale on wrong input', () => {
+    expect(
+    /* istanbul ignore next */(0, _themes.getThemeSource)('themeX')).
+    toEqual( /* istanbul ignore next */_lightBaseTheme2.default);
+  });
+
+
+});
