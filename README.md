@@ -1,4 +1,11 @@
-# React Most Wanted
+<p>
+  <img alt="react-most-wanted" src="public/icons/icon_256x256.png" width="300"></img>
+</p>
+<p>
+  <a title='License' href="https://github.com/TarikHuber/react-most-wanted/master/LICENSE" height="18">
+    <img src='https://img.shields.io/npm/l/express.svg' />
+  </a>
+</p>
 
 ## Table of Contents
 
@@ -15,8 +22,9 @@
   - [material-ui-responsive-drawer](#material-ui-responsive-drawer)
   - [material-ui-selectable-menu-list](#material-ui-selectable-menu-list)
   - [redux-logger](#redux-logger)
-- [Supported Language Features and Polyfills](#supported-language-features-and-polyfills)
-- [Syntax Highlighting in the Editor](#syntax-highlighting-in-the-editor)
+  - [sw-precache](#sw-precache)
+- [TO DO](#to-do)
+- [License](#license)
 
 
 ## Description
@@ -41,7 +49,9 @@ I tried to make the project as clean as possible and to use all libraries in the
 * *theming*
 * *internationalization*
 
-All these features can be programmed from scratch. But why should you do this to you? Out there are so mutch greate developers creating greate application, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier. If all that is true why did I create this project? There must be already a starter kit for react applications! Well, there are lots of them but unfortunaly non of them was as I would like it to be. Some don't have enough fatures to just start and some are have so many that I had to delete features I don't need. I want to create a starting point that has, as said before, my **personal** "Most Wanted" features. If someone likes it, greate :)
+All these features can be programmed from scratch. But why should you do this? Out there are so mutch greate developers creating greate applications, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier.
+
+If all that is true why did I create this project? There must be already a starter kit for react applications! Well, there are lots of them but unfortunaly non of them was as I would like it to be. Some don't have enough fatures to just start and some are have so many that I had to delete features I don't need. I want to create a starting point that has, as said before, my **personal** "Most Wanted" features. If someone likes it, greate :)
 
 The further text explains witch libraries/modules are used and why. Some of them are installed and used in they're `pure` way as in documentation described so in that cases we will just show the link to the official documentation to awoid outdated descriptions of the usage.
 
@@ -92,7 +102,7 @@ You want to make a web application and use only `react` without any library to m
 
 Yes, you will need to write more code but there are much more pros than cons! There are lots of discussions on witch library is the best to use with `react` even if you should use `react` or some other project like [preact](https://github.com/developit/preact), [inferno](https://github.com/infernojs/inferno) and a very loooong etc....
 
-My private favorits are `react` and `redux` because I can shurely say that they are not some hiped projects that will die in a couple of months or years. 'react' is maintained by Facebook so I can be shure that lots of greate developers will take care of witch path the library will go.
+My private favorits are `react` and `redux` because I can shurely say that they are not some hiped projects that will die in a couple of months or years. `react` is maintained by Facebook so I can be shure that lots of greate developers will take care of witch path the library will go.
 
 
 ### create-react-app
@@ -104,12 +114,14 @@ The project should be easy to update in long term. That brings me to the first u
 * it can be updated to the latest version without any or small changes to your application and
 * if you feel strangled by the configs and setup you can `eyect` and leave the prepared path and go your own way.
 
-There is a large team from Facebook taking care that everithing is up to date witch makes me more confortable using this tool than any other there. And there are others! My second favorite would be [nwb](https://github.com/insin/nwb). I havend made applications with it but for making standalone react or react-redux components it is just fantastic.
+There is a large team from Facebook taking care that everything is up to date witch makes me more confortable using this tool than any other there. And there are others! My second favorite would be [nwb](https://github.com/insin/nwb). I havend made applications with it but for making standalone react or react-redux components it is just fantastic.
 
 
 ### material-ui
 
-Because I make most of the time web applications and not "just" web pages and because I'm not a designer there is only one solution that I could use for design and that is Googles Material-UI design patterns. And ofcourse there is a greate react library that we can use for that [material-ui](https://github.com/callemall/material-ui). It has most of the parts you would need for a Material-UI designed application. It comes with a greate feature that we can use in our application and that is `theming` or "customatisation" how they call it in they'r [documentation](http://www.material-ui.com/#/get-started/required-knowledge).
+Because I make most of the time web applications and not "just" web pages and because I'm not a designer there is only one solution that I could use for design and that is Googles Material-UI design patterns. And ofcourse there is a greate react library that we can use for that: [material-ui](https://github.com/callemall/material-ui).
+
+It has most of the parts you would need for a Material-UI designed application. It comes with a greate feature that we can use in our application and that is `theming` or "customatisation" how they call it in they'r [documentation](http://www.material-ui.com/#/get-started/required-knowledge).
 
 This application uses 100% `material-ui`! There are no other libraries for styling. But there are other libraries that rely on `material-ui`. We will explain them in the further text.
 
@@ -193,3 +205,13 @@ We use the simple `redux-logger` dev library to se how the redux state changes d
 ### sw-precache
 
 Is also a dev library that helos us to create a service worker during build proccess. The service worker then allows the user to open our application even if he has no connection. Because the implementation is fully used how it is described in [this](https://github.com/jeffposnick/create-react-pwa) project we leave the detaile explanation to them.
+
+
+## TO DO
+
+- [ ] finish unit tests
+- [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
+
+## License
+
+MIT
