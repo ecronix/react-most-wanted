@@ -1,0 +1,55 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_react = require('react');
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_theme = require('../../actions/theme');
+var /* istanbul ignore next */_locale = require('../../actions/locale');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_Drawer = require('../../components/Drawer');
+
+/* istanbul ignore next */_Drawer.DrawerContent.propTypes = {
+  responsiveDrawer: /* istanbul ignore next */_react.PropTypes.object.isRequired,
+  theme: /* istanbul ignore next */_react.PropTypes.string.isRequired,
+  locale: /* istanbul ignore next */_react.PropTypes.string.isRequired,
+  router: /* istanbul ignore next */_react.PropTypes.object.isRequired,
+  push: /* istanbul ignore next */_react.PropTypes.func.isRequired,
+  setResponsive: /* istanbul ignore next */_react.PropTypes.func.isRequired,
+  setDrawerOpen: /* istanbul ignore next */_react.PropTypes.func.isRequired,
+  updateTheme: /* istanbul ignore next */_react.PropTypes.func.isRequired,
+  updateLocale: /* istanbul ignore next */_react.PropTypes.func.isRequired };
+
+
+const mapStateToProps = state => {
+  const { responsiveDrawer, theme, locale, router } = state;
+
+  return {
+    responsiveDrawer,
+    theme,
+    locale,
+    router };
+
+};
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    push: path => {
+      dispatch( /* istanbul ignore next */(0, _reactRouterRedux.push)(path));
+    },
+    setResponsive: responsive => {
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setResponsive)(responsive));
+    },
+    setDrawerOpen: open => {
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setDrawerOpen)(open));
+    },
+    updateTheme: theme => {
+      dispatch( /* istanbul ignore next */(0, _theme.updateTheme)(theme));
+    },
+    updateLocale: locale => {
+      dispatch( /* istanbul ignore next */(0, _locale.updateLocale)(locale));
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)( /* istanbul ignore next */_Drawer.DrawerContent);

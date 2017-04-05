@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });
+
+
+
+
+
+
+
+
+var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_enzyme = require('enzyme'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const messages = require('../locales/en'); // en.json
+/**
+ * Components using the react-intl module require access to the intl context.
+ * This is not available when mounting single components in Enzyme.
+ * These helper functions aim to address that and wrap a valid,
+ * English-locale intl context around them.
+ */ //SOURCE: http://stackoverflow.com/questions/37021217/injecting-react-intl-object-into-mounted-enzyme-components-for-testing
+const intlProvider = new /* istanbul ignore next */_reactIntl.IntlProvider({ locale: 'en', messages }, {});const { intl } = intlProvider.getChildContext(); /**
+                                                                                                                                                             * When using React-Intl `injectIntl` on components, props.intl is required.
+                                                                                                                                                             */function nodeWithIntlProp(node) {return (/* istanbul ignore next */_react2.default.cloneElement(node, { intl }));} /* istanbul ignore next */exports.default =
+
+{
+  shallowWithIntl(node) {
+    return (/* istanbul ignore next */(0, _enzyme.shallow)(nodeWithIntlProp(node), { context: { intl } }));
+  },
+
+  mountWithIntl(node) {
+    return (/* istanbul ignore next */(0, _enzyme.mount)(nodeWithIntlProp(node), {
+        context: { intl },
+        childContextTypes: { intl: /* istanbul ignore next */_reactIntl.intlShape } }));
+
+  } };

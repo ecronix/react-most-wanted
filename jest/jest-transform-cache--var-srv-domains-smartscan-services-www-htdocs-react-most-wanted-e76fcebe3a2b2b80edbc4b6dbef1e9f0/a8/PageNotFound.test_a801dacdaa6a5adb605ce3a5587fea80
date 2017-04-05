@@ -1,0 +1,31 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/tests/components/PageNotFound.test.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_PageNotFound = require('../../components/PageNotFound/PageNotFound'); /* istanbul ignore next */var _PageNotFound2 = _interopRequireDefault(_PageNotFound);
+var /* istanbul ignore next */_themeTest = require('../../helpers/theme-test');
+var /* istanbul ignore next */_intlTest = require('../../helpers/intl-test');
+var /* istanbul ignore next */_getMuiTheme = require('material-ui/styles/getMuiTheme'); /* istanbul ignore next */var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+const muiTheme = /* istanbul ignore next */(0, _getMuiTheme2.default)( /* istanbul ignore next */_lightBaseTheme2.default);
+
+function setup() {
+
+  const enzymeWrapper = /* istanbul ignore next */(0, _themeTest.shallowWithTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PageNotFound2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: this }));
+
+  return {
+    enzymeWrapper };
+
+}
+
+describe('components', () => {
+  describe('Header', () => {
+    it('should render self and subcomponents', () => {
+      const { enzymeWrapper } = setup();
+
+      expect(enzymeWrapper.find('header')).toBe(true);
+      //expect(enzymeWrapper.find('h1').text()).toBe('todos')
+
+    });
+
+  });
+});

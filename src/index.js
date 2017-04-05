@@ -6,10 +6,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import './index.css';
 import createHistory from 'history/createBrowserHistory'
 import { Root } from './containers/Root';
+import {addLocalizationData} from './locales';
 
 const history = createHistory()
 const store = configureStore(history);
+
 injectTapEventPlugin();
+addLocalizationData();
 
 ReactDOM.render(
   <Provider store={store}>

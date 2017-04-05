@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import {injectIntl, intlShape} from 'react-intl';
 import {GitHubIcon} from '../Icons';
 import {Helmet} from 'react-helmet';
+import {FormattedDate} from 'react-intl'
 
 class Dashboard extends Component {
 
@@ -29,8 +30,8 @@ class Dashboard extends Component {
           }
         />
 
-        <div style={{margin:'10px'}}>
-
+        <div style={{paddingTop:64}}>
+          <FormattedDate value={new Date(1459832991883)}/>
 
         </div>
       </div>

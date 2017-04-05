@@ -33,7 +33,7 @@ const DrawerContent = (props) => {
     }
   };
 
-  const themeItems= allThemes.map((t)=>{
+  const themeItems = allThemes.map((t)=>{
     return {
       value:undefined,
       visible: true,
@@ -121,13 +121,11 @@ const DrawerContent = (props) => {
   ];
 
   return (
-    <div>
       <SelectableMenuList
         items={menuItems}
         onIndexChange={handleChange}
         index={router?router.location.pathname:'/'}
       />
-    </div>
   );
 }
 

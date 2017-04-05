@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/tests/components/PageNotFound.test.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_PageNotFound = require('../../components/PageNotFound');
+var /* istanbul ignore next */_themeTest = require('../../helpers/theme-test');
+var /* istanbul ignore next */_intlTest = require('../../helpers/intl-test');
+var /* istanbul ignore next */_getMuiTheme = require('material-ui/styles/getMuiTheme'); /* istanbul ignore next */var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+var /* istanbul ignore next */_enzyme = require('enzyme');
+var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);
+
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+const messages = require('../../locales/en'); // en.json
+const intlProvider = new /* istanbul ignore next */_reactIntl.IntlProvider({ locale: 'en', messages }, {});
+const { intl } = intlProvider.getChildContext();
+
+const muiTheme = /* istanbul ignore next */(0, _getMuiTheme2.default)( /* istanbul ignore next */_lightBaseTheme2.default);
+
+const wrapper = /* istanbul ignore next */(0, _enzyme.mount)(
+/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PageNotFound.PageNotFound, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: undefined }), {
+  context: { muiTheme, intl },
+  childContextTypes: { muiTheme: /* istanbul ignore next */_react2.default.PropTypes.object } });
+
+
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  /* istanbul ignore next */_reactDom2.default.render(wrapper, div);
+});

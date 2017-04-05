@@ -1,0 +1,1 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _Root = require('./Root.js');Object.defineProperty(exports, 'Root', { enumerable: true, get: function () {return _interopRequireDefault(_Root).default;} }); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}

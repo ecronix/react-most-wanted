@@ -1,0 +1,29 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+shallowWithTheme = shallowWithTheme; /* istanbul ignore next */exports.
+
+
+
+mountWithTheme = mountWithTheme;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactIntl = require('react-intl');var /* istanbul ignore next */_MuiThemeProvider = require('material-ui/styles/MuiThemeProvider'); /* istanbul ignore next */var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);var /* istanbul ignore next */_getMuiTheme = require('material-ui/styles/getMuiTheme'); /* istanbul ignore next */var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);var /* istanbul ignore next */_enzyme = require('enzyme');var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const theme = /* istanbul ignore next */(0, _getMuiTheme2.default)( /* istanbul ignore next */_lightBaseTheme2.default);const muiThemeProvider = new /* istanbul ignore next */_MuiThemeProvider2.default({ muiTheme: theme }, {});const { muiTheme } = muiThemeProvider.getChildContext(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * When using Material-UI `muiThemeable` on components, props.muiTheme is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */function nodeWithThemeProp(node) {return (/* istanbul ignore next */_react2.default.cloneElement(node, { muiTheme }));}function shallowWithTheme(node) {return (/* istanbul ignore next */(0, _enzyme.shallow)(nodeWithThemeProp(node), { context: { muiTheme } }));};function mountWithTheme(node) {return (/* istanbul ignore next */(0, _enzyme.mount)(nodeWithThemeProp(node), { context: { muiTheme },
+      childContextTypes: { muiTheme: /* istanbul ignore next */_react2.default.PropTypes.object } }));
+
+};

@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/tests/components/PageNotFound.test.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_PageNotFound = require('../../components/PageNotFound');
+var /* istanbul ignore next */_themeTest = require('../../helpers/theme-test');
+var /* istanbul ignore next */_intlTest = require('../../helpers/intl-test'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const wrapper = /* istanbul ignore next */(0, _intlTest.mountWithIntl)(
+/* istanbul ignore next */(0, _themeTest.mountWithTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PageNotFound.PageNotFound, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 8 }, __self: undefined })));
+
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  /* istanbul ignore next */_reactDom2.default.render(wrapper(), div);
+});

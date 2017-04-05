@@ -1,5 +1,5 @@
 import reducer from '../../reducers/locale'
-import {UPDATE_LOCALE} from '../../actions/locale'
+import {UPDATE_LOCALE, updateLocale} from '../../actions/locale'
 
 describe('locale reducer', () => {
   it('should return the initial state', () => {
@@ -10,10 +10,7 @@ describe('locale reducer', () => {
 
   it('should handle UPDATE_LOCALE', () => {
     expect(
-      reducer('en', {
-        type: UPDATE_LOCALE,
-        locale: 'de'
-      })
+      reducer('en', updateLocale('de'))
     ).toEqual('de')
   })
 

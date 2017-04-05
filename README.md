@@ -75,6 +75,7 @@ react-most-wanted/
     actions/
     components/
     containers/
+    helpers/
     locales/
     reducers/
     store/
@@ -200,11 +201,11 @@ This is also a library that should make our life easier. It also uses `material-
 
 ### redux-logger
 
-We use the simple `redux-logger` dev library to se how the redux state changes during application usage.
+We use the simple `redux-logger` dev library to see how the redux state changes during application usage.
 
 ### sw-precache
 
-Is also a dev library that helos us to create a service worker during build proccess. The service worker then allows the user to open our application even if he has no connection. Because the implementation is fully used how it is described in [this](https://github.com/jeffposnick/create-react-pwa) project we leave the detaile explanation to them.
+Is also a dev library that helps us to create a service worker during build proccess. The service worker then allows the user to open our application even if he has no connection. Because the implementation is fully used how it is described in [this](https://github.com/jeffposnick/create-react-pwa) project we leave the detaile explanation to them.
 
 
 ## TO DO

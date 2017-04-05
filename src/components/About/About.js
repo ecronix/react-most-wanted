@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import {injectIntl, intlShape} from 'react-intl';
 import {Helmet} from 'react-helmet';
 
-class About extends Component {
+const About = (props) => {
 
-  render() {
+  const {intl}=props;
 
-    const {intl}=this.props;
-
-    return (
+  return (
+    <div>
+      <Helmet>
+        <title>{intl.formatMessage({id: 'about'})}</title>
+      </Helmet>
+      <ResponsiveAppBar
+        title={intl.formatMessage({id: 'about'})}
+      />
       <div>
-        <Helmet>
-          <title>{intl.formatMessage({id: 'about'})}</title>
-        </Helmet>
-        <ResponsiveAppBar
-          title={intl.formatMessage({id: 'about'})}
-        />
-        <div style={{margin:'10px'}}>
 
-        </div>
       </div>
-    );
-  }
+    </div>
+  );
+
 }
 
 
