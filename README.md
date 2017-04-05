@@ -1,11 +1,4 @@
-# React Most Wanted
-
-<p>
-<img alt="react-most-wanted" src="public/icons/icon_256x256.png" width="80" />
-  <a title='License' href="https://github.com/TarikHuber/react-most-wanted/master/LICENSE" height="18">
-    <img src='https://img.shields.io/npm/l/express.svg' />
-  </a>
-</p>
+# ‌‌ [![LOGO](public/icons/icon_32x32.png)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) React Most Wanted [![Build Status](https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master)](https://travis-ci.org/TarikHuber/react-most-wanted) [![LICENCE](https://img.shields.io/npm/l/express.svg)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) 
 
 ## Table of Contents
 
