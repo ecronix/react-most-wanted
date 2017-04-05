@@ -1,8 +1,15 @@
 # ‌‌ [![LOGO](public/icons/icon_32x32.png)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) React Most Wanted [![Build Status](https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master)](https://travis-ci.org/TarikHuber/react-most-wanted) [![LICENCE](https://img.shields.io/npm/l/express.svg)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) 
 
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
+It should be a `shell` for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
+
+You can find a example of this project in this [DEMO](https://react-most-wanted.firebaseapp.com/).
+
+I tried to make the project as clean as possible and to use all libraries in they're pure way.
+
 ## Table of Contents
 
-- [Description](#description)
 - [Features](#features)
 - [Folder Structure](#folder-structure)
 - [Libraries](#libraries)
@@ -18,17 +25,6 @@
   - [sw-precache](#sw-precache)
 - [TO DO](#to-do)
 - [License](#license)
-
-
-## Description
-
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
-It should be a `shell` for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
-
-You can find a example of this project in this [DEMO](https://react-most-wanted.firebaseapp.com/).
-
-I tried to make the project as clean as possible and to use all libraries in they're pure way.
 
 
 ## Features
