@@ -16,6 +16,8 @@ const App = (props) => {
       <Helmet>
         <title>{intl.formatMessage({id: 'app_name'})}</title>
         <meta name="theme-color" content={muiTheme.palette.primary1Color}/>
+        <meta name="apple-mobile-web-app-status-bar-style" content={muiTheme.palette.primary1Color}/>
+        <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color}/>
       </Helmet>
       <ResponsiveDrawer openSecondary={false}>
         <DrawerHeader/>

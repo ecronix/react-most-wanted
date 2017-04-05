@@ -6,7 +6,7 @@ describe('locale reducer', () => {
     expect(
       reducer(undefined, {})
     ).toEqual('en')
-  })
+  }) 
 
   it('should handle UPDATE_LOCALE', () => {
     expect(
