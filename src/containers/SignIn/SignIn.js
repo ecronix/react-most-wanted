@@ -6,7 +6,6 @@ import {GoogleIcon, FacebookIcon} from '../../components/Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ActionHome from 'material-ui/svg-icons/action/home';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { updateAuth } from '../../actions/auth';
@@ -14,6 +13,8 @@ import GoogleLogin from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 import config from '../../config'
 import { push } from 'react-router-redux';
+import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
+import FontIcon from 'material-ui/FontIcon';
 
 const styles={
   paper:{
@@ -28,10 +29,17 @@ const styles={
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5,
-    marginTop: 64,
+    marginTop: 100,
   },
   button: {
     margin:6,
+    align: 'left'
+  },
+  sign_up_button: {
+    float: 'right',
+    overflow: 'none',
+    alignSelf: 'flex-end',
+    marginRight:-43,
   }
 }
 
@@ -57,38 +65,46 @@ const SignIn = (props) => {
 
   return (
     <div>
-
+      <ResponsiveAppBar
+        muiTheme={muiTheme}
+        title={intl.formatMessage({id: 'sign_in'})}
+      />
       <div style={styles.container}>
+
         <Paper  zDepth={2} style={styles.paper}>
-          <h3>{intl.formatMessage({id: 'sign_in'})}</h3>
-          <TextField
-            hintText="Email"
-            fullWidth={true}
-          /><br />
-          <TextField
-            hintText="Password"
-            fullWidth={true}
-          />
-          <div style={{display:'flex', flexDirection: 'row', justifyContent: 'center', marginTop:20}}>
-            <RaisedButton
-              label={intl.formatMessage({id: 'sign_in'})}
-              secondary={true}
-              style={styles.button}
-              //fullWidth={true}
-            />
-            <RaisedButton
-              label={intl.formatMessage({id: 'sign_up'})}
-              primary={true}
-              style={styles.button}
-              //fullWidth={true}
+          <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <h3>{intl.formatMessage({id: 'sign_in'}).toUpperCase()}</h3>
+            <FloatingActionButton style={styles.sign_up_button}>
+              <FontIcon
+                className="material-icons">
+                person_add
+              </FontIcon>
+            </FloatingActionButton>
+          </div>
+          <div style={{marginBottom: 20}}>
+            <TextField
+              hintText="Email"
+              fullWidth={true}
+            /><br />
+            <TextField
+              hintText="Password"
+              fullWidth={true}
             />
           </div>
 
+          <RaisedButton
+            label={intl.formatMessage({id: 'sign_in'})}
+            secondary={true}
+            style={styles.button}
+            fullWidth={true}
+            icon={
+              <FontIcon
+                className="material-icons">
+                lock
+              </FontIcon>
+            }
+          />
           <br />
-
-        </Paper><br />
-
-        <Paper  zDepth={2} style={styles.paper}>
 
           <GoogleLogin
             style={{backgroundColor: 'transparent', borderRadius:0, border: 0, padding: 0, width: '100%'}}
@@ -101,11 +117,14 @@ const SignIn = (props) => {
               style={styles.button}
               fullWidth={true}
             />
-          </GoogleLogin> <br/>
+          </GoogleLogin>
+
+          <br />
           <FacebookLogin
             appId={config.facebook_app_id}
             //autoLoad={true}
             fields="name,email,picture"
+            redirectUri="https://www.soft-erp.eu/"
             textButton=""
             cssClass=""
             icon={<RaisedButton
@@ -118,12 +137,7 @@ const SignIn = (props) => {
             callback={responseFacebook}/>
 
           </Paper>
-          <FloatingActionButton
-            style={{marginTop:15}}
-            secondary={true}
-            href='/'>
-            <ActionHome />
-          </FloatingActionButton>
+
 
         </div>
 

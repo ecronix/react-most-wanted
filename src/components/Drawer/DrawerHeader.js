@@ -65,9 +65,19 @@ const DrawerHeader = (props) => {
 
       {!auth&&
 
-        <div style={styles.header_content}>
-          <h3>{intl.formatMessage({id: 'app_name'})}</h3>
-        </div>
+        <List>
+          <ListItem
+            disabled={true}
+            primaryText={intl.formatMessage({id: 'app_name'})}
+            //secondaryText={auth.email}
+            leftAvatar={
+              <Avatar
+                src={"/apple-touch-icon.png"}
+              />
+            }
+          />
+        </List>
+      
 
       }
     </Paper>

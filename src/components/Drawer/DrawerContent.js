@@ -18,7 +18,8 @@ const DrawerContent = (props) => {
     updateTheme,
     updateLocale,
     intl,
-    muiTheme
+    muiTheme,
+    auth
   }=props;
 
   const handleChange = (event, index) => {
@@ -79,7 +80,7 @@ const DrawerContent = (props) => {
     },
     {
       value:'/about',
-      visible: true,
+      visible: auth!=null,
       primaryText: intl.formatMessage({id: 'about'}),
       leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
     },
