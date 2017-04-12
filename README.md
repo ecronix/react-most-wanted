@@ -1,10 +1,10 @@
-# ‌‌ [![LOGO](public/icons/icon_32x32.png)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) React Most Wanted [![Build Status](https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master)](https://travis-ci.org/TarikHuber/react-most-wanted) [![LICENCE](https://img.shields.io/npm/l/express.svg)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) 
+# ‌‌ [![LOGO](public/icons/favicon-32x32.png)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) React Most Wanted [![Build Status](https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master)](https://travis-ci.org/TarikHuber/react-most-wanted) [![LICENCE](https://img.shields.io/npm/l/express.svg)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 It should be a `shell` for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
 
-You can find a example of this project in this [DEMO](https://react-most-wanted.firebaseapp.com/).
+You can find a example of this project in this [DEMO](https://www.soft-erp.eu/).
 
 I tried to make the project as clean as possible and to use all libraries in they're pure way.
 

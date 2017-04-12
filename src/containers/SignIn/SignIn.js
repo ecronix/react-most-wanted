@@ -11,7 +11,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { updateAuth } from '../../actions/auth';
 import GoogleLogin from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 import config from '../../config'
+import { push } from 'react-router-redux';
 
 const styles={
   paper:{
@@ -36,13 +38,21 @@ const styles={
 
 const SignIn = (props) => {
 
-  const { muiTheme, intl, updateAuth }=props;
+  const { muiTheme, intl, updateAuth, push }=props;
+
+  console.log('test');
 
   const  responseGoogle = (googleUser) => {
+    console.log(googleUser);
     var profile = googleUser.getBasicProfile();
     updateAuth({name: profile.getName(), email: profile.getEmail(), img: profile.getImageUrl() });
-    //console.log({profile: profile.getName()});
-    //console.log({googleUser: googleUser});
+    push('/');
+  }
+
+  const responseFacebook = (facebookUser) => {
+    console.log(facebookUser);
+    updateAuth({name: facebookUser.name, email: facebookUser.email, img: facebookUser.picture.data.url });
+    push('/');
   }
 
   return (
@@ -86,58 +96,69 @@ const SignIn = (props) => {
             scope="profile"
             onSuccess={responseGoogle}>
             <RaisedButton
-            label={intl.formatMessage({id: 'sign_in_with_google'})}
-            icon={<GoogleIcon color={muiTheme.palette.primary2Color}/>}
-            style={styles.button}
-            fullWidth={true}
-          />
-        </GoogleLogin> <br/>
+              label={intl.formatMessage({id: 'sign_in_with_google'})}
+              icon={<GoogleIcon color={muiTheme.palette.primary2Color}/>}
+              style={styles.button}
+              fullWidth={true}
+            />
+          </GoogleLogin> <br/>
+          <FacebookLogin
+            appId={config.facebook_app_id}
+            //autoLoad={true}
+            fields="name,email,picture"
+            textButton=""
+            cssClass=""
+            icon={<RaisedButton
+              label={intl.formatMessage({id: 'sign_in_with_facebook'})}
+              icon={<FacebookIcon color={muiTheme.palette.primary2Color}/>}
+              style={styles.button}
+              fullWidth={true}
+            />}
+            tag="div"
+            callback={responseFacebook}/>
 
-          <RaisedButton
-            label={intl.formatMessage({id: 'sign_in_with_facebook'})}
-            icon={<FacebookIcon color={muiTheme.palette.primary2Color}/>}
-            style={styles.button}
-            fullWidth={true}
-          />
-        </Paper>
-        <FloatingActionButton
-          style={{marginTop:15}}
-          secondary={true}
-          href='/'>
-          <ActionHome />
-        </FloatingActionButton>
+          </Paper>
+          <FloatingActionButton
+            style={{marginTop:15}}
+            secondary={true}
+            href='/'>
+            <ActionHome />
+          </FloatingActionButton>
+
+        </div>
+
+
 
       </div>
 
-
-
-    </div>
-
-  );
-}
-SignIn.propTypes = {
-  updateAuth: PropTypes.func.isRequired,
-  auth: PropTypes.object,
-  //intl: intlShape.isRequired,
-};
-
-const mapStateToProps = (state) => {
-  const { auth } = state;
-  return {
-    auth
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-
-  return {
-    updateAuth: (auth) => {
-      dispatch(updateAuth(auth));
-    },
+    );
   }
-};
+  SignIn.propTypes = {
+    updateAuth: PropTypes.func.isRequired,
+    auth: PropTypes.object,
+    //intl: intlShape.isRequired,
+  };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectIntl(muiThemeable()(SignIn)));
+  const mapStateToProps = (state) => {
+    const { auth } = state;
+    return {
+      auth
+    };
+  };
+
+  const mapDispatchToProps = (dispatch) => {
+
+    return {
+      updateAuth: (auth) => {
+        dispatch(updateAuth(auth));
+      },
+      push: (path)=>{
+        dispatch(push(path))
+      },
+    }
+  };
+
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(injectIntl(muiThemeable()(SignIn)));
