@@ -20,13 +20,14 @@ DrawerContent.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { responsiveDrawer, theme, locale, router } = state;
+  const { responsiveDrawer, theme, locale, router, auth } = state;
 
   return {
     responsiveDrawer,
     theme,
     locale,
-    router
+    router,
+    auth
   };
 };
 

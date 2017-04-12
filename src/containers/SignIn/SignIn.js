@@ -48,7 +48,6 @@ const SignIn = (props) => {
 
   const { muiTheme, intl, updateAuth, push }=props;
 
-  console.log('test');
 
   const  responseGoogle = (googleUser) => {
     console.log(googleUser);
@@ -66,7 +65,6 @@ const SignIn = (props) => {
   return (
     <div>
       <ResponsiveAppBar
-        muiTheme={muiTheme}
         title={intl.formatMessage({id: 'sign_in'})}
       />
       <div style={styles.container}>
@@ -84,10 +82,12 @@ const SignIn = (props) => {
           <div style={{marginBottom: 20}}>
             <TextField
               hintText="Email"
+              type="Email"
               fullWidth={true}
             /><br />
             <TextField
               hintText="Password"
+              type="Password"
               fullWidth={true}
             />
           </div>
@@ -113,8 +113,9 @@ const SignIn = (props) => {
             onSuccess={responseGoogle}>
             <RaisedButton
               label={intl.formatMessage({id: 'sign_in_with_google'})}
-              icon={<GoogleIcon color={muiTheme.palette.primary2Color}/>}
+              icon={<GoogleIcon color={muiTheme.palette.accent1Color}/>}
               style={styles.button}
+              primary={true}
               fullWidth={true}
             />
           </GoogleLogin>
@@ -124,13 +125,14 @@ const SignIn = (props) => {
             appId={config.facebook_app_id}
             //autoLoad={true}
             fields="name,email,picture"
-            redirectUri="https://www.soft-erp.eu/"
+            redirectUri="https://www.soft-erp.eu/test"
             textButton=""
             cssClass=""
             icon={<RaisedButton
               label={intl.formatMessage({id: 'sign_in_with_facebook'})}
-              icon={<FacebookIcon color={muiTheme.palette.primary2Color}/>}
+              icon={<FacebookIcon color={muiTheme.palette.accent1Color}/>}
               style={styles.button}
+              primary={true}
               fullWidth={true}
             />}
             tag="div"

@@ -9,9 +9,11 @@ const Routes = (props) => {
 
   const {auth}=props;
 
+  const isAuthorised=auth!=null;
+
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
-      auth!=null ? (
+      isAuthorised ? (
         <Component {...props}/>
       ) : (
         <Redirect to={{
@@ -27,7 +29,7 @@ const Routes = (props) => {
     <Switch>
       <Route path="/" exact component={Dashboard} />
       <Route path="/dashboard" exact component={Dashboard} />
-      <PrivateRoute path="/about" exact component={About} />
+      <PrivateRoute path="/about" exact component={About}  />
       <Route path="/signin" component={SignIn} />
       <Route path="/*" component={PageNotFound} />
     </Switch>

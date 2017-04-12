@@ -3,7 +3,7 @@ import { Route } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
 import { ConnectedRouter } from 'react-router-redux'
-import {App} from '../App';
+import {App} from '../../containers/App';
 
 const Root = (props) => {
 

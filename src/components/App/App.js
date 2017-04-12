@@ -2,14 +2,14 @@ import React from 'react';
 import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
 import {DrawerHeader} from '../../containers/Drawer';
 import {DrawerContent} from '../../containers/Drawer';
-import {Routes} from '../Routes';
+import {Routes} from '../../components/Routes';
 import {Helmet} from 'react-helmet';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
 const App = (props) => {
 
-  const { intl, muiTheme } = props;
+  const { intl, muiTheme, auth } = props;
 
   return (
     <div>
@@ -24,7 +24,7 @@ const App = (props) => {
         <DrawerContent/>
       </ResponsiveDrawer>
       <BodyContainer openSecondary={false}>
-        <Routes/>
+        <Routes auth={auth} />
       </BodyContainer>
     </div>
   );

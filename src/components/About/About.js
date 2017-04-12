@@ -6,7 +6,7 @@ import {Helmet} from 'react-helmet';
 
 const About = (props) => {
 
-  const {intl, muiTheme}=props;
+  const {intl}=props;
 
   return (
     <div >
@@ -14,7 +14,6 @@ const About = (props) => {
         <title>{intl.formatMessage({id: 'about'})}</title>
       </Helmet>
       <ResponsiveAppBar
-        muiTheme={muiTheme}
         title={intl.formatMessage({id: 'about'})}
       />
       <div >

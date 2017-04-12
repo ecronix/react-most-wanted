@@ -77,7 +77,6 @@ const DrawerHeader = (props) => {
             }
           />
         </List>
-      
 
       }
     </Paper>
@@ -89,52 +88,3 @@ const DrawerHeader = (props) => {
 
 
 export default DrawerHeader;
-
-/*
-return (
-
-<Paper  zDepth={1} style={styles.paper}>
-
-{auth&&
-<div>
-<List>
-<ListItem
-disabled={true}
-primaryText={auth.name}
-secondaryText={auth.email}
-leftAvatar={
-<Avatar
-src={auth.img}
-/>
-}
-rightIconButton={
-<IconMenu
-iconButtonElement={
-<IconButton touch={true}>
-<NavigationExpandMoreIcon />
-</IconButton>
-}>
-<MenuItem
-primaryText={intl.formatMessage({id: 'log_out'})}
-secondaryTextLines={2}
-onTouchTap={()=>{updateAuth(null)}}
-/>
-</IconMenu>
-}
-/>
-</List>
-</div>
-}
-
-{!auth&&
-<div >
-<div style={styles.header_content}>
-<h3>{intl.formatMessage({id: 'app_name'})}</h3>
-</div>
-</div>
-}
-</Paper>
-
-
-);
-*/

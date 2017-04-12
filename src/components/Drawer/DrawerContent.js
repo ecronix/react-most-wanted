@@ -6,6 +6,7 @@ import Toggle from 'material-ui/Toggle';
 import allThemes from '../../themes';
 import allLocales from '../../locales';
 import {injectIntl} from 'react-intl';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const DrawerContent = (props) => {
 
@@ -19,7 +20,8 @@ const DrawerContent = (props) => {
     updateLocale,
     intl,
     muiTheme,
-    auth
+    auth,
+    push
   }=props;
 
   const handleChange = (event, index) => {
@@ -65,6 +67,7 @@ const DrawerContent = (props) => {
     }
   });
 
+
   const menuItems=[
     {
       value:'/dashboard',
@@ -74,7 +77,7 @@ const DrawerContent = (props) => {
     },
     {
       value:'/signin',
-      visible: true,
+      visible: false,
       primaryText: intl.formatMessage({id: 'sign_in'}),
       leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
     },
@@ -86,7 +89,7 @@ const DrawerContent = (props) => {
     },
     {
       value:'/wrong_url',
-      visible: true,
+      visible: false,
       primaryText: intl.formatMessage({id: '404'}),
       secondaryText: intl.formatMessage({id: 'page_not_found_demo'}),
       leftIcon: <FontIcon className="material-icons" >warning</FontIcon>
@@ -128,11 +131,31 @@ const DrawerContent = (props) => {
   ];
 
   return (
-    <SelectableMenuList
-      items={menuItems}
-      onIndexChange={handleChange}
-      index={router?router.location.pathname:'/'}
-    />
+    <div style={{display: 'flex', flexDirection: 'column'}}>
+      {auth==null &&
+        <RaisedButton
+          label={intl.formatMessage({id: 'sign_in'})}
+          secondary={true}
+          style={{margin:20}}
+          onTouchTap={()=>{push('/signin')}}
+          //fullWidth={true}
+          icon={
+            <FontIcon
+              className="material-icons">
+              lock
+            </FontIcon>
+          }
+        />
+      }
+
+      <SelectableMenuList
+        items={menuItems}
+        onIndexChange={handleChange}
+        index={router?router.location.pathname:'/'}
+      />
+
+    </div>
+
   );
 }
 

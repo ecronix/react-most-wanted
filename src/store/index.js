@@ -13,6 +13,8 @@ export default function configureStore(history) {
   });
 
   const initState={
+    locale: 'de',
+    theme: 'dark',
   };
 
   let middlewares=[]
