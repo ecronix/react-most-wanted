@@ -110,6 +110,7 @@ const SignIn = (props) => {
             style={{backgroundColor: 'transparent', borderRadius:0, border: 0, padding: 0, width: '100%'}}
             clientId={config.google_client_id}
             scope="profile"
+            tag="div"
             onSuccess={responseGoogle}>
             <RaisedButton
               label={intl.formatMessage({id: 'sign_in_with_google'})}
@@ -125,7 +126,8 @@ const SignIn = (props) => {
             appId={config.facebook_app_id}
             //autoLoad={true}
             fields="name,email,picture"
-            redirectUri="https://www.soft-erp.eu/test"
+            //redirectUri="https://www.soft-erp.eu/test"
+            disableMobileRedirect={true}
             textButton=""
             cssClass=""
             icon={<RaisedButton

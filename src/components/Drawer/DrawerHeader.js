@@ -7,6 +7,7 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import ListItem from 'material-ui/List/ListItem';
 import List from 'material-ui/List/List';
 import Paper from 'material-ui/Paper';
+import {ReduxIcon} from '../Icons';
 
 const DrawerHeader = (props) => {
 
@@ -27,6 +28,12 @@ const DrawerHeader = (props) => {
       margin:0,
       padding: 0
     },
+    icon: {
+      width:48,
+      height: 48,
+      top: 4
+      //paddingBottom: 15
+    }
   }
 
   return (
@@ -71,9 +78,7 @@ const DrawerHeader = (props) => {
             primaryText={intl.formatMessage({id: 'app_name'})}
             //secondaryText={auth.email}
             leftAvatar={
-              <Avatar
-                src={"/apple-touch-icon.png"}
-              />
+              <ReduxIcon color={muiTheme.palette.accent1Color} style={styles.icon}/>
             }
           />
         </List>
