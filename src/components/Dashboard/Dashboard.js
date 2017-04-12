@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FlatButton from 'material-ui/FlatButton';
-import {injectIntl, intlShape} from 'react-intl';
+import {injectIntl} from 'react-intl';
 import {GitHubIcon} from '../Icons';
 import {Helmet} from 'react-helmet';
 import {FormattedDate} from 'react-intl'
@@ -28,6 +28,7 @@ class Dashboard extends Component {
               icon={<GitHubIcon/>}
             />
           }
+
         />
 
         <div style={{paddingTop:64}}>
@@ -39,11 +40,6 @@ class Dashboard extends Component {
   }
 }
 
-
-
-Dashboard.propTypes = {
-  intl: intlShape.isRequired,
-};
 
 
 export default injectIntl(Dashboard);

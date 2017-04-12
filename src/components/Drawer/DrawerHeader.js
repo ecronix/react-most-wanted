@@ -1,33 +1,130 @@
 import React from 'react';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import {injectIntl, intlShape} from 'react-intl';
+import Avatar from 'material-ui/Avatar';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import ListItem from 'material-ui/List/ListItem';
+import List from 'material-ui/List/List';
+import Paper from 'material-ui/Paper';
 
 const DrawerHeader = (props) => {
 
-  const {muiTheme, intl}=props;
+  const {muiTheme, intl, auth, updateAuth}=props;
 
   const styles={
     header:{
-      backgroundColor:muiTheme.palette.primary2Color,
-      color: muiTheme.palette.alternateTextColor,
-      padding: 1,
+      //backgroundColor:muiTheme.palette.primary2Color,
+      //color: muiTheme.palette.alternateTextColor,
+      padding: 5,
     },
     header_content:{
-      marginLeft: 20
-    }
+      padding: 5,
+    },
+    paper:{
+      backgroundColor:muiTheme.palette.primary2Color,
+      color: muiTheme.palette.alternateTextColor,
+      margin:0,
+      padding: 0
+    },
   }
 
   return (
-    <div style={styles.header}>
-      <div style={styles.header_content}>
-        <h3>{intl.formatMessage({id: 'app_name'})}</h3>
-      </div>
-    </div>
+    <Paper  zDepth={1} style={styles.paper}>
+
+      {auth&&
+
+        <List>
+          <ListItem
+            disabled={true}
+            primaryText={auth.name}
+            secondaryText={auth.email}
+            leftAvatar={
+              <Avatar
+                src={auth.img}
+              />
+            }
+            rightIconButton={
+              <IconMenu
+                iconButtonElement={
+                  <IconButton touch={true}>
+                    <NavigationExpandMoreIcon />
+                  </IconButton>
+                }>
+                <MenuItem
+                  primaryText={intl.formatMessage({id: 'sign_out'})}
+                  secondaryTextLines={2}
+                  onTouchTap={()=>{updateAuth(null)}}
+                />
+              </IconMenu>
+            }
+          />
+        </List>
+
+      }
+
+      {!auth&&
+
+        <div style={styles.header_content}>
+          <h3>{intl.formatMessage({id: 'app_name'})}</h3>
+        </div>
+
+      }
+    </Paper>
   );
+
+
+
 }
 
-DrawerHeader.propTypes = {
-  intl: intlShape.isRequired,
-};
 
-export default muiThemeable()(injectIntl(DrawerHeader));
+export default DrawerHeader;
+
+/*
+return (
+
+<Paper  zDepth={1} style={styles.paper}>
+
+{auth&&
+<div>
+<List>
+<ListItem
+disabled={true}
+primaryText={auth.name}
+secondaryText={auth.email}
+leftAvatar={
+<Avatar
+src={auth.img}
+/>
+}
+rightIconButton={
+<IconMenu
+iconButtonElement={
+<IconButton touch={true}>
+<NavigationExpandMoreIcon />
+</IconButton>
+}>
+<MenuItem
+primaryText={intl.formatMessage({id: 'log_out'})}
+secondaryTextLines={2}
+onTouchTap={()=>{updateAuth(null)}}
+/>
+</IconMenu>
+}
+/>
+</List>
+</div>
+}
+
+{!auth&&
+<div >
+<div style={styles.header_content}>
+<h3>{intl.formatMessage({id: 'app_name'})}</h3>
+</div>
+</div>
+}
+</Paper>
+
+
+);
+*/

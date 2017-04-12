@@ -42,7 +42,7 @@ export default function configureStore(history) {
   ));
 
   try{
-    persistStore(store, { }, ()=>{});
+    persistStore(store, {blacklist:['router'] }, ()=>{});
   }catch(e){
 
   }

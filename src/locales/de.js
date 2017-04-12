@@ -1,8 +1,8 @@
 import {defineMessages} from 'react-intl';
 
 const messages=defineMessages({
-  app_name: 'React Most Wanted',
-  dashboard: 'Dashboard',
+  app_name: 'React Meist Gesucht',
+  dashboard: 'Übersicht',
   about: 'Über',
   page_not_found_demo: 'Seite nicht gefunden demo',
   '404': '404',
@@ -17,6 +17,11 @@ const messages=defineMessages({
   dark: 'Dark',
   light: 'Light',
   ics: 'ICS',
+  sign_out: 'Abmelden',
+  sign_in: 'Anmelden',
+  sign_up: 'Registrieren',
+  sign_in_with_google: 'Mit Google anmelden',
+  sign_in_with_facebook: 'mit Facebook anmelden',
 
 });
 

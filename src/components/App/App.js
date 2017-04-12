@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
-import {DrawerHeader} from '../Drawer';
+import {DrawerHeader} from '../../containers/Drawer';
 import {DrawerContent} from '../../containers/Drawer';
 import {Routes} from '../Routes';
 import {Helmet} from 'react-helmet';

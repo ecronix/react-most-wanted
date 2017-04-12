@@ -1,4 +1,5 @@
-import { PropTypes } from 'react';
+//import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toggleDrawerOpen } from 'material-ui-responsive-drawer';
 import App from '../../components/App/App.js';

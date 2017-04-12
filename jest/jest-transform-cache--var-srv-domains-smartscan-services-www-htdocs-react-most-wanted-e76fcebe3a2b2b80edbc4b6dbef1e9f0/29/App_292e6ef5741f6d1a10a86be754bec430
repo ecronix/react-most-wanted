@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/App/App.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_Drawer = require('../Drawer');
+var /* istanbul ignore next */_Drawer2 = require('../../containers/Drawer');
+var /* istanbul ignore next */_Routes = require('../Routes');
+var /* istanbul ignore next */_reactHelmet = require('react-helmet');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const App = props => {
+
+  const { intl, muiTheme } = props;
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 16 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: undefined }, intl.formatMessage({ id: 'app_name' })),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'meta', /* istanbul ignore next */{ name: 'theme-color', content: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'meta', /* istanbul ignore next */{ name: 'apple-mobile-web-app-status-bar-style', content: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'meta', /* istanbul ignore next */{ name: 'msapplication-navbutton-color', content: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: undefined })),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveDrawer, /* istanbul ignore next */{ openSecondary: false, __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Drawer.DrawerHeader, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Drawer2.DrawerContent, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: undefined })),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.BodyContainer, /* istanbul ignore next */{ openSecondary: false, __source: { fileName: _jsxFileName, lineNumber: 26 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Routes.Routes, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: undefined }))));
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(App));

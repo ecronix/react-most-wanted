@@ -72,6 +72,12 @@ const DrawerContent = (props) => {
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
     {
+      value:'/signin',
+      visible: true,
+      primaryText: intl.formatMessage({id: 'sign_in'}),
+      leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
+    },
+    {
       value:'/about',
       visible: true,
       primaryText: intl.formatMessage({id: 'about'}),
@@ -121,11 +127,11 @@ const DrawerContent = (props) => {
   ];
 
   return (
-      <SelectableMenuList
-        items={menuItems}
-        onIndexChange={handleChange}
-        index={router?router.location.pathname:'/'}
-      />
+    <SelectableMenuList
+      items={menuItems}
+      onIndexChange={handleChange}
+      index={router?router.location.pathname:'/'}
+    />
   );
 }
 

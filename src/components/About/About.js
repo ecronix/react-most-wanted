@@ -1,21 +1,23 @@
 import React from 'react';
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import {Helmet} from 'react-helmet';
 
 const About = (props) => {
 
-  const {intl}=props;
+  const {intl, muiTheme}=props;
 
   return (
-    <div>
+    <div >
       <Helmet>
         <title>{intl.formatMessage({id: 'about'})}</title>
       </Helmet>
       <ResponsiveAppBar
+        muiTheme={muiTheme}
         title={intl.formatMessage({id: 'about'})}
       />
-      <div>
+      <div >
 
       </div>
     </div>
@@ -30,4 +32,4 @@ About.propTypes = {
 };
 
 
-export default injectIntl(About);
+export default injectIntl(muiThemeable()(About));

@@ -17,6 +17,11 @@ const messages=defineMessages({
   dark: 'Dark',
   light: 'Light',
   ics: 'ICS',
+  sign_out: 'Sign out',
+  sign_in: 'Sign in',
+  sign_up: 'Sign up',
+  sign_in_with_google: 'Sign in with Google',
+  sign_in_with_facebook: 'Sign in with Facebook',
 
 });
 

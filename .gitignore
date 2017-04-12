@@ -21,3 +21,4 @@ yarn-error.log*
 .firebaserc
 database.rules.json
 firebase.json
+srs/config.js
