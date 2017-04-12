@@ -121,7 +121,6 @@ const SignIn = (props) => {
             />
           </GoogleLogin>
 
-          <br />
           <FacebookLogin
             appId={config.facebook_app_id}
             //autoLoad={true}
