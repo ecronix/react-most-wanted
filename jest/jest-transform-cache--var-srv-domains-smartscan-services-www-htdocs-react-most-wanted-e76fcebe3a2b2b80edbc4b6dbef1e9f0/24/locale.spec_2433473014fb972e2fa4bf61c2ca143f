@@ -1,0 +1,18 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_reducer = require('../locale/reducer'); /* istanbul ignore next */var _reducer2 = _interopRequireDefault(_reducer);
+var /* istanbul ignore next */_locale = require('../../actions/locale'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('locale reducer', () => {
+  it('should return the initial state', () => {
+    expect(
+    /* istanbul ignore next */(0, _reducer2.default)(undefined, {})).
+    toEqual('en');
+  });
+
+  it('should handle UPDATE_LOCALE', () => {
+    expect(
+    /* istanbul ignore next */(0, _reducer2.default)('en', /* istanbul ignore next */(0, _locale.updateLocale)('de'))).
+    toEqual('de');
+  });
+
+
+});

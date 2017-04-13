@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+updateAuth = updateAuth;const UPDATE_AUTH = /* istanbul ignore next */exports.UPDATE_AUTH = 'UPDATE_AUTH';function updateAuth(auth) {
+  return {
+    type: UPDATE_AUTH,
+    auth };
+
+}

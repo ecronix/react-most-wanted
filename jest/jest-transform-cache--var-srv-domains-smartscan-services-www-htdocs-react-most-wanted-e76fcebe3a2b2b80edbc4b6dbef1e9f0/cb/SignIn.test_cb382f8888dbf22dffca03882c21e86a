@@ -1,0 +1,42 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/tests/components/SignIn.test.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_SignIn = require('../../components/SignIn');
+var /* istanbul ignore next */_intlThemeTest = require('../../helpers/intl-theme-test'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+function setup() {
+  const props = {
+    updateAuth: jest.fn(),
+    push: jest.fn() };
+
+
+  const wrapper = /* istanbul ignore next */(0, _intlThemeTest.shallowWithIntlTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SignIn.SignIn, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this })));
+
+  return {
+    props,
+    wrapper };
+
+}
+
+describe('components', () => {
+  describe('SignIn', () => {
+    const { wrapper } = setup();
+
+    it('renders without exploding', () => {
+      expect(wrapper.length).toBe(1);
+    });
+
+    it('should be able to call updateAuth', () => {
+      const { wrapper, props } = setup();
+      props.updateAuth(true);
+      expect(props.updateAuth.mock.calls.length).toBe(1);
+    });
+
+    it('should be able to call push', () => {
+      const { wrapper, props } = setup();
+      props.push(true);
+      expect(props.push.mock.calls.length).toBe(1);
+    });
+
+
+  });
+});

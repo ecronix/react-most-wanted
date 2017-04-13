@@ -21,7 +21,8 @@ const DrawerContent = (props) => {
     intl,
     muiTheme,
     auth,
-    push
+    push,
+    setDrawerOpen
   }=props;
 
   const handleChange = (event, index) => {
@@ -55,7 +56,7 @@ const DrawerContent = (props) => {
   const localeItems=allLocales.map((l)=>{
 
     return {
-      value:undefined,
+      value: undefined,
       visible: true,
       primaryText: intl.formatMessage({id: l.locale}) ,
       onTouchTap: ()=>{updateLocale(l.locale)},
@@ -137,8 +138,7 @@ const DrawerContent = (props) => {
           label={intl.formatMessage({id: 'sign_in'})}
           secondary={true}
           style={{margin:20}}
-          onTouchTap={()=>{push('/signin')}}
-          //fullWidth={true}
+          onTouchTap={()=>{push('/signin'); setDrawerOpen(false);}}
           icon={
             <FontIcon
               className="material-icons">

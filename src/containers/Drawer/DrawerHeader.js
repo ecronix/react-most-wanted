@@ -1,8 +1,7 @@
-//import { PropTypes } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import  DrawerHeader  from '../../components/Drawer/DrawerHeader';
-import { updateAuth } from '../../actions/auth';
+import { updateAuth } from '../../store/auth/actions';
 import {injectIntl, intlShape} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 

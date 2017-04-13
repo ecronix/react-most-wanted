@@ -1,0 +1,18 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_reducer = require('./reducer'); /* istanbul ignore next */var _reducer2 = _interopRequireDefault(_reducer);
+var /* istanbul ignore next */_actions = require('./actions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('auth reducer', () => {
+  it('should return the initial state', () => {
+    expect(
+    /* istanbul ignore next */(0, _reducer2.default)(undefined, {})).
+    toEqual(null);
+  });
+
+  it('should handle UPDATE_THEME', () => {
+    expect(
+    /* istanbul ignore next */(0, _reducer2.default)(null, /* istanbul ignore next */(0, _actions.updateAuth)({ name: 'Name', email: 'Email' }))).
+    toEqual({ name: 'Name', email: 'Email' });
+  });
+
+
+});

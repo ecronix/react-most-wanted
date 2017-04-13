@@ -1,0 +1,25 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_reduxTestkit = require('redux-testkit');
+var /* istanbul ignore next */_reducer = require('../reducer'); /* istanbul ignore next */var _reducer2 = _interopRequireDefault(_reducer);
+var /* istanbul ignore next */_actions = require('../actions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const initialState = 'en';
+
+describe('locale reducer', () => {
+  it('should return the initial state', () => {
+    expect(
+    /* istanbul ignore next */(0, _reducer2.default)(undefined, {})).
+    toEqual(initialState);
+  });
+
+  it('should not affect state', () => {
+    /* istanbul ignore next */(0, _reduxTestkit.Reducer)( /* istanbul ignore next */_reducer2.default).expect({ type: 'NOT_EXISTING' }).toReturnState(initialState);
+  });
+
+  it('should handle UPDATE_THEME', () => {
+
+    const locale = 'de';
+    /* istanbul ignore next */(0, _reduxTestkit.Reducer)( /* istanbul ignore next */_reducer2.default).expect( /* istanbul ignore next */(0, _actions.updateLocale)(locale)).toReturnState(locale);
+
+  });
+
+});

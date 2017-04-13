@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+updateAuth = updateAuth;var /* istanbul ignore next */_actionTypes = require('./actionTypes'); /* istanbul ignore next */var types = _interopRequireWildcard(_actionTypes); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function updateAuth(auth) {
+  return {
+    type: types.UPDATE_AUTH,
+    auth };
+
+}

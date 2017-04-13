@@ -1,9 +1,8 @@
-//import { PropTypes } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setResponsive, setDrawerOpen } from 'material-ui-responsive-drawer';
-import { updateTheme } from '../../actions/theme';
-import { updateLocale } from '../../actions/locale';
+import { updateTheme } from '../../store/theme/actions';
+import { updateLocale } from '../../store/locale/actions';
 import { push } from 'react-router-redux';
 import { DrawerContent } from '../../components/Drawer';
 

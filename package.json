@@ -7,6 +7,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-scripts": "0.9.5",
     "redux-logger": "^3.0.1",
+    "redux-testkit": "^1.0.6",
     "sw-precache": "^4.2.2"
   },
   "dependencies": {
@@ -26,7 +27,9 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-persist": "^4.6.0",
-    "redux-responsive": "^4.1.1"
+    "redux-responsive": "^4.1.1",
+    "redux-thunk": "^2.2.0",
+    "seamless-immutable": "^7.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

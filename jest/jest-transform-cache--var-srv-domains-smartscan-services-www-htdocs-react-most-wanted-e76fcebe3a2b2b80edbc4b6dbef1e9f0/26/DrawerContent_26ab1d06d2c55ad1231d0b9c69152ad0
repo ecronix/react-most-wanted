@@ -1,0 +1,163 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Drawer/DrawerContent.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_materialUiSelectableMenuList = require('material-ui-selectable-menu-list');
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_Toggle = require('material-ui/Toggle'); /* istanbul ignore next */var _Toggle2 = _interopRequireDefault(_Toggle);
+var /* istanbul ignore next */_themes = require('../../themes'); /* istanbul ignore next */var _themes2 = _interopRequireDefault(_themes);
+var /* istanbul ignore next */_locales = require('../../locales'); /* istanbul ignore next */var _locales2 = _interopRequireDefault(_locales);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_RaisedButton = require('material-ui/RaisedButton'); /* istanbul ignore next */var _RaisedButton2 = _interopRequireDefault(_RaisedButton);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const DrawerContent = props => {
+
+  const {
+    router,
+    responsiveDrawer,
+    setResponsive,
+    theme,
+    locale,
+    updateTheme,
+    updateLocale,
+    intl,
+    muiTheme,
+    auth,
+    push,
+    setDrawerOpen } =
+  props;
+
+  const handleChange = (event, index) => {
+    const { push, responsiveDrawer, setDrawerOpen } = props;
+
+    if (responsiveDrawer.open && index !== undefined) {
+      setDrawerOpen(false);
+    }
+
+    if (index !== undefined && index !== Object(index)) {
+      push(index);
+    }
+  };
+
+  const themeItems = /* istanbul ignore next */_themes2.default.map(t => {
+    return {
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: t.id }),
+      onTouchTap: () => {updateTheme(t.id);},
+      rightIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+          className: 'material-icons',
+          color: t.id === theme ? muiTheme.palette.primary1Color : undefined, __source: { fileName: _jsxFileName, lineNumber: 46 }, __self: undefined }, /* istanbul ignore next */'style') };
+
+
+
+  });
+
+
+
+  const localeItems = /* istanbul ignore next */_locales2.default.map(l => {
+
+    return {
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: l.locale }),
+      onTouchTap: () => {updateLocale(l.locale);},
+      rightIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+          className: 'material-icons',
+          color: l.locale === locale ? muiTheme.palette.primary1Color : undefined, __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: undefined }, /* istanbul ignore next */'language') };
+
+
+
+  });
+
+
+  const menuItems = [
+  {
+    value: '/dashboard',
+    visible: true,
+    primaryText: intl.formatMessage({ id: 'dashboard' }),
+    leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: undefined }, /* istanbul ignore next */'dashboard') },
+
+  {
+    value: '/signin',
+    visible: false,
+    primaryText: intl.formatMessage({ id: 'sign_in' }),
+    leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 83 }, __self: undefined }, /* istanbul ignore next */'info_outline') },
+
+  {
+    value: '/about',
+    visible: auth != null,
+    primaryText: intl.formatMessage({ id: 'about' }),
+    leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 89 }, __self: undefined }, /* istanbul ignore next */'info_outline') },
+
+  {
+    value: '/wrong_url',
+    visible: false,
+    primaryText: intl.formatMessage({ id: '404' }),
+    secondaryText: intl.formatMessage({ id: 'page_not_found_demo' }),
+    leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 96 }, __self: undefined }, /* istanbul ignore next */'warning') },
+
+  {
+    divider: true },
+
+  {
+    primaryText: intl.formatMessage({ id: 'settings' }),
+    primaryTogglesNestedList: true,
+    leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 104 }, __self: undefined }, /* istanbul ignore next */'settings'),
+    nestedItems: [
+    {
+      primaryText: intl.formatMessage({ id: 'theme' }),
+      secondaryText: intl.formatMessage({ id: theme }),
+      primaryTogglesNestedList: true,
+      leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 110 }, __self: undefined }, /* istanbul ignore next */'style'),
+      nestedItems: themeItems },
+
+    {
+      primaryText: intl.formatMessage({ id: 'language' }),
+      secondaryText: intl.formatMessage({ id: locale }),
+      primaryTogglesNestedList: true,
+      leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 117 }, __self: undefined }, /* istanbul ignore next */'language'),
+      nestedItems: localeItems },
+
+    {
+      primaryText: intl.formatMessage({ id: 'responsive' }),
+      leftIcon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 122 }, __self: undefined }, /* istanbul ignore next */'chrome_reader_mode'),
+      rightToggle: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Toggle2.default, /* istanbul ignore next */{
+        toggled: responsiveDrawer.responsive,
+        onToggle:
+        () => {setResponsive(!responsiveDrawer.responsive);}, __source: { fileName: _jsxFileName, lineNumber: 123 }, __self: undefined }) }] }];
+
+
+
+
+
+
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { display: 'flex', flexDirection: 'column' }, __source: { fileName: _jsxFileName, lineNumber: 135 }, __self: undefined },
+      auth == null &&
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+        label: intl.formatMessage({ id: 'sign_in' }),
+        secondary: true,
+        style: { margin: 20 },
+        onTouchTap: () => {push('/signin');setDrawerOpen(false);}
+        //fullWidth={true}
+        , icon:
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+            className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: undefined }, /* istanbul ignore next */'lock'), __source: { fileName: _jsxFileName, lineNumber: 137 }, __self: undefined }),
+
+
+
+
+
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiSelectableMenuList.SelectableMenuList, /* istanbul ignore next */{
+        items: menuItems,
+        onIndexChange: handleChange,
+        index: router ? router.location.pathname : '/', __source: { fileName: _jsxFileName, lineNumber: 152 }, __self: undefined })));
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(DrawerContent));

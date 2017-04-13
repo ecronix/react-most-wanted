@@ -1,0 +1,95 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Drawer/DrawerHeader.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Avatar = require('material-ui/Avatar'); /* istanbul ignore next */var _Avatar2 = _interopRequireDefault(_Avatar);
+var /* istanbul ignore next */_IconMenu = require('material-ui/IconMenu'); /* istanbul ignore next */var _IconMenu2 = _interopRequireDefault(_IconMenu);
+var /* istanbul ignore next */_MenuItem = require('material-ui/MenuItem'); /* istanbul ignore next */var _MenuItem2 = _interopRequireDefault(_MenuItem);
+var /* istanbul ignore next */_IconButton = require('material-ui/IconButton'); /* istanbul ignore next */var _IconButton2 = _interopRequireDefault(_IconButton);
+var /* istanbul ignore next */_expandMore = require('material-ui/svg-icons/navigation/expand-more'); /* istanbul ignore next */var _expandMore2 = _interopRequireDefault(_expandMore);
+var /* istanbul ignore next */_ListItem = require('material-ui/List/ListItem'); /* istanbul ignore next */var _ListItem2 = _interopRequireDefault(_ListItem);
+var /* istanbul ignore next */_List = require('material-ui/List/List'); /* istanbul ignore next */var _List2 = _interopRequireDefault(_List);
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_Icons = require('../Icons'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const DrawerHeader = props => {
+
+  const { muiTheme, intl, auth, updateAuth, setDrawerOpen } = props;
+
+  const styles = {
+    header: {
+      //backgroundColor:muiTheme.palette.primary2Color,
+      //color: muiTheme.palette.alternateTextColor,
+      padding: 5 },
+
+    header_content: {
+      padding: 5 },
+
+    paper: {
+      backgroundColor: muiTheme.palette.primary2Color,
+      color: muiTheme.palette.alternateTextColor,
+      margin: 0,
+      padding: 0 },
+
+    icon: {
+      width: 48,
+      height: 48,
+      top: 4
+      //paddingBottom: 15
+    } };
+
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ zDepth: 1, style: styles.paper, __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: undefined },
+
+      auth &&
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 44 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ListItem2.default, /* istanbul ignore next */{
+          disabled: true,
+          primaryText: auth.name,
+          secondaryText: auth.email,
+          leftAvatar:
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Avatar2.default, /* istanbul ignore next */{
+            src: auth.img, __source: { fileName: _jsxFileName, lineNumber: 50 }, __self: undefined }),
+
+
+          rightIconButton:
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconMenu2.default, /* istanbul ignore next */{
+              iconButtonElement:
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{ touch: true, __source: { fileName: _jsxFileName, lineNumber: 57 }, __self: undefined },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_expandMore2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: undefined })), __source: { fileName: _jsxFileName, lineNumber: 55 }, __self: undefined },
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_MenuItem2.default, /* istanbul ignore next */{
+              primaryText: intl.formatMessage({ id: 'sign_out' }),
+              secondaryTextLines: 2,
+              onTouchTap: () => {updateAuth(null);}, __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: undefined })), __source: { fileName: _jsxFileName, lineNumber: 45 }, __self: undefined })),
+
+
+
+
+
+
+
+
+      !auth &&
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ListItem2.default, /* istanbul ignore next */{
+          disabled: true,
+          primaryText: intl.formatMessage({ id: 'app_name' })
+          //secondaryText={auth.email}
+          , leftAvatar:
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.ReduxIcon, /* istanbul ignore next */{ color: muiTheme.palette.accent1Color, style: styles.icon, __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: undefined }), __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: undefined }))));
+
+
+
+
+
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+
+DrawerHeader;

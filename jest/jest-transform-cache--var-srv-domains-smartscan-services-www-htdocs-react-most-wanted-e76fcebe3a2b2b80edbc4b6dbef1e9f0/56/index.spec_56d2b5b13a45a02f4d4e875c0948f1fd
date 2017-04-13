@@ -1,0 +1,20 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_locales = require('./locales');
+var /* istanbul ignore next */_en = require('./en'); /* istanbul ignore next */var _en2 = _interopRequireDefault(_en);
+var /* istanbul ignore next */_de = require('./de'); /* istanbul ignore next */var _de2 = _interopRequireDefault(_de);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+describe('locales', () => {
+
+  it('should return locale messages', () => {
+    expect(
+    /* istanbul ignore next */(0, _locales.getLocaleMessages)('de')).
+    toEqual( /* istanbul ignore next */_de2.default);
+  });
+
+  it('should return default locale on wrong input', () => {
+    expect(
+    /* istanbul ignore next */(0, _locales.getLocaleMessages)('de2')).
+    toEqual( /* istanbul ignore next */_en2.default);
+  });
+
+
+});

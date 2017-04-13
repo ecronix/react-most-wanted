@@ -68,7 +68,9 @@ react-most-wanted/
     locales/
     reducers/
     store/
+    tests/
     themes/
+    config.js
     index.css
     index.js
 ```
@@ -199,7 +201,8 @@ Is also a dev library that helps us to create a service worker during build proc
 
 ## TO DO
 
-- [ ] finish unit tests
+- [X] finish tests
+- [X] implement authentication using google and facebook
 - [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
 
 ## License
