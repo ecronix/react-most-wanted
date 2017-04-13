@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerHeader } from '../../components/Drawer';
+import DrawerHeader from './DrawerHeader';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
 function setup() {

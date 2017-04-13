@@ -1,11 +1,11 @@
 import React from 'react';
-import { Root } from '../../components/Root';
+import App from './App';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
-const wrapper=shallowWithIntlTheme(<Root/>)
+const wrapper=shallowWithIntlTheme(<App/>)
 
 describe('components', () => {
-  describe('Root', () => {
+  describe('App', () => {
     it('renders without exploding', () => {
       expect(wrapper.length).toBe(1)
     })

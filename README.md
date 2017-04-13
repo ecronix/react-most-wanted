@@ -61,14 +61,13 @@ react-most-wanted/
     favicon.ico
     manifest.json
   src/
-    actions/
     components/
     containers/
     helpers/
     locales/
-    reducers/
     store/
-    tests/
+      index.js
+      reducers.js
     themes/
     config.js
     index.css
@@ -79,9 +78,7 @@ All application parts and code should be stored in the `src` folder.
 
 All `react` components shold be seperated in presentational and container compnents. This greate [article](https://www.fullstackreact.com/p/using-presentational-and-container-components-with-redux/) is describing it why and how. For that purpose we have the `components` and `containers` folders.
 
-Because we are using `redux` there are the `actions` and `reducers` folders. You can find more about redux [here](http://redux.js.org/docs/introduction/).
-
-We have a `store` folder in witch we can seperate the `dev` and `prod` store. It is just for future preparation. We still have in this project a single store file.
+All `redux` related files are in the `store` folder. You can find more about redux [here](http://redux.js.org/docs/introduction/).
 
 The folders `locales` and `themes` are used to store data for different locales and themes.
 

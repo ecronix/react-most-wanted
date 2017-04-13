@@ -1,11 +1,11 @@
 import React from 'react';
-import { Dashboard } from '../../components/Dashboard';
+import Root from './Root';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
-const wrapper=shallowWithIntlTheme(<Dashboard/>)
+const wrapper=shallowWithIntlTheme(<Root/>)
 
 describe('components', () => {
-  describe('Dashboard', () => {
+  describe('Root', () => {
     it('renders without exploding', () => {
       expect(wrapper.length).toBe(1)
     })

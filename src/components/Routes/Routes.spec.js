@@ -1,11 +1,11 @@
 import React from 'react';
-import { App } from '../../components/App';
+import Routes from './Routes';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
-const wrapper=shallowWithIntlTheme(<App/>)
+const wrapper=shallowWithIntlTheme(<Routes/>)
 
 describe('components', () => {
-  describe('App', () => {
+  describe('Routes', () => {
     it('renders without exploding', () => {
       expect(wrapper.length).toBe(1)
     })

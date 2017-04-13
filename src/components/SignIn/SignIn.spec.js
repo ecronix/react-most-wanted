@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignIn } from '../../components/SignIn';
+import SignIn from './SignIn';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
 

@@ -1,11 +1,11 @@
 import React from 'react';
-import { PageNotFound } from '../../components/PageNotFound';
+import Dashboard  from './Dashboard';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
-const wrapper=shallowWithIntlTheme(<PageNotFound/>)
+const wrapper=shallowWithIntlTheme(<Dashboard/>)
 
 describe('components', () => {
-  describe('PageNotFound', () => {
+  describe('Dashboard', () => {
     it('renders without exploding', () => {
       expect(wrapper.length).toBe(1)
     })

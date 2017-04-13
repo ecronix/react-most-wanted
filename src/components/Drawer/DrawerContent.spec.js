@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerContent } from '../../components/Drawer';
+import DrawerContent  from './DrawerContent';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
 

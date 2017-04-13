@@ -1,5 +1,5 @@
 import React from 'react';
-import {About} from '../../components/About';
+import About from './About';
 import {shallowWithIntlTheme} from '../../helpers/intl-theme-test';
 
 const wrapper=shallowWithIntlTheme(<About/>)
