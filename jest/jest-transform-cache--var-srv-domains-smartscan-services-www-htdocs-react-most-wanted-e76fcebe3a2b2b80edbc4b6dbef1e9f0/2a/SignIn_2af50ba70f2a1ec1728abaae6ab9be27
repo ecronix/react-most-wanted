@@ -1,0 +1,44 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_fshu80knr = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/SignIn/SignIn.js',hash = 'b5b956f755c100d9d958af7028083195308e8f6a',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/SignIn/SignIn.js', statementMap: { '0': { start: { line: 10, column: 0 }, end: { line: 17, column: 2 } }, '1': { start: { line: 19, column: 24 }, end: { line: 24, column: 1 } }, '2': { start: { line: 20, column: 19 }, end: { line: 20, column: 24 } }, '3': { start: { line: 21, column: 2 }, end: { line: 23, column: 4 } }, '4': { start: { line: 26, column: 27 }, end: { line: 39, column: 1 } }, '5': { start: { line: 28, column: 2 }, end: { line: 38, column: 3 } }, '6': { start: { line: 30, column: 6 }, end: { line: 30, column: 33 } }, '7': { start: { line: 33, column: 6 }, end: { line: 33, column: 26 } }, '8': { start: { line: 36, column: 6 }, end: { line: 36, column: 35 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 19, column: 24 }, end: { line: 19, column: 25 } }, loc: { start: { line: 19, column: 35 }, end: { line: 24, column: 1 } }, line: 19 }, '1': { name: '(anonymous_1)', decl: { start: { line: 26, column: 27 }, end: { line: 26, column: 28 } }, loc: { start: { line: 26, column: 41 }, end: { line: 39, column: 1 } }, line: 26 }, '2': { name: '(anonymous_2)', decl: { start: { line: 29, column: 16 }, end: { line: 29, column: 17 } }, loc: { start: { line: 29, column: 26 }, end: { line: 31, column: 5 } }, line: 29 }, '3': { name: '(anonymous_3)', decl: { start: { line: 32, column: 10 }, end: { line: 32, column: 11 } }, loc: { start: { line: 32, column: 18 }, end: { line: 34, column: 5 } }, line: 32 }, '4': { name: '(anonymous_4)', decl: { start: { line: 35, column: 19 }, end: { line: 35, column: 20 } }, loc: { start: { line: 35, column: 27 }, end: { line: 37, column: 5 } }, line: 35 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_SignIn = require('../../components/SignIn'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_fshu80knr.s[0];
+
+/* istanbul ignore next */_SignIn.SignIn.propTypes = {
+  updateAuth: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setDrawerOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  push: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  auth: /* istanbul ignore next */_propTypes2.default.object,
+  intl: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired }; /* istanbul ignore next */++cov_fshu80knr.s[1];
+
+
+const mapStateToProps = state => {/* istanbul ignore next */++cov_fshu80knr.f[0];
+  const { auth } = /* istanbul ignore next */(++cov_fshu80knr.s[2], state); /* istanbul ignore next */++cov_fshu80knr.s[3];
+  return {
+    auth };
+
+}; /* istanbul ignore next */++cov_fshu80knr.s[4];
+
+const mapDispatchToProps = dispatch => {/* istanbul ignore next */++cov_fshu80knr.f[1];++cov_fshu80knr.s[5];
+
+  return {
+    updateAuth: auth => {/* istanbul ignore next */++cov_fshu80knr.f[2];++cov_fshu80knr.s[6];
+      dispatch( /* istanbul ignore next */(0, _actions.updateAuth)(auth));
+    },
+    push: path => {/* istanbul ignore next */++cov_fshu80knr.f[3];++cov_fshu80knr.s[7];
+      dispatch( /* istanbul ignore next */(0, _reactRouterRedux.push)(path));
+    },
+    setDrawerOpen: open => {/* istanbul ignore next */++cov_fshu80knr.f[4];++cov_fshu80knr.s[8];
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setDrawerOpen)(open));
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)(
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()( /* istanbul ignore next */_SignIn.SignIn)));

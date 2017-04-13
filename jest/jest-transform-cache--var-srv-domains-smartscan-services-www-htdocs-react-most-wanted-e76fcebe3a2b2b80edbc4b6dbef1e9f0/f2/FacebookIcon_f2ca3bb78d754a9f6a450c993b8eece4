@@ -1,0 +1,19 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_u9vtxjlna = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Icons/FacebookIcon.js',hash = 'dd07b111c82ddef9a2da05400ab29322e6f84ce0',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Icons/FacebookIcon.js', statementMap: { '0': { start: { line: 4, column: 21 }, end: { line: 17, column: 1 } }, '1': { start: { line: 5, column: 2 }, end: { line: 16, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 4, column: 21 }, end: { line: 4, column: 22 } }, loc: { start: { line: 4, column: 32 }, end: { line: 17, column: 1 } }, line: 4 } }, branchMap: {}, s: { '0': 0, '1': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Icons/FacebookIcon.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_SvgIcon = require('material-ui/SvgIcon'); /* istanbul ignore next */var _SvgIcon2 = _interopRequireDefault(_SvgIcon);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_u9vtxjlna.s[0];
+
+const FacebookIcon = props => {/* istanbul ignore next */++cov_u9vtxjlna.f[0];++cov_u9vtxjlna.s[1];
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SvgIcon2.default, /* istanbul ignore next */Object.assign({ width: 22, height: 22, viewBox: '0 0 266.893 266.895', enableBackground: 'new 0 0 266.893 266.895' }, props, { __source: { fileName: _jsxFileName, lineNumber: 6 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{ id: 'Blue_1_', d: 'M248.082,262.307c7.854,0,14.223-6.369,14.223-14.225V18.812\r c0-7.857-6.368-14.224-14.223-14.224H18.812c-7.857,0-14.224,6.367-14.224,14.224v229.27c0,7.855,6.366,14.225,14.224,14.225\r H248.082z', __source: { fileName: _jsxFileName, lineNumber: 7 }, __self: undefined }),
+
+
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{ id: 'f', fill: '#FFFFFF', d: 'M182.409,262.307v-99.803h33.499l5.016-38.895h-38.515V98.777c0-11.261,3.127-18.935,19.275-18.935\r l20.596-0.009V45.045c-3.562-0.474-15.788-1.533-30.012-1.533c-29.695,0-50.025,18.126-50.025,51.413v28.684h-33.585v38.895h33.585\r v99.803H182.409z', __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: undefined })));
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+FacebookIcon;

@@ -1,0 +1,19 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_2m0w3cd9li = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/App/App.js',hash = '3e64d11a1e1d835308ca0b143ccd0e2a9e5a1e71',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/App/App.js', statementMap: { '0': { start: { line: 5, column: 0 }, end: { line: 7, column: 2 } }, '1': { start: { line: 9, column: 24 }, end: { line: 15, column: 1 } }, '2': { start: { line: 10, column: 19 }, end: { line: 10, column: 24 } }, '3': { start: { line: 12, column: 2 }, end: { line: 14, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 9, column: 24 }, end: { line: 9, column: 25 } }, loc: { start: { line: 9, column: 35 }, end: { line: 15, column: 1 } }, line: 9 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_App = require('../../components/App'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_2m0w3cd9li.s[0];
+
+/* istanbul ignore next */_App.App.propTypes = {
+  auth: /* istanbul ignore next */_propTypes2.default.object }; /* istanbul ignore next */++cov_2m0w3cd9li.s[1];
+
+
+const mapStateToProps = state => {/* istanbul ignore next */++cov_2m0w3cd9li.f[0];
+  const { auth } = /* istanbul ignore next */(++cov_2m0w3cd9li.s[2], state); /* istanbul ignore next */++cov_2m0w3cd9li.s[3];
+
+  return {
+    auth };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps)( /* istanbul ignore next */_App.App);

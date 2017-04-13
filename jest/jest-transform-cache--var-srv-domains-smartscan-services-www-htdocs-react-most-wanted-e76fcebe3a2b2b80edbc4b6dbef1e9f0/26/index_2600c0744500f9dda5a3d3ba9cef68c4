@@ -1,0 +1,44 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_ky9uhl0or = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/locales/index.js',hash = '2c40261e5d0df8f57892c5bb7e81965a5aeed23c',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/locales/index.js', statementMap: { '0': { start: { line: 7, column: 16 }, end: { line: 19, column: 1 } }, '1': { start: { line: 24, column: 21 }, end: { line: 24, column: 66 } }, '2': { start: { line: 24, column: 40 }, end: { line: 24, column: 64 } }, '3': { start: { line: 26, column: 2 }, end: { line: 28, column: 3 } }, '4': { start: { line: 27, column: 4 }, end: { line: 27, column: 33 } }, '5': { start: { line: 31, column: 2 }, end: { line: 31, column: 29 } }, '6': { start: { line: 36, column: 2 }, end: { line: 39, column: 5 } }, '7': { start: { line: 37, column: 4 }, end: { line: 37, column: 26 } }, '8': { start: { line: 38, column: 4 }, end: { line: 38, column: 13 } } }, fnMap: { '0': { name: 'getLocaleMessages', decl: { start: { line: 22, column: 16 }, end: { line: 22, column: 33 } }, loc: { start: { line: 22, column: 41 }, end: { line: 32, column: 1 } }, line: 22 }, '1': { name: '(anonymous_1)', decl: { start: { line: 24, column: 34 }, end: { line: 24, column: 35 } }, loc: { start: { line: 24, column: 39 }, end: { line: 24, column: 65 } }, line: 24 }, '2': { name: 'addLocalizationData', decl: { start: { line: 34, column: 16 }, end: { line: 34, column: 35 } }, loc: { start: { line: 34, column: 37 }, end: { line: 41, column: 1 } }, line: 34 }, '3': { name: '(anonymous_3)', decl: { start: { line: 36, column: 14 }, end: { line: 36, column: 15 } }, loc: { start: { line: 36, column: 19 }, end: { line: 39, column: 3 } }, line: 36 } }, branchMap: { '0': { loc: { start: { line: 26, column: 2 }, end: { line: 28, column: 3 } }, type: 'if', locations: [{ start: { line: 26, column: 2 }, end: { line: 28, column: 3 } }, { start: { line: 26, column: 2 }, end: { line: 28, column: 3 } }], line: 26 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0 }, b: { '0': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getLocaleMessages = getLocaleMessages; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+addLocalizationData = addLocalizationData;var /* istanbul ignore next */_reactIntl = require('react-intl');var /* istanbul ignore next */_en = require('./en'); /* istanbul ignore next */var _en2 = _interopRequireDefault(_en);var /* istanbul ignore next */_de = require('./de'); /* istanbul ignore next */var _de2 = _interopRequireDefault(_de);var /* istanbul ignore next */_en3 = require('react-intl/locale-data/en'); /* istanbul ignore next */var _en4 = _interopRequireDefault(_en3);var /* istanbul ignore next */_de3 = require('react-intl/locale-data/de'); /* istanbul ignore next */var _de4 = _interopRequireDefault(_de3);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const locales = /* istanbul ignore next */(++cov_ky9uhl0or.s[0], [{ locale: 'en', messages: /* istanbul ignore next */_en2.default, data: /* istanbul ignore next */_en4.default }, { locale: 'de', messages: /* istanbul ignore next */_de2.default, data: /* istanbul ignore next */_de4.default }]);function getLocaleMessages(locale) {/* istanbul ignore next */++cov_ky9uhl0or.f[0];const localization = /* istanbul ignore next */(++cov_ky9uhl0or.s[1], locales.find(l => {/* istanbul ignore next */++cov_ky9uhl0or.f[1];++cov_ky9uhl0or.s[2];return l.locale === locale;})); /* istanbul ignore next */++cov_ky9uhl0or.s[3];if (localization) {/* istanbul ignore next */++cov_ky9uhl0or.b[0][0];++cov_ky9uhl0or.s[4];return localization.messages;} else /* istanbul ignore next */{++cov_ky9uhl0or.b[0][1];} //If no locale is found the first one will be returned
+  ++cov_ky9uhl0or.s[5];return locales[0].messages;}function addLocalizationData() {/* istanbul ignore next */++cov_ky9uhl0or.f[2];++cov_ky9uhl0or.s[6];
+  locales.map(l => {/* istanbul ignore next */++cov_ky9uhl0or.f[3];++cov_ky9uhl0or.s[7];
+    /* istanbul ignore next */(0, _reactIntl.addLocaleData)(l.data); /* istanbul ignore next */++cov_ky9uhl0or.s[8];
+    return l;
+  });
+
+} /* istanbul ignore next */exports.default =
+
+
+locales;

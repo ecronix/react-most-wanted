@@ -1,0 +1,32 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1wjg0t6dkg = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/helpers/intl-theme-test.js',hash = '9091842b560b56c49efb200d35fc4696920c46b5',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/helpers/intl-theme-test.js', statementMap: { '0': { start: { line: 7, column: 17 }, end: { line: 7, column: 41 } }, '1': { start: { line: 8, column: 21 }, end: { line: 8, column: 69 } }, '2': { start: { line: 9, column: 17 }, end: { line: 9, column: 47 } }, '3': { start: { line: 10, column: 25 }, end: { line: 10, column: 73 } }, '4': { start: { line: 11, column: 21 }, end: { line: 11, column: 55 } }, '5': { start: { line: 15, column: 2 }, end: { line: 15, column: 44 } }, '6': { start: { line: 19, column: 2 }, end: { line: 19, column: 48 } }, '7': { start: { line: 24, column: 2 }, end: { line: 24, column: 93 } }, '8': { start: { line: 28, column: 2 }, end: { line: 31, column: 5 } } }, fnMap: { '0': { name: 'nodeWithIntlProp', decl: { start: { line: 14, column: 9 }, end: { line: 14, column: 25 } }, loc: { start: { line: 14, column: 32 }, end: { line: 16, column: 1 } }, line: 14 }, '1': { name: 'nodeWithThemeProp', decl: { start: { line: 18, column: 9 }, end: { line: 18, column: 26 } }, loc: { start: { line: 18, column: 33 }, end: { line: 20, column: 1 } }, line: 18 }, '2': { name: 'shallowWithIntlTheme', decl: { start: { line: 23, column: 16 }, end: { line: 23, column: 36 } }, loc: { start: { line: 23, column: 43 }, end: { line: 25, column: 1 } }, line: 23 }, '3': { name: 'mountWithIntlTheme', decl: { start: { line: 27, column: 16 }, end: { line: 27, column: 34 } }, loc: { start: { line: 27, column: 41 }, end: { line: 32, column: 1 } }, line: 27 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+shallowWithIntlTheme = shallowWithIntlTheme; /* istanbul ignore next */exports.
+
+
+
+mountWithIntlTheme = mountWithIntlTheme;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactIntl = require('react-intl');var /* istanbul ignore next */_MuiThemeProvider = require('material-ui/styles/MuiThemeProvider'); /* istanbul ignore next */var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);var /* istanbul ignore next */_getMuiTheme = require('material-ui/styles/getMuiTheme'); /* istanbul ignore next */var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);var /* istanbul ignore next */_enzyme = require('enzyme'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const messages = /* istanbul ignore next */(++cov_1wjg0t6dkg.s[0], require('../locales/en')); // en.json
+const intlProvider = /* istanbul ignore next */(++cov_1wjg0t6dkg.s[1], new /* istanbul ignore next */_reactIntl.IntlProvider({ locale: 'en', messages }, {}));const { intl } = /* istanbul ignore next */(++cov_1wjg0t6dkg.s[2], intlProvider.getChildContext());const muiThemeProvider = /* istanbul ignore next */(++cov_1wjg0t6dkg.s[3], new /* istanbul ignore next */_MuiThemeProvider2.default({ muiTheme: /* istanbul ignore next */(0, _getMuiTheme2.default)() }));const { muiTheme } = /* istanbul ignore next */(++cov_1wjg0t6dkg.s[4], muiThemeProvider.getChildContext());function nodeWithIntlProp(node) {/* istanbul ignore next */++cov_1wjg0t6dkg.f[0];++cov_1wjg0t6dkg.s[5];return (/* istanbul ignore next */_react2.default.cloneElement(node, { intl }));}function nodeWithThemeProp(node) {/* istanbul ignore next */++cov_1wjg0t6dkg.f[1];++cov_1wjg0t6dkg.s[6];return (/* istanbul ignore next */_react2.default.cloneElement(node, { muiTheme }));}function shallowWithIntlTheme(node) {/* istanbul ignore next */++cov_1wjg0t6dkg.f[2];++cov_1wjg0t6dkg.s[7];return (/* istanbul ignore next */(0, _enzyme.shallow)(nodeWithThemeProp(nodeWithIntlProp(node)), { context: { intl, muiTheme } }));};function mountWithIntlTheme(node) {/* istanbul ignore next */++cov_1wjg0t6dkg.f[3];++cov_1wjg0t6dkg.s[8];return (/* istanbul ignore next */(0, _enzyme.mount)(nodeWithThemeProp(nodeWithIntlProp(node)), {
+      context: { intl },
+      childContextTypes: { intl: /* istanbul ignore next */_reactIntl.intlShape, muiTheme } }));
+
+};

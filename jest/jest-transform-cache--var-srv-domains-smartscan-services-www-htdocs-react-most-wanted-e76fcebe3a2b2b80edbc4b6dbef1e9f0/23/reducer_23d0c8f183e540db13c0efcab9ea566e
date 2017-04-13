@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1nvgv9vuoq = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/store/auth/reducer.js',hash = 'f14c1f35fddae58c35b548cd142970b36903fca1',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/store/auth/reducer.js', statementMap: { '0': { start: { line: 4, column: 13 }, end: { line: 13, column: 1 } }, '1': { start: { line: 6, column: 2 }, end: { line: 12, column: 3 } }, '2': { start: { line: 8, column: 4 }, end: { line: 8, column: 23 } }, '3': { start: { line: 11, column: 4 }, end: { line: 11, column: 17 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 4, column: 13 }, end: { line: 4, column: 14 } }, loc: { start: { line: 4, column: 50 }, end: { line: 13, column: 1 } }, line: 4 } }, branchMap: { '0': { loc: { start: { line: 4, column: 14 }, end: { line: 4, column: 37 } }, type: 'default-arg', locations: [{ start: { line: 4, column: 22 }, end: { line: 4, column: 37 } }], line: 4 }, '1': { loc: { start: { line: 6, column: 2 }, end: { line: 12, column: 3 } }, type: 'switch', locations: [{ start: { line: 7, column: 4 }, end: { line: 8, column: 23 } }, { start: { line: 10, column: 4 }, end: { line: 11, column: 17 } }], line: 6 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0 }, f: { '0': 0 }, b: { '0': [0], '1': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_actionTypes = require('./actionTypes'); /* istanbul ignore next */var types = _interopRequireWildcard(_actionTypes);
+var /* istanbul ignore next */_seamlessImmutable = require('seamless-immutable'); /* istanbul ignore next */var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}++cov_1nvgv9vuoq.s[0];
+
+const auth = (state = /* istanbul ignore next */(++cov_1nvgv9vuoq.b[0][0], /* istanbul ignore next */(0, _seamlessImmutable2.default)(null)), action) => {/* istanbul ignore next */++cov_1nvgv9vuoq.f[0];++cov_1nvgv9vuoq.s[1];
+
+  switch (action.type) {
+    case types.UPDATE_AUTH: /* istanbul ignore next */++cov_1nvgv9vuoq.b[1][0];++cov_1nvgv9vuoq.s[2];
+      return action.auth;
+
+    default: /* istanbul ignore next */++cov_1nvgv9vuoq.b[1][1];++cov_1nvgv9vuoq.s[3];
+      return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+auth;

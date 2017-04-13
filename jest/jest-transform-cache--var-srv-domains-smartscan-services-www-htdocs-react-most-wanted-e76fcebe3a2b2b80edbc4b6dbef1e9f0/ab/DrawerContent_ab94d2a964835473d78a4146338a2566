@@ -1,0 +1,56 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_actions = require('../../store/theme/actions');
+var /* istanbul ignore next */_actions2 = require('../../store/locale/actions');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_Drawer = require('../../components/Drawer'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/* istanbul ignore next */_Drawer.DrawerContent.propTypes = {
+  responsiveDrawer: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  theme: /* istanbul ignore next */_propTypes2.default.string.isRequired,
+  locale: /* istanbul ignore next */_propTypes2.default.string.isRequired,
+  router: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  push: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setResponsive: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setDrawerOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  updateTheme: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  updateLocale: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+const mapStateToProps = state => {
+  const { responsiveDrawer, theme, locale, router, auth } = state;
+
+  return {
+    responsiveDrawer,
+    theme,
+    locale,
+    router,
+    auth };
+
+};
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    push: path => {
+      dispatch( /* istanbul ignore next */(0, _reactRouterRedux.push)(path));
+    },
+    setResponsive: responsive => {
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setResponsive)(responsive));
+    },
+    setDrawerOpen: open => {
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setDrawerOpen)(open));
+    },
+    updateTheme: theme => {
+      dispatch( /* istanbul ignore next */(0, _actions.updateTheme)(theme));
+    },
+    updateLocale: locale => {
+      dispatch( /* istanbul ignore next */(0, _actions2.updateLocale)(locale));
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)( /* istanbul ignore next */_Drawer.DrawerContent);

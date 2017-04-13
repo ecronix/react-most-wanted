@@ -19,6 +19,11 @@ const styles={
     margin:0,
     padding: 15
   },
+  header:{
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   container: {
     display: 'flex',
     alignItems: 'center',
@@ -66,7 +71,7 @@ const SignIn = ({muiTheme, intl, updateAuth, push, setDrawerOpen }) => {
       <div style={styles.container}>
 
         <Paper  zDepth={2} style={styles.paper}>
-          <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <div style={styles.header}>
             <h3>{intl.formatMessage({id: 'sign_in'}).toUpperCase()}</h3>
             <FloatingActionButton style={styles.sign_up_button}>
               <FontIcon

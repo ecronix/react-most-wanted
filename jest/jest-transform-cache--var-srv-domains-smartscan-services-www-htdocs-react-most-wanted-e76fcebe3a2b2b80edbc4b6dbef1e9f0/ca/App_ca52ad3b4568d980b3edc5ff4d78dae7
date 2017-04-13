@@ -1,0 +1,31 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_11pt5evfg6 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/App/App.js',hash = '5bf639d32d8eb7650c813ad13ef7ff0e57c78062',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/App/App.js', statementMap: { '0': { start: { line: 10, column: 12 }, end: { line: 29, column: 1 } }, '1': { start: { line: 12, column: 2 }, end: { line: 28, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 10, column: 12 }, end: { line: 10, column: 13 } }, loc: { start: { line: 10, column: 42 }, end: { line: 29, column: 1 } }, line: 10 } }, branchMap: {}, s: { '0': 0, '1': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/App/App.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_Drawer = require('../../containers/Drawer');
+
+var /* istanbul ignore next */_Routes = require('../../components/Routes');
+var /* istanbul ignore next */_reactHelmet = require('react-helmet');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_11pt5evfg6.s[0];
+
+const App = ({ intl, muiTheme, auth }) => {/* istanbul ignore next */++cov_11pt5evfg6.f[0];++cov_11pt5evfg6.s[1];
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 14 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: undefined }, intl.formatMessage({ id: 'app_name' })),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'meta', /* istanbul ignore next */{ name: 'theme-color', content: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 16 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'meta', /* istanbul ignore next */{ name: 'apple-mobile-web-app-status-bar-style', content: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'meta', /* istanbul ignore next */{ name: 'msapplication-navbutton-color', content: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined })),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveDrawer, /* istanbul ignore next */{ openSecondary: false, __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Drawer.DrawerHeader, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Drawer.DrawerContent, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: undefined })),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.BodyContainer, /* istanbul ignore next */{ openSecondary: false, __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Routes.Routes, /* istanbul ignore next */{ auth: auth, __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: undefined }))));
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(App));

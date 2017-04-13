@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_17pi92xzi9 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/themes/index.js',hash = 'add89bd90478a5e3667c99a6b42b924a3ea938cb',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/themes/index.js', statementMap: { '0': { start: { line: 5, column: 14 }, end: { line: 18, column: 1 } }, '1': { start: { line: 22, column: 19 }, end: { line: 22, column: 58 } }, '2': { start: { line: 22, column: 37 }, end: { line: 22, column: 56 } }, '3': { start: { line: 24, column: 2 }, end: { line: 26, column: 3 } }, '4': { start: { line: 25, column: 4 }, end: { line: 25, column: 29 } }, '5': { start: { line: 29, column: 2 }, end: { line: 29, column: 26 } } }, fnMap: { '0': { name: 'getThemeSource', decl: { start: { line: 20, column: 16 }, end: { line: 20, column: 30 } }, loc: { start: { line: 20, column: 37 }, end: { line: 30, column: 1 } }, line: 20 }, '1': { name: '(anonymous_1)', decl: { start: { line: 22, column: 31 }, end: { line: 22, column: 32 } }, loc: { start: { line: 22, column: 36 }, end: { line: 22, column: 57 } }, line: 22 } }, branchMap: { '0': { loc: { start: { line: 24, column: 2 }, end: { line: 26, column: 3 } }, type: 'if', locations: [{ start: { line: 24, column: 2 }, end: { line: 26, column: 3 } }, { start: { line: 24, column: 2 }, end: { line: 26, column: 3 } }], line: 24 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }, f: { '0': 0, '1': 0 }, b: { '0': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getThemeSource = getThemeSource;var /* istanbul ignore next */_darkBaseTheme = require('material-ui/styles/baseThemes/darkBaseTheme'); /* istanbul ignore next */var _darkBaseTheme2 = _interopRequireDefault(_darkBaseTheme);var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);var /* istanbul ignore next */_ics_theme = require('./ics_theme'); /* istanbul ignore next */var _ics_theme2 = _interopRequireDefault(_ics_theme);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const themes = /* istanbul ignore next */(++cov_17pi92xzi9.s[0], [{ id: 'light', source: /* istanbul ignore next */_lightBaseTheme2.default }, { id: 'dark', source: /* istanbul ignore next */_darkBaseTheme2.default }, { id: 'ics', source: /* istanbul ignore next */_ics_theme2.default }]);function getThemeSource(theme) {/* istanbul ignore next */++cov_17pi92xzi9.f[0];
+
+  const themeFound = /* istanbul ignore next */(++cov_17pi92xzi9.s[1], themes.find(l => {/* istanbul ignore next */++cov_17pi92xzi9.f[1];++cov_17pi92xzi9.s[2];return l.id === theme;})); /* istanbul ignore next */++cov_17pi92xzi9.s[3];
+
+  if (themeFound) {/* istanbul ignore next */++cov_17pi92xzi9.b[0][0];++cov_17pi92xzi9.s[4];
+    return themeFound.source;
+  } else /* istanbul ignore next */{++cov_17pi92xzi9.b[0][1];}
+
+  //If no locale is found the first one will be returned
+  ++cov_17pi92xzi9.s[5];return themes[0].source;
+} /* istanbul ignore next */exports.default =
+
+
+themes;
