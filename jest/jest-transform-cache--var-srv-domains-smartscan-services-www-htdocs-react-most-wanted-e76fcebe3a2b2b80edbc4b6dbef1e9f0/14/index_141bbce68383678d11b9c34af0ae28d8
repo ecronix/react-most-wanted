@@ -1,0 +1,45 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+configureStore;var /* istanbul ignore next */_redux = require('redux');var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');var /* istanbul ignore next */_reduxLogger = require('redux-logger');var /* istanbul ignore next */_reduxThunk = require('redux-thunk'); /* istanbul ignore next */var _reduxThunk2 = _interopRequireDefault(_reduxThunk);var /* istanbul ignore next */_reducers = require('./reducers'); /* istanbul ignore next */var _reducers2 = _interopRequireDefault(_reducers);var /* istanbul ignore next */_reduxPersist = require('redux-persist');var /* istanbul ignore next */_reduxResponsive = require('redux-responsive'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function configureStore(history) {
+  let store;
+
+  const logger = /* istanbul ignore next */(0, _reduxLogger.createLogger)({});
+
+
+
+  const initState = {
+    locale: 'de',
+    theme: 'dark' };
+
+
+  let middlewares = [/* istanbul ignore next */(0, _reactRouterRedux.routerMiddleware)(history), /* istanbul ignore next */_reduxThunk2.default];
+
+
+  if (process.env.NODE_ENV !== 'production') {
+
+    //DEV middlewares
+    middlewares.push(logger);
+
+  }
+
+  store = /* istanbul ignore next */(0, _redux.createStore)( /* istanbul ignore next */_reducers2.default, initState, /* istanbul ignore next */(0, _redux.compose)(
+  /* istanbul ignore next */(0, _redux.applyMiddleware)(...middlewares),
+  /* istanbul ignore next */(0, _reduxPersist.autoRehydrate)(), /* istanbul ignore next */_reduxResponsive.responsiveStoreEnhancer));
+
+
+
+  try {
+    /* istanbul ignore next */(0, _reduxPersist.persistStore)(store, { blacklist: ['router'] }, () => {});
+  } catch (e) {
+
+  }
+
+
+  return store;
+}

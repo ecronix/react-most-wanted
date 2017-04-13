@@ -1,0 +1,56 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_144j51znw7 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/Drawer/DrawerContent.js',hash = 'adbb101b1a45180e437c213033eadd7c4d004116',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/Drawer/DrawerContent.js', statementMap: { '0': { start: { line: 9, column: 0 }, end: { line: 19, column: 2 } }, '1': { start: { line: 21, column: 24 }, end: { line: 31, column: 1 } }, '2': { start: { line: 22, column: 60 }, end: { line: 22, column: 65 } }, '3': { start: { line: 24, column: 2 }, end: { line: 30, column: 4 } }, '4': { start: { line: 33, column: 27 }, end: { line: 52, column: 1 } }, '5': { start: { line: 35, column: 2 }, end: { line: 51, column: 3 } }, '6': { start: { line: 37, column: 6 }, end: { line: 37, column: 26 } }, '7': { start: { line: 40, column: 6 }, end: { line: 40, column: 42 } }, '8': { start: { line: 43, column: 6 }, end: { line: 43, column: 36 } }, '9': { start: { line: 46, column: 6 }, end: { line: 46, column: 35 } }, '10': { start: { line: 49, column: 6 }, end: { line: 49, column: 37 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 21, column: 24 }, end: { line: 21, column: 25 } }, loc: { start: { line: 21, column: 35 }, end: { line: 31, column: 1 } }, line: 21 }, '1': { name: '(anonymous_1)', decl: { start: { line: 33, column: 27 }, end: { line: 33, column: 28 } }, loc: { start: { line: 33, column: 41 }, end: { line: 52, column: 1 } }, line: 33 }, '2': { name: '(anonymous_2)', decl: { start: { line: 36, column: 10 }, end: { line: 36, column: 11 } }, loc: { start: { line: 36, column: 18 }, end: { line: 38, column: 5 } }, line: 36 }, '3': { name: '(anonymous_3)', decl: { start: { line: 39, column: 19 }, end: { line: 39, column: 20 } }, loc: { start: { line: 39, column: 35 }, end: { line: 41, column: 5 } }, line: 39 }, '4': { name: '(anonymous_4)', decl: { start: { line: 42, column: 19 }, end: { line: 42, column: 20 } }, loc: { start: { line: 42, column: 29 }, end: { line: 44, column: 5 } }, line: 42 }, '5': { name: '(anonymous_5)', decl: { start: { line: 45, column: 17 }, end: { line: 45, column: 18 } }, loc: { start: { line: 45, column: 28 }, end: { line: 47, column: 5 } }, line: 45 }, '6': { name: '(anonymous_6)', decl: { start: { line: 48, column: 18 }, end: { line: 48, column: 19 } }, loc: { start: { line: 48, column: 30 }, end: { line: 50, column: 5 } }, line: 48 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_actions = require('../../store/theme/actions');
+var /* istanbul ignore next */_actions2 = require('../../store/locale/actions');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_Drawer = require('../../components/Drawer'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_144j51znw7.s[0];
+
+/* istanbul ignore next */_Drawer.DrawerContent.propTypes = {
+  responsiveDrawer: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  theme: /* istanbul ignore next */_propTypes2.default.string.isRequired,
+  locale: /* istanbul ignore next */_propTypes2.default.string.isRequired,
+  router: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  push: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setResponsive: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setDrawerOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  updateTheme: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  updateLocale: /* istanbul ignore next */_propTypes2.default.func.isRequired }; /* istanbul ignore next */++cov_144j51znw7.s[1];
+
+
+const mapStateToProps = state => {/* istanbul ignore next */++cov_144j51znw7.f[0];
+  const { responsiveDrawer, theme, locale, router, auth } = /* istanbul ignore next */(++cov_144j51znw7.s[2], state); /* istanbul ignore next */++cov_144j51znw7.s[3];
+
+  return {
+    responsiveDrawer,
+    theme,
+    locale,
+    router,
+    auth };
+
+}; /* istanbul ignore next */++cov_144j51znw7.s[4];
+
+const mapDispatchToProps = dispatch => {/* istanbul ignore next */++cov_144j51znw7.f[1];++cov_144j51znw7.s[5];
+
+  return {
+    push: path => {/* istanbul ignore next */++cov_144j51znw7.f[2];++cov_144j51znw7.s[6];
+      dispatch( /* istanbul ignore next */(0, _reactRouterRedux.push)(path));
+    },
+    setResponsive: responsive => {/* istanbul ignore next */++cov_144j51znw7.f[3];++cov_144j51znw7.s[7];
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setResponsive)(responsive));
+    },
+    setDrawerOpen: open => {/* istanbul ignore next */++cov_144j51znw7.f[4];++cov_144j51znw7.s[8];
+      dispatch( /* istanbul ignore next */(0, _materialUiResponsiveDrawer.setDrawerOpen)(open));
+    },
+    updateTheme: theme => {/* istanbul ignore next */++cov_144j51znw7.f[5];++cov_144j51znw7.s[9];
+      dispatch( /* istanbul ignore next */(0, _actions.updateTheme)(theme));
+    },
+    updateLocale: locale => {/* istanbul ignore next */++cov_144j51znw7.f[6];++cov_144j51znw7.s[10];
+      dispatch( /* istanbul ignore next */(0, _actions2.updateLocale)(locale));
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)( /* istanbul ignore next */_Drawer.DrawerContent);

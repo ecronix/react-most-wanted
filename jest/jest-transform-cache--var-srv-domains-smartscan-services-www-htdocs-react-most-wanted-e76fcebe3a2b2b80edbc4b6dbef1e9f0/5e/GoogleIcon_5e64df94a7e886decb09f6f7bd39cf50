@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_becd8zk3s = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Icons/GoogleIcon.js',hash = 'c8e8909e911ee1e51697a17956d9ef5147a03f86',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Icons/GoogleIcon.js', statementMap: { '0': { start: { line: 4, column: 19 }, end: { line: 12, column: 1 } }, '1': { start: { line: 5, column: 2 }, end: { line: 11, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 4, column: 19 }, end: { line: 4, column: 20 } }, loc: { start: { line: 4, column: 30 }, end: { line: 12, column: 1 } }, line: 4 } }, branchMap: {}, s: { '0': 0, '1': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Icons/GoogleIcon.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_SvgIcon = require('material-ui/SvgIcon'); /* istanbul ignore next */var _SvgIcon2 = _interopRequireDefault(_SvgIcon);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_becd8zk3s.s[0];
+
+const GoogleIcon = props => {/* istanbul ignore next */++cov_becd8zk3s.f[0];++cov_becd8zk3s.s[1];
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SvgIcon2.default, /* istanbul ignore next */Object.assign({ width: 22, height: 22, viewBox: '0 0 48 48' }, props, { __source: { fileName: _jsxFileName, lineNumber: 6 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{
+        d: 'M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z', __source: { fileName: _jsxFileName, lineNumber: 7 }, __self: undefined })));
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+GoogleIcon;

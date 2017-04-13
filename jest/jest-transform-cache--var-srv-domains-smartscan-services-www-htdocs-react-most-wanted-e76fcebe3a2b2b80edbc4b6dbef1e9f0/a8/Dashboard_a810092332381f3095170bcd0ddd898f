@@ -1,0 +1,41 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_wky6sia22 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Dashboard/Dashboard.js',hash = '45f680815f50bbb5113971fa43192fa54f6fef40',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Dashboard/Dashboard.js', statementMap: { '0': { start: { line: 12, column: 17 }, end: { line: 12, column: 27 } }, '1': { start: { line: 14, column: 4 }, end: { line: 35, column: 6 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 10, column: 2 }, end: { line: 10, column: 3 } }, loc: { start: { line: 10, column: 11 }, end: { line: 36, column: 3 } }, line: 10 } }, branchMap: {}, s: { '0': 0, '1': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Dashboard/Dashboard.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_FlatButton = require('material-ui/FlatButton'); /* istanbul ignore next */var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Icons = require('../Icons');
+var /* istanbul ignore next */_reactHelmet = require('react-helmet'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class Dashboard extends /* istanbul ignore next */_react.Component {
+
+  render() {/* istanbul ignore next */++cov_wky6sia22.f[0];
+
+    const { intl } = /* istanbul ignore next */(++cov_wky6sia22.s[0], this.props); /* istanbul ignore next */++cov_wky6sia22.s[1];
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 16 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: this }, intl.formatMessage({ id: 'dashboard' }))),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveAppBar, /* istanbul ignore next */{
+          title: intl.formatMessage({ id: 'dashboard' }),
+          iconElementRight:
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+            href: 'https://github.com/TarikHuber/material-ui-responsive-drawer',
+            target: '_blank',
+            rel: 'noopener',
+            secondary: true,
+            icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GitHubIcon, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: this }), __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this }), __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: this }),
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { paddingTop: 64 }, __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: this })));
+
+
+
+
+  }} /* istanbul ignore next */exports.default =
+
+
+
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)(Dashboard);

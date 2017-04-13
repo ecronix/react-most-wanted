@@ -1,4 +1,9 @@
-# ‌‌ [![LOGO](public/favicon-32x32.png)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE) React Most Wanted [![Build Status](https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master)](https://travis-ci.org/TarikHuber/react-most-wanted) [![LICENCE](https://img.shields.io/npm/l/express.svg)](https://github.com/TarikHuber/react-most-wanted/master/LICENSE)
+# ‌‌ [![LOGO][logo-image]][logo-url] React Most Wanted
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][daviddm-image]][daviddm-url]
+[![License][license-image]][license-url]
+[![Code Coverage][coverage-image]][coverage-url]
+[![Code Style][code-style-image]][code-style-url]
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -37,6 +42,7 @@ I tried to make the project as clean as possible and to use all libraries in the
 * *routing*
 * *theming*
 * *internationalization*
+* *authentication*
 
 All these features can be programmed from scratch. But why should you do this? Out there are so mutch greate developers creating greate applications, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier.
 
@@ -205,3 +211,16 @@ Is also a dev library that helps us to create a service worker during build proc
 ## License
 
 MIT
+
+[logo-image]: public/favicon-32x32.png
+[logo-url]: https://github.com/TarikHuber/react-most-wanted/master/README.md
+[travis-image]: https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master
+[travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted
+[daviddm-image]: https://img.shields.io/david/TarikHuber/react-most-wanted.svg?style=flat-square
+[daviddm-url]: https://david-dm.org/TarikHuber/react-most-wanted
+[coverage-image]: https://coveralls.io/repos/github/TarikHuber/react-most-wanted/badge.svg?branch=master
+[coverage-url]: https://coveralls.io/github/TarikHuber/react-most-wanted?branch=master
+[license-image]: https://img.shields.io/npm/l/express.svg
+[license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
+[code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
+[code-style-url]: http://standardjs.com/

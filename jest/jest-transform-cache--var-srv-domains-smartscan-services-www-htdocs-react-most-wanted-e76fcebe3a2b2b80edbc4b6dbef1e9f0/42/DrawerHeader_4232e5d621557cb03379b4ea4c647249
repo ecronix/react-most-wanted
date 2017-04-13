@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_16bpy2j6yj = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/Drawer/DrawerHeader.js',hash = '181fdcdc327a4f7c66afc19af5c777d8a4461d92',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/Drawer/DrawerHeader.js', statementMap: { '0': { start: { line: 8, column: 0 }, end: { line: 13, column: 2 } }, '1': { start: { line: 15, column: 24 }, end: { line: 23, column: 1 } }, '2': { start: { line: 16, column: 33 }, end: { line: 16, column: 38 } }, '3': { start: { line: 18, column: 2 }, end: { line: 22, column: 4 } }, '4': { start: { line: 25, column: 27 }, end: { line: 32, column: 1 } }, '5': { start: { line: 27, column: 2 }, end: { line: 31, column: 3 } }, '6': { start: { line: 29, column: 6 }, end: { line: 29, column: 32 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 15, column: 24 }, end: { line: 15, column: 25 } }, loc: { start: { line: 15, column: 35 }, end: { line: 23, column: 1 } }, line: 15 }, '1': { name: '(anonymous_1)', decl: { start: { line: 25, column: 27 }, end: { line: 25, column: 28 } }, loc: { start: { line: 25, column: 41 }, end: { line: 32, column: 1 } }, line: 25 }, '2': { name: '(anonymous_2)', decl: { start: { line: 28, column: 16 }, end: { line: 28, column: 17 } }, loc: { start: { line: 28, column: 24 }, end: { line: 30, column: 5 } }, line: 28 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0 }, f: { '0': 0, '1': 0, '2': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_DrawerHeader = require('../../components/Drawer/DrawerHeader'); /* istanbul ignore next */var _DrawerHeader2 = _interopRequireDefault(_DrawerHeader);
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_16bpy2j6yj.s[0];
+
+/* istanbul ignore next */_DrawerHeader2.default.propTypes = {
+  auth: /* istanbul ignore next */_propTypes2.default.object,
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  updateAuth: /* istanbul ignore next */_propTypes2.default.func.isRequired }; /* istanbul ignore next */++cov_16bpy2j6yj.s[1];
+
+
+const mapStateToProps = state => {/* istanbul ignore next */++cov_16bpy2j6yj.f[0];
+  const { auth, theme, locale } = /* istanbul ignore next */(++cov_16bpy2j6yj.s[2], state); /* istanbul ignore next */++cov_16bpy2j6yj.s[3];
+
+  return {
+    auth,
+    theme,
+    locale };
+
+}; /* istanbul ignore next */++cov_16bpy2j6yj.s[4];
+
+const mapDispatchToProps = dispatch => {/* istanbul ignore next */++cov_16bpy2j6yj.f[1];++cov_16bpy2j6yj.s[5];
+
+  return {
+    updateAuth: auth => {/* istanbul ignore next */++cov_16bpy2j6yj.f[2];++cov_16bpy2j6yj.s[6];
+      dispatch( /* istanbul ignore next */(0, _actions.updateAuth)(auth));
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)(
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()( /* istanbul ignore next */_DrawerHeader2.default)));

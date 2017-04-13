@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/index.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactDom = require('react-dom'); /* istanbul ignore next */var _reactDom2 = _interopRequireDefault(_reactDom);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_store = require('./store'); /* istanbul ignore next */var _store2 = _interopRequireDefault(_store);
+var /* istanbul ignore next */_reactTapEventPlugin = require('react-tap-event-plugin'); /* istanbul ignore next */var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
+/* istanbul ignore next */require('./index.css');
+var /* istanbul ignore next */_createBrowserHistory = require('history/createBrowserHistory'); /* istanbul ignore next */var _createBrowserHistory2 = _interopRequireDefault(_createBrowserHistory);
+var /* istanbul ignore next */_Root = require('./containers/Root');
+var /* istanbul ignore next */_locales = require('./locales'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const history = /* istanbul ignore next */(0, _createBrowserHistory2.default)();
+const store = /* istanbul ignore next */(0, _store2.default)(history);
+
+/* istanbul ignore next */(0, _reactTapEventPlugin2.default)();
+/* istanbul ignore next */(0, _locales.addLocalizationData)();
+
+/* istanbul ignore next */_reactDom2.default.render(
+/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRedux.Provider, /* istanbul ignore next */{ store: store, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined },
+  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Root.Root, /* istanbul ignore next */{ history: history, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: undefined })),
+
+document.getElementById('root'));
