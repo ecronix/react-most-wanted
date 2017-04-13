@@ -218,8 +218,8 @@ MIT
 [travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted
 [daviddm-image]: https://img.shields.io/david/TarikHuber/react-most-wanted.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/TarikHuber/react-most-wanted
-[coverage-image]: https://coveralls.io/repos/github/TarikHuber/react-most-wanted/badge.svg?branch=master
-[coverage-url]: https://coveralls.io/github/TarikHuber/react-most-wanted?branch=master
+[coverage-image]: https://img.shields.io/codecov/c/github/TarikHuber/react-most-wanted.svg?style=flat-square
+[coverage-url]: https://codecov.io/gh/TarikHuber/react-most-wanted
 [license-image]: https://img.shields.io/npm/l/express.svg
 [license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
 [code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square

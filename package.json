@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "coveralls": "^2.13.0",
     "enzyme": "^2.8.0",
     "react-addons-test-utils": "^15.4.2",
     "react-scripts": "0.9.5",
@@ -36,5 +37,9 @@
     "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }
