@@ -39,22 +39,23 @@ const styles={
 }
 
 
-const SignIn = (props) => {
+const SignIn = ({muiTheme, intl, updateAuth, push, setDrawerOpen }) => {
 
-  const { muiTheme, intl, updateAuth, push, setDrawerOpen }=props;
-
-
-  const  responseGoogle = (googleUser) => {
-    var profile = googleUser.getBasicProfile();
-    updateAuth({name: profile.getName(), email: profile.getEmail(), img: profile.getImageUrl() });
+  const handleSignIn = (auth) => {
+    updateAuth(auth);
     push('/');
     setDrawerOpen(false);
   }
 
+  const  responseGoogle = (googleUser) => {
+    var profile = googleUser.getBasicProfile();
+    const auth={name: profile.getName(), email: profile.getEmail(), img: profile.getImageUrl() };
+    handleSignIn(auth);
+  }
+
   const responseFacebook = (facebookUser) => {
-    updateAuth({name: facebookUser.name, email: facebookUser.email, img: facebookUser.picture.data.url });
-    push('/');
-    setDrawerOpen(false);
+    const auth= {name: facebookUser.name, email: facebookUser.email, img: facebookUser.picture.data.url }
+    handleSignIn(auth);
   }
 
   return (

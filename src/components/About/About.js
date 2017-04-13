@@ -4,9 +4,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import {Helmet} from 'react-helmet';
 
-const About = (props) => {
-
-  const {intl}=props;
+const About = ({intl}) => {
 
   return (
     <div >
@@ -23,8 +21,6 @@ const About = (props) => {
   );
 
 }
-
-
 
 About.propTypes = {
   intl: intlShape.isRequired,

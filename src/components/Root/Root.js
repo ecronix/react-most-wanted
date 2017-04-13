@@ -5,14 +5,7 @@ import { IntlProvider } from 'react-intl'
 import { ConnectedRouter } from 'react-router-redux'
 import {App} from '../../containers/App';
 
-const Root = (props) => {
-
-  const {
-    history,
-    locale,
-    muiTheme,
-    messages
-  }=props;
+const Root = ({ history, locale, muiTheme, messages}) => {
 
   return (
     <MuiThemeProvider muiTheme={muiTheme}>

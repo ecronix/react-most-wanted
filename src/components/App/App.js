@@ -7,9 +7,7 @@ import {Helmet} from 'react-helmet';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
-const App = (props) => {
-
-  const { intl, muiTheme, auth } = props;
+const App = ({ intl, muiTheme, auth }) => {
 
   return (
     <div>

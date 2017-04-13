@@ -9,14 +9,10 @@ import List from 'material-ui/List/List';
 import Paper from 'material-ui/Paper';
 import {ReduxIcon} from '../Icons';
 
-const DrawerHeader = (props) => {
-
-  const {muiTheme, intl, auth, updateAuth}=props;
+const DrawerHeader = ({muiTheme, intl, auth, updateAuth}) => {
 
   const styles={
     header:{
-      //backgroundColor:muiTheme.palette.primary2Color,
-      //color: muiTheme.palette.alternateTextColor,
       padding: 5,
     },
     header_content:{
@@ -32,7 +28,6 @@ const DrawerHeader = (props) => {
       width:48,
       height: 48,
       top: 4
-      //paddingBottom: 15
     }
   }
 

@@ -213,7 +213,7 @@ Is also a dev library that helps us to create a service worker during build proc
 MIT
 
 [logo-image]: public/favicon-32x32.png
-[logo-url]: https://github.com/TarikHuber/react-most-wanted/master/README.md
+[logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md
 [travis-image]: https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master
 [travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted
 [daviddm-image]: https://img.shields.io/david/TarikHuber/react-most-wanted.svg?style=flat-square

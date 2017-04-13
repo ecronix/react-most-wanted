@@ -4,9 +4,8 @@
   "private": true,
   "devDependencies": {
     "coveralls": "^2.13.0",
-    "enzyme": "^2.8.0",
-    "react-addons-test-utils": "^15.4.2",
-    "react-scripts": "0.9.5",
+    "enzyme": "^2.8.1",
+    "react-scripts": "^0.9.5",
     "redux-logger": "^3.0.1",
     "redux-testkit": "^1.0.6",
     "sw-precache": "^4.2.2"

@@ -26,9 +26,7 @@ const styles={
 }
 
 
-const PageNotFound = (props) => {
-
-  const { muiTheme, intl }=props;
+const PageNotFound = ({muiTheme, intl }) => {
 
   return (
     <Paper  zDepth={1} style={styles.paper}>
