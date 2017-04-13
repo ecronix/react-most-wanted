@@ -9,7 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 It should be a `shell` for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
 
-You can find a example of this project in this [DEMO](https://www.soft-erp.eu/).
+You can find a example of this project in this [DEMO](https://www.react-most-wanted.com/).
 
 I tried to make the project as clean as possible and to use all libraries in they're pure way.
 
