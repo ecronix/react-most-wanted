@@ -1,0 +1,6 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_upual3ugd = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/themes/ics_theme.js',hash = '5b64cd65056963908c565e0d242447f6f6e5a286',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/themes/ics_theme.js', statementMap: {}, fnMap: {}, branchMap: {}, s: {}, f: {}, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.default = {
+	palette: {
+		primary1Color: '#00387b',
+		primary2Color: '#1A237E',
+		alternateTextColor: '#FFFFFF',
+		secondary1Color: 'EC407A' } };

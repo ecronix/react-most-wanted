@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_DrawerHeader = require('../../components/Drawer/DrawerHeader'); /* istanbul ignore next */var _DrawerHeader2 = _interopRequireDefault(_DrawerHeader);
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/* istanbul ignore next */_DrawerHeader2.default.propTypes = {
+  auth: /* istanbul ignore next */_propTypes2.default.object,
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  updateAuth: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+const mapStateToProps = state => {
+  const { auth, theme, locale } = state;
+
+  return {
+    auth,
+    theme,
+    locale };
+
+};
+
+const mapDispatchToProps = dispatch => {
+
+  return {
+    updateAuth: auth => {
+      dispatch( /* istanbul ignore next */(0, _actions.updateAuth)(auth));
+    } };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+mapDispatchToProps)(
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()( /* istanbul ignore next */_DrawerHeader2.default)));

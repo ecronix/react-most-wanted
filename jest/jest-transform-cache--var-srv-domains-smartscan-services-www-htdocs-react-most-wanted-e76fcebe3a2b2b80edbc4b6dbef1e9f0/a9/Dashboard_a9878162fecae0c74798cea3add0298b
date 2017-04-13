@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_wky6sia22 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Dashboard/Dashboard.js',hash = '51b5a53aae4659e6e0fef27739edd7dbc275e466',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Dashboard/Dashboard.js', statementMap: { '0': { start: { line: 8, column: 18 }, end: { line: 33, column: 1 } }, '1': { start: { line: 10, column: 2 }, end: { line: 31, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 8, column: 18 }, end: { line: 8, column: 19 } }, loc: { start: { line: 8, column: 30 }, end: { line: 33, column: 1 } }, line: 8 } }, branchMap: {}, s: { '0': 0, '1': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Dashboard/Dashboard.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_FlatButton = require('material-ui/FlatButton'); /* istanbul ignore next */var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Icons = require('../Icons');
+var /* istanbul ignore next */_reactHelmet = require('react-helmet'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}++cov_wky6sia22.s[0];
+
+const Dashboard = ({ intl }) => {/* istanbul ignore next */++cov_wky6sia22.f[0];++cov_wky6sia22.s[1];
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: undefined }, intl.formatMessage({ id: 'dashboard' }))),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveAppBar, /* istanbul ignore next */{
+        title: intl.formatMessage({ id: 'dashboard' }),
+        iconElementRight:
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+          href: 'https://github.com/TarikHuber/material-ui-responsive-drawer',
+          target: '_blank',
+          rel: 'noopener',
+          secondary: true,
+          icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GitHubIcon, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: undefined }), __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined }), __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: undefined }),
+
+
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { paddingTop: 64 }, __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: undefined })));
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)(Dashboard);

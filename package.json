@@ -36,7 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
-    "test": "react-scripts test --env=jsdom --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/containers/**/*js",
+    "test": "react-scripts test --env=jsdom --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/index.js --collectCoverageFrom=!src/containers/**/*js --collectCoverageFrom=!src/helpers/**/*js --collectCoverageFrom=!src/store/*js",
     "eject": "react-scripts eject"
   },
   "jest": {

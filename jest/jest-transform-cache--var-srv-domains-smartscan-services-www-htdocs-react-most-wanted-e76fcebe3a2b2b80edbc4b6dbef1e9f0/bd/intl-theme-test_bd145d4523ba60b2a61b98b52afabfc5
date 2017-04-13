@@ -1,0 +1,32 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+shallowWithIntlTheme = shallowWithIntlTheme; /* istanbul ignore next */exports.
+
+
+
+mountWithIntlTheme = mountWithIntlTheme;var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);var /* istanbul ignore next */_reactIntl = require('react-intl');var /* istanbul ignore next */_MuiThemeProvider = require('material-ui/styles/MuiThemeProvider'); /* istanbul ignore next */var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);var /* istanbul ignore next */_getMuiTheme = require('material-ui/styles/getMuiTheme'); /* istanbul ignore next */var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);var /* istanbul ignore next */_enzyme = require('enzyme'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const messages = require('../locales/en'); // en.json
+const intlProvider = new /* istanbul ignore next */_reactIntl.IntlProvider({ locale: 'en', messages }, {});const { intl } = intlProvider.getChildContext();const muiThemeProvider = new /* istanbul ignore next */_MuiThemeProvider2.default({ muiTheme: /* istanbul ignore next */(0, _getMuiTheme2.default)() });const { muiTheme } = muiThemeProvider.getChildContext();function nodeWithIntlProp(node) {return (/* istanbul ignore next */_react2.default.cloneElement(node, { intl }));}function nodeWithThemeProp(node) {return (/* istanbul ignore next */_react2.default.cloneElement(node, { muiTheme }));}function shallowWithIntlTheme(node) {return (/* istanbul ignore next */(0, _enzyme.shallow)(nodeWithThemeProp(nodeWithIntlProp(node)), { context: { intl, muiTheme } }));};function mountWithIntlTheme(node) {return (/* istanbul ignore next */(0, _enzyme.mount)(nodeWithThemeProp(nodeWithIntlProp(node)), {
+      context: { intl },
+      childContextTypes: { intl: /* istanbul ignore next */_reactIntl.intlShape, muiTheme } }));
+
+};

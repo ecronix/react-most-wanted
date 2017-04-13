@@ -1,0 +1,28 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1fwahpc5d8 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/locales/en.js',hash = 'e102b29211e69090005049cc2b74fb4d1af413ab',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/locales/en.js', statementMap: { '0': { start: { line: 3, column: 15 }, end: { line: 26, column: 2 } } }, fnMap: {}, branchMap: {}, s: { '0': 0 }, f: {}, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+const messages = /* istanbul ignore next */(++cov_1fwahpc5d8.s[0], /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  app_name: 'React Most Wanted',
+  dashboard: 'Dashboard',
+  about: 'About',
+  page_not_found_demo: 'Page not found demo',
+  '404': '404',
+  warning_404_message: '404 Page not found',
+  warning_404_description: 'We are sorry but the page you are looking for does not exist.',
+  settings: 'Settings',
+  language: 'Language',
+  theme: 'Theme',
+  responsive: 'Responsive',
+  en: 'English',
+  de: 'German',
+  dark: 'Dark',
+  light: 'Light',
+  ics: 'ICS',
+  sign_out: 'Sign out',
+  sign_in: 'Sign in',
+  sign_up: 'Sign up',
+  sign_in_with_google: 'Sign in with Google',
+  sign_in_with_facebook: 'Sign in with Facebook' })); /* istanbul ignore next */exports.default =
+
+
+
+messages;

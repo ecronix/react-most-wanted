@@ -1,0 +1,7 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_p1b6hmdd7 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/config.js',hash = '9f98d11527267a98a3834a12c3a6011706e8eb4f',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/config.js', statementMap: { '0': { start: { line: 1, column: 14 }, end: { line: 4, column: 1 } } }, fnMap: {}, branchMap: {}, s: { '0': 0 }, f: {}, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();const config = /* istanbul ignore next */(++cov_p1b6hmdd7.s[0], {
+  google_client_id: '941480856475-lvilroe1spibcocgo9rgo592hd67i17h.apps.googleusercontent.com',
+  facebook_app_id: '1832263543689561' }); /* istanbul ignore next */exports.default =
+
+
+
+config;
