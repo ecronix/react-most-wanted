@@ -1,6 +1,7 @@
 import React from 'react';
 import {Dashboard} from '../../components/Dashboard';
 import {About} from '../../components/About';
+import {MyAccount} from '../../containers/MyAccount';
 import {PageNotFound} from '../../components/PageNotFound';
 import {SignIn} from '../../containers/SignIn';
 import { Route , Switch, Redirect} from 'react-router';
@@ -9,7 +10,7 @@ const Routes = (props) => {
 
   const {auth}=props;
 
-  const isAuthorised=auth!=null;
+  const isAuthorised=auth.isSignedIn;
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -30,6 +31,7 @@ const Routes = (props) => {
       <Route path="/" exact component={Dashboard} />
       <Route path="/dashboard" exact component={Dashboard} />
       <PrivateRoute path="/about" exact component={About}  />
+      <PrivateRoute path="/my_account" exact component={MyAccount}  />
       <Route path="/signin" component={SignIn} />
       <Route path="/*" component={PageNotFound} />
     </Switch>

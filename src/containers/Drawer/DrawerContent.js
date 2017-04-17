@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setResponsive, setDrawerOpen } from 'material-ui-responsive-drawer';
+import { signOut } from '../../store/auth/actions';
 import { updateTheme } from '../../store/theme/actions';
 import { updateLocale } from '../../store/locale/actions';
 import { push } from 'react-router-redux';
@@ -16,6 +17,7 @@ DrawerContent.propTypes = {
   setDrawerOpen: PropTypes.func.isRequired,
   updateTheme: PropTypes.func.isRequired,
   updateLocale: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -47,6 +49,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateLocale: (locale) => {
       dispatch(updateLocale(locale));
+    },
+    signOut: ()=>{
+      dispatch(signOut())
     },
   }
 };

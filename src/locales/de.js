@@ -22,6 +22,7 @@ const messages=defineMessages({
   sign_up: 'Registrieren',
   sign_in_with_google: 'Mit Google anmelden',
   sign_in_with_facebook: 'mit Facebook anmelden',
+  my_account: 'Mein Konto',
 
 });
 

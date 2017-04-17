@@ -11,6 +11,7 @@ import FacebookLogin from 'react-facebook-login';
 import config from '../../config'
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FontIcon from 'material-ui/FontIcon';
+import {Helmet} from 'react-helmet';
 
 const styles={
   paper:{
@@ -44,12 +45,17 @@ const styles={
 }
 
 
-const SignIn = ({muiTheme, intl, updateAuth, push, setDrawerOpen }) => {
+const SignIn = ({muiTheme, intl, signIn, push, setDrawerOpen }) => {
 
   const handleSignIn = (auth) => {
-    updateAuth(auth);
+    signIn(auth);
     push('/');
     setDrawerOpen(false);
+  }
+
+  const responseEmail = () => {
+    const auth={name: 'Demo User', email: 'demo@email.com' };
+    handleSignIn(auth);
   }
 
   const  responseGoogle = (googleUser) => {
@@ -65,6 +71,9 @@ const SignIn = ({muiTheme, intl, updateAuth, push, setDrawerOpen }) => {
 
   return (
     <div>
+      <Helmet>
+        <title>{intl.formatMessage({id: 'sign_in'})}</title>
+      </Helmet>
       <ResponsiveAppBar
         title={intl.formatMessage({id: 'sign_in'})}
       />
@@ -98,6 +107,7 @@ const SignIn = ({muiTheme, intl, updateAuth, push, setDrawerOpen }) => {
             secondary={true}
             style={styles.button}
             fullWidth={true}
+            onTouchTap={responseEmail}
             icon={
               <FontIcon
                 className="material-icons">

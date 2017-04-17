@@ -22,7 +22,8 @@ const DrawerContent = (props) => {
     muiTheme,
     auth,
     push,
-    setDrawerOpen
+    setDrawerOpen,
+    signOut
   }=props;
 
   const handleChange = (event, index) => {
@@ -77,23 +78,10 @@ const DrawerContent = (props) => {
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
     {
-      value:'/signin',
-      visible: false,
-      primaryText: intl.formatMessage({id: 'sign_in'}),
-      leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
-    },
-    {
       value:'/about',
-      visible: auth!=null,
+      visible: auth.isSignedIn,
       primaryText: intl.formatMessage({id: 'about'}),
       leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
-    },
-    {
-      value:'/wrong_url',
-      visible: false,
-      primaryText: intl.formatMessage({id: '404'}),
-      secondaryText: intl.formatMessage({id: 'page_not_found_demo'}),
-      leftIcon: <FontIcon className="material-icons" >warning</FontIcon>
     },
     {
       divider:true,
@@ -131,9 +119,26 @@ const DrawerContent = (props) => {
     },
   ];
 
+  const handleSignOut=()=>{signOut()};
+
+  const authItems=[
+    {
+      value:'/my_account',
+      primaryText: intl.formatMessage({id: 'my_account'}),
+      leftIcon: <FontIcon className="material-icons" >account_box</FontIcon>
+    },
+    {
+      value:'/signin',
+      onTouchTap: handleSignOut,
+      primaryText: intl.formatMessage({id: 'sign_out'}),
+      leftIcon: <FontIcon className="material-icons" >lock</FontIcon>
+    },
+
+  ];
+
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
-      {auth==null &&
+      {!auth.isSignedIn &&
         <RaisedButton
           label={intl.formatMessage({id: 'sign_in'})}
           secondary={true}
@@ -149,7 +154,7 @@ const DrawerContent = (props) => {
       }
 
       <SelectableMenuList
-        items={menuItems}
+        items={auth.isMenuOpen?authItems:menuItems}
         onIndexChange={handleChange}
         index={router?router.location.pathname:'/'}
       />

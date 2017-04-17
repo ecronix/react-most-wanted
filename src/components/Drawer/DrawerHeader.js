@@ -1,15 +1,13 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
-import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import FontIcon from 'material-ui/FontIcon';
 import ListItem from 'material-ui/List/ListItem';
 import List from 'material-ui/List/List';
 import Paper from 'material-ui/Paper';
 import {ReduxIcon} from '../Icons';
 
-const DrawerHeader = ({muiTheme, intl, auth, updateAuth}) => {
+const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
 
   const styles={
     header:{
@@ -34,38 +32,35 @@ const DrawerHeader = ({muiTheme, intl, auth, updateAuth}) => {
   return (
     <Paper  zDepth={1} style={styles.paper}>
 
-      {auth&&
-
+      {auth.isSignedIn&&
         <List>
+          <ListItem
+            disabled={true}
+            leftAvatar={
+              <Avatar
+                size={45}
+                icon={auth.img===undefined?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
+                src={auth.img}
+              />
+            }
+          />
           <ListItem
             disabled={true}
             primaryText={auth.name}
             secondaryText={auth.email}
-            leftAvatar={
-              <Avatar
-                src={auth.img}
-              />
-            }
             rightIconButton={
-              <IconMenu
-                iconButtonElement={
-                  <IconButton touch={true}>
-                    <NavigationExpandMoreIcon />
-                  </IconButton>
-                }>
-                <MenuItem
-                  primaryText={intl.formatMessage({id: 'sign_out'})}
-                  secondaryTextLines={2}
-                  onTouchTap={()=>{updateAuth(null)}}
-                />
-              </IconMenu>
+              <IconButton
+                onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
+                touch={true}>
+                <FontIcon className="material-icons" >{auth.isMenuOpen?'expand_less':'expand_more'}</FontIcon>
+              </IconButton>
             }
+
           />
         </List>
-
       }
 
-      {!auth&&
+      {!auth.isSignedIn&&
 
         <List>
           <ListItem

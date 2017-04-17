@@ -25,7 +25,7 @@ const Dashboard = ({intl}) => {
         }
       />
       <div style={{paddingTop:64}}>
-
+        
       </div>
     </div>
   );

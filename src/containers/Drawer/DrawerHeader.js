@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import  DrawerHeader  from '../../components/Drawer/DrawerHeader';
-import { updateAuth } from '../../store/auth/actions';
+import { updateAuth, setAuthMenuOpen } from '../../store/auth/actions';
 import {injectIntl, intlShape} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
@@ -10,6 +10,7 @@ DrawerHeader.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   updateAuth: PropTypes.func.isRequired,
+  setAuthMenuOpen: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -27,6 +28,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateAuth: (auth)=>{
       dispatch(updateAuth(auth))
+    },
+    setAuthMenuOpen: (open)=>{
+      dispatch(setAuthMenuOpen(open))
     },
   }
 };
