@@ -1,0 +1,1 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const UPDATE_LOCALE = /* istanbul ignore next */exports.UPDATE_LOCALE = 'locale.UPDATE_LOCALE';

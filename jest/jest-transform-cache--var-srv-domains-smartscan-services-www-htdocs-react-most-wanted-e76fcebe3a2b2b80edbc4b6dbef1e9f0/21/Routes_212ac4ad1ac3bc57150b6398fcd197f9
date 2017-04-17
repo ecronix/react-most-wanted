@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_2djy295z7d = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Routes/Routes.js',hash = '8cdd004235d418a24a95b52409d1c8b3c8a53cf3',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Routes/Routes.js', statementMap: { '0': { start: { line: 9, column: 15 }, end: { line: 37, column: 1 } }, '1': { start: { line: 11, column: 21 }, end: { line: 11, column: 42 } }, '2': { start: { line: 13, column: 23 }, end: { line: 24, column: 3 } }, '3': { start: { line: 14, column: 4 }, end: { line: 23, column: 8 } }, '4': { start: { line: 15, column: 6 }, end: { line: 22, column: 7 } }, '5': { start: { line: 27, column: 2 }, end: { line: 36, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 9, column: 15 }, end: { line: 9, column: 16 } }, loc: { start: { line: 9, column: 27 }, end: { line: 37, column: 1 } }, line: 9 }, '1': { name: '(anonymous_1)', decl: { start: { line: 13, column: 23 }, end: { line: 13, column: 24 } }, loc: { start: { line: 14, column: 4 }, end: { line: 23, column: 8 } }, line: 14 }, '2': { name: '(anonymous_2)', decl: { start: { line: 14, column: 29 }, end: { line: 14, column: 30 } }, loc: { start: { line: 15, column: 6 }, end: { line: 22, column: 7 } }, line: 15 } }, branchMap: { '0': { loc: { start: { line: 11, column: 21 }, end: { line: 11, column: 42 } }, type: 'binary-expr', locations: [{ start: { line: 11, column: 21 }, end: { line: 11, column: 25 } }, { start: { line: 11, column: 27 }, end: { line: 11, column: 42 } }], line: 11 }, '1': { loc: { start: { line: 15, column: 6 }, end: { line: 22, column: 7 } }, type: 'cond-expr', locations: [{ start: { line: 16, column: 8 }, end: { line: 16, column: 31 } }, { start: { line: 18, column: 8 }, end: { line: 21, column: 12 } }], line: 15 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0 }, f: { '0': 0, '1': 0, '2': 0 }, b: { '0': [0, 0], '1': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Routes/Routes.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Dashboard = require('../../components/Dashboard');
+var /* istanbul ignore next */_About = require('../../components/About');
+var /* istanbul ignore next */_MyAccount = require('../../containers/MyAccount');
+var /* istanbul ignore next */_PageNotFound = require('../../components/PageNotFound');
+var /* istanbul ignore next */_SignIn = require('../../containers/SignIn');
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}++cov_2djy295z7d.s[0];
+
+const Routes = ({ auth }) => {/* istanbul ignore next */++cov_2djy295z7d.f[0];
+
+  const isAuthorised = /* istanbul ignore next */(++cov_2djy295z7d.s[1], /* istanbul ignore next */(++cov_2djy295z7d.b[0][0], auth) && /* istanbul ignore next */(++cov_2djy295z7d.b[0][1], auth.isSignedIn)); /* istanbul ignore next */++cov_2djy295z7d.s[2];
+
+  const PrivateRoute = ( /* istanbul ignore next */_ref) =>
+  {/* istanbul ignore next */let { component: Component } = _ref,rest = _objectWithoutProperties(_ref, ['component']); /* istanbul ignore next */++cov_2djy295z7d.f[1];++cov_2djy295z7d.s[3];return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */Object.assign({}, rest, { render: props =>
+        {/* istanbul ignore next */++cov_2djy295z7d.f[2];++cov_2djy295z7d.s[4];return isAuthorised ? /* istanbul ignore next */(++cov_2djy295z7d.b[1][0],
+          /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 16 }, __self: undefined }))) : /* istanbul ignore next */(++cov_2djy295z7d.b[1][1],
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Redirect, /* istanbul ignore next */{ to: {
+              pathname: '/signin',
+              state: { from: props.location } }, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined }));
+
+        }, __source: { fileName: _jsxFileName, lineNumber: 14 }, __self: undefined })));
+  }; /* istanbul ignore next */++cov_2djy295z7d.s[5];
+
+
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Switch, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 28 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Dashboard.Dashboard, __source: { fileName: _jsxFileName, lineNumber: 29 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/dashboard', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Dashboard.Dashboard, __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement(PrivateRoute, /* istanbul ignore next */{ path: '/about', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_About.About, __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement(PrivateRoute, /* istanbul ignore next */{ path: '/my_account', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_MyAccount.MyAccount, __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/signin', component: /* istanbul ignore next */_SignIn.SignIn, __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/*', component: /* istanbul ignore next */_PageNotFound.PageNotFound, __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: undefined })));
+
+
+}; /* istanbul ignore next */exports.default =
+
+Routes;

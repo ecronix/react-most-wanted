@@ -1,0 +1,1 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const UPDATE_THEME = /* istanbul ignore next */exports.UPDATE_THEME = 'theme.UPDATE_THEME';

@@ -1,0 +1,165 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1iw6fkvbjx = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/SignIn/SignIn.js',hash = '35edeff074383b9ea8856fd78e4315da21a9c179',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/SignIn/SignIn.js', statementMap: { '0': { start: { line: 16, column: 13 }, end: { line: 45, column: 1 } }, '1': { start: { line: 48, column: 15 }, end: { line: 162, column: 1 } }, '2': { start: { line: 50, column: 23 }, end: { line: 54, column: 3 } }, '3': { start: { line: 51, column: 4 }, end: { line: 51, column: 17 } }, '4': { start: { line: 52, column: 4 }, end: { line: 52, column: 14 } }, '5': { start: { line: 53, column: 4 }, end: { line: 53, column: 25 } }, '6': { start: { line: 56, column: 24 }, end: { line: 59, column: 3 } }, '7': { start: { line: 57, column: 15 }, end: { line: 57, column: 60 } }, '8': { start: { line: 58, column: 4 }, end: { line: 58, column: 23 } }, '9': { start: { line: 61, column: 26 }, end: { line: 65, column: 3 } }, '10': { start: { line: 62, column: 18 }, end: { line: 62, column: 46 } }, '11': { start: { line: 63, column: 15 }, end: { line: 63, column: 96 } }, '12': { start: { line: 64, column: 4 }, end: { line: 64, column: 23 } }, '13': { start: { line: 67, column: 27 }, end: { line: 70, column: 3 } }, '14': { start: { line: 68, column: 16 }, end: { line: 68, column: 105 } }, '15': { start: { line: 69, column: 4 }, end: { line: 69, column: 23 } }, '16': { start: { line: 72, column: 2 }, end: { line: 161, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 48, column: 15 }, end: { line: 48, column: 16 } }, loc: { start: { line: 48, column: 67 }, end: { line: 162, column: 1 } }, line: 48 }, '1': { name: '(anonymous_1)', decl: { start: { line: 50, column: 23 }, end: { line: 50, column: 24 } }, loc: { start: { line: 50, column: 33 }, end: { line: 54, column: 3 } }, line: 50 }, '2': { name: '(anonymous_2)', decl: { start: { line: 56, column: 24 }, end: { line: 56, column: 25 } }, loc: { start: { line: 56, column: 30 }, end: { line: 59, column: 3 } }, line: 56 }, '3': { name: '(anonymous_3)', decl: { start: { line: 61, column: 26 }, end: { line: 61, column: 27 } }, loc: { start: { line: 61, column: 42 }, end: { line: 65, column: 3 } }, line: 61 }, '4': { name: '(anonymous_4)', decl: { start: { line: 67, column: 27 }, end: { line: 67, column: 28 } }, loc: { start: { line: 67, column: 45 }, end: { line: 70, column: 3 } }, line: 67 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0, '16': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/SignIn/SignIn.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_Icons = require('../../components/Icons');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_FloatingActionButton = require('material-ui/FloatingActionButton'); /* istanbul ignore next */var _FloatingActionButton2 = _interopRequireDefault(_FloatingActionButton);
+var /* istanbul ignore next */_TextField = require('material-ui/TextField'); /* istanbul ignore next */var _TextField2 = _interopRequireDefault(_TextField);
+var /* istanbul ignore next */_RaisedButton = require('material-ui/RaisedButton'); /* istanbul ignore next */var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+var /* istanbul ignore next */_reactGoogleLogin = require('react-google-login'); /* istanbul ignore next */var _reactGoogleLogin2 = _interopRequireDefault(_reactGoogleLogin);
+var /* istanbul ignore next */_reactFacebookLogin = require('react-facebook-login'); /* istanbul ignore next */var _reactFacebookLogin2 = _interopRequireDefault(_reactFacebookLogin);
+var /* istanbul ignore next */_config = require('../../config'); /* istanbul ignore next */var _config2 = _interopRequireDefault(_config);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_reactHelmet = require('react-helmet'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = /* istanbul ignore next */(++cov_1iw6fkvbjx.s[0], {
+  paper: {
+    height: '100%',
+    display: 'block',
+    margin: 0,
+    padding: 15 },
+
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between' },
+
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    paddingTop: 100 },
+
+  button: {
+    margin: 6,
+    align: 'left' },
+
+  sign_up_button: {
+    float: 'right',
+    overflow: 'none',
+    alignSelf: 'flex-end',
+    marginRight: -43 } }); /* istanbul ignore next */++cov_1iw6fkvbjx.s[1];
+
+
+
+
+const SignIn = ({ muiTheme, intl, signIn, push, setDrawerOpen }) => {/* istanbul ignore next */++cov_1iw6fkvbjx.f[0];++cov_1iw6fkvbjx.s[2];
+
+  const handleSignIn = auth => {/* istanbul ignore next */++cov_1iw6fkvbjx.f[1];++cov_1iw6fkvbjx.s[3];
+    signIn(auth); /* istanbul ignore next */++cov_1iw6fkvbjx.s[4];
+    push('/'); /* istanbul ignore next */++cov_1iw6fkvbjx.s[5];
+    setDrawerOpen(false);
+  }; /* istanbul ignore next */++cov_1iw6fkvbjx.s[6];
+
+  const responseEmail = () => {/* istanbul ignore next */++cov_1iw6fkvbjx.f[2];
+    const auth = /* istanbul ignore next */(++cov_1iw6fkvbjx.s[7], { name: 'Demo User', email: 'demo@email.com' }); /* istanbul ignore next */++cov_1iw6fkvbjx.s[8];
+    handleSignIn(auth);
+  }; /* istanbul ignore next */++cov_1iw6fkvbjx.s[9];
+
+  const responseGoogle = googleUser => {/* istanbul ignore next */++cov_1iw6fkvbjx.f[3];
+    var profile = /* istanbul ignore next */(++cov_1iw6fkvbjx.s[10], googleUser.getBasicProfile());
+    const auth = /* istanbul ignore next */(++cov_1iw6fkvbjx.s[11], { name: profile.getName(), email: profile.getEmail(), img: profile.getImageUrl() }); /* istanbul ignore next */++cov_1iw6fkvbjx.s[12];
+    handleSignIn(auth);
+  }; /* istanbul ignore next */++cov_1iw6fkvbjx.s[13];
+
+  const responseFacebook = facebookUser => {/* istanbul ignore next */++cov_1iw6fkvbjx.f[4];
+    const auth = /* istanbul ignore next */(++cov_1iw6fkvbjx.s[14], { name: facebookUser.name, email: facebookUser.email, img: facebookUser.picture.data.url }); /* istanbul ignore next */++cov_1iw6fkvbjx.s[15];
+    handleSignIn(auth);
+  }; /* istanbul ignore next */++cov_1iw6fkvbjx.s[16];
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: undefined }, intl.formatMessage({ id: 'sign_in' }))),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveAppBar, /* istanbul ignore next */{
+        title: intl.formatMessage({ id: 'sign_in' }), __source: { fileName: _jsxFileName, lineNumber: 77 }, __self: undefined }),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 80 }, __self: undefined },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ zDepth: 2, style: styles.paper, __source: { fileName: _jsxFileName, lineNumber: 82 }, __self: undefined },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.header, __source: { fileName: _jsxFileName, lineNumber: 83 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: undefined }, intl.formatMessage({ id: 'sign_in' }).toUpperCase()),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FloatingActionButton2.default, /* istanbul ignore next */{ style: styles.sign_up_button, __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: undefined },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                  className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: undefined }, /* istanbul ignore next */'person_add'))),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { marginBottom: 20 }, __source: { fileName: _jsxFileName, lineNumber: 92 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              hintText: 'Email',
+              type: 'Email',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              hintText: 'Password',
+              type: 'Password',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: undefined })),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+            label: intl.formatMessage({ id: 'sign_in' }),
+            secondary: true,
+            style: styles.button,
+            fullWidth: true,
+            onTouchTap: responseEmail,
+            icon:
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 112 }, __self: undefined }, /* istanbul ignore next */'lock'), __source: { fileName: _jsxFileName, lineNumber: 105 }, __self: undefined }),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 118 }, __self: undefined }),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactGoogleLogin2.default, /* istanbul ignore next */{
+              style: { backgroundColor: 'transparent', borderRadius: 0, border: 0, padding: 0, width: '100%' },
+              clientId: /* istanbul ignore next */_config2.default.google_client_id,
+              scope: 'profile',
+              tag: 'div',
+              onSuccess: responseGoogle, __source: { fileName: _jsxFileName, lineNumber: 120 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+              label: intl.formatMessage({ id: 'sign_in_with_google' }),
+              icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GoogleIcon, /* istanbul ignore next */{ color: muiTheme.palette.accent1Color, __source: { fileName: _jsxFileName, lineNumber: 128 }, __self: undefined }),
+              style: styles.button,
+              primary: true,
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 126 }, __self: undefined })),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactFacebookLogin2.default, /* istanbul ignore next */{
+            appId: /* istanbul ignore next */_config2.default.facebook_app_id,
+            fields: 'name,email,picture',
+            disableMobileRedirect: true,
+            textButton: '',
+            cssClass: '',
+            icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+              label: intl.formatMessage({ id: 'sign_in_with_facebook' }),
+              icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.FacebookIcon, /* istanbul ignore next */{ color: muiTheme.palette.accent1Color, __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: undefined }),
+              style: styles.button,
+              primary: true,
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 141 }, __self: undefined }),
+
+            tag: 'div',
+            callback: responseFacebook, __source: { fileName: _jsxFileName, lineNumber: 135 }, __self: undefined })))));
+
+
+
+
+
+
+
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(SignIn));
