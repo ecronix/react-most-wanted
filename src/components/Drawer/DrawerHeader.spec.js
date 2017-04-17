@@ -4,7 +4,8 @@ import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
 
 function setup() {
   const props = {
-    updateAuth: jest.fn(),
+    setAuthMenuOpen: jest.fn(),
+    auth: {isSignedIn: false}
   }
 
   const wrapper = shallowWithIntlTheme(<DrawerHeader {...props} />)
@@ -23,10 +24,10 @@ describe('components', () => {
     })
   })
 
-  it('should be able to call updateAuth', () => {
+  it('should be able to call setAuthMenuOpen', () => {
     const { wrapper, props } = setup()
-    props.updateAuth(true)
-    expect(props.updateAuth.mock.calls.length).toBe(1)
+    props.setAuthMenuOpen(true)
+    expect(props.setAuthMenuOpen.mock.calls.length).toBe(1)
   })
 
 

@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+signIn = signIn; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signOut = signOut; /* istanbul ignore next */exports.
+
+
+
+
+
+setAuthMenuOpen = setAuthMenuOpen;var /* istanbul ignore next */_actionTypes = require('./actionTypes'); /* istanbul ignore next */var types = _interopRequireWildcard(_actionTypes); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function signIn(auth) {return { type: types.SIGN_IN, auth };}function signOut() {return { type: types.SIGN_OUT };}function setAuthMenuOpen(open) {
+  return {
+    type: types.SET_AUTH_MENU_OPEN,
+    open };
+
+}

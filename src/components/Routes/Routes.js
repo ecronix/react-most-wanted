@@ -6,11 +6,9 @@ import {PageNotFound} from '../../components/PageNotFound';
 import {SignIn} from '../../containers/SignIn';
 import { Route , Switch, Redirect} from 'react-router';
 
-const Routes = (props) => {
+const Routes = ({auth}) => {
 
-  const {auth}=props;
-
-  const isAuthorised=auth.isSignedIn;
+  const isAuthorised=auth&&auth.isSignedIn;
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
