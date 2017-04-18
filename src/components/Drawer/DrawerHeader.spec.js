@@ -1,6 +1,7 @@
 import React from 'react';
-import DrawerHeader from './DrawerHeader';
+import {DrawerHeaderTest} from './DrawerHeader';
 import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
+import {injectIntl} from 'react-intl';
 
 function setup() {
   const props = {
@@ -8,7 +9,7 @@ function setup() {
     auth: {isSignedIn: false}
   }
 
-  const wrapper = shallowWithIntlTheme(<DrawerHeader {...props} />)
+  const wrapper = shallowWithIntlTheme(<DrawerHeaderTest {...props} />)
 
   return {
     props,

@@ -1,0 +1,3 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const SIGN_IN = /* istanbul ignore next */exports.SIGN_IN = 'auth.SIGN_IN';
+const SIGN_OUT = /* istanbul ignore next */exports.SIGN_OUT = 'auth.SIGN_OUT';
+const SET_AUTH_MENU_OPEN = /* istanbul ignore next */exports.SET_AUTH_MENU_OPEN = 'auth.SET_AUTH_MENU_OPEN';

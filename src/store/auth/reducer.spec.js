@@ -1,6 +1,6 @@
 import { Reducer } from 'redux-testkit';
 import reducer from './reducer'
-import {signIn, signOut} from './actions';
+import {signIn, signOut, setAuthMenuOpen} from './actions';
 
 const initialState={
   isSignedIn: false,
@@ -26,6 +26,10 @@ describe('auth reducer', () => {
 
   it('should handle SIGN_OUT', () => {
     Reducer(reducer).expect(signOut()).toReturnState(initialState)
+  })
+
+  it('should handle SET_AUTH_MENU_OPEN', () => {
+    Reducer(reducer).expect(setAuthMenuOpen(true)).toReturnState({...initialState, isMenuOpen: true})
   })
 
 })

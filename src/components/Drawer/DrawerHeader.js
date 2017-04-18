@@ -6,6 +6,8 @@ import ListItem from 'material-ui/List/ListItem';
 import List from 'material-ui/List/List';
 import Paper from 'material-ui/Paper';
 import {ReduxIcon} from '../Icons';
+import {injectIntl} from 'react-intl';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
 
@@ -66,7 +68,6 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
           <ListItem
             disabled={true}
             primaryText={intl.formatMessage({id: 'app_name'})}
-            //secondaryText={auth.email}
             leftAvatar={
               <ReduxIcon color={muiTheme.palette.accent1Color} style={styles.icon}/>
             }
@@ -77,9 +78,8 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
     </Paper>
   );
 
-
-
 }
 
+export const DrawerHeaderTest=injectIntl(muiThemeable()(DrawerHeader));
 
-export default DrawerHeader;
+export default injectIntl(muiThemeable()(DrawerHeader));

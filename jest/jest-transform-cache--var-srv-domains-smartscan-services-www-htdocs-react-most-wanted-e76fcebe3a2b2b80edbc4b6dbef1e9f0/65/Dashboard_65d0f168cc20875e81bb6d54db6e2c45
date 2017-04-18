@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.Dashboard = undefined;var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/containers/Dashboard/Dashboard.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_FlatButton = require('material-ui/FlatButton'); /* istanbul ignore next */var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Icons = require('../../components/Icons');
+var /* istanbul ignore next */_reactHelmet = require('react-helmet'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const Dashboard = /* istanbul ignore next */exports.Dashboard = ({ intl }) => {
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: undefined }, intl.formatMessage({ id: 'dashboard' }))),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveAppBar, /* istanbul ignore next */{
+        title: intl.formatMessage({ id: 'dashboard' }),
+        iconElementRight:
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+          href: 'https://github.com/TarikHuber/material-ui-responsive-drawer',
+          target: '_blank',
+          rel: 'noopener',
+          secondary: true,
+          icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GitHubIcon, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: undefined }), __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined }), __source: { fileName: _jsxFileName, lineNumber: 15 }, __self: undefined }),
+
+
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { paddingTop: 64 }, __source: { fileName: _jsxFileName, lineNumber: 27 }, __self: undefined })));
+
+
+
+
+
+};
+
+Dashboard.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired }; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)(Dashboard);

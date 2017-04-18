@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/Drawer/DrawerHeader.spec.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_DrawerHeader = require('./DrawerHeader');
+var /* istanbul ignore next */_intlThemeTest = require('../../helpers/intl-theme-test');
+var /* istanbul ignore next */_reactIntl = require('react-intl'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function setup() {
+  const props = {
+    setAuthMenuOpen: jest.fn(),
+    auth: { isSignedIn: false } };
+
+
+  const wrapper = /* istanbul ignore next */(0, _intlThemeTest.shallowWithIntlTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DrawerHeader.DrawerHeaderTest, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this })));
+
+  return {
+    props,
+    wrapper };
+
+}
+
+describe('components', () => {
+  describe('DrawerHeader', () => {
+    it('renders without exploding', () => {
+      const { wrapper } = setup();
+      expect(wrapper.length).toBe(1);
+    });
+  });
+
+  it('should be able to call setAuthMenuOpen', () => {
+    const { wrapper, props } = setup();
+    props.setAuthMenuOpen(true);
+    expect(props.setAuthMenuOpen.mock.calls.length).toBe(1);
+  });
+
+
+});
