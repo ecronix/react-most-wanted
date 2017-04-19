@@ -1,0 +1,26 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });const getUser = /* istanbul ignore next */exports.getUser = firebaseUser => {
+
+  if (firebaseUser) {
+    return {
+      isSignedIn: true,
+      name: firebaseUser.displayName,
+      email: firebaseUser.email,
+      img: firebaseUser.photoURL,
+      uid: firebaseUser.uid };
+
+  }
+
+  return {
+    isSignedIn: false };
+
+
+};
+
+const getValidationErrorMessage = /* istanbul ignore next */exports.getValidationErrorMessage = (auth, fieldID) => {
+
+  if (auth.error && auth.error.errorCode && auth.error.errorCode.indexOf(fieldID) > 0) {
+    return auth.error.errorMessage;
+  }
+
+  return undefined;
+};

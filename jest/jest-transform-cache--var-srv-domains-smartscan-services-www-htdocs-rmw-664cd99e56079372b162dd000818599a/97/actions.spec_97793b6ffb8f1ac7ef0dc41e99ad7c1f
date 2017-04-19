@@ -1,0 +1,25 @@
+/* istanbul ignore next */'use strict';
+
+
+
+jest.mock('./actions');var /* istanbul ignore next */_reduxTestkit = require('redux-testkit');var /* istanbul ignore next */_reducer = require('./reducer'); /* istanbul ignore next */var _reducer2 = _interopRequireDefault(_reducer);var /* istanbul ignore next */_selectors = require('./selectors'); /* istanbul ignore next */var selectors = _interopRequireWildcard(_selectors);var /* istanbul ignore next */_actions = require('./actions'); /* istanbul ignore next */var actions = _interopRequireWildcard(_actions); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _asyncToGenerator(fn) {return function () {var gen = fn.apply(this, arguments);return new Promise(function (resolve, reject) {function step(key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {return Promise.resolve(value).then(function (value) {step("next", value);}, function (err) {step("throw", err);});}}return step("next");});};}
+
+
+describe('auth actions', () => {
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+
+  it('should handle signInWithProvider', /* istanbul ignore next */_asyncToGenerator(function* () {
+
+    yield expect(actions.signInWithProvider('google')).resolves.toBe('peanut butter');
+
+  }));
+
+
+
+
+
+});

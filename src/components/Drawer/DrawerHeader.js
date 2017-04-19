@@ -82,5 +82,4 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
 
 }
 
-
 export default injectIntl(muiThemeable()(DrawerHeader));

@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Icons/GoogleIcon.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_SvgIcon = require('material-ui/SvgIcon'); /* istanbul ignore next */var _SvgIcon2 = _interopRequireDefault(_SvgIcon);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const GoogleIcon = props => {
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SvgIcon2.default, /* istanbul ignore next */Object.assign({ width: 22, height: 22, viewBox: '0 0 48 48' }, props, { __source: { fileName: _jsxFileName, lineNumber: 6 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{
+        d: 'M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z', __source: { fileName: _jsxFileName, lineNumber: 7 }, __self: undefined })));
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+GoogleIcon;

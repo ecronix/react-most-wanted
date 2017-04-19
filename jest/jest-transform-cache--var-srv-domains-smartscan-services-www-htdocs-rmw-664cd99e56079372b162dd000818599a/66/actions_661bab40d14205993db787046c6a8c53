@@ -1,0 +1,129 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+signInWithProvider = signInWithProvider; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+signOutUser = signOutUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+signInUser = signInUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+signUpUser = signUpUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+updateUser = updateUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fetchUser = fetchUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+authError = authError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setAuthMenuOpen = setAuthMenuOpen;var /* istanbul ignore next */_firebase = require('../../utils/firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function signInWithProvider(provider, onSuccess = null) {return dispatch => {/* istanbul ignore next */_firebase2.default.loginWithProvider(provider).then(payload => {if (payload.errorCode) {dispatch(authError(payload));} else {dispatch(signInSuccess(payload.user));if (onSuccess && onSuccess instanceof Function) {onSuccess(payload.user);}}}).catch(error => dispatch(authError(error)));};}function signOutUser(user) {return dispatch => {/* istanbul ignore next */_firebase2.default.logoutUser(user).then(result => dispatch(signOutSuccess(result))).catch(error => dispatch(authError(error)));};}function signInUser(user) {return dispatch => {/* istanbul ignore next */_firebase2.default.loginUser(user).then(payload => {if (payload.errorCode) {dispatch(authError(payload));} else {dispatch(signInSuccess(payload));}}).catch(error => dispatch(authError(error)));};}function signUpUser(user) {return dispatch => {/* istanbul ignore next */_firebase2.default.registerUser(user).then(payload => {if (payload.errorCode) {dispatch(authError(payload));} else {dispatch(signInSuccess(payload));}}).catch(error => dispatch(authError(error)));};}function updateUser(user) {return dispatch => {/* istanbul ignore next */_firebase2.default.updateUserProfile(user).then(payload => {if (payload.errorCode) {dispatch(authError(payload));} else {dispatch(signInSuccess(payload));}}).catch(error => dispatch(authError(error)));};}function fetchUser() {return dispatch => {/* istanbul ignore next */_firebase2.default.fetchUser().then(result => dispatch(fetchSuccess(result))).catch(error => dispatch(authError(error)));};}function signInSuccess(user) {return { type: types.SIGN_IN_SUCCESS, user };}function signOutSuccess(payload) {return { type: types.SIGN_OUT_SUCCESS, payload };}function fetchSuccess(user) {return { type: types.FETCH_SUCCESS, user };}function authError(error) {return { type: types.AUTH_ERROR, error };}function setAuthMenuOpen(open) {
+  return {
+    type: types.SET_AUTH_MENU_OPEN,
+    open };
+
+}

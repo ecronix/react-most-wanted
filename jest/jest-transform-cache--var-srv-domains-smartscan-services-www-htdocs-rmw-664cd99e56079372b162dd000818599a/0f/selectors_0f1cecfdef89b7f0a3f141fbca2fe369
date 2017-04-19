@@ -1,0 +1,26 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var cov_1is0ia8kkr = function () {var path = "/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/auth/selectors.js",hash = "0534b755e875aa7a30f43c8bc90703c0755955c8",global = new Function('return this')(),gcv = "__coverage__",coverageData = { path: "/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/auth/selectors.js", statementMap: { "0": { start: { line: 1, column: 23 }, end: { line: 17, column: 1 } }, "1": { start: { line: 3, column: 2 }, end: { line: 11, column: 3 } }, "2": { start: { line: 4, column: 4 }, end: { line: 10, column: 5 } }, "3": { start: { line: 13, column: 2 }, end: { line: 15, column: 4 } }, "4": { start: { line: 19, column: 41 }, end: { line: 26, column: 1 } }, "5": { start: { line: 21, column: 2 }, end: { line: 23, column: 3 } }, "6": { start: { line: 22, column: 4 }, end: { line: 22, column: 35 } }, "7": { start: { line: 25, column: 2 }, end: { line: 25, column: 19 } } }, fnMap: { "0": { name: "(anonymous_0)", decl: { start: { line: 1, column: 23 }, end: { line: 1, column: 24 } }, loc: { start: { line: 1, column: 41 }, end: { line: 17, column: 1 } }, line: 1 }, "1": { name: "(anonymous_1)", decl: { start: { line: 19, column: 41 }, end: { line: 19, column: 42 } }, loc: { start: { line: 19, column: 60 }, end: { line: 26, column: 1 } }, line: 19 } }, branchMap: { "0": { loc: { start: { line: 3, column: 2 }, end: { line: 11, column: 3 } }, type: "if", locations: [{ start: { line: 3, column: 2 }, end: { line: 11, column: 3 } }, { start: { line: 3, column: 2 }, end: { line: 11, column: 3 } }], line: 3 }, "1": { loc: { start: { line: 21, column: 2 }, end: { line: 23, column: 3 } }, type: "if", locations: [{ start: { line: 21, column: 2 }, end: { line: 23, column: 3 } }, { start: { line: 21, column: 2 }, end: { line: 23, column: 3 } }], line: 21 }, "2": { loc: { start: { line: 21, column: 5 }, end: { line: 21, column: 90 } }, type: "binary-expr", locations: [{ start: { line: 21, column: 5 }, end: { line: 21, column: 9 } }, { start: { line: 21, column: 13 }, end: { line: 21, column: 23 } }, { start: { line: 21, column: 27 }, end: { line: 21, column: 47 } }, { start: { line: 21, column: 51 }, end: { line: 21, column: 90 } }], line: 21 } }, s: { "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0, "7": 0 }, f: { "0": 0, "1": 0 }, b: { "0": [0, 0], "1": [0, 0], "2": [0, 0, 0, 0] }, _coverageSchema: "332fd63041d2c1bcb487cc26dd0d5f7d97098a6c" },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();const getUser = /* istanbul ignore next */exports.getUser = (++cov_1is0ia8kkr.s[0], firebaseUser => {/* istanbul ignore next */++cov_1is0ia8kkr.f[0];++cov_1is0ia8kkr.s[1];
+
+  if (firebaseUser) {/* istanbul ignore next */++cov_1is0ia8kkr.b[0][0];++cov_1is0ia8kkr.s[2];
+    return {
+      isSignedIn: true,
+      name: firebaseUser.displayName,
+      email: firebaseUser.email,
+      img: firebaseUser.photoURL,
+      uid: firebaseUser.uid };
+
+  } else /* istanbul ignore next */{++cov_1is0ia8kkr.b[0][1];}++cov_1is0ia8kkr.s[3];
+
+  return {
+    isSignedIn: false };
+
+
+});
+
+const getValidationErrorMessage = /* istanbul ignore next */exports.getValidationErrorMessage = (++cov_1is0ia8kkr.s[4], (auth, fieldID) => {/* istanbul ignore next */++cov_1is0ia8kkr.f[1];++cov_1is0ia8kkr.s[5];
+
+  if ( /* istanbul ignore next */(++cov_1is0ia8kkr.b[2][0], auth) && /* istanbul ignore next */(++cov_1is0ia8kkr.b[2][1], auth.error) && /* istanbul ignore next */(++cov_1is0ia8kkr.b[2][2], auth.error.errorCode) && /* istanbul ignore next */(++cov_1is0ia8kkr.b[2][3], auth.error.errorCode.indexOf(fieldID) > 0)) {/* istanbul ignore next */++cov_1is0ia8kkr.b[1][0];++cov_1is0ia8kkr.s[6];
+    return auth.error.errorMessage;
+  } else /* istanbul ignore next */{++cov_1is0ia8kkr.b[1][1];}++cov_1is0ia8kkr.s[7];
+
+  return undefined;
+});

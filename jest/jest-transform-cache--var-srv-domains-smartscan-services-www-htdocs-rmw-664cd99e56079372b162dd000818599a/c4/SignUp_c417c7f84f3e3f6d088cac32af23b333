@@ -1,0 +1,138 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/SignUp/SignUp.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_TextField = require('material-ui/TextField'); /* istanbul ignore next */var _TextField2 = _interopRequireDefault(_TextField);
+var /* istanbul ignore next */_RaisedButton = require('material-ui/RaisedButton'); /* istanbul ignore next */var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_reactHelmet = require('react-helmet'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = {
+  paper: {
+    height: '100%',
+    display: 'block',
+    margin: 0,
+    padding: 15 },
+
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between' },
+
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    paddingTop: 100 },
+
+  button: {
+    margin: 6,
+    align: 'left' },
+
+  sign_up_button: {
+    float: 'right',
+    overflow: 'none',
+    alignSelf: 'flex-end',
+    marginRight: -43 } };
+
+
+
+
+const SignUp = props => {
+
+  let email = null;
+  let password = null;
+  let confirm_password = null;
+
+  const {
+    intl,
+    signUpUser,
+    authError,
+    getValidationErrorMessage } =
+  props;
+
+
+  const hanleSignInSubmit = () => {
+
+    if (password.getValue().localeCompare(confirm_password.getValue()) === 0) {
+      signUpUser({ email: email.getValue(), password: password.getValue() });
+    } else {
+      authError({
+        errorCode: 'auth/invalid-confirm_password',
+        errorMessage: 'Masswords doent match' });
+
+    }
+
+  };
+
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 73 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: undefined }, intl.formatMessage({ id: 'sign_up' }))),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveAppBar, /* istanbul ignore next */{
+        title: intl.formatMessage({ id: 'sign_up' }), __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: undefined }),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 79 }, __self: undefined },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ zDepth: 2, style: styles.paper, __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: undefined },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.header, __source: { fileName: _jsxFileName, lineNumber: 82 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 83 }, __self: undefined }, intl.formatMessage({ id: 'sign_up' }).toUpperCase())),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { marginBottom: 20 }, __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              id: 'email',
+              ref: field => {email = field;},
+              hintText: intl.formatMessage({ id: 'email' }),
+              errorText: getValidationErrorMessage('email'),
+              type: 'Email',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 93 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              id: 'password',
+              ref: field => {password = field;},
+              hintText: intl.formatMessage({ id: 'password' }),
+              errorText: getValidationErrorMessage('password'),
+              type: 'Password',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 94 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 101 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              id: 'confirm_password',
+              ref: field => {confirm_password = field;},
+              hintText: intl.formatMessage({ id: 'confirm_password' }),
+              errorText: getValidationErrorMessage('confirm_password'),
+              type: 'Password',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 102 }, __self: undefined })),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+            label: intl.formatMessage({ id: 'sign_up' }),
+            secondary: true,
+            style: styles.button,
+            fullWidth: true,
+            onTouchTap: hanleSignInSubmit,
+            icon:
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 119 }, __self: undefined }, /* istanbul ignore next */'person_add'), __source: { fileName: _jsxFileName, lineNumber: 112 }, __self: undefined }),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 125 }, __self: undefined })))));
+
+
+
+
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(SignUp));

@@ -1,12 +1,24 @@
 import React from 'react';
-import MyAccount from './MyAccount';
-import {shallowWithIntlTheme} from '../../helpers/intl-theme-test';
+import {MyAccountTest} from './MyAccount';
+import {shallowWithIntlTheme} from '../../utils/intl-theme-test';
 
-const wrapper=shallowWithIntlTheme(<MyAccount/>)
+function setup() {
+  const props = {
+    auth: {},
+  }
+
+  const wrapper = shallowWithIntlTheme(<MyAccountTest {...props} />)
+
+  return {
+    props,
+    wrapper
+  }
+}
 
 describe('components', () => {
   describe('MyAccount', () => {
     it('renders without exploding', () => {
+      const { wrapper, props } = setup()
       expect(wrapper.length).toBe(1)
     })
   })

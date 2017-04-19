@@ -1,0 +1,24 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_Drawer = require('../../components/Drawer');
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+var /* istanbul ignore next */_actions2 = require('../../store/firebase/actions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/* istanbul ignore next */_Drawer.DrawerHeader.propTypes = {
+  auth: /* istanbul ignore next */_propTypes2.default.object,
+  setAuthMenuOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+const mapStateToProps = state => {
+  const { auth, theme, locale } = state;
+
+  return {
+    auth,
+    theme,
+    locale };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+{ setAuthMenuOpen: /* istanbul ignore next */_actions.setAuthMenuOpen, fetchUser: /* istanbul ignore next */_actions2.fetchUser })( /* istanbul ignore next */_Drawer.DrawerHeader);

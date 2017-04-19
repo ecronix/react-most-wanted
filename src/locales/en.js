@@ -24,6 +24,10 @@ const messages=defineMessages({
   sign_in_with_google: 'Sign in with Google',
   sign_in_with_facebook: 'Sign in with Facebook',
   my_account: 'My account',
+  email: 'E-Mail',
+  password: 'Password',
+  confirm_password: 'Confirm Password',
+  save: 'Save',
 
 });
 

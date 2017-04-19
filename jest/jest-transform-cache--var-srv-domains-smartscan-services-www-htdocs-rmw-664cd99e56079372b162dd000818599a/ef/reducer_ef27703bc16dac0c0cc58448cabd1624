@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_2avdm20iq1 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/theme/reducer.js',hash = '85b097ee9ddf4883e5d63140f367f1e7b141ed41',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/theme/reducer.js', statementMap: { '0': { start: { line: 4, column: 14 }, end: { line: 13, column: 1 } }, '1': { start: { line: 6, column: 2 }, end: { line: 12, column: 3 } }, '2': { start: { line: 8, column: 4 }, end: { line: 8, column: 25 } }, '3': { start: { line: 11, column: 4 }, end: { line: 11, column: 17 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 4, column: 14 }, end: { line: 4, column: 15 } }, loc: { start: { line: 4, column: 55 }, end: { line: 13, column: 1 } }, line: 4 } }, branchMap: { '0': { loc: { start: { line: 4, column: 15 }, end: { line: 4, column: 41 } }, type: 'default-arg', locations: [{ start: { line: 4, column: 23 }, end: { line: 4, column: 41 } }], line: 4 }, '1': { loc: { start: { line: 6, column: 2 }, end: { line: 12, column: 3 } }, type: 'switch', locations: [{ start: { line: 7, column: 4 }, end: { line: 8, column: 25 } }, { start: { line: 10, column: 4 }, end: { line: 11, column: 17 } }], line: 6 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0 }, f: { '0': 0 }, b: { '0': [0], '1': [0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_actionTypes = require('./actionTypes'); /* istanbul ignore next */var types = _interopRequireWildcard(_actionTypes);
+var /* istanbul ignore next */_seamlessImmutable = require('seamless-immutable'); /* istanbul ignore next */var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}++cov_2avdm20iq1.s[0];
+
+const theme = (state = /* istanbul ignore next */(++cov_2avdm20iq1.b[0][0], /* istanbul ignore next */(0, _seamlessImmutable2.default)('light')), action) => {/* istanbul ignore next */++cov_2avdm20iq1.f[0];++cov_2avdm20iq1.s[1];
+
+  switch (action.type) {
+    case types.UPDATE_THEME: /* istanbul ignore next */++cov_2avdm20iq1.b[1][0];++cov_2avdm20iq1.s[2];
+      return action.theme;
+
+    default: /* istanbul ignore next */++cov_2avdm20iq1.b[1][1];++cov_2avdm20iq1.s[3];
+      return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+theme;

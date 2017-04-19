@@ -1,0 +1,16 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true }); // / FIREBASE AUTH ACTIONS
+const LOGIN_WITH_PROVIDER_FIREBASE = /* istanbul ignore next */exports.LOGIN_WITH_PROVIDER_FIREBASE = 'firebase.LOGIN_WITH_PROVIDER_FIREBASE';
+const REGISTER_FIREBASE_USER = /* istanbul ignore next */exports.REGISTER_FIREBASE_USER = 'firebase.REGISTER_FIREBASE_USER';
+const LOGIN_FIREBASE_USER = /* istanbul ignore next */exports.LOGIN_FIREBASE_USER = 'firebase.LOGIN_FIREBASE_USER';
+const FETCH_FIREBASE_USER = /* istanbul ignore next */exports.FETCH_FIREBASE_USER = 'firebase.FETCH_FIREBASE_USER';
+const UPDATE_FIREBASE_USER = /* istanbul ignore next */exports.UPDATE_FIREBASE_USER = 'firebase.UPDATE_FIREBASE_USER';
+const CHANGE_FIREBASE_USER_PASSWORD = /* istanbul ignore next */exports.CHANGE_FIREBASE_USER_PASSWORD = 'firebase.CHANGE_FIREBASE_USER_PASSWORD';
+const FIREBASE_PASSWORD_RESET_EMAIL = /* istanbul ignore next */exports.FIREBASE_PASSWORD_RESET_EMAIL = 'firebase.FIREBASE_PASSWORD_RESET_EMAIL';
+const LOGOUT_FIREBASE_USER = /* istanbul ignore next */exports.LOGOUT_FIREBASE_USER = 'firebase.LOGOUT_FIREBASE_USER';
+
+const INIT_AUTH = /* istanbul ignore next */exports.INIT_AUTH = 'INIT_AUTH';
+
+const SIGN_IN_ERROR = /* istanbul ignore next */exports.SIGN_IN_ERROR = 'SIGN_IN_ERROR';
+const SIGN_IN_SUCCESS = /* istanbul ignore next */exports.SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
+
+const SIGN_OUT_SUCCESS = /* istanbul ignore next */exports.SIGN_OUT_SUCCESS = 'SIGN_OUT_SUCCESS';

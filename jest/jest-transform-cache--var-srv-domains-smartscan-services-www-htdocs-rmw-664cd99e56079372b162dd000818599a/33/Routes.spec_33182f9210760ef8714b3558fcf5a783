@@ -1,0 +1,30 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Routes/Routes.spec.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Routes = require('./Routes'); /* istanbul ignore next */var _Routes2 = _interopRequireDefault(_Routes);
+var /* istanbul ignore next */_intlThemeTest = require('../../helpers/intl-theme-test'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const wrapper = /* istanbul ignore next */(0, _intlThemeTest.shallowWithIntlTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Routes2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 5 }, __self: undefined }));
+
+function setup() {
+  const props = {
+    auth: { isSignedIn: false } };
+
+
+  const wrapper = /* istanbul ignore next */(0, _intlThemeTest.shallowWithIntlTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Routes2.default, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this })));
+
+  return {
+    props,
+    wrapper };
+
+}
+
+describe('components', () => {
+  describe('Routes', () => {
+
+
+    it('renders without exploding', () => {
+      const { wrapper, props } = setup();
+      expect(wrapper.length).toBe(1);
+    });
+
+  });
+});

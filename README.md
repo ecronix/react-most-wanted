@@ -208,6 +208,7 @@ Is also a dev library that helps us to create a service worker during build proc
 - [X] implement authentication using google and facebook
 - [ ] update to material-ui@next
 - [X] create profile menu in drawer
+- [ ] default error displaying component
 - [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
 
 ## License

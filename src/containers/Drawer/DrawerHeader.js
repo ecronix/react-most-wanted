@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DrawerHeader }  from '../../components/Drawer';
 import { setAuthMenuOpen } from '../../store/auth/actions';
-import { fetchUser } from '../../store/firebase/actions';
 
 DrawerHeader.propTypes = {
   auth: PropTypes.object,
@@ -21,5 +20,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { setAuthMenuOpen, fetchUser }
+  { setAuthMenuOpen }
 )(DrawerHeader);

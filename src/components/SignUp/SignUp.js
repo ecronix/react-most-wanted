@@ -86,7 +86,7 @@ const SignUp = (props) => {
             <TextField
               id="email"
               ref={(field) => { email = field; }}
-              hintText="Email"
+              hintText={intl.formatMessage({id: 'email'})}
               errorText={getValidationErrorMessage('email')}
               type="Email"
               fullWidth={true}
@@ -94,7 +94,7 @@ const SignUp = (props) => {
             <TextField
               id="password"
               ref={(field) => { password = field; }}
-              hintText="Password"
+              hintText={intl.formatMessage({id: 'password'})}
               errorText={getValidationErrorMessage('password')}
               type="Password"
               fullWidth={true}
@@ -102,7 +102,7 @@ const SignUp = (props) => {
             <TextField
               id="confirm_password"
               ref={(field) => { confirm_password = field; }}
-              hintText="Confirm Password"
+              hintText={intl.formatMessage({id: 'confirm_password'})}
               errorText={getValidationErrorMessage('confirm_password')}
               type="Password"
               fullWidth={true}

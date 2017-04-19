@@ -1,0 +1,49 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Drawer/DrawerContent.spec.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_DrawerContent = require('./DrawerContent'); /* istanbul ignore next */var _DrawerContent2 = _interopRequireDefault(_DrawerContent);
+var /* istanbul ignore next */_intlThemeTest = require('../../utils/intl-theme-test'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+function setup() {
+  const props = {
+    setResponsive: jest.fn(),
+    setDrawerOpen: jest.fn(),
+    updateLocale: jest.fn() };
+
+
+  const wrapper = /* istanbul ignore next */(0, _intlThemeTest.shallowWithIntlTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DrawerContent2.default, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: this })));
+
+  return {
+    props,
+    wrapper };
+
+}
+
+describe('components', () => {
+  describe('DrawerContent', () => {
+    const { wrapper } = setup();
+
+    it('renders without exploding', () => {
+      expect(wrapper.length).toBe(1);
+    });
+
+    it('should be able to call setResponsive', () => {
+      const { wrapper, props } = setup();
+      props.setResponsive(true);
+      expect(props.setResponsive.mock.calls.length).toBe(1);
+    });
+
+    it('should be able to call setDrawerOpen', () => {
+      const { wrapper, props } = setup();
+      props.setDrawerOpen(true);
+      expect(props.setDrawerOpen.mock.calls.length).toBe(1);
+    });
+
+    it('should be able to call updateLocale', () => {
+      const { wrapper, props } = setup();
+      props.updateLocale(true);
+      expect(props.updateLocale.mock.calls.length).toBe(1);
+    });
+
+
+  });
+});

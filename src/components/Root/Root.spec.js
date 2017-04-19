@@ -1,6 +1,6 @@
 import React from 'react';
 import Root from './Root';
-import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
+import { shallowWithIntlTheme } from '../../utils/intl-theme-test';
 
 function setup() {
   const props = {
@@ -22,9 +22,9 @@ describe('components', () => {
       expect(wrapper.length).toBe(1);
     })
 
-    it('should be able to call fetchUser', () => {
+    it('fetchUser should be called', () => {
       const { wrapper, props } = setup();
-      props.fetchUser(true)
+      //props.fetchUser(true)
       expect(props.fetchUser.mock.calls.length).toBe(1)
     })
 

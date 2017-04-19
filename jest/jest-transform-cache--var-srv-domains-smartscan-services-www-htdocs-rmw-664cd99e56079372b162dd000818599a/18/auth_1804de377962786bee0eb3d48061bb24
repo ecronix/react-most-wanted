@@ -1,0 +1,6 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });
+const isAuthorised = /* istanbul ignore next */exports.isAuthorised = () => {
+  const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
+  const data = JSON.parse(localStorage.getItem(key));
+  return data != null;
+};

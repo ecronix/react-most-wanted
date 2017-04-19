@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Root/Root.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRouter = require('react-router');
+var /* istanbul ignore next */_MuiThemeProvider = require('material-ui/styles/MuiThemeProvider'); /* istanbul ignore next */var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_App = require('../../containers/App'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class Root extends /* istanbul ignore next */_react.Component {
+
+  componentWillMount() {
+    const { fetchUser } = this.props;
+    fetchUser();
+  }
+
+  render() {
+    const { history, locale, muiTheme, messages } = this.props;
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_MuiThemeProvider2.default, /* istanbul ignore next */{ muiTheme: muiTheme, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactIntl.IntlProvider, /* istanbul ignore next */{ locale: locale, messages: messages, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouterRedux.ConnectedRouter, /* istanbul ignore next */{ history: history, __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: this },
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{
+              path: '/',
+              component: /* istanbul ignore next */_App.App, __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: this })))));
+
+
+
+
+
+
+  }} /* istanbul ignore next */exports.default =
+
+
+
+Root;

@@ -49,7 +49,7 @@ const styles={
   }
 }
 
-class MyAccount extends Component {
+export class MyAccount extends Component {
 
   constructor(props) {
     super(props);
@@ -155,6 +155,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+export const MyAccountTest = injectIntl(muiThemeable()(MyAccount));
 
 export default connect(
   mapStateToProps,

@@ -1,0 +1,25 @@
+/* istanbul ignore next */'use strict';var /* istanbul ignore next */_reduxTestkit = require('redux-testkit');
+var /* istanbul ignore next */_reducer = require('./reducer'); /* istanbul ignore next */var _reducer2 = _interopRequireDefault(_reducer);
+var /* istanbul ignore next */_selectors = require('./selectors'); /* istanbul ignore next */var selectors = _interopRequireWildcard(_selectors);
+var /* istanbul ignore next */_actions = require('./actions'); /* istanbul ignore next */var actions = _interopRequireWildcard(_actions); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+//jest.mock('./actions');
+
+
+describe('auth actions', () => {
+
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
+
+  it('should handle signInWithProvider', () => {
+    actions.signInWithProvider('google').then(data => {
+      expect(data).toBe('peanut butter');
+    });
+  });
+
+
+
+
+
+});

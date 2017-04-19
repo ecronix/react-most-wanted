@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Icons/ReduxIcon.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_SvgIcon = require('material-ui/SvgIcon'); /* istanbul ignore next */var _SvgIcon2 = _interopRequireDefault(_SvgIcon);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const GitHubIcon = props => {
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_SvgIcon2.default, /* istanbul ignore next */Object.assign({ width: 22, height: 22, viewBox: '0 0 100 100' }, props, { __source: { fileName: _jsxFileName, lineNumber: 6 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{ d: 'M65.6 65.4c2.9-.3 5.1-2.8 5-5.8-.1-3-2.6-5.4-5.6-5.4h-.2c-3.1.1-5.5 2.7-5.4 5.8.1 1.5.7 2.8 1.6 3.7-3.4 6.7-8.6 11.6-16.4 15.7-5.3 2.8-10.8 3.8-16.3 3.1-4.5-.6-8-2.6-10.2-5.9-3.2-4.9-3.5-10.2-.8-15.5 1.9-3.8 4.9-6.6 6.8-8-.4-1.3-1-3.5-1.3-5.1-14.5 10.5-13 24.7-8.6 31.4 3.3 5 10 8.1 17.4 8.1 2 0 4-.2 6-.7 12.8-2.5 22.5-10.1 28-21.4z', __source: { fileName: _jsxFileName, lineNumber: 7 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{ d: 'M83.2 53c-7.6-8.9-18.8-13.8-31.6-13.8H50c-.9-1.8-2.8-3-4.9-3h-.2c-3.1.1-5.5 2.7-5.4 5.8.1 3 2.6 5.4 5.6 5.4h.2c2.2-.1 4.1-1.5 4.9-3.4H52c7.6 0 14.8 2.2 21.3 6.5 5 3.3 8.6 7.6 10.6 12.8 1.7 4.2 1.6 8.3-.2 11.8-2.8 5.3-7.5 8.2-13.7 8.2-4 0-7.8-1.2-9.8-2.1-1.1 1-3.1 2.6-4.5 3.6 4.3 2 8.7 3.1 12.9 3.1 9.6 0 16.7-5.3 19.4-10.6 2.9-5.8 2.7-15.8-4.8-24.3z', __source: { fileName: _jsxFileName, lineNumber: 8 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'path', /* istanbul ignore next */{ d: 'M32.4 67.1c.1 3 2.6 5.4 5.6 5.4h.2c3.1-.1 5.5-2.7 5.4-5.8-.1-3-2.6-5.4-5.6-5.4h-.2c-.2 0-.5 0-.7.1-4.1-6.8-5.8-14.2-5.2-22.2.4-6 2.4-11.2 5.9-15.5 2.9-3.7 8.5-5.5 12.3-5.6 10.6-.2 15.1 13 15.4 18.3 1.3.3 3.5 1 5 1.5-1.2-16.2-11.2-24.6-20.8-24.6-9 0-17.3 6.5-20.6 16.1-4.6 12.8-1.6 25.1 4 34.8-.5.7-.8 1.8-.7 2.9z', __source: { fileName: _jsxFileName, lineNumber: 9 }, __self: undefined })));
+
+
+}; /* istanbul ignore next */exports.default =
+
+GitHubIcon;

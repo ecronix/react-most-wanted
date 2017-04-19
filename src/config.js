@@ -1,11 +1,11 @@
 const config= {
   FIREBASE_CONFIG: {
-    apiKey: "AIzaSyDzRWMGiJPah7X0iUaXpQ5KFXAqBDPAnJk",
-    authDomain: "react-most-wanted.firebaseapp.com",
-    databaseURL: "https://react-most-wanted.firebaseio.com",
-    projectId: "react-most-wanted",
-    storageBucket: "react-most-wanted.appspot.com",
-    messagingSenderId: "941480856475"
+    apiKey: "AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY",
+    authDomain: "react-most-wanted-3b1b2.firebaseapp.com",
+    databaseURL: "https://react-most-wanted-3b1b2.firebaseio.com",
+    projectId: "react-most-wanted-3b1b2",
+    storageBucket: "react-most-wanted-3b1b2.appspot.com",
+    messagingSenderId: "258373383650"
   },
 }
 

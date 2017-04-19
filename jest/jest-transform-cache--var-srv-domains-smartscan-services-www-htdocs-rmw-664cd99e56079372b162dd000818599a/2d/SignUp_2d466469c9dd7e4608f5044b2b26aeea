@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+var /* istanbul ignore next */_selectors = require('../../store/auth/selectors');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_SignUp = require('../../components/SignUp'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+/* istanbul ignore next */_SignUp.SignUp.propTypes = {
+  setDrawerOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  signUpUser: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  push: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  auth: /* istanbul ignore next */_propTypes2.default.object,
+  intl: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  router: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired };
+
+
+const mapStateToProps = state => {
+  const { auth, router } = state;
+  return {
+    auth,
+    router,
+    getValidationErrorMessage: fieldID => /* istanbul ignore next */(0, _selectors.getValidationErrorMessage)(auth, fieldID) };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+{ signUpUser: /* istanbul ignore next */_actions.signUpUser, authError: /* istanbul ignore next */_actions.authError, push: /* istanbul ignore next */_reactRouterRedux.push, setDrawerOpen: /* istanbul ignore next */_materialUiResponsiveDrawer.setDrawerOpen })(
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()( /* istanbul ignore next */_SignUp.SignUp)));

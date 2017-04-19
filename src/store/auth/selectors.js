@@ -18,7 +18,7 @@ export const getUser = (firebaseUser) => {
 
 export const getValidationErrorMessage = (auth, fieldID) => {
 
-  if(auth.error && auth.error.errorCode && auth.error.errorCode.indexOf(fieldID)>0){
+  if(auth && auth.error && auth.error.errorCode && auth.error.errorCode.indexOf(fieldID)>0){
     return auth.error.errorMessage;
   }
 

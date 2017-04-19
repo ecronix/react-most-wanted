@@ -53,7 +53,8 @@ const SignIn = (props) => {
     signInWithProvider,
     push,
     router,
-    signInUser
+    signInUser,
+    getValidationErrorMessage
   } = props;
 
 
@@ -95,14 +96,18 @@ const SignIn = (props) => {
           </div>
           <div style={{marginBottom: 20}}>
             <TextField
+              id="email"
               ref={(field) => { email = field; }}
-              hintText="Email"
+              hintText={intl.formatMessage({id: 'email'})}
+              errorText={getValidationErrorMessage('email')}
               type="Email"
               fullWidth={true}
             /><br />
             <TextField
+              id="password"
               ref={(field) => { password = field; }}
-              hintText="Password"
+              hintText={intl.formatMessage({id: 'password'})}
+              errorText={getValidationErrorMessage('password')}
               type="Password"
               fullWidth={true}
             />

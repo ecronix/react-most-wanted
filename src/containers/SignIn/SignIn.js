@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { signInWithProvider, signInUser } from '../../store/auth/actions';
+import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
 import { setDrawerOpen } from 'material-ui-responsive-drawer';
 import { SignIn } from '../../components/SignIn'
@@ -21,7 +22,8 @@ const mapStateToProps = (state) => {
   const { auth, router } = state;
   return {
     auth,
-    router
+    router,
+    getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
   };
 };
 

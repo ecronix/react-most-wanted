@@ -89,7 +89,7 @@ export function fetchUser() {
 
 }
 
-function signInSuccess(user) {
+export function signInSuccess(user) {
   return {
     type: types.SIGN_IN_SUCCESS,
     user
@@ -98,14 +98,12 @@ function signInSuccess(user) {
 
 
 
-function signOutSuccess(payload) {
+export function signOutSuccess(payload) {
   return {
     type: types.SIGN_OUT_SUCCESS,
     payload
   };
 }
-
-
 
 function fetchSuccess(user) {
   return {
@@ -127,3 +125,23 @@ export function setAuthMenuOpen(open) {
     open
   };
 }
+
+// TODO:
+/*
+export function changePassword(newPassword) {
+  const request = FireBaseTools.changePassword(newPassword);
+  return {
+    type: CHANGE_FIREBASE_USER_PASSWORD,
+    payload: request,
+  };
+}
+
+export function resetPasswordEmail(email) {
+  const request = FireBaseTools.resetPasswordEmail(email);
+  return {
+    type: FIREBASE_PASSWORD_RESET_EMAIL,
+    payload: request,
+  };
+}
+
+ */

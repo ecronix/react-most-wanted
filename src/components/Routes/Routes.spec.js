@@ -1,6 +1,6 @@
 import React from 'react';
 import Routes from './Routes';
-import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
+import { shallowWithIntlTheme } from '../../utils/intl-theme-test';
 
 const wrapper=shallowWithIntlTheme(<Routes/>)
 

@@ -1,0 +1,30 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_e6acwsp2q = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/firebase/actions.js',hash = 'c388888d509850af7e5c8ff500765f8f905b5c27',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/firebase/actions.js', statementMap: { '0': { start: { line: 17, column: 18 }, end: { line: 17, column: 59 } }, '1': { start: { line: 18, column: 2 }, end: { line: 21, column: 4 } }, '2': { start: { line: 25, column: 18 }, end: { line: 25, column: 57 } }, '3': { start: { line: 26, column: 2 }, end: { line: 29, column: 4 } } }, fnMap: { '0': { name: 'changePassword', decl: { start: { line: 16, column: 16 }, end: { line: 16, column: 30 } }, loc: { start: { line: 16, column: 44 }, end: { line: 22, column: 1 } }, line: 16 }, '1': { name: 'resetPasswordEmail', decl: { start: { line: 24, column: 16 }, end: { line: 24, column: 34 } }, loc: { start: { line: 24, column: 42 }, end: { line: 30, column: 1 } }, line: 24 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0 }, f: { '0': 0, '1': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+changePassword = changePassword; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+resetPasswordEmail = resetPasswordEmail;var /* istanbul ignore next */_firebase = require('../../utils/firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function changePassword(newPassword) {/* istanbul ignore next */++cov_e6acwsp2q.f[0];const request = /* istanbul ignore next */(++cov_e6acwsp2q.s[0], /* istanbul ignore next */_firebase2.default.changePassword(newPassword)); /* istanbul ignore next */++cov_e6acwsp2q.s[1];return { type: /* istanbul ignore next */_types.CHANGE_FIREBASE_USER_PASSWORD, payload: request };}function resetPasswordEmail(email) {/* istanbul ignore next */++cov_e6acwsp2q.f[1];
+  const request = /* istanbul ignore next */(++cov_e6acwsp2q.s[2], /* istanbul ignore next */_firebase2.default.resetPasswordEmail(email)); /* istanbul ignore next */++cov_e6acwsp2q.s[3];
+  return {
+    type: /* istanbul ignore next */_types.FIREBASE_PASSWORD_RESET_EMAIL,
+    payload: request };
+
+}

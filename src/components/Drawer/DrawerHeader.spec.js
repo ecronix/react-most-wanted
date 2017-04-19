@@ -1,6 +1,6 @@
 import React from 'react';
-import {DrawerHeaderTest} from './DrawerHeader';
-import { shallowWithIntlTheme } from '../../helpers/intl-theme-test';
+import DrawerHeaderTest from './DrawerHeader';
+import { shallowWithIntlTheme } from '../../utils/intl-theme-test';
 import {injectIntl} from 'react-intl';
 
 function setup() {

@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
+function (state = null, action) {
+    switch (action.type) {
+        case /* istanbul ignore next */_types.FETCH_FIREBASE_USER:
+            return action.payload;
+        case /* istanbul ignore next */_types.LOGOUT_FIREBASE_USER:
+            return action.payload;
+        case /* istanbul ignore next */_types.REGISTER_FIREBASE_USER:
+            return action.payload;
+        case /* istanbul ignore next */_types.SIGN_IN_SUCCESS:
+            return action.payload;
+        case /* istanbul ignore next */_types.LOGIN_FIREBASE_USER:
+            return action.payload;
+        case /* istanbul ignore next */_types.UPDATE_FIREBASE_USER:
+            return action.payload;
+        case /* istanbul ignore next */_types.CHANGE_FIREBASE_USER_PASSWORD:
+            return action.payload;
+        case /* istanbul ignore next */_types.FIREBASE_PASSWORD_RESET_EMAIL:
+            return action.payload;
+        case /* istanbul ignore next */_types.LOGIN_WITH_PROVIDER_FIREBASE:
+            return action.payload;
+        default:
+            return state;}
+
+};var /* istanbul ignore next */_types = require('./types');

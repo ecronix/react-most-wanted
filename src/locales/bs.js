@@ -24,6 +24,10 @@ const messages=defineMessages({
   sign_in_with_google: 'Sa Google prijaviti',
   sign_in_with_facebook: 'Sa Facebookom prijaviti',
   my_account: 'Moj profil',
+  email: 'E-Mail',
+  password: 'Sifra',
+  confirm_password: 'Potvrdi sifru',
+  save: 'Spasi',
 
 });
 
