@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_sb19y7q0x = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/store/auth/actions.js',hash = '1dc0fc81173e7bb85b20b952dbcd0c173b1aef2b',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/store/auth/actions.js', statementMap: { '0': { start: { line: 4, column: 2 }, end: { line: 7, column: 4 } }, '1': { start: { line: 11, column: 2 }, end: { line: 13, column: 4 } }, '2': { start: { line: 17, column: 2 }, end: { line: 20, column: 4 } } }, fnMap: { '0': { name: 'signIn', decl: { start: { line: 3, column: 16 }, end: { line: 3, column: 22 } }, loc: { start: { line: 3, column: 29 }, end: { line: 8, column: 1 } }, line: 3 }, '1': { name: 'signOut', decl: { start: { line: 10, column: 16 }, end: { line: 10, column: 23 } }, loc: { start: { line: 10, column: 26 }, end: { line: 14, column: 1 } }, line: 10 }, '2': { name: 'setAuthMenuOpen', decl: { start: { line: 16, column: 16 }, end: { line: 16, column: 31 } }, loc: { start: { line: 16, column: 38 }, end: { line: 21, column: 1 } }, line: 16 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0 }, f: { '0': 0, '1': 0, '2': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+signIn = signIn; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signOut = signOut; /* istanbul ignore next */exports.
+
+
+
+
+
+setAuthMenuOpen = setAuthMenuOpen;var /* istanbul ignore next */_actionTypes = require('./actionTypes'); /* istanbul ignore next */var types = _interopRequireWildcard(_actionTypes); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function signIn(auth) {/* istanbul ignore next */++cov_sb19y7q0x.f[0];++cov_sb19y7q0x.s[0];return { type: types.SIGN_IN, auth };}function signOut() {/* istanbul ignore next */++cov_sb19y7q0x.f[1];++cov_sb19y7q0x.s[1];return { type: types.SIGN_OUT };}function setAuthMenuOpen(open) {/* istanbul ignore next */++cov_sb19y7q0x.f[2];++cov_sb19y7q0x.s[2];
+  return {
+    type: types.SET_AUTH_MENU_OPEN,
+    open };
+
+}

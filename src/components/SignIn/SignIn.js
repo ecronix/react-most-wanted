@@ -6,9 +6,6 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import GoogleLogin from 'react-google-login';
-import FacebookLogin from 'react-facebook-login';
-import config from '../../config'
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FontIcon from 'material-ui/FontIcon';
 import {Helmet} from 'react-helmet';
@@ -45,29 +42,34 @@ const styles={
 }
 
 
-const SignIn = ({muiTheme, intl, signIn, push, setDrawerOpen }) => {
+const SignIn = (props) => {
 
-  const handleSignIn = (auth) => {
-    signIn(auth);
-    push('/');
-    setDrawerOpen(false);
+  let email = null;
+  let password = null;
+
+  const  {
+    muiTheme,
+    intl,
+    signInWithProvider,
+    push,
+    router,
+    signInUser
+  } = props;
+
+
+  const hanleSignInSubmit = () => {
+
+    signInUser({email: email.getValue(), password: password.getValue()});
   }
 
-  const responseEmail = () => {
-    const auth={name: 'Demo User', email: 'demo@email.com' };
-    handleSignIn(auth);
+
+  const onSignInSuccess = (user) => {
+
+    const pathname =((((router || {}).location || {}).state || {}).from || {}).pathname;
+    push(pathname || '/');
+
   }
 
-  const  responseGoogle = (googleUser) => {
-    var profile = googleUser.getBasicProfile();
-    const auth={name: profile.getName(), email: profile.getEmail(), img: profile.getImageUrl() };
-    handleSignIn(auth);
-  }
-
-  const responseFacebook = (facebookUser) => {
-    const auth= {name: facebookUser.name, email: facebookUser.email, img: facebookUser.picture.data.url }
-    handleSignIn(auth);
-  }
 
   return (
     <div>
@@ -82,7 +84,9 @@ const SignIn = ({muiTheme, intl, signIn, push, setDrawerOpen }) => {
         <Paper  zDepth={2} style={styles.paper}>
           <div style={styles.header}>
             <h3>{intl.formatMessage({id: 'sign_in'}).toUpperCase()}</h3>
-            <FloatingActionButton style={styles.sign_up_button}>
+            <FloatingActionButton
+              onTouchTap={()=>{push('/signup')}}
+              style={styles.sign_up_button}>
               <FontIcon
                 className="material-icons">
                 person_add
@@ -91,11 +95,13 @@ const SignIn = ({muiTheme, intl, signIn, push, setDrawerOpen }) => {
           </div>
           <div style={{marginBottom: 20}}>
             <TextField
+              ref={(field) => { email = field; }}
               hintText="Email"
               type="Email"
               fullWidth={true}
             /><br />
             <TextField
+              ref={(field) => { password = field; }}
               hintText="Password"
               type="Password"
               fullWidth={true}
@@ -107,7 +113,7 @@ const SignIn = ({muiTheme, intl, signIn, push, setDrawerOpen }) => {
             secondary={true}
             style={styles.button}
             fullWidth={true}
-            onTouchTap={responseEmail}
+            onTouchTap={hanleSignInSubmit}
             icon={
               <FontIcon
                 className="material-icons">
@@ -117,44 +123,29 @@ const SignIn = ({muiTheme, intl, signIn, push, setDrawerOpen }) => {
           />
           <br />
 
-          <GoogleLogin
-            style={{backgroundColor: 'transparent', borderRadius:0, border: 0, padding: 0, width: '100%'}}
-            clientId={config.google_client_id}
-            scope="profile"
-            tag="div"
-            onSuccess={responseGoogle}>
-            <RaisedButton
-              label={intl.formatMessage({id: 'sign_in_with_google'})}
-              icon={<GoogleIcon color={muiTheme.palette.accent1Color}/>}
-              style={styles.button}
-              primary={true}
-              fullWidth={true}
-            />
-          </GoogleLogin>
+          <RaisedButton
+            onTouchTap={()=>{signInWithProvider('google', onSignInSuccess)}}
+            label={intl.formatMessage({id: 'sign_in_with_google'})}
+            icon={<GoogleIcon color={muiTheme.palette.accent1Color}/>}
+            style={styles.button}
+            primary={true}
+            fullWidth={true}
+          />
+          <br />
 
-          <FacebookLogin
-            appId={config.facebook_app_id}
-            fields="name,email,picture"
-            disableMobileRedirect={true}
-            textButton=""
-            cssClass=""
-            icon={<RaisedButton
-              label={intl.formatMessage({id: 'sign_in_with_facebook'})}
-              icon={<FacebookIcon color={muiTheme.palette.accent1Color}/>}
-              style={styles.button}
-              primary={true}
-              fullWidth={true}
-            />}
-            tag="div"
-            callback={responseFacebook}
+          <RaisedButton
+            onTouchTap={()=>{signInWithProvider('facebook', onSignInSuccess)}}
+            label={intl.formatMessage({id: 'sign_in_with_facebook'})}
+            icon={<FacebookIcon color={muiTheme.palette.accent1Color}/>}
+            style={styles.button}
+            primary={true}
+            fullWidth={true}
           />
 
         </Paper>
 
 
       </div>
-
-
 
     </div>
 

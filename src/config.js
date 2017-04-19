@@ -1,6 +1,12 @@
 const config= {
-  google_client_id: '941480856475-lvilroe1spibcocgo9rgo592hd67i17h.apps.googleusercontent.com',
-  facebook_app_id: '1832263543689561',
+  FIREBASE_CONFIG: {
+    apiKey: "AIzaSyDzRWMGiJPah7X0iUaXpQ5KFXAqBDPAnJk",
+    authDomain: "react-most-wanted.firebaseapp.com",
+    databaseURL: "https://react-most-wanted.firebaseio.com",
+    projectId: "react-most-wanted",
+    storageBucket: "react-most-wanted.appspot.com",
+    messagingSenderId: "941480856475"
+  },
 }
 
 

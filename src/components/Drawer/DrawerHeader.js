@@ -9,7 +9,7 @@ import {ReduxIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 
-const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
+const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
 
   const styles={
     header:{
@@ -31,6 +31,8 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
     }
   }
 
+
+
   return (
     <Paper  zDepth={1} style={styles.paper}>
 
@@ -41,7 +43,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
             leftAvatar={
               <Avatar
                 size={45}
-                icon={auth.img===undefined?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
+                icon={auth.img===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
                 src={auth.img}
               />
             }
@@ -80,6 +82,5 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen}) => {
 
 }
 
-export const DrawerHeaderTest=injectIntl(muiThemeable()(DrawerHeader));
 
 export default injectIntl(muiThemeable()(DrawerHeader));

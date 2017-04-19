@@ -13,6 +13,7 @@
     "sw-precache": "^4.2.2"
   },
   "dependencies": {
+    "firebase": "^3.7.8",
     "material-ui": "^0.17.4",
     "material-ui-responsive-drawer": "^1.1.13",
     "material-ui-selectable-menu-list": "^1.1.12",
@@ -29,6 +30,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-persist": "^4.6.0",
+    "redux-promise": "^0.5.3",
     "redux-responsive": "^4.1.1",
     "redux-thunk": "^2.2.0",
     "seamless-immutable": "^7.1.2"

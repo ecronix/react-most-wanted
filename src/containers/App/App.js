@@ -28,12 +28,15 @@ const App = ({ intl, muiTheme, auth }) => {
       </BodyContainer>
     </div>
   );
+
+
 }
 
 App.propTypes = {
   auth: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
+
 };
 
 const mapStateToProps = (state) => {

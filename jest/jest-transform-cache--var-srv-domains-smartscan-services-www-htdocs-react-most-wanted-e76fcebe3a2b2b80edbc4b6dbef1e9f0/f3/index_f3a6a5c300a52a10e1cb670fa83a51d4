@@ -1,0 +1,33 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getThemeSource = getThemeSource;var /* istanbul ignore next */_darkBaseTheme = require('material-ui/styles/baseThemes/darkBaseTheme'); /* istanbul ignore next */var _darkBaseTheme2 = _interopRequireDefault(_darkBaseTheme);var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);var /* istanbul ignore next */_ics_theme = require('./ics_theme'); /* istanbul ignore next */var _ics_theme2 = _interopRequireDefault(_ics_theme);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const themes = [{ id: 'light', source: /* istanbul ignore next */_lightBaseTheme2.default }, { id: 'dark', source: /* istanbul ignore next */_darkBaseTheme2.default }, { id: 'ics', source: /* istanbul ignore next */_ics_theme2.default }];function getThemeSource(theme) {
+
+  const themeFound = themes.find(l => {return l.id === theme;});
+
+  if (themeFound) {
+    return themeFound.source;
+  }
+
+  //If no locale is found the first one will be returned
+  return themes[0].source;
+} /* istanbul ignore next */exports.default =
+
+
+themes;

@@ -1,0 +1,57 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+signInWithProvider = signInWithProvider; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+signOutUser = signOutUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+signInSuccess = signInSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signInError = signInError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signOutSuccess = signOutSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signOutError = signOutError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+setAuthMenuOpen = setAuthMenuOpen;var /* istanbul ignore next */_firebase = require('../../helpers/firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function signInWithProvider(provider) {return dispatch => {/* istanbul ignore next */_firebase2.default.loginWithProvider(provider).then(result => dispatch(signInSuccess(result))).catch(error => dispatch(signInError(error)));};}function signOutUser(user) {return dispatch => {/* istanbul ignore next */_firebase2.default.logoutUser(user).then(result => dispatch(signInSuccess(result))).catch(error => dispatch(signOutError(error)));};}function signInSuccess(result) {return { type: types.SIGN_IN_SUCCESS, payload: result.user };}function signInError(error) {return { type: types.SIGN_IN_ERROR, payload: error };}function signOutSuccess(result) {return { type: types.SIGN_OUT_SUCCESS, payload: result };}function signOutError(error) {return { type: types.SIGN_OUT_ERROR, payload: error };}function setAuthMenuOpen(open) {
+  return {
+    type: types.SET_AUTH_MENU_OPEN,
+    open };
+
+}

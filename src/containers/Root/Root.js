@@ -4,6 +4,7 @@ import { Root } from '../../components/Root';
 import {getLocaleMessages} from '../../locales';
 import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {fetchUser } from '../../store/auth/actions';
 
 Root.propTypes = {
   history: PropTypes.object.isRequired,
@@ -11,6 +12,7 @@ Root.propTypes = {
   source: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
+  fetchUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -30,5 +32,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps, {fetchUser}
 )(Root);

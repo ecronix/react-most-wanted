@@ -23,7 +23,7 @@ const DrawerContent = (props) => {
     auth,
     push,
     setDrawerOpen,
-    signOut
+    signOutUser
   }=props;
 
   const handleChange = (event, index) => {
@@ -73,7 +73,7 @@ const DrawerContent = (props) => {
   const menuItems=[
     {
       value:'/dashboard',
-      visible: true,
+      visible: auth.isSignedIn,
       primaryText: intl.formatMessage({id: 'dashboard'}),
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
@@ -85,10 +85,11 @@ const DrawerContent = (props) => {
     },
     {
       divider:true,
+      visible: !auth.isSignedIn && router.location.pathname!=='/signin',
     },
     {
       primaryText: intl.formatMessage({id: 'settings'}),
-      primaryTogglesNestedList: true,
+      primaryTogglesNestedList: true,  
       leftIcon: <FontIcon className="material-icons" >settings</FontIcon>,
       nestedItems:[
         {
@@ -119,7 +120,7 @@ const DrawerContent = (props) => {
     },
   ];
 
-  const handleSignOut=()=>{signOut()};
+  const handleSignOut=()=>{signOutUser()};
 
   const authItems=[
     {
@@ -137,31 +138,34 @@ const DrawerContent = (props) => {
   ];
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      {!auth.isSignedIn &&
-        <RaisedButton
-          label={intl.formatMessage({id: 'sign_in'})}
-          secondary={true}
-          style={{margin:20}}
-          onTouchTap={()=>{push('/signin'); setDrawerOpen(false);}}
-          icon={
-            <FontIcon
-              className="material-icons">
-              lock
-            </FontIcon>
-          }
-        />
-      }
-
-      <SelectableMenuList
-        items={auth.isMenuOpen?authItems:menuItems}
-        onIndexChange={handleChange}
-        index={router?router.location.pathname:'/'}
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
+    {!auth.isSignedIn && router.location.pathname!=='/signin' &&
+      <RaisedButton
+        label={intl.formatMessage({id: 'sign_in'})}
+        secondary={true}
+        style={{margin:20}}
+        onTouchTap={()=>{push('/signin'); setDrawerOpen(false);}}
+        icon={
+          <FontIcon
+            className="material-icons">
+            lock
+          </FontIcon>
+        }
       />
+    }
 
-    </div>
+    <SelectableMenuList
+      items={auth.isMenuOpen?authItems:menuItems}
+      onIndexChange={handleChange}
+      index={router?router.location.pathname:'/'}
+    />
 
-  );
+  </div>
+
+);
 }
 
 export default injectIntl(muiThemeable()(DrawerContent));

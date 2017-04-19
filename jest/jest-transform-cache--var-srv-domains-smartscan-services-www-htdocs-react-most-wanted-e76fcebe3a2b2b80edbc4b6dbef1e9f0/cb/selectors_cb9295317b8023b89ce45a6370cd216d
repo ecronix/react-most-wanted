@@ -1,0 +1,16 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });const getUser = /* istanbul ignore next */exports.getUser = firebaseUser => {
+
+  if (firebaseUser) {
+    return {
+      isSignedIn: true,
+      name: firebaseUser.displayName,
+      email: firebaseUser.email,
+      img: firebaseUser.photoURL };
+
+  }
+
+  return {
+    isSignedIn: false };
+
+
+};

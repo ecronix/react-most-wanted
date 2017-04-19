@@ -1,0 +1,45 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1neizpzv6u = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/PageNotFound/PageNotFound.js',hash = 'd0f7398df32a34e6f1ff685e2542603dad8a23e6',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/PageNotFound/PageNotFound.js', statementMap: { '0': { start: { line: 9, column: 13 }, end: { line: 26, column: 1 } }, '1': { start: { line: 29, column: 21 }, end: { line: 43, column: 1 } }, '2': { start: { line: 31, column: 2 }, end: { line: 42, column: 4 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 29, column: 21 }, end: { line: 29, column: 22 } }, loc: { start: { line: 29, column: 44 }, end: { line: 43, column: 1 } }, line: 29 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/react-most-wanted/src/components/PageNotFound/PageNotFound.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_Icons = require('../Icons');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_FloatingActionButton = require('material-ui/FloatingActionButton'); /* istanbul ignore next */var _FloatingActionButton2 = _interopRequireDefault(_FloatingActionButton);
+var /* istanbul ignore next */_home = require('material-ui/svg-icons/action/home'); /* istanbul ignore next */var _home2 = _interopRequireDefault(_home);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = /* istanbul ignore next */(++cov_1neizpzv6u.s[0], {
+  paper: {
+    height: '100%',
+    margin: 0,
+    padding: 1 },
+
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5 },
+
+  icon: {
+    width: 192,
+    height: 192 } }); /* istanbul ignore next */++cov_1neizpzv6u.s[1];
+
+
+
+
+const PageNotFound = ({ muiTheme, intl }) => {/* istanbul ignore next */++cov_1neizpzv6u.f[0];++cov_1neizpzv6u.s[2];
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ zDepth: 1, style: styles.paper, __source: { fileName: _jsxFileName, lineNumber: 32 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.ReduxIcon, /* istanbul ignore next */{ color: muiTheme.palette.primary2Color, style: styles.icon, __source: { fileName: _jsxFileName, lineNumber: 34 }, __self: undefined }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 35 }, __self: undefined }, intl.formatMessage({ id: 'warning_404_message' })),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'p', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: undefined }, intl.formatMessage({ id: 'warning_404_description' })),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FloatingActionButton2.default, /* istanbul ignore next */{ secondary: true, href: '/', __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: undefined },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_home2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 38 }, __self: undefined })))));
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(PageNotFound));

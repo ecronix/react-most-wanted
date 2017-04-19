@@ -1,8 +1,10 @@
 import {addLocaleData} from 'react-intl';
 import en_messages from './en';
 import de_messages from './de';
+import bs_messages from './bs';
 import en from 'react-intl/locale-data/en';
 import de from 'react-intl/locale-data/de';
+import bs from 'react-intl/locale-data/bs';
 
 const locales = [
   {
@@ -14,6 +16,11 @@ const locales = [
     locale: 'de',
     messages: de_messages,
     data: de
+  },
+  {
+    locale: 'bs',
+    messages: bs_messages,
+    data: bs
   },
 
 ]

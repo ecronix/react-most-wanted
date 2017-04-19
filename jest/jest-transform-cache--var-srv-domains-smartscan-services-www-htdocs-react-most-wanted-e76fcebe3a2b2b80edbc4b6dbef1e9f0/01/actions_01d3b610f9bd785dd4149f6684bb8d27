@@ -1,0 +1,100 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+authenticate = authenticate; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+signInSuccess = signInSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signInError = signInError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+loginWithProvider = loginWithProvider; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+registerUser = registerUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+loginUser = loginUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+fetchUser = fetchUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+updateUser = updateUser; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+changePassword = changePassword; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+resetPasswordEmail = resetPasswordEmail; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+logoutUser = logoutUser;var /* istanbul ignore next */_firebase = require('../../helpers/firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function authenticate(provider) {return dispatch => {/* istanbul ignore next */_firebase2.default.loginWithProvider(provider).then(result => dispatch(signInSuccess(result))).catch(error => dispatch(signInError(error)));};}function signInSuccess(result) {return { type: /* istanbul ignore next */_types.SIGN_IN_SUCCESS, payload: result.user };}function signInError(error) {return { type: /* istanbul ignore next */_types.SIGN_IN_ERROR, payload: error };}function loginWithProvider(provider) {const request = /* istanbul ignore next */_firebase2.default.loginWithProvider(provider);return { type: /* istanbul ignore next */_types.LOGIN_WITH_PROVIDER_FIREBASE, payload: request };}function registerUser(user) {const request = /* istanbul ignore next */_firebase2.default.registerUser(user);return { type: /* istanbul ignore next */_types.REGISTER_FIREBASE_USER, payload: request };}function loginUser(user) {const request = /* istanbul ignore next */_firebase2.default.loginUser(user);return { type: /* istanbul ignore next */_types.LOGIN_FIREBASE_USER, payload: request };}function fetchUser() {const request = /* istanbul ignore next */_firebase2.default.fetchUser();return { type: /* istanbul ignore next */_types.FETCH_FIREBASE_USER, payload: request };}function updateUser(user) {const request = /* istanbul ignore next */_firebase2.default.updateUserProfile(user);return { type: /* istanbul ignore next */_types.UPDATE_FIREBASE_USER, payload: request };}function changePassword(newPassword) {const request = /* istanbul ignore next */_firebase2.default.changePassword(newPassword);return { type: /* istanbul ignore next */_types.CHANGE_FIREBASE_USER_PASSWORD, payload: request };}function resetPasswordEmail(email) {const request = /* istanbul ignore next */_firebase2.default.resetPasswordEmail(email);return { type: /* istanbul ignore next */_types.FIREBASE_PASSWORD_RESET_EMAIL, payload: request };}function logoutUser(user) {
+  const request = /* istanbul ignore next */_firebase2.default.logoutUser(user);
+  return {
+    type: /* istanbul ignore next */_types.LOGOUT_FIREBASE_USER,
+    payload: request };
+
+}

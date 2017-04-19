@@ -1,0 +1,15 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const config = {
+  google_client_id: '941480856475-lvilroe1spibcocgo9rgo592hd67i17h.apps.googleusercontent.com',
+  facebook_app_id: '1832263543689561',
+  FIREBASE_CONFIG: {
+    apiKey: "AIzaSyBqffCLF23HCPLeuiqXuGIg_Jh5NJPe9zc",
+    authDomain: "rrfb-40334.firebaseapp.com",
+    databaseURL: "https://rrfb-40334.firebaseio.com",
+    projectId: "rrfb-40334",
+    storageBucket: "rrfb-40334.appspot.com",
+    messagingSenderId: "272273674785" } }; /* istanbul ignore next */exports.default =
+
+
+
+
+config;

@@ -6,6 +6,8 @@ import reducers from './reducers';
 import { persistStore, autoRehydrate} from 'redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
 
+import ReduxPromise from 'redux-promise';
+
 export default function configureStore(history) {
   let store;
 
@@ -18,7 +20,7 @@ export default function configureStore(history) {
     theme: 'dark',
   };
 
-  let middlewares=[routerMiddleware(history), thunk];
+  let middlewares=[routerMiddleware(history), thunk, ReduxPromise];
 
 
   if (process.env.NODE_ENV !== 'production') {
@@ -35,7 +37,7 @@ export default function configureStore(history) {
   ));
 
   try{
-    persistStore(store, {blacklist:['router'] }, ()=>{});
+    persistStore(store, {blacklist:['router', 'auth'] }, ()=>{});
   }catch(e){
 
   }

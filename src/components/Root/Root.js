@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
 import { ConnectedRouter } from 'react-router-redux'
 import {App} from '../../containers/App';
 
-const Root = ({ history, locale, muiTheme, messages}) => {
+class Root extends Component {
 
-  return (
-    <MuiThemeProvider muiTheme={muiTheme}>
-      <IntlProvider locale={locale} messages={messages}>
-        <ConnectedRouter history={history} >
+  componentWillMount () {
+    const { fetchUser }= this.props;
+    fetchUser();
+  }
+  
+  render() {
+    const { history, locale, muiTheme, messages}= this.props;
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <IntlProvider locale={locale} messages={messages}>
+          <ConnectedRouter history={history} >
 
-          <Route
-            path="/"
-            component={App}
-          />
+            <Route
+              path="/"
+              component={App}
+            />
 
-        </ConnectedRouter>
-      </IntlProvider>
-    </MuiThemeProvider>
-  );
+          </ConnectedRouter>
+        </IntlProvider>
+      </MuiThemeProvider>
+    );
+  }
+
 }
 
 export default Root;
