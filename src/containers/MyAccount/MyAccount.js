@@ -10,35 +10,31 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
-
-import { signUpUser, authError, updateUser } from '../../store/auth/actions';
+import { authError, updateUser, changePassword } from '../../store/auth/actions';
 import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
-import { setDrawerOpen } from 'material-ui-responsive-drawer';
-import { SignUp } from '../../components/SignUp'
 
 const styles={
   paper:{
     height: '100%',
     display: 'block',
-    margin:0,
+    margin:15,
     padding: 15
   },
   header:{
     display:'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    //justifyContent: 'space-between'
   },
   container: {
     display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    margin: 5,
     paddingTop: 120,
   },
   button: {
-    margin:6,
+    marginTop:6,
     align: 'left'
   },
   sign_up_button: {
@@ -55,20 +51,37 @@ export class MyAccount extends Component {
     super(props);
     this.email = null;
     this.name = null;
+    this.password = null;
     this.confirm_password = null;
 
   }
 
-  hanleSignInSubmit = () => {
-    const {authError, updateUser} =this.props;
+  hanleUpdateSubmit = () => {
+    const {updateUser} =this.props;
 
     updateUser({displayName: this.name.getValue()});
+  }
 
+  handlePasswordChangeSuccess = () => {
+
+  }
+
+  handlePasswordChangeSubmit = () => {
+    const {changePassword} =this.props;
+
+    if(this.password.getValue().localeCompare(this.confirm_password.getValue())===0){
+      changePassword(this.password.getValue(), this.handlePasswordChangeSuccess);
+    }else{
+      authError({
+        errorCode: 'auth/invalid-confirm_password',
+        errorMessage: 'Masswords doesn`t match'
+      })
+    }
   }
 
 
   render(){
-    const {intl, getValidationErrorMessage, muiTheme, auth} =this.props;
+    const {intl, getValidationErrorMessage, auth} =this.props;
 
     return (
       <div >
@@ -88,26 +101,31 @@ export class MyAccount extends Component {
               <Avatar
                 style={styles.sign_up_button}
                 size={80}
-                icon={auth.img===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
-                src={auth.img}
+                icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
+                src={auth.photoURL}
               />
 
-              <h3>{auth.name}</h3>
+              <h3>{auth.displayName}</h3>
 
             </div>
             <div style={{marginBottom: 20}}>
               <TextField
+                id="email"
                 disabled={true}
                 ref={(field) => { this.email = field; }}
                 defaultValue={auth.email}
+                errorText={getValidationErrorMessage('email')}
                 hintText="Email"
                 type="Email"
                 fullWidth={true}
               /><br />
               <TextField
+                id="name"
                 ref={(field) => { this.name = field; }}
-                defaultValue={auth.name}
-                hintText="name"
+                defaultValue={auth.displayName}
+                errorText={getValidationErrorMessage('name')}
+                floatingLabelText={intl.formatMessage({id: 'name'})}
+                hintText={intl.formatMessage({id: 'name'})}
                 type="Text"
                 fullWidth={true}
               />
@@ -116,9 +134,52 @@ export class MyAccount extends Component {
             <RaisedButton
               label={intl.formatMessage({id: 'save'})}
               secondary={true}
-              //style={styles.button}
+              style={styles.button}
               fullWidth={true}
-              onTouchTap={this.hanleSignInSubmit}
+              onTouchTap={this.hanleUpdateSubmit}
+              icon={
+                <FontIcon
+                  className="material-icons">
+                  save
+                </FontIcon>
+              }
+            />
+            <br />
+
+          </Paper>
+
+          <Paper  zDepth={2} style={styles.paper}>
+            <div style={styles.header}>
+
+              <h3>{intl.formatMessage({id: 'password'})}</h3>
+
+            </div>
+            <div style={{marginBottom: 20}}>
+              <TextField
+                id="password"
+                ref={(field) => { this.password = field; }}
+                errorText={getValidationErrorMessage('password')}
+                floatingLabelText={intl.formatMessage({id: 'password'})}
+                hintText={intl.formatMessage({id: 'password'})}
+                type="Password"
+                fullWidth={true}
+              /><br />
+              <TextField
+                id="confirm_password"
+                ref={(field) => { this.confirm_password = field; }}
+                errorText={getValidationErrorMessage('confirm_password')}
+                floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
+                hintText={intl.formatMessage({id: 'confirm_password'})}
+                type="Password"
+                fullWidth={true}
+              />
+            </div>
+
+            <RaisedButton
+              label={intl.formatMessage({id: 'change_password'})}
+              secondary={true}
+              fullWidth={true}
+              onTouchTap={this.handlePasswordChangeSubmit}
               icon={
                 <FontIcon
                   className="material-icons">
@@ -143,6 +204,11 @@ export class MyAccount extends Component {
 MyAccount.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
+  authError: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
+  changePassword: PropTypes.func.isRequired,
 };
 
 
@@ -159,5 +225,5 @@ export const MyAccountTest = injectIntl(muiThemeable()(MyAccount));
 
 export default connect(
   mapStateToProps,
-  { signUpUser, authError, push, setDrawerOpen, updateUser }
+  { authError, push, updateUser, changePassword }
 )(injectIntl(muiThemeable()(MyAccount)));

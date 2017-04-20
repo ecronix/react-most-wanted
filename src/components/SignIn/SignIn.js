@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FontIcon from 'material-ui/FontIcon';
 import {Helmet} from 'react-helmet';
+import { Link } from 'react-router-dom'
 
 const styles={
   paper:{
@@ -30,8 +31,7 @@ const styles={
     paddingTop: 100,
   },
   button: {
-    margin:6,
-    align: 'left'
+    marginTop:6,
   },
   sign_up_button: {
     float: 'right',
@@ -100,6 +100,7 @@ const SignIn = (props) => {
               ref={(field) => { email = field; }}
               hintText={intl.formatMessage({id: 'email'})}
               errorText={getValidationErrorMessage('email')}
+              floatingLabelText={intl.formatMessage({id: 'email'})}
               type="Email"
               fullWidth={true}
             /><br />
@@ -108,9 +109,18 @@ const SignIn = (props) => {
               ref={(field) => { password = field; }}
               hintText={intl.formatMessage({id: 'password'})}
               errorText={getValidationErrorMessage('password')}
+              floatingLabelText={intl.formatMessage({id: 'password'})}
               type="Password"
               fullWidth={true}
             />
+          </div>
+
+          <div style={{margin:5, marginBottom:10}}>
+            <Link
+              to={`/reset`}
+              style={{color:muiTheme.palette.primary2Color}} >
+              {intl.formatMessage({id: 'forgort_password'})}
+            </Link><br />
           </div>
 
           <RaisedButton

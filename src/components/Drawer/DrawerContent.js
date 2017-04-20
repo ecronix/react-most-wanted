@@ -23,7 +23,8 @@ const DrawerContent = (props) => {
     auth,
     push,
     setDrawerOpen,
-    signOutUser
+    signOutUser,
+    isAuthorised
   }=props;
 
   const handleChange = (event, index) => {
@@ -73,23 +74,23 @@ const DrawerContent = (props) => {
   const menuItems=[
     {
       value:'/dashboard',
-      visible: auth.isSignedIn,
+      visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'dashboard'}),
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
     {
       value:'/about',
-      visible: auth.isSignedIn,
+      visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'about'}),
       leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
     },
     {
       divider:true,
-      visible: !auth.isSignedIn && router.location.pathname!=='/signin',
+      visible: !isAuthorised && router.location.pathname!=='/signin',
     },
     {
       primaryText: intl.formatMessage({id: 'settings'}),
-      primaryTogglesNestedList: true,  
+      primaryTogglesNestedList: true,
       leftIcon: <FontIcon className="material-icons" >settings</FontIcon>,
       nestedItems:[
         {
@@ -142,7 +143,7 @@ const DrawerContent = (props) => {
       display: 'flex',
       flexDirection: 'column',
     }}>
-    {!auth.isSignedIn && router.location.pathname!=='/signin' &&
+    {!isAuthorised && router.location.pathname!=='/signin' &&
       <RaisedButton
         label={intl.formatMessage({id: 'sign_in'})}
         secondary={true}

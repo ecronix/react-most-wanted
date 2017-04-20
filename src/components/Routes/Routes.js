@@ -2,18 +2,17 @@ import React from 'react';
 import { Dashboard } from '../../containers/Dashboard';
 import { About } from '../../containers/About';
 import { MyAccount } from '../../containers/MyAccount';
+import { ResetPassword } from '../../containers/ResetPassword';
 import { PageNotFound } from '../../components/PageNotFound';
 import { SignIn } from '../../containers/SignIn';
 import { SignUp } from '../../containers/SignUp';
 import { Route , Switch, Redirect } from 'react-router';
-import { isAuthorised } from '../../utils/auth';
 
-
-const Routes = ({auth}) => {
+const Routes = ({isAuthorised}) => {
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
-      isAuthorised() ? (
+      isAuthorised ? (
         <Component {...props}/>
       ) : (
         <Redirect to={{
@@ -26,7 +25,7 @@ const Routes = ({auth}) => {
 
   const PublicRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
-      !isAuthorised() ? (
+      !isAuthorised ? (
         <Component {...props}/>
       ) : (
         <Redirect to={{
@@ -46,6 +45,7 @@ const Routes = ({auth}) => {
       <PrivateRoute path="/my_account" exact component={MyAccount} />
       <PublicRoute path="/signin" component={SignIn} />
       <PublicRoute path="/signup" component={SignUp} />
+      <PublicRoute path="/reset" component={ResetPassword} />
       <Route path="/*" component={PageNotFound} />
     </Switch>
   );

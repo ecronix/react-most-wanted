@@ -8,8 +8,9 @@ import { Routes } from '../../components/Routes';
 import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import * as authSelectors from '../../store/auth/selectors'
 
-const App = ({ intl, muiTheme, auth }) => {
+const App = ({ intl, muiTheme, auth, isAuthorised }) => {
 
   return (
     <div>
@@ -24,7 +25,7 @@ const App = ({ intl, muiTheme, auth }) => {
         <DrawerContent/>
       </ResponsiveDrawer>
       <BodyContainer>
-        <Routes auth={auth} />
+        <Routes isAuthorised={isAuthorised}/>
       </BodyContainer>
     </div>
   );
@@ -36,6 +37,7 @@ App.propTypes = {
   auth: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
+  isAuthorised: PropTypes.bool.isRequired,
 
 };
 
@@ -43,7 +45,8 @@ const mapStateToProps = (state) => {
   const { auth } = state;
 
   return {
-    auth
+    auth,
+    isAuthorised: authSelectors.isAuthorised(auth)
   };
 };
 

@@ -205,7 +205,7 @@ Is also a dev library that helps us to create a service worker during build proc
 ## TO DO
 
 - [X] finish tests
-- [X] implement authentication using google and facebook
+- [ ] implement authentication using firebase API
 - [ ] update to material-ui@next
 - [X] create profile menu in drawer
 - [ ] default error displaying component

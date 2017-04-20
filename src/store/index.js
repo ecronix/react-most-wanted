@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { persistStore, autoRehydrate} from 'redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
+import { isAuthorised } from '../utils/auth';
 
 import ReduxPromise from 'redux-promise';
 
@@ -16,18 +17,13 @@ export default function configureStore(history) {
   });
 
   const initState={
-    locale: 'de',
-    theme: 'dark',
+    auth: {isAuthorised: isAuthorised()},
   };
 
   let middlewares=[routerMiddleware(history), thunk, ReduxPromise];
 
-
   if (process.env.NODE_ENV !== 'production') {
-
-    //DEV middlewares
-    middlewares.push(logger);
-
+    middlewares.push(logger); //DEV middlewares
   }
 
   store = createStore(reducers, initState, compose(

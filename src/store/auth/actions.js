@@ -1,92 +1,88 @@
-import FireBaseTools from '../../utils/firebase';
+import * as auth from '../../utils/auth';
 import * as types from './types';
 
-export function signInWithProvider(provider, onSuccess=null) {
+export const signInWithProvider = (provider, onSuccess=null) => dispatch => {
+  auth.loginWithProvider(provider)
+  .then((payload) => {
 
-  return dispatch => {
-    FireBaseTools.loginWithProvider(provider)
-    .then((payload) => {
-      if (payload.errorCode) {
-        dispatch(authError(payload))
-      } else {
-        dispatch(signInSuccess(payload.user))
+    dispatch(signInSuccess(payload.user))
 
-        if(onSuccess && onSuccess instanceof Function){
-          onSuccess(payload.user);
-        }
-      }
-    })
-    .catch(error => dispatch(authError(error)));
-  };
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess(payload.user);
+    }
+
+  })
+  .catch(error => dispatch(authError(error)));
+};
+
+export const signOutUser = (user) => dispatch =>  {
+  auth.logoutUser(user)
+  .then(() => dispatch(signOutSuccess()))
+  .catch(error => dispatch(authError(error)));
+};
+
+
+export const signInUser = (user) => dispatch =>  {
+  auth.loginUser(user)
+  .then((result) => {
+    dispatch(signInSuccess(result))
+  })
+  .catch(error => dispatch(authError(error)));
+}
+
+export const signUpUser = (user) => dispatch => {
+  auth.registerUser(user)
+  .then((payload) => {
+    dispatch(signInSuccess(payload))
+  })
+  .catch(error => dispatch(authError(error)));
+};
+
+
+export const updateUser = (user) =>  dispatch => {
+
+  auth.updateUserProfile(user)
+  .then((result) => {
+    dispatch(signInSuccess(result))
+  })
+  .catch(error => dispatch(authError(error)));
 
 }
 
-export function signOutUser(user) {
+export const resetPasswordEmail = (email, onSuccess) => dispatch => {
+  auth.resetPasswordEmail(email)
+  .then(() => {
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess();
+    }
+  })
+  .catch(error => dispatch(authError(error)));
+};
 
-  return dispatch => {
-    FireBaseTools.logoutUser(user)
-    .then(result => dispatch(signOutSuccess(result)))
-    .catch(error => dispatch(authError(error)));
-  };
+export const sendEmailVerification = (onSuccess) => dispatch => {
+  auth.sendEmailVerification()
+  .then(() => {
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess();
+    }
+  })
+  .catch(error => dispatch(authError(error)));
+};
 
+export const changePassword = (newPassword, onSuccess) => dispatch => {
+  auth.changePassword(newPassword)
+  .then((payload) => {
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess(payload);
+    }
+  })
+  .catch(error => dispatch(authError(error)));
 }
 
-export function signInUser(user) {
-
-  return dispatch => {
-    FireBaseTools.loginUser(user)
-    .then((payload) => {
-      if (payload.errorCode) {
-        dispatch(authError(payload))
-      } else {
-        dispatch(signInSuccess(payload))
-      }
-    })
-    .catch(error => dispatch(authError(error)));
-  };
-
-}
-
-export function signUpUser(user) {
-
-  return dispatch => {
-    FireBaseTools.registerUser(user)
-    .then((payload) => {
-      if (payload.errorCode) {
-        dispatch(authError(payload))
-      } else {
-        dispatch(signInSuccess(payload))
-      }
-    })
-    .catch(error => dispatch(authError(error)));
-  };
-
-}
-
-export function updateUser(user) {
-
-  return dispatch => {
-    FireBaseTools.updateUserProfile(user)
-    .then((payload) => {
-      if (payload.errorCode) {
-        dispatch(authError(payload))
-      } else {
-        dispatch(signInSuccess(payload))
-      }
-    })
-    .catch(error => dispatch(authError(error)));
-  };
-
-}
-
-export function fetchUser() {
-
-  return dispatch => {
-    FireBaseTools.fetchUser()
-    .then(result => dispatch(fetchSuccess(result)))
-    .catch(error => dispatch(authError(error)));
-  };
-
+export const fetchUser = () => dispatch => {
+  auth.fetchUser()
+  .then(result => dispatch(fetchSuccess(result)))
+  .catch(error => dispatch(authError(error)));
 }
 
 export function signInSuccess(user) {
@@ -96,12 +92,9 @@ export function signInSuccess(user) {
   };
 }
 
-
-
-export function signOutSuccess(payload) {
+export function signOutSuccess() {
   return {
-    type: types.SIGN_OUT_SUCCESS,
-    payload
+    type: types.SIGN_OUT_SUCCESS
   };
 }
 
@@ -125,23 +118,3 @@ export function setAuthMenuOpen(open) {
     open
   };
 }
-
-// TODO:
-/*
-export function changePassword(newPassword) {
-  const request = FireBaseTools.changePassword(newPassword);
-  return {
-    type: CHANGE_FIREBASE_USER_PASSWORD,
-    payload: request,
-  };
-}
-
-export function resetPasswordEmail(email) {
-  const request = FireBaseTools.resetPasswordEmail(email);
-  return {
-    type: FIREBASE_PASSWORD_RESET_EMAIL,
-    payload: request,
-  };
-}
-
- */

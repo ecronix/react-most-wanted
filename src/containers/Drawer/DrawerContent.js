@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setResponsive, setDrawerOpen } from 'material-ui-responsive-drawer';
-//import { signOut } from '../../store/auth/actions';
 import { updateTheme } from '../../store/theme/actions';
 import { updateLocale } from '../../store/locale/actions';
 import { signOutUser } from '../../store/auth/actions';
 import { push } from 'react-router-redux';
 import { DrawerContent } from '../../components/Drawer';
+import * as authSelectors from '../../store/auth/selectors'
 
 DrawerContent.propTypes = {
   responsiveDrawer: PropTypes.object.isRequired,
@@ -19,6 +19,7 @@ DrawerContent.propTypes = {
   updateTheme: PropTypes.func.isRequired,
   updateLocale: PropTypes.func.isRequired,
   signOutUser: PropTypes.func.isRequired,
+  isAuthorised: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -29,7 +30,9 @@ const mapStateToProps = (state) => {
     theme,
     locale,
     router,
-    auth
+    auth,
+    isAuthorised: authSelectors.isAuthorised(auth)
+
   };
 };
 

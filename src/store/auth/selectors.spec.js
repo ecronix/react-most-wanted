@@ -10,17 +10,23 @@ describe('auth selectors', () => {
     const inputUser={
       displayName: 'Name',
       email: 'Email',
+      emailVerified: false,
+      isAnonymous: false,
       photoURL: 'img',
       uid: 'uid',
+      providerData: null,
       test: 'test'
     }
 
     const expectedUser={
-      name: 'Name',
+      displayName: 'Name',
       email: 'Email',
-      img: 'img',
+      emailVerified: false,
+      isAnonymous: false,
+      photoURL: 'img',
       uid: 'uid',
-      isSignedIn: true
+      providerData: null,
+      isAuthorised: true
     }
 
     expect(
@@ -33,7 +39,7 @@ describe('auth selectors', () => {
     expect(
       selectors.getUser()
     ).toEqual({
-      isSignedIn: false
+      isAuthorised: false
     })
   });
 
@@ -42,8 +48,8 @@ describe('auth selectors', () => {
 
     const auth={
       error: {
-        errorCode: 'auth/week-password',
-        errorMessage: 'Expected Message',
+        code: 'auth/week-password',
+        message: 'Expected Message',
       }
     }
 
@@ -56,8 +62,8 @@ describe('auth selectors', () => {
 
     const auth={
       error: {
-        errorCode: 'auth/week-password',
-        errorMessage: 'Expected Message',
+        code: 'auth/week-password',
+        message: 'Expected Message',
       }
     }
 
@@ -70,8 +76,8 @@ describe('auth selectors', () => {
 
     const auth={
       error: {
-        errorCode: 'auth/week-password',
-        errorMessage: 'Expected Message',
+        code: 'auth/week-password',
+        message: 'Expected Message',
       }
     }
 

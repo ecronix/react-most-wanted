@@ -28,8 +28,7 @@ const styles={
     paddingTop: 100,
   },
   button: {
-    margin:6,
-    align: 'left'
+    marginTop:6,
   },
   sign_up_button: {
     float: 'right',
@@ -88,6 +87,7 @@ const SignUp = (props) => {
               ref={(field) => { email = field; }}
               hintText={intl.formatMessage({id: 'email'})}
               errorText={getValidationErrorMessage('email')}
+              floatingLabelText={intl.formatMessage({id: 'email'})}
               type="Email"
               fullWidth={true}
             /><br />
@@ -96,6 +96,7 @@ const SignUp = (props) => {
               ref={(field) => { password = field; }}
               hintText={intl.formatMessage({id: 'password'})}
               errorText={getValidationErrorMessage('password')}
+              floatingLabelText={intl.formatMessage({id: 'password'})}
               type="Password"
               fullWidth={true}
             /><br />
@@ -104,6 +105,7 @@ const SignUp = (props) => {
               ref={(field) => { confirm_password = field; }}
               hintText={intl.formatMessage({id: 'confirm_password'})}
               errorText={getValidationErrorMessage('confirm_password')}
+              floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
               type="Password"
               fullWidth={true}
             />

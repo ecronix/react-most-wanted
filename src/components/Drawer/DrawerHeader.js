@@ -8,6 +8,7 @@ import Paper from 'material-ui/Paper';
 import {ReduxIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
+import { isAuthorised } from '../../utils/auth';
 
 const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
 
@@ -36,21 +37,21 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
   return (
     <Paper  zDepth={1} style={styles.paper}>
 
-      {auth.isSignedIn&&
+      {isAuthorised(auth)&&
         <List>
           <ListItem
             disabled={true}
             leftAvatar={
               <Avatar
                 size={45}
-                icon={auth.img===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
-                src={auth.img}
+                icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
+                src={auth.photoURL}
               />
             }
           />
           <ListItem
             disabled={true}
-            primaryText={auth.name}
+            primaryText={auth.displayName}
             secondaryText={auth.email}
             rightIconButton={
               <IconButton
@@ -64,7 +65,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
         </List>
       }
 
-      {!auth.isSignedIn&&
+      {!isAuthorised(auth)&&
 
         <List>
           <ListItem

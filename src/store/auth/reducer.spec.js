@@ -5,7 +5,7 @@ import * as actions from './actions';
 import Immutable from 'seamless-immutable';
 
 const initialState=Immutable({
-  isSignedIn: false,
+  isAuthorised: false,
   isMenuOpen: false
 });
 
@@ -27,7 +27,7 @@ describe('auth reducer', () => {
 
 
   it('should handle SET_AUTH_MENU_OPEN', () => {
-    Reducer(reducer).expect(actions.setAuthMenuOpen(true)).toReturnState({isSignedIn: false, isMenuOpen: true})
+    Reducer(reducer).expect(actions.setAuthMenuOpen(true)).toReturnState({isAuthorised: false, isMenuOpen: true})
   })
 
   it('should handle SIGN_OUT_SUCCESS', () => {
@@ -53,8 +53,8 @@ describe('auth reducer', () => {
     }
 
     Reducer(reducer).expect(actions.signInSuccess(user)).toReturnState({
+      isAuthorised: true,
       isMenuOpen: false,
-      isSignedIn: true,
       ...(selectors.getUser(user))
     })
   })

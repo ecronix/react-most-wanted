@@ -1,26 +1,45 @@
 export const getUser = (firebaseUser) => {
 
   if(firebaseUser){
+
+    const {
+      displayName,
+      email,
+      emailVerified,
+      photoURL,
+      isAnonymous,
+      uid,
+      providerData
+    } = firebaseUser;
+
+
     return {
-      isSignedIn: true,
-      name: firebaseUser.displayName,
-      email: firebaseUser.email,
-      img: firebaseUser.photoURL,
-      uid: firebaseUser.uid
+      isAuthorised: true,
+      displayName,
+      email,
+      emailVerified,
+      photoURL,
+      isAnonymous,
+      uid,
+      providerData
     }
   }
 
   return {
-    isSignedIn: false
+    isAuthorised: false
   };
 
 }
 
 export const getValidationErrorMessage = (auth, fieldID) => {
 
-  if(auth && auth.error && auth.error.errorCode && auth.error.errorCode.indexOf(fieldID)>0){
-    return auth.error.errorMessage;
+  if(auth && auth.error && auth.error.code && auth.error.code.indexOf(fieldID)>0){
+    return auth.error.message;
   }
 
   return undefined;
+}
+
+export const isAuthorised = (auth) => {
+  return auth && auth.isAuthorised;
 }

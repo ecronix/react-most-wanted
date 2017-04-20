@@ -3,7 +3,7 @@ import * as selectors from './selectors';
 import Immutable from 'seamless-immutable';
 
 const initialState=Immutable({
-  isSignedIn: false,
+  isAuthorised: false,
   isMenuOpen: false
 });
 
@@ -17,7 +17,6 @@ const auth = (state = initialState, action) => {
     return {
       ...state,
       isMenuOpen: false,
-      isSignedIn: true,
       ...(selectors.getUser(action.user))
     };
 
