@@ -12,6 +12,7 @@ import { authError, updateUser, changePassword } from '../../store/auth/actions'
 import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
 import { Activity } from '../../components/Activity';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles={
   paper:{
@@ -62,29 +63,39 @@ export class MyAccount extends Component {
   }
 
   handlePasswordChangeSuccess = () => {
-
+    const {authError} =this.props;
+    authError({
+      code: 'success',
+      message: 'Password changed successfully'
+    })
   }
 
   handlePasswordChangeSubmit = () => {
-    const {changePassword} =this.props;
+    const {changePassword, authError} =this.props;
 
     if(this.password.getValue().localeCompare(this.confirm_password.getValue())===0){
       changePassword(this.password.getValue(), this.handlePasswordChangeSuccess);
     }else{
       authError({
-        errorCode: 'auth/invalid-confirm_password',
-        errorMessage: 'Masswords doesn`t match'
+        code: 'auth/invalid-confirm_password',
+        message: 'Passwords doesn`t match'
       })
     }
   }
 
 
   render(){
-    const {intl, getValidationErrorMessage, auth} =this.props;
+    const {intl, getValidationErrorMessage, auth, authError} =this.props;
+
+    const isSnackbarOpen=auth.error !==undefined
+    && auth.error.message
+    && auth.error.code.indexOf('email')<0
+    && auth.error.code.indexOf('password')<0
+    && auth.error.code.indexOf('confirm_password')<0;
 
     return (
       <Activity
-      title={intl.formatMessage({id: 'my_account'})}>
+        title={intl.formatMessage({id: 'my_account'})}>
 
         <div style={styles.container}>
 
@@ -189,6 +200,16 @@ export class MyAccount extends Component {
 
 
         </div>
+
+        <Snackbar
+          bodyStyle={{height:'100%'}}
+          open={isSnackbarOpen}
+          message={isSnackbarOpen?auth.error.message:''}
+          action="OK"
+          autoHideDuration={5000}
+          onRequestClose={()=>{authError(undefined)}}
+          onActionTouchTap={()=>{authError(undefined)}}
+        />
 
       </Activity>
     );

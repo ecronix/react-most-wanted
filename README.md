@@ -205,11 +205,10 @@ Is also a dev library that helps us to create a service worker during build proc
 ## TO DO
 
 - [X] finish tests
-- [ ] implement authentication using firebase API
-- [ ] update to material-ui@next
+- [X] implement authentication using firebase API
 - [X] create profile menu in drawer
-- [ ] default error displaying component
 - [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
+- [ ] update to material-ui@next
 
 ## License
 

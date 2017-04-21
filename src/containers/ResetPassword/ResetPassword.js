@@ -12,6 +12,7 @@ import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
 import { setDrawerOpen } from 'material-ui-responsive-drawer';
 import { Activity } from '../../components/Activity'
+import Snackbar from 'material-ui/Snackbar';
 
 const styles={
   paper:{
@@ -40,7 +41,11 @@ export class ResetPassword extends Component {
   }
 
   handleResetSuccess = (result) => {
-    const {push} =this.props;
+    const {push, authError} =this.props;
+    authError({
+      code: 'success',
+      message: 'Reset email successfully send. Pleas check inbox.'
+    })
     push('signin');
   }
 
@@ -51,7 +56,11 @@ export class ResetPassword extends Component {
 
 
   render(){
-    const {intl, getValidationErrorMessage, auth, push} =this.props;
+    const {intl, getValidationErrorMessage, auth, push, authError} =this.props;
+
+    const isSnackbarOpen=auth.error !==undefined
+    && auth.error.message
+    && auth.error.code.indexOf('email')<0;
 
     return (
       <Activity
@@ -88,6 +97,16 @@ export class ResetPassword extends Component {
 
           </Paper>
         </div>
+
+        <Snackbar
+          bodyStyle={{height:'100%'}}
+          open={isSnackbarOpen}
+          message={isSnackbarOpen?auth.error.message:''}
+          action="OK"
+          autoHideDuration={5000}
+          onRequestClose={()=>{authError(undefined)}}
+          onActionTouchTap={()=>{authError(undefined)}}
+        />
       </Activity>
     );
 

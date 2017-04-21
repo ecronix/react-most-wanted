@@ -1,0 +1,8 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_2laosy7hqg = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/theme/actions.js',hash = '346bcaf1f6063e803c5adeb3ef44e06ecba72c96',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/theme/actions.js', statementMap: { '0': { start: { line: 4, column: 2 }, end: { line: 7, column: 4 } } }, fnMap: { '0': { name: 'updateTheme', decl: { start: { line: 3, column: 16 }, end: { line: 3, column: 27 } }, loc: { start: { line: 3, column: 35 }, end: { line: 8, column: 1 } }, line: 3 } }, branchMap: {}, s: { '0': 0 }, f: { '0': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+updateTheme = updateTheme;var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function updateTheme(theme) {/* istanbul ignore next */++cov_2laosy7hqg.f[0];++cov_2laosy7hqg.s[0];
+  return {
+    type: types.UPDATE_THEME,
+    theme };
+
+}
