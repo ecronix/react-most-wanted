@@ -1,0 +1,25 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_colors = require('material-ui/styles/colors');
+
+
+
+
+
+
+var /* istanbul ignore next */_colorManipulator = require('material-ui/utils/colorManipulator'); /* istanbul ignore next */exports.default =
+
+{
+	palette: {
+		primary1Color: /* istanbul ignore next */_colors.indigo500,
+		primary2Color: /* istanbul ignore next */_colors.indigo700,
+		primary3Color: /* istanbul ignore next */_colors.grey600,
+		accent1Color: /* istanbul ignore next */_colors.pinkA200,
+		accent2Color: /* istanbul ignore next */_colors.pinkA400,
+		accent3Color: /* istanbul ignore next */_colors.pinkA100,
+		textColor: /* istanbul ignore next */_colors.fullWhite,
+		secondaryTextColor: /* istanbul ignore next */(0, _colorManipulator.fade)( /* istanbul ignore next */_colors.fullWhite, 0.7),
+		alternateTextColor: '#303030',
+		canvasColor: '#303030',
+		borderColor: /* istanbul ignore next */(0, _colorManipulator.fade)( /* istanbul ignore next */_colors.fullWhite, 0.3),
+		disabledColor: /* istanbul ignore next */(0, _colorManipulator.fade)( /* istanbul ignore next */_colors.fullWhite, 0.3),
+		pickerHeaderColor: /* istanbul ignore next */(0, _colorManipulator.fade)( /* istanbul ignore next */_colors.fullWhite, 0.12),
+		clockCircleColor: /* istanbul ignore next */(0, _colorManipulator.fade)( /* istanbul ignore next */_colors.fullWhite, 0.12) } };

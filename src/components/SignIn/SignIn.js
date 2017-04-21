@@ -10,6 +10,7 @@ import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FontIcon from 'material-ui/FontIcon';
 import {Helmet} from 'react-helmet';
 import { Link } from 'react-router-dom'
+import Divider from 'material-ui/Divider';
 
 const styles={
   paper:{
@@ -86,6 +87,7 @@ const SignIn = (props) => {
           <div style={styles.header}>
             <h3>{intl.formatMessage({id: 'sign_in'}).toUpperCase()}</h3>
             <FloatingActionButton
+              secondary={true}
               onTouchTap={()=>{push('/signup')}}
               style={styles.sign_up_button}>
               <FontIcon
@@ -118,7 +120,7 @@ const SignIn = (props) => {
           <div style={{margin:5, marginBottom:10}}>
             <Link
               to={`/reset`}
-              style={{color:muiTheme.palette.primary2Color}} >
+              style={{color:muiTheme.palette.primary3Color}} >
               {intl.formatMessage({id: 'forgort_password'})}
             </Link><br />
           </div>
@@ -131,6 +133,7 @@ const SignIn = (props) => {
             onTouchTap={hanleSignInSubmit}
             icon={
               <FontIcon
+                color={muiTheme.palette.primary2Color}
                 className="material-icons">
                 lock
               </FontIcon>
@@ -138,12 +141,17 @@ const SignIn = (props) => {
           />
           <br />
 
+          <div style={{ marginBottom:15}} />
+          <Divider />
+          <div style={{ marginBottom:10}} />
+
+
           <RaisedButton
             onTouchTap={()=>{signInWithProvider('google', onSignInSuccess)}}
             label={intl.formatMessage({id: 'sign_in_with_google'})}
-            icon={<GoogleIcon color={muiTheme.palette.accent1Color}/>}
+            icon={<GoogleIcon color={muiTheme.palette.primary2Color}/>}
             style={styles.button}
-            primary={true}
+            secondary={true}
             fullWidth={true}
           />
           <br />
@@ -151,9 +159,9 @@ const SignIn = (props) => {
           <RaisedButton
             onTouchTap={()=>{signInWithProvider('facebook', onSignInSuccess)}}
             label={intl.formatMessage({id: 'sign_in_with_facebook'})}
-            icon={<FacebookIcon color={muiTheme.palette.accent1Color}/>}
+            icon={<FacebookIcon color={muiTheme.palette.primary2Color}/>}
             style={styles.button}
-            primary={true}
+            secondary={true}
             fullWidth={true}
           />
 

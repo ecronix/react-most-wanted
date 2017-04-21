@@ -4,9 +4,8 @@ import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import FontIcon from 'material-ui/FontIcon';
-import {Helmet} from 'react-helmet';
+import { Activity } from '../../components/Activity'
 
 const styles={
   paper:{
@@ -15,27 +14,14 @@ const styles={
     margin:0,
     padding: 15
   },
-  header:{
-    display:'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
   container: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5,
-    paddingTop: 100,
+    paddingTop: 50,
   },
-  button: {
-    marginTop:6,
-  },
-  sign_up_button: {
-    float: 'right',
-    overflow: 'none',
-    alignSelf: 'flex-end',
-    marginRight:-43,
-  }
+
 }
 
 
@@ -49,18 +35,19 @@ const SignUp = (props) => {
     intl,
     signUpUser,
     authError,
-    getValidationErrorMessage
+    getValidationErrorMessage,
+    push
   } = props;
 
 
-  const hanleSignInSubmit = () => {
+  const hanleSignUpSubmit = () => {
 
     if(password.getValue().localeCompare(confirm_password.getValue())===0){
       signUpUser({email: email.getValue(), password: password.getValue()});
     }else{
       authError({
-        errorCode: 'auth/invalid-confirm_password',
-        errorMessage: 'Masswords doent match'
+        code: 'auth/invalid-confirm_password',
+        message: 'Masswords doent match'
       })
     }
 
@@ -68,19 +55,16 @@ const SignUp = (props) => {
 
 
   return (
-    <div>
-      <Helmet>
-        <title>{intl.formatMessage({id: 'sign_up'})}</title>
-      </Helmet>
-      <ResponsiveAppBar
-        title={intl.formatMessage({id: 'sign_up'})}
-      />
+    <Activity
+      onBackClick={()=>{push('signin')}}
+      title={intl.formatMessage({id: 'sign_up'})}>
+
       <div style={styles.container}>
 
         <Paper  zDepth={2} style={styles.paper}>
-          <div style={styles.header}>
-            <h3>{intl.formatMessage({id: 'sign_up'}).toUpperCase()}</h3>
-          </div>
+
+          <h3>{intl.formatMessage({id: 'sign_up'}).toUpperCase()}</h3>
+
           <div style={{marginBottom: 20}}>
             <TextField
               id="email"
@@ -116,7 +100,7 @@ const SignUp = (props) => {
             secondary={true}
             style={styles.button}
             fullWidth={true}
-            onTouchTap={hanleSignInSubmit}
+            onTouchTap={hanleSignUpSubmit}
             icon={
               <FontIcon
                 className="material-icons">
@@ -125,14 +109,10 @@ const SignUp = (props) => {
             }
           />
           <br />
-
         </Paper>
-
-
       </div>
 
-    </div>
-
+    </Activity>
   );
 }
 

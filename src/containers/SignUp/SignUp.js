@@ -6,8 +6,7 @@ import { signUpUser, authError } from '../../store/auth/actions';
 import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
 import { setDrawerOpen } from 'material-ui-responsive-drawer';
-import { SignUp } from '../../components/SignUp'
-
+import { SignUp } from '../../components/SignUp';
 
 SignUp.propTypes = {
   setDrawerOpen: PropTypes.func.isRequired,

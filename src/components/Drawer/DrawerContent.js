@@ -6,7 +6,6 @@ import Toggle from 'material-ui/Toggle';
 import allThemes from '../../themes';
 import allLocales from '../../locales';
 import {injectIntl} from 'react-intl';
-import RaisedButton from 'material-ui/RaisedButton';
 
 const DrawerContent = (props) => {
 
@@ -21,8 +20,6 @@ const DrawerContent = (props) => {
     intl,
     muiTheme,
     auth,
-    push,
-    setDrawerOpen,
     signOutUser,
     isAuthorised
   }=props;
@@ -86,7 +83,7 @@ const DrawerContent = (props) => {
     },
     {
       divider:true,
-      visible: !isAuthorised && router.location.pathname!=='/signin',
+      visible: isAuthorised,
     },
     {
       primaryText: intl.formatMessage({id: 'settings'}),
@@ -143,21 +140,6 @@ const DrawerContent = (props) => {
       display: 'flex',
       flexDirection: 'column',
     }}>
-    {!isAuthorised && router.location.pathname!=='/signin' &&
-      <RaisedButton
-        label={intl.formatMessage({id: 'sign_in'})}
-        secondary={true}
-        style={{margin:20}}
-        onTouchTap={()=>{push('/signin'); setDrawerOpen(false);}}
-        icon={
-          <FontIcon
-            className="material-icons">
-            lock
-          </FontIcon>
-        }
-      />
-    }
-
     <SelectableMenuList
       items={auth.isMenuOpen?authItems:menuItems}
       onIndexChange={handleChange}

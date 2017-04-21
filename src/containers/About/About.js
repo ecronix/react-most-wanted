@@ -1,22 +1,15 @@
 import React from 'react';
-import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import {injectIntl, intlShape} from 'react-intl';
-import {Helmet} from 'react-helmet';
+import { Activity } from '../../components/Activity';
 
 export const About = ({intl}) => {
 
   return (
-    <div >
-      <Helmet>
-        <title>{intl.formatMessage({id: 'about'})}</title>
-      </Helmet>
-      <ResponsiveAppBar
-        title={intl.formatMessage({id: 'about'})}
-      />
-      <div >
+    <Activity
+      title={intl.formatMessage({id: 'about'})}>
 
-      </div>
-    </div>
+
+    </Activity>
   );
 
 }

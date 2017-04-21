@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
-import {Helmet} from 'react-helmet';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,6 +11,7 @@ import Avatar from 'material-ui/Avatar';
 import { authError, updateUser, changePassword } from '../../store/auth/actions';
 import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
+import { Activity } from '../../components/Activity';
 
 const styles={
   paper:{
@@ -31,13 +30,13 @@ const styles={
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 120,
+    paddingTop: 50,
   },
   button: {
     marginTop:6,
     align: 'left'
   },
-  sign_up_button: {
+  avatar: {
     float: 'right',
     overflow: 'none',
     alignSelf: 'center',
@@ -84,13 +83,8 @@ export class MyAccount extends Component {
     const {intl, getValidationErrorMessage, auth} =this.props;
 
     return (
-      <div >
-        <Helmet>
-          <title>{intl.formatMessage({id: 'my_account'})}</title>
-        </Helmet>
-        <ResponsiveAppBar
-          title={intl.formatMessage({id: 'my_account'})}
-        />
+      <Activity
+      title={intl.formatMessage({id: 'my_account'})}>
 
         <div style={styles.container}>
 
@@ -99,7 +93,7 @@ export class MyAccount extends Component {
 
 
               <Avatar
-                style={styles.sign_up_button}
+                style={styles.avatar}
                 size={80}
                 icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
                 src={auth.photoURL}
@@ -183,7 +177,7 @@ export class MyAccount extends Component {
               icon={
                 <FontIcon
                   className="material-icons">
-                  save
+                  lock
                 </FontIcon>
               }
             />
@@ -194,7 +188,7 @@ export class MyAccount extends Component {
 
         </div>
 
-      </div>
+      </Activity>
     );
 
   }

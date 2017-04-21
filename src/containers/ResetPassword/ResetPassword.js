@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
-import {Helmet} from 'react-helmet';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -13,6 +11,7 @@ import { signUpUser, authError, resetPasswordEmail } from '../../store/auth/acti
 import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
 import { setDrawerOpen } from 'material-ui-responsive-drawer';
+import { Activity } from '../../components/Activity'
 
 const styles={
   paper:{
@@ -21,28 +20,14 @@ const styles={
     margin:0,
     padding: 15
   },
-  header:{
-    display:'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   container: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 5,
-    paddingTop: 120,
+    paddingTop: 50,
   },
-  button: {
-    margin:6,
-    align: 'left'
-  },
-  sign_up_button: {
-    float: 'right',
-    overflow: 'none',
-    alignSelf: 'center',
-    marginTop:-60,
-  }
+
 }
 
 export class ResetPassword extends Component {
@@ -65,19 +50,13 @@ export class ResetPassword extends Component {
 
 
   render(){
-    const {intl, getValidationErrorMessage, auth} =this.props;
+    const {intl, getValidationErrorMessage, auth, push} =this.props;
 
     return (
-      <div >
-        <Helmet>
-          <title>{intl.formatMessage({id: 'reset_password'})}</title>
-        </Helmet>
-        <ResponsiveAppBar
-          title={intl.formatMessage({id: 'reset_password'})}
-        />
-
+      <Activity
+        onBackClick={()=>{push('signin')}}
+        title={intl.formatMessage({id: 'reset_password'})}>
         <div style={styles.container}>
-
           <Paper  zDepth={2} style={styles.paper}>
             <div style={{marginBottom: 20}}>
               <TextField
@@ -100,18 +79,15 @@ export class ResetPassword extends Component {
               icon={
                 <FontIcon
                   className="material-icons">
-                  save
+                  refresh
                 </FontIcon>
               }
             />
             <br />
 
           </Paper>
-
-
         </div>
-
-      </div>
+      </Activity>
     );
 
   }
