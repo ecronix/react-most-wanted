@@ -5,7 +5,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
-import { Activity } from '../../components/Activity'
+import { Activity } from '../../components/Activity';
 
 const styles={
   paper:{

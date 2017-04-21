@@ -1,0 +1,178 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/SignIn/SignIn.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_Icons = require('../../components/Icons');
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_FloatingActionButton = require('material-ui/FloatingActionButton'); /* istanbul ignore next */var _FloatingActionButton2 = _interopRequireDefault(_FloatingActionButton);
+var /* istanbul ignore next */_TextField = require('material-ui/TextField'); /* istanbul ignore next */var _TextField2 = _interopRequireDefault(_TextField);
+var /* istanbul ignore next */_RaisedButton = require('material-ui/RaisedButton'); /* istanbul ignore next */var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_reactRouterDom = require('react-router-dom');
+var /* istanbul ignore next */_Divider = require('material-ui/Divider'); /* istanbul ignore next */var _Divider2 = _interopRequireDefault(_Divider);
+var /* istanbul ignore next */_Activity = require('../../components/Activity');
+var /* istanbul ignore next */_CircularProgress = require('material-ui/CircularProgress'); /* istanbul ignore next */var _CircularProgress2 = _interopRequireDefault(_CircularProgress);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = {
+  paper: {
+    margin: 0,
+    padding: 15 },
+
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between' },
+
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 5,
+    paddingTop: 50 },
+
+  button: {
+    marginTop: 6 },
+
+  sign_up_button: {
+    float: 'right',
+    overflow: 'none',
+    alignSelf: 'flex-end',
+    marginRight: -43 } };
+
+
+
+
+const SignIn = props => {
+
+  let email = null;
+  let password = null;
+
+  const {
+    muiTheme,
+    intl,
+    auth,
+    signInWithProvider,
+    push,
+    router,
+    signInUser,
+    getValidationErrorMessage } =
+  props;
+
+
+  const hanleSignInSubmit = () => {
+
+    signInUser({ email: email.getValue(), password: password.getValue() });
+  };
+
+
+  const onSignInSuccess = user => {
+
+    const pathname = ((((router || {}).location || {}).state || {}).from || {}).pathname;
+    push(pathname || '/');
+
+  };
+
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Activity.Activity, /* istanbul ignore next */{
+        title: intl.formatMessage({ id: 'sign_in' }), __source: { fileName: _jsxFileName, lineNumber: 76 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 78 }, __self: undefined },
+
+
+        auth.isFetching && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CircularProgress2.default, /* istanbul ignore next */{ size: 80, thickness: 5, __source: { fileName: _jsxFileName, lineNumber: 81 }, __self: undefined }),
+
+        !auth.isFetching &&
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ zDepth: 2, style: styles.paper, __source: { fileName: _jsxFileName, lineNumber: 84 }, __self: undefined },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.header, __source: { fileName: _jsxFileName, lineNumber: 85 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 86 }, __self: undefined }, intl.formatMessage({ id: 'sign_in' }).toUpperCase()),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FloatingActionButton2.default, /* istanbul ignore next */{
+                secondary: true,
+                onTouchTap: () => {push('/signup');},
+                style: styles.sign_up_button, __source: { fileName: _jsxFileName, lineNumber: 87 }, __self: undefined },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                  className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 91 }, __self: undefined }, /* istanbul ignore next */'person_add'))),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { marginBottom: 20 }, __source: { fileName: _jsxFileName, lineNumber: 97 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              id: 'email',
+              ref: field => {email = field;},
+              hintText: intl.formatMessage({ id: 'email' }),
+              errorText: getValidationErrorMessage('email'),
+              floatingLabelText: intl.formatMessage({ id: 'email' }),
+              type: 'Email',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 98 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 106 }, __self: undefined }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+              id: 'password',
+              ref: field => {password = field;},
+              hintText: intl.formatMessage({ id: 'password' }),
+              errorText: getValidationErrorMessage('password'),
+              floatingLabelText: intl.formatMessage({ id: 'password' }),
+              type: 'Password',
+              fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 107 }, __self: undefined })),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { margin: 5, marginBottom: 10 }, __source: { fileName: _jsxFileName, lineNumber: 118 }, __self: undefined },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouterDom.Link, /* istanbul ignore next */{
+                to: `/reset`,
+                style: { color: muiTheme.palette.primary3Color }, __source: { fileName: _jsxFileName, lineNumber: 119 }, __self: undefined },
+              intl.formatMessage({ id: 'forgort_password' })),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 123 }, __self: undefined })),
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+            label: intl.formatMessage({ id: 'sign_in' }),
+            secondary: true,
+            style: styles.button,
+            fullWidth: true,
+            onTouchTap: hanleSignInSubmit,
+            icon:
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                color: muiTheme.palette.primary2Color,
+                className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 133 }, __self: undefined }, /* istanbul ignore next */'lock'), __source: { fileName: _jsxFileName, lineNumber: 126 }, __self: undefined }),
+
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 140 }, __self: undefined }),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { marginBottom: 15 }, __source: { fileName: _jsxFileName, lineNumber: 142 }, __self: undefined }),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Divider2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: undefined }),
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { marginBottom: 10 }, __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: undefined }),
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+            onTouchTap: () => {signInWithProvider('google', onSignInSuccess);},
+            label: intl.formatMessage({ id: 'sign_in_with_google' }),
+            icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GoogleIcon, /* istanbul ignore next */{ color: muiTheme.palette.primary2Color, __source: { fileName: _jsxFileName, lineNumber: 150 }, __self: undefined }),
+            style: styles.button,
+            secondary: true,
+            fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 147 }, __self: undefined }),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 155 }, __self: undefined }),
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+            onTouchTap: () => {signInWithProvider('facebook', onSignInSuccess);},
+            label: intl.formatMessage({ id: 'sign_in_with_facebook' }),
+            icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.FacebookIcon, /* istanbul ignore next */{ color: muiTheme.palette.primary2Color, __source: { fileName: _jsxFileName, lineNumber: 160 }, __self: undefined }),
+            style: styles.button,
+            secondary: true,
+            fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 157 }, __self: undefined })))));
+
+
+
+
+
+
+
+
+
+
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(SignIn));

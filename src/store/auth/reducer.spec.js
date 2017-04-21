@@ -6,7 +6,8 @@ import Immutable from 'seamless-immutable';
 
 const initialState=Immutable({
   isAuthorised: false,
-  isMenuOpen: false
+  isMenuOpen: false,
+  isFetching: false
 });
 
 describe('auth reducer', () => {
@@ -27,7 +28,11 @@ describe('auth reducer', () => {
 
 
   it('should handle SET_AUTH_MENU_OPEN', () => {
-    Reducer(reducer).expect(actions.setAuthMenuOpen(true)).toReturnState({isAuthorised: false, isMenuOpen: true})
+    Reducer(reducer).expect(actions.setAuthMenuOpen(true)).toReturnState({isAuthorised: false, isMenuOpen: true, isFetching: false})
+  })
+
+  it('should handle SET_FETCHING', () => {
+    Reducer(reducer).expect(actions.setFetching(true)).toReturnState({isAuthorised: false, isMenuOpen: false, isFetching: true})
   })
 
   it('should handle SIGN_OUT_SUCCESS', () => {
@@ -48,14 +53,16 @@ describe('auth reducer', () => {
   it('should handle SIGN_IN_SUCCESS', () => {
 
     const user={
+      isAuthorised: true,
       name: 'Name',
       email: 'Email'
     }
 
     Reducer(reducer).expect(actions.signInSuccess(user)).toReturnState({
-      isAuthorised: true,
       isMenuOpen: false,
-      ...(selectors.getUser(user))
+      isFetching: false,
+      error: undefined,
+      ...user
     })
   })
 

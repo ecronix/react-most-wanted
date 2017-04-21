@@ -9,6 +9,7 @@ import {ReduxIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { isAuthorised } from '../../utils/auth';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
 
@@ -38,31 +39,39 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
     <Paper  zDepth={1} style={styles.paper}>
 
       {isAuthorised(auth)&&
-        <List>
-          <ListItem
-            disabled={true}
-            leftAvatar={
-              <Avatar
-                size={45}
-                icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
-                src={auth.photoURL}
-              />
-            }
-          />
-          <ListItem
-            disabled={true}
-            primaryText={auth.displayName}
-            secondaryText={auth.email}
-            rightIconButton={
-              <IconButton
-                onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
-                touch={true}>
-                <FontIcon className="material-icons" >{auth.isMenuOpen?'expand_less':'expand_more'}</FontIcon>
-              </IconButton>
-            }
+        <div>
 
-          />
-        </List>
+          {auth.isFetching && <CircularProgress size={80} thickness={5} />}
+
+          {!auth.isFetching &&
+
+            <List>
+              <ListItem
+                disabled={true}
+                leftAvatar={
+                  <Avatar
+                    size={45}
+                    icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
+                    src={auth.photoURL}
+                  />
+                }
+              />
+              <ListItem
+                disabled={true}
+                primaryText={auth.displayName}
+                secondaryText={auth.email}
+                rightIconButton={
+                  <IconButton
+                    onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
+                    touch={true}>
+                    <FontIcon className="material-icons" >{auth.isMenuOpen?'expand_less':'expand_more'}</FontIcon>
+                  </IconButton>
+                }
+
+              />
+            </List>
+          }
+        </div>
       }
 
       {!isAuthorised(auth)&&

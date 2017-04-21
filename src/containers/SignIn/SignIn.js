@@ -12,7 +12,7 @@ SignIn.propTypes = {
   signInWithProvider: PropTypes.func.isRequired,
   setDrawerOpen: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-  auth: PropTypes.object,
+  auth: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,

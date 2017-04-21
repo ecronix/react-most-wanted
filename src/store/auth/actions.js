@@ -1,14 +1,18 @@
 import * as auth from '../../utils/auth';
 import * as types from './types';
+import * as selectors from './selectors';
 
 export const signInWithProvider = (provider, onSuccess=null) => dispatch => {
+
+  dispatch(setFetching(true));
+
   auth.loginWithProvider(provider)
   .then((payload) => {
 
-    dispatch(signInSuccess(payload.user))
+    dispatch(signInSuccess(selectors.getUser(payload.user)))
 
     if(onSuccess && onSuccess instanceof Function){
-      onSuccess(payload.user);
+      onSuccess(selectors.getUser(payload.user));
     }
 
   })
@@ -23,17 +27,23 @@ export const signOutUser = (user) => dispatch =>  {
 
 
 export const signInUser = (user) => dispatch =>  {
+
+  dispatch(setFetching(true));
+
   auth.loginUser(user)
   .then((result) => {
-    dispatch(signInSuccess(result))
+    dispatch(signInSuccess(selectors.getUser(result)))
   })
   .catch(error => dispatch(authError(error)));
 }
 
 export const signUpUser = (user) => dispatch => {
+
+  dispatch(setFetching(true));
+
   auth.registerUser(user)
   .then((payload) => {
-    dispatch(signInSuccess(payload))
+    dispatch(signInSuccess(selectors.getUser(payload)))
   })
   .catch(error => dispatch(authError(error)));
 };
@@ -41,9 +51,11 @@ export const signUpUser = (user) => dispatch => {
 
 export const updateUser = (user) =>  dispatch => {
 
+  dispatch(setFetching(true));
+
   auth.updateUserProfile(user)
-  .then((result) => {
-    dispatch(signInSuccess(result))
+  .then((payload) => {
+    dispatch(signInSuccess(selectors.getUser(payload)))
   })
   .catch(error => dispatch(authError(error)));
 
@@ -80,9 +92,19 @@ export const changePassword = (newPassword, onSuccess) => dispatch => {
 }
 
 export const fetchUser = () => dispatch => {
+
+  dispatch(setFetching(true));
+
   auth.fetchUser()
-  .then(result => dispatch(fetchSuccess(result)))
+  .then(user => dispatch(fetchSuccess(selectors.getUser(user))))
   .catch(error => dispatch(authError(error)));
+}
+
+export function setFetching(isFetching) {
+  return {
+    type: types.SET_FETCHING,
+    isFetching
+  };
 }
 
 export function signInSuccess(user) {

@@ -128,6 +128,7 @@ export class MyAccount extends Component {
             <RaisedButton
               label={intl.formatMessage({id: 'save'})}
               secondary={true}
+              disabled={auth.isFetching}
               style={styles.button}
               fullWidth={true}
               onTouchTap={this.hanleUpdateSubmit}
@@ -171,6 +172,7 @@ export class MyAccount extends Component {
 
             <RaisedButton
               label={intl.formatMessage({id: 'change_password'})}
+              disabled={auth.isFetching}
               secondary={true}
               fullWidth={true}
               onTouchTap={this.handlePasswordChangeSubmit}

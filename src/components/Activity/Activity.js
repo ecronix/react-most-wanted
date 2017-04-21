@@ -7,6 +7,7 @@ import FontIcon from 'material-ui/FontIcon';
 const styles={
   container:{
     marginTop: 64,
+    height: '100%'
   },
 }
 
@@ -24,7 +25,7 @@ export const Activity = ({title, children, onBackClick,  ...rest}) =>  {
   }
 
   return (
-    <div >
+    <div style={{height:'100%'}}>
       <Helmet>
         <title>{title}</title>
       </Helmet>

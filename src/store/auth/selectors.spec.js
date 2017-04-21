@@ -86,5 +86,16 @@ describe('auth selectors', () => {
     ).toEqual(undefined)
   });
 
+  it('isAuthorised should return authorised state', () => {
+
+    const auth={
+      isAuthorised: false
+    }
+
+    expect(
+      selectors.isAuthorised(auth)
+    ).toEqual(false)
+  });
+
 
 })

@@ -1,10 +1,10 @@
 import * as types from './types';
-import * as selectors from './selectors';
 import Immutable from 'seamless-immutable';
 
 const initialState=Immutable({
   isAuthorised: false,
-  isMenuOpen: false
+  isMenuOpen: false,
+  isFetching: false
 });
 
 const auth = (state = initialState, action) => {
@@ -17,14 +17,19 @@ const auth = (state = initialState, action) => {
     return {
       ...state,
       isMenuOpen: false,
-      ...(selectors.getUser(action.user))
+      isFetching: false,
+      error: undefined,
+      ...(action.user)
     };
 
     case types.SIGN_OUT_SUCCESS:
     return initialState;
 
+    case types.SET_FETCHING:
+    return {...state, error: undefined,  isFetching: action.isFetching};
+
     case types.AUTH_ERROR:
-    return {...state, error: action.error};
+    return {...state, isFetching: false, error: action.error};
 
     case types.SET_AUTH_MENU_OPEN:
     return {...state, isMenuOpen: action.open};
