@@ -1,6 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import {GoogleIcon, FacebookIcon} from '../../components/Icons';
+import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -11,11 +11,15 @@ import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider';
 import { Activity } from '../../components/Activity';
 import CircularProgress from 'material-ui/CircularProgress';
+import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
+import config from '../../config';
 
 const styles={
   paper:{
     margin:0,
-    padding: 15
+    padding: 15,
+    minWidth: 300
   },
   header:{
     display:'flex',
@@ -28,6 +32,11 @@ const styles={
     justifyContent: 'center',
     margin: 5,
     paddingTop: 50,
+  },
+  buttons_container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   button: {
     marginTop:6,
@@ -54,8 +63,14 @@ const SignIn = (props) => {
     push,
     router,
     signInUser,
-    getValidationErrorMessage
+    getValidationErrorMessage,
+    authError
   } = props;
+
+  const isSnackbarOpen=auth.error !==undefined
+  && auth.error.message
+  && auth.error.code.indexOf('email')<0
+  && auth.error.code.indexOf('password')<0;
 
 
   const hanleSignInSubmit = () => {
@@ -71,12 +86,25 @@ const SignIn = (props) => {
 
   }
 
+  const getProviderIcon = (provider) => {
+
+    const color=muiTheme.palette.primary2Color;
+
+    return <IconButton
+      onTouchTap={()=>{signInWithProvider(provider, onSignInSuccess)}}
+      tooltip={intl.formatMessage({id: `sign_in_with_${provider}`})}>
+      {provider==='google'&&<GoogleIcon color={color}/>}
+      {provider==='facebook'&&<FacebookIcon color={color}/>}
+      {provider==='twitter'&&<TwitterIcon color={color}/>}
+      {provider==='github'&&<GitHubIcon color={color}/>}
+    </IconButton>
+  }
+
 
   return (
     <Activity
       title={intl.formatMessage({id: 'sign_in'})}>
       <div style={styles.container}>
-        
 
         {auth.isFetching && <CircularProgress size={80} thickness={5} />}
 
@@ -86,7 +114,7 @@ const SignIn = (props) => {
               <h3>{intl.formatMessage({id: 'sign_in'}).toUpperCase()}</h3>
               <FloatingActionButton
                 secondary={true}
-                onTouchTap={()=>{push('/signup')}}
+                onTouchTap={()=>{push('/signup'); authError(undefined);}}
                 style={styles.sign_up_button}>
                 <FontIcon
                   className="material-icons">
@@ -118,6 +146,7 @@ const SignIn = (props) => {
             <div style={{margin:5, marginBottom:10}}>
               <Link
                 to={`/reset`}
+                onTouchTap={()=>{push('/reset'); authError(undefined);}}
                 style={{color:muiTheme.palette.primary3Color}} >
                 {intl.formatMessage({id: 'forgort_password'})}
               </Link><br />
@@ -143,31 +172,28 @@ const SignIn = (props) => {
             <Divider />
             <div style={{ marginBottom:10}} />
 
+            <div style={styles.buttons_container}>
+              {config.providers.map((p)=>{
+                return getProviderIcon(p);
+              })}
 
-            <RaisedButton
-              onTouchTap={()=>{signInWithProvider('google', onSignInSuccess)}}
-              label={intl.formatMessage({id: 'sign_in_with_google'})}
-              icon={<GoogleIcon color={muiTheme.palette.primary2Color}/>}
-              style={styles.button}
-              secondary={true}
-              fullWidth={true}
-            />
-            <br />
-
-            <RaisedButton
-              onTouchTap={()=>{signInWithProvider('facebook', onSignInSuccess)}}
-              label={intl.formatMessage({id: 'sign_in_with_facebook'})}
-              icon={<FacebookIcon color={muiTheme.palette.primary2Color}/>}
-              style={styles.button}
-              secondary={true}
-              fullWidth={true}
-            />
+            </div>
 
           </Paper>
         }
 
 
       </div>
+
+      <Snackbar
+        bodyStyle={{height:'100%'}}
+        open={isSnackbarOpen}
+        message={isSnackbarOpen?auth.error.message:''}
+        action="OK"
+        autoHideDuration={5000}
+        onRequestClose={()=>{authError(undefined)}}
+        onActionTouchTap={()=>{authError(undefined)}}
+      />
 
     </Activity>
 

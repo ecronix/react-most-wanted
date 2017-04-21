@@ -7,6 +7,7 @@ const config= {
     storageBucket: "react-most-wanted-3b1b2.appspot.com",
     messagingSenderId: "258373383650"
   },
+  providers:['google','facebook', 'twitter', 'github']
 }
 
 

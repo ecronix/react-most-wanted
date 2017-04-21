@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './types';
 import Immutable from 'seamless-immutable';
 
 const theme = (state = Immutable('light') , action) => {

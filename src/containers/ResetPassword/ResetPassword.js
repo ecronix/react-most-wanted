@@ -18,7 +18,8 @@ const styles={
     height: '100%',
     display: 'block',
     margin:0,
-    padding: 15
+    padding: 15,
+    minWidth: 300,
   },
   container: {
     display: 'flex',

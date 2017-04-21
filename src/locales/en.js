@@ -23,6 +23,8 @@ const messages=defineMessages({
   sign_up: 'Sign up',
   sign_in_with_google: 'Sign in with Google',
   sign_in_with_facebook: 'Sign in with Facebook',
+  sign_in_with_twitter: 'Sign in with Twitter',
+  sign_in_with_github: 'Sign in with Github',
   my_account: 'My account',
   name: 'Name',
   email: 'E-Mail',

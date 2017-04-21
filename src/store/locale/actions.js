@@ -1,4 +1,4 @@
-import * as types from './actionTypes';
+import * as types from './types';
 
 export function updateLocale(locale) {
   return {

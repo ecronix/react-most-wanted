@@ -10,9 +10,9 @@ const reducers = combineReducers({
   browser: responsiveStateReducer,
   responsiveDrawer: responsiveDrawer,
   router: routerReducer,
-  theme,
+  auth,
   locale,
-  auth
+  theme
 })
 
 export default reducers;

@@ -23,6 +23,8 @@ const messages=defineMessages({
   sign_up: 'Registrovati',
   sign_in_with_google: 'Sa Google prijaviti',
   sign_in_with_facebook: 'Sa Facebookom prijaviti',
+  sign_in_with_twitter: 'Sa Twitterom prijaviti',
+  sign_in_with_github: 'Sa Githubom prijaviti',
   my_account: 'Moj profil',
   name: 'Ime',
   email: 'E-Mail',

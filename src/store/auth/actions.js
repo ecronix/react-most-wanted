@@ -16,7 +16,9 @@ export const signInWithProvider = (provider, onSuccess=null) => dispatch => {
     }
 
   })
-  .catch(error => dispatch(authError(error)));
+  .catch((error) => {
+    dispatch(authError(error))
+  });
 };
 
 export const signOutUser = (user) => dispatch =>  {

@@ -1,0 +1,14 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });const config = {
+  FIREBASE_CONFIG: {
+    apiKey: "AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY",
+    authDomain: "react-most-wanted-3b1b2.firebaseapp.com",
+    databaseURL: "https://react-most-wanted-3b1b2.firebaseio.com",
+    projectId: "react-most-wanted-3b1b2",
+    storageBucket: "react-most-wanted-3b1b2.appspot.com",
+    messagingSenderId: "258373383650" },
+
+  providers: ['google', 'facebook', 'twitter', 'github'] }; /* istanbul ignore next */exports.default =
+
+
+
+config;
