@@ -16,14 +16,17 @@ import {
   reauthenticateUser,
   deleteUser,
   setNewPhotoURL,
-  updateUserPhoto
+  updateUserPhoto,
+  linkUserWithPopup
 } from '../../store/auth/actions';
-import { getValidationErrorMessage } from '../../store/auth/selectors';
+import { getValidationErrorMessage, isLinkedWithProvider } from '../../store/auth/selectors';
 import { Activity } from '../../components/Activity';
 import { PasswordDialog } from '../../containers/PasswordDialog';
 import Snackbar from 'material-ui/Snackbar';
-
-import {Cropper} from 'react-image-cropper'
+import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
+import IconButton from 'material-ui/IconButton';
+import {Cropper} from 'react-image-cropper';
+import config from '../../config';
 
 const styles={
   paper:{
@@ -65,7 +68,12 @@ const styles={
     left: '0',
     width: '100%',
     opacity: '0'
-  }
+  },
+  buttons_container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
 }
 
 export class MyAccount extends Component {
@@ -94,14 +102,9 @@ export class MyAccount extends Component {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      //this.tempPath=reader.result
       setNewPhotoURL(reader.result)
-      //console.log(this.tempPath);
-      //this.setState({ src: reader.result });
     };
     reader.readAsDataURL(files[0]);
-
-    //console.log(this.tempPath);
   }
 
 
@@ -150,9 +153,27 @@ export class MyAccount extends Component {
   }
 
   handleDeleteAccount = () => {
-    const {deleteUser, reauthenticateUser, auth,} =this.props;
+    const {deleteUser, reauthenticateUser, auth} =this.props;
 
     reauthenticateUser(auth, ()=>{deleteUser()})
+  }
+
+  getProviderIcon = (provider) => {
+
+    const {muiTheme, intl, auth, linkUserWithPopup} =this.props;
+
+    const color=muiTheme.palette.primary2Color;
+
+    return <IconButton
+      key={provider}
+      disabled={isLinkedWithProvider(auth, provider)}
+      onTouchTap={()=>{linkUserWithPopup(provider)}}
+      tooltip={intl.formatMessage({id: `link_with_${provider}`})}>
+      {provider==='google'&&<GoogleIcon color={color}/>}
+      {provider==='facebook'&&<FacebookIcon color={color}/>}
+      {provider==='twitter'&&<TwitterIcon color={color}/>}
+      {provider==='github'&&<GitHubIcon color={color}/>}
+    </IconButton>
   }
 
   render(){
@@ -183,6 +204,13 @@ export class MyAccount extends Component {
 
               <h3>{auth.displayName}</h3>
 
+
+            </div>
+
+            <div style={styles.buttons_container}>
+              {config.providers.map((p)=>{
+                return this.getProviderIcon(p);
+              })}
 
             </div>
 
@@ -321,6 +349,8 @@ export class MyAccount extends Component {
             />
             <br />
 
+
+
           </Paper>
 
           <Paper  zDepth={2} style={styles.paper}>
@@ -401,6 +431,7 @@ MyAccount.propTypes = {
   deleteUser: PropTypes.func.isRequired,
   setNewPhotoURL: PropTypes.func.isRequired,
   updateUserPhoto: PropTypes.func.isRequired,
+  linkUserWithPopup: PropTypes.func.isRequired,
 };
 
 
@@ -425,6 +456,7 @@ export default connect(
     reauthenticateUser,
     deleteUser,
     setNewPhotoURL,
-    updateUserPhoto
+    updateUserPhoto,
+    linkUserWithPopup
   }
 )(injectIntl(muiThemeable()(MyAccount)));

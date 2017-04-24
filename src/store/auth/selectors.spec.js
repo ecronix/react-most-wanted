@@ -97,5 +97,18 @@ describe('auth selectors', () => {
     ).toEqual(false)
   });
 
+  it('isLinkedWithProvider should return link state to provider', () => {
+
+    const auth={
+      providerData:[
+        {providerId: 'facebook'}
+      ]
+    }
+
+    expect(
+      selectors.isLinkedWithProvider(auth, 'facebook')
+    ).toEqual(true)
+  });
+
 
 })

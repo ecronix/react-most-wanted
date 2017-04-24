@@ -41,6 +41,7 @@ export const reauthenticateWithCredential = (password) => {
   return firebaseAuth.currentUser.reauthenticateWithCredential(credential);
 }
 export const reauthenticateWithPopup = (provider) => firebaseAuth.currentUser.reauthenticateWithPopup(getProvider(provider));
+export const linkWithPopup = (provider) => firebaseAuth.currentUser.linkWithPopup(getProvider(provider));
 export const logoutUser = () => firebaseAuth.signOut();
 export const resetPasswordEmail = (email) => firebaseAuth.sendPasswordResetEmail(email);
 export const changePassword = (newPassword) => firebaseAuth.currentUser.updatePassword(newPassword);

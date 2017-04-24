@@ -112,6 +112,8 @@ export const reauthenticateUserWithPopup = (provider, onSuccess) => dispatch => 
   .catch(error => dispatch(authError(error)));
 };
 
+
+
 export const reauthenticateUser = (auth, onSuccess) => dispatch => {
 
   if(auth.providerData[0].providerId==='password'){
@@ -166,6 +168,20 @@ export const fetchUser = () => dispatch => {
   .then(user => dispatch(fetchSuccess(selectors.getUser(user))))
   .catch(error => dispatch(authError(error)));
 }
+
+export const linkUserWithPopup = (provider, onSuccess) => dispatch => {
+
+  auth.linkWithPopup(provider)
+  .then(() => {
+
+    dispatch(fetchUser());
+
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess();
+    }
+  })
+  .catch(error => dispatch(authError(error)));
+};
 
 export const changeEmail = (newEmail, onSuccess) => dispatch => {
 

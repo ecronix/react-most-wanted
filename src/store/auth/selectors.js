@@ -43,3 +43,7 @@ export const getValidationErrorMessage = (auth, fieldID) => {
 export const isAuthorised = (auth) => {
   return auth && auth.isAuthorised;
 }
+
+export const isLinkedWithProvider = (auth, providerId) => {
+  return auth && auth.providerData && auth.providerData.find((provider)=>{return provider.providerId.indexOf(providerId)>-1})!==undefined;
+}
