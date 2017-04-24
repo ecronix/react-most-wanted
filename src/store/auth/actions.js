@@ -1,6 +1,7 @@
 import * as auth from '../../utils/auth';
 import * as types from './types';
 import * as selectors from './selectors';
+import { firebaseApp } from '../../utils/firebase';
 
 export const signInWithProvider = (provider, onSuccess=null) => dispatch => {
 
@@ -45,6 +46,8 @@ export const signInUser = (user) => dispatch =>  {
   .catch(error => dispatch(authError(error)));
 }
 
+
+
 export const updateUser = (user) =>  dispatch => {
 
   dispatch(setFetching(true));
@@ -55,6 +58,21 @@ export const updateUser = (user) =>  dispatch => {
   })
   .catch(error => dispatch(authError(error)));
 
+}
+
+export const updateUserPhoto = (data_url) => dispatch =>  {
+
+  let storageRef=firebaseApp.storage().ref('photoURLS');
+  let uploadTask = storageRef.child(`${auth.uid}`).putString(data_url, 'data_url');
+
+  uploadTask.on('state_changed',
+  function(snapshot) {
+    dispatch(setFetching(true));
+  }, function(error) {
+    dispatch(authError(error));
+  }, function() {
+    dispatch(updateUser({photoURL: uploadTask.snapshot.downloadURL}));
+  });
 }
 
 export const signUpUser = (user) => dispatch => {

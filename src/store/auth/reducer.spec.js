@@ -30,6 +30,10 @@ describe('auth reducer', () => {
     Reducer(reducer).expect(actions.setPasswordDialogOpen(true)).toReturnState({...initialState, isPasswordDialogOpen: true})
   })
 
+  it('should handle SET_NEW_PHOTO_URL', () => {
+    Reducer(reducer).expect(actions.setNewPhotoURL('url')).toReturnState({...initialState, newPhotoURL: 'url'})
+  })
+
   it('should handle SET_FETCHING', () => {
     Reducer(reducer).expect(actions.setFetching(true)).toReturnState({...initialState, isFetching: true})
   })

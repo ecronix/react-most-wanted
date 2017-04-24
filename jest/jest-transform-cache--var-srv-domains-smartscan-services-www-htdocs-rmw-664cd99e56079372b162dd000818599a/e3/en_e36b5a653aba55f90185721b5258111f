@@ -1,0 +1,45 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reactIntl = require('react-intl');
+
+const messages = /* istanbul ignore next */(0, _reactIntl.defineMessages)({
+  app_name: 'React Most Wanted',
+  dashboard: 'Dashboard',
+  about: 'About',
+  page_not_found_demo: 'Page not found demo',
+  '404': '404',
+  warning_404_message: '404 Page not found',
+  warning_404_description: 'We are sorry but the page you are looking for does not exist.',
+  settings: 'Settings',
+  language: 'Language',
+  theme: 'Theme',
+  responsive: 'Responsive',
+  en: 'English',
+  de: 'German',
+  bs: 'Bosnian',
+  dark: 'Dark',
+  light: 'Light',
+  ics: 'ICS',
+  sign_out: 'Sign out',
+  sign_in: 'Sign in',
+  sign_up: 'Sign up',
+  sign_in_with_google: 'Sign in with Google',
+  sign_in_with_facebook: 'Sign in with Facebook',
+  sign_in_with_twitter: 'Sign in with Twitter',
+  sign_in_with_github: 'Sign in with Github',
+  my_account: 'My account',
+  name: 'Name',
+  email: 'E-Mail',
+  password: 'Password',
+  confirm_password: 'Confirm Password',
+  forgort_password: 'Forgot Password?',
+  reset_password: 'Reset Password',
+  change_password: 'Change Password',
+  change_photo: 'Change Photo',
+  change_email: 'Change E-Mail',
+  reset_password_hint: 'Enter your E-Mail',
+  save: 'Save',
+  delete_account: 'Delete account',
+  select_file: 'Select file' }); /* istanbul ignore next */exports.default =
+
+
+
+messages;

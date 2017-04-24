@@ -13,22 +13,17 @@ import {
   updateUser,
   changePassword,
   changeEmail,
-  reauthenticateUserWithCredential,
-  reauthenticateUserWithPopup,
-  setPasswordDaialogOpen,
   reauthenticateUser,
   deleteUser,
   setNewPhotoURL,
-  setFetching
+  updateUserPhoto
 } from '../../store/auth/actions';
 import { getValidationErrorMessage } from '../../store/auth/selectors';
-import { push } from 'react-router-redux';
 import { Activity } from '../../components/Activity';
 import { PasswordDialog } from '../../containers/PasswordDialog';
 import Snackbar from 'material-ui/Snackbar';
-import {firebaseApp} from '../../utils/firebase'
-import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css';
+
+import {Cropper} from 'react-image-cropper'
 
 const styles={
   paper:{
@@ -115,32 +110,12 @@ export class MyAccount extends Component {
     const {updateUser} =this.props;
 
     updateUser({displayName: this.name.getValue()});
-
   }
 
   hanleUpdatePhotoSubmit = () => {
-    const {auth, updateUser, setFetching, authError} =this.props;
+    const { updateUserPhoto} =this.props;
 
-    setFetching(true);
-
-    this.cropper.getCroppedCanvas().toBlob(function(blob){
-
-      let storageRef=firebaseApp.storage().ref('photoURLS');
-
-      var uploadTask = storageRef.child(`${auth.uid}`).put(blob);
-
-      uploadTask.on('state_changed',
-      function(snapshot) {
-
-
-      }, function(error) {authError(error); }, function() {
-
-        updateUser({photoURL: uploadTask.snapshot.downloadURL});
-
-      });
-
-    });
-
+    updateUserPhoto(this.cropper.crop());
   }
 
   handlePasswordChangeSuccess = () => {
@@ -419,10 +394,13 @@ MyAccount.propTypes = {
   muiTheme: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   authError: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   changePassword: PropTypes.func.isRequired,
   changeEmail: PropTypes.func.isRequired,
+  reauthenticateUser: PropTypes.func.isRequired,
+  deleteUser: PropTypes.func.isRequired,
+  setNewPhotoURL: PropTypes.func.isRequired,
+  updateUserPhoto: PropTypes.func.isRequired,
 };
 
 
@@ -441,16 +419,12 @@ export default connect(
   mapStateToProps,
   {
     authError,
-    push,
     updateUser,
     changePassword,
     changeEmail,
-    reauthenticateUserWithCredential,
-    reauthenticateUserWithPopup,
-    setPasswordDaialogOpen,
     reauthenticateUser,
     deleteUser,
     setNewPhotoURL,
-    setFetching
+    updateUserPhoto
   }
 )(injectIntl(muiThemeable()(MyAccount)));
