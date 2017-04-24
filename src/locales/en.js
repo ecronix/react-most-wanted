@@ -33,6 +33,7 @@ const messages=defineMessages({
   forgort_password: 'Forgot Password?',
   reset_password: 'Reset Password',
   change_password: 'Change Password',
+  change_email: 'Change E-Mail',
   reset_password_hint: 'Enter your E-Mail',
   save: 'Save',
 

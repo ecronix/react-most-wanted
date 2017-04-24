@@ -39,18 +39,6 @@ export const signInUser = (user) => dispatch =>  {
   .catch(error => dispatch(authError(error)));
 }
 
-export const signUpUser = (user) => dispatch => {
-
-  dispatch(setFetching(true));
-
-  auth.registerUser(user)
-  .then((payload) => {
-    dispatch(signInSuccess(selectors.getUser(payload)))
-  })
-  .catch(error => dispatch(authError(error)));
-};
-
-
 export const updateUser = (user) =>  dispatch => {
 
   dispatch(setFetching(true));
@@ -62,6 +50,53 @@ export const updateUser = (user) =>  dispatch => {
   .catch(error => dispatch(authError(error)));
 
 }
+
+export const signUpUser = (user) => dispatch => {
+
+  dispatch(setFetching(true));
+
+  auth.registerUser(user)
+  .then((payload) => {
+    dispatch(signInSuccess(selectors.getUser(payload)));
+    dispatch(updateUser(user));
+  })
+  .catch(error => dispatch(authError(error)));
+};
+
+
+
+
+export const reauthenticateUserWithCredential = (password, onSuccess) => dispatch => {
+
+  auth.reauthenticateWithCredential(password)
+  .then(() => {
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess();
+    }
+  })
+  .catch(error => dispatch(authError(error)));
+};
+
+export const reauthenticateUserWithPopup = (provider, onSuccess) => dispatch => {
+
+  auth.reauthenticateWithPopup(provider)
+  .then(() => {
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess();
+    }
+  })
+  .catch(error => dispatch(authError(error)));
+};
+
+export const reauthenticateUser = (auth, onSuccess) => dispatch => {
+
+  if(auth.providerData[0].providerId==='password'){
+    dispatch(setPasswordDialogOpen(true, onSuccess));
+  }else{
+    dispatch(reauthenticateUserWithPopup(auth.providerData[0].providerId, onSuccess));
+  }
+};
+
 
 export const resetPasswordEmail = (email, onSuccess) => dispatch => {
   auth.resetPasswordEmail(email)
@@ -84,8 +119,14 @@ export const sendEmailVerification = (onSuccess) => dispatch => {
 };
 
 export const changePassword = (newPassword, onSuccess) => dispatch => {
+
+  dispatch(setFetching(true));
+
   auth.changePassword(newPassword)
   .then((payload) => {
+
+    dispatch(setFetching(false));
+
     if(onSuccess && onSuccess instanceof Function){
       onSuccess(payload);
     }
@@ -99,6 +140,20 @@ export const fetchUser = () => dispatch => {
 
   auth.fetchUser()
   .then(user => dispatch(fetchSuccess(selectors.getUser(user))))
+  .catch(error => dispatch(authError(error)));
+}
+
+export const changeEmail = (newEmail, onSuccess) => dispatch => {
+
+  dispatch(setFetching(true));
+
+  auth.changeEmail(newEmail)
+  .then((payload) => {
+    dispatch(fetchUser());
+    if(onSuccess && onSuccess instanceof Function){
+      onSuccess(payload);
+    }
+  })
   .catch(error => dispatch(authError(error)));
 }
 
@@ -140,5 +195,13 @@ export function setAuthMenuOpen(open) {
   return {
     type: types.SET_AUTH_MENU_OPEN,
     open
+  };
+}
+
+export function setPasswordDialogOpen(open, onSuccess=undefined) {
+  return {
+    type: types.SET_PASSWORD_DIALOG_OPEN,
+    open,
+    onSuccess
   };
 }

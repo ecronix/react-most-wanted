@@ -6,6 +6,7 @@ import reducers from './reducers';
 import { persistStore, autoRehydrate} from 'redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
 import { isAuthorised } from '../utils/auth';
+import { initialState } from '../store/auth/reducer';
 
 import ReduxPromise from 'redux-promise';
 
@@ -17,7 +18,7 @@ export default function configureStore(history) {
   });
 
   const initState={
-    auth: {isAuthorised: isAuthorised()},
+    auth: {...initialState, isAuthorised: isAuthorised()},
   };
 
   let middlewares=[routerMiddleware(history), thunk, ReduxPromise];

@@ -3,12 +3,7 @@ import reducer from './reducer'
 import * as selectors from './selectors';
 import * as actions from './actions';
 import Immutable from 'seamless-immutable';
-
-const initialState=Immutable({
-  isAuthorised: false,
-  isMenuOpen: false,
-  isFetching: false
-});
+import { initialState } from './reducer'
 
 describe('auth reducer', () => {
 
@@ -28,11 +23,15 @@ describe('auth reducer', () => {
 
 
   it('should handle SET_AUTH_MENU_OPEN', () => {
-    Reducer(reducer).expect(actions.setAuthMenuOpen(true)).toReturnState({isAuthorised: false, isMenuOpen: true, isFetching: false})
+    Reducer(reducer).expect(actions.setAuthMenuOpen(true)).toReturnState({...initialState, isMenuOpen: true})
+  })
+
+  it('should handle SET_PASSWORD_DIALOG_OPEN', () => {
+    Reducer(reducer).expect(actions.setPasswordDialogOpen(true)).toReturnState({...initialState, isPasswordDialogOpen: true})
   })
 
   it('should handle SET_FETCHING', () => {
-    Reducer(reducer).expect(actions.setFetching(true)).toReturnState({isAuthorised: false, isMenuOpen: false, isFetching: true})
+    Reducer(reducer).expect(actions.setFetching(true)).toReturnState({...initialState, isFetching: true})
   })
 
   it('should handle SIGN_OUT_SUCCESS', () => {
@@ -59,9 +58,7 @@ describe('auth reducer', () => {
     }
 
     Reducer(reducer).expect(actions.signInSuccess(user)).toReturnState({
-      isMenuOpen: false,
-      isFetching: false,
-      error: undefined,
+      ...initialState,
       ...user
     })
   })

@@ -33,6 +33,7 @@ const messages=defineMessages({
   forgort_password: 'Passwort vergessen?',
   reset_password: 'Passwort zurücksetzten',
   change_password: 'Passwort ändern',
+  change_email: 'E-Mail ändern',
   reset_password_hint: 'Ihre E-Mail eingeben',
   save: 'Speichern',
 

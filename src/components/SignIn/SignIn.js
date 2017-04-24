@@ -91,6 +91,7 @@ const SignIn = (props) => {
     const color=muiTheme.palette.primary2Color;
 
     return <IconButton
+      key={provider}
       onTouchTap={()=>{signInWithProvider(provider, onSignInSuccess)}}
       tooltip={intl.formatMessage({id: `sign_in_with_${provider}`})}>
       {provider==='google'&&<GoogleIcon color={color}/>}

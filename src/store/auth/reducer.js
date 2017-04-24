@@ -1,10 +1,11 @@
 import * as types from './types';
 import Immutable from 'seamless-immutable';
 
-const initialState=Immutable({
+export const initialState=Immutable({
   isAuthorised: false,
   isMenuOpen: false,
-  isFetching: false
+  isFetching: false,
+  isPasswordDialogOpen: false,
 });
 
 const auth = (state = initialState, action) => {
@@ -18,6 +19,7 @@ const auth = (state = initialState, action) => {
       ...state,
       isMenuOpen: false,
       isFetching: false,
+      isPasswordDialogOpen: false,
       error: undefined,
       ...(action.user)
     };
@@ -33,6 +35,9 @@ const auth = (state = initialState, action) => {
 
     case types.SET_AUTH_MENU_OPEN:
     return {...state, isMenuOpen: action.open};
+
+    case types.SET_PASSWORD_DIALOG_OPEN:
+    return {...state, isPasswordDialogOpen: action.open, onPasswordDialogSuccess: action.onSuccess};
 
     default:
     return state;

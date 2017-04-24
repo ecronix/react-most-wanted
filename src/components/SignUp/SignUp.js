@@ -29,6 +29,7 @@ const styles={
 const SignUp = (props) => {
 
   let email = null;
+  let displayName = null;
   let password = null;
   let confirm_password = null;
 
@@ -43,8 +44,15 @@ const SignUp = (props) => {
 
   const hanleSignUpSubmit = () => {
 
+    const user={
+      displayName: displayName.getValue(),
+      email: email.getValue(),
+      password: email.getValue(),
+
+    }
+
     if(password.getValue().localeCompare(confirm_password.getValue())===0){
-      signUpUser({email: email.getValue(), password: password.getValue()});
+      signUpUser(user);
     }else{
       authError({
         code: 'auth/invalid-confirm_password',
@@ -67,6 +75,15 @@ const SignUp = (props) => {
           <h3>{intl.formatMessage({id: 'sign_up'}).toUpperCase()}</h3>
 
           <div style={{marginBottom: 20}}>
+            <TextField
+              id="displayName"
+              ref={(field) => { displayName = field; }}
+              hintText={intl.formatMessage({id: 'name'})}
+              errorText={getValidationErrorMessage('displayName')}
+              floatingLabelText={intl.formatMessage({id: 'name'})}
+              type="Name"
+              fullWidth={true}
+            /><br />
             <TextField
               id="email"
               ref={(field) => { email = field; }}

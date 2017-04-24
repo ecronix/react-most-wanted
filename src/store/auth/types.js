@@ -1,4 +1,5 @@
 export const SET_AUTH_MENU_OPEN = 'auth.SET_AUTH_MENU_OPEN';
+export const SET_PASSWORD_DIALOG_OPEN = 'auth.SET_PASSWORD_DIALOG_OPEN';
 
 export const AUTH_ERROR = 'auth.AUTH_ERROR';
 

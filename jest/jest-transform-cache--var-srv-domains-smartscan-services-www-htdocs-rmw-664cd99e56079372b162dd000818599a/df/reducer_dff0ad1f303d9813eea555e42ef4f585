@@ -1,0 +1,47 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;var cov_2qe8cryl8o = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/auth/reducer.js',hash = '85bf51b0f1523be87912a447c79dee4378b4092f',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/auth/reducer.js', statementMap: { '0': { start: { line: 4, column: 26 }, end: { line: 9, column: 2 } }, '1': { start: { line: 11, column: 13 }, end: { line: 45, column: 1 } }, '2': { start: { line: 13, column: 2 }, end: { line: 44, column: 3 } }, '3': { start: { line: 18, column: 4 }, end: { line: 25, column: 6 } }, '4': { start: { line: 28, column: 4 }, end: { line: 28, column: 24 } }, '5': { start: { line: 31, column: 4 }, end: { line: 31, column: 72 } }, '6': { start: { line: 34, column: 4 }, end: { line: 34, column: 62 } }, '7': { start: { line: 37, column: 4 }, end: { line: 37, column: 47 } }, '8': { start: { line: 40, column: 4 }, end: { line: 40, column: 100 } }, '9': { start: { line: 43, column: 4 }, end: { line: 43, column: 17 } } }, fnMap: { '0': { name: '(anonymous_0)', decl: { start: { line: 11, column: 13 }, end: { line: 11, column: 14 } }, loc: { start: { line: 11, column: 47 }, end: { line: 45, column: 1 } }, line: 11 } }, branchMap: { '0': { loc: { start: { line: 11, column: 14 }, end: { line: 11, column: 34 } }, type: 'default-arg', locations: [{ start: { line: 11, column: 22 }, end: { line: 11, column: 34 } }], line: 11 }, '1': { loc: { start: { line: 13, column: 2 }, end: { line: 44, column: 3 } }, type: 'switch', locations: [{ start: { line: 16, column: 4 }, end: { line: 16, column: 31 } }, { start: { line: 17, column: 4 }, end: { line: 25, column: 6 } }, { start: { line: 27, column: 4 }, end: { line: 28, column: 24 } }, { start: { line: 30, column: 4 }, end: { line: 31, column: 72 } }, { start: { line: 33, column: 4 }, end: { line: 34, column: 62 } }, { start: { line: 36, column: 4 }, end: { line: 37, column: 47 } }, { start: { line: 39, column: 4 }, end: { line: 40, column: 100 } }, { start: { line: 42, column: 4 }, end: { line: 43, column: 17 } }], line: 13 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0 }, f: { '0': 0 }, b: { '0': [0], '1': [0, 0, 0, 0, 0, 0, 0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);
+var /* istanbul ignore next */_seamlessImmutable = require('seamless-immutable'); /* istanbul ignore next */var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+const initialState = /* istanbul ignore next */exports.initialState = (++cov_2qe8cryl8o.s[0], /* istanbul ignore next */(0, _seamlessImmutable2.default)({
+    isAuthorised: false,
+    isMenuOpen: false,
+    isFetching: false,
+    isPasswordDialogOpen: false })); /* istanbul ignore next */++cov_2qe8cryl8o.s[1];
+
+
+const auth = (state = /* istanbul ignore next */(++cov_2qe8cryl8o.b[0][0], initialState), action) => {/* istanbul ignore next */++cov_2qe8cryl8o.f[0];++cov_2qe8cryl8o.s[2];
+
+    switch (action.type) {
+
+        //!!! DROP DOWN !!!
+        case types.SIGN_IN_SUCCESS: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][0];
+        case types.FETCH_SUCCESS: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][1];++cov_2qe8cryl8o.s[3];
+            return (/* istanbul ignore next */Object.assign({},
+                state, {
+                    isMenuOpen: false,
+                    isFetching: false,
+                    isPasswordDialogOpen: false,
+                    error: undefined },
+                action.user));
+
+
+        case types.SIGN_OUT_SUCCESS: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][2];++cov_2qe8cryl8o.s[4];
+            return initialState;
+
+        case types.SET_FETCHING: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][3];++cov_2qe8cryl8o.s[5];
+            return (/* istanbul ignore next */Object.assign({}, state, { error: undefined, isFetching: action.isFetching }));
+
+        case types.AUTH_ERROR: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][4];++cov_2qe8cryl8o.s[6];
+            return (/* istanbul ignore next */Object.assign({}, state, { isFetching: false, error: action.error }));
+
+        case types.SET_AUTH_MENU_OPEN: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][5];++cov_2qe8cryl8o.s[7];
+            return (/* istanbul ignore next */Object.assign({}, state, { isMenuOpen: action.open }));
+
+        case types.SET_PASSWORD_DIALOG_OPEN: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][6];++cov_2qe8cryl8o.s[8];
+            return (/* istanbul ignore next */Object.assign({}, state, { isPasswordDialogOpen: action.open, onPasswordDialogSuccess: action.onSuccess }));
+
+        default: /* istanbul ignore next */++cov_2qe8cryl8o.b[1][7];++cov_2qe8cryl8o.s[9];
+            return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+auth;

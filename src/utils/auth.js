@@ -3,18 +3,24 @@ import { firebaseAuth } from './firebase';
 
 
 const getProvider = (provider) => {
-  switch (provider) {
-    case 'facebook':
+
+  if(provider.indexOf('facebook')>-1){
     return new firebase.auth.FacebookAuthProvider();
-    case 'github':
-    return new firebase.auth.GithubAuthProvider();
-    case 'google':
-    return new firebase.auth.GoogleAuthProvider();
-    case 'twitter':
-    return new firebase.auth.TwitterAuthProvider();
-    default:
-    throw new Error('Provider is not supported!!!');
   }
+
+  if(provider.indexOf('github')>-1){
+    return new firebase.auth.GithubAuthProvider();
+  }
+
+  if(provider.indexOf('google')>-1){
+    return new firebase.auth.GoogleAuthProvider();
+  }
+
+  if(provider.indexOf('twitter')>-1){
+    return new firebase.auth.TwitterAuthProvider();
+  }
+
+  throw new Error('Provider is not supported!!!');
 };
 
 
@@ -27,9 +33,20 @@ export const isAuthorised = () => {
 export const loginWithProvider = (p) => firebaseAuth.signInWithPopup(getProvider(p));
 export const registerUser = (user) => firebaseAuth.createUserWithEmailAndPassword(user.email, user.password);
 export const loginUser = (user) => firebaseAuth.signInWithEmailAndPassword(user.email, user.password);
+export const reauthenticateWithCredential = (password) => {
+  const credential = firebase.auth.EmailAuthProvider.credential(
+    firebaseAuth.currentUser.email,
+    password
+  );
+
+  return firebaseAuth.currentUser.reauthenticateWithCredential(credential);
+}
+export const reauthenticateWithPopup = (provider) => firebaseAuth.currentUser.reauthenticateWithPopup(getProvider(provider));
 export const logoutUser = () => firebaseAuth.signOut();
 export const resetPasswordEmail = (email) => firebaseAuth.sendPasswordResetEmail(email);
 export const changePassword = (newPassword) => firebaseAuth.currentUser.updatePassword(newPassword);
+export const changeEmail = (newEmail) => firebaseAuth.currentUser.updateEmail(newEmail);
+export const deleteUser = () => firebaseAuth.currentUser.delete();
 export const sendEmailVerification = () => firebaseAuth.currentUser.sendEmailVerification();
 
 export const updateUserProfile = (user) => firebaseAuth.currentUser.updateProfile(user)

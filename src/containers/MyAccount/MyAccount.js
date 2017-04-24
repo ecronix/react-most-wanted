@@ -8,22 +8,34 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
-import { authError, updateUser, changePassword } from '../../store/auth/actions';
+import {
+  authError,
+  updateUser,
+  changePassword,
+  changeEmail,
+  reauthenticateUserWithCredential,
+  reauthenticateUserWithPopup,
+  setPasswordDaialogOpen,
+  reauthenticateUser
+} from '../../store/auth/actions';
 import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
 import { Activity } from '../../components/Activity';
+import { PasswordDialog } from '../../containers/PasswordDialog';
 import Snackbar from 'material-ui/Snackbar';
 
 const styles={
   paper:{
     height: '100%',
     display: 'block',
+    minHeight: 300,
     margin:15,
     padding: 15
   },
   header:{
     display:'flex',
     flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
@@ -71,10 +83,12 @@ export class MyAccount extends Component {
   }
 
   handlePasswordChangeSubmit = () => {
-    const {changePassword, authError} =this.props;
+    const { auth, reauthenticateUser, changePassword, authError} =this.props;
 
-    if(this.password.getValue().localeCompare(this.confirm_password.getValue())===0){
-      changePassword(this.password.getValue(), this.handlePasswordChangeSuccess);
+    const password=this.password.getValue();
+
+    if(password.localeCompare(this.confirm_password.getValue())===0){
+      reauthenticateUser(auth, ()=>{changePassword(password, this.handlePasswordChangeSuccess)});
     }else{
       authError({
         code: 'auth/invalid-confirm_password',
@@ -84,11 +98,19 @@ export class MyAccount extends Component {
   }
 
 
+  handleEmailChangeSubmit = () => {
+    const {changeEmail, reauthenticateUser, auth,} =this.props;
+
+    const email=this.email.getValue();
+    reauthenticateUser(auth, ()=>{changeEmail(email, this.handlePasswordChangeSuccess)})
+  }
+
   render(){
     const {intl, getValidationErrorMessage, auth, authError} =this.props;
 
     const isSnackbarOpen=auth.error !==undefined
     && auth.error.message
+    && auth.error.code!==undefined
     && auth.error.code.indexOf('email')<0
     && auth.error.code.indexOf('password')<0
     && auth.error.code.indexOf('confirm_password')<0;
@@ -102,7 +124,6 @@ export class MyAccount extends Component {
           <Paper  zDepth={2} style={styles.paper}>
             <div style={styles.header}>
 
-
               <Avatar
                 style={styles.avatar}
                 size={80}
@@ -112,18 +133,11 @@ export class MyAccount extends Component {
 
               <h3>{auth.displayName}</h3>
 
+
             </div>
+
             <div style={{marginBottom: 20}}>
-              <TextField
-                id="email"
-                disabled={true}
-                ref={(field) => { this.email = field; }}
-                defaultValue={auth.email}
-                errorText={getValidationErrorMessage('email')}
-                hintText="Email"
-                type="Email"
-                fullWidth={true}
-              /><br />
+
               <TextField
                 id="name"
                 ref={(field) => { this.name = field; }}
@@ -157,7 +171,43 @@ export class MyAccount extends Component {
           <Paper  zDepth={2} style={styles.paper}>
             <div style={styles.header}>
 
-              <h3>{intl.formatMessage({id: 'password'})}</h3>
+              <h3>{intl.formatMessage({id: 'change_email'})}</h3>
+
+            </div>
+            <div style={{marginBottom: 20}}>
+              <TextField
+                id="email"
+                ref={(field) => { this.email = field; }}
+                defaultValue={auth.email}
+                errorText={getValidationErrorMessage('email')}
+                floatingLabelText={intl.formatMessage({id: 'email'})}
+                hintText={intl.formatMessage({id: 'password'})}
+                type="Email"
+                fullWidth={true}
+              /><br />
+            </div>
+
+            <RaisedButton
+              label={intl.formatMessage({id: 'change_email'})}
+              disabled={auth.isFetching}
+              secondary={true}
+              fullWidth={true}
+              onTouchTap={this.handleEmailChangeSubmit}
+              icon={
+                <FontIcon
+                  className="material-icons">
+                  lock
+                </FontIcon>
+              }
+            />
+            <br />
+
+          </Paper>
+
+          <Paper  zDepth={2} style={styles.paper}>
+            <div style={styles.header}>
+
+              <h3>{intl.formatMessage({id: 'change_password'})}</h3>
 
             </div>
             <div style={{marginBottom: 20}}>
@@ -195,11 +245,11 @@ export class MyAccount extends Component {
               }
             />
             <br />
-
           </Paper>
 
-
         </div>
+
+        <PasswordDialog onSucces={()=>{console.log('test');}}/>
 
         <Snackbar
           bodyStyle={{height:'100%'}}
@@ -226,6 +276,7 @@ MyAccount.propTypes = {
   push: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   changePassword: PropTypes.func.isRequired,
+  changeEmail: PropTypes.func.isRequired,
 };
 
 
@@ -242,5 +293,15 @@ export const MyAccountTest = injectIntl(muiThemeable()(MyAccount));
 
 export default connect(
   mapStateToProps,
-  { authError, push, updateUser, changePassword }
+  {
+    authError,
+    push,
+    updateUser,
+    changePassword,
+    changeEmail,
+    reauthenticateUserWithCredential,
+    reauthenticateUserWithPopup,
+    setPasswordDaialogOpen,
+    reauthenticateUser
+  }
 )(injectIntl(muiThemeable()(MyAccount)));
