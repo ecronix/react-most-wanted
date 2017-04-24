@@ -1,0 +1,52 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);
+var /* istanbul ignore next */_seamlessImmutable = require('seamless-immutable'); /* istanbul ignore next */var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+const initialState = /* istanbul ignore next */exports.initialState = /* istanbul ignore next */(0, _seamlessImmutable2.default)({
+    isAuthorised: false,
+    isMenuOpen: false,
+    isFetching: false,
+    isPasswordDialogOpen: false,
+    newPhotoURL: null });
+
+
+const auth = (state = initialState, action) => {
+
+    switch (action.type) {
+
+        //!!! DROP DOWN !!!
+        case types.SIGN_IN_SUCCESS:
+        case types.FETCH_SUCCESS:
+            return (/* istanbul ignore next */Object.assign({},
+                state, {
+                    isMenuOpen: false,
+                    isFetching: false,
+                    isPasswordDialogOpen: false,
+                    newPhotoURL: null,
+                    error: undefined },
+                action.user));
+
+
+        case types.SIGN_OUT_SUCCESS:
+            return initialState;
+
+        case types.SET_FETCHING:
+            return (/* istanbul ignore next */Object.assign({}, state, { error: undefined, isFetching: action.isFetching }));
+
+        case types.AUTH_ERROR:
+            return (/* istanbul ignore next */Object.assign({}, state, { isFetching: false, error: action.error }));
+
+        case types.SET_AUTH_MENU_OPEN:
+            return (/* istanbul ignore next */Object.assign({}, state, { isMenuOpen: action.open }));
+
+        case types.SET_NEW_PHOTO_URL:
+            return (/* istanbul ignore next */Object.assign({}, state, { newPhotoURL: action.newPhotoURL }));
+
+        case types.SET_PASSWORD_DIALOG_OPEN:
+            return (/* istanbul ignore next */Object.assign({}, state, { isPasswordDialogOpen: action.open, onPasswordDialogSuccess: action.onSuccess }));
+
+        default:
+            return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+auth;

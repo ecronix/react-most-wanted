@@ -1,7 +1,6 @@
 import firebase from 'firebase';
 import { firebaseAuth } from './firebase';
 
-
 const getProvider = (provider) => {
 
   if(provider.indexOf('facebook')>-1){

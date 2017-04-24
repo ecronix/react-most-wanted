@@ -19,6 +19,7 @@
     "material-ui-selectable-menu-list": "^1.1.12",
     "prop-types": "^15.5.7",
     "react": "^15.5.4",
+    "react-cropper": "^0.12.0",
     "react-dom": "^15.5.4",
     "react-facebook-login": "^3.5.0",
     "react-google-login": "^2.8.5",

@@ -27,6 +27,12 @@ export const signOutUser = (user) => dispatch =>  {
   .catch(error => dispatch(authError(error)));
 };
 
+export const deleteUser = () => dispatch =>  {
+  auth.deleteUser()
+  .then(() => dispatch(signOutSuccess()))
+  .catch(error => dispatch(authError(error)));
+};
+
 
 export const signInUser = (user) => dispatch =>  {
 
@@ -203,5 +209,12 @@ export function setPasswordDialogOpen(open, onSuccess=undefined) {
     type: types.SET_PASSWORD_DIALOG_OPEN,
     open,
     onSuccess
+  };
+}
+
+export function setNewPhotoURL(newPhotoURL) {
+  return {
+    type: types.SET_NEW_PHOTO_URL,
+    newPhotoURL
   };
 }

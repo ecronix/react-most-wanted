@@ -34,8 +34,11 @@ const messages=defineMessages({
   reset_password: 'Passwort zurücksetzten',
   change_password: 'Passwort ändern',
   change_email: 'E-Mail ändern',
+  change_photo: 'Foto ändern',
   reset_password_hint: 'Ihre E-Mail eingeben',
   save: 'Speichern',
+  delete_account: 'Konto löschen',
+  select_file: 'Datei auswählen',
 
 });
 

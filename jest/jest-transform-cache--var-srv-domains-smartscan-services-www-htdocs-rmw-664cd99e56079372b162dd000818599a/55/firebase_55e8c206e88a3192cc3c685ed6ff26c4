@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.firebaseSt = exports.firebaseDb = exports.firebaseAuth = exports.firebaseApp = undefined;var /* istanbul ignore next */_firebase = require('firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);
+var /* istanbul ignore next */_config = require('../config'); /* istanbul ignore next */var _config2 = _interopRequireDefault(_config);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const firebaseApp = /* istanbul ignore next */exports.firebaseApp = /* istanbul ignore next */_firebase2.default.initializeApp( /* istanbul ignore next */_config2.default.FIREBASE_CONFIG);
+const firebaseAuth = /* istanbul ignore next */exports.firebaseAuth = firebaseApp.auth();
+const firebaseDb = /* istanbul ignore next */exports.firebaseDb = firebaseApp.database();
+const firebaseSt = /* istanbul ignore next */exports.firebaseSt = firebaseApp.storage();
+
+const FireBaseTools = {
+
+
+
+  /**
+                        * Get the firebase database reference.
+                        *
+                        * @param path {!string|string}
+                        * @returns {!firebase.database.Reference|firebase.database.Reference}
+                        */
+  getDatabaseReference: path => firebaseDb.ref(path) }; /* istanbul ignore next */exports.default =
+
+
+FireBaseTools;

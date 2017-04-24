@@ -34,8 +34,11 @@ const messages=defineMessages({
   reset_password: 'Resetuj sifru',
   change_password: 'Promjeni sifru',
   change_email: 'Promjeni E-Mail',
+  change_photo: 'Promjeni Sliku',
   reset_password_hint: 'Unesi svoj E-Mail',
   save: 'Spasi',
+  delete_account: 'Izbrisi profil',
+  select_file: 'Izaberi datoteku',
 
 });
 
