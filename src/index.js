@@ -6,7 +6,6 @@ import configureStore from './store';
 import { Root } from './containers/Root';
 import { addLocalizationData } from './locales';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import './index.css';
 
 const history = createHistory()
 const store = configureStore(history);

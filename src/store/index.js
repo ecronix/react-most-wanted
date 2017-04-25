@@ -8,8 +8,6 @@ import { responsiveStoreEnhancer } from 'redux-responsive';
 import { isAuthorised } from '../utils/auth';
 import { initialState } from '../store/auth/reducer';
 
-import ReduxPromise from 'redux-promise';
-
 export default function configureStore(history) {
   let store;
 
@@ -21,7 +19,7 @@ export default function configureStore(history) {
     auth: {...initialState, isAuthorised: isAuthorised()},
   };
 
-  let middlewares=[routerMiddleware(history), thunk, ReduxPromise];
+  let middlewares=[routerMiddleware(history), thunk];
 
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger); //DEV middlewares

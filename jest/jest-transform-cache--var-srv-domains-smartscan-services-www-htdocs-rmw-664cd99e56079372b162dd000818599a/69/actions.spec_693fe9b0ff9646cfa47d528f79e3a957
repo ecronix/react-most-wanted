@@ -1,0 +1,56 @@
+/* istanbul ignore next */'use strict';
+
+
+
+
+
+
+
+
+
+
+jest.mock('../../utils/auth');var /* istanbul ignore next */_reduxTestkit = require('redux-testkit');var /* istanbul ignore next */_redux = require('redux');var /* istanbul ignore next */_reduxThunk = require('redux-thunk'); /* istanbul ignore next */var _reduxThunk2 = _interopRequireDefault(_reduxThunk);var /* istanbul ignore next */_reducers = require('../reducers'); /* istanbul ignore next */var reducers = _interopRequireWildcard(_reducers);var /* istanbul ignore next */_selectors = require('./selectors'); /* istanbul ignore next */var selectors = _interopRequireWildcard(_selectors);var /* istanbul ignore next */_actions = require('./actions'); /* istanbul ignore next */var actions = _interopRequireWildcard(_actions);var /* istanbul ignore next */_auth = require('../../utils/auth'); /* istanbul ignore next */var auth = _interopRequireWildcard(_auth);var /* istanbul ignore next */_reducer = require('./reducer'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _asyncToGenerator(fn) {return function () {var gen = fn.apply(this, arguments);return new Promise(function (resolve, reject) {function step(key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {return Promise.resolve(value).then(function (value) {step("next", value);}, function (err) {step("throw", err);});}}return step("next");});};}
+
+describe('auth actions', () => {
+
+  let flushThunks, store;
+
+  beforeEach(() => {
+    beforeEach(() => {
+      jest.resetAllMocks();
+      //_.shuffle = jest.fn();
+      //_.shuffle.mockImplementation((arr) => arr);
+      flushThunks = /* istanbul ignore next */_reduxTestkit.FlushThunks.createMiddleware();
+      store = /* istanbul ignore next */(0, _redux.createStore)( /* istanbul ignore next */(0, _redux.combineReducers)(reducers), /* istanbul ignore next */(0, _redux.applyMiddleware)(flushThunks, /* istanbul ignore next */_reduxThunk2.default));
+    });
+  });
+
+  it('should fetch posts from server', /* istanbul ignore next */_asyncToGenerator(function* () {
+
+  }));
+
+  it('should handle signOutUsert', /* istanbul ignore next */_asyncToGenerator(function* () {
+
+    auth.logoutUser.mockReturnValueOnce({});
+    yield store.dispatch(actions.signOutUser);
+    yield flushThunks.flush();
+    expect(store.getState()['default']['auth']).toEqual( /* istanbul ignore next */_reducer.initialState);
+
+  }));
+
+
+
+  it('should fetch posts from server', /* istanbul ignore next */_asyncToGenerator(function* () {
+    auth.fetchUser.mockReturnValueOnce({ error: { code: '', message: '' } });
+    const dispatches = yield (/* istanbul ignore next */(0, _reduxTestkit.Thunk)(actions.signOutUser).execute());
+    expect(dispatches.length).toBe(3);
+    expect(dispatches[0].getAction()).toEqual({ type: 'POSTS_LOADING', loading: true });
+    expect(dispatches[1].getAction()).toEqual({ type: 'POSTS_UPDATED', posts: ['post1', 'post2'] });
+    expect(dispatches[2].getAction()).toEqual({ type: 'POSTS_LOADING', loading: false });
+  }));
+
+
+
+
+
+});

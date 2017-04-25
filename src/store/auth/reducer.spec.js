@@ -1,15 +1,11 @@
-import { Reducer, Thunk } from 'redux-testkit';
+
+import { Reducer } from 'redux-testkit';
 import reducer from './reducer'
-import * as selectors from './selectors';
 import * as actions from './actions';
-import Immutable from 'seamless-immutable';
 import { initialState } from './reducer'
 
-describe('auth reducer', () => {
 
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
+describe('auth reducer', () => {
 
   it('should return the initial state', () => {
     expect(

@@ -1,0 +1,297 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.changeEmail = exports.linkUserWithPopup = exports.changePassword = exports.sendEmailVerification = exports.resetPasswordEmail = exports.reauthenticateUser = exports.reauthenticateUserWithPopup = exports.reauthenticateUserWithCredential = exports.signUpUser = exports.updateUserPhoto = exports.updateUser = exports.signInUser = exports.deleteUser = exports.signOutUser = exports.signInWithProvider = exports.fetchUser = undefined;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+setFetching = setFetching; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signInSuccess = signInSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+signOutSuccess = signOutSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+authError = authError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setAuthMenuOpen = setAuthMenuOpen; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setDeleteDialogOpen = setDeleteDialogOpen; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setPasswordDialogOpen = setPasswordDialogOpen; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+setNewPhotoURL = setNewPhotoURL; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsVerficationEmailSend = setIsVerficationEmailSend; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fetchTodos = fetchTodos; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+incrementAsync = incrementAsync;var /* istanbul ignore next */_auth = require('../../utils/auth'); /* istanbul ignore next */var auth = _interopRequireWildcard(_auth);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);var /* istanbul ignore next */_selectors = require('./selectors'); /* istanbul ignore next */var selectors = _interopRequireWildcard(_selectors);var /* istanbul ignore next */_firebase = require('../../utils/firebase');var /* istanbul ignore next */_cuid = require('cuid'); /* istanbul ignore next */var _cuid2 = _interopRequireDefault(_cuid);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function fetchSuccess(user) {return { type: types.FETCH_SUCCESS, user };}function setFetching(isFetching) {return { type: types.SET_FETCHING, isFetching };}function signInSuccess(user) {return { type: types.SIGN_IN_SUCCESS, user };}function signOutSuccess() {return { type: types.SIGN_OUT_SUCCESS };}function authError(error) {return { type: types.AUTH_ERROR, error };}function setAuthMenuOpen(open) {return { type: types.SET_AUTH_MENU_OPEN, open };}function setDeleteDialogOpen(open) {return { type: types.SET_DELETE_DIALOG_OPEN, open };}function setPasswordDialogOpen(open, onSuccess = undefined) {return { type: types.SET_PASSWORD_DIALOG_OPEN, open, onSuccess };}function setNewPhotoURL(newPhotoURL) {return { type: types.SET_NEW_PHOTO_URL, newPhotoURL };}function setIsVerficationEmailSend(send) {return { type: types.SET_IS_VERIFICATION_EMAIL_SEND, send };}const fetchUser = /* istanbul ignore next */exports.fetchUser = () => dispatch => {dispatch(setFetching(true));return auth.fetchUser().then(user => dispatch(fetchSuccess(selectors.getUser(user)))).catch(error => dispatch(authError(error)));};const signInWithProvider = /* istanbul ignore next */exports.signInWithProvider = (provider, onSuccess = null) => dispatch => {dispatch(setFetching(true));return auth.loginWithProvider(provider).then(payload => {dispatch(signInSuccess(selectors.getUser(payload.user)));if (onSuccess && onSuccess instanceof Function) {onSuccess(selectors.getUser(payload.user));}}).catch(error => {dispatch(authError(error));});};const signOutUser = /* istanbul ignore next */exports.signOutUser = user => dispatch => {return auth.logoutUser(user).then(() => dispatch(signOutSuccess())).catch(error => dispatch(authError(error)));};const deleteUser = /* istanbul ignore next */exports.deleteUser = () => dispatch => {return auth.deleteUser().then(() => dispatch(signOutSuccess())).catch(error => dispatch(authError(error)));};const signInUser = /* istanbul ignore next */exports.signInUser = user => dispatch => {dispatch(setFetching(true));return auth.loginUser(user).then(result => {dispatch(signInSuccess(selectors.getUser(result)));}).catch(error => dispatch(authError(error)));};const updateUser = /* istanbul ignore next */exports.updateUser = user => dispatch => {dispatch(setFetching(true));return auth.updateUserProfile(user).then(payload => {dispatch(signInSuccess(selectors.getUser(payload)));}).catch(error => dispatch(authError(error)));};const updateUserPhoto = /* istanbul ignore next */exports.updateUserPhoto = (dataURL, fileName = /* istanbul ignore next */(0, _cuid2.default)()) => dispatch => {let storageRef = /* istanbul ignore next */_firebase.firebaseApp.storage().ref('photoURLS');let uploadTask = storageRef.child(`${fileName}`).putString(dataURL, 'data_url');uploadTask.on('state_changed', function (snapshot) {dispatch(setFetching(true));}, function (error) {dispatch(authError(error));}, function () {dispatch(updateUser({ photoURL: uploadTask.snapshot.downloadURL }));});};const signUpUser = /* istanbul ignore next */exports.signUpUser = user => dispatch => {dispatch(setFetching(true));return auth.registerUser(user).then(payload => {dispatch(signInSuccess(selectors.getUser(payload)));dispatch(updateUser(user));}).catch(error => dispatch(authError(error)));};const reauthenticateUserWithCredential = /* istanbul ignore next */exports.reauthenticateUserWithCredential = (password, onSuccess) => dispatch => {return auth.reauthenticateWithCredential(password).then(() => {if (onSuccess && onSuccess instanceof Function) {onSuccess();}}).catch(error => dispatch(authError(error)));};const reauthenticateUserWithPopup = /* istanbul ignore next */exports.reauthenticateUserWithPopup = (provider, onSuccess) => dispatch => {return auth.reauthenticateWithPopup(provider).then(() => {if (onSuccess && onSuccess instanceof Function) {onSuccess();}}).catch(error => dispatch(authError(error)));};const reauthenticateUser = /* istanbul ignore next */exports.reauthenticateUser = (auth, onSuccess) => dispatch => {if (auth.providerData[0].providerId === 'password') {dispatch(setPasswordDialogOpen(true, onSuccess));} else {dispatch(reauthenticateUserWithPopup(auth.providerData[0].providerId, onSuccess));}};const resetPasswordEmail = /* istanbul ignore next */exports.resetPasswordEmail = (email, onSuccess) => dispatch => {return auth.resetPasswordEmail(email).then(() => {if (onSuccess && onSuccess instanceof Function) {onSuccess();}}).catch(error => dispatch(authError(error)));}; //Async TEST
+function fetchTodos() {return dispatch => {dispatch(fetch(true));return auth.fetchUser('http://example.com/todos').then(json => dispatch(setFetching(false))).catch(ex => dispatch(setFetching(false)));};}function incrementAsync() {
+  return dispatch => {
+    dispatch(setFetching(true));
+
+    return setTimeout(() => {
+      // Yay! Can invoke sync or async actions with `dispatch`
+      dispatch(setFetching(true));
+    }, 1000);
+  };
+}
+
+const sendEmailVerification = /* istanbul ignore next */exports.sendEmailVerification = onSuccess => dispatch => {
+
+  dispatch(setFetching(true));
+
+  return auth.sendEmailVerification().
+  then(() => {
+    dispatch(setIsVerficationEmailSend(true));
+    if (onSuccess && onSuccess instanceof Function) {
+      onSuccess();
+    }
+  }).
+  catch(error => dispatch(authError(error)));
+
+};
+
+const changePassword = /* istanbul ignore next */exports.changePassword = (newPassword, onSuccess) => dispatch => {
+
+  dispatch(setFetching(true));
+
+  return auth.changePassword(newPassword).
+  then(payload => {
+
+    dispatch(setFetching(false));
+
+    if (onSuccess && onSuccess instanceof Function) {
+      onSuccess(payload);
+    }
+  }).
+  catch(error => dispatch(authError(error)));
+};
+
+
+
+const linkUserWithPopup = /* istanbul ignore next */exports.linkUserWithPopup = (provider, onSuccess) => dispatch => {
+
+  return auth.linkWithPopup(provider).
+  then(() => {
+
+    dispatch(fetchUser());
+
+    if (onSuccess && onSuccess instanceof Function) {
+      onSuccess();
+    }
+  }).
+  catch(error => dispatch(authError(error)));
+};
+
+const changeEmail = /* istanbul ignore next */exports.changeEmail = (newEmail, onSuccess) => dispatch => {
+
+  dispatch(setFetching(true));
+
+  return auth.changeEmail(newEmail).
+  then(payload => {
+    dispatch(fetchUser());
+    if (onSuccess && onSuccess instanceof Function) {
+      onSuccess(payload);
+    }
+  }).
+  catch(error => dispatch(authError(error)));
+};

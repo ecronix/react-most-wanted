@@ -1,0 +1,18 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_reduxResponsive = require('redux-responsive');
+var /* istanbul ignore next */_redux = require('redux');
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_reactRouterRedux = require('react-router-redux');
+var /* istanbul ignore next */_reducer = require('./auth/reducer'); /* istanbul ignore next */var _reducer2 = _interopRequireDefault(_reducer);
+var /* istanbul ignore next */_reducer3 = require('./locale/reducer'); /* istanbul ignore next */var _reducer4 = _interopRequireDefault(_reducer3);
+var /* istanbul ignore next */_reducer5 = require('./theme/reducer'); /* istanbul ignore next */var _reducer6 = _interopRequireDefault(_reducer5);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const reducers = /* istanbul ignore next */(0, _redux.combineReducers)({
+  browser: /* istanbul ignore next */_reduxResponsive.responsiveStateReducer,
+  responsiveDrawer: /* istanbul ignore next */_materialUiResponsiveDrawer.responsiveDrawer,
+  router: /* istanbul ignore next */_reactRouterRedux.routerReducer,
+  auth: /* istanbul ignore next */_reducer2.default,
+  locale: /* istanbul ignore next */_reducer4.default,
+  theme: /* istanbul ignore next */_reducer6.default }); /* istanbul ignore next */exports.default =
+
+
+reducers;
