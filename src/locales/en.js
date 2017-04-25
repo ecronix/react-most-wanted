@@ -43,6 +43,16 @@ const messages=defineMessages({
   save: 'Save',
   delete_account: 'Delete account',
   select_file: 'Select file',
+  cancel: 'Cancel',
+  submit: 'Submit',
+  delete: 'Delete',
+  ok: 'OK',
+  delete_account_dialog_title: 'Delete Account?',
+  delete_account_dialog_message: 'Your account will be deleted and you will lose all your data!',
+  email_not_verified: 'E-Mail is not verified!',
+  email_verified: 'E-Mail is verified',
+  send_verification_email: 'Send verification E-Mail',
+  send_verification_email_again: 'Send verification E-Mail again',
 
 });
 

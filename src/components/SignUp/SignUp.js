@@ -47,7 +47,7 @@ const SignUp = (props) => {
     const user={
       displayName: displayName.getValue(),
       email: email.getValue(),
-      password: email.getValue(),
+      password: password.getValue(),
 
     }
 

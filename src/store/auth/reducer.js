@@ -6,6 +6,8 @@ export const initialState=Immutable({
   isMenuOpen: false,
   isFetching: false,
   isPasswordDialogOpen: false,
+  isDeleteDialogOpen: false,
+  isVerificationEmailSend: false,
   newPhotoURL: null,
 });
 
@@ -21,6 +23,8 @@ const auth = (state = initialState, action) => {
       isMenuOpen: false,
       isFetching: false,
       isPasswordDialogOpen: false,
+      isDeleteDialogOpen: false,
+      isVerificationEmailSend: false,
       newPhotoURL: null,
       error: undefined,
       ...(action.user)
@@ -43,6 +47,12 @@ const auth = (state = initialState, action) => {
 
     case types.SET_PASSWORD_DIALOG_OPEN:
     return {...state, isPasswordDialogOpen: action.open, onPasswordDialogSuccess: action.onSuccess};
+
+    case types.SET_DELETE_DIALOG_OPEN:
+    return {...state, isDeleteDialogOpen: action.open};
+
+    case types.SET_IS_VERIFICATION_EMAIL_SEND:
+    return {...state, isVerificationEmailSend: action.send, isFetching: false};
 
     default:
     return state;

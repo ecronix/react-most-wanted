@@ -1,0 +1,13 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const SET_AUTH_MENU_OPEN = /* istanbul ignore next */exports.SET_AUTH_MENU_OPEN = 'auth.SET_AUTH_MENU_OPEN';
+const SET_PASSWORD_DIALOG_OPEN = /* istanbul ignore next */exports.SET_PASSWORD_DIALOG_OPEN = 'auth.SET_PASSWORD_DIALOG_OPEN';
+const SET_DELETE_DIALOG_OPEN = /* istanbul ignore next */exports.SET_DELETE_DIALOG_OPEN = 'auth.SET_DELETE_DIALOG_OPEN';
+const SET_NEW_PHOTO_URL = /* istanbul ignore next */exports.SET_NEW_PHOTO_URL = 'auth.SET_NEW_PHOTO_URL';
+const SET_IS_VERIFICATION_EMAIL_SEND = /* istanbul ignore next */exports.SET_IS_VERIFICATION_EMAIL_SEND = 'auth.SET_IS_VERIFICATION_EMAIL_SEND';
+
+const AUTH_ERROR = /* istanbul ignore next */exports.AUTH_ERROR = 'auth.AUTH_ERROR';
+
+const SET_FETCHING = /* istanbul ignore next */exports.SET_FETCHING = 'auth.SET_FETCHING';
+
+const SIGN_IN_SUCCESS = /* istanbul ignore next */exports.SIGN_IN_SUCCESS = 'auth.SIGN_IN_SUCCESS';
+const SIGN_OUT_SUCCESS = /* istanbul ignore next */exports.SIGN_OUT_SUCCESS = 'auth.SIGN_OUT_SUCCESS';
+const FETCH_SUCCESS = /* istanbul ignore next */exports.FETCH_SUCCESS = 'auth.FETCH_SUCCESS';

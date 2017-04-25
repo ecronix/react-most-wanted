@@ -64,7 +64,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
                   <IconButton
                     onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
                     touch={true}>
-                    <FontIcon className="material-icons" >{auth.isMenuOpen?'expand_less':'expand_more'}</FontIcon>
+                    <FontIcon className="material-icons" >{auth.isMenuOpen?'arrow_drop_up':'arrow_drop_down'}</FontIcon>
                   </IconButton>
                 }
 

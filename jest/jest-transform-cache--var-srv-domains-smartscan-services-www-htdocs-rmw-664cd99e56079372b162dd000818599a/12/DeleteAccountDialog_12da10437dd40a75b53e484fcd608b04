@@ -1,0 +1,89 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.DeleteAccountDialog = undefined;var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/DeleteAccountDialog/DeleteAccountDialog.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+
+
+
+
+var /* istanbul ignore next */_Dialog = require('material-ui/Dialog'); /* istanbul ignore next */var _Dialog2 = _interopRequireDefault(_Dialog);
+var /* istanbul ignore next */_FlatButton = require('material-ui/FlatButton'); /* istanbul ignore next */var _FlatButton2 = _interopRequireDefault(_FlatButton);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+const DeleteAccountDialog = /* istanbul ignore next */exports.DeleteAccountDialog = props => {
+
+  const {
+    auth,
+    intl,
+    setDeleteDialogOpen,
+    deleteUser,
+    reauthenticateUser } =
+  props;
+
+  const handleClose = () => {
+    setDeleteDialogOpen(false);
+  };
+
+  const hanldeSubmit = () => {
+
+    handleClose();
+    reauthenticateUser(auth, () => {deleteUser();});
+  };
+
+
+  const actions = [
+  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+    label: intl.formatMessage({ id: 'delete' }),
+    secondary: true,
+    onTouchTap: hanldeSubmit, __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: undefined }),
+
+  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+    label: intl.formatMessage({ id: 'cancel' }),
+    primary: true,
+    onTouchTap: handleClose, __source: { fileName: _jsxFileName, lineNumber: 42 }, __self: undefined })];
+
+
+
+  return (
+
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Dialog2.default, /* istanbul ignore next */{
+        title: intl.formatMessage({ id: 'delete_account_dialog_title' }),
+        actions: actions,
+        modal: true,
+        open: auth.isDeleteDialogOpen, __source: { fileName: _jsxFileName, lineNumber: 51 }, __self: undefined },
+      intl.formatMessage({ id: 'delete_account_dialog_message' })));
+
+
+
+
+
+
+};
+
+DeleteAccountDialog.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  setDeleteDialogOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  deleteUser: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  reauthenticateUser: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+
+const mapStateToProps = state => {
+  const { auth } = state;
+  return {
+    auth };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+{
+  deleteUser: /* istanbul ignore next */_actions.deleteUser,
+  setDeleteDialogOpen: /* istanbul ignore next */_actions.setDeleteDialogOpen,
+  reauthenticateUser: /* istanbul ignore next */_actions.reauthenticateUser })(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(DeleteAccountDialog)));

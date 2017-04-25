@@ -38,6 +38,14 @@ describe('auth reducer', () => {
     Reducer(reducer).expect(actions.setFetching(true)).toReturnState({...initialState, isFetching: true})
   })
 
+  it('should handle SET_DELETE_DIALOG_OPEN', () => {
+    Reducer(reducer).expect(actions.setDeleteDialogOpen(true)).toReturnState({...initialState, isDeleteDialogOpen: true})
+  })
+
+  it('should handle SET_IS_VERIFICATION_EMAIL_SEND', () => {
+    Reducer(reducer).expect(actions.setIsVerficationEmailSend(true)).toReturnState({...initialState, isVerificationEmailSend: true})
+  })
+
   it('should handle SIGN_OUT_SUCCESS', () => {
     Reducer(reducer).expect(actions.signOutSuccess()).toReturnState(initialState)
   })

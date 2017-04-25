@@ -43,6 +43,16 @@ const messages=defineMessages({
   save: 'Speichern',
   delete_account: 'Konto löschen',
   select_file: 'Datei auswählen',
+  cancel: 'Abbrechen',
+  submit: 'Bestätigen',
+  delete: 'Löschen',
+  ok: 'OK',
+  delete_account_dialog_title: 'Konto löschen?',
+  delete_account_dialog_message: 'Dein Konto wird gelöscht und mit ihm alle Daten!',
+  email_not_verified: 'E-Mail ist nicht verifiziert!',
+  email_verified: 'E-Mail ist verifiziert',
+  send_verification_email: 'Verifizierungs E-Mail senden',
+  send_verification_email_again: 'Verifizierungs E-Mail wieder senden',
 
 });
 

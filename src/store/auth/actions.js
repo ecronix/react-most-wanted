@@ -2,6 +2,7 @@ import * as auth from '../../utils/auth';
 import * as types from './types';
 import * as selectors from './selectors';
 import { firebaseApp } from '../../utils/firebase';
+import cuid  from 'cuid';
 
 export const signInWithProvider = (provider, onSuccess=null) => dispatch => {
 
@@ -60,10 +61,10 @@ export const updateUser = (user) =>  dispatch => {
 
 }
 
-export const updateUserPhoto = (data_url) => dispatch =>  {
+export const updateUserPhoto = (dataURL, fileName=cuid()) => dispatch =>  {
 
   let storageRef=firebaseApp.storage().ref('photoURLS');
-  let uploadTask = storageRef.child(`${auth.uid}`).putString(data_url, 'data_url');
+  let uploadTask = storageRef.child(`${fileName}`).putString(dataURL, 'data_url');
 
   uploadTask.on('state_changed',
   function(snapshot) {
@@ -135,8 +136,12 @@ export const resetPasswordEmail = (email, onSuccess) => dispatch => {
 };
 
 export const sendEmailVerification = (onSuccess) => dispatch => {
+
+  dispatch(setFetching(true));
+
   auth.sendEmailVerification()
   .then(() => {
+    dispatch(setIsVerficationEmailSend(true));
     if(onSuccess && onSuccess instanceof Function){
       onSuccess();
     }
@@ -238,6 +243,13 @@ export function setAuthMenuOpen(open) {
   };
 }
 
+export function setDeleteDialogOpen(open) {
+  return {
+    type: types.SET_DELETE_DIALOG_OPEN,
+    open
+  };
+}
+
 export function setPasswordDialogOpen(open, onSuccess=undefined) {
   return {
     type: types.SET_PASSWORD_DIALOG_OPEN,
@@ -250,5 +262,12 @@ export function setNewPhotoURL(newPhotoURL) {
   return {
     type: types.SET_NEW_PHOTO_URL,
     newPhotoURL
+  };
+}
+
+export function setIsVerficationEmailSend(send) {
+  return {
+    type: types.SET_IS_VERIFICATION_EMAIL_SEND,
+    send
   };
 }

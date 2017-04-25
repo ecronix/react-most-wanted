@@ -43,6 +43,16 @@ const messages=defineMessages({
   save: 'Spasi',
   delete_account: 'Izbrisi profil',
   select_file: 'Izaberi datoteku',
+  cancel: 'Odustani',
+  submit: 'Potvrdi',
+  delete: 'Izbrisi',
+  ok: 'OK',
+  delete_account_dialog_title: 'Izbrisati profil?',
+  delete_account_dialog_message: 'Tvoj profil i svi njegovi podaci ce biti izbrisani!',
+  email_not_verified: 'E-Mail nije verificiran!',
+  email_verified: 'E-Mail je verificiran',
+  send_verification_email: 'Posalji E-Mail za verifikaciju',
+  send_verification_email_again: 'Posalji ponove E-Mail za verifikaciju',
 
 });
 

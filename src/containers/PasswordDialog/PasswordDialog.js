@@ -53,12 +53,12 @@ export class PasswordDialog extends Component {
 
     const actions = [
       <FlatButton
-        label="Ok"
+        label={intl.formatMessage({id: 'submit'})}
         primary={true}
         onTouchTap={this.hanldePasswordSubmit}
       />,
       <FlatButton
-        label="Cancel"
+        label={intl.formatMessage({id: 'cancel'})}
         primary={true}
         onTouchTap={this.hanldeClose}
       />,
