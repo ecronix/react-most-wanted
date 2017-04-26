@@ -1,0 +1,99 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });
+const loginWithProvider = /* istanbul ignore next */exports.loginWithProvider = p => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => p ? resolve(p) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const fetchUser = /* istanbul ignore next */exports.fetchUser = () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve());
+  });
+};
+
+const logoutUser = /* istanbul ignore next */exports.logoutUser = () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve());
+  });
+};
+
+const deleteUser = /* istanbul ignore next */exports.deleteUser = () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve());
+  });
+};
+
+const loginUser = /* istanbul ignore next */exports.loginUser = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const updateUserProfile = /* istanbul ignore next */exports.updateUserProfile = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+
+const registerUser = /* istanbul ignore next */exports.registerUser = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const reauthenticateWithCredential = /* istanbul ignore next */exports.reauthenticateWithCredential = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const reauthenticateWithPopup = /* istanbul ignore next */exports.reauthenticateWithPopup = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const resetPasswordEmail = /* istanbul ignore next */exports.resetPasswordEmail = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const changePassword = /* istanbul ignore next */exports.changePassword = u => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => u ? resolve(u) : reject({
+      error: 'error' }));
+
+
+  });
+};

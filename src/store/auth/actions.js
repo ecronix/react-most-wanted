@@ -75,11 +75,11 @@ export function setIsVerficationEmailSend(send) {
   };
 }
 
-export const fetchUser = () => dispatch => {
+export const fetchUser = (props) => dispatch => {
 
   dispatch(setFetching(true));
 
-  return auth.fetchUser()
+  return auth.fetchUser(props)
   .then(user => dispatch(fetchSuccess(selectors.getUser(user))))
   .catch(error => dispatch(authError(error)));
 }
@@ -109,8 +109,8 @@ export const signOutUser = (user) => dispatch =>  {
   .catch(error => dispatch(authError(error)));
 };
 
-export const deleteUser = () => dispatch =>  {
-  return auth.deleteUser()
+export const deleteUser = (props) => dispatch =>  {
+  return auth.deleteUser(props)
   .then(() => dispatch(signOutSuccess()))
   .catch(error => dispatch(authError(error)));
 };
@@ -195,10 +195,10 @@ export const reauthenticateUserWithPopup = (provider, onSuccess) => dispatch => 
 
 export const reauthenticateUser = (auth, onSuccess) => dispatch => {
 
-  if(auth.providerData[0].providerId==='password'){
-    dispatch(setPasswordDialogOpen(true, onSuccess));
-  }else{
+  if(auth &&  auth.providerData!==undefined && Array.isArray(auth.providerData) && auth.providerData[0].providerId!=='password'){
     dispatch(reauthenticateUserWithPopup(auth.providerData[0].providerId, onSuccess));
+  }else{
+    dispatch(setPasswordDialogOpen(true, onSuccess));
   }
 };
 
@@ -213,16 +213,13 @@ export const resetPasswordEmail = (email, onSuccess) => dispatch => {
   .catch(error => dispatch(authError(error)));
 };
 
-export const sendEmailVerification = (onSuccess) => dispatch => {
+export const sendEmailVerification = (props) => dispatch => {
 
   dispatch(setFetching(true));
 
-  return auth.sendEmailVerification()
+  return auth.sendEmailVerification(props)
   .then(() => {
     dispatch(setIsVerficationEmailSend(true));
-    if(onSuccess && onSuccess instanceof Function){
-      onSuccess();
-    }
   })
   .catch(error => dispatch(authError(error)));
 

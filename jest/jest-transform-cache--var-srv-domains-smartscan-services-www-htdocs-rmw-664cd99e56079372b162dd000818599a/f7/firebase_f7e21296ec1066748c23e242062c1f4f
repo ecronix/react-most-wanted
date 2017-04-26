@@ -1,0 +1,10 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.firebaseApp = undefined;var /* istanbul ignore next */_firebase = require('firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);
+
+var /* istanbul ignore next */_config = require('../../config'); /* istanbul ignore next */var _config2 = _interopRequireDefault(_config);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+//const gcloud = require('google-cloud')(config.FIREBASE_CONFIG);
+
+const firebaseApp = /* istanbul ignore next */exports.firebaseApp = {};
+//export const firebaseAuth = firebaseApp.auth();
+//export const firebaseDb = firebaseApp.database();
+//import gcloud from 'google-cloud';

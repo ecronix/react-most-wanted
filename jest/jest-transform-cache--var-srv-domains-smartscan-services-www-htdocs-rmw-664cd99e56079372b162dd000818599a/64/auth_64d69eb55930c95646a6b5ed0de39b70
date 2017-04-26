@@ -1,0 +1,109 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });
+const loginWithProvider = /* istanbul ignore next */exports.loginWithProvider = p => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => p ? resolve(p) : reject({
+      error: 'error' }));
+
+
+  });
+};
+
+const fetchUser = /* istanbul ignore next */exports.fetchUser = () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve());
+  });
+};
+
+const logoutUser = /* istanbul ignore next */exports.logoutUser = () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve());
+  });
+};
+
+const deleteUser = /* istanbul ignore next */exports.deleteUser = () => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(() => resolve());
+  });
+};
+
+
+const loginUser = /* istanbul ignore next */exports.loginUser = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const updateUserProfile = /* istanbul ignore next */exports.updateUserProfile = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const registerUser = /* istanbul ignore next */exports.registerUser = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const reauthenticateWithCredential = /* istanbul ignore next */exports.reauthenticateWithCredential = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const reauthenticateWithPopup = /* istanbul ignore next */exports.reauthenticateWithPopup = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const resetPasswordEmail = /* istanbul ignore next */exports.resetPasswordEmail = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const sendEmailVerification = /* istanbul ignore next */exports.sendEmailVerification = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => resolve(success));
+
+  });
+};
+
+const changePassword = /* istanbul ignore next */exports.changePassword = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const linkWithPopup = /* istanbul ignore next */exports.linkWithPopup = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};
+
+const changeEmail = /* istanbul ignore next */exports.changeEmail = success => {
+  return new Promise((resolve, reject) => {
+    process.nextTick(
+    () => success ? resolve(success) : reject(success));
+
+  });
+};

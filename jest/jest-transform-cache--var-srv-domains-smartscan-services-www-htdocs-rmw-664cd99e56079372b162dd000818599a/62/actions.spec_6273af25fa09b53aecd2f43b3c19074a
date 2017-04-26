@@ -1,0 +1,60 @@
+/* istanbul ignore next */'use strict';
+var /* istanbul ignore next */_reduxTestkit = require('redux-testkit');
+var /* istanbul ignore next */_reduxMockStore = require('redux-mock-store'); /* istanbul ignore next */var _reduxMockStore2 = _interopRequireDefault(_reduxMockStore);
+var /* istanbul ignore next */_reduxThunk = require('redux-thunk'); /* istanbul ignore next */var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+var /* istanbul ignore next */_reducers = require('../reducers'); /* istanbul ignore next */var reducers = _interopRequireWildcard(_reducers);
+var /* istanbul ignore next */_selectors = require('./selectors'); /* istanbul ignore next */var selectors = _interopRequireWildcard(_selectors);
+var /* istanbul ignore next */_actions = require('./actions'); /* istanbul ignore next */var actions = _interopRequireWildcard(_actions);
+var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);
+var /* istanbul ignore next */_auth = require('../../utils/auth'); /* istanbul ignore next */var auth = _interopRequireWildcard(_auth);
+var /* istanbul ignore next */_reducer = require('./reducer'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const middlewares = [/* istanbul ignore next */_reduxThunk2.default];
+const mockStore = /* istanbul ignore next */(0, _reduxMockStore2.default)(middlewares);
+
+describe('auth actions', () => {
+
+
+    it('should dispatch action fetchUser', () => {
+
+        const store = mockStore( /* istanbul ignore next */_reducer.initialState);
+
+        store.dispatch(actions.fetchUser());
+
+        const resultActions = store.getActions();
+        const expectedPayload = { type: types.SET_FETCHING, isFetching: true };
+        expect(resultActions).toEqual([expectedPayload]);
+    });
+
+    it('should dispatch action signInWithProvider', () => {
+
+        const store = mockStore( /* istanbul ignore next */_reducer.initialState);
+
+        store.dispatch(actions.signInWithProvider('facebook'));
+
+        const resultActions = store.getActions();
+        const expectedPayload = { type: types.SET_FETCHING, isFetching: true };
+        expect(resultActions).toEqual([expectedPayload]);
+    });
+
+    it('should dispatch action signInWithProvider', () => {
+
+        const store = mockStore( /* istanbul ignore next */_reducer.initialState);
+
+        return store.dispatch(actions.signInWithProvider('facebook')).then(() => {
+            const resultActions = store.getActions();
+            const expectedPayload = [actions.setFetching(true), actions.authError({})];
+            expect(resultActions).toEqual([expectedPayload]);
+        });
+
+        /*
+            const resultActions = store.getActions()
+            const expectedPayload = { type: types.SET_FETCHING, isFetching: true }
+            expect(resultActions).toEqual([expectedPayload])
+            */
+    });
+
+
+
+});
