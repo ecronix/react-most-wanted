@@ -2,6 +2,7 @@ import React from 'react';
 import { Dashboard } from '../../containers/Dashboard';
 import { About } from '../../containers/About';
 import { MyAccount } from '../../containers/MyAccount';
+import { Tasks } from '../../containers/Tasks';
 import { ResetPassword } from '../../containers/ResetPassword';
 import { PageNotFound } from '../../components/PageNotFound';
 import { SignIn } from '../../containers/SignIn';
@@ -41,6 +42,7 @@ const Routes = ({isAuthorised}) => {
     <Switch>
       <PrivateRoute path="/" exact component={Dashboard} />
       <PrivateRoute path="/dashboard" exact component={Dashboard} />
+      <Route path="/tasks" exact component={Tasks} />
       <PrivateRoute path="/about" exact component={About}  />
       <PrivateRoute path="/my_account" exact component={MyAccount} />
       <PublicRoute path="/signin" component={SignIn} />

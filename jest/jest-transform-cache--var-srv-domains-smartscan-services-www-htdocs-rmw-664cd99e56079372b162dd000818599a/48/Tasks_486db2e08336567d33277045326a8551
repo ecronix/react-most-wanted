@@ -1,0 +1,108 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/Tasks/Tasks.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_lodash = require('lodash'); /* istanbul ignore next */var _lodash2 = _interopRequireDefault(_lodash);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Activity = require('../../components/Activity');
+var /* istanbul ignore next */_actions = require('../../store/tasks/actions');
+var /* istanbul ignore next */_List = require('material-ui/List');
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_IconButton = require('material-ui/IconButton'); /* istanbul ignore next */var _IconButton2 = _interopRequireDefault(_IconButton);
+var /* istanbul ignore next */_TextField = require('material-ui/TextField'); /* istanbul ignore next */var _TextField2 = _interopRequireDefault(_TextField);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+class Tasks extends /* istanbul ignore next */_react.Component {
+
+  constructor(props) {
+    super(props); /* istanbul ignore next */this.
+
+
+
+
+
+
+
+
+
+
+
+    handleAddTask = () => {
+      const { createTask } = this.props;
+      createTask(this.name.getValue());
+      this.name.setState({ value: "" });
+    };this.name = null;}componentWillMount() {this.props.loadTasks();}componentWillUnmount() {this.props.unloadTasks();}
+
+  rednerTasks(tasks) {
+    const { deleteTask } = this.props;
+
+    return (/* istanbul ignore next */_lodash2.default.map(tasks, (task, key) => {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List.ListItem, /* istanbul ignore next */{
+            key: key,
+            primaryText: task,
+            id: key,
+            rightIconButton:
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+                onTouchTap: () => {deleteTask(key);}, __source: { fileName: _jsxFileName, lineNumber: 44 }, __self: this },
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', color: 'red', __source: { fileName: _jsxFileName, lineNumber: 46 }, __self: this }, /* istanbul ignore next */'delete')), __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this }));
+
+
+
+
+      }));
+  }
+
+
+  render() {
+    const { intl, tasks } = this.props;
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Activity.Activity, /* istanbul ignore next */{
+          title: intl.formatMessage({ id: 'tasks' }), __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+          id: 'name',
+          style: { margin: 15 },
+          ref: field => {this.name = field;},
+          floatingLabelText: intl.formatMessage({ id: 'name' }),
+          hintText: intl.formatMessage({ id: 'name' }),
+          type: 'Text'
+          //fullWidth={true}
+          , __source: { fileName: _jsxFileName, lineNumber: 61 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+            onTouchTap: this.handleAddTask, __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', color: 'green', __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: this }, /* istanbul ignore next */'add')),
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List.List, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 74 }, __self: this },
+          this.rednerTasks(tasks.list))));
+
+
+
+
+
+
+  }}
+
+
+
+Tasks.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  loadTasks: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  createTask: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  deleteTask: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+
+const mapStateToProps = state => {
+  const { tasks } = state;
+  return {
+    tasks };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+{
+  loadTasks: /* istanbul ignore next */_actions.loadTasks, filterTasks: /* istanbul ignore next */_actions.filterTasks, createTask: /* istanbul ignore next */_actions.createTask, deleteTask: /* istanbul ignore next */_actions.deleteTask, unloadTasks: /* istanbul ignore next */_actions.unloadTasks })(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(Tasks)));

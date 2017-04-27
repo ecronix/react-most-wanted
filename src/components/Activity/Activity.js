@@ -11,8 +11,8 @@ const styles={
   },
 }
 
-export const Activity = ({title, children, onBackClick, ...rest}) =>  {
 
+export const Activity = ({title, children, onBackClick,  ...rest}) =>  {
 
   const getIconElementLeft = () => {
     if(onBackClick){

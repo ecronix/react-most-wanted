@@ -1,0 +1,39 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.getVisibleTasks = undefined;exports.
+
+
+getTasks = getTasks; /* istanbul ignore next */exports.
+
+
+
+getTaskList = getTaskList; /* istanbul ignore next */exports.
+
+
+
+getTaskFilter = getTaskFilter; /* istanbul ignore next */exports.
+
+
+
+getDeletedTask = getDeletedTask;var /* istanbul ignore next */_reselect = require('reselect');function getTasks(state) {return state.tasks;}function getTaskList(state) {return getTasks(state).list;}function getTaskFilter(state) {return getTasks(state).filter;}function getDeletedTask(state) {
+  return getTasks(state).deleted;
+}
+
+
+//=====================================
+//  MEMOIZED SELECTORS
+//-------------------------------------
+
+const getVisibleTasks = /* istanbul ignore next */exports.getVisibleTasks = /* istanbul ignore next */(0, _reselect.createSelector)(
+getTaskList,
+getTaskFilter,
+(tasks, filter) => {
+  switch (filter) {
+    case 'active':
+      return tasks.filter(task => !task.completed);
+
+    case 'completed':
+      return tasks.filter(task => task.completed);
+
+    default:
+      return tasks;}
+
+});

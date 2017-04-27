@@ -53,6 +53,7 @@ const messages=defineMessages({
   email_verified: 'E-Mail ist verifiziert',
   send_verification_email: 'Verifizierungs E-Mail senden',
   send_verification_email_again: 'Verifizierungs E-Mail wieder senden',
+  tasks: 'Aufgaben',
 
 });
 

@@ -24,7 +24,7 @@ const App = ({ intl, muiTheme, auth, isAuthorised }) => {
         <DrawerHeader/>
         <DrawerContent/>
       </ResponsiveDrawer>
-      <BodyContainer>
+      <BodyContainer style={{backgroundColor: muiTheme.palette.canvasColor}}>
         <Routes isAuthorised={isAuthorised}/>
       </BodyContainer>
     </div>

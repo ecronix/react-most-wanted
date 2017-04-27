@@ -76,6 +76,12 @@ const DrawerContent = (props) => {
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
     {
+      value:'/tasks',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({id: 'tasks'}),
+      leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
+    },
+    {
       value:'/about',
       visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'about'}),

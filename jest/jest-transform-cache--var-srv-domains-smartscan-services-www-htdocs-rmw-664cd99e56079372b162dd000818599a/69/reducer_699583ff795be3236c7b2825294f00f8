@@ -1,0 +1,48 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;exports.default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+tasks;var /* istanbul ignore next */_types = require('./types');const initialState = /* istanbul ignore next */exports.initialState = { initialized: false, deleted: null, filter: '', list: [], previous: null };function tasks(state = initialState, { payload, type }) {
+  switch (type) {
+    case /* istanbul ignore next */_types.CREATE_TASK_SUCCESS:
+      return (/* istanbul ignore next */Object.assign({}, state, { list: [...state.list, payload] }));
+
+    case /* istanbul ignore next */_types.DELETE_TASK_SUCCESS:
+      return (/* istanbul ignore next */Object.assign({}, state, {
+          deleted: payload,
+          previous: state.list,
+          list: state.list.filter(task => task.key !== payload.key) }));
+
+
+    case /* istanbul ignore next */_types.FILTER_TASKS:
+      return (/* istanbul ignore next */Object.assign({}, state, { filter: payload, list: payload }));
+
+    case /* istanbul ignore next */_types.LOAD_TASKS_SUCCESS:
+      return (/* istanbul ignore next */Object.assign({}, state, { initialized: true, list: payload }));
+
+    case /* istanbul ignore next */_types.UPDATE_TASK_SUCCESS:
+      return state.merge({
+        deleted: null,
+        previous: null,
+        list: state.list.map(task => {
+          return task.key === payload.key ? payload : task;
+        }) });
+
+
+
+    default:
+      return state;}
+
+}

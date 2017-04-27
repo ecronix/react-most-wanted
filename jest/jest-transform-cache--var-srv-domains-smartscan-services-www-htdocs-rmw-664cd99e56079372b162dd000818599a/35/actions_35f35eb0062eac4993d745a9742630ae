@@ -1,0 +1,127 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.taskList = exports.Task = undefined;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+createTask = createTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskError = createTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskSuccess = createTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTask = deleteTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTaskError = deleteTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTaskSuccess = deleteTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+undeleteTask = undeleteTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+undeleteTaskError = undeleteTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTaskError = updateTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTask = updateTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTaskSuccess = updateTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+loadTasksSuccess = loadTasksSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+filterTasks = filterTasks; /* istanbul ignore next */exports.
+
+
+
+
+
+
+loadTasks = loadTasks; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+unloadTasks = unloadTasks;var /* istanbul ignore next */_selectors = require('./selectors');var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);var /* istanbul ignore next */_firebaseList = require('../../utils/firebase-list'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}const Task = /* istanbul ignore next */exports.Task = { completed: false, key: null, title: null };const taskList = /* istanbul ignore next */exports.taskList = new /* istanbul ignore next */_firebaseList.FirebaseList({ onAdd: createTaskSuccess, onChange: updateTaskSuccess, onLoad: loadTasksSuccess, onRemove: deleteTaskSuccess }, Task);function createTask(title) {return dispatch => {taskList.push({ completed: false, title }).catch(error => dispatch(createTaskError(error)));};}function createTaskError(error) {return { type: types.CREATE_TASK_ERROR, payload: error };}function createTaskSuccess(task) {return { type: types.CREATE_TASK_SUCCESS, payload: task };}function deleteTask(task) {return dispatch => {taskList.remove(task.key).catch(error => dispatch(deleteTaskError(error)));};}function deleteTaskError(error) {return { type: types.DELETE_TASK_ERROR, payload: error };}function deleteTaskSuccess(task) {return { type: types.DELETE_TASK_SUCCESS, payload: task };}function undeleteTask() {return (dispatch, getState) => {const task = /* istanbul ignore next */(0, _selectors.getDeletedTask)(getState());if (task) {taskList.set(task.key, { completed: task.completed, title: task.title }).catch(error => dispatch(undeleteTaskError(error)));}};}function undeleteTaskError(error) {return { type: types.UNDELETE_TASK_ERROR, payload: error };}function updateTaskError(error) {return { type: types.UPDATE_TASK_ERROR, payload: error };}function updateTask(task, changes) {return dispatch => {taskList.update(task.key, changes).catch(error => dispatch(updateTaskError(error)));};}function updateTaskSuccess(task) {return { type: types.UPDATE_TASK_SUCCESS, payload: task };}function loadTasksSuccess(tasks) {return { type: types.LOAD_TASKS_SUCCESS, payload: tasks };}function filterTasks(filterType) {return { type: types.FILTER_TASKS, payload: { filterType } };}function loadTasks() {return (dispatch, getState) => {const { auth } = getState();taskList.path = `tasks/${auth.id}`;taskList.subscribe(dispatch);};}function unloadTasks() {
+  taskList.unsubscribe();
+  return {
+    type: types.UNLOAD_TASKS_SUCCESS };
+
+}

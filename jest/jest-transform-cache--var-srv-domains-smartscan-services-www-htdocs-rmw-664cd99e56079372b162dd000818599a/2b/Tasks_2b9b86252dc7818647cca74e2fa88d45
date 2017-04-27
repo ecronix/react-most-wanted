@@ -1,0 +1,71 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.Tasks = undefined;var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/Tasks/Tasks.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Activity = require('../../components/Activity');
+var /* istanbul ignore next */_actions = require('../../store/tasks/actions'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    paddingTop: 50 } };
+
+
+
+
+class Tasks extends /* istanbul ignore next */_react.Component {
+
+
+  componentWillMount() {
+
+    const { loadTasks } = this.props;
+
+    //loadTasks();
+  }
+
+
+  render() {
+    const { intl } = this.props;
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Activity.Activity, /* istanbul ignore next */{
+          title: intl.formatMessage({ id: 'my_account' }), __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 39 }, __self: this })));
+
+
+
+
+
+
+  }} /* istanbul ignore next */exports.Tasks = Tasks;
+
+
+
+Tasks.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  loadTasks: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+
+
+const mapStateToProps = state => {
+  const { auth, router } = state;
+  return {
+    auth,
+    router };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+{
+  loadTasks: /* istanbul ignore next */_actions.loadTasks })(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(Tasks)));

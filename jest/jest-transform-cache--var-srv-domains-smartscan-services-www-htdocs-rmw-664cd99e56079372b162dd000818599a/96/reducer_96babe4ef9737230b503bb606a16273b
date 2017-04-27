@@ -1,0 +1,54 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);
+
+var /* istanbul ignore next */_seamlessImmutable = require('seamless-immutable'); /* istanbul ignore next */var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}
+
+const initialState = /* istanbul ignore next */exports.initialState = /* istanbul ignore next */(0, _seamlessImmutable2.default)({
+  deleted: null,
+  filter: '',
+  list: [],
+  previous: null });
+
+
+
+const tasks = (state = initialState, { payload, type }) => {
+  switch (type) {
+    case types.CREATE_TASK_SUCCESS:
+      return state.merge({
+        deleted: null,
+        previous: null,
+        list: state.deleted && state.deleted.key === payload.key ?
+        state.previous :
+        state.list.unshift(payload) });
+
+
+    case types.DELETE_TASK_SUCCESS:
+      return state.merge({
+        deleted: payload,
+        previous: state.list,
+        list: state.list.filter(task => task.key !== payload.key) });
+
+
+    case types.FILTER_TASKS:
+      return state.set('filter', payload.filterType || '');
+
+    case types.LOAD_TASKS_SUCCESS:
+      return state.set('list', payload.reverse());
+
+    case types.UPDATE_TASK_SUCCESS:
+      return state.merge({
+        deleted: null,
+        previous: null,
+        list: state.list.map(task => {
+          return task.key === payload.key ? payload : task;
+        }) });
+
+
+    case types.SIGN_OUT_SUCCESS:
+      return initialState;
+
+    default:
+      return state;}
+
+}; /* istanbul ignore next */exports.default =
+
+tasks;

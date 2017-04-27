@@ -1,0 +1,48 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.Activity = undefined;var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Activity/Activity.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_materialUiResponsiveDrawer = require('material-ui-responsive-drawer');
+var /* istanbul ignore next */_reactHelmet = require('react-helmet');
+var /* istanbul ignore next */_IconButton = require('material-ui/IconButton'); /* istanbul ignore next */var _IconButton2 = _interopRequireDefault(_IconButton);
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}
+
+const Activity = ( /* istanbul ignore next */_ref) => {/* istanbul ignore next */let { title, children, onBackClick, muiTheme } = _ref,rest = _objectWithoutProperties(_ref, ['title', 'children', 'onBackClick', 'muiTheme']);
+
+  const styles = {
+    container: {
+      marginTop: 64,
+      height: '100%' } };
+
+
+
+
+  const getIconElementLeft = () => {
+    if (onBackClick) {
+      return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: undefined },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: undefined }, /* istanbul ignore next */'chevron_left')));
+
+    } else {
+      return undefined;
+    }
+  };
+
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { height: '100%' }, __source: { fileName: _jsxFileName, lineNumber: 29 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactHelmet.Helmet, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 30 }, __self: undefined },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'title', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 31 }, __self: undefined }, title)),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_materialUiResponsiveDrawer.ResponsiveAppBar, /* istanbul ignore next */Object.assign({
+        title: title,
+        showMenuIconButton: onBackClick !== undefined ? true : undefined,
+        onLeftIconButtonTouchTap: onBackClick,
+        iconElementLeft: getIconElementLeft() },
+      rest, { __source: { fileName: _jsxFileName, lineNumber: 33 }, __self: undefined })),
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: undefined },
+        children)));
+
+
+
+
+}; /* istanbul ignore next */exports.Activity = Activity;exports.default =
+
+/* istanbul ignore next */(0, _muiThemeable2.default)()(Activity);

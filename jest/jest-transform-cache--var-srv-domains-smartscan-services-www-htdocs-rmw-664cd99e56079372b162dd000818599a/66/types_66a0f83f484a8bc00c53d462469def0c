@@ -1,0 +1,14 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const CREATE_TASK_ERROR = /* istanbul ignore next */exports.CREATE_TASK_ERROR = 'CREATE_TASK_ERROR';
+const CREATE_TASK_SUCCESS = /* istanbul ignore next */exports.CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
+
+const DELETE_TASK_ERROR = /* istanbul ignore next */exports.DELETE_TASK_ERROR = 'DELETE_TASK_ERROR';
+const DELETE_TASK_SUCCESS = /* istanbul ignore next */exports.DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCCESS';
+
+const UNDELETE_TASK_ERROR = /* istanbul ignore next */exports.UNDELETE_TASK_ERROR = 'UNDELETE_TASK_ERROR';
+
+const UPDATE_TASK_ERROR = /* istanbul ignore next */exports.UPDATE_TASK_ERROR = 'UPDATE_TASK_ERROR';
+const UPDATE_TASK_SUCCESS = /* istanbul ignore next */exports.UPDATE_TASK_SUCCESS = 'UPDATE_TASK_SUCCESS';
+
+const FILTER_TASKS = /* istanbul ignore next */exports.FILTER_TASKS = 'FILTER_TASKS';
+const LOAD_TASKS_SUCCESS = /* istanbul ignore next */exports.LOAD_TASKS_SUCCESS = 'LOAD_TASKS_SUCCESS';
+const UNLOAD_TASKS_SUCCESS = /* istanbul ignore next */exports.UNLOAD_TASKS_SUCCESS = 'UNLOAD_TASKS_SUCCESS';

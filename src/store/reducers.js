@@ -5,6 +5,7 @@ import { routerReducer } from 'react-router-redux';
 import auth from './auth/reducer';
 import locale from './locale/reducer';
 import theme from './theme/reducer';
+import tasks from './tasks/reducer';
 
 const reducers = combineReducers({
   browser: responsiveStateReducer,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
   router: routerReducer,
   auth,
   locale,
-  theme
+  theme,
+  tasks
 })
 
 export default reducers;
