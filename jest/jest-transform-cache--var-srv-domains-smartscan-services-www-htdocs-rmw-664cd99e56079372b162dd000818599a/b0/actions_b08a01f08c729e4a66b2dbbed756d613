@@ -1,0 +1,77 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.loadTasks = exports.deleteTask = exports.createTask = undefined;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+createTaskError = createTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskSuccess = createTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+loadTasksSuccess = loadTasksSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsCreating = setIsCreating; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsFetching = setIsFetching; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+unloadTasks = unloadTasks;var /* istanbul ignore next */_firebase = require('../../utils/firebase');var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}const refRoot = 'public_tasks';const createTask = /* istanbul ignore next */exports.createTask = task => dispatch => {dispatch(setIsCreating(false)); /* istanbul ignore next */_firebase.firebaseDb.ref(refRoot).push(task);};const deleteTask = /* istanbul ignore next */exports.deleteTask = key => dispatch => {/* istanbul ignore next */_firebase.firebaseDb.ref(`${refRoot}/${key}`).remove();};function createTaskError(error) {return { type: types.CREATE_TASK_ERROR, payload: error };}function createTaskSuccess(task) {return { type: types.CREATE_TASK_SUCCESS, payload: task };}function loadTasksSuccess(tasks) {return { type: types.LOAD_TASKS_SUCCESS, payload: { list: tasks } };}function setIsCreating(isCreating) {return { type: types.CREATE_TASK, payload: { isCreating } };}function setIsFetching(isFetching) {return { type: types.FETCH_TASKS, payload: { isFetching } };}const loadTasks = /* istanbul ignore next */exports.loadTasks = () => (dispatch, getState) => {const tasksRef = /* istanbul ignore next */_firebase.firebaseDb.ref(refRoot);dispatch(setIsFetching(true));tasksRef.on('value', snap => {if (getState().tasks.list !== snap.val()) {dispatch(loadTasksSuccess(snap.val()));}});};function unloadTasks() {
+  const tasksRef = /* istanbul ignore next */_firebase.firebaseDb.ref(refRoot);
+  tasksRef.off();
+
+  return {
+    type: types.UNLOAD_TASKS_SUCCESS };
+
+}

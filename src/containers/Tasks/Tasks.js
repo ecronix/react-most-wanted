@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,6 +15,7 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
 
 const styles={
   center_container:{
@@ -31,6 +33,8 @@ class Tasks extends Component {
   constructor(props) {
     super(props);
     this.name = null;
+    this.list = null;
+    this.shouldScrollBottom = true;
   }
 
   componentWillMount() {
@@ -44,15 +48,32 @@ class Tasks extends Component {
     }
   }
 
+  scrollToBottom = () => {
+
+    const node = ReactDOM.findDOMNode(this.messagesEnd);
+    node.scrollIntoView({behavior: "smooth"});
+  }
+
   componentWillUnmount() {
-    //console.log('test');
     this.props.unloadTasks();
   }
 
+  componentDidUpdate() {
+    // TODO: just a fast solution. Repair it ASAP
+    window.scrollTo(0, 100000)
+  }
+
   handleAddTask = () => {
-    const {createTask}=this.props;
-    createTask(this.name.getValue());
-    this.name.setState({ value: "" })
+    const {createTask, auth}=this.props;
+
+    const newTask={
+      title: this.name.getValue(),
+      userName: auth.displayName,
+      userPhotoURL: auth.photoURL,
+      completed: false
+    }
+
+    createTask(newTask);
   }
 
   rednerTasks(tasks) {
@@ -62,7 +83,9 @@ class Tasks extends Component {
       return <div key={key}>
         <ListItem
           key={key}
-          primaryText={task}
+          leftAvatar={<Avatar src={task.userPhotoURL} />}
+          primaryText={task.title}
+          secondaryText={task.userName}
           id={key}
           rightIconButton={
             <IconButton
@@ -70,9 +93,8 @@ class Tasks extends Component {
               <FontIcon className="material-icons" color={'red'}>delete</FontIcon>
             </IconButton>
           }
-
         />
-        <Divider />
+        <Divider inset={true}/>
       </div>
     });
   }
@@ -87,59 +109,74 @@ class Tasks extends Component {
         <div >
           {tasks.isFetching &&
             <div style={styles.center_container}>
-              <CircularProgress size={80} thickness={5} />
+              <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
             </div>
           }
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
-            <List  id='test' style={{height: '100%'}}>
+            <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
               {this.rednerTasks(tasks.list)}
             </List>
           </div>
 
+          <div style={{
+            display: 'flex',
+            zIndex:3,
+            alignItems:
+            'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+            position: 'fixed',
+            bottom: 15,
+            left:0,
+            width: '100%'
+          }}>
 
-
-          <div style={{display: 'flex', zIndex:3, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', position: 'fixed', bottom: 15, left:0, width: '100%'}}>
-
-            { tasks.isCreating &&
-              <Chip>
+          { tasks.isCreating &&
+            <Chip>
+              <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
+                <IconButton
+                  onTouchTap={()=>{setIsCreating(false)}}>
+                  <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>close</FontIcon>
+                </IconButton>
                 <TextField
+                  id="public_task"
                   onKeyDown={this.handleKeyDown}
                   ref={(field) => { this.name = field; this.name && this.name.focus(); }}
-                  hintText={intl.formatMessage({id: 'name'})}
+                  type="Text"
                 />
                 <IconButton
                   onTouchTap={this.handleAddTask}>
                   <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
                 </IconButton>
-              </Chip>
-            }
+              </div>
+            </Chip>
+          }
 
-            { !tasks.isCreating &&
-              <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
-                <FontIcon className="material-icons" >add</FontIcon>
-              </FloatingActionButton>
-            }
-
+          { !tasks.isCreating &&
+            <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+              <FontIcon className="material-icons" >add</FontIcon>
+            </FloatingActionButton>
+          }
+          <div style={ {float:"left", clear: "both"} }
+            ref={(el) => { this.messagesEnd = el; }}>
           </div>
-
-
-
-
-
         </div>
 
+      </div>
 
-      </Activity>
-    );
 
-  }
+    </Activity>
+  );
+
+}
 
 }
 
 Tasks.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
   loadTasks: PropTypes.func.isRequired,
   createTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
@@ -148,9 +185,10 @@ Tasks.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { tasks } = state;
+  const { tasks, auth } = state;
   return {
-    tasks
+    tasks,
+    auth
   };
 };
 

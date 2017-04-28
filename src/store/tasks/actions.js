@@ -1,17 +1,19 @@
 import {firebaseDb} from '../../utils/firebase';
 import * as types from './types';
 
+const refRoot= 'public_tasks';
+
 
 export const createTask = (task) => dispatch => {
 
   dispatch(setIsCreating(false));
-  
-  firebaseDb.ref('tasks')
+
+  firebaseDb.ref(refRoot)
     .push(task);
 }
 
 export const deleteTask = (key) => dispatch => {
-  firebaseDb.ref(`tasks/${key}`)
+  firebaseDb.ref(`${refRoot}/${key}`)
     .remove();
 }
 
@@ -53,7 +55,7 @@ export function setIsFetching(isFetching) {
 
 
 export const loadTasks = () => (dispatch, getState) => {
-  const tasksRef=firebaseDb.ref('tasks');
+  const tasksRef=firebaseDb.ref(refRoot);
 
   dispatch(setIsFetching(true));
 
@@ -66,7 +68,7 @@ export const loadTasks = () => (dispatch, getState) => {
 
 
 export function unloadTasks() {
-  const tasksRef=firebaseDb.ref('tasks');
+  const tasksRef=firebaseDb.ref(refRoot);
   tasksRef.off();
 
   return {
