@@ -1,38 +1,31 @@
-import {
-  CREATE_TASK_SUCCESS,
-  DELETE_TASK_SUCCESS,
-  FILTER_TASKS,
-  LOAD_TASKS_SUCCESS,
-  UPDATE_TASK_SUCCESS
-} from './types';
+import * as types from './types';
 
 export const initialState={
-  initialized: false,
-  deleted: null,
-  filter: '',
+  isFetching: false,
+  isCreating: false,
   list: [],
-  previous: null
 }
 
 export default function tasks(state = initialState, {payload, type}) {
   switch (type) {
-    case CREATE_TASK_SUCCESS:
-    return {...state, list: [...(state.list), payload]}
+    case types.CREATE_TASK_SUCCESS:
+    return {...state, isCreating:false, list: [...(state.list), payload]}
 
-    case DELETE_TASK_SUCCESS:
+    case types.DELETE_TASK_SUCCESS:
     return { ...state,
       deleted: payload,
       previous: state.list,
       list: state.list.filter(task => task.key !== payload.key)
     };
 
-    case FILTER_TASKS:
-    return {...state, filter: payload, list: payload};
+    case types.CREATE_TASK:
+    case types.FETCH_TASKS:
+    return {...state, ...payload};
 
-    case LOAD_TASKS_SUCCESS:
-    return  {...state, initialized: true, list: payload};
+    case types.LOAD_TASKS_SUCCESS:
+    return  {...state, isFetching: false, ...payload};
 
-    case UPDATE_TASK_SUCCESS:
+    case types.UPDATE_TASK_SUCCESS:
     return state.merge({
       deleted: null,
       previous: null,

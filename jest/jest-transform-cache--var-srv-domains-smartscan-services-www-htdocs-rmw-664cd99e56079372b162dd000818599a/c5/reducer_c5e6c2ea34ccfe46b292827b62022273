@@ -1,0 +1,41 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;exports.default =
+
+
+
+
+
+
+
+tasks;var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}const initialState = /* istanbul ignore next */exports.initialState = { isFetching: false, isCreating: false, list: [] };function tasks(state = initialState, { payload, type }) {
+  switch (type) {
+    case types.CREATE_TASK_SUCCESS:
+      return (/* istanbul ignore next */Object.assign({}, state, { isCreating: false, list: [...state.list, payload] }));
+
+    case types.DELETE_TASK_SUCCESS:
+      return (/* istanbul ignore next */Object.assign({}, state, {
+          deleted: payload,
+          previous: state.list,
+          list: state.list.filter(task => task.key !== payload.key) }));
+
+
+    case types.CREATE_TASK:
+    case types.FETCH_TASKS:
+      return (/* istanbul ignore next */Object.assign({}, state, payload));
+
+    case types.LOAD_TASKS_SUCCESS:
+      return (/* istanbul ignore next */Object.assign({}, state, { isFetching: false }, payload));
+
+    case types.UPDATE_TASK_SUCCESS:
+      return state.merge({
+        deleted: null,
+        previous: null,
+        list: state.list.map(task => {
+          return task.key === payload.key ? payload : task;
+        }) });
+
+
+
+    default:
+      return state;}
+
+}

@@ -1,0 +1,37 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/RestrictedRoute/RestrictedRoute.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_selectors = require('../../store/auth/selectors'); /* istanbul ignore next */var authSelectors = _interopRequireWildcard(_selectors);
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}
+
+
+const RestrictedRoute = ( /* istanbul ignore next */_ref) => /* istanbul ignore next */{let { type, isAuthorised, component: Component } = _ref,rest = _objectWithoutProperties(_ref, ['type', 'isAuthorised', 'component']);return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */Object.assign({}, rest, { render: props =>
+      isAuthorised && type === 'private' || !isAuthorised && type === 'public' ?
+      /* istanbul ignore next */_react2.default.createElement(Component, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 11 }, __self: undefined })) :
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Redirect, /* istanbul ignore next */{ to: {
+          pathname: type === 'private' ? '/signin' : '/',
+          state: { from: props.location } }, __source: { fileName: _jsxFileName, lineNumber: 13 }, __self: undefined }), __source: { fileName: _jsxFileName, lineNumber: 9 }, __self: undefined })));};
+
+
+
+
+
+RestrictedRoute.propTypes = {
+  isAuthorised: /* istanbul ignore next */_propTypes2.default.bool.isRequired };
+
+
+
+const mapStateToProps = state => {
+  const { auth } = state;
+
+  return {
+    isAuthorised: authSelectors.isAuthorised(auth) };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps)(
+RestrictedRoute);

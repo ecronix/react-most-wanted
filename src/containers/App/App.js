@@ -13,7 +13,7 @@ import * as authSelectors from '../../store/auth/selectors'
 const App = ({ intl, muiTheme, auth, isAuthorised }) => {
 
   return (
-    <div>
+    <div style={{backgroundColor: muiTheme.palette.canvasColor}}>
       <Helmet>
         <title>{intl.formatMessage({id: 'app_name'})}</title>
         <meta name="theme-color" content={muiTheme.palette.primary1Color}/>
@@ -25,7 +25,7 @@ const App = ({ intl, muiTheme, auth, isAuthorised }) => {
         <DrawerContent/>
       </ResponsiveDrawer>
       <BodyContainer style={{backgroundColor: muiTheme.palette.canvasColor}}>
-        <Routes isAuthorised={isAuthorised}/>
+        <Routes />
       </BodyContainer>
     </div>
   );

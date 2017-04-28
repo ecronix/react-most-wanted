@@ -7,47 +7,20 @@ import { ResetPassword } from '../../containers/ResetPassword';
 import { PageNotFound } from '../../components/PageNotFound';
 import { SignIn } from '../../containers/SignIn';
 import { SignUp } from '../../containers/SignUp';
-import { Route , Switch, Redirect } from 'react-router';
+import { RestrictedRoute } from '../../containers/RestrictedRoute';
+import { Route , Switch } from 'react-router';
 
-const Routes = ({isAuthorised}) => {
-
-  const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-      isAuthorised ? (
-        <Component {...props}/>
-      ) : (
-        <Redirect to={{
-          pathname: '/signin',
-          state: { from: props.location }
-        }}/>
-      )
-    )}/>
-  )
-
-  const PublicRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-      !isAuthorised ? (
-        <Component {...props}/>
-      ) : (
-        <Redirect to={{
-          pathname: '/',
-          state: { from: props.location }
-        }}/>
-      )
-    )}/>
-  )
-
-
+const Routes = () => {
   return (
     <Switch>
-      <PrivateRoute path="/" exact component={Dashboard} />
-      <PrivateRoute path="/dashboard" exact component={Dashboard} />
-      <Route path="/tasks" exact component={Tasks} />
-      <PrivateRoute path="/about" exact component={About}  />
-      <PrivateRoute path="/my_account" exact component={MyAccount} />
-      <PublicRoute path="/signin" component={SignIn} />
-      <PublicRoute path="/signup" component={SignUp} />
-      <PublicRoute path="/reset" component={ResetPassword} />
+      <RestrictedRoute type='private' path="/" exact component={Dashboard} />
+      <RestrictedRoute type='private' path="/dashboard" exact component={Dashboard} />
+      <RestrictedRoute type='private' path="/tasks" exact component={Tasks} />
+      <RestrictedRoute type='private' path="/about" exact component={About}  />
+      <RestrictedRoute type='private' path="/my_account"  exact component={MyAccount} />
+      <RestrictedRoute type='public' path="/signin" component={SignIn} />
+      <RestrictedRoute type='public' path="/signup" component={SignUp} />
+      <RestrictedRoute type='public' path="/reset" component={ResetPassword} />
       <Route path="/*" component={PageNotFound} />
     </Switch>
   );

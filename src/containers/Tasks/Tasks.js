@@ -5,11 +5,26 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../components/Activity';
-import { loadTasks, filterTasks, createTask, deleteTask, unloadTasks } from '../../store/tasks/actions';
+import { loadTasks, filterTasks, createTask, deleteTask, unloadTasks, setIsCreating } from '../../store/tasks/actions';
 import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import CircularProgress from 'material-ui/CircularProgress';
+import Chip from 'material-ui/Chip';
+
+const styles={
+  center_container:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    margin: 16,
+  }
+}
+
 
 class Tasks extends Component {
 
@@ -22,7 +37,15 @@ class Tasks extends Component {
     this.props.loadTasks();
   }
 
+  handleKeyDown = (event) => {
+
+    if(event.keyCode===13){
+      this.handleAddTask();
+    }
+  }
+
   componentWillUnmount() {
+    //console.log('test');
     this.props.unloadTasks();
   }
 
@@ -36,44 +59,75 @@ class Tasks extends Component {
     const {deleteTask} =this.props;
 
     return _.map(tasks, (task, key) => {
-      return <ListItem
-        key={key}
-        primaryText={task}
-        id={key}
-        rightIconButton={
-          <IconButton
-            onTouchTap={()=>{deleteTask(key);}}>
-            <FontIcon className="material-icons" color={'red'}>delete</FontIcon>
-          </IconButton>
-        }
+      return <div key={key}>
+        <ListItem
+          key={key}
+          primaryText={task}
+          id={key}
+          rightIconButton={
+            <IconButton
+              onTouchTap={()=>{deleteTask(key);}}>
+              <FontIcon className="material-icons" color={'red'}>delete</FontIcon>
+            </IconButton>
+          }
 
-      />
+        />
+        <Divider />
+      </div>
     });
   }
 
 
   render(){
-    const {intl, tasks} =this.props;
+    const {intl, tasks, setIsCreating, muiTheme} =this.props;
 
     return (
       <Activity
         title={intl.formatMessage({id: 'tasks'})}>
-        <TextField
-          id="name"
-          style={{margin: 15}}
-          ref={(field) => { this.name = field; }}
-          floatingLabelText={intl.formatMessage({id: 'name'})}
-          hintText={intl.formatMessage({id: 'name'})}
-          type="Text"
-          //fullWidth={true}
-        />
-        <IconButton
-          onTouchTap={this.handleAddTask}>
-          <FontIcon className="material-icons" color={'green'}>add</FontIcon>
-        </IconButton>
-        <List>
-          {this.rednerTasks(tasks.list)}
-        </List>
+        <div >
+          {tasks.isFetching &&
+            <div style={styles.center_container}>
+              <CircularProgress size={80} thickness={5} />
+            </div>
+          }
+
+          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
+            <List  id='test' style={{height: '100%'}}>
+              {this.rednerTasks(tasks.list)}
+            </List>
+          </div>
+
+
+
+          <div style={{display: 'flex', zIndex:3, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', position: 'fixed', bottom: 15, left:0, width: '100%'}}>
+
+            { tasks.isCreating &&
+              <Chip>
+                <TextField
+                  onKeyDown={this.handleKeyDown}
+                  ref={(field) => { this.name = field; this.name && this.name.focus(); }}
+                  hintText={intl.formatMessage({id: 'name'})}
+                />
+                <IconButton
+                  onTouchTap={this.handleAddTask}>
+                  <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
+                </IconButton>
+              </Chip>
+            }
+
+            { !tasks.isCreating &&
+              <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+                <FontIcon className="material-icons" >add</FontIcon>
+              </FloatingActionButton>
+            }
+
+          </div>
+
+
+
+
+
+        </div>
 
 
       </Activity>
@@ -89,6 +143,7 @@ Tasks.propTypes = {
   loadTasks: PropTypes.func.isRequired,
   createTask: PropTypes.func.isRequired,
   deleteTask: PropTypes.func.isRequired,
+  setIsCreating: PropTypes.func.isRequired,
 
 };
 
@@ -103,6 +158,6 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-    loadTasks, filterTasks, createTask, deleteTask, unloadTasks
+    loadTasks, filterTasks, createTask, deleteTask, unloadTasks, setIsCreating
   }
 )(injectIntl(muiThemeable()(Tasks)));

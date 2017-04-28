@@ -3,16 +3,18 @@ import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import { Helmet } from 'react-helmet';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
-
-const styles={
-  container:{
-    marginTop: 64,
-    height: '100%'
-  },
-}
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
 
-export const Activity = ({title, children, onBackClick,  ...rest}) =>  {
+export const Activity = ({muiTheme, title, children, onBackClick,  ...rest}) =>  {
+
+  const styles={
+    container:{
+      backgroundColor: muiTheme.palette.canvasColor,
+      marginTop: 64,
+      height: '100%'
+    },
+  }
 
   const getIconElementLeft = () => {
     if(onBackClick){
@@ -25,7 +27,7 @@ export const Activity = ({title, children, onBackClick,  ...rest}) =>  {
   }
 
   return (
-    <div style={{height:'100%'}}>
+    <div >
       <Helmet>
         <title>{title}</title>
       </Helmet>
@@ -44,4 +46,5 @@ export const Activity = ({title, children, onBackClick,  ...rest}) =>  {
 
 }
 
-export default Activity;
+
+export default muiThemeable()(Activity);

@@ -319,171 +319,168 @@ export class MyAccount extends Component {
 
               <h3>{intl.formatMessage({id: 'email'})}</h3>
               <IconButton
-                tooltip={intl.formatMessage({id: auth.emailVerified===true?'email_verified':'email_not_verified'})}
-                secondary={true}
-                >
-                  <FontIcon
-                    secondary={true}
-                    color={auth.emailVerified===true?muiTheme.palette.primary1Color:muiTheme.palette.accent1Color}
-                    style={{'paddingLeft': 10}}
-                    className="material-icons">
-                    {auth.emailVerified===true?'verified_user':'error'}
-                  </FontIcon>
-                </IconButton>
+                tooltip={intl.formatMessage({id: auth.emailVerified===true?'email_verified':'email_not_verified'})}>
+                <FontIcon
+                  color={auth.emailVerified===true?muiTheme.palette.primary1Color:muiTheme.palette.accent1Color}
+                  style={{'paddingLeft': 10}}
+                  className="material-icons">
+                  {auth.emailVerified===true?'verified_user':'error'}
+                </FontIcon>
+              </IconButton>
 
-              </div>
-              <div style={{marginBottom: 20}}>
-                <TextField
-                  id="email"
-                  ref={(field) => { this.email = field; }}
-                  defaultValue={auth.email}
-                  errorText={getValidationErrorMessage('email')}
-                  floatingLabelText={intl.formatMessage({id: 'email'})}
-                  hintText={intl.formatMessage({id: 'password'})}
-                  type="Email"
-                  fullWidth={true}
-                /><br />
-              </div>
-
-              <RaisedButton
-                label={intl.formatMessage({id: 'change_email'})}
-                disabled={auth.isFetching}
-                primary={true}
-                style={styles.button}
+            </div>
+            <div style={{marginBottom: 20}}>
+              <TextField
+                id="email"
+                ref={(field) => { this.email = field; }}
+                defaultValue={auth.email}
+                errorText={getValidationErrorMessage('email')}
+                floatingLabelText={intl.formatMessage({id: 'email'})}
+                hintText={intl.formatMessage({id: 'password'})}
+                type="Email"
                 fullWidth={true}
-                onTouchTap={this.handleEmailChangeSubmit}
-                icon={
-                  <FontIcon
-                    className="material-icons">
-                    lock
-                  </FontIcon>
-                }
-              />
-              <br />
-              {auth && auth.emailVerified===false &&
-                <RaisedButton
-                  label={intl.formatMessage({id: auth.isVerificationEmailSend===true?'send_verification_email_again':'send_verification_email'})}
-                  disabled={auth.isFetching}
-                  secondary={true}
-                  fullWidth={true}
-                  onTouchTap={()=>{sendEmailVerification()}}
-                  icon={
-                    <FontIcon
-                      className="material-icons">
-                      send
-                    </FontIcon>
-                  }
-                />
+              /><br />
+            </div>
+
+            <RaisedButton
+              label={intl.formatMessage({id: 'change_email'})}
+              disabled={auth.isFetching}
+              primary={true}
+              style={styles.button}
+              fullWidth={true}
+              onTouchTap={this.handleEmailChangeSubmit}
+              icon={
+                <FontIcon
+                  className="material-icons">
+                  lock
+                </FontIcon>
               }
-
-            </Paper>
-
-            <Paper  zDepth={2} style={styles.paper}>
-              <div style={styles.header}>
-
-                <h3>{intl.formatMessage({id: 'change_password'})}</h3>
-
-              </div>
-              <div style={{marginBottom: 20}}>
-                <TextField
-                  id="password"
-                  ref={(field) => { this.password = field; }}
-                  errorText={getValidationErrorMessage('password')}
-                  floatingLabelText={intl.formatMessage({id: 'password'})}
-                  hintText={intl.formatMessage({id: 'password'})}
-                  type="Password"
-                  fullWidth={true}
-                /><br />
-                <TextField
-                  id="confirm_password"
-                  ref={(field) => { this.confirm_password = field; }}
-                  errorText={getValidationErrorMessage('confirm_password')}
-                  floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
-                  hintText={intl.formatMessage({id: 'confirm_password'})}
-                  type="Password"
-                  fullWidth={true}
-                />
-              </div>
-
+            />
+            <br />
+            {auth && auth.emailVerified===false &&
               <RaisedButton
-                label={intl.formatMessage({id: 'change_password'})}
+                label={intl.formatMessage({id: auth.isVerificationEmailSend===true?'send_verification_email_again':'send_verification_email'})}
                 disabled={auth.isFetching}
-                primary={true}
+                secondary={true}
                 fullWidth={true}
-                onTouchTap={this.handlePasswordChangeSubmit}
+                onTouchTap={()=>{sendEmailVerification()}}
                 icon={
                   <FontIcon
                     className="material-icons">
-                    lock
+                    send
                   </FontIcon>
                 }
               />
-              <br />
-            </Paper>
+            }
 
-          </div>
+          </Paper>
 
-          <PasswordDialog />
-          <DeleteAccountDialog />
+          <Paper  zDepth={2} style={styles.paper}>
+            <div style={styles.header}>
 
-          <Snackbar
-            bodyStyle={{height:'100%'}}
-            open={isSnackbarOpen}
-            message={isSnackbarOpen?auth.error.message:''}
-            action="OK"
-            autoHideDuration={5000}
-            onRequestClose={()=>{authError(undefined)}}
-            onActionTouchTap={()=>{authError(undefined)}}
-          />
+              <h3>{intl.formatMessage({id: 'change_password'})}</h3>
 
-        </Activity>
-      );
+            </div>
+            <div style={{marginBottom: 20}}>
+              <TextField
+                id="password"
+                ref={(field) => { this.password = field; }}
+                errorText={getValidationErrorMessage('password')}
+                floatingLabelText={intl.formatMessage({id: 'password'})}
+                hintText={intl.formatMessage({id: 'password'})}
+                type="Password"
+                fullWidth={true}
+              /><br />
+              <TextField
+                id="confirm_password"
+                ref={(field) => { this.confirm_password = field; }}
+                errorText={getValidationErrorMessage('confirm_password')}
+                floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
+                hintText={intl.formatMessage({id: 'confirm_password'})}
+                type="Password"
+                fullWidth={true}
+              />
+            </div>
 
-    }
+            <RaisedButton
+              label={intl.formatMessage({id: 'change_password'})}
+              disabled={auth.isFetching}
+              primary={true}
+              fullWidth={true}
+              onTouchTap={this.handlePasswordChangeSubmit}
+              icon={
+                <FontIcon
+                  className="material-icons">
+                  lock
+                </FontIcon>
+              }
+            />
+            <br />
+          </Paper>
+
+        </div>
+
+        <PasswordDialog />
+        <DeleteAccountDialog />
+
+        <Snackbar
+          bodyStyle={{height:'100%'}}
+          open={isSnackbarOpen}
+          message={isSnackbarOpen?auth.error.message:''}
+          action="OK"
+          autoHideDuration={5000}
+          onRequestClose={()=>{authError(undefined)}}
+          onActionTouchTap={()=>{authError(undefined)}}
+        />
+
+      </Activity>
+    );
 
   }
 
-  MyAccount.propTypes = {
-    intl: intlShape.isRequired,
-    muiTheme: PropTypes.object.isRequired,
-    router: PropTypes.object.isRequired,
-    authError: PropTypes.func.isRequired,
-    updateUser: PropTypes.func.isRequired,
-    changePassword: PropTypes.func.isRequired,
-    changeEmail: PropTypes.func.isRequired,
-    setNewPhotoURL: PropTypes.func.isRequired,
-    updateUserPhoto: PropTypes.func.isRequired,
-    linkUserWithPopup: PropTypes.func.isRequired,
-    getValidationErrorMessage: PropTypes.func.isRequired,
-    setDeleteDialogOpen: PropTypes.func.isRequired,
-    reauthenticateUser: PropTypes.func.isRequired,
-    sendEmailVerification: PropTypes.func.isRequired,
+}
+
+MyAccount.propTypes = {
+  intl: intlShape.isRequired,
+  muiTheme: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
+  authError: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
+  changePassword: PropTypes.func.isRequired,
+  changeEmail: PropTypes.func.isRequired,
+  setNewPhotoURL: PropTypes.func.isRequired,
+  updateUserPhoto: PropTypes.func.isRequired,
+  linkUserWithPopup: PropTypes.func.isRequired,
+  getValidationErrorMessage: PropTypes.func.isRequired,
+  setDeleteDialogOpen: PropTypes.func.isRequired,
+  reauthenticateUser: PropTypes.func.isRequired,
+  sendEmailVerification: PropTypes.func.isRequired,
+};
+
+
+const mapStateToProps = (state) => {
+  const { auth, router } = state;
+  return {
+    auth,
+    router,
+    getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
   };
+};
 
+export const MyAccountTest = injectIntl(muiThemeable()(MyAccount));
 
-  const mapStateToProps = (state) => {
-    const { auth, router } = state;
-    return {
-      auth,
-      router,
-      getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
-    };
-  };
-
-  export const MyAccountTest = injectIntl(muiThemeable()(MyAccount));
-
-  export default connect(
-    mapStateToProps,
-    {
-      authError,
-      updateUser,
-      changePassword,
-      changeEmail,
-      setNewPhotoURL,
-      updateUserPhoto,
-      linkUserWithPopup,
-      setDeleteDialogOpen,
-      reauthenticateUser,
-      sendEmailVerification
-    }
-  )(injectIntl(muiThemeable()(MyAccount)));
+export default connect(
+  mapStateToProps,
+  {
+    authError,
+    updateUser,
+    changePassword,
+    changeEmail,
+    setNewPhotoURL,
+    updateUserPhoto,
+    linkUserWithPopup,
+    setDeleteDialogOpen,
+    reauthenticateUser,
+    sendEmailVerification
+  }
+)(injectIntl(muiThemeable()(MyAccount)));
