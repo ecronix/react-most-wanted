@@ -10,7 +10,7 @@ const Dashboard = ({intl}) => {
     <Activity
       iconElementRight={
         <FlatButton
-          href="https://github.com/TarikHuber/material-ui-responsive-drawer"
+          href="https://github.com/TarikHuber/react-most-wanted"
           target="_blank"
           rel="noopener"
           secondary={true}
