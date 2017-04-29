@@ -28,7 +28,7 @@ const locales = [
 
 export function getLocaleMessages(locale){
 
-  const localization=locales.find((l)=>{return l.locale===locale});
+  const localization=(locales && Array.isArray(locales))?locales.find((l)=>{return l.locale===locale}):false;
 
   if(localization){
     return localization.messages;
