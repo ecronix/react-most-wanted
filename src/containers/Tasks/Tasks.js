@@ -14,8 +14,8 @@ import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CircularProgress from 'material-ui/CircularProgress';
-import Chip from 'material-ui/Chip';
 import Avatar from 'material-ui/Avatar';
+import Paper from 'material-ui/Paper';
 
 const styles={
   center_container:{
@@ -24,6 +24,31 @@ const styles={
     justifyContent: 'center',
     flexDirection: 'column',
     margin: 16,
+  },
+  main_container:{
+    float: 'left',
+    position: 'relative',
+    left: '50%',
+  },
+
+  fixer_container:{
+    float: 'left',
+    position: 'relative',
+    left: '-50%',
+  },
+
+  button: {
+    position: 'fixed',
+    zIndex:3,
+    bottom: 35,
+    marginLeft: -24
+  },
+
+  text_input: {
+    position: 'fixed',
+    zIndex:3,
+    bottom: 35,
+    marginLeft: -155
   }
 }
 
@@ -119,57 +144,54 @@ class Tasks extends Component {
             </List>
           </div>
 
-          <div style={{
-            display: 'flex',
-            zIndex:3,
-            alignItems:
-            'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            position: 'fixed',
-            bottom: 15,
-            left:0,
-            width: '100%'
-          }}>
+          <div style={styles.main_container}>
+            <div style={styles.fixer_container}>
 
-          { tasks.isCreating &&
-            <Chip>
-              <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
-                <IconButton
-                  onTouchTap={()=>{setIsCreating(false)}}>
-                  <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>close</FontIcon>
-                </IconButton>
-                <TextField
-                  id="public_task"
-                  onKeyDown={this.handleKeyDown}
-                  ref={(field) => { this.name = field; this.name && this.name.focus(); }}
-                  type="Text"
-                />
-                <IconButton
-                  onTouchTap={this.handleAddTask}>
-                  <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
-                </IconButton>
+              { tasks.isCreating &&
+                <div style={styles.text_input}>
+
+                  <Paper style={{borderRadius: 25, backgroundColor: muiTheme.chip.backgroundColor}}>
+                    <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
+                      <IconButton
+                        onTouchTap={()=>{setIsCreating(false)}}>
+                        <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>highlight_off</FontIcon>
+                      </IconButton>
+                      <TextField
+                        id="public_task"
+                        fullWidth={true}
+                        onKeyDown={this.handleKeyDown}
+                        ref={(field) => { this.name = field; this.name && this.name.focus(); }}
+                        type="Text"
+                      />
+                      <IconButton
+                        onTouchTap={this.handleAddTask}>
+                        <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
+                      </IconButton>
+                    </div>
+                  </Paper>
+                </div>
+              }
+
+              { !tasks.isCreating &&
+                <div style={styles.button}>
+                  <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+                    <FontIcon className="material-icons" >add</FontIcon>
+                  </FloatingActionButton>
+                </div>
+              }
+              <div style={ {float:"left", clear: "both"} }
+                ref={(el) => { this.messagesEnd = el; }}>
               </div>
-            </Chip>
-          }
-
-          { !tasks.isCreating &&
-            <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
-              <FontIcon className="material-icons" >add</FontIcon>
-            </FloatingActionButton>
-          }
-          <div style={ {float:"left", clear: "both"} }
-            ref={(el) => { this.messagesEnd = el; }}>
+            </div>
           </div>
+
         </div>
 
-      </div>
 
+      </Activity>
+    );
 
-    </Activity>
-  );
-
-}
+  }
 
 }
 
