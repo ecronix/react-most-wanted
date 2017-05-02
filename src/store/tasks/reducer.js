@@ -3,23 +3,25 @@ import * as types from './types';
 export const initialState={
   isFetching: false,
   isCreating: false,
-  list: [],
+  list: {},
 }
 
 export default function tasks(state = initialState, {payload, type}) {
   switch (type) {
     case types.CREATE_TASK_SUCCESS:
-    return {...state, isCreating:false, list: [...(state.list), payload]}
+    return {...state, isCreating:false, list:{...state.list, [payload.key]: payload.data}};
 
     case types.DELETE_TASK_SUCCESS:
+    let { [payload.key]: undefined, ...rest}= state.list;
+
     return { ...state,
       deleted: payload,
       previous: state.list,
-      list: state.list.filter(task => task.key !== payload.key)
+      list: rest 
     };
 
-    case types.CREATE_TASK:
     case types.FETCH_TASKS:
+    case types.CREATE_TASK:
     return {...state, ...payload};
 
     case types.LOAD_TASKS_SUCCESS:

@@ -1,20 +1,26 @@
-import {firebaseDb} from '../../utils/firebase';
+import FirebaseList from '../../utils/firebase-list';
 import * as types from './types';
 
-const refRoot= 'public_tasks';
+const taskList= new FirebaseList({
+  onAdd: createTaskSuccess,
+  onChange: updateTaskSuccess,
+  onLoad: loadTasksSuccess,
+  onRemove: deleteTaskSuccess
+}, 'public_tasks')
 
 
-export const createTask = (task) => dispatch => {
-
-  dispatch(setIsCreating(false));
-
-  firebaseDb.ref(refRoot)
-    .push(task);
+export function deleteTaskError(error) {
+  return {
+    type: types.DELETE_TASK_ERROR,
+    payload: error
+  };
 }
 
-export const deleteTask = (key) => dispatch => {
-  firebaseDb.ref(`${refRoot}/${key}`)
-    .remove();
+export function deleteTaskSuccess(payload) {
+  return {
+    type: types.DELETE_TASK_SUCCESS,
+    payload
+  };
 }
 
 export function createTaskError(error) {
@@ -24,18 +30,18 @@ export function createTaskError(error) {
   };
 }
 
-export function createTaskSuccess(task) {
+export function createTaskSuccess(payload) {
   return {
     type: types.CREATE_TASK_SUCCESS,
-    payload: task
+    payload
   };
 }
 
 
-export function loadTasksSuccess(tasks) {
+export function loadTasksSuccess(list) {
   return {
     type: types.LOAD_TASKS_SUCCESS,
-    payload: {list: tasks}
+    payload: {list}
   };
 }
 
@@ -53,25 +59,55 @@ export function setIsFetching(isFetching) {
   };
 }
 
-
-export const loadTasks = () => (dispatch, getState) => {
-  const tasksRef=firebaseDb.ref(refRoot);
-
-  dispatch(setIsFetching(true));
-
-  tasksRef.on('value', snap=>{
-    if(getState().tasks.list!==snap.val()){
-      dispatch(loadTasksSuccess(snap.val()));
-    }
-  })
+export function updateTaskSuccess(task) {
+  return {
+    type: types.UPDATE_TASK_SUCCESS,
+    payload: task
+  };
 }
 
+export function updateTaskError(error) {
+  return {
+    type: types.UPDATE_TASK_ERROR,
+    payload: error
+  };
+}
+
+export function loadTasks() {
+  return (dispatch, getState) => {
+
+    dispatch(setIsFetching(true));
+    taskList.subscribe(dispatch);
+  };
+}
+
+export function createTask(task) {
+  return dispatch => {
+
+    dispatch(setIsCreating(false));
+
+    taskList.push(task)
+      .catch(error => dispatch(createTaskError(error)));
+  };
+}
+
+export function updateTask(task, changes) {
+  return dispatch => {
+    taskList.update(task.key, changes)
+      .catch(error => dispatch(updateTaskError(error)));
+  };
+}
+
+export function deleteTask(key) {
+  return dispatch => {
+    taskList.remove(key)
+      .catch(error => dispatch(deleteTaskError(error)));
+  };
+}
 
 export function unloadTasks() {
-  const tasksRef=firebaseDb.ref(refRoot);
-  tasksRef.off();
-
+  taskList.unsubscribe();
   return {
     type: types.UNLOAD_TASKS_SUCCESS
-  }
+  };
 }

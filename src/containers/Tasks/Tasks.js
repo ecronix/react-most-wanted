@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../components/Activity';
-import { loadTasks, filterTasks, createTask, deleteTask, unloadTasks, setIsCreating } from '../../store/tasks/actions';
+import * as taskActions from '../../store/tasks/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
@@ -218,6 +218,6 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-    loadTasks, filterTasks, createTask, deleteTask, unloadTasks, setIsCreating
+    ...taskActions
   }
 )(injectIntl(muiThemeable()(Tasks)));
