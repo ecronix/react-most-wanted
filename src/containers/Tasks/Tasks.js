@@ -15,6 +15,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
+import {transparent, green800} from 'material-ui/styles/colors';
 
 const styles={
   center_container:{
@@ -97,9 +98,9 @@ class Tasks extends Component {
   handleUpdateTask = (key, task) => {
     const { updateTask }=this.props;
 
-    const newTask= {...task, title: this.new_task_title.getValue()};
+    //const newTask= {...task, title: this.new_task_title.getValue()};
 
-    updateTask(key, newTask);
+    updateTask(key, task);
   }
 
   renderPrimaryText = (task, key) =>{
@@ -111,11 +112,13 @@ class Tasks extends Component {
         style={{height: 26}}
         underlineShow={false}
         defaultValue={task.title}
-        onKeyDown={(event)=>{this.handleKeyDown(event, ()=>{this.handleUpdateTask(key, task)})}}
+        onKeyDown={(event)=>{this.handleKeyDown(event, ()=>{this.handleUpdateTask(key, {...task, title: this.new_task_title.getValue()})})}}
         ref={(field) => { this.new_task_title = field; this.new_task_title && this.new_task_title.focus(); }}
         type="Text"
       />
-    </div>:  task.title;
+    </div>:  <div>
+      {task.title}
+    </div>;
 
   }
 
@@ -129,15 +132,24 @@ class Tasks extends Component {
       return <div key={key}>
         <ListItem
           key={key}
-          onTouchTap={task.userId===auth.uid?()=>{setIsEditing(key);}:undefined}
-          leftAvatar={<Avatar src={task.userPhotoURL} />}
+          onTouchTap={()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}}
+          leftAvatar={
+            task.completed?
+            <Avatar
+              icon={<FontIcon className="material-icons" >check_circle</FontIcon>}
+              color={green800}
+              backgroundColor={transparent}
+            />
+            :
+            <Avatar src={task.userPhotoURL} />
+          }
           primaryText={this.renderPrimaryText(task, key)}
           secondaryText={isEditing?undefined:task.userName}
           id={key}
           rightIconButton={<div>
             {task.userId===auth.uid && <div>
               <IconButton
-                onTouchTap={isEditing?()=>{this.handleUpdateTask(key,task)}:()=>{setIsEditing(key);}}>
+                onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
                 <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
               </IconButton>
 
