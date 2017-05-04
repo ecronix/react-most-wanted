@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -59,8 +58,6 @@ class Tasks extends Component {
     super(props);
     this.name = null;
     this.new_task_title = null;
-    this.list = null;
-    this.shouldScrollBottom = true;
   }
 
   componentWillMount() {
@@ -72,12 +69,6 @@ class Tasks extends Component {
     if(event.keyCode===13){
       onSucces();
     }
-  }
-
-  scrollToBottom = () => {
-
-    const node = ReactDOM.findDOMNode(this.messagesEnd);
-    node.scrollIntoView({behavior: "smooth"});
   }
 
   componentWillUnmount() {
@@ -219,9 +210,6 @@ render(){
                 </FloatingActionButton>
               </div>
             }
-            <div style={ {float:"left", clear: "both"} }
-              ref={(el) => { this.messagesEnd = el; }}>
-            </div>
           </div>
         </div>
 

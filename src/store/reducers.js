@@ -6,6 +6,7 @@ import auth from './auth/reducer';
 import locale from './locale/reducer';
 import theme from './theme/reducer';
 import tasks from './tasks/reducer';
+import users from './users/reducer';
 
 const reducers = combineReducers({
   browser: responsiveStateReducer,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
   auth,
   locale,
   theme,
-  tasks
+  tasks,
+  users
 })
 
 export default reducers;

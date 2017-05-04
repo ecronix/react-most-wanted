@@ -54,6 +54,7 @@ const messages=defineMessages({
   send_verification_email: 'Posalji E-Mail za verifikaciju',
   send_verification_email_again: 'Posalji ponove E-Mail za verifikaciju',
   tasks: 'Zadaci',
+  users: 'Korisnici',
 
 });
 
