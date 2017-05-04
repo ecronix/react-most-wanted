@@ -19,5 +19,3 @@ yarn-error.log*
 # firebase
 /functions
 .firebaserc
-database.rules.json
-firebase.json
