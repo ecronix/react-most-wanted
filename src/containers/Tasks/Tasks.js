@@ -58,6 +58,7 @@ class Tasks extends Component {
   constructor(props) {
     super(props);
     this.name = null;
+    this.new_task_title = null;
     this.list = null;
     this.shouldScrollBottom = true;
   }
@@ -66,10 +67,10 @@ class Tasks extends Component {
     this.props.loadTasks();
   }
 
-  handleKeyDown = (event) => {
+  handleKeyDown = (event, onSucces) => {
 
     if(event.keyCode===13){
-      this.handleAddTask();
+      onSucces();
     }
   }
 
@@ -95,103 +96,142 @@ class Tasks extends Component {
       title: this.name.getValue(),
       userName: auth.displayName,
       userPhotoURL: auth.photoURL,
+      userId: auth.uid,
       completed: false
     }
 
     createTask(newTask);
   }
 
-  rednerTasks(tasks) {
-    const {deleteTask} =this.props;
+  handleUpdateTask = (key, task) => {
+    const { updateTask }=this.props;
 
-    return _.map(tasks, (task, key) => {
+    const newTask= {...task, title: this.new_task_title.getValue()};
+
+    updateTask(key, newTask);
+  }
+
+  renderPrimaryText = (task, key) =>{
+    const { tasks} =this.props;
+
+    return tasks.isEditing===key? <div>
+      <TextField
+        id="new_task_title"
+        style={{height: 26}}
+        underlineShow={false}
+        defaultValue={task.title}
+        onKeyDown={(event)=>{this.handleKeyDown(event, ()=>{this.handleUpdateTask(key, task)})}}
+        ref={(field) => { this.new_task_title = field; this.new_task_title && this.new_task_title.focus(); }}
+        type="Text"
+      />
+    </div>:  task.title;
+
+  }
+
+  rednerTasks(tasks) {
+    const {deleteTask, muiTheme, setIsEditing, auth} =this.props;
+
+    return _.map(tasks.list, (task, key) => {
+
+      const isEditing=tasks.isEditing===key;
+
       return <div key={key}>
         <ListItem
           key={key}
+          onTouchTap={task.userId===auth.uid?()=>{setIsEditing(key);}:undefined}
           leftAvatar={<Avatar src={task.userPhotoURL} />}
-          primaryText={task.title}
-          secondaryText={task.userName}
+          primaryText={this.renderPrimaryText(task, key)}
+          secondaryText={isEditing?undefined:task.userName}
           id={key}
-          rightIconButton={
-            <IconButton
-              onTouchTap={()=>{deleteTask(key);}}>
-              <FontIcon className="material-icons" color={'red'}>delete</FontIcon>
-            </IconButton>
-          }
-        />
-        <Divider inset={true}/>
-      </div>
-    });
-  }
+          rightIconButton={<div>
+            {task.userId===auth.uid && <div>
+              <IconButton
+                onTouchTap={isEditing?()=>{this.handleUpdateTask(key,task)}:()=>{setIsEditing(key);}}>
+                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
+              </IconButton>
 
-
-  render(){
-    const {intl, tasks, setIsCreating, muiTheme} =this.props;
-
-    return (
-      <Activity
-        title={intl.formatMessage({id: 'tasks'})}>
-        <div >
-          {tasks.isFetching &&
-            <div style={styles.center_container}>
-              <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
+              <IconButton
+                onTouchTap={isEditing?()=>{setIsEditing(false);}:()=>{deleteTask(key);}}>
+                <FontIcon className="material-icons" color={'red'}>{isEditing?'highlight_off':'delete'}</FontIcon>
+              </IconButton>
             </div>
           }
+        </div>
+      }
+    />
+    <Divider inset={true}/>
+  </div>
+});
+}
 
-          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
-            <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
-              {this.rednerTasks(tasks.list)}
-            </List>
+
+render(){
+  const {intl, tasks, setIsCreating, muiTheme} =this.props;
+
+  return (
+    <Activity
+      title={intl.formatMessage({id: 'tasks'})}>
+      <div >
+        {tasks.isFetching &&
+          <div style={styles.center_container}>
+            <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
           </div>
+        }
 
-          <div style={styles.main_container}>
-            <div style={styles.fixer_container}>
-
-              { tasks.isCreating &&
-                <div style={styles.text_input}>
-
-                  <Paper style={{borderRadius: 25, backgroundColor: muiTheme.chip.backgroundColor}}>
-                    <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
-                      <IconButton
-                        onTouchTap={()=>{setIsCreating(false)}}>
-                        <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>highlight_off</FontIcon>
-                      </IconButton>
-                      <TextField
-                        id="public_task"
-                        fullWidth={true}
-                        onKeyDown={this.handleKeyDown}
-                        ref={(field) => { this.name = field; this.name && this.name.focus(); }}
-                        type="Text"
-                      />
-                      <IconButton
-                        onTouchTap={this.handleAddTask}>
-                        <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
-                      </IconButton>
-                    </div>
-                  </Paper>
-                </div>
-              }
-
-              { !tasks.isCreating &&
-                <div style={styles.button}>
-                  <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
-                    <FontIcon className="material-icons" >add</FontIcon>
-                  </FloatingActionButton>
-                </div>
-              }
-              <div style={ {float:"left", clear: "both"} }
-                ref={(el) => { this.messagesEnd = el; }}>
-              </div>
-            </div>
-          </div>
-
+        <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
+          <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
+            {this.rednerTasks(tasks)}
+          </List>
         </div>
 
+        <div style={styles.main_container}>
+          <div style={styles.fixer_container}>
 
-      </Activity>
-    );
+            { tasks.isCreating &&
+              <div style={styles.text_input}>
 
-  }
+                <Paper style={{borderRadius: 25, backgroundColor: muiTheme.chip.backgroundColor}}>
+                  <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
+                    <IconButton
+                      onTouchTap={()=>{setIsCreating(false)}}>
+                      <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>highlight_off</FontIcon>
+                    </IconButton>
+                    <TextField
+                      id="public_task"
+                      fullWidth={true}
+                      onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
+                      ref={(field) => { this.name = field; this.name && this.name.focus(); }}
+                      type="Text"
+                    />
+                    <IconButton
+                      onTouchTap={this.handleAddTask}>
+                      <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
+                    </IconButton>
+                  </div>
+                </Paper>
+              </div>
+            }
+
+            { !tasks.isCreating &&
+              <div style={styles.button}>
+                <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+                  <FontIcon className="material-icons" >add</FontIcon>
+                </FloatingActionButton>
+              </div>
+            }
+            <div style={ {float:"left", clear: "both"} }
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </Activity>
+  );
+
+}
 
 }
 

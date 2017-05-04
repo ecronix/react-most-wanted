@@ -59,6 +59,13 @@ export function setIsFetching(isFetching) {
   };
 }
 
+export function setIsEditing(isEditing) {
+  return {
+    type: types.EDIT_TASK,
+    payload: {isEditing}
+  };
+}
+
 export function updateTaskSuccess(task) {
   return {
     type: types.UPDATE_TASK_SUCCESS,
@@ -91,9 +98,9 @@ export function createTask(task) {
   };
 }
 
-export function updateTask(task, changes) {
+export function updateTask(key, changes) {
   return dispatch => {
-    taskList.update(task.key, changes)
+    taskList.update(key, changes)
       .catch(error => dispatch(updateTaskError(error)));
   };
 }
