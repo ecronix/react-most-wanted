@@ -1,20 +1,22 @@
-export const FETCH_TASKS = 'FETCH_TASKS';
-export const FETCH_TASK = 'FETCH_TASK';
-export const DELETE_TASK = 'DELETE_TASK';
-export const CREATE_TASK = 'CREATE_TASK';
-export const EDIT_TASK = 'EDIT_TASK';
+const namespace='TASKS'
 
-export const CREATE_TASK_ERROR = 'CREATE_TASK_ERROR';
-export const CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
+export const FETCH =  `${namespace}@FETCH`;
+export const DELETE = `${namespace}@DELETE`;
+export const CREATE = `${namespace}@CREATE`;
+export const EDIT = `${namespace}@EDIT`;
+export const CONNECTED = `${namespace}@CONNECTED`;
 
-export const DELETE_TASK_ERROR = 'DELETE_TASK_ERROR';
-export const DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCCESS';
+export const CREATE_ERROR = `${namespace}@CREATE_ERROR`;
+export const CREATE_SUCCESS = `${namespace}@CREATE_SUCCESS`;
 
-export const UNDELETE_TASK_ERROR = 'UNDELETE_TASK_ERROR';
+export const UPDATE_ERROR = `${namespace}@UPDATE_ERROR`;
+export const UPDATE_SUCCESS = `${namespace}@UPDATE_SUCCESS`;
 
-export const UPDATE_TASK_ERROR = 'UPDATE_TASK_ERROR';
-export const UPDATE_TASK_SUCCESS = 'UPDATE_TASK_SUCCESS';
+export const DELETE_ERROR = `${namespace}@DELETE_ERROR`;
+export const DELETE_SUCCESS = `${namespace}@DELETE_SUCCESS`;
 
-export const FILTER_TASKS = 'FILTER_TASKS';
-export const LOAD_TASKS_SUCCESS = 'LOAD_TASKS_SUCCESS';
-export const UNLOAD_TASKS_SUCCESS = 'UNLOAD_TASKS_SUCCESS';
+export const UNDELETE_ERROR = `${namespace}@UNDELETE_ERROR`;
+
+export const FILTER = `${namespace}@FILTER`;
+export const LOAD_SUCCESS = `${namespace}@LOAD_SUCCESS`;
+export const UNLOAD_SUCCESS = `${namespace}@UNLOAD_SUCCESS`;

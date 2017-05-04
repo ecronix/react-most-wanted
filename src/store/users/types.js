@@ -5,6 +5,7 @@ export const FETCH =  `${namespace}@FETCH`;
 export const DELETE = `${namespace}@DELETE`;
 export const CREATE = `${namespace}@CREATE`;
 export const EDIT = `${namespace}@EDIT`;
+export const CONNECTED = `${namespace}@CONNECTED`;
 
 export const CREATE_ERROR = `${namespace}@CREATE_ERROR`;
 export const CREATE_SUCCESS = `${namespace}@CREATE_SUCCESS`;
@@ -19,4 +20,4 @@ export const UNDELETE_ERROR = `${namespace}@UNDELETE_ERROR`;
 
 export const FILTER = `${namespace}@FILTER`;
 export const LOAD_SUCCESS = `${namespace}@LOAD_SUCCESS`;
-export const UNLOAD_SUCCESS = `${namespace}@v`;
+export const UNLOAD_SUCCESS = `${namespace}@UNLOAD_SUCCESS`;

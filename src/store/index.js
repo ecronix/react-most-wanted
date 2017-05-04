@@ -32,7 +32,7 @@ export default function configureStore(history) {
   ));
 
   try{
-    persistStore(store, {blacklist:['router', 'auth', 'tasks'] }, ()=>{});
+    persistStore(store, {blacklist:['router', 'auth'] }, ()=>{});
   }catch(e){
 
   }

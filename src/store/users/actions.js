@@ -5,9 +5,16 @@ const taskList= new FirebaseList({
   onAdd: createSuccess,
   onChange: updateSuccess,
   onLoad: loadSuccess,
-  onRemove: deleteSuccess
-}, 'users')
+  onRemove: deleteSuccess,
+  onConnectionChange: setIsConnected
+}, 'users');
 
+export function setIsConnected(isConnected) {
+  return {
+    type: types.CONNECTED,
+    payload: {isConnected}
+  };
+}
 
 export function deleteError(error) {
   return {

@@ -26,7 +26,8 @@ export default function tasks(state = initialState, {payload, type}) {
 
     case types.FETCH:
     case types.CREATE:
-    case types.EDIT_TASK:
+    case types.EDIT:
+    case types.CONNECTED:
     return {...state, ...payload};
 
     case types.LOAD_SUCCESS:

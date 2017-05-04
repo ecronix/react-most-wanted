@@ -44,6 +44,14 @@ export const updateUserData = (user) => {
 
 }
 
+export const deleteUserData = (user) => {
+
+  if(user!==undefined && user!==null){
+    firebaseDb.ref('users/' + user.uid).remove();
+  }
+
+}
+
 
 export const reauthenticateWithCredential = (password) => {
   const credential = firebase.auth.EmailAuthProvider.credential(
@@ -63,7 +71,7 @@ export const logoutUser = () => firebaseAuth.signOut();
 export const resetPasswordEmail = (email) => firebaseAuth.sendPasswordResetEmail(email);
 export const changePassword = (newPassword) => firebaseAuth.currentUser.updatePassword(newPassword);
 
-export const deleteUser = () => firebaseAuth.currentUser.delete();
+
 export const sendEmailVerification = () => firebaseAuth.currentUser.sendEmailVerification();
 
 export const fetchUser = () => new Promise((resolve, reject) => {
@@ -73,6 +81,19 @@ export const fetchUser = () => new Promise((resolve, reject) => {
   }, (error) => {
     reject(error);
   });
+});
+
+//export const deleteUser = () => firebaseAuth.currentUser.delete();
+
+export const deleteUser = () => new Promise((resolve, reject) => {
+
+  deleteUserData(firebaseAuth.currentUser);
+
+  firebaseAuth.currentUser.delete()
+  .then(() => {
+    resolve()}
+  )
+  .catch((error) => reject(error))
 });
 
 export const changeEmail = (newEmail) => new Promise((resolve, reject) => {

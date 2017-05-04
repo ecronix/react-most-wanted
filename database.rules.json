@@ -3,7 +3,7 @@
     ".read": "auth != null",
     "users": {
       "$uid": {
-        ".write": "$uid === auth.uid"
+        ".write": "auth != null && $uid === auth.uid"
       }
     },
     "public_tasks":{

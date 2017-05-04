@@ -37,10 +37,15 @@ class FirebaseList {
   subscribe(emit) {
     let ref = firebaseDb.ref(this._path);
 
+    let connectedRef = firebaseDb.ref(".info/connected");
+    connectedRef.on("value", snapshot => {
+      emit(this._actions.onConnectionChange(snapshot.val()));
+    });
+
     ref.once('value', (snapshot) => {
 
       let list = {};
-      
+
       snapshot.forEach(function(childSnapshot) {
         let childKey = childSnapshot.key;
         let childData = childSnapshot.val();
@@ -63,7 +68,7 @@ class FirebaseList {
       emit(this._actions.onRemove(this.getPayload(snapshot)));
     });
 
-    this._unsubscribe = () => ref.off();
+    this._unsubscribe = () => {ref.off(); connectedRef.off()};
   }
 
   unsubscribe() {

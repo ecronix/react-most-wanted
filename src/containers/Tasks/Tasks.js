@@ -175,7 +175,7 @@ render(){
     <Activity
       title={intl.formatMessage({id: 'tasks'})}>
       <div >
-        {tasks.isFetching &&
+        {tasks.isFetching && tasks.isConnected &&
           <div style={styles.center_container}>
             <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
           </div>

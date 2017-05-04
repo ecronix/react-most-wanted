@@ -54,7 +54,7 @@ class Users extends Component {
       <Activity
         title={intl.formatMessage({id: 'users'})}>
         <div >
-          {users.isFetching &&
+          {users.isFetching && users.isConnected &&
             <div style={styles.center_container}>
               <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
             </div>
