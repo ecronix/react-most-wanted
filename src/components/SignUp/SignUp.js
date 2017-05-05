@@ -42,6 +42,7 @@ const SignUp = (props) => {
   } = props;
 
 
+
   const hanleSignUpSubmit = () => {
 
     const user={
@@ -62,6 +63,12 @@ const SignUp = (props) => {
 
   }
 
+  const handleKeyDown = (event) => {
+    if(event.keyCode===13){
+      hanleSignUpSubmit();
+    }
+  }
+
 
   return (
     <Activity
@@ -77,7 +84,7 @@ const SignUp = (props) => {
           <div style={{marginBottom: 20}}>
             <TextField
               id="displayName"
-              ref={(field) => { displayName = field; }}
+              ref={(field) => { displayName = field; displayName && displayName.focus(); }}
               hintText={intl.formatMessage({id: 'name'})}
               errorText={getValidationErrorMessage('displayName')}
               floatingLabelText={intl.formatMessage({id: 'name'})}
@@ -105,6 +112,7 @@ const SignUp = (props) => {
             <TextField
               id="confirm_password"
               ref={(field) => { confirm_password = field; }}
+              onKeyDown={handleKeyDown}
               hintText={intl.formatMessage({id: 'confirm_password'})}
               errorText={getValidationErrorMessage('confirm_password')}
               floatingLabelText={intl.formatMessage({id: 'confirm_password'})}

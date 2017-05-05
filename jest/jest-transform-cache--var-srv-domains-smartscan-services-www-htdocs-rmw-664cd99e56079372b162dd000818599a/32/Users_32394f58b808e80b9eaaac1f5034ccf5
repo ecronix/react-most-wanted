@@ -1,0 +1,104 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/Users/Users.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_lodash = require('lodash'); /* istanbul ignore next */var _lodash2 = _interopRequireDefault(_lodash);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Activity = require('../../components/Activity');
+var /* istanbul ignore next */_actions = require('../../store/users/actions'); /* istanbul ignore next */var usersActions = _interopRequireWildcard(_actions);
+var /* istanbul ignore next */_List = require('material-ui/List');
+var /* istanbul ignore next */_Divider = require('material-ui/Divider'); /* istanbul ignore next */var _Divider2 = _interopRequireDefault(_Divider);
+var /* istanbul ignore next */_CircularProgress = require('material-ui/CircularProgress'); /* istanbul ignore next */var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
+var /* istanbul ignore next */_Avatar = require('material-ui/Avatar'); /* istanbul ignore next */var _Avatar2 = _interopRequireDefault(_Avatar);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = {
+  center_container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    margin: 16 } };
+
+
+
+class Users extends /* istanbul ignore next */_react.Component {
+
+  componentWillMount() {
+    this.props.requestLoad();
+  }
+
+  componentWillUnmount() {
+    this.props.requestUnload();
+  }
+
+  rednerList(users) {
+    return (/* istanbul ignore next */_lodash2.default.map(users.list, (task, key) => {
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: key, __source: { fileName: _jsxFileName, lineNumber: 36 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List.ListItem, /* istanbul ignore next */{
+              key: key,
+              id: key,
+              leftAvatar: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Avatar2.default, /* istanbul ignore next */{ src: task.photoURL, __source: { fileName: _jsxFileName, lineNumber: 40 }, __self: this }),
+              primaryText: task.displayName,
+              secondaryText: task.email, __source: { fileName: _jsxFileName, lineNumber: 37 }, __self: this }),
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Divider2.default, /* istanbul ignore next */{ inset: true, __source: { fileName: _jsxFileName, lineNumber: 44 }, __self: this })));
+
+      }));
+  }
+
+
+  render() {
+    const { intl, users, muiTheme } = this.props;
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Activity.Activity, /* istanbul ignore next */{
+          title: intl.formatMessage({ id: 'users' }), __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 56 }, __self: this },
+          users.isFetching && users.isConnected && !Object.keys(users.list).length &&
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.center_container, __source: { fileName: _jsxFileName, lineNumber: 58 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CircularProgress2.default, /* istanbul ignore next */{ style: { padding: 20 }, size: 80, thickness: 5, __source: { fileName: _jsxFileName, lineNumber: 59 }, __self: this })),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { overflow: 'none', backgroundColor: muiTheme.palette.convasColor }, __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List.List, /* istanbul ignore next */{ id: 'test', style: { height: '100%' }, ref: field => {this.list = field;}, __source: { fileName: _jsxFileName, lineNumber: 64 }, __self: this },
+              this.rednerList(users))))));
+
+
+
+
+
+
+
+
+
+  }}
+
+
+
+Users.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  auth: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  requestLoad: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  requestCreate: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  requestUnload: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  requestDelete: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setIsCreating: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+const mapStateToProps = state => {
+  const { users, auth } = state;
+  return {
+    users,
+    auth };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps, /* istanbul ignore next */Object.assign({},
+
+usersActions))(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(Users)));

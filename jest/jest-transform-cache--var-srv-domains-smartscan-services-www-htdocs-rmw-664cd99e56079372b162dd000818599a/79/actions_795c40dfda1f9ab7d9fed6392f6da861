@@ -1,0 +1,128 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+deleteTaskError = deleteTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTaskSuccess = deleteTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskError = createTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskSuccess = createTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+loadTasksSuccess = loadTasksSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsCreating = setIsCreating; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsConnected = setIsConnected; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsFetching = setIsFetching; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsEditing = setIsEditing; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTaskSuccess = updateTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTaskError = updateTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+loadTasks = loadTasks; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+createTask = createTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+updateTask = updateTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTask = deleteTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+unloadTasks = unloadTasks;var /* istanbul ignore next */_firebaseList = require('../../utils/firebase-list'); /* istanbul ignore next */var _firebaseList2 = _interopRequireDefault(_firebaseList);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const taskList = new /* istanbul ignore next */_firebaseList2.default({ onAdd: createTaskSuccess, onChange: updateTaskSuccess, onLoad: loadTasksSuccess, onRemove: deleteTaskSuccess, onConnectionChange: setIsConnected }, 'public_tasks');function deleteTaskError(error) {return { type: types.DELETE_ERROR, payload: error };}function deleteTaskSuccess(payload) {return { type: types.DELETE_SUCCESS, payload };}function createTaskError(error) {return { type: types.CREATE_ERROR, payload: error };}function createTaskSuccess(payload) {return { type: types.CREATE_SUCCESS, payload };}function loadTasksSuccess(list) {return { type: types.LOAD_SUCCESS, payload: { list } };}function setIsCreating(isCreating) {return { type: types.CREATE, payload: { isCreating } };}function setIsConnected(isConnected) {return { type: types.CONNECTED, payload: { isConnected } };}function setIsFetching(isFetching) {return { type: types.FETCH, payload: { isFetching } };}function setIsEditing(isEditing) {return { type: types.EDIT, payload: { isEditing } };}function updateTaskSuccess(task) {return { type: types.UPDATE_SUCCESS, payload: task };}function updateTaskError(error) {return { type: types.UPDATE_ERROR, payload: error };}function loadTasks() {return (dispatch, getState) => {dispatch(setIsFetching(true));taskList.subscribe(dispatch);};}function createTask(task) {return dispatch => {dispatch(setIsCreating(false));taskList.push(task).catch(error => dispatch(createTaskError(error)));};}function updateTask(key, changes) {return dispatch => {taskList.update(key, changes).catch(error => dispatch(updateTaskError(error)));};}function deleteTask(key) {return dispatch => {taskList.remove(key).catch(error => dispatch(deleteTaskError(error)));};}function unloadTasks() {
+  taskList.unsubscribe();
+  return {
+    type: types.UNLOAD_SUCCESS };
+
+}

@@ -25,16 +25,22 @@ export class PasswordDialog extends Component {
     this.password = null;
   }
 
-  hanldeClose = () => {
+  handleClose = () => {
     const {setPasswordDialogOpen} = this.props;
 
     setPasswordDialogOpen(false);
   }
 
+  handleKeyDown = (event, onSucces) => {
+    if(event.keyCode===13){
+      onSucces();
+    }
+  }
+
   handleReauthenticationSuccess = () => {
     const {auth} = this.props;
 
-    this.hanldeClose()
+    this.handleClose()
 
     if(auth && auth.onPasswordDialogSuccess && auth.onPasswordDialogSuccess instanceof Function){
       auth.onPasswordDialogSuccess();
@@ -60,7 +66,7 @@ export class PasswordDialog extends Component {
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
         primary={true}
-        onTouchTap={this.hanldeClose}
+        onTouchTap={this.handleClose}
       />,
     ];
 
@@ -74,7 +80,8 @@ export class PasswordDialog extends Component {
         open={auth.isPasswordDialogOpen}>
         <TextField
           id="password"
-          ref={(field) => { this.password = field; }}
+          ref={(field) => { this.password = field; this.password && this.password.focus(); }}
+          onKeyDown={(e)=>{this.handleKeyDown(e, this.hanldePasswordSubmit)}}
           errorText={getValidationErrorMessage('password')}
           floatingLabelText={intl.formatMessage({id: 'password'})}
           hintText={intl.formatMessage({id: 'password'})}

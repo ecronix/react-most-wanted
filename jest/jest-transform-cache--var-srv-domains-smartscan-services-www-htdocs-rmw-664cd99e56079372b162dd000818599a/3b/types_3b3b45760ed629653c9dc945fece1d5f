@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const namespace = 'TASKS';
+
+const FETCH = /* istanbul ignore next */exports.FETCH = `${namespace}@FETCH`;
+const DELETE = /* istanbul ignore next */exports.DELETE = `${namespace}@DELETE`;
+const CREATE = /* istanbul ignore next */exports.CREATE = `${namespace}@CREATE`;
+const EDIT = /* istanbul ignore next */exports.EDIT = `${namespace}@EDIT`;
+const CONNECTED = /* istanbul ignore next */exports.CONNECTED = `${namespace}@CONNECTED`;
+
+const CREATE_ERROR = /* istanbul ignore next */exports.CREATE_ERROR = `${namespace}@CREATE_ERROR`;
+const CREATE_SUCCESS = /* istanbul ignore next */exports.CREATE_SUCCESS = `${namespace}@CREATE_SUCCESS`;
+
+const UPDATE_ERROR = /* istanbul ignore next */exports.UPDATE_ERROR = `${namespace}@UPDATE_ERROR`;
+const UPDATE_SUCCESS = /* istanbul ignore next */exports.UPDATE_SUCCESS = `${namespace}@UPDATE_SUCCESS`;
+
+const DELETE_ERROR = /* istanbul ignore next */exports.DELETE_ERROR = `${namespace}@DELETE_ERROR`;
+const DELETE_SUCCESS = /* istanbul ignore next */exports.DELETE_SUCCESS = `${namespace}@DELETE_SUCCESS`;
+
+const UNDELETE_ERROR = /* istanbul ignore next */exports.UNDELETE_ERROR = `${namespace}@UNDELETE_ERROR`;
+
+const FILTER = /* istanbul ignore next */exports.FILTER = `${namespace}@FILTER`;
+const LOAD_SUCCESS = /* istanbul ignore next */exports.LOAD_SUCCESS = `${namespace}@LOAD_SUCCESS`;
+const UNLOAD_SUCCESS = /* istanbul ignore next */exports.UNLOAD_SUCCESS = `${namespace}@UNLOAD_SUCCESS`;

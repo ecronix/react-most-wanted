@@ -1,0 +1,46 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;exports.default =
+
+
+
+
+
+
+
+
+
+tasks;var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _objectWithoutProperties(obj, keys) {var target = {};for (var i in obj) {if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];}return target;}const initialState = /* istanbul ignore next */exports.initialState = { isFetching: false, isConnected: false, isCreating: false, isEditing: null, list: {} };function tasks(state = initialState, { payload, type }) {
+    switch (type) {
+        case types.CREATE_SUCCESS:
+            return (/* istanbul ignore next */Object.assign({}, state, { isCreating: false, list: /* istanbul ignore next */Object.assign({}, state.list, { [payload.key]: payload.data }) }));
+
+        case types.UPDATE_SUCCESS:
+            return (/* istanbul ignore next */Object.assign({}, state, { isEditing: false, list: /* istanbul ignore next */Object.assign({}, state.list, { [payload.key]: payload.data }) }));
+
+        case types.DELETE_SUCCESS:
+            let /* istanbul ignore next */_state$list = state.list, /* istanbul ignore next */{ [payload.key]: undefined } = _state$list, /* istanbul ignore next */rest = _objectWithoutProperties(_state$list, [payload.key]);
+
+            return (/* istanbul ignore next */Object.assign({}, state, {
+                    deleted: payload,
+                    previous: state.list,
+                    list: rest }));
+
+
+        case types.FETCH:
+        case types.CREATE:
+        case types.EDIT:
+        case types.CONNECTED:
+            return (/* istanbul ignore next */Object.assign({}, state, payload));
+
+        case types.DELETE_ERROR:
+        case types.CREATE_ERROR:
+        case types.UPDATE_ERROR:
+            return (/* istanbul ignore next */Object.assign({}, state, { isFetching: false }));
+
+        case types.LOAD_SUCCESS:
+            return (/* istanbul ignore next */Object.assign({}, state, { isFetching: false }, payload));
+
+
+        default:
+            return state;}
+
+}

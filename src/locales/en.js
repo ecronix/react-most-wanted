@@ -55,6 +55,7 @@ const messages=defineMessages({
   send_verification_email_again: 'Send verification E-Mail again',
   tasks: 'Tasks',
   users: 'Users',
+  edit: 'Edit',
 
 });
 

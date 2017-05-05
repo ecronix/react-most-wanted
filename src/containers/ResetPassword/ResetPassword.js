@@ -71,7 +71,7 @@ export class ResetPassword extends Component {
             <div style={{marginBottom: 20}}>
               <TextField
                 id="email"
-                ref={(field) => { this.email = field; }}
+                ref={(field) => { this.email = field; this.email && this.email.focus(); }}
                 defaultValue={auth.email}
                 errorText={getValidationErrorMessage('email')}
                 floatingLabelText={intl.formatMessage({id: 'email'})}

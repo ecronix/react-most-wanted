@@ -5,6 +5,7 @@ export const initialState=Immutable({
   isAuthorised: false,
   isMenuOpen: false,
   isFetching: false,
+  isEditing: false,
   isPasswordDialogOpen: false,
   isDeleteDialogOpen: false,
   isVerificationEmailSend: false,
@@ -22,6 +23,7 @@ const auth = (state = initialState, action) => {
       ...state,
       isMenuOpen: false,
       isFetching: false,
+      isEditing: false,
       isPasswordDialogOpen: false,
       isDeleteDialogOpen: false,
       isVerificationEmailSend: false,
@@ -34,7 +36,8 @@ const auth = (state = initialState, action) => {
     return initialState;
 
     case types.SET_FETCHING:
-    return {...state, error: undefined,  isFetching: action.isFetching};
+    case types.SET_IS_EDITING:
+    return {...state, error: undefined,  ...action.payload};
 
     case types.AUTH_ERROR:
     return {...state, isFetching: false, error: action.error};

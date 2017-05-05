@@ -78,6 +78,12 @@ const SignIn = (props) => {
     signInUser({email: email.getValue(), password: password.getValue()});
   }
 
+  const handleKeyDown = (event, onSucces) => {
+    if(event.keyCode===13){
+      onSucces();
+    }
+  }
+
 
   const onSignInSuccess = (user) => {
 
@@ -126,7 +132,7 @@ const SignIn = (props) => {
             <div style={{marginBottom: 20}}>
               <TextField
                 id="email"
-                ref={(field) => { email = field; }}
+                ref={(field) => { email = field; email && email.focus(); }}
                 hintText={intl.formatMessage({id: 'email'})}
                 errorText={getValidationErrorMessage('email')}
                 floatingLabelText={intl.formatMessage({id: 'email'})}
@@ -136,6 +142,7 @@ const SignIn = (props) => {
               <TextField
                 id="password"
                 ref={(field) => { password = field; }}
+                onKeyDown={(e)=>{handleKeyDown(e, hanleSignInSubmit)}}
                 hintText={intl.formatMessage({id: 'password'})}
                 errorText={getValidationErrorMessage('password')}
                 floatingLabelText={intl.formatMessage({id: 'password'})}
@@ -155,13 +162,13 @@ const SignIn = (props) => {
 
             <RaisedButton
               label={intl.formatMessage({id: 'sign_in'})}
-              secondary={true}
+              primary={true}
               style={styles.button}
               fullWidth={true}
               onTouchTap={hanleSignInSubmit}
               icon={
                 <FontIcon
-                  color={muiTheme.palette.primary2Color}
+                  color={muiTheme.palette.accent1Color}
                   className="material-icons">
                   lock
                 </FontIcon>

@@ -1,0 +1,115 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.updateUserProfile = exports.changeEmail = exports.deleteUser = exports.fetchUser = exports.sendEmailVerification = exports.changePassword = exports.resetPasswordEmail = exports.logoutUser = exports.linkWithPopup = exports.reauthenticateWithPopup = exports.registerUser = exports.loginUser = exports.loginWithProvider = exports.reauthenticateWithCredential = exports.deleteUserData = exports.updateUserData = exports.isAuthorised = undefined;var /* istanbul ignore next */_firebase = require('firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);
+var /* istanbul ignore next */_firebase3 = require('./firebase'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const getProvider = provider => {
+
+  if (provider.indexOf('facebook') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.FacebookAuthProvider();
+  }
+
+  if (provider.indexOf('github') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.GithubAuthProvider();
+  }
+
+  if (provider.indexOf('google') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.GoogleAuthProvider();
+  }
+
+  if (provider.indexOf('twitter') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.TwitterAuthProvider();
+  }
+
+  throw new Error('Provider is not supported!!!');
+};
+
+
+const isAuthorised = /* istanbul ignore next */exports.isAuthorised = () => {
+  const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
+  const data = JSON.parse(localStorage.getItem(key));
+  return data != null;
+};
+
+const updateUserData = /* istanbul ignore next */exports.updateUserData = user => {
+
+  if (user !== undefined && user !== null) {
+    /* istanbul ignore next */_firebase3.firebaseDb.ref('users/' + user.uid).update({
+      displayName: user.displayName,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      isAnonymous: user.isAnonymous,
+      photoURL: user.photoURL,
+      providerData: user.providerData });
+
+  }
+
+};
+
+const deleteUserData = /* istanbul ignore next */exports.deleteUserData = user => {
+
+  if (user !== undefined && user !== null) {
+    /* istanbul ignore next */_firebase3.firebaseDb.ref('users/' + user.uid).remove();
+  }
+
+};
+
+
+const reauthenticateWithCredential = /* istanbul ignore next */exports.reauthenticateWithCredential = password => {
+  const credential = /* istanbul ignore next */_firebase2.default.auth.EmailAuthProvider.credential(
+  /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.email,
+  password);
+
+
+  return (/* istanbul ignore next */_firebase3.firebaseAuth.currentUser.reauthenticateWithCredential(credential));
+};
+
+const loginWithProvider = /* istanbul ignore next */exports.loginWithProvider = p => /* istanbul ignore next */_firebase3.firebaseAuth.signInWithPopup(getProvider(p));
+const loginUser = /* istanbul ignore next */exports.loginUser = user => /* istanbul ignore next */_firebase3.firebaseAuth.signInWithEmailAndPassword(user.email, user.password);
+const registerUser = /* istanbul ignore next */exports.registerUser = user => /* istanbul ignore next */_firebase3.firebaseAuth.createUserWithEmailAndPassword(user.email, user.password);
+const reauthenticateWithPopup = /* istanbul ignore next */exports.reauthenticateWithPopup = provider => /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.reauthenticateWithPopup(getProvider(provider));
+const linkWithPopup = /* istanbul ignore next */exports.linkWithPopup = provider => /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.linkWithPopup(getProvider(provider));
+const logoutUser = /* istanbul ignore next */exports.logoutUser = () => /* istanbul ignore next */_firebase3.firebaseAuth.signOut();
+const resetPasswordEmail = /* istanbul ignore next */exports.resetPasswordEmail = email => /* istanbul ignore next */_firebase3.firebaseAuth.sendPasswordResetEmail(email);
+const changePassword = /* istanbul ignore next */exports.changePassword = newPassword => /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.updatePassword(newPassword);
+
+
+const sendEmailVerification = /* istanbul ignore next */exports.sendEmailVerification = () => /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.sendEmailVerification();
+
+const fetchUser = /* istanbul ignore next */exports.fetchUser = () => new Promise((resolve, reject) => {
+  const unsub = /* istanbul ignore next */_firebase3.firebaseAuth.onAuthStateChanged(user => {
+    unsub();
+    resolve(user);
+  }, error => {
+    reject(error);
+  });
+});
+
+//export const deleteUser = () => firebaseAuth.currentUser.delete();
+
+const deleteUser = /* istanbul ignore next */exports.deleteUser = () => new Promise((resolve, reject) => {
+
+  deleteUserData( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);
+
+  /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.delete().
+  then(() => {
+    resolve();}).
+
+  catch(error => reject(error));
+});
+
+const changeEmail = /* istanbul ignore next */exports.changeEmail = newEmail => new Promise((resolve, reject) => {
+  /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.updateEmail(newEmail).
+  then(() => {
+    updateUserData( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);
+    resolve( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}).
+
+  catch(error => reject(error));
+});
+
+const updateUserProfile = /* istanbul ignore next */exports.updateUserProfile = user => new Promise((resolve, reject) => {
+  /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.updateProfile(user).
+  then(() => {
+    updateUserData( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);
+    resolve( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}).
+
+  catch(error => reject(error));
+});

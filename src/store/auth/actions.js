@@ -15,7 +15,14 @@ function fetchSuccess(user) {
 export function setFetching(isFetching) {
   return {
     type: types.SET_FETCHING,
-    isFetching
+    payload: {isFetching}
+  };
+}
+
+export function setIsEditing(isEditing) {
+  return {
+    type: types.SET_IS_EDITING,
+    payload: {isEditing}
   };
 }
 

@@ -1,0 +1,31 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Routes/Routes.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Dashboard = require('../../containers/Dashboard');
+var /* istanbul ignore next */_About = require('../../containers/About');
+var /* istanbul ignore next */_MyAccount = require('../../containers/MyAccount');
+var /* istanbul ignore next */_Tasks = require('../../containers/Tasks');
+var /* istanbul ignore next */_Users = require('../../containers/Users');
+var /* istanbul ignore next */_ResetPassword = require('../../containers/ResetPassword');
+var /* istanbul ignore next */_PageNotFound = require('../../components/PageNotFound');
+var /* istanbul ignore next */_SignIn = require('../../containers/SignIn');
+var /* istanbul ignore next */_SignUp = require('../../containers/SignUp');
+var /* istanbul ignore next */_RestrictedRoute = require('../../containers/RestrictedRoute');
+var /* istanbul ignore next */_reactRouter = require('react-router'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const Routes = () => {
+  return (
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Switch, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 16 }, __self: undefined },
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'private', path: '/', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Dashboard.Dashboard, __source: { fileName: _jsxFileName, lineNumber: 17 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'private', path: '/dashboard', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Dashboard.Dashboard, __source: { fileName: _jsxFileName, lineNumber: 18 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'private', path: '/tasks', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Tasks.Tasks, __source: { fileName: _jsxFileName, lineNumber: 19 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'private', path: '/users', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_Users.Users, __source: { fileName: _jsxFileName, lineNumber: 20 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'private', path: '/about', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_About.About, __source: { fileName: _jsxFileName, lineNumber: 21 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'private', path: '/my_account', exact: /* istanbul ignore next */true, component: /* istanbul ignore next */_MyAccount.MyAccount, __source: { fileName: _jsxFileName, lineNumber: 22 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'public', path: '/signin', component: /* istanbul ignore next */_SignIn.SignIn, __source: { fileName: _jsxFileName, lineNumber: 23 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'public', path: '/signup', component: /* istanbul ignore next */_SignUp.SignUp, __source: { fileName: _jsxFileName, lineNumber: 24 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RestrictedRoute.RestrictedRoute, /* istanbul ignore next */{ type: 'public', path: '/reset', component: /* istanbul ignore next */_ResetPassword.ResetPassword, __source: { fileName: _jsxFileName, lineNumber: 25 }, __self: undefined }),
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactRouter.Route, /* istanbul ignore next */{ path: '/*', component: /* istanbul ignore next */_PageNotFound.PageNotFound, __source: { fileName: _jsxFileName, lineNumber: 26 }, __self: undefined })));
+
+
+}; /* istanbul ignore next */exports.default =
+
+Routes;

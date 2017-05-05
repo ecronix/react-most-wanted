@@ -1,0 +1,376 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.MyAccountTest = exports.MyAccount = undefined;var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/MyAccount/MyAccount.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_TextField = require('material-ui/TextField'); /* istanbul ignore next */var _TextField2 = _interopRequireDefault(_TextField);
+var /* istanbul ignore next */_RaisedButton = require('material-ui/RaisedButton'); /* istanbul ignore next */var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_Avatar = require('material-ui/Avatar'); /* istanbul ignore next */var _Avatar2 = _interopRequireDefault(_Avatar);
+var /* istanbul ignore next */_actions = require('../../store/auth/actions'); /* istanbul ignore next */var authActions = _interopRequireWildcard(_actions);
+var /* istanbul ignore next */_selectors = require('../../store/auth/selectors');
+var /* istanbul ignore next */_Activity = require('../../components/Activity');
+var /* istanbul ignore next */_PasswordDialog = require('../../containers/PasswordDialog');
+var /* istanbul ignore next */_ImageCropDialog = require('../../containers/ImageCropDialog');
+var /* istanbul ignore next */_ChangePasswordDialog = require('../../containers/ChangePasswordDialog');
+var /* istanbul ignore next */_DeleteAccountDialog = require('../../containers/DeleteAccountDialog');
+var /* istanbul ignore next */_Snackbar = require('material-ui/Snackbar'); /* istanbul ignore next */var _Snackbar2 = _interopRequireDefault(_Snackbar);
+var /* istanbul ignore next */_Icons = require('../../components/Icons');
+var /* istanbul ignore next */_IconButton = require('material-ui/IconButton'); /* istanbul ignore next */var _IconButton2 = _interopRequireDefault(_IconButton);
+var /* istanbul ignore next */_config = require('../../config'); /* istanbul ignore next */var _config2 = _interopRequireDefault(_config);
+var /* istanbul ignore next */_FlatButton = require('material-ui/FlatButton'); /* istanbul ignore next */var _FlatButton2 = _interopRequireDefault(_FlatButton);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = {
+  paper: {
+    display: 'block',
+    minHeight: 300,
+    margin: 15,
+    padding: 15 },
+
+  header: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center' },
+
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    paddingTop: 80 },
+
+  button: {
+    marginBottom: 10 },
+
+
+  avatar: {
+    float: 'right',
+    overflow: 'none',
+    alignSelf: 'center',
+    marginTop: -100 },
+
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '0',
+    bottom: '0',
+    right: '0',
+    left: '0',
+    width: '100%',
+    opacity: '0' },
+
+  buttons_container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between' } };
+
+
+
+class MyAccount extends /* istanbul ignore next */_react.Component {
+
+  constructor(props) {
+    super(props); /* istanbul ignore next */this.
+
+
+
+
+
+
+
+
+
+
+    hanldePhotoULRChange = e => {
+      const { setNewPhotoURL } = this.props;
+
+      e.preventDefault();
+      let files;
+      if (e.dataTransfer) {
+        files = e.dataTransfer.files;
+      } else if (e.target) {
+        files = e.target.files;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        setNewPhotoURL(reader.result);
+      };
+      reader.readAsDataURL(files[0]);
+    }; /* istanbul ignore next */this.
+
+
+
+    hanleUpdateSubmit = () => {
+      const { updateUser } = this.props;
+
+      updateUser({ displayName: this.name.getValue() });
+    }; /* istanbul ignore next */this.
+
+    handleKeyDown = (event, onSucces) => {
+
+      if (event.keyCode === 13) {
+        onSucces();
+      }
+    }; /* istanbul ignore next */this.
+
+
+    handlePasswordChange = () => {
+      const { auth, reauthenticateUser, setIsEditing } = this.props;
+
+      reauthenticateUser(auth, () => {setIsEditing('change_password');});
+
+    }; /* istanbul ignore next */this.
+
+    handleEmailChangeSubmit = () => {
+      const { changeEmail, reauthenticateUser, auth } = this.props;
+
+      const email = this.email.getValue();
+      reauthenticateUser(auth, () => {changeEmail(email, this.handlePasswordChangeSuccess);});
+    }; /* istanbul ignore next */this.
+
+    handleDeleteAccount = () => {
+      const { setDeleteDialogOpen } = this.props;
+
+      setDeleteDialogOpen(true);
+    }; /* istanbul ignore next */this.
+
+    getProviderIcon = provider => {
+
+      const { muiTheme, intl, auth, linkUserWithPopup } = this.props;
+
+      const color = muiTheme.palette.primary2Color;
+
+      return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+            key: provider,
+            disabled: /* istanbul ignore next */(0, _selectors.isLinkedWithProvider)(auth, provider),
+            onTouchTap: () => {linkUserWithPopup(provider);},
+            tooltip: intl.formatMessage({ id: `link_with_${provider}` }), __source: { fileName: _jsxFileName, lineNumber: 144 }, __self: this },
+          provider === 'google' && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GoogleIcon, /* istanbul ignore next */{ color: color, __source: { fileName: _jsxFileName, lineNumber: 149 }, __self: this }),
+          provider === 'facebook' && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.FacebookIcon, /* istanbul ignore next */{ color: color, __source: { fileName: _jsxFileName, lineNumber: 150 }, __self: this }),
+          provider === 'twitter' && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.TwitterIcon, /* istanbul ignore next */{ color: color, __source: { fileName: _jsxFileName, lineNumber: 151 }, __self: this }),
+          provider === 'github' && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Icons.GitHubIcon, /* istanbul ignore next */{ color: color, __source: { fileName: _jsxFileName, lineNumber: 152 }, __self: this })));
+
+    };this.email = null;this.name = null;this.photoURL = null;this.password = null;this.confirm_password = null;this.tempPath = null;this.cropper = null;}
+
+  render() {
+    const { intl, getValidationErrorMessage, auth, authError, muiTheme, sendEmailVerification, setIsEditing } = this.props;
+
+    const isSnackbarOpen = auth.error !== undefined &&
+    auth.error.message &&
+    auth.error.code !== undefined &&
+    auth.error.code.indexOf('email') < 0 &&
+    auth.error.code.indexOf('password') < 0 &&
+    auth.error.code.indexOf('confirm_password') < 0;
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Activity.Activity, /* istanbul ignore next */{
+          title: intl.formatMessage({ id: 'my_account' }), __source: { fileName: _jsxFileName, lineNumber: 167 }, __self: this },
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 170 }, __self: this },
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ zDepth: 2, style: styles.paper, __source: { fileName: _jsxFileName, lineNumber: 172 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.header, __source: { fileName: _jsxFileName, lineNumber: 173 }, __self: this },
+
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Avatar2.default, /* istanbul ignore next */{
+                style: styles.avatar,
+                size: 150,
+                icon: auth.photoURL === null ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this }, /* istanbul ignore next */'account_circle') : undefined,
+                src: auth.photoURL, __source: { fileName: _jsxFileName, lineNumber: 175 }, __self: this }),
+
+
+              auth.isEditing &&
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+                  containerElement: 'label',
+                  primary: true,
+                  style: styles.button
+                  //fullWidth={true}
+                  , icon:
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                      className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 189 }, __self: this }, /* istanbul ignore next */'photo_camera'), __source: { fileName: _jsxFileName, lineNumber: 183 }, __self: this },
+
+
+
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'input', /* istanbul ignore next */{
+                  ref: field => {this.photoURL = field;},
+                  type: 'file',
+                  accept: 'image/*',
+                  style: { display: 'none' },
+                  onChange: this.hanldePhotoULRChange, __source: { fileName: _jsxFileName, lineNumber: 195 }, __self: this })),
+
+
+
+
+              !auth.isEditing &&
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.buttons_container, __source: { fileName: _jsxFileName, lineNumber: 206 }, __self: this },
+                /* istanbul ignore next */_config2.default.providers.map(p => {
+                  return this.getProviderIcon(p);
+                })),
+
+
+
+
+              auth.isEditing && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 214 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+                  id: 'name',
+                  ref: field => {this.name = field;}
+                  //underlineShow={false}
+                  , defaultValue: auth.displayName,
+                  onKeyDown: e => {this.handleKeyDown(e, this.hanleUpdateSubmit);},
+                  errorText: getValidationErrorMessage('name'),
+                  floatingLabelText: intl.formatMessage({ id: 'name' }),
+                  type: 'Text',
+                  fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 215 }, __self: this }), /* istanbul ignore next */' ',
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 225 }, __self: this }),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+                  id: 'email',
+                  ref: field => {this.email = field;},
+                  defaultValue: auth.email,
+                  onKeyDown: e => {this.handleKeyDown(e, this.handleEmailChangeSubmit);},
+                  errorText: getValidationErrorMessage('email'),
+                  floatingLabelText: intl.formatMessage({ id: 'email' }),
+                  hintText: intl.formatMessage({ id: 'password' }),
+                  type: 'Email',
+                  fullWidth: true, __source: { fileName: _jsxFileName, lineNumber: 226 }, __self: this })),
+
+
+
+
+              !auth.isEditing && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 240 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'h3', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 241 }, __self: this }, auth.displayName),
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'span', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 242 }, __self: this },
+                  auth.email,
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+                      onTouchTap: auth.emailVerified === true ? undefined : () => {sendEmailVerification();},
+                      tooltip: intl.formatMessage({ id: auth.emailVerified === true ? 'email_verified' : 'email_not_verified' }), __source: { fileName: _jsxFileName, lineNumber: 244 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                        color: auth.emailVerified === true ? muiTheme.palette.primary1Color : muiTheme.palette.accent1Color,
+                        style: { 'paddingLeft': 10 },
+                        className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 247 }, __self: this },
+                      auth.emailVerified === true ? 'verified_user' : 'error'))))),
+
+
+
+
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { marginBottom: 20 }, __source: { fileName: _jsxFileName, lineNumber: 261 }, __self: this }),
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+              label: intl.formatMessage({ id: auth.isEditing ? 'cancel' : 'edit' }),
+              primary: true,
+              disabled: auth.isFetching,
+              style: styles.button,
+              fullWidth: true,
+              onTouchTap: () => {setIsEditing(!auth.isEditing);},
+              icon:
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                  className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 273 }, __self: this },
+                auth.isEditing ? 'cancel' : 'edit'), __source: { fileName: _jsxFileName, lineNumber: 265 }, __self: this }),
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 279 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+              label: intl.formatMessage({ id: 'change_password' }),
+              disabled: auth.isFetching,
+              primary: true,
+              fullWidth: true,
+              style: styles.button,
+              onTouchTap: this.handlePasswordChange,
+              icon:
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                  className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 288 }, __self: this }, /* istanbul ignore next */'lock'), __source: { fileName: _jsxFileName, lineNumber: 280 }, __self: this }), /* istanbul ignore next */' ',
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'br', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 293 }, __self: this }),
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_RaisedButton2.default, /* istanbul ignore next */{
+              label: intl.formatMessage({ id: 'delete_account' }),
+              disabled: auth.isFetching,
+              secondary: true,
+              fullWidth: true,
+              onTouchTap: this.handleDeleteAccount,
+              icon:
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{
+                  className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 301 }, __self: this }, /* istanbul ignore next */'delete'), __source: { fileName: _jsxFileName, lineNumber: 294 }, __self: this }))),
+
+
+
+
+
+
+
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_PasswordDialog.PasswordDialog, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 312 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_DeleteAccountDialog.DeleteAccountDialog, /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 313 }, __self: this }),
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ImageCropDialog.ImageCropDialog, /* istanbul ignore next */{
+          open: auth.newPhotoURL !== null,
+          title: intl.formatMessage({ id: 'change_photo' }), __source: { fileName: _jsxFileName, lineNumber: 314 }, __self: this }),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_ChangePasswordDialog.ChangePasswordDialog, /* istanbul ignore next */{
+          open: auth.isEditing === 'change_password',
+          title: intl.formatMessage({ id: 'change_password' }), __source: { fileName: _jsxFileName, lineNumber: 319 }, __self: this }),
+
+
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Snackbar2.default, /* istanbul ignore next */{
+          bodyStyle: { height: '100%' },
+          open: isSnackbarOpen,
+          message: isSnackbarOpen ? auth.error.message : '',
+          action: 'OK',
+          autoHideDuration: 5000,
+          onRequestClose: () => {authError(undefined);},
+          onActionTouchTap: () => {authError(undefined);}, __source: { fileName: _jsxFileName, lineNumber: 324 }, __self: this })));
+
+
+
+
+
+  }} /* istanbul ignore next */exports.MyAccount = MyAccount;
+
+
+
+MyAccount.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  router: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  authError: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  updateUser: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  changePassword: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  changeEmail: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setNewPhotoURL: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  updateUserPhoto: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  linkUserWithPopup: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  getValidationErrorMessage: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setDeleteDialogOpen: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  reauthenticateUser: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  sendEmailVerification: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  fetchUser: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+
+const mapStateToProps = state => {
+  const { auth, router } = state;
+  return {
+    auth,
+    router,
+    getValidationErrorMessage: fieldID => /* istanbul ignore next */(0, _selectors.getValidationErrorMessage)(auth, fieldID) };
+
+};
+
+const MyAccountTest = /* istanbul ignore next */exports.MyAccountTest = /* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(MyAccount)); /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps, /* istanbul ignore next */Object.assign({},
+
+authActions))(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(MyAccount)));

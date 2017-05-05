@@ -66,7 +66,6 @@ class Tasks extends Component {
   }
 
   handleKeyDown = (event, onSucces) => {
-
     if(event.keyCode===13){
       onSucces();
     }
@@ -132,7 +131,7 @@ class Tasks extends Component {
       return <div key={key}>
         <ListItem
           key={key}
-          onTouchTap={()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}}
+          onTouchTap={tasks.isEditing===key?undefined: ()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}}
           leftAvatar={
             task.completed?
             <Avatar
@@ -175,7 +174,7 @@ render(){
     <Activity
       title={intl.formatMessage({id: 'tasks'})}>
       <div >
-        {tasks.isFetching && tasks.isConnected &&
+        {tasks.isFetching && tasks.isConnected && !Object.keys(tasks.list).length &&
           <div style={styles.center_container}>
             <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
           </div>

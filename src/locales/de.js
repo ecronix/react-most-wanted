@@ -55,6 +55,7 @@ const messages=defineMessages({
   send_verification_email_again: 'Verifizierungs E-Mail wieder senden',
   tasks: 'Aufgaben',
   users: 'Benutzer',
+  edit: 'Bearbeiten',
 
 });
 
