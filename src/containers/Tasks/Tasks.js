@@ -40,14 +40,14 @@ const styles={
   button: {
     position: 'fixed',
     zIndex:3,
-    bottom: 35,
+    bottom: 10,
     marginLeft: -24
   },
 
   text_input: {
     position: 'fixed',
     zIndex:3,
-    bottom: 35,
+    bottom: 10,
     marginLeft: -155
   }
 }

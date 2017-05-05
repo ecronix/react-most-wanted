@@ -57,7 +57,7 @@ describe('auth reducer', () => {
   })
 
 
-  it('should handle SIGN_IN_SUCCESS', () => {
+  it('should handle AUTH_STATE_CHANGED', () => {
 
     const user={
       isAuthorised: true,
@@ -65,7 +65,7 @@ describe('auth reducer', () => {
       email: 'Email'
     }
 
-    Reducer(reducer).expect(actions.signInSuccess(user)).toReturnState({
+    Reducer(reducer).expect(actions.onAuthStateChanged(user)).toReturnState({
       ...initialState,
       ...user
     })

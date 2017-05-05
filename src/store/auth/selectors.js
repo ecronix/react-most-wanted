@@ -14,7 +14,6 @@ export const getUser = (firebaseUser) => {
 
 
     return {
-      isAuthorised: true,
       displayName,
       email,
       emailVerified,
@@ -26,7 +25,7 @@ export const getUser = (firebaseUser) => {
   }
 
   return {
-    isAuthorised: false
+
   };
 
 }

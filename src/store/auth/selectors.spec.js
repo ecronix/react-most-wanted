@@ -25,8 +25,7 @@ describe('auth selectors', () => {
       isAnonymous: false,
       photoURL: 'img',
       uid: 'uid',
-      providerData: null,
-      isAuthorised: true
+      providerData: null
     }
 
     expect(
@@ -39,7 +38,7 @@ describe('auth selectors', () => {
     expect(
       selectors.getUser()
     ).toEqual({
-      isAuthorised: false
+      
     })
   });
 

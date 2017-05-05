@@ -1,0 +1,423 @@
+/* istanbul ignore next */'use strict';
+
+
+
+
+
+
+
+
+
+jest.mock('../../utils/auth');var /* istanbul ignore next */_reduxTestkit = require('redux-testkit');var /* istanbul ignore next */_reduxMockStore = require('redux-mock-store'); /* istanbul ignore next */var _reduxMockStore2 = _interopRequireDefault(_reduxMockStore);var /* istanbul ignore next */_reduxThunk = require('redux-thunk'); /* istanbul ignore next */var _reduxThunk2 = _interopRequireDefault(_reduxThunk);var /* istanbul ignore next */_reducers = require('../reducers'); /* istanbul ignore next */var reducers = _interopRequireWildcard(_reducers);var /* istanbul ignore next */_selectors = require('./selectors'); /* istanbul ignore next */var selectors = _interopRequireWildcard(_selectors);var /* istanbul ignore next */_actions = require('./actions'); /* istanbul ignore next */var actions = _interopRequireWildcard(_actions);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);var /* istanbul ignore next */_reducer = require('./reducer'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const middlewares = [/* istanbul ignore next */_reduxThunk2.default];
+const mockStore = /* istanbul ignore next */(0, _reduxMockStore2.default)(middlewares);
+
+
+
+/*
+                                                                                        describe('auth actions', () => {
+                                                                                        
+                                                                                          it('should handle signInWithProvider success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.signInWithProvider(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SIGN_IN_SUCCESS);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signInWithProvider error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.signInWithProvider(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signOutUser success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.signOutUser(true)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                        
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.SIGN_OUT_SUCCESS);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signOutUser error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.signOutUser(false)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                        
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.AUTH_ERROR);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle deleteUser success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.deleteUser(true)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                        
+                                                                                              expect(resultActions).toHaveLength(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.SIGN_OUT_SUCCESS);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle deleteUser error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.deleteUser(false)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                        
+                                                                                              expect(resultActions).toHaveLength(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.AUTH_ERROR);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signInUser success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.signInUser(true)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SIGN_IN_SUCCESS);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signInUser error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.signInUser(false)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle updateUser succes', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.updateUser(true)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SIGN_IN_SUCCESS);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle updateUser error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.updateUser(false)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signUpUser success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.signUpUser(true)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(3);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SIGN_IN_SUCCESS);
+                                                                                              expect(resultActions[2].type).toEqual(types.SET_FETCHING);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle signUpUser error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.signUpUser(false)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                        
+                                                                                          it('should handle reauthenticateUserWithCredential success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.reauthenticateUserWithCredential(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(0);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle reauthenticateUserWithCredential error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.reauthenticateUserWithCredential(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle reauthenticateUserWithPopup success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.reauthenticateUserWithPopup(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(0);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle reauthenticateUserWithPopup error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.reauthenticateUserWithPopup(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                        
+                                                                                          it('should handle reauthenticateUser with provider', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const auth={providerData:[{providerId: 'google.com'}]}
+                                                                                        
+                                                                                            store.dispatch(actions.reauthenticateUser(auth));
+                                                                                        
+                                                                                            const resultActions = store.getActions();
+                                                                                        
+                                                                                            expect(resultActions).toEqual([])
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle reauthenticateUser with password', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            store.dispatch(actions.reauthenticateUser({}));
+                                                                                        
+                                                                                            const resultActions = store.getActions();
+                                                                                            expect(resultActions.length).toBe(1);
+                                                                                            expect(resultActions[0].type).toEqual(types.SET_PASSWORD_DIALOG_OPEN)
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle resetPasswordEmail success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState);
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.resetPasswordEmail(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(0);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle resetPasswordEmail error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState);
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.resetPasswordEmail(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle sendEmailVerification success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.sendEmailVerification(true)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SET_IS_VERIFICATION_EMAIL_SEND);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle sendEmailVerification error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                        
+                                                                                            return store.dispatch(actions.sendEmailVerification(false)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                        
+                                                                                          it('should handle changePassword success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.changePassword(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle changePassword error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.changePassword(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                        
+                                                                                          it('should handle linkUserWithPopup success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.linkUserWithPopup(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle linkUserWithPopup error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.linkUserWithPopup(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(1);
+                                                                                              expect(resultActions[0].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle changeEmail success', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.changeEmail(true, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(spy).toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                          it('should handle changeEmail error', () => {
+                                                                                        
+                                                                                            const store = mockStore(initialState)
+                                                                                            const spy=jest.fn();
+                                                                                            const success = ()=>{spy()}
+                                                                                        
+                                                                                            return store.dispatch(actions.changeEmail(false, success)).then(()=>{
+                                                                                              const resultActions = store.getActions()
+                                                                                              expect(resultActions.length).toBe(2);
+                                                                                              expect(resultActions[0].type).toEqual(types.SET_FETCHING);
+                                                                                              expect(resultActions[1].type).toEqual(types.AUTH_ERROR);
+                                                                                              expect(spy).not.toBeCalled();
+                                                                                            })
+                                                                                        
+                                                                                          })
+                                                                                        
+                                                                                        
+                                                                                        })
+                                                                                        
+                                                                                        */

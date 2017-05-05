@@ -8,10 +8,10 @@ import {App} from '../../containers/App';
 class Root extends Component {
 
   componentWillMount () {
-    const { fetchUser }= this.props;
-    fetchUser();
+    const { initAuth }= this.props;
+    initAuth();
   }
-  
+
   render() {
     const { history, locale, muiTheme, messages}= this.props;
     return (

@@ -18,16 +18,11 @@ const auth = (state = initialState, action) => {
 
     //!!! DROP DOWN !!!
     case types.SIGN_IN_SUCCESS:
-    case types.FETCH_SUCCESS:
+    case types.AUTH_STATE_CHANGED:
     return {
       ...state,
-      isMenuOpen: false,
-      isFetching: false,
-      isEditing: false,
-      isPasswordDialogOpen: false,
-      isDeleteDialogOpen: false,
-      isVerificationEmailSend: false,
-      newPhotoURL: null,
+      ...initialState,
+      isAuthorised: true,
       error: undefined,
       ...(action.user)
     };

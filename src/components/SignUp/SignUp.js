@@ -6,6 +6,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import { Activity } from '../../components/Activity';
+import CircularProgress from 'material-ui/CircularProgress';
 
 const styles={
   paper:{
@@ -38,7 +39,8 @@ const SignUp = (props) => {
     signUpUser,
     authError,
     getValidationErrorMessage,
-    push
+    push,
+    auth
   } = props;
 
 
@@ -77,65 +79,69 @@ const SignUp = (props) => {
 
       <div style={styles.container}>
 
-        <Paper  zDepth={2} style={styles.paper}>
+        {auth.isFetching && <CircularProgress size={80} thickness={5} />}
 
-          <h3>{intl.formatMessage({id: 'sign_up'}).toUpperCase()}</h3>
+        {!auth.isFetching &&
+          <Paper  zDepth={2} style={styles.paper}>
 
-          <div style={{marginBottom: 20}}>
-            <TextField
-              id="displayName"
-              ref={(field) => { displayName = field; displayName && displayName.focus(); }}
-              hintText={intl.formatMessage({id: 'name'})}
-              errorText={getValidationErrorMessage('displayName')}
-              floatingLabelText={intl.formatMessage({id: 'name'})}
-              type="Name"
+            <h3>{intl.formatMessage({id: 'sign_up'}).toUpperCase()}</h3>
+
+            <div style={{marginBottom: 20}}>
+              <TextField
+                id="displayName"
+                ref={(field) => { displayName = field; displayName && displayName.focus(); }}
+                hintText={intl.formatMessage({id: 'name'})}
+                errorText={getValidationErrorMessage('displayName')}
+                floatingLabelText={intl.formatMessage({id: 'name'})}
+                type="Name"
+                fullWidth={true}
+              /><br />
+              <TextField
+                id="email"
+                ref={(field) => { email = field; }}
+                hintText={intl.formatMessage({id: 'email'})}
+                errorText={getValidationErrorMessage('email')}
+                floatingLabelText={intl.formatMessage({id: 'email'})}
+                type="Email"
+                fullWidth={true}
+              /><br />
+              <TextField
+                id="password"
+                ref={(field) => { password = field; }}
+                hintText={intl.formatMessage({id: 'password'})}
+                errorText={getValidationErrorMessage('password')}
+                floatingLabelText={intl.formatMessage({id: 'password'})}
+                type="Password"
+                fullWidth={true}
+              /><br />
+              <TextField
+                id="confirm_password"
+                ref={(field) => { confirm_password = field; }}
+                onKeyDown={handleKeyDown}
+                hintText={intl.formatMessage({id: 'confirm_password'})}
+                errorText={getValidationErrorMessage('confirm_password')}
+                floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
+                type="Password"
+                fullWidth={true}
+              />
+            </div>
+
+            <RaisedButton
+              label={intl.formatMessage({id: 'sign_up'})}
+              secondary={true}
+              style={styles.button}
               fullWidth={true}
-            /><br />
-            <TextField
-              id="email"
-              ref={(field) => { email = field; }}
-              hintText={intl.formatMessage({id: 'email'})}
-              errorText={getValidationErrorMessage('email')}
-              floatingLabelText={intl.formatMessage({id: 'email'})}
-              type="Email"
-              fullWidth={true}
-            /><br />
-            <TextField
-              id="password"
-              ref={(field) => { password = field; }}
-              hintText={intl.formatMessage({id: 'password'})}
-              errorText={getValidationErrorMessage('password')}
-              floatingLabelText={intl.formatMessage({id: 'password'})}
-              type="Password"
-              fullWidth={true}
-            /><br />
-            <TextField
-              id="confirm_password"
-              ref={(field) => { confirm_password = field; }}
-              onKeyDown={handleKeyDown}
-              hintText={intl.formatMessage({id: 'confirm_password'})}
-              errorText={getValidationErrorMessage('confirm_password')}
-              floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
-              type="Password"
-              fullWidth={true}
+              onTouchTap={hanleSignUpSubmit}
+              icon={
+                <FontIcon
+                  className="material-icons">
+                  person_add
+                </FontIcon>
+              }
             />
-          </div>
-
-          <RaisedButton
-            label={intl.formatMessage({id: 'sign_up'})}
-            secondary={true}
-            style={styles.button}
-            fullWidth={true}
-            onTouchTap={hanleSignUpSubmit}
-            icon={
-              <FontIcon
-                className="material-icons">
-                person_add
-              </FontIcon>
-            }
-          />
-          <br />
-        </Paper>
+            <br />
+          </Paper>
+        }
       </div>
 
     </Activity>

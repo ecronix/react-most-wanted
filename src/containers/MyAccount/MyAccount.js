@@ -353,7 +353,6 @@ MyAccount.propTypes = {
   setDeleteDialogOpen: PropTypes.func.isRequired,
   reauthenticateUser: PropTypes.func.isRequired,
   sendEmailVerification: PropTypes.func.isRequired,
-  fetchUser: PropTypes.func.isRequired,
 };
 
 

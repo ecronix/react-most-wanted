@@ -7,6 +7,7 @@ export const SET_DELETE_DIALOG_OPEN =  `${namespace}@SET_DELETE_DIALOG_OPEN`;
 export const SET_NEW_PHOTO_URL =  `${namespace}@SET_NEW_PHOTO_URL`;
 export const SET_IS_VERIFICATION_EMAIL_SEND =  `${namespace}@SET_IS_VERIFICATION_EMAIL_SEND`;
 
+export const AUTH_STATE_CHANGED =  `${namespace}@AUTH_STATE_CHANGED`;
 export const AUTH_ERROR =  `${namespace}@AUTH_ERROR`;
 export const SET_FETCHING =  `${namespace}@SET_FETCHING`;
 

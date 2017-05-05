@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { firebaseAuth, firebaseDb } from './firebase';
+import { firebaseAuth } from './firebase';
 
 const getProvider = (provider) => {
 
@@ -20,6 +20,7 @@ const getProvider = (provider) => {
   }
 
   throw new Error('Provider is not supported!!!');
+
 };
 
 
@@ -27,29 +28,6 @@ export const isAuthorised = () => {
   const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
   const data = JSON.parse(localStorage.getItem(key));
   return data != null;
-}
-
-export const updateUserData = (user) => {
-
-  if(user!==undefined && user!==null){
-    firebaseDb.ref('users/' + user.uid).update({
-      displayName: user.displayName,
-      email: user.email,
-      emailVerified : user.emailVerified,
-      isAnonymous : user.isAnonymous,
-      photoURL : user.photoURL,
-      providerData : user.providerData
-    });
-  }
-
-}
-
-export const deleteUserData = (user) => {
-
-  if(user!==undefined && user!==null){
-    firebaseDb.ref('users/' + user.uid).remove();
-  }
-
 }
 
 
@@ -70,45 +48,12 @@ export const linkWithPopup = (provider) => firebaseAuth.currentUser.linkWithPopu
 export const logoutUser = () => firebaseAuth.signOut();
 export const resetPasswordEmail = (email) => firebaseAuth.sendPasswordResetEmail(email);
 export const changePassword = (newPassword) => firebaseAuth.currentUser.updatePassword(newPassword);
-
-
 export const sendEmailVerification = () => firebaseAuth.currentUser.sendEmailVerification();
-
-export const fetchUser = () => new Promise((resolve, reject) => {
-  const unsub = firebaseAuth.onAuthStateChanged((user) => {
-    unsub();
-    resolve(user);
-  }, (error) => {
-    reject(error);
-  });
-});
-
-//export const deleteUser = () => firebaseAuth.currentUser.delete();
-
-export const deleteUser = () => new Promise((resolve, reject) => {
-
-  deleteUserData(firebaseAuth.currentUser);
-
-  firebaseAuth.currentUser.delete()
-  .then(() => {
-    resolve()}
-  )
-  .catch((error) => reject(error))
-});
 
 export const changeEmail = (newEmail) => new Promise((resolve, reject) => {
   firebaseAuth.currentUser.updateEmail(newEmail)
   .then(() => {
-    updateUserData(firebaseAuth.currentUser);
-    resolve(firebaseAuth.currentUser)}
-  )
-  .catch((error) => reject(error))
-});
-
-export const updateUserProfile = (user) => new Promise((resolve, reject) => {
-  firebaseAuth.currentUser.updateProfile(user)
-  .then(() => {
-    updateUserData(firebaseAuth.currentUser);
+    //updateUserData(firebaseAuth.currentUser);
     resolve(firebaseAuth.currentUser)}
   )
   .catch((error) => reject(error))

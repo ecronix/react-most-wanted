@@ -1,0 +1,262 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/Tasks/Tasks.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_lodash = require('lodash'); /* istanbul ignore next */var _lodash2 = _interopRequireDefault(_lodash);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_muiThemeable = require('material-ui/styles/muiThemeable'); /* istanbul ignore next */var _muiThemeable2 = _interopRequireDefault(_muiThemeable);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_Activity = require('../../components/Activity');
+var /* istanbul ignore next */_actions = require('../../store/tasks/actions'); /* istanbul ignore next */var taskActions = _interopRequireWildcard(_actions);
+var /* istanbul ignore next */_List = require('material-ui/List');
+var /* istanbul ignore next */_Divider = require('material-ui/Divider'); /* istanbul ignore next */var _Divider2 = _interopRequireDefault(_Divider);
+var /* istanbul ignore next */_FontIcon = require('material-ui/FontIcon'); /* istanbul ignore next */var _FontIcon2 = _interopRequireDefault(_FontIcon);
+var /* istanbul ignore next */_IconButton = require('material-ui/IconButton'); /* istanbul ignore next */var _IconButton2 = _interopRequireDefault(_IconButton);
+var /* istanbul ignore next */_TextField = require('material-ui/TextField'); /* istanbul ignore next */var _TextField2 = _interopRequireDefault(_TextField);
+var /* istanbul ignore next */_FloatingActionButton = require('material-ui/FloatingActionButton'); /* istanbul ignore next */var _FloatingActionButton2 = _interopRequireDefault(_FloatingActionButton);
+var /* istanbul ignore next */_CircularProgress = require('material-ui/CircularProgress'); /* istanbul ignore next */var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
+var /* istanbul ignore next */_Avatar = require('material-ui/Avatar'); /* istanbul ignore next */var _Avatar2 = _interopRequireDefault(_Avatar);
+var /* istanbul ignore next */_Paper = require('material-ui/Paper'); /* istanbul ignore next */var _Paper2 = _interopRequireDefault(_Paper);
+var /* istanbul ignore next */_colors = require('material-ui/styles/colors'); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = {
+  center_container: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    margin: 16 },
+
+  main_container: {
+    float: 'left',
+    position: 'relative',
+    left: '50%' },
+
+
+  fixer_container: {
+    float: 'left',
+    position: 'relative',
+    left: '-50%' },
+
+
+  button: {
+    position: 'fixed',
+    zIndex: 3,
+    bottom: 10,
+    marginLeft: -24 },
+
+
+  text_input: {
+    position: 'fixed',
+    zIndex: 3,
+    bottom: 10,
+    marginLeft: -155 } };
+
+
+
+
+class Tasks extends /* istanbul ignore next */_react.Component {
+
+  constructor(props) {
+    super(props); /* istanbul ignore next */this.
+
+
+
+
+
+
+
+
+    handleKeyDown = (event, onSucces) => {
+      if (event.keyCode === 13) {
+        onSucces();
+      }
+    }; /* istanbul ignore next */this.
+
+
+
+
+
+
+
+
+
+
+    handleAddTask = () => {
+      const { createTask, auth } = this.props;
+
+      const newTask = {
+        title: this.name.getValue(),
+        userName: auth.displayName,
+        userPhotoURL: auth.photoURL,
+        userId: auth.uid,
+        completed: false };
+
+
+      createTask(newTask);
+    }; /* istanbul ignore next */this.
+
+    handleUpdateTask = (key, task) => {
+      const { updateTask } = this.props;
+
+      //const newTask= {...task, title: this.new_task_title.getValue()};
+
+      updateTask(key, task);
+    }; /* istanbul ignore next */this.
+
+    renderPrimaryText = (task, key) => {
+      const { tasks } = this.props;
+
+      return tasks.isEditing === key ? /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 108 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+          id: 'new_task_title',
+          style: { height: 26 },
+          underlineShow: false,
+          defaultValue: task.title,
+          onKeyDown: event => {this.handleKeyDown(event, () => {this.handleUpdateTask(key, /* istanbul ignore next */Object.assign({}, task, { title: this.new_task_title.getValue() }));});},
+          ref: field => {this.new_task_title = field;this.new_task_title && this.new_task_title.focus();},
+          type: 'Text', __source: { fileName: _jsxFileName, lineNumber: 109 }, __self: this })) :
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 118 }, __self: this },
+        task.title);
+
+
+    };this.name = null;this.new_task_title = null;}componentWillMount() {this.props.loadTasks();}componentWillUnmount() {this.props.unloadTasks();}componentDidUpdate() {// TODO: just a fast solution. Repair it ASAP
+    window.scrollTo(0, 100000);}
+  rednerTasks(tasks) {
+    const { deleteTask, muiTheme, setIsEditing, auth } = this.props;
+
+    return (/* istanbul ignore next */_lodash2.default.map(tasks.list, (task, key) => {
+
+        const isEditing = tasks.isEditing === key;
+
+        return (/* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ key: key, __source: { fileName: _jsxFileName, lineNumber: 131 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List.ListItem, /* istanbul ignore next */{
+              key: key,
+              onTouchTap: tasks.isEditing === key ? undefined : () => {this.handleUpdateTask(key, /* istanbul ignore next */Object.assign({}, task, { completed: !task.completed }));},
+              leftAvatar:
+              task.completed ?
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Avatar2.default, /* istanbul ignore next */{
+                icon: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 138 }, __self: this }, /* istanbul ignore next */'check_circle'),
+                color: /* istanbul ignore next */_colors.green800,
+                backgroundColor: /* istanbul ignore next */_colors.transparent, __source: { fileName: _jsxFileName, lineNumber: 137 }, __self: this }) :
+
+
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Avatar2.default, /* istanbul ignore next */{ src: task.userPhotoURL, __source: { fileName: _jsxFileName, lineNumber: 143 }, __self: this }),
+
+              primaryText: this.renderPrimaryText(task, key),
+              secondaryText: isEditing ? undefined : task.userName,
+              id: key,
+              rightIconButton: /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 148 }, __self: this },
+                task.userId === auth.uid && /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 149 }, __self: this },
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+                      onTouchTap: isEditing ? () => {this.handleUpdateTask(key, /* istanbul ignore next */Object.assign({}, task, { title: this.new_task_title.getValue() }));} : () => {setIsEditing(key);}, __source: { fileName: _jsxFileName, lineNumber: 150 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', color: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 152 }, __self: this }, isEditing ? 'save' : 'edit')),
+
+
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+                      onTouchTap: isEditing ? () => {setIsEditing(false);} : () => {deleteTask(key);}, __source: { fileName: _jsxFileName, lineNumber: 155 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', color: 'red', __source: { fileName: _jsxFileName, lineNumber: 157 }, __self: this }, isEditing ? 'highlight_off' : 'delete')))), __source: { fileName: _jsxFileName, lineNumber: 132 }, __self: this }),
+
+
+
+
+
+
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Divider2.default, /* istanbul ignore next */{ inset: true, __source: { fileName: _jsxFileName, lineNumber: 164 }, __self: this })));
+
+      }));
+  }
+
+
+  render() {
+    const { intl, tasks, setIsCreating, muiTheme } = this.props;
+
+    return (
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Activity.Activity, /* istanbul ignore next */{
+          title: intl.formatMessage({ id: 'tasks' }), __source: { fileName: _jsxFileName, lineNumber: 174 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ __source: { fileName: _jsxFileName, lineNumber: 176 }, __self: this },
+          tasks.isFetching && tasks.isConnected && !Object.keys(tasks.list).length &&
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.center_container, __source: { fileName: _jsxFileName, lineNumber: 178 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CircularProgress2.default, /* istanbul ignore next */{ style: { padding: 20 }, size: 80, thickness: 5, __source: { fileName: _jsxFileName, lineNumber: 179 }, __self: this })),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { overflow: 'none', backgroundColor: muiTheme.palette.convasColor }, __source: { fileName: _jsxFileName, lineNumber: 183 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_List.List, /* istanbul ignore next */{ id: 'test', style: { height: '100%' }, ref: field => {this.list = field;}, __source: { fileName: _jsxFileName, lineNumber: 184 }, __self: this },
+              this.rednerTasks(tasks))),
+
+
+
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.main_container, __source: { fileName: _jsxFileName, lineNumber: 189 }, __self: this },
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.fixer_container, __source: { fileName: _jsxFileName, lineNumber: 190 }, __self: this },
+
+              tasks.isCreating &&
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.text_input, __source: { fileName: _jsxFileName, lineNumber: 193 }, __self: this },
+
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Paper2.default, /* istanbul ignore next */{ style: { borderRadius: 25, backgroundColor: muiTheme.chip.backgroundColor }, __source: { fileName: _jsxFileName, lineNumber: 195 }, __self: this },
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, __source: { fileName: _jsxFileName, lineNumber: 196 }, __self: this },
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+                        onTouchTap: () => {setIsCreating(false);}, __source: { fileName: _jsxFileName, lineNumber: 197 }, __self: this },
+                      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', color: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 199 }, __self: this }, /* istanbul ignore next */'highlight_off')),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_TextField2.default, /* istanbul ignore next */{
+                      id: 'public_task',
+                      fullWidth: true,
+                      onKeyDown: event => {this.handleKeyDown(event, this.handleAddTask);},
+                      ref: field => {this.name = field;this.name && this.name.focus();},
+                      type: 'Text', __source: { fileName: _jsxFileName, lineNumber: 201 }, __self: this }),
+
+                    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_IconButton2.default, /* istanbul ignore next */{
+                        onTouchTap: this.handleAddTask, __source: { fileName: _jsxFileName, lineNumber: 208 }, __self: this },
+                      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', color: muiTheme.palette.primary1Color, __source: { fileName: _jsxFileName, lineNumber: 210 }, __self: this }, /* istanbul ignore next */'send'))))),
+
+
+
+
+
+
+              !tasks.isCreating &&
+              /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.button, __source: { fileName: _jsxFileName, lineNumber: 218 }, __self: this },
+                /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FloatingActionButton2.default, /* istanbul ignore next */{ onTouchTap: () => {setIsCreating(true);}, style: { zIndex: 3 }, __source: { fileName: _jsxFileName, lineNumber: 219 }, __self: this },
+                  /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FontIcon2.default, /* istanbul ignore next */{ className: 'material-icons', __source: { fileName: _jsxFileName, lineNumber: 220 }, __self: this }, /* istanbul ignore next */'add'))))))));
+
+
+
+
+
+
+
+
+
+
+
+
+  }}
+
+
+
+Tasks.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  muiTheme: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  auth: /* istanbul ignore next */_propTypes2.default.object.isRequired,
+  loadTasks: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  createTask: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  deleteTask: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setIsCreating: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+
+const mapStateToProps = state => {
+  const { tasks, auth } = state;
+  return {
+    tasks,
+    auth };
+
+}; /* istanbul ignore next */exports.default =
+
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps, /* istanbul ignore next */Object.assign({},
+
+taskActions))(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)( /* istanbul ignore next */(0, _muiThemeable2.default)()(Tasks)));

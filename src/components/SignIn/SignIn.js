@@ -72,12 +72,6 @@ const SignIn = (props) => {
   && auth.error.code.indexOf('email')<0
   && auth.error.code.indexOf('password')<0;
 
-
-  const hanleSignInSubmit = () => {
-
-    signInUser({email: email.getValue(), password: password.getValue()});
-  }
-
   const handleKeyDown = (event, onSucces) => {
     if(event.keyCode===13){
       onSucces();
@@ -85,11 +79,16 @@ const SignIn = (props) => {
   }
 
 
-  const onSignInSuccess = (user) => {
+  const onSignInSuccess = () => {
 
     const pathname =((((router || {}).location || {}).state || {}).from || {}).pathname;
     push(pathname || '/');
 
+  }
+
+  const hanleSignInSubmit = () => {
+
+    signInUser({email: email.getValue(), password: password.getValue()}, onSignInSuccess);
   }
 
   const getProviderIcon = (provider) => {
