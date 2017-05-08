@@ -2,6 +2,13 @@ import firebase from 'firebase';
 import cuid  from 'cuid';
 import { firebaseAuth, firebaseDb, firebaseApp } from './firebase';
 
+
+export const isAuthorised = () => {
+  const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
+  const data = JSON.parse(localStorage.getItem(key));
+  return data != null;
+}
+
 const  getProvider = (provider) => {
 
   if(provider.indexOf('facebook')>-1){
@@ -50,8 +57,13 @@ class FirebaseAuth {
 
   updateUserData = (user) => {
 
+    const state=this._getState();
+
     if(user!==undefined && user!==null){
-      firebaseDb.ref('users/' + user.uid).update(this.getUser(user));
+
+      const userDate={'mToken': state.messaging.token ,...this.getUser(user)};
+
+      firebaseDb.ref('users/' + user.uid).update(userDate);
     }
 
   }
@@ -84,6 +96,7 @@ class FirebaseAuth {
         this._emit(this.onAuthStateChanged(user));
 
         if(onSuccess && onSuccess instanceof Function){
+
           onSuccess(user);
         }
 
@@ -100,6 +113,10 @@ class FirebaseAuth {
       .then((payload) => {
 
         this._emit(this.onAuthStateChanged(payload.user));
+
+        //Because signin with popu is also used as registratiorn for new users
+        //we need to update the user data after each signin with popup
+        this.updateProfile(this.getUser(payload.user));
 
         if(onSuccess && onSuccess instanceof Function){
           onSuccess(payload.user);
@@ -329,9 +346,10 @@ class FirebaseAuth {
 
   }
 
-  subscribe(emit) {
+  subscribe(emit, getState) {
 
     this._emit=emit;
+    this._getState=getState;
 
     firebaseAuth.onAuthStateChanged((user) => {
       if(user){
@@ -343,7 +361,10 @@ class FirebaseAuth {
     }, (error) => {
       emit(this._actions.onAuthError(error));
     });
+
   }
+
+
 
 }
 

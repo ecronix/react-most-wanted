@@ -6,6 +6,7 @@ function setup() {
   const props = {
     initAuth: jest.fn(),
     initConnection: jest.fn(),
+    initMessaging: jest.fn(),
   }
 
   const wrapper = shallowWithIntlTheme(<Root {...props} />)

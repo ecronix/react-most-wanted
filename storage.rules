@@ -1,0 +1,7 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+       match /users/{userId}/{allPaths=**} {
+      allow read, write: if request.auth.uid == userId;
+    }
+  }
+}

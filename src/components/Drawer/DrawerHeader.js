@@ -8,7 +8,6 @@ import Paper from 'material-ui/Paper';
 import {ReduxIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { isAuthorised } from '../../utils/auth';
 import CircularProgress from 'material-ui/CircularProgress';
 
 const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
@@ -38,7 +37,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
   return (
     <Paper  zDepth={1} style={styles.paper}>
 
-      {isAuthorised(auth)&&
+      {auth.isAuthorised&&
         <div>
 
           {auth.isFetching && <CircularProgress size={80} thickness={5} />}
@@ -74,7 +73,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
         </div>
       }
 
-      {!isAuthorised(auth)&&
+      {!auth.isAuthorised&&
 
         <List>
           <ListItem

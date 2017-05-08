@@ -1,0 +1,371 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.isAuthorised = undefined;var /* istanbul ignore next */_firebase = require('firebase'); /* istanbul ignore next */var _firebase2 = _interopRequireDefault(_firebase);
+var /* istanbul ignore next */_cuid = require('cuid'); /* istanbul ignore next */var _cuid2 = _interopRequireDefault(_cuid);
+var /* istanbul ignore next */_firebase3 = require('./firebase'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+
+const isAuthorised = /* istanbul ignore next */exports.isAuthorised = () => {
+  const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
+  const data = JSON.parse(localStorage.getItem(key));
+  return data != null;
+};
+
+const getProvider = provider => {
+
+  if (provider.indexOf('facebook') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.FacebookAuthProvider();
+  }
+
+  if (provider.indexOf('github') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.GithubAuthProvider();
+  }
+
+  if (provider.indexOf('google') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.GoogleAuthProvider();
+  }
+
+  if (provider.indexOf('twitter') > -1) {
+    return new /* istanbul ignore next */_firebase2.default.auth.TwitterAuthProvider();
+  }
+
+  throw new Error('Provider is not supported!!!');
+
+};
+
+
+class FirebaseAuth {
+  constructor(actions, userSelector) {/* istanbul ignore next */this.
+
+
+
+
+    handleError = error => {
+      this._emit(this._actions.onAuthError(error));
+    }; /* istanbul ignore next */this.
+
+    getUser = rawUserData => {
+
+      if (this._userSelector !== undefined && this._userSelector instanceof Function) {
+        return this._userSelector(rawUserData);
+      } else {
+        return rawUserData;
+      }
+    }; /* istanbul ignore next */this.
+
+    onAuthStateChanged = user => {
+      return this._actions.onAuthStateChanged(this.getUser(user));
+    }; /* istanbul ignore next */this.
+
+    updateUserData = user => {
+
+      const state = this._getState();
+
+      if (user !== undefined && user !== null) {
+
+        const userDate = /* istanbul ignore next */Object.assign({ 'mToken': state.messaging.token }, this.getUser(user));
+
+        /* istanbul ignore next */_firebase3.firebaseDb.ref('users/' + user.uid).update(userDate);
+      }
+
+    }; /* istanbul ignore next */this.
+
+    deleteUserData = user => {
+      if (user !== undefined && user !== null) {
+        /* istanbul ignore next */_firebase3.firebaseDb.ref('users/' + user.uid).remove();
+      }
+    }; /* istanbul ignore next */this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    handlePresence = user => {
+      let myConnectionsRef = /* istanbul ignore next */_firebase2.default.database().ref(`users/${user.uid}/connections`);
+      let lastOnlineRef = /* istanbul ignore next */_firebase2.default.database().ref(`users/${user.uid}/lastOnline`);
+
+      var con = myConnectionsRef.push(true);
+
+      con.onDisconnect().remove();
+      lastOnlineRef.onDisconnect().set( /* istanbul ignore next */_firebase2.default.database.ServerValue.TIMESTAMP);
+
+    }; /* istanbul ignore next */this.
+
+    handleAbsence = user => {
+      let myConnectionsRef = /* istanbul ignore next */_firebase2.default.database().ref(`users/${user.uid}/connections`);
+      let lastOnlineRef = /* istanbul ignore next */_firebase2.default.database().ref(`users/${user.uid}/lastOnline`);
+
+      myConnectionsRef.remove();
+      lastOnlineRef.set( /* istanbul ignore next */_firebase2.default.database.ServerValue.TIMESTAMP);
+
+    };this._actions = actions;this._userSelector = userSelector;}updateProfile(user) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.updateProfile(user).then(() => {this.updateUserData( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);this._emit(this.onAuthStateChanged( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser));resolve( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}).catch(error => {this.handleError(error);reject(error);});});}signInWithEmailAndPassword(user, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.signInWithEmailAndPassword(user.email, user.password).then(user => {this._emit(this.onAuthStateChanged(user));if (onSuccess && onSuccess instanceof Function) {onSuccess(user);}resolve(user);}).catch(error => {this.handleError(error);reject(error);});});}signInWithPopup(provider, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.signInWithPopup(getProvider(provider)).then(payload => {this._emit(this.onAuthStateChanged(payload.user)); //Because signin with popu is also used as registratiorn for new users
+        //we need to update the user data after each signin with popup
+        this.updateProfile(this.getUser(payload.user));if (onSuccess && onSuccess instanceof Function) {onSuccess(payload.user);}resolve(payload);}).catch(error => {this.handleError(error);reject(error);});});}reauthenticateWithCredential(password, onSuccess = null) {return new Promise((resolve, reject) => {const credential = /* istanbul ignore next */_firebase2.default.auth.EmailAuthProvider.credential( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.email, password);this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.reauthenticateWithCredential(credential).then(() => {if (onSuccess && onSuccess instanceof Function) {onSuccess();}resolve();}).catch(error => {this.handleError(error);reject(error);});});}reauthenticateWithPopup(provider, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.reauthenticateWithPopup(getProvider(provider)).then(() => {if (onSuccess && onSuccess instanceof Function) {onSuccess();}resolve();}).catch(error => {this.handleError(error);reject(error);});});}updatePassword(newPassword, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.updatePassword(newPassword).then(() => {this._emit(this._actions.onFetchChanged(false));if (onSuccess && onSuccess instanceof Function) {onSuccess();}resolve();}).catch(error => {this.handleError(error);reject(error);});});}updateEmail(newEmail, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.updateEmail(newEmail).then(() => {this._emit(this.onAuthStateChanged( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser));if (onSuccess && onSuccess instanceof Function) {onSuccess( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}resolve( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}).catch(error => {this.handleError(error);reject(error);});});}sendPasswordResetEmail(newEmail, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.sendPasswordResetEmail(newEmail).then(() => {if (onSuccess && onSuccess instanceof Function) {onSuccess( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}resolve();}).catch(error => {this.handleError(error);reject(error);});});}sendEmailVerification(onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.sendEmailVerification().then(() => {this._emit(this._actions.onFetchChanged(false));if (onSuccess && onSuccess instanceof Function) {onSuccess( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser);}resolve();}).catch(error => {this.handleError(error);reject(error);});});}createUserWithEmailAndPassword(user) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.createUserWithEmailAndPassword(user.email, user.password).then(result => {this.updateProfile(user);resolve(user);}).catch(error => {this.handleError(error);reject(error);});});}linkWithPopup(provider, onSuccess = null) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.linkWithPopup(getProvider(provider)).then(payload => {this._emit(this._actions.onFetchChanged(false));if (onSuccess && onSuccess instanceof Function) {onSuccess(this.getUser(payload.user));}resolve(payload);}).catch(error => {this.handleError(error);reject(error);});});}updateUserPhoto(dataURL) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true));let storageRef = /* istanbul ignore next */_firebase3.firebaseApp.storage().ref(`users/${/* istanbul ignore next */_firebase3.firebaseAuth.currentUser.uid}`);storageRef.child(`${/* istanbul ignore next */(0, _cuid2.default)()}`).putString(dataURL, 'data_url').then(snapshot => {this.updateProfile({ photoURL: snapshot.downloadURL });}).catch(error => {this.handleError(error);reject(error);});});}signOut() {return new Promise((resolve, reject) => {//we save to the database the user absence
+      //we also have to save to the database
+      //whly we habe access to it
+      this.handleAbsence( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser); /* istanbul ignore next */_firebase3.firebaseAuth.signOut().then(() => {resolve();}).catch(error => {this.handleError(error);reject(error);});});}deleteProfile(user) {return new Promise((resolve, reject) => {this._emit(this._actions.onFetchChanged(true)); //we need to delete the user data first
+      //othervise we would not have access to the database
+      //if we delete the user first
+      this.deleteUserData( /* istanbul ignore next */_firebase3.firebaseAuth.currentUser); /* istanbul ignore next */_firebase3.firebaseAuth.currentUser.delete().then(() => {this._emit(this._actions.onLogoutUser());resolve();}).catch(error => {this.handleError(error);reject(error);});});}subscribe(emit, getState) {this._emit = emit;this._getState = getState; /* istanbul ignore next */_firebase3.firebaseAuth.onAuthStateChanged(user => {if (user) {
+        emit(this.onAuthStateChanged(user));
+        this.handlePresence(user);
+      } else {
+        emit(this._actions.onLogoutUser());
+      }
+    }, error => {
+      emit(this._actions.onAuthError(error));
+    });
+
+  }} /* istanbul ignore next */exports.default =
+
+
+
+
+
+FirebaseAuth;

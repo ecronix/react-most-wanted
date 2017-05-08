@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
@@ -85,6 +86,7 @@ class Tasks extends Component {
 
     const newTask={
       title: this.name.getValue(),
+      created: firebase.database.ServerValue.TIMESTAMP ,
       userName: auth.displayName,
       userPhotoURL: auth.photoURL,
       userId: auth.uid,
@@ -122,7 +124,7 @@ class Tasks extends Component {
   }
 
   rednerTasks(tasks) {
-    const {deleteTask, muiTheme, setIsEditing, auth} =this.props;
+    const {deleteTask, muiTheme, setIsEditing, auth, intl} =this.props;
 
     return _.map(tasks.list, (task, key) => {
 
@@ -143,7 +145,9 @@ class Tasks extends Component {
             <Avatar src={task.userPhotoURL} />
           }
           primaryText={this.renderPrimaryText(task, key)}
-          secondaryText={isEditing?undefined:task.userName}
+          secondaryText={isEditing?undefined:<div>
+            {task.userName} {' '} {task.created?intl.formatRelative(new Date(task.created)):undefined}
+          </div>}
           id={key}
           rightIconButton={<div>
             {task.userId===auth.uid && <div>

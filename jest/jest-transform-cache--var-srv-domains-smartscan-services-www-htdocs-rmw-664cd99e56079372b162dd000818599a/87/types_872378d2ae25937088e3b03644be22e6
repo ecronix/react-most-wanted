@@ -1,0 +1,4 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const namespace = 'MESSAGING';
+
+const ON_TOKEN_CHANGED = /* istanbul ignore next */exports.ON_TOKEN_CHANGED = `${namespace}@ON_TOKEN_CHANGED`;
+const ON_PERMISSION_CHANGED = /* istanbul ignore next */exports.ON_PERMISSION_CHANGED = `${namespace}@ON_PERMISSION_CHANGED`;

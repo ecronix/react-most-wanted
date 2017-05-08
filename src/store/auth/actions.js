@@ -12,7 +12,7 @@ const firebaseAuth= new FirebaseAuth({
 
 export function initAuth() {
   return (dispatch, getState) => {
-    firebaseAuth.subscribe(dispatch);
+    firebaseAuth.subscribe(dispatch, getState);
   };
 }
 
