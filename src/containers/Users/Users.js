@@ -10,6 +10,7 @@ import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
+import FontIcon from 'material-ui/FontIcon';
 
 const styles={
   center_container:{
@@ -32,14 +33,22 @@ class Users extends Component {
   }
 
   rednerList(users) {
-    return _.map(users.list, (task, key) => {
+    const {intl} =this.props;
+
+    return _.map(users.list, (user, key) => {
       return <div key={key}>
         <ListItem
           key={key}
           id={key}
-          leftAvatar={<Avatar src={task.photoURL} />}
-          primaryText={task.displayName}
-          secondaryText={task.email}
+          leftAvatar={<Avatar src={user.photoURL} />}
+          rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}
+          primaryText={user.displayName}
+          secondaryTextLines={1}
+          secondaryText={<p>
+            {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
+            {' '}
+            {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
+          </p>}
         />
         <Divider inset={true}/>
       </div>

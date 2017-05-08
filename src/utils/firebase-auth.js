@@ -277,6 +277,12 @@ class FirebaseAuth {
 
   signOut() {
     return new Promise((resolve, reject) => {
+
+      //we save to the database the user absence
+      //we also have to save to the database
+      //whly we habe access to it
+      this.handleAbsence(firebaseAuth.currentUser);
+
       firebaseAuth.signOut()
       .then(() => {
         resolve();
@@ -304,6 +310,26 @@ class FirebaseAuth {
     });
   }
 
+  handlePresence = (user) => {
+    let myConnectionsRef = firebase.database().ref(`users/${user.uid}/connections`);
+    let lastOnlineRef = firebase.database().ref(`users/${user.uid}/lastOnline`);
+
+    var con = myConnectionsRef.push(true);
+
+    con.onDisconnect().remove();
+    lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+
+  }
+
+  handleAbsence = (user) => {
+    let myConnectionsRef = firebase.database().ref(`users/${user.uid}/connections`);
+    let lastOnlineRef = firebase.database().ref(`users/${user.uid}/lastOnline`);
+
+    myConnectionsRef.remove();
+    lastOnlineRef.set(firebase.database.ServerValue.TIMESTAMP);
+
+  }
+
   subscribe(emit) {
 
     this._emit=emit;
@@ -311,6 +337,7 @@ class FirebaseAuth {
     firebaseAuth.onAuthStateChanged((user) => {
       if(user){
         emit(this.onAuthStateChanged(user));
+        this.handlePresence(user);
       }else{
         emit(this._actions.onLogoutUser());
       }

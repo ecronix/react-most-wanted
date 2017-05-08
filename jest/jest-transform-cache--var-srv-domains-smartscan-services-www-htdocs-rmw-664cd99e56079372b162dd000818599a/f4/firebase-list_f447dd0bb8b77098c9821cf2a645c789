@@ -1,0 +1,78 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_firebase = require('./firebase');
+
+class FirebaseList {
+  constructor(actions, path = null) {
+    this._actions = actions;
+    this._path = path;
+  }
+
+  push(value) {
+    return new Promise((resolve, reject) => {
+      /* istanbul ignore next */_firebase.firebaseDb.ref(this._path).
+      push(value, error => error ? reject(error) : resolve());
+    });
+  }
+
+  remove(key) {
+    return new Promise((resolve, reject) => {
+      /* istanbul ignore next */_firebase.firebaseDb.ref(`${this._path}/${key}`).
+      remove(error => error ? reject(error) : resolve());
+    });
+  }
+
+  set(key, value) {
+    return new Promise((resolve, reject) => {
+      /* istanbul ignore next */_firebase.firebaseDb.ref(`${this._path}/${key}`).
+      set(value, error => error ? reject(error) : resolve());
+    });
+  }
+
+  update(key, value) {
+    return new Promise((resolve, reject) => {
+      /* istanbul ignore next */_firebase.firebaseDb.ref(`${this._path}/${key}`).
+      update(value, error => error ? reject(error) : resolve());
+    });
+  }
+
+  subscribe(emit) {
+    let ref = /* istanbul ignore next */_firebase.firebaseDb.ref(this._path);
+
+    ref.once('value', snapshot => {
+
+      let list = {};
+
+      snapshot.forEach(function (childSnapshot) {
+        let childKey = childSnapshot.key;
+        let childData = childSnapshot.val();
+
+        list[childKey] = childData;
+      });
+
+      emit(this._actions.onLoad(list));
+    });
+
+    ref.on('child_added', snapshot => {
+      emit(this._actions.onAdd(this.getPayload(snapshot)));
+    });
+
+    ref.on('child_changed', snapshot => {
+      emit(this._actions.onChange(this.getPayload(snapshot)));
+    });
+
+    ref.on('child_removed', snapshot => {
+      emit(this._actions.onRemove(this.getPayload(snapshot)));
+    });
+
+    this._unsubscribe = () => {ref.off();};
+  }
+
+  unsubscribe() {
+    this._unsubscribe();
+  }
+
+  getPayload(snapshot) {
+    return { data: snapshot.val(), key: snapshot.key };
+  }} /* istanbul ignore next */exports.default =
+
+
+FirebaseList;

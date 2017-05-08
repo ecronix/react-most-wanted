@@ -28,11 +28,11 @@ export default function configureStore(history) {
   store = createStore(reducers, initState, compose(
     applyMiddleware(...middlewares),
     autoRehydrate(),
-    responsiveStoreEnhancer,
+    responsiveStoreEnhancer
   ));
 
   try{
-    persistStore(store, {blacklist:['router', 'auth'] }, ()=>{});
+    persistStore(store, {blacklist:['router', 'auth', 'connection'] }, ()=>{});
   }catch(e){
 
   }

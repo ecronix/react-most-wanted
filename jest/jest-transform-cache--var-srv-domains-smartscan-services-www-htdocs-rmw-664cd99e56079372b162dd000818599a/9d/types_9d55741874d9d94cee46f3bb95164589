@@ -1,0 +1,3 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });const namespace = 'CONNECTION';
+
+const ON_CONNECTION_STATE_CHANGED = /* istanbul ignore next */exports.ON_CONNECTION_STATE_CHANGED = `${namespace}@ON_CONNECTION_STATE_CHANGED`;

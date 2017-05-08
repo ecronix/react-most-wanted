@@ -56,6 +56,9 @@ const messages=defineMessages({
   tasks: 'Zadaci',
   users: 'Korisnici',
   edit: 'Izmjeniti',
+  online: 'Online',
+  offline: 'Offline',
+  no_connection_warning: 'Nema konekcije!',
 
 });
 

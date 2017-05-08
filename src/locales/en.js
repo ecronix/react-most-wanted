@@ -56,6 +56,9 @@ const messages=defineMessages({
   tasks: 'Tasks',
   users: 'Users',
   edit: 'Edit',
+  online: 'Online',
+  offline: 'Offline',
+  no_connection_warning: 'No connection!',
 
 });
 

@@ -5,6 +5,7 @@ import {getLocaleMessages} from '../../locales';
 import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { initAuth } from '../../store/auth/actions';
+import { initConnection, unsubscribeConnection } from '../../store/connection/actions';
 
 Root.propTypes = {
   history: PropTypes.object.isRequired,
@@ -13,6 +14,8 @@ Root.propTypes = {
   messages: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
   initAuth: PropTypes.func.isRequired,
+  initConnection: PropTypes.func.isRequired,
+  unsubscribeConnection: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -32,5 +35,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {initAuth}
+  mapStateToProps, {initAuth, initConnection, unsubscribeConnection}
 )(Root);

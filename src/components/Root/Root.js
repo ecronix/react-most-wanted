@@ -8,8 +8,15 @@ import {App} from '../../containers/App';
 class Root extends Component {
 
   componentWillMount () {
-    const { initAuth }= this.props;
+    const { initAuth, initConnection }= this.props;
     initAuth();
+    initConnection();
+
+  }
+
+  componentWillUnmount() {
+    const { unsubscribeConnection }= this.props;
+    unsubscribeConnection();
   }
 
   render() {

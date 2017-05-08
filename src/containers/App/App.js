@@ -7,10 +7,11 @@ import { DrawerContent } from '../../containers/Drawer';
 import { Routes } from '../../components/Routes';
 import { Helmet } from 'react-helmet';
 import { injectIntl } from 'react-intl';
+import Snackbar from 'material-ui/Snackbar';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import * as authSelectors from '../../store/auth/selectors'
 
-const App = ({ intl, muiTheme, auth, isAuthorised }) => {
+const App = ({ intl, muiTheme, auth, isAuthorised, connection }) => {
 
   return (
     <div style={{backgroundColor: muiTheme.palette.canvasColor}}>
@@ -26,6 +27,12 @@ const App = ({ intl, muiTheme, auth, isAuthorised }) => {
       </ResponsiveDrawer>
       <BodyContainer style={{backgroundColor: muiTheme.palette.canvasColor}}>
         <Routes />
+        <Snackbar
+          //open={auth.displayName!==undefined && !connection.isConnected}
+          open={false}
+          message={intl.formatMessage({id: 'no_connection_warning'})}
+          autoHideDuration={4000}
+        />
       </BodyContainer>
     </div>
   );
@@ -42,10 +49,11 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
+  const { auth, connection } = state;
 
   return {
     auth,
+    connection,
     isAuthorised: authSelectors.isAuthorised(auth)
   };
 };

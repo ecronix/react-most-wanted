@@ -5,6 +5,7 @@ import { shallowWithIntlTheme } from '../../utils/intl-theme-test';
 function setup() {
   const props = {
     initAuth: jest.fn(),
+    initConnection: jest.fn(),
   }
 
   const wrapper = shallowWithIntlTheme(<Root {...props} />)
@@ -26,6 +27,12 @@ describe('components', () => {
       const { wrapper, props } = setup();
       //props.fetchUser(true)
       expect(props.initAuth.mock.calls.length).toBe(1)
+    })
+
+    it('initConnection should be called', () => {
+      const { wrapper, props } = setup();
+      //props.fetchUser(true)
+      expect(props.initConnection.mock.calls.length).toBe(1)
     })
 
   })
