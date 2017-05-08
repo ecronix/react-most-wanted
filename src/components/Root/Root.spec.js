@@ -29,11 +29,6 @@ describe('components', () => {
       expect(props.initAuth.mock.calls.length).toBe(1)
     })
 
-    it('initConnection should be called', () => {
-      const { wrapper, props } = setup();
-      //props.fetchUser(true)
-      expect(props.initConnection.mock.calls.length).toBe(1)
-    })
 
   })
 })
