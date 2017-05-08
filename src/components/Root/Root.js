@@ -10,7 +10,9 @@ class Root extends Component {
   componentWillMount () {
     const { initAuth, initConnection }= this.props;
     initAuth();
-    initConnection();
+
+    //Set connection listener with delay
+    setTimeout(function(){ initConnection();}, 3000);
 
   }
 

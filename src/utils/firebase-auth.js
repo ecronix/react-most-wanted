@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import cuid  from 'cuid';
 import { firebaseAuth, firebaseDb, firebaseApp } from './firebase';
 
-
 const  getProvider = (provider) => {
 
   if(provider.indexOf('facebook')>-1){

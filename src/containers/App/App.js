@@ -28,8 +28,8 @@ const App = ({ intl, muiTheme, auth, isAuthorised, connection }) => {
       <BodyContainer style={{backgroundColor: muiTheme.palette.canvasColor}}>
         <Routes />
         <Snackbar
-          //open={auth.displayName!==undefined && !connection.isConnected}
-          open={false}
+          open={!connection.isConnected}
+          //open={false}
           message={intl.formatMessage({id: 'no_connection_warning'})}
           autoHideDuration={4000}
         />
