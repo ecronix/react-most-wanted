@@ -1,0 +1,30 @@
+{
+    "name": "express",
+    "libraryName": "Express",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "data": {
+        "authors": "Boris Yankov <https://github.com/borisyankov/>",
+        "dependencies": {
+            "serve-static": "*",
+            "express-serve-static-core": "*"
+        },
+        "pathMappings": {},
+        "libraryMajorVersion": 4,
+        "libraryMinorVersion": 0,
+        "typeScriptVersion": "2.0",
+        "libraryName": "Express",
+        "typingsPackageName": "express",
+        "projectName": "http://expressjs.com",
+        "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+        "globals": [],
+        "declaredModules": [
+            "express/."
+        ],
+        "files": [
+            "index.d.ts"
+        ],
+        "hasPackageJson": false,
+        "contentHash": "c3c508a3f9eda6225a5545f1006a32e40f1f377672b30c5e4548d9763dbef964"
+    },
+    "isLatest": true
+}

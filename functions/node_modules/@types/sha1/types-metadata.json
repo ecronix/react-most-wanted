@@ -1,0 +1,28 @@
+{
+    "name": "sha1",
+    "libraryName": "sha1",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "data": {
+        "authors": "Bill Sourour <https://github.com/arcdev1>",
+        "dependencies": {
+            "node": "*"
+        },
+        "libraryMajorVersion": 1,
+        "libraryMinorVersion": 1,
+        "typeScriptVersion": "2.0",
+        "libraryName": "sha1",
+        "typingsPackageName": "sha1",
+        "projectName": "https://github.com/pvorb/node-sha1",
+        "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+        "globals": [],
+        "declaredModules": [
+            "sha1/."
+        ],
+        "files": [
+            "index.d.ts"
+        ],
+        "hasPackageJson": false,
+        "contentHash": "281512da9574d71ca4baafb9233b938739de0b2bce11ac09c3c076b94f85bd4f"
+    },
+    "isLatest": true
+}
