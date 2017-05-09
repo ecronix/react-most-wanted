@@ -13,7 +13,6 @@ class FirebaseMessaging {
 
   subscribe(emit) {
 
-
     const messaging=firebaseApp.messaging();
 
     messaging.requestPermission()
@@ -21,7 +20,6 @@ class FirebaseMessaging {
       return messaging.getToken();
     })
     .then((token)=>{
-      console.log(token);
       emit(this._actions.onTokenChanged(token));
     })
     .catch((error)=>{

@@ -1,10 +1,3 @@
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
 
 'use strict';
 
@@ -23,30 +16,62 @@ const mailTransport = nodemailer.createTransport(`smtps://${gmailEmail}:${gmailP
 const APP_NAME = 'React Most Wanted';
 
 exports.notifyOnTaskChange = functions.database.ref('/public_tasks/{taskUid}').onWrite(event => {
+
+  // Only edit data when it is first created.
+  if (event.data.previous.exists()) {
+    return;
+  }
+
+
   const taskUid = event.params.taskUid;
   const eventSnapshot=event.data;
   const userId=eventSnapshot.child('userId').val();
 
-  const payload = {
-    notification: {
-      title: 'Task created!',
-      body: eventSnapshot.child('title').val(),
-      icon: '/apple-touch-icon.png',
-      click_action: 'https://www.react-most-wanted.com/tasks'
+  admin.database().ref(`/users`).once('value')
+  .then(snapshot =>{
+
+    let user=null;
+    let registrationTokens=[];
+
+
+    snapshot.forEach(function(childSnapshot) {
+
+      const childData = childSnapshot.val();
+
+      if(childSnapshot.key===userId){
+        user=childData;
+      }else{
+        childSnapshot.child('notificationTokens').forEach(token =>{
+          if(token.val()){
+            registrationTokens.push(token.key);
+          }
+        });
+
+      }
+
+    });
+
+    const payload = {
+      notification: {
+        title: user?`${user.displayName} created a Task!`: 'Task created!',
+        body: eventSnapshot.child('title').val(),
+        icon: (user && user.photoURL!==undefined)?user.photoURL:'/apple-touch-icon.png',
+        click_action: 'https://www.react-most-wanted.com/tasks'
+      }
+    };
+
+    if(registrationTokens.length){
+      admin.messaging().sendToDevice(registrationTokens, payload)
+      .then(function(response) {
+        // See the MessagingDevicesResponse reference documentation for
+        // the contents of response.
+        console.log("Successfully sent message:", response);
+      })
+      .catch(function(error) {
+        console.log("Error sending message:", error);
+      });
     }
-  };
 
-  // Listing all tokens.
-  const registrationToken = 'eJcd8qTn8rg:APA91bGwpmQrj2Z8vvlkoc_ZCJzIJhEohHIY9y_67FB2s2QKY2hX928rAKkAQ3nSny-x6YiLX-ylXE5Ncvw-dAScB2XdR056rnYDbwxMYiLLoV1rWd95vskUbz73kG6pKYD1rF8NmDLC';
-
-  admin.messaging().sendToDevice(registrationToken, payload)
-  .then(function(response) {
-    // See the MessagingDevicesResponse reference documentation for
-    // the contents of response.
-    console.log("Successfully sent message:", response);
-  })
-  .catch(function(error) {
-    console.log("Error sending message:", error);
   });
 
 
@@ -99,55 +124,3 @@ function sendWelcomeEmail(email, displayName) {
         console.log('Account deletion confirmation email sent to:', email);
       });
     }
-
-    /*
-    exports.sendTasksNotification = functions.database.ref('/public_tasks/{taskUid}/{userId}').onWrite(event => {
-    const taskUid = event.params.taskUid;
-    const userId = event.params.userId;
-
-
-    console.log('New task created UID:', taskUid, ' from userId:', userId);
-
-    // Get the list of device notification tokens.
-    const getDeviceTokensPromise = admin.database().ref(`/users/${userId}/mToken`).once('value');
-
-    // Get the follower profile.
-    const getUserProfilePromise = admin.auth().getUser(userId);
-
-    return Promise.all([getUserProfilePromise]).then(results => {
-    const user = results[0];
-
-    console.log('Fetched follower profile', user);
-
-    // Notification details.
-    const payload = {
-    notification: {
-    title: 'Task created!',
-    body: `A new task is created :)`,
-    icon: '/apple-touch-icon.png'
-  }
-};
-
-// Listing all tokens.
-const tokens = Object.keys([user.mToken]);
-
-// Send notifications to all tokens.
-return admin.messaging().sendToDevice(tokens, payload).then(response => {
-// For each message check if there was an error.
-const tokensToRemove = [];
-response.results.forEach((result, index) => {
-const error = result.error;
-if (error) {
-console.error('Failure sending notification to', tokens[index], error);
-// Cleanup the tokens who are not registered anymore.
-if (error.code === 'messaging/invalid-registration-token' ||
-error.code === 'messaging/registration-token-not-registered') {
-tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
-}
-}
-});
-return Promise.all(tokensToRemove);
-});
-});
-});
-*/

@@ -4,9 +4,16 @@ import { firebaseAuth, firebaseDb, firebaseApp } from './firebase';
 
 
 export const isAuthorised = () => {
-  const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
-  const data = JSON.parse(localStorage.getItem(key));
-  return data != null;
+
+  try{
+    const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
+    const data = JSON.parse(localStorage.getItem(key));
+    return data != null;
+  }catch(ex){
+    return false;
+  }
+
+
 }
 
 const  getProvider = (provider) => {
@@ -55,15 +62,27 @@ class FirebaseAuth {
     return this._actions.onAuthStateChanged(this.getUser(user));
   }
 
-  updateUserData = (user) => {
+  getCurrentMessagingToken = () => {
+    return this._getState().messaging.token;
+  }
 
-    const state=this._getState();
+  updateToken = (user, status) => {
+
+    const token=this._getState().messaging.token;
+
+    if(token){
+      firebaseDb.ref(`users/${user.uid}/notificationTokens/${this.getCurrentMessagingToken()}`).set(status);
+    }
+
+  }
+
+  updateUserData = (user) => {
 
     if(user!==undefined && user!==null){
 
-      const userDate={'mToken': state.messaging.token ,...this.getUser(user)};
+      firebaseDb.ref('users/' + user.uid).update(this.getUser(user));
+      this.updateToken(user, true);
 
-      firebaseDb.ref('users/' + user.uid).update(userDate);
     }
 
   }
@@ -298,6 +317,7 @@ class FirebaseAuth {
       //we also have to save to the database
       //whly we habe access to it
       this.handleAbsence(firebaseAuth.currentUser);
+      this.updateToken(firebaseAuth.currentUser, false);
 
       firebaseAuth.signOut()
       .then(() => {
@@ -331,6 +351,7 @@ class FirebaseAuth {
     let lastOnlineRef = firebase.database().ref(`users/${user.uid}/lastOnline`);
 
     var con = myConnectionsRef.push(true);
+    this.updateToken(firebaseAuth.currentUser, true);
 
     con.onDisconnect().remove();
     lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);

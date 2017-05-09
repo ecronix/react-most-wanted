@@ -10,7 +10,7 @@
     "redux-logger": "^3.0.1",
     "redux-mock-store": "^1.2.3",
     "redux-testkit": "^1.0.6",
-    "sw-precache": "^4.2.2"
+    "sw-precache": "^4.3.0"
   },
   "dependencies": {
     "clientjs": "^0.1.11",
@@ -19,8 +19,8 @@
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.17.4",
-    "material-ui-responsive-drawer": "^1.1.13",
-    "material-ui-selectable-menu-list": "^1.1.12",
+    "material-ui-responsive-drawer": "^1.1.16",
+    "material-ui-selectable-menu-list": "^1.1.13",
     "prop-types": "^15.5.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

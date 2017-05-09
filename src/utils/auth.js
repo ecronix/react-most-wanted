@@ -24,12 +24,6 @@ const getProvider = (provider) => {
 };
 
 
-export const isAuthorised = () => {
-  const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/));
-  const data = JSON.parse(localStorage.getItem(key));
-  return data != null;
-}
-
 
 export const reauthenticateWithCredential = (password) => {
   const credential = firebase.auth.EmailAuthProvider.credential(
