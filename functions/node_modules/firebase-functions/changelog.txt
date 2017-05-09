@@ -1,1 +1,0 @@
-fixed - Fixes bug where database connections were being closed more frequently than necessary causing DNS quota issues.
