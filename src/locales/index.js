@@ -28,14 +28,16 @@ const locales = [
 
 export function getLocaleMessages(locale){
 
-  const localization=(locales && Array.isArray(locales))?locales.find((l)=>{return l.locale===locale}):false;
-
-  if(localization){
-    return localization.messages;
+  if(locales){
+    for (var i = 0; i < locales.length; i++) {
+      if(locales[i]['locale']===locale){
+        return locales[i]['messages']
+      }
+    }
   }
 
-  //If no locale is found the first one will be returned
-  return locales[0].messages;
+  return en_messages; //Default locale
+
 }
 
 export function addLocalizationData(){

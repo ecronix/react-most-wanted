@@ -19,14 +19,17 @@ const themes= [
 
 export function getThemeSource(theme){
 
-  const themeFound=themes.find((l)=>{return l.id===theme});
 
-  if(themeFound){
-    return themeFound.source;
+  if(themes){
+    for (var i = 0; i < themes.length; i++) {
+      if(themes[i]['id']===theme){
+        return themes[i]['source']
+      }
+    }
   }
 
-  //If no locale is found the first one will be returned
-  return themes[0].source;
+  return lightBaseTheme; //Default theme
+
 }
 
 

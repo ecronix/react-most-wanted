@@ -29,7 +29,6 @@ const App = ({ intl, muiTheme, auth, isAuthorised, connection }) => {
         <Routes />
         <Snackbar
           open={!connection.isConnected}
-          //open={false}
           message={intl.formatMessage({id: 'no_connection_warning'})}
           autoHideDuration={4000}
         />

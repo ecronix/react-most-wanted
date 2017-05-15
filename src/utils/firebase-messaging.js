@@ -15,16 +15,20 @@ class FirebaseMessaging {
 
     const messaging=firebaseApp.messaging();
 
-    messaging.requestPermission()
-    .then(function(){
-      return messaging.getToken();
-    })
-    .then((token)=>{
-      emit(this._actions.onTokenChanged(token));
-    })
-    .catch((error)=>{
-      emit(this._actions.onPermissionChanged(false));
-    })
+    try{
+      messaging.requestPermission()
+      .then(function(){
+        return messaging.getToken();
+      })
+      .then((token)=>{
+        emit(this._actions.onTokenChanged(token));
+      })
+      .catch((error)=>{
+        emit(this._actions.onPermissionChanged(false));
+      })
+    }catch(e){
+      console.log(e);
+    }
 
     messaging.onMessage(function(payload){
       console.log(payload);
