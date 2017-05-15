@@ -1,0 +1,78 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getLocaleMessages = getLocaleMessages; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+addLocalizationData = addLocalizationData;var /* istanbul ignore next */_reactIntl = require('react-intl');var /* istanbul ignore next */_en = require('./en'); /* istanbul ignore next */var _en2 = _interopRequireDefault(_en);var /* istanbul ignore next */_de = require('./de'); /* istanbul ignore next */var _de2 = _interopRequireDefault(_de);var /* istanbul ignore next */_bs = require('./bs'); /* istanbul ignore next */var _bs2 = _interopRequireDefault(_bs);var /* istanbul ignore next */_en3 = require('react-intl/locale-data/en'); /* istanbul ignore next */var _en4 = _interopRequireDefault(_en3);var /* istanbul ignore next */_de3 = require('react-intl/locale-data/de'); /* istanbul ignore next */var _de4 = _interopRequireDefault(_de3);var /* istanbul ignore next */_bs3 = require('react-intl/locale-data/bs'); /* istanbul ignore next */var _bs4 = _interopRequireDefault(_bs3);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var areIntlLocalesSupported = require('intl-locales-supported'); //START: Intl polyfill
+//Required for working on Safari
+//Code from here: https://formatjs.io/guides/runtime-environments/
+var localesMyAppSupports = [/* list locales here */];if (global.Intl) {// Determine if the built-in `Intl` has the locale data we need.
+  if (!areIntlLocalesSupported(localesMyAppSupports)) {// `Intl` exists, but it doesn't have the data we need, so load the
+    // polyfill and replace the constructors with need with the polyfill's.
+    var IntlPolyfill = require('intl');Intl.NumberFormat = IntlPolyfill.NumberFormat;Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;}} else {// No `Intl`, so use and load the polyfill.
+  global.Intl = require('intl');} //END: Intl polyfill
+const locales = [{ locale: 'en', messages: /* istanbul ignore next */_en2.default, data: /* istanbul ignore next */_en4.default }, { locale: 'de', messages: /* istanbul ignore next */_de2.default, data: /* istanbul ignore next */_de4.default }, { locale: 'bs', messages: /* istanbul ignore next */_bs2.default, data: /* istanbul ignore next */_bs4.default }];function getLocaleMessages(locale) {if (locales) {for (var i = 0; i < locales.length; i++) {if (locales[i]['locale'] === locale) {return locales[i]['messages'];}}}return (/* istanbul ignore next */_en2.default); //Default locale
+}function addLocalizationData() {locales.map(l => {/* istanbul ignore next */(0, _reactIntl.addLocaleData)(l.data);return l;});} /* istanbul ignore next */exports.default =
+locales;

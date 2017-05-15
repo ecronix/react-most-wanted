@@ -8,7 +8,6 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import * as types from './types';
 import { initialState } from './reducer';
-jest.mock('../../utils/auth')
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)

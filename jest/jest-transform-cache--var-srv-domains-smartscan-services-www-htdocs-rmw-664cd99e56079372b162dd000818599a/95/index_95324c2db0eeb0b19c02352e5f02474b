@@ -1,0 +1,36 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+getThemeSource = getThemeSource;var /* istanbul ignore next */_darkBaseTheme = require('material-ui/styles/baseThemes/darkBaseTheme'); /* istanbul ignore next */var _darkBaseTheme2 = _interopRequireDefault(_darkBaseTheme);var /* istanbul ignore next */_lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme'); /* istanbul ignore next */var _lightBaseTheme2 = _interopRequireDefault(_lightBaseTheme);var /* istanbul ignore next */_ics_theme = require('./ics_theme'); /* istanbul ignore next */var _ics_theme2 = _interopRequireDefault(_ics_theme);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const themes = [{ id: 'light', source: /* istanbul ignore next */_lightBaseTheme2.default }, { id: 'dark', source: /* istanbul ignore next */_darkBaseTheme2.default }, { id: 'ics', source: /* istanbul ignore next */_ics_theme2.default }];function getThemeSource(theme) {
+
+
+  if (themes) {
+    for (var i = 0; i < themes.length; i++) {
+      if (themes[i]['id'] === theme) {
+        return themes[i]['source'];
+      }
+    }
+  }
+
+  return (/* istanbul ignore next */_lightBaseTheme2.default); //Default theme
+
+} /* istanbul ignore next */exports.default =
+
+
+themes;
