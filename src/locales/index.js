@@ -8,6 +8,10 @@ import bs from 'react-intl/locale-data/bs';
 
 var areIntlLocalesSupported = require('intl-locales-supported');
 
+
+//START: Intl polyfill
+//Required for working on Safari
+//Code from here: https://formatjs.io/guides/runtime-environments/
 var localesMyAppSupports = [
     /* list locales here */
 ];
@@ -25,6 +29,7 @@ if (global.Intl) {
     // No `Intl`, so use and load the polyfill.
     global.Intl = require('intl');
 }
+//END: Intl polyfill
 
 const locales = [
   {

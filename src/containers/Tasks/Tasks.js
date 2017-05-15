@@ -15,8 +15,8 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
-import Paper from 'material-ui/Paper';
 import {transparent, green800} from 'material-ui/styles/colors';
+import {BottomNavigation} from 'material-ui/BottomNavigation';
 
 const styles={
   center_container:{
@@ -26,29 +26,17 @@ const styles={
     flexDirection: 'column',
     margin: 16,
   },
-  main_container:{
-    float: 'left',
-    position: 'relative',
-    left: '50%',
-  },
-
-  fixer_container:{
-    float: 'left',
-    position: 'relative',
-    left: '-50%',
-  },
-
   button: {
     position: 'fixed',
+    right: 18,
     zIndex:3,
-    bottom: 10,
-    marginLeft: -24
+    bottom: 18,
   },
 
   text_input: {
     position: 'fixed',
     zIndex:3,
-    bottom: 10,
+    bottom: 15,
     marginLeft: -155
   }
 }
@@ -84,8 +72,10 @@ class Tasks extends Component {
   handleAddTask = () => {
     const {createTask, auth}=this.props;
 
+    const title=this.name.getValue();
+
     const newTask={
-      title: this.name.getValue(),
+      title: title,
       created: firebase.database.ServerValue.TIMESTAMP ,
       userName: auth.displayName,
       userPhotoURL: auth.photoURL,
@@ -93,34 +83,26 @@ class Tasks extends Component {
       completed: false
     }
 
-    createTask(newTask);
+    if(title.length>0){
+      createTask(newTask);
+    }
+
   }
 
   handleUpdateTask = (key, task) => {
     const { updateTask }=this.props;
-
-    //const newTask= {...task, title: this.new_task_title.getValue()};
-
     updateTask(key, task);
   }
 
-  renderPrimaryText = (task, key) =>{
-    const { tasks} =this.props;
-
-    return tasks.isEditing===key? <div>
-      <TextField
-        id="new_task_title"
-        style={{height: 26}}
-        underlineShow={false}
-        defaultValue={task.title}
-        onKeyDown={(event)=>{this.handleKeyDown(event, ()=>{this.handleUpdateTask(key, {...task, title: this.new_task_title.getValue()})})}}
-        ref={(field) => { this.new_task_title = field; this.new_task_title && this.new_task_title.focus(); }}
-        type="Text"
-      />
-    </div>:  <div>
-      {task.title}
-    </div>;
-
+  userAvatar(task){
+    return task.completed?
+    <Avatar
+      icon={<FontIcon className="material-icons" >check_circle</FontIcon>}
+      color={green800}
+      backgroundColor={transparent}
+    />
+    :
+    <Avatar src={task.userPhotoURL} />
   }
 
   rednerTasks(tasks) {
@@ -131,43 +113,61 @@ class Tasks extends Component {
       const isEditing=tasks.isEditing===key;
 
       return <div key={key}>
+
+        {isEditing && <ListItem
+          leftAvatar={this.userAvatar(task)}
+          key={key} >
+          <TextField
+            id="new_task_title"
+            style={{height: 26}}
+            underlineShow={false}
+            defaultValue={task.title}
+            fullWidth={true}
+            onKeyDown={(event)=>{this.handleKeyDown(event, ()=>{this.handleUpdateTask(key, {...task, title: this.new_task_title.getValue()})})}}
+            ref={(field) => { this.new_task_title = field; this.new_task_title && this.new_task_title.focus(); }}
+            type="Text"
+          />
+
+          <div>
+            <IconButton
+              onTouchTap={tasks.isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'save'}</FontIcon>
+            </IconButton>
+
+            <IconButton
+              onTouchTap={()=>{deleteTask(key);}}>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'delete'}</FontIcon>
+            </IconButton>
+
+            <IconButton
+              onTouchTap={()=>{setIsEditing(false);}}>
+              <FontIcon className="material-icons" color={'red'}>{'cancel'}</FontIcon>
+            </IconButton>
+          </div>
+
+        </ListItem>
+
+      }
+
+      {!isEditing &&
         <ListItem
           key={key}
-          onTouchTap={tasks.isEditing===key?undefined: ()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}}
-          leftAvatar={
-            task.completed?
-            <Avatar
-              icon={<FontIcon className="material-icons" >check_circle</FontIcon>}
-              color={green800}
-              backgroundColor={transparent}
-            />
-            :
-            <Avatar src={task.userPhotoURL} />
-          }
-          primaryText={this.renderPrimaryText(task, key)}
-          secondaryText={isEditing?undefined:<div>
-            {task.userName} {' '} {task.created?intl.formatRelative(new Date(task.created)):undefined}
-          </div>}
+          onTouchTap={()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}}
+          leftAvatar={this.userAvatar(task)}
+          primaryText={task.title}
+          secondaryText={`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}
           id={key}
-          rightIconButton={<div>
-            {task.userId===auth.uid && <div>
-              <IconButton
-                onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
-                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
-              </IconButton>
-
-              <IconButton
-                onTouchTap={isEditing?()=>{setIsEditing(false);}:()=>{deleteTask(key);}}>
-                <FontIcon className="material-icons" color={'red'}>{isEditing?'highlight_off':'delete'}</FontIcon>
-              </IconButton>
-            </div>
+          rightIconButton={task.userId===auth.uid?
+            <IconButton
+              onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
+            </IconButton>:undefined
           }
-        </div>
+        />
       }
-    />
-    <Divider inset={true}/>
-  </div>
-});
+      <Divider inset={true}/>
+    </div>
+  });
 }
 
 
@@ -190,43 +190,37 @@ render(){
           </List>
         </div>
 
-        <div style={styles.main_container}>
-          <div style={styles.fixer_container}>
 
-            { tasks.isCreating &&
-              <div style={styles.text_input}>
+        { tasks.isCreating &&
+          <BottomNavigation style={{width: '100%'}}>
+            <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
+              <IconButton
+                onTouchTap={()=>{setIsCreating(false)}}>
+                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>highlight_off</FontIcon>
+              </IconButton>
+              <TextField
+                id="public_task"
+                fullWidth={true}
+                onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
+                ref={(field) => { this.name = field; this.name && this.name.focus(); }}
+                type="Text"
+              />
+              <IconButton
+                onTouchTap={this.handleAddTask}>
+                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
+              </IconButton>
+            </div>
+          </BottomNavigation>
+        }
 
-                <Paper style={{borderRadius: 25, backgroundColor: muiTheme.chip.backgroundColor}}>
-                  <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
-                    <IconButton
-                      onTouchTap={()=>{setIsCreating(false)}}>
-                      <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>highlight_off</FontIcon>
-                    </IconButton>
-                    <TextField
-                      id="public_task"
-                      fullWidth={true}
-                      onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
-                      ref={(field) => { this.name = field; this.name && this.name.focus(); }}
-                      type="Text"
-                    />
-                    <IconButton
-                      onTouchTap={this.handleAddTask}>
-                      <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
-                    </IconButton>
-                  </div>
-                </Paper>
-              </div>
-            }
-
-            { !tasks.isCreating &&
-              <div style={styles.button}>
-                <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
-                  <FontIcon className="material-icons" >add</FontIcon>
-                </FloatingActionButton>
-              </div>
-            }
+        { !tasks.isCreating &&
+          <div style={styles.button}>
+            <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+              <FontIcon className="material-icons" >add</FontIcon>
+            </FloatingActionButton>
           </div>
-        </div>
+        }
+
 
       </div>
 
