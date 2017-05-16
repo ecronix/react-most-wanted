@@ -103,6 +103,10 @@ After setting up the code we need to deploy our application to firebase. As firs
 
 To use firebase we need to install the firebase tools by running `npm install -g firebase-tools` and after that login to firebase with `firebase login`.
 
+After the login run `fribease init` to setup the firebase project. Override the existing project and select yours from your firebase console. Don't forget to setup the email configs into the firebase functions using `firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"`.
+
+You should now be able to deploy your application to your firebase using `firebase deploy`.
+
 
 ## Libraries
 
