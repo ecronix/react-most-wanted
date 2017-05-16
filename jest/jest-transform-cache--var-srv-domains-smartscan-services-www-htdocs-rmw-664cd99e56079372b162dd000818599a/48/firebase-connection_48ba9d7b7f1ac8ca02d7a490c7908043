@@ -1,0 +1,23 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });
+class FirebaseConnection {
+
+  constructor(actions) {
+    this._actions = actions;
+  }
+
+  subscribe(emit) {
+
+    console.log('test');
+
+    return true;
+
+
+  }
+
+  unsubscribe() {
+    return true;
+  }} /* istanbul ignore next */exports.default =
+
+
+
+FirebaseConnection;

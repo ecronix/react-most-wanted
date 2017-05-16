@@ -1,0 +1,128 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_kq7kwaz6b = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/tasks/actions.js',hash = '69416f01912c4631f71a350b7ee7eed2c3ccf001',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/tasks/actions.js', statementMap: { '0': { start: { line: 4, column: 16 }, end: { line: 10, column: 18 } }, '1': { start: { line: 14, column: 2 }, end: { line: 17, column: 4 } }, '2': { start: { line: 21, column: 2 }, end: { line: 24, column: 4 } }, '3': { start: { line: 28, column: 2 }, end: { line: 31, column: 4 } }, '4': { start: { line: 35, column: 2 }, end: { line: 38, column: 4 } }, '5': { start: { line: 43, column: 2 }, end: { line: 46, column: 4 } }, '6': { start: { line: 50, column: 2 }, end: { line: 53, column: 4 } }, '7': { start: { line: 57, column: 2 }, end: { line: 60, column: 4 } }, '8': { start: { line: 64, column: 2 }, end: { line: 67, column: 4 } }, '9': { start: { line: 71, column: 2 }, end: { line: 74, column: 4 } }, '10': { start: { line: 78, column: 2 }, end: { line: 81, column: 4 } }, '11': { start: { line: 85, column: 2 }, end: { line: 88, column: 4 } }, '12': { start: { line: 92, column: 2 }, end: { line: 96, column: 4 } }, '13': { start: { line: 94, column: 4 }, end: { line: 94, column: 34 } }, '14': { start: { line: 95, column: 4 }, end: { line: 95, column: 33 } }, '15': { start: { line: 100, column: 2 }, end: { line: 106, column: 4 } }, '16': { start: { line: 102, column: 4 }, end: { line: 102, column: 35 } }, '17': { start: { line: 104, column: 4 }, end: { line: 105, column: 56 } }, '18': { start: { line: 105, column: 22 }, end: { line: 105, column: 54 } }, '19': { start: { line: 110, column: 2 }, end: { line: 113, column: 4 } }, '20': { start: { line: 111, column: 4 }, end: { line: 112, column: 56 } }, '21': { start: { line: 112, column: 22 }, end: { line: 112, column: 54 } }, '22': { start: { line: 117, column: 2 }, end: { line: 120, column: 4 } }, '23': { start: { line: 118, column: 4 }, end: { line: 119, column: 56 } }, '24': { start: { line: 119, column: 22 }, end: { line: 119, column: 54 } }, '25': { start: { line: 124, column: 2 }, end: { line: 124, column: 25 } }, '26': { start: { line: 125, column: 2 }, end: { line: 127, column: 4 } } }, fnMap: { '0': { name: 'deleteTaskError', decl: { start: { line: 13, column: 16 }, end: { line: 13, column: 31 } }, loc: { start: { line: 13, column: 39 }, end: { line: 18, column: 1 } }, line: 13 }, '1': { name: 'deleteTaskSuccess', decl: { start: { line: 20, column: 16 }, end: { line: 20, column: 33 } }, loc: { start: { line: 20, column: 43 }, end: { line: 25, column: 1 } }, line: 20 }, '2': { name: 'createTaskError', decl: { start: { line: 27, column: 16 }, end: { line: 27, column: 31 } }, loc: { start: { line: 27, column: 39 }, end: { line: 32, column: 1 } }, line: 27 }, '3': { name: 'createTaskSuccess', decl: { start: { line: 34, column: 16 }, end: { line: 34, column: 33 } }, loc: { start: { line: 34, column: 43 }, end: { line: 39, column: 1 } }, line: 34 }, '4': { name: 'loadTasksSuccess', decl: { start: { line: 42, column: 16 }, end: { line: 42, column: 32 } }, loc: { start: { line: 42, column: 39 }, end: { line: 47, column: 1 } }, line: 42 }, '5': { name: 'setIsCreating', decl: { start: { line: 49, column: 16 }, end: { line: 49, column: 29 } }, loc: { start: { line: 49, column: 42 }, end: { line: 54, column: 1 } }, line: 49 }, '6': { name: 'setIsConnected', decl: { start: { line: 56, column: 16 }, end: { line: 56, column: 30 } }, loc: { start: { line: 56, column: 44 }, end: { line: 61, column: 1 } }, line: 56 }, '7': { name: 'setIsFetching', decl: { start: { line: 63, column: 16 }, end: { line: 63, column: 29 } }, loc: { start: { line: 63, column: 42 }, end: { line: 68, column: 1 } }, line: 63 }, '8': { name: 'setIsEditing', decl: { start: { line: 70, column: 16 }, end: { line: 70, column: 28 } }, loc: { start: { line: 70, column: 40 }, end: { line: 75, column: 1 } }, line: 70 }, '9': { name: 'updateTaskSuccess', decl: { start: { line: 77, column: 16 }, end: { line: 77, column: 33 } }, loc: { start: { line: 77, column: 40 }, end: { line: 82, column: 1 } }, line: 77 }, '10': { name: 'updateTaskError', decl: { start: { line: 84, column: 16 }, end: { line: 84, column: 31 } }, loc: { start: { line: 84, column: 39 }, end: { line: 89, column: 1 } }, line: 84 }, '11': { name: 'loadTasks', decl: { start: { line: 91, column: 16 }, end: { line: 91, column: 25 } }, loc: { start: { line: 91, column: 28 }, end: { line: 97, column: 1 } }, line: 91 }, '12': { name: '(anonymous_12)', decl: { start: { line: 92, column: 9 }, end: { line: 92, column: 10 } }, loc: { start: { line: 92, column: 33 }, end: { line: 96, column: 3 } }, line: 92 }, '13': { name: 'createTask', decl: { start: { line: 99, column: 16 }, end: { line: 99, column: 26 } }, loc: { start: { line: 99, column: 33 }, end: { line: 107, column: 1 } }, line: 99 }, '14': { name: '(anonymous_14)', decl: { start: { line: 100, column: 9 }, end: { line: 100, column: 10 } }, loc: { start: { line: 100, column: 21 }, end: { line: 106, column: 3 } }, line: 100 }, '15': { name: '(anonymous_15)', decl: { start: { line: 105, column: 13 }, end: { line: 105, column: 14 } }, loc: { start: { line: 105, column: 22 }, end: { line: 105, column: 54 } }, line: 105 }, '16': { name: 'updateTask', decl: { start: { line: 109, column: 16 }, end: { line: 109, column: 26 } }, loc: { start: { line: 109, column: 41 }, end: { line: 114, column: 1 } }, line: 109 }, '17': { name: '(anonymous_17)', decl: { start: { line: 110, column: 9 }, end: { line: 110, column: 10 } }, loc: { start: { line: 110, column: 21 }, end: { line: 113, column: 3 } }, line: 110 }, '18': { name: '(anonymous_18)', decl: { start: { line: 112, column: 13 }, end: { line: 112, column: 14 } }, loc: { start: { line: 112, column: 22 }, end: { line: 112, column: 54 } }, line: 112 }, '19': { name: 'deleteTask', decl: { start: { line: 116, column: 16 }, end: { line: 116, column: 26 } }, loc: { start: { line: 116, column: 32 }, end: { line: 121, column: 1 } }, line: 116 }, '20': { name: '(anonymous_20)', decl: { start: { line: 117, column: 9 }, end: { line: 117, column: 10 } }, loc: { start: { line: 117, column: 21 }, end: { line: 120, column: 3 } }, line: 117 }, '21': { name: '(anonymous_21)', decl: { start: { line: 119, column: 13 }, end: { line: 119, column: 14 } }, loc: { start: { line: 119, column: 22 }, end: { line: 119, column: 54 } }, line: 119 }, '22': { name: 'unloadTasks', decl: { start: { line: 123, column: 16 }, end: { line: 123, column: 27 } }, loc: { start: { line: 123, column: 30 }, end: { line: 128, column: 1 } }, line: 123 } }, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0, '16': 0, '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0, '23': 0, '24': 0, '25': 0, '26': 0 }, f: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0, '16': 0, '17': 0, '18': 0, '19': 0, '20': 0, '21': 0, '22': 0 }, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.
+
+
+
+
+
+
+
+
+
+
+
+deleteTaskError = deleteTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTaskSuccess = deleteTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskError = createTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+createTaskSuccess = createTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+loadTasksSuccess = loadTasksSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsCreating = setIsCreating; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsConnected = setIsConnected; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsFetching = setIsFetching; /* istanbul ignore next */exports.
+
+
+
+
+
+
+setIsEditing = setIsEditing; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTaskSuccess = updateTaskSuccess; /* istanbul ignore next */exports.
+
+
+
+
+
+
+updateTaskError = updateTaskError; /* istanbul ignore next */exports.
+
+
+
+
+
+
+loadTasks = loadTasks; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+createTask = createTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+
+
+updateTask = updateTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+deleteTask = deleteTask; /* istanbul ignore next */exports.
+
+
+
+
+
+
+unloadTasks = unloadTasks;var /* istanbul ignore next */_firebaseList = require('../../utils/firebase-list'); /* istanbul ignore next */var _firebaseList2 = _interopRequireDefault(_firebaseList);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const taskList = /* istanbul ignore next */(++cov_kq7kwaz6b.s[0], new /* istanbul ignore next */_firebaseList2.default({ onAdd: createTaskSuccess, onChange: updateTaskSuccess, onLoad: loadTasksSuccess, onRemove: deleteTaskSuccess, onConnectionChange: setIsConnected }, 'public_tasks'));function deleteTaskError(error) {/* istanbul ignore next */++cov_kq7kwaz6b.f[0];++cov_kq7kwaz6b.s[1];return { type: types.DELETE_ERROR, payload: error };}function deleteTaskSuccess(payload) {/* istanbul ignore next */++cov_kq7kwaz6b.f[1];++cov_kq7kwaz6b.s[2];return { type: types.DELETE_SUCCESS, payload };}function createTaskError(error) {/* istanbul ignore next */++cov_kq7kwaz6b.f[2];++cov_kq7kwaz6b.s[3];return { type: types.CREATE_ERROR, payload: error };}function createTaskSuccess(payload) {/* istanbul ignore next */++cov_kq7kwaz6b.f[3];++cov_kq7kwaz6b.s[4];return { type: types.CREATE_SUCCESS, payload };}function loadTasksSuccess(list) {/* istanbul ignore next */++cov_kq7kwaz6b.f[4];++cov_kq7kwaz6b.s[5];return { type: types.LOAD_SUCCESS, payload: { list } };}function setIsCreating(isCreating) {/* istanbul ignore next */++cov_kq7kwaz6b.f[5];++cov_kq7kwaz6b.s[6];return { type: types.CREATE, payload: { isCreating } };}function setIsConnected(isConnected) {/* istanbul ignore next */++cov_kq7kwaz6b.f[6];++cov_kq7kwaz6b.s[7];return { type: types.CONNECTED, payload: { isConnected } };}function setIsFetching(isFetching) {/* istanbul ignore next */++cov_kq7kwaz6b.f[7];++cov_kq7kwaz6b.s[8];return { type: types.FETCH, payload: { isFetching } };}function setIsEditing(isEditing) {/* istanbul ignore next */++cov_kq7kwaz6b.f[8];++cov_kq7kwaz6b.s[9];return { type: types.EDIT, payload: { isEditing } };}function updateTaskSuccess(task) {/* istanbul ignore next */++cov_kq7kwaz6b.f[9];++cov_kq7kwaz6b.s[10];return { type: types.UPDATE_SUCCESS, payload: task };}function updateTaskError(error) {/* istanbul ignore next */++cov_kq7kwaz6b.f[10];++cov_kq7kwaz6b.s[11];return { type: types.UPDATE_ERROR, payload: error };}function loadTasks() {/* istanbul ignore next */++cov_kq7kwaz6b.f[11];++cov_kq7kwaz6b.s[12];return (dispatch, getState) => {/* istanbul ignore next */++cov_kq7kwaz6b.f[12];++cov_kq7kwaz6b.s[13];dispatch(setIsFetching(true)); /* istanbul ignore next */++cov_kq7kwaz6b.s[14];taskList.subscribe(dispatch);};}function createTask(task) {/* istanbul ignore next */++cov_kq7kwaz6b.f[13];++cov_kq7kwaz6b.s[15];return dispatch => {/* istanbul ignore next */++cov_kq7kwaz6b.f[14];++cov_kq7kwaz6b.s[16];dispatch(setIsCreating(false)); /* istanbul ignore next */++cov_kq7kwaz6b.s[17];taskList.push(task).catch(error => {/* istanbul ignore next */++cov_kq7kwaz6b.f[15];++cov_kq7kwaz6b.s[18];return dispatch(createTaskError(error));});};}function updateTask(key, changes) {/* istanbul ignore next */++cov_kq7kwaz6b.f[16];++cov_kq7kwaz6b.s[19];return dispatch => {/* istanbul ignore next */++cov_kq7kwaz6b.f[17];++cov_kq7kwaz6b.s[20];taskList.update(key, changes).catch(error => {/* istanbul ignore next */++cov_kq7kwaz6b.f[18];++cov_kq7kwaz6b.s[21];return dispatch(updateTaskError(error));});};}function deleteTask(key) {/* istanbul ignore next */++cov_kq7kwaz6b.f[19];++cov_kq7kwaz6b.s[22];return dispatch => {/* istanbul ignore next */++cov_kq7kwaz6b.f[20];++cov_kq7kwaz6b.s[23];taskList.remove(key).catch(error => {/* istanbul ignore next */++cov_kq7kwaz6b.f[21];++cov_kq7kwaz6b.s[24];return dispatch(deleteTaskError(error));});};}function unloadTasks() {/* istanbul ignore next */++cov_kq7kwaz6b.f[22];++cov_kq7kwaz6b.s[25];
+  taskList.unsubscribe(); /* istanbul ignore next */++cov_kq7kwaz6b.s[26];
+  return {
+    type: types.UNLOAD_SUCCESS };
+
+}

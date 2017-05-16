@@ -1,0 +1,35 @@
+/* istanbul ignore next */'use strict';var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/components/Root/Root.spec.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_Root = require('./Root'); /* istanbul ignore next */var _Root2 = _interopRequireDefault(_Root);
+var /* istanbul ignore next */_intlThemeTest = require('../../utils/intl-theme-test'); /* istanbul ignore next */function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+function setup() {
+  const props = {
+    initAuth: jest.fn(),
+    initConnection: jest.fn(),
+    initMessaging: jest.fn() };
+
+
+  const wrapper = /* istanbul ignore next */(0, _intlThemeTest.shallowWithIntlTheme)( /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Root2.default, /* istanbul ignore next */Object.assign({}, props, { __source: { fileName: _jsxFileName, lineNumber: 12 }, __self: this })));
+
+  return {
+    props,
+    wrapper };
+
+}
+
+describe('components', () => {
+  describe('Root', () => {
+    it('renders without exploding', () => {
+      const { wrapper, props } = setup();
+      expect(wrapper.length).toBe(1);
+    });
+
+    it('initAuth should be called', () => {
+      const { wrapper, props } = setup();
+      //props.fetchUser(true)
+      expect(props.initAuth.mock.calls.length).toBe(1);
+    });
+
+
+  });
+});

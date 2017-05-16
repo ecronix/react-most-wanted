@@ -1,0 +1,21 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.initialState = undefined;var cov_sireucel8 = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/messaging/reducer.js',hash = 'fd6653038e3842d219bceb797a9e9b240efebea9',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/messaging/reducer.js', statementMap: { '0': { start: { line: 4, column: 26 }, end: { line: 7, column: 2 } }, '1': { start: { line: 10, column: 2 }, end: { line: 20, column: 3 } }, '2': { start: { line: 13, column: 4 }, end: { line: 13, column: 54 } }, '3': { start: { line: 16, column: 4 }, end: { line: 16, column: 34 } }, '4': { start: { line: 19, column: 4 }, end: { line: 19, column: 17 } } }, fnMap: { '0': { name: 'messaging', decl: { start: { line: 9, column: 24 }, end: { line: 9, column: 33 } }, loc: { start: { line: 9, column: 73 }, end: { line: 21, column: 1 } }, line: 9 } }, branchMap: { '0': { loc: { start: { line: 9, column: 34 }, end: { line: 9, column: 54 } }, type: 'default-arg', locations: [{ start: { line: 9, column: 42 }, end: { line: 9, column: 54 } }], line: 9 }, '1': { loc: { start: { line: 10, column: 2 }, end: { line: 20, column: 3 } }, type: 'switch', locations: [{ start: { line: 12, column: 4 }, end: { line: 13, column: 54 } }, { start: { line: 15, column: 4 }, end: { line: 16, column: 34 } }, { start: { line: 18, column: 4 }, end: { line: 19, column: 17 } }], line: 10 } }, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0 }, f: { '0': 0 }, b: { '0': [0], '1': [0, 0, 0] }, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();exports.default =
+
+
+
+
+
+
+
+messaging;var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types);var /* istanbul ignore next */_seamlessImmutable = require('seamless-immutable'); /* istanbul ignore next */var _seamlessImmutable2 = _interopRequireDefault(_seamlessImmutable);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}const initialState = /* istanbul ignore next */exports.initialState = (++cov_sireucel8.s[0], /* istanbul ignore next */(0, _seamlessImmutable2.default)({ hasPermission: false, token: undefined }));function messaging(state = /* istanbul ignore next */(++cov_sireucel8.b[0][0], initialState), { payload, type }) {/* istanbul ignore next */++cov_sireucel8.f[0];++cov_sireucel8.s[1];
+  switch (type) {
+
+    case types.ON_TOKEN_CHANGED: /* istanbul ignore next */++cov_sireucel8.b[1][0];++cov_sireucel8.s[2];
+      return (/* istanbul ignore next */Object.assign({}, state, { hasPermission: true }, payload));
+
+    case types.ON_PERMISSION_CHANGED: /* istanbul ignore next */++cov_sireucel8.b[1][1];++cov_sireucel8.s[3];
+      return (/* istanbul ignore next */Object.assign({}, state, payload));
+
+    default: /* istanbul ignore next */++cov_sireucel8.b[1][2];++cov_sireucel8.s[4];
+      return state;}
+
+}

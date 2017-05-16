@@ -17,6 +17,7 @@ I tried to make the project as clean as possible and to use all libraries in the
 
 - [Features](#features)
 - [Folder Structure](#folder-structure)
+- [How to use](#how-to-use)
 - [Libraries](#libraries)
   - [react and redux](#react-and-redux)
   - [create-react-app](#create-react-app)
@@ -87,6 +88,20 @@ All `react` components shold be seperated in presentational and container compne
 All `redux` related files are in the `store` folder. You can find more about redux [here](http://redux.js.org/docs/introduction/).
 
 The folders `locales` and `themes` are used to store data for different locales and themes.
+
+## How to use
+
+You can eather fork this project or clone it into your own repo. I use the second. You can find [here](https://help.github.com/articles/duplicating-a-repository/) more information about how to clone/duplicate a repo into your own.
+
+After cloning the repo into your own you should change the configuration like project name and the firebase config. Here is a list of all changes you should make:
+* **package.json**  - here you should change the name and version
+* **src/config.js**  - here you should change all firebase data and the providers array for your needs
+* **public/index.html**  - change the title (it will be overriden but it looks bether)
+* **public/firebase-messaging-sw.js**  - change the ``messagingSenderId``
+
+After setting up the code we need to deploy our application to firebase. As first create an application biuld with runing `npm run build`.
+
+To use firebase we need to install the firebase tools by running `npm install -g firebase-tools` and after that login to firebase with `firebase login`.
 
 
 ## Libraries
@@ -204,9 +219,8 @@ Is also a dev library that helps us to create a service worker during build proc
 
 ## TO DO
 
-- [X] finish tests
-- [X] implement authentication using firebase API
-- [X] create profile menu in drawer
+- [X] implement all or most firebase functionalities
+- [ ] finish tests
 - [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
 - [ ] update to material-ui@next
 

@@ -1,0 +1,30 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+
+onTokenChanged = onTokenChanged; /* istanbul ignore next */exports.
+
+
+
+
+
+
+onPermissionChanged = onPermissionChanged; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+initMessaging = initMessaging;var /* istanbul ignore next */_firebaseMessaging = require('../../utils/firebase-messaging'); /* istanbul ignore next */var _firebaseMessaging2 = _interopRequireDefault(_firebaseMessaging);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const firebaseMessaging = new /* istanbul ignore next */_firebaseMessaging2.default({ onTokenChanged: onTokenChanged, onPermissionChanged: onPermissionChanged });function onTokenChanged(token) {return { type: types.ON_TOKEN_CHANGED, payload: { token } };}function onPermissionChanged(hasPermission) {return { type: types.ON_PERMISSION_CHANGED, payload: { hasPermission } };}function initMessaging() {
+
+  return (dispatch, getState) => {
+    firebaseMessaging.subscribe(dispatch);
+  };
+
+}

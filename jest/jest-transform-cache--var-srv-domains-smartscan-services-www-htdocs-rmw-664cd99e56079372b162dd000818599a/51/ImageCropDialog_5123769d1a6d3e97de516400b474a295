@@ -1,0 +1,113 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.ImageCropDialog = undefined;var _jsxFileName = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/containers/ImageCropDialog/ImageCropDialog.js';var /* istanbul ignore next */_react = require('react'); /* istanbul ignore next */var _react2 = _interopRequireDefault(_react);
+var /* istanbul ignore next */_reactRedux = require('react-redux');
+var /* istanbul ignore next */_propTypes = require('prop-types'); /* istanbul ignore next */var _propTypes2 = _interopRequireDefault(_propTypes);
+var /* istanbul ignore next */_reactIntl = require('react-intl');
+var /* istanbul ignore next */_actions = require('../../store/auth/actions');
+var /* istanbul ignore next */_reactImageCropper = require('react-image-cropper');
+var /* istanbul ignore next */_Dialog = require('material-ui/Dialog'); /* istanbul ignore next */var _Dialog2 = _interopRequireDefault(_Dialog);
+var /* istanbul ignore next */_FlatButton = require('material-ui/FlatButton'); /* istanbul ignore next */var _FlatButton2 = _interopRequireDefault(_FlatButton);
+var /* istanbul ignore next */_CircularProgress = require('material-ui/CircularProgress'); /* istanbul ignore next */var _CircularProgress2 = _interopRequireDefault(_CircularProgress);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+const styles = {
+  container: {
+    display: 'flex',
+    alignItems: 'strech',
+    justifyContent: 'center',
+    flexDirection: 'row' },
+
+  dialog: {
+    width: '100%',
+    maxWidth: 'none' },
+
+  cropper: {
+    height: 250,
+    width: 250 } };
+
+
+
+class ImageCropDialog extends /* istanbul ignore next */_react.Component {
+
+  constructor(props) {
+    super(props); /* istanbul ignore next */this.
+
+
+
+    handleClose = () => {
+      const { setNewPhotoURL } = this.props;
+      setNewPhotoURL(null);
+    }; /* istanbul ignore next */this.
+
+    hanleUpdatePhotoSubmit = () => {
+      const { auth, updateUserPhoto } = this.props;
+      updateUserPhoto(this.cropper.crop(), auth.uid);
+    };this.cropper = null;}
+
+  render() {
+    const { intl, auth, open, title } = this.props;
+
+    const actions = [
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+      label: intl.formatMessage({ id: 'submit' }),
+      primary: true,
+      onTouchTap: this.hanleUpdatePhotoSubmit, __source: { fileName: _jsxFileName, lineNumber: 49 }, __self: this }),
+
+    /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_FlatButton2.default, /* istanbul ignore next */{
+      label: intl.formatMessage({ id: 'cancel' }),
+      primary: true,
+      onTouchTap: this.handleClose, __source: { fileName: _jsxFileName, lineNumber: 54 }, __self: this })];
+
+
+
+    return (
+
+      /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_Dialog2.default, /* istanbul ignore next */{
+          contentStyle: styles.dialog,
+          title: title,
+          actions: actions,
+          onRequestClose: this.handleClose,
+          open: open, __source: { fileName: _jsxFileName, lineNumber: 63 }, __self: this },
+        /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.container, __source: { fileName: _jsxFileName, lineNumber: 69 }, __self: this },
+          /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */'div', /* istanbul ignore next */{ style: styles.cropper, __source: { fileName: _jsxFileName, lineNumber: 70 }, __self: this },
+            auth.isFetching &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_CircularProgress2.default, /* istanbul ignore next */{ size: 80, thickness: 5, __source: { fileName: _jsxFileName, lineNumber: 72 }, __self: this }),
+
+            !auth.isFetching &&
+            /* istanbul ignore next */_react2.default.createElement( /* istanbul ignore next */_reactImageCropper.Cropper, /* istanbul ignore next */{
+              ref: field => {this.cropper = field;},
+              src: auth.newPhotoURL,
+              aspectRatio: 9 / 9, __source: { fileName: _jsxFileName, lineNumber: 75 }, __self: this })))));
+
+
+
+
+
+
+
+
+
+  }} /* istanbul ignore next */exports.ImageCropDialog = ImageCropDialog;
+
+
+
+ImageCropDialog.propTypes = {
+  intl: /* istanbul ignore next */_reactIntl.intlShape.isRequired,
+  open: /* istanbul ignore next */_propTypes2.default.bool.isRequired,
+  title: /* istanbul ignore next */_propTypes2.default.string,
+  updateUserPhoto: /* istanbul ignore next */_propTypes2.default.func.isRequired,
+  setNewPhotoURL: /* istanbul ignore next */_propTypes2.default.func.isRequired };
+
+
+
+const mapStateToProps = state => {
+  const { auth } = state;
+  return {
+    auth };
+
+}; /* istanbul ignore next */exports.default =
+
+/* istanbul ignore next */(0, _reactRedux.connect)(
+mapStateToProps,
+{
+  updateUserPhoto: /* istanbul ignore next */_actions.updateUserPhoto, setNewPhotoURL: /* istanbul ignore next */_actions.setNewPhotoURL })(
+
+/* istanbul ignore next */(0, _reactIntl.injectIntl)(ImageCropDialog));

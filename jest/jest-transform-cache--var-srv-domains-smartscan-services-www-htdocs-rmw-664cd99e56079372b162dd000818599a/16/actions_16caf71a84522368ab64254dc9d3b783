@@ -1,0 +1,24 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.
+
+
+
+
+
+
+onConnectionStateChange = onConnectionStateChange; /* istanbul ignore next */exports.
+
+
+
+
+
+
+
+initConnection = initConnection; /* istanbul ignore next */exports.
+
+
+
+
+
+unsubscribeConnection = unsubscribeConnection;var /* istanbul ignore next */_firebaseConnection = require('../../utils/firebase-connection'); /* istanbul ignore next */var _firebaseConnection2 = _interopRequireDefault(_firebaseConnection);var /* istanbul ignore next */_types = require('./types'); /* istanbul ignore next */var types = _interopRequireWildcard(_types); /* istanbul ignore next */function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}const firebaseConnection = new /* istanbul ignore next */_firebaseConnection2.default({ onConnectionStateChange: onConnectionStateChange });function onConnectionStateChange(isConnected) {return { type: types.ON_CONNECTION_STATE_CHANGED, payload: { isConnected } };}function initConnection() {return (dispatch, getState) => {firebaseConnection.subscribe(dispatch);};}function unsubscribeConnection() {
+  firebaseConnection.unsubscribe();
+}

@@ -1,0 +1,26 @@
+/* istanbul ignore next */"use strict";Object.defineProperty(exports, "__esModule", { value: true });var /* istanbul ignore next */_firebase = require("./firebase");
+
+class FirebaseConnection {
+
+  constructor(actions) {
+    this._actions = actions;
+  }
+
+  subscribe(emit) {
+
+    let ref = /* istanbul ignore next */_firebase.firebaseDb.ref(".info/connected");
+
+    ref.on("value", snapshot => {
+      emit(this._actions.onConnectionStateChange(snapshot.val()));
+    });
+
+    this._unsubscribe = () => {ref.off();};
+  }
+
+  unsubscribe() {
+    this._unsubscribe();
+  }} /* istanbul ignore next */exports.default =
+
+
+
+FirebaseConnection;

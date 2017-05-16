@@ -1,0 +1,22 @@
+/* istanbul ignore next */'use strict';Object.defineProperty(exports, "__esModule", { value: true });var cov_1zsplfqyhp = function () {var path = '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/tasks/types.js',hash = '5e0df25154a59032b80eb5dc5674446a065f650e',global = new Function('return this')(),gcv = '__coverage__',coverageData = { path: '/var/srv/domains/smartscan.services/www/htdocs/rmw/src/store/tasks/types.js', statementMap: { '0': { start: { line: 1, column: 16 }, end: { line: 1, column: 23 } }, '1': { start: { line: 3, column: 22 }, end: { line: 3, column: 42 } }, '2': { start: { line: 4, column: 22 }, end: { line: 4, column: 43 } }, '3': { start: { line: 5, column: 22 }, end: { line: 5, column: 43 } }, '4': { start: { line: 6, column: 20 }, end: { line: 6, column: 39 } }, '5': { start: { line: 7, column: 25 }, end: { line: 7, column: 49 } }, '6': { start: { line: 9, column: 28 }, end: { line: 9, column: 55 } }, '7': { start: { line: 10, column: 30 }, end: { line: 10, column: 59 } }, '8': { start: { line: 12, column: 28 }, end: { line: 12, column: 55 } }, '9': { start: { line: 13, column: 30 }, end: { line: 13, column: 59 } }, '10': { start: { line: 15, column: 28 }, end: { line: 15, column: 55 } }, '11': { start: { line: 16, column: 30 }, end: { line: 16, column: 59 } }, '12': { start: { line: 18, column: 30 }, end: { line: 18, column: 59 } }, '13': { start: { line: 20, column: 22 }, end: { line: 20, column: 43 } }, '14': { start: { line: 21, column: 28 }, end: { line: 21, column: 55 } }, '15': { start: { line: 22, column: 30 }, end: { line: 22, column: 59 } } }, fnMap: {}, branchMap: {}, s: { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0, '5': 0, '6': 0, '7': 0, '8': 0, '9': 0, '10': 0, '11': 0, '12': 0, '13': 0, '14': 0, '15': 0 }, f: {}, b: {}, _coverageSchema: '332fd63041d2c1bcb487cc26dd0d5f7d97098a6c' },coverage = global[gcv] || (global[gcv] = {});if (coverage[path] && coverage[path].hash === hash) {return coverage[path];}coverageData.hash = hash;return coverage[path] = coverageData;}();const namespace = /* istanbul ignore next */(++cov_1zsplfqyhp.s[0], 'TASKS');
+
+const FETCH = /* istanbul ignore next */exports.FETCH = (++cov_1zsplfqyhp.s[1], `${namespace}@FETCH`);
+const DELETE = /* istanbul ignore next */exports.DELETE = (++cov_1zsplfqyhp.s[2], `${namespace}@DELETE`);
+const CREATE = /* istanbul ignore next */exports.CREATE = (++cov_1zsplfqyhp.s[3], `${namespace}@CREATE`);
+const EDIT = /* istanbul ignore next */exports.EDIT = (++cov_1zsplfqyhp.s[4], `${namespace}@EDIT`);
+const CONNECTED = /* istanbul ignore next */exports.CONNECTED = (++cov_1zsplfqyhp.s[5], `${namespace}@CONNECTED`);
+
+const CREATE_ERROR = /* istanbul ignore next */exports.CREATE_ERROR = (++cov_1zsplfqyhp.s[6], `${namespace}@CREATE_ERROR`);
+const CREATE_SUCCESS = /* istanbul ignore next */exports.CREATE_SUCCESS = (++cov_1zsplfqyhp.s[7], `${namespace}@CREATE_SUCCESS`);
+
+const UPDATE_ERROR = /* istanbul ignore next */exports.UPDATE_ERROR = (++cov_1zsplfqyhp.s[8], `${namespace}@UPDATE_ERROR`);
+const UPDATE_SUCCESS = /* istanbul ignore next */exports.UPDATE_SUCCESS = (++cov_1zsplfqyhp.s[9], `${namespace}@UPDATE_SUCCESS`);
+
+const DELETE_ERROR = /* istanbul ignore next */exports.DELETE_ERROR = (++cov_1zsplfqyhp.s[10], `${namespace}@DELETE_ERROR`);
+const DELETE_SUCCESS = /* istanbul ignore next */exports.DELETE_SUCCESS = (++cov_1zsplfqyhp.s[11], `${namespace}@DELETE_SUCCESS`);
+
+const UNDELETE_ERROR = /* istanbul ignore next */exports.UNDELETE_ERROR = (++cov_1zsplfqyhp.s[12], `${namespace}@UNDELETE_ERROR`);
+
+const FILTER = /* istanbul ignore next */exports.FILTER = (++cov_1zsplfqyhp.s[13], `${namespace}@FILTER`);
+const LOAD_SUCCESS = /* istanbul ignore next */exports.LOAD_SUCCESS = (++cov_1zsplfqyhp.s[14], `${namespace}@LOAD_SUCCESS`);
+const UNLOAD_SUCCESS = /* istanbul ignore next */exports.UNLOAD_SUCCESS = (++cov_1zsplfqyhp.s[15], `${namespace}@UNLOAD_SUCCESS`);
