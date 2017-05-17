@@ -50,8 +50,8 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
                 leftAvatar={
                   <Avatar
                     size={45}
-                    icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
                     src={auth.photoURL}
+                    icon={<FontIcon className="material-icons" >person</FontIcon>}
                   />
                 }
               />

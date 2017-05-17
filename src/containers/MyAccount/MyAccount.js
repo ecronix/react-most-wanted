@@ -49,7 +49,7 @@ const styles={
     float: 'right',
     overflow: 'none',
     alignSelf: 'center',
-    marginTop:-100,
+    marginTop:-80,
   },
   exampleImageInput: {
     cursor: 'pointer',
@@ -174,9 +174,9 @@ export class MyAccount extends Component {
 
               <Avatar
                 style={styles.avatar}
-                size={150}
-                icon={auth.photoURL===null?<FontIcon className="material-icons" >account_circle</FontIcon>:undefined}
+                size={120}
                 src={auth.photoURL}
+                icon={<FontIcon className="material-icons" >person</FontIcon>}
               />
 
               { auth.isEditing &&

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../components/Activity';
-import * as taskActions from '../../store/tasks/actions';
+import ListActions from '../../utils/firebase-list-actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
@@ -15,7 +15,7 @@ import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
-import {transparent, green800} from 'material-ui/styles/colors';
+import { green800} from 'material-ui/styles/colors';
 import {BottomNavigation} from 'material-ui/BottomNavigation';
 
 const styles={
@@ -51,7 +51,9 @@ class Tasks extends Component {
   }
 
   componentWillMount() {
-    this.props.loadTasks();
+    const {initialiseList}=this.props;
+
+    initialiseList();
   }
 
   handleKeyDown = (event, onSucces) => {
@@ -61,7 +63,9 @@ class Tasks extends Component {
   }
 
   componentWillUnmount() {
-    this.props.unloadTasks();
+    const {unsubscribeList}=this.props;
+
+    unsubscribeList();
   }
 
   componentDidUpdate() {
@@ -70,7 +74,7 @@ class Tasks extends Component {
   }
 
   handleAddTask = () => {
-    const {createTask, auth}=this.props;
+    const {pushChild, auth}=this.props;
 
     const title=this.name.getValue();
 
@@ -84,29 +88,28 @@ class Tasks extends Component {
     }
 
     if(title.length>0){
-      createTask(newTask);
+      pushChild(newTask);
     }
 
   }
 
   handleUpdateTask = (key, task) => {
-    const { updateTask }=this.props;
-    updateTask(key, task);
+    const { updateChild }=this.props;
+    updateChild(key, task);
   }
 
   userAvatar(task){
     return task.completed?
     <Avatar
-      icon={<FontIcon className="material-icons" >check_circle</FontIcon>}
-      color={green800}
-      backgroundColor={transparent}
+      icon={<FontIcon className="material-icons" >done</FontIcon>}
+      backgroundColor={green800}
     />
     :
-    <Avatar src={task.userPhotoURL} />
+    <Avatar src={task.userPhotoURL} icon={<FontIcon className="material-icons" >person</FontIcon>}/>
   }
 
   rednerTasks(tasks) {
-    const {deleteTask, muiTheme, setIsEditing, auth, intl} =this.props;
+    const {removeChild, muiTheme, setIsEditing, auth, intl} =this.props;
 
     return _.map(tasks.list, (task, key) => {
 
@@ -135,7 +138,7 @@ class Tasks extends Component {
             </IconButton>
 
             <IconButton
-              onTouchTap={()=>{deleteTask(key);}}>
+              onTouchTap={()=>{removeChild(key);}}>
               <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'delete'}</FontIcon>
             </IconButton>
 
@@ -236,12 +239,14 @@ Tasks.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  loadTasks: PropTypes.func.isRequired,
-  createTask: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func.isRequired,
-  setIsCreating: PropTypes.func.isRequired,
+  //loadTasks: PropTypes.func.isRequired,
+  //createTask: PropTypes.func.isRequired,
+  //deleteTask: PropTypes.func.isRequired,
+  //setIsCreating: PropTypes.func.isRequired,
 
 };
+
+const publicTasksActions = new ListActions('public_tasks').createActions();
 
 const mapStateToProps = (state) => {
   const { tasks, auth } = state;
@@ -255,6 +260,6 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {
-    ...taskActions
+    ...publicTasksActions
   }
 )(injectIntl(muiThemeable()(Tasks)));

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../components/Activity';
-import * as usersActions from '../../store/users/actions';
+import ListActions from '../../utils/firebase-list-actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -25,22 +25,24 @@ const styles={
 class Users extends Component {
 
   componentWillMount() {
-    this.props.requestLoad();
+    this.props.initialiseList();
   }
 
   componentWillUnmount() {
-    this.props.requestUnload();
+    this.props.unsubscribeList();
   }
 
   rednerList(users) {
     const {intl} =this.props;
 
+
     return _.map(users.list, (user, key) => {
+
       return <div key={key}>
         <ListItem
           key={key}
           id={key}
-          leftAvatar={<Avatar src={user.photoURL} />}
+          leftAvatar={<Avatar src={user.photoURL} icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
           rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}
           primaryText={user.displayName}
           secondaryTextLines={1}
@@ -89,12 +91,9 @@ Users.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  requestLoad: PropTypes.func.isRequired,
-  requestCreate: PropTypes.func.isRequired,
-  requestUnload: PropTypes.func.isRequired,
-  requestDelete: PropTypes.func.isRequired,
-  setIsCreating: PropTypes.func.isRequired,
 };
+
+const usersActions = new ListActions('users').createActions();
 
 const mapStateToProps = (state) => {
   const { users, auth } = state;

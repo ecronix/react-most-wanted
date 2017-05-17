@@ -2,13 +2,12 @@ import { responsiveStateReducer } from 'redux-responsive';
 import { combineReducers } from 'redux';
 import { responsiveDrawer } from 'material-ui-responsive-drawer';
 import { routerReducer } from 'react-router-redux';
+import getListReducers from '../utils/firebase-list-reducers';
 import auth from './auth/reducer';
 import connection from './connection/reducer';
 import messaging from './messaging/reducer';
 import locale from './locale/reducer';
 import theme from './theme/reducer';
-import tasks from './tasks/reducer';
-import users from './users/reducer';
 
 const reducers = combineReducers({
   browser: responsiveStateReducer,
@@ -19,8 +18,8 @@ const reducers = combineReducers({
   messaging,
   locale,
   theme,
-  tasks,
-  users
+  tasks: getListReducers('public_tasks'),
+  users: getListReducers('users')
 })
 
 export default reducers;
