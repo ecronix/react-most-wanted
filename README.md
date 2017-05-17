@@ -70,7 +70,7 @@ react-most-wanted/
   src/
     components/
     containers/
-    helpers/
+    utils/
     locales/
     store/
       index.js
