@@ -9,6 +9,7 @@ export const initialState=Immutable({
   isPasswordDialogOpen: false,
   isDeleteDialogOpen: false,
   isVerificationEmailSend: false,
+  signInSuccessUrl: undefined,
   newPhotoURL: null,
 });
 

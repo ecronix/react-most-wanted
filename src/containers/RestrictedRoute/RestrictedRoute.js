@@ -11,7 +11,8 @@ const RestrictedRoute = ({ type, isAuthorised, component: Component, ...rest }) 
       <Component {...props}/>
     ) : (
       <Redirect to={{
-        pathname: type==='private' ? '/signin' : '/',
+        pathname: type==='private' ? `/signin`: '/',
+        search: `${props.location.pathname}`,
         state: { from: props.location }
       }}/>
     )
