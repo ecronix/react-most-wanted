@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
 import { Activity } from '../../components/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { signInWithProvider, signInUser, authError } from '../../store/auth/actions';
-import { getValidationErrorMessage } from '../../store/auth/selectors';
 import { push } from 'react-router-redux';
-import { setDrawerOpen } from 'material-ui-responsive-drawer';
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
 import {firebaseAuth} from '../../utils/firebase';
@@ -70,11 +67,7 @@ class SignIn extends Component {
 
 
 SignIn.propTypes = {
-  signInWithProvider: PropTypes.func.isRequired,
-  setDrawerOpen: PropTypes.func.isRequired,
-  authError: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   router: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
@@ -82,17 +75,15 @@ SignIn.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  const { auth, router, browser } = state;
+  const {router, browser } = state;
   return {
-    auth,
     router,
-    browser,
-    getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
+    browser
   };
 };
 
 
 export default connect(
   mapStateToProps,
-  { signInWithProvider, signInUser, push, setDrawerOpen, authError }
+  { push}
 )(injectIntl(muiThemeable()(SignIn)));

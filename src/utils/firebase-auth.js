@@ -375,6 +375,7 @@ class FirebaseAuth {
     firebaseAuth.onAuthStateChanged((user) => {
       if(user){
         emit(this.onAuthStateChanged(user));
+        this.updateUserData(user);
         this.handlePresence(user);
       }else{
         emit(this._actions.onLogoutUser());
