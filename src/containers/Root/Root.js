@@ -6,7 +6,6 @@ import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { initAuth } from '../../store/auth/actions';
 import { initConnection, unsubscribeConnection } from '../../store/connection/actions';
-import { initMessaging } from '../../store/messaging/actions';
 
 Root.propTypes = {
   history: PropTypes.object.isRequired,
@@ -16,7 +15,6 @@ Root.propTypes = {
   muiTheme: PropTypes.object.isRequired,
   initAuth: PropTypes.func.isRequired,
   initConnection: PropTypes.func.isRequired,
-  initMessaging: PropTypes.func.isRequired,
   unsubscribeConnection: PropTypes.func.isRequired,
 };
 
@@ -37,5 +35,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {initAuth, initConnection, unsubscribeConnection, initMessaging}
+  mapStateToProps, {initAuth, initConnection, unsubscribeConnection}
 )(Root);

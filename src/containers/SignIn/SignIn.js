@@ -8,13 +8,14 @@ import { push } from 'react-router-redux';
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
 import {firebaseAuth} from '../../utils/firebase';
+import { initMessaging } from '../../store/messaging/actions';
 
 var authUi = new firebaseui.auth.AuthUI(firebaseAuth);
 
 class SignIn extends Component {
 
   componentDidMount() {
-    const {router, browser}= this.props;
+    const {router, browser, initMessaging}= this.props;
 
     const redirect =((router || {}).location || {}).search;
 
@@ -25,7 +26,7 @@ class SignIn extends Component {
         signInSuccess: function(user, credentials, redirect) {
 
           push(redirect || '/');
-
+          initMessaging();
           //To avoid page reload on single page applications
           return false;
         }
@@ -41,7 +42,7 @@ class SignIn extends Component {
     };
 
     authUi.start('#firebaseui-auth', uiConfig);
-    
+
   }
 
   componentWillUnmount() {
@@ -85,5 +86,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { push}
+  { push, initMessaging}
 )(injectIntl(muiThemeable()(SignIn)));

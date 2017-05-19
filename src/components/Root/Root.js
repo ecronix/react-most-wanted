@@ -8,9 +8,8 @@ import {App} from '../../containers/App';
 class Root extends Component {
 
   componentWillMount () {
-    const { initAuth, initConnection, initMessaging }= this.props;
+    const { initAuth, initConnection }= this.props;
     initAuth();
-    initMessaging();
 
     //Set connection listener with delay
     setTimeout(function(){ initConnection();}, 3000);
