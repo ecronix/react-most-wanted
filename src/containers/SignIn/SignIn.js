@@ -41,7 +41,7 @@ class SignIn extends Component {
     };
 
     authUi.start('#firebaseui-auth', uiConfig);
-
+    
   }
 
   componentWillUnmount() {

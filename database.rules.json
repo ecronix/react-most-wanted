@@ -10,6 +10,14 @@
       "$tid":{
         ".write": "data.child('userId').val() === auth.uid || newData.child('userId').val() === auth.uid"
       }
+    },
+    "public_tasks_count":{
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "users_count":{
+      ".read": true,
+      ".write": "auth != null"
     }
   }
 }

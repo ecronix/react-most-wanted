@@ -15,112 +15,34 @@ const mailTransport = nodemailer.createTransport(`smtps://${gmailEmail}:${gmailP
 
 const APP_NAME = 'React Most Wanted';
 
-exports.notifyOnTaskChange = functions.database.ref('/public_tasks/{taskUid}').onWrite(event => {
+const counting = require('./counting');
+const messaging = require('./messaging');
+const userNotifications = require('./userNotifications');
 
-  // Only edit data when it is first created.
-  if (event.data.previous.exists()) {
-    return;
-  }
+exports.countTasksChange = functions.database.ref('/public_tasks/{id}').onWrite(
+  (event)=> counting.handleListChange(event, 'public_tasks_count')
+);
 
+exports.recountTasks = functions.database.ref('/public_tasks_count').onWrite(
+  (event)=> counting.handleRecount(event, 'public_tasks')
+);
 
-  const taskUid = event.params.taskUid;
-  const eventSnapshot=event.data;
-  const userId=eventSnapshot.child('userId').val();
+exports.countUsersChange = functions.database.ref('/users/{id}').onWrite(
+  (event)=> counting.handleListChange(event, 'users_count')
+);
 
-  admin.database().ref(`/users`).once('value')
-  .then(snapshot =>{
+exports.recountUsers = functions.database.ref('/users_count').onWrite(
+  (event)=> counting.handleRecount(event, 'users')
+);
 
-    let user=null;
-    let registrationTokens=[];
+exports.notifyOnTaskChange = functions.database.ref('/public_tasks/{taskUid}').onWrite(
+  (event)=> messaging.handleTaskAdded(event, admin)
+);
 
+exports.sendWelcomeEmail = functions.auth.user().onCreate(
+  (event) => userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME)
+);
 
-    snapshot.forEach(function(childSnapshot) {
-
-      const childData = childSnapshot.val();
-
-      if(childSnapshot.key===userId){
-        user=childData;
-      }else{
-        childSnapshot.child('notificationTokens').forEach(token =>{
-          if(token.val()){
-            registrationTokens.push(token.key);
-          }
-        });
-
-      }
-
-    });
-
-    const payload = {
-      notification: {
-        title: user?`${user.displayName} created a Task!`: 'Task created!',
-        body: eventSnapshot.child('title').val(),
-        icon: (user && user.photoURL!==undefined)?user.photoURL:'/apple-touch-icon.png',
-        click_action: 'https://www.react-most-wanted.com/tasks'
-      }
-    };
-
-    if(registrationTokens.length){
-      admin.messaging().sendToDevice(registrationTokens, payload)
-      .then(function(response) {
-        // See the MessagingDevicesResponse reference documentation for
-        // the contents of response.
-        console.log("Successfully sent message:", response);
-      })
-      .catch(function(error) {
-        console.log("Error sending message:", error);
-      });
-    }
-
-  });
-
-
-});
-
-exports.sendWelcomeEmail = functions.auth.user().onCreate(event => {
-  const user = event.data; // The Firebase user.
-
-  const email = user.email; // The email of the user.
-  const displayName = user.displayName; // The display name of the user.
-
-  return sendWelcomeEmail(email, displayName);
-});
-
-
-exports.sendByeEmail = functions.auth.user().onDelete(event => {
-
-  const user = event.data;
-
-  const email = user.email;
-  const displayName = user.displayName;
-
-  return sendGoodbyEmail(email, displayName);
-});
-
-function sendWelcomeEmail(email, displayName) {
-  const mailOptions = {
-    from: '"Tarik Huber" <huber.tarik@gmail.com>',
-      to: email
-    };
-
-    // The user unsubscribed to the newsletter.
-    mailOptions.subject = `Welcome to ${APP_NAME}!`;
-    mailOptions.text = `Hey ${displayName}!, Welcome to ${APP_NAME}. I hope you will enjoy the demo application.`;
-    return mailTransport.sendMail(mailOptions).then(() => {
-      console.log('New welcome email sent to:', email);
-    });
-  }
-
-  function sendGoodbyEmail(email, displayName) {
-    const mailOptions = {
-      from: '"Tarik Huber" <huber.tarik@gmail.com>',
-        to: email
-      };
-
-      // The user unsubscribed to the newsletter.
-      mailOptions.subject = `Bye!`;
-      mailOptions.text = `Hey ${displayName}!, We confirm that we have deleted your ${APP_NAME} account.`;
-      return mailTransport.sendMail(mailOptions).then(() => {
-        console.log('Account deletion confirmation email sent to:', email);
-      });
-    }
+exports.sendByeEmail = functions.auth.user().onDelete(
+  (event) => userNotifications.sendByeEmail(event, mailTransport, APP_NAME)
+);
