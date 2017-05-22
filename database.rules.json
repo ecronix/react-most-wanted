@@ -7,7 +7,9 @@
       }
     },
     "public_tasks":{
+      ".indexOn": ["userId"],
       "$tid":{
+        ".indexOn": ["userId"],
         ".write": "data.child('userId').val() === auth.uid || newData.child('userId').val() === auth.uid"
       }
     },

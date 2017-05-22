@@ -1,7 +1,7 @@
 
 module.exports = {
   handleListChange: (event, counterName) => {
-    const collectionRef = event.data.ref.parent;
+    const collectionRef = event.data.adminRef.parent;
     const countRef = collectionRef.parent.child(counterName);
 
     // Return the promise from countRef.transaction() so our function
@@ -19,7 +19,7 @@ module.exports = {
   },
   handleRecount: (event, listName) =>{
     if (!event.data.exists()) {
-      const counterRef = event.data.ref;
+      const counterRef = event.data.adminRef;
       const collectionRef = counterRef.parent.child(listName);
 
       // Return the promise from counterRef.set() so our function

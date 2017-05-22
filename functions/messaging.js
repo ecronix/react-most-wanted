@@ -10,7 +10,7 @@ module.exports = {
     const eventSnapshot=event.data;
     const userId=eventSnapshot.child('userId').val();
 
-    admin.database().ref(`/users`).once('value')
+    return admin.database().ref(`/users`).once('value')
     .then(snapshot =>{
 
       let user=null;
@@ -44,7 +44,7 @@ module.exports = {
       };
 
       if(registrationTokens.length){
-        admin.messaging().sendToDevice(registrationTokens, payload)
+        return admin.messaging().sendToDevice(registrationTokens, payload)
         .then(function(response) {
           // See the MessagingDevicesResponse reference documentation for
           // the contents of response.
@@ -53,6 +53,9 @@ module.exports = {
         .catch(function(error) {
           console.log("Error sending message:", error);
         });
+      }else{
+        console.log("Not tokens registered:", error);
+        return;
       }
 
     });
