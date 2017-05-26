@@ -47,12 +47,5 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --collectCoverageFrom=src/store/**/*js --collectCoverageFrom=!src/store/*js",
     "eject": "react-scripts eject"
-  },
-  "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true,
-    "testPathIgnorePatterns": [
-      "components"
-    ]
   }
 }
