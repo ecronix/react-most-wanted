@@ -6,6 +6,7 @@ import configureStore from './store';
 import { Root } from './containers/Root';
 import { addLocalizationData } from './locales';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import registerServiceWorker from './registerServiceWorker';
 
 const history = createHistory()
 const store = configureStore(history);
@@ -19,3 +20,5 @@ ReactDOM.render(
   </Provider>
   , document.getElementById('root')
 );
+
+registerServiceWorker();

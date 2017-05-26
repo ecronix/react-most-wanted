@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+  background-color: #222;
 }
 
 .shell {
@@ -22,12 +23,8 @@ body {
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+  animation: spin infinite 20s linear;
+  height: 80px;
 }
 
 @keyframes spin {
