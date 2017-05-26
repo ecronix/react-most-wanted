@@ -46,10 +46,21 @@ exports.recountUsers = functions.database.ref('/users_count').onWrite(
   (event)=> counting.handleRecount(event, 'users')
 );
 
-exports.sendWelcomeEmail = functions.auth.user().onCreate(
-  (event) => userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME)
+exports.handleUserCreated = functions.auth.user().onCreate(
+  (event)=> {
+    return Promise.all([
+      userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME),
+      userSync.userCreatedDefaults(event, admin)
+    ])
+  }
 );
 
-exports.sendByeEmail = functions.auth.user().onDelete(
-  (event) => userNotifications.sendByeEmail(event, mailTransport, APP_NAME)
+
+exports.handleUserDeleted = functions.auth.user().onDelete(
+  (event)=> {
+  return Promise.all([
+    userNotifications.sendByeEmail(event, mailTransport, APP_NAME),
+    userSync.userDeleted(event, admin)
+  ])
+}
 );

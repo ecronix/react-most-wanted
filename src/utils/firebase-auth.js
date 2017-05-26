@@ -349,12 +349,12 @@ class FirebaseAuth {
   handlePresence = (user) => {
     let myConnectionsRef = firebase.database().ref(`users/${user.uid}/connections`);
     let lastOnlineRef = firebase.database().ref(`users/${user.uid}/lastOnline`);
+    lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
 
     var con = myConnectionsRef.push(true);
-    this.updateToken(firebaseAuth.currentUser, true);
-
     con.onDisconnect().remove();
-    lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+
+    this.updateToken(firebaseAuth.currentUser, true);
 
   }
 
