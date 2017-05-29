@@ -24,7 +24,7 @@ const styles={
 
 class Users extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.initialiseList();
   }
 

@@ -50,7 +50,7 @@ class Tasks extends Component {
     this.new_task_title = null;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {initialiseList}=this.props;
 
     initialiseList();

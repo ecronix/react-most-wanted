@@ -17,7 +17,8 @@ export default function configureStore(history) {
 
   const initState={
     auth: {...initialState, isAuthorised: isAuthorised()},
-    theme: 'dark'
+    theme: 'dark',
+    locale: 'de'
   };
 
   let middlewares=[routerMiddleware(history), thunk];

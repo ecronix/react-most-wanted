@@ -36,9 +36,10 @@ class FirebaseList {
 
   subscribe(emit) {
     let ref = firebaseDb.ref(this._path);
+    let initialized = false;
 
     ref.once('value', (snapshot) => {
-
+      initialized = true;
       let list = {};
 
       snapshot.forEach(function(childSnapshot) {
@@ -52,13 +53,17 @@ class FirebaseList {
     });
 
     ref.on('child_added', snapshot => {
-      emit(this._actions.onAdd(this.getPayload(snapshot)));
+      if (initialized) {
+        emit(this._actions.onAdd(this.getPayload(snapshot)));
+      }else{
+       //Ignore
+      }
     });
 
     ref.on('child_changed', snapshot => {
       emit(this._actions.onChange(this.getPayload(snapshot)));
     });
-
+    
     ref.on('child_removed', snapshot => {
       emit(this._actions.onRemove(this.getPayload(snapshot)));
     });
