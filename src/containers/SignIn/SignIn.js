@@ -2,31 +2,29 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
-import { Activity } from '../../components/Activity';
+import { Activity } from '../../containers/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { push } from 'react-router-redux';
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
 import {firebaseAuth} from '../../utils/firebase';
 import { initMessaging } from '../../store/messaging/actions';
+import {withRouter} from 'react-router-dom';
 
 var authUi = new firebaseui.auth.AuthUI(firebaseAuth);
 
 class SignIn extends Component {
 
   componentDidMount() {
-    const {router, browser, initMessaging}= this.props;
-
-    const redirect =((router || {}).location || {}).search;
+    const {browser, initMessaging}= this.props;
 
     var uiConfig = {
-      signInSuccessUrl: redirect.slice(1),
+      signInSuccessUrl: '/',
       signInFlow: browser.greaterThan.medium?'popup':'redirect',
       callbacks: {
         signInSuccess: function(user, credentials, redirect) {
 
-          push(redirect || '/');
           initMessaging();
+
           //To avoid page reload on single page applications
           return false;
         }
@@ -68,17 +66,14 @@ class SignIn extends Component {
 
 
 SignIn.propTypes = {
-  push: PropTypes.func.isRequired,
   intl: PropTypes.object.isRequired,
-  router: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
 };
 
 
 const mapStateToProps = (state) => {
-  const {router, browser } = state;
+  const {browser } = state;
   return {
-    router,
     browser
   };
 };
@@ -86,5 +81,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { push, initMessaging}
-)(injectIntl(muiThemeable()(SignIn)));
+  { initMessaging}
+)(injectIntl(muiThemeable()(withRouter(SignIn))));

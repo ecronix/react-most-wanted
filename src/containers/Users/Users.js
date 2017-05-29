@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
-import { Activity } from '../../components/Activity';
+import { Activity } from '../../containers/Activity';
 import ListActions from '../../utils/firebase-list-actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -63,6 +63,7 @@ class Users extends Component {
 
     return (
       <Activity
+        isLoading={users.isFetching}
         title={intl.formatMessage({id: 'users'})}>
         <div >
           {users.isFetching && users.isConnected && !Object.keys(users.list).length &&

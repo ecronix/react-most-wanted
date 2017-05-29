@@ -6,11 +6,11 @@ import Toggle from 'material-ui/Toggle';
 import allThemes from '../../themes';
 import allLocales from '../../locales';
 import {injectIntl} from 'react-intl';
+import {withRouter} from 'react-router-dom';
 
-const DrawerContent = (props) => {
+const DrawerContent = (props, context) => {
 
   const {
-    router,
     responsiveDrawer,
     setResponsive,
     theme,
@@ -21,18 +21,19 @@ const DrawerContent = (props) => {
     muiTheme,
     auth,
     signOutUser,
-    isAuthorised
+    isAuthorised,
+    match
   }=props;
 
   const handleChange = (event, index) => {
-    const {push, responsiveDrawer, setDrawerOpen} = props;
+    const {history, responsiveDrawer, setDrawerOpen} = props;
 
     if(responsiveDrawer.open && index!==undefined){
       setDrawerOpen(false);
     }
 
     if(index!==undefined && index!==Object(index)){
-      push(index);
+      history.push(index);
     }
   };
 
@@ -155,7 +156,7 @@ const DrawerContent = (props) => {
     <SelectableMenuList
       items={auth.isMenuOpen?authItems:menuItems}
       onIndexChange={handleChange}
-      index={router?router.location.pathname:'/'}
+      index={match?match.path:'/'}
     />
 
   </div>
@@ -163,4 +164,4 @@ const DrawerContent = (props) => {
 );
 }
 
-export default injectIntl(muiThemeable()(DrawerContent));
+export default injectIntl(muiThemeable()(withRouter(DrawerContent)));

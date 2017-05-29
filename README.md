@@ -22,7 +22,7 @@ I tried to make the project as clean as possible and to use all libraries in the
   - [react and redux](#react-and-redux)
   - [create-react-app](#create-react-app)
   - [material-ui](#material-ui)
-  - [react-router-redux](#react-router-redux)
+  - [react-router](#react-router)
   - [react-intl](#react-intl)
   - [redux-persist](#redux-persist)
   - [material-ui-responsive-drawer](#material-ui-responsive-drawer)
@@ -143,22 +143,9 @@ The team around `material-ui` is working in the `@next` branch on a greate new v
 
 This library gives use all we need for theming our application. All you have to do is to provide some theme in the `themes` folder and update the `index.js` file in the `themes` folder. After that your theme should be visible and ready to use. Just watch how it is done with the `ics_theme`.
 
-### react-router-redux
+### react-router
 
-Every application would need some kind of routing. I desided to use `react-router` in this project and to use the new version 4 for witch the `react-router-redux` is unfortunaly only in alpha state. But the main features are working in the alpha so I desided to use it even it is not released in stable version. Why should I do this when there is the older versio of `react-router` and the stable version of `react-router-redux`. At first it was the old version and when I wanted to try the new one there where so drastical changes that I had to change the complete routing code. The whole concept is different in the version 4. Because of that we are using here the newer version to be prepared for the future.
-
-The main difference is that every `Route` is now a real react component that renders its childs:
-Example in the [Routes.js](https://github.com/TarikHuber/react-most-wanted/blob/master/src/components/Routes/Routes.js) folder.
-```js
-
-<Switch>
-  <Route path="/" exact component={Dashboard} />
-  <Route path="/dashboard" exact component={Dashboard} />
-  <Route path="/about" exact component={About} />
-  <Route path="/*" component={PageNotFound} />
-</Switch>
-
-```
+Every application would need some kind of routing. I desided to use `react-router` in this project.
 
 ### react-helmet
 

@@ -1,7 +1,7 @@
 import { responsiveStateReducer } from 'redux-responsive';
 import { combineReducers } from 'redux';
 import { responsiveDrawer } from 'material-ui-responsive-drawer';
-import { routerReducer } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form'
 import getListReducers from '../utils/firebase-list-reducers';
 import auth from './auth/reducer';
 import connection from './connection/reducer';
@@ -12,7 +12,7 @@ import theme from './theme/reducer';
 const reducers = combineReducers({
   browser: responsiveStateReducer,
   responsiveDrawer: responsiveDrawer,
-  router: routerReducer,
+  form: formReducer,
   auth,
   connection,
   messaging,

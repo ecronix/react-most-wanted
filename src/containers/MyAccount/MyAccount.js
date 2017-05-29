@@ -10,7 +10,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
 import * as authActions from '../../store/auth/actions';
 import { getValidationErrorMessage, isLinkedWithProvider } from '../../store/auth/selectors';
-import { Activity } from '../../components/Activity';
+import { Activity } from '../../containers/Activity';
 import { PasswordDialog } from '../../containers/PasswordDialog';
 import { ImageCropDialog } from '../../containers/ImageCropDialog';
 import { ChangePasswordDialog } from '../../containers/ChangePasswordDialog';
@@ -341,7 +341,6 @@ export class MyAccount extends Component {
 MyAccount.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
-  router: PropTypes.object.isRequired,
   authError: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   changePassword: PropTypes.func.isRequired,
@@ -357,10 +356,9 @@ MyAccount.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  const { auth, router } = state;
+  const { auth } = state;
   return {
     auth,
-    router,
     getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
   };
 };

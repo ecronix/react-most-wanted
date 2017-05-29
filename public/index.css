@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: 'Roboto', sans-serif;
   background-color: #222;
+  height: 100%
 }
 
 .shell {
@@ -20,6 +21,10 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+}
+
+html, body, #root{
+  height: 100%
 }
 
 .loader {

@@ -1,14 +1,45 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Root } from '../../components/Root';
 import {getLocaleMessages} from '../../locales';
 import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { initAuth } from '../../store/auth/actions';
 import { initConnection, unsubscribeConnection } from '../../store/connection/actions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { IntlProvider } from 'react-intl'
+import {Routes} from '../../components/Routes';
+
+class Root extends Component {
+
+  componentWillMount () {
+    const { initAuth, initConnection }= this.props;
+    initAuth();
+
+    //Set connection listener with delay
+    setTimeout(function(){ initConnection();}, 3000);
+  }
+
+  componentWillUnmount() {
+    const { unsubscribeConnection }= this.props;
+    unsubscribeConnection();
+  }
+
+  render() {
+    const { locale, muiTheme, messages}= this.props;
+
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <IntlProvider locale={locale} messages={messages}>
+          <Routes />
+        </IntlProvider>
+      </MuiThemeProvider>
+    );
+  }
+
+}
 
 Root.propTypes = {
-  history: PropTypes.object.isRequired,
   locale: PropTypes.string.isRequired,
   source: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,

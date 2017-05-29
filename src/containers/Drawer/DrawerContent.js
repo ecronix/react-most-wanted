@@ -4,7 +4,6 @@ import { setResponsive, setDrawerOpen } from 'material-ui-responsive-drawer';
 import { updateTheme } from '../../store/theme/actions';
 import { updateLocale } from '../../store/locale/actions';
 import { signOutUser } from '../../store/auth/actions';
-import { push } from 'react-router-redux';
 import { DrawerContent } from '../../components/Drawer';
 import * as authSelectors from '../../store/auth/selectors'
 
@@ -12,8 +11,6 @@ DrawerContent.propTypes = {
   responsiveDrawer: PropTypes.object.isRequired,
   theme: PropTypes.string.isRequired,
   locale: PropTypes.string.isRequired,
-  router: PropTypes.object.isRequired,
-  push: PropTypes.func.isRequired,
   setResponsive: PropTypes.func.isRequired,
   setDrawerOpen: PropTypes.func.isRequired,
   updateTheme: PropTypes.func.isRequired,
@@ -23,13 +20,12 @@ DrawerContent.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { responsiveDrawer, theme, locale, router, auth } = state;
+  const { responsiveDrawer, theme, locale, auth } = state;
 
   return {
     responsiveDrawer,
     theme,
     locale,
-    router,
     auth,
     isAuthorised: authSelectors.isAuthorised(auth)
 
@@ -38,5 +34,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  {push, setResponsive, setDrawerOpen, updateTheme, updateLocale, signOutUser}
+  {setResponsive, setDrawerOpen, updateTheme, updateLocale, signOutUser}
 )(DrawerContent);

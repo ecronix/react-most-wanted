@@ -1,6 +1,6 @@
 import React from 'react';
 import {injectIntl, intlShape} from 'react-intl';
-import { Activity } from '../../components/Activity';
+import { Activity } from '../../containers/Activity';
 
 export const About = ({intl}) => {
 

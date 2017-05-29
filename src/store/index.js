@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk';
 import reducers from './reducers';
@@ -8,7 +7,7 @@ import { responsiveStoreEnhancer } from 'redux-responsive';
 import { isAuthorised } from '../utils/firebase-auth';
 import { initialState } from '../store/auth/reducer';
 
-export default function configureStore(history) {
+export default function configureStore() {
   let store;
 
   const logger = createLogger({
@@ -21,7 +20,7 @@ export default function configureStore(history) {
     locale: 'de'
   };
 
-  let middlewares=[routerMiddleware(history), thunk];
+  let middlewares=[thunk];
 
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger); //DEV middlewares
@@ -34,7 +33,7 @@ export default function configureStore(history) {
   ));
 
   try{
-    persistStore(store, {blacklist:['router', 'auth', 'connection'] }, ()=>{});
+    persistStore(store, {blacklist:['auth', 'connection', 'form'] }, ()=>{});
   }catch(e){
 
   }

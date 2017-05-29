@@ -9,10 +9,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import { signUpUser, authError, resetPasswordEmail } from '../../store/auth/actions';
 import { getValidationErrorMessage } from '../../store/auth/selectors';
-import { push } from 'react-router-redux';
 import { setDrawerOpen } from 'material-ui-responsive-drawer';
-import { Activity } from '../../components/Activity'
+import { Activity } from '../../containers/Activity'
 import Snackbar from 'material-ui/Snackbar';
+import {withRouter} from 'react-router-dom';
 
 const styles={
   paper:{
@@ -41,12 +41,12 @@ export class ResetPassword extends Component {
   }
 
   handleResetSuccess = (result) => {
-    const {push, authError} =this.props;
+    const {history, authError} =this.props;
     authError({
       code: 'success',
       message: 'Reset email successfully send. Pleas check inbox.'
     })
-    push('signin');
+    history.push('signin');
   }
 
   hanleSignInSubmit = () => {
@@ -56,7 +56,7 @@ export class ResetPassword extends Component {
 
 
   render(){
-    const {intl, getValidationErrorMessage, auth, push, authError} =this.props;
+    const {intl, getValidationErrorMessage, auth, history, authError} =this.props;
 
     const isSnackbarOpen=auth.error !==undefined
     && auth.error.message
@@ -64,7 +64,7 @@ export class ResetPassword extends Component {
 
     return (
       <Activity
-        onBackClick={()=>{push('signin')}}
+        onBackClick={()=>{history.push('signin')}}
         title={intl.formatMessage({id: 'reset_password'})}>
         <div style={styles.container}>
           <Paper  zDepth={2} style={styles.paper}>
@@ -121,10 +121,9 @@ ResetPassword.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  const { auth, router } = state;
+  const { auth } = state;
   return {
     auth,
-    router,
     getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
   };
 };
@@ -133,5 +132,5 @@ export const ResetPasswordTest = injectIntl(muiThemeable()(ResetPassword));
 
 export default connect(
   mapStateToProps,
-  { signUpUser, authError, push, setDrawerOpen, resetPasswordEmail }
-)(injectIntl(muiThemeable()(ResetPassword)));
+  { signUpUser, authError, setDrawerOpen, resetPasswordEmail }
+)(injectIntl(muiThemeable()(withRouter(ResetPassword))));

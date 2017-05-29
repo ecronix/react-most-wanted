@@ -5,7 +5,7 @@ import firebase from 'firebase';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
-import { Activity } from '../../components/Activity';
+import { Activity } from '../../containers/Activity';
 import ListActions from '../../utils/firebase-list-actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -17,6 +17,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
 import { green800} from 'material-ui/styles/colors';
 import {BottomNavigation} from 'material-ui/BottomNavigation';
+import {withRouter} from 'react-router-dom';
 
 const styles={
   center_container:{
@@ -109,7 +110,7 @@ class Tasks extends Component {
   }
 
   rednerTasks(tasks) {
-    const {removeChild, muiTheme, setIsEditing, auth, intl} =this.props;
+    const {removeChild, muiTheme, setIsEditing, auth, intl, history} =this.props;
 
     return _.map(tasks.list, (task, key) => {
 
@@ -135,6 +136,11 @@ class Tasks extends Component {
             <IconButton
               onTouchTap={tasks.isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
               <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'save'}</FontIcon>
+            </IconButton>
+
+            <IconButton
+              onTouchTap={()=>{history.push(`/tasks/edit/${key}`)}}>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'open_in_new'}</FontIcon>
             </IconButton>
 
             <IconButton
@@ -179,6 +185,7 @@ render(){
 
   return (
     <Activity
+      isLoading={tasks.isFetching}
       title={intl.formatMessage({id: 'tasks'})}>
       <div >
         {tasks.isFetching && tasks.isConnected && !Object.keys(tasks.list).length &&
@@ -239,11 +246,6 @@ Tasks.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  //loadTasks: PropTypes.func.isRequired,
-  //createTask: PropTypes.func.isRequired,
-  //deleteTask: PropTypes.func.isRequired,
-  //setIsCreating: PropTypes.func.isRequired,
-
 };
 
 const publicTasksActions = new ListActions('public_tasks').createActions();
@@ -262,4 +264,4 @@ export default connect(
   {
     ...publicTasksActions
   }
-)(injectIntl(muiThemeable()(Tasks)));
+)(injectIntl(muiThemeable()(withRouter(Tasks))));
