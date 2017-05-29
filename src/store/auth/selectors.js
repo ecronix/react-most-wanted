@@ -14,8 +14,8 @@ export const getUser = (firebaseUser) => {
 
 
     return {
-      displayName,
-      email,
+      displayName:displayName!==undefined?displayName:'UserName',
+      email:email!==undefined?email:'--',
       emailVerified,
       photoURL,
       isAnonymous,

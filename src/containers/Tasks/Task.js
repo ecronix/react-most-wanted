@@ -6,6 +6,7 @@ import { GitHubIcon } from '../../components/Icons';
 import { Activity } from '../../containers/Activity'
 import { reduxForm, formValueSelector} from 'redux-form';
 import SimpleForm from './SimpleForm';
+import {withRouter} from 'react-router-dom';
 
 class Task extends Component {
 
@@ -14,10 +15,11 @@ class Task extends Component {
   }
 
   render() {
-    const { intl} = this.props;
+    const { intl, history} = this.props;
 
     return (
       <Activity
+        onBackClick={()=>{history.goBack()}}
         iconElementRight={
           <FlatButton
             href="https://github.com/TarikHuber/react-most-wanted"
@@ -60,4 +62,4 @@ Task = reduxForm({  form: 'task'})(Task);
 export default connect(
   mapStateToProps,
 
-)(injectIntl(Task));
+)(injectIntl(withRouter(Task)));

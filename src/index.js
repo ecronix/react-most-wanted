@@ -9,7 +9,10 @@ import registerServiceWorker from './registerServiceWorker';
 
 const store = configureStore();
 
-injectTapEventPlugin();
+
+//injectTapEventPlugin(); //Impementation without ignore of ghost clicks
+injectTapEventPlugin({ignoreMouseThreshold: 1200}); //Ignores ghost clicks on mobile devices
+
 addLocalizationData();
 
 ReactDOM.render(
