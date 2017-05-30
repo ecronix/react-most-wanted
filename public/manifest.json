@@ -1,5 +1,5 @@
 {
-  "short_name": "React MW",
+  "short_name": "RMW",
   "name": "React Most Wanted",
   "icons": [
     {
@@ -15,6 +15,6 @@
   ],
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#292929",
+  "background_color": "#222222",
   "gcm_sender_id": "103953800507"
 }

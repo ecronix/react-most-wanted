@@ -2,7 +2,7 @@ import { responsiveStateReducer } from 'redux-responsive';
 import { combineReducers } from 'redux';
 import { responsiveDrawer } from 'material-ui-responsive-drawer';
 import { reducer as formReducer } from 'redux-form'
-import getListReducers from '../utils/firebase-list-reducers';
+import getListReducers from '../firebase/list/reducers';
 import auth from './auth/reducer';
 import connection from './connection/reducer';
 import messaging from './messaging/reducer';

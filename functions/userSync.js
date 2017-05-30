@@ -38,27 +38,37 @@ module.exports = {
   userCreatedDefaults: (event, admin) => {
 
     const user = event.data; // The Firebase user.
-
-    const email = user.email?user.email:'  '; // The email of the user.
-    const displayName = user.displayName?user.displayName:'UserName'; // The display name of the user.
     const uid = user.uid; // The display name of the user.
 
+    if(!user.displayName){
 
-    let usersRef=admin.database().ref("/users");
-    let userRef=usersRef.child(uid);
+      const displayName = 'UserName'; //Default name
 
-    let newUser={
-      displayName: displayName,
-      email: email,
+      return admin.auth().updateUser(uid, {
+        displayName: displayName
+      }).then(()=>{
+
+        console.log('User updated');
+
+        let usersRef=admin.database().ref("/users");
+        let userRef=usersRef.child(uid);
+
+        let newUser={
+          displayName: displayName,
+        }
+
+        return userRef.update(newUser, function(error) {
+          if (error) {
+            console.log('Error:', error);
+          } else {
+            console.log('New user created');
+          }
+        });
+      });
     }
 
-    return userRef.update(newUser, function(error) {
-      if (error) {
-        console.log('Error:', error);
-      } else {
-        console.log('New user created');
-      }
-    });
+    return;
+
 
   },
   userDeleted: (event, admin) => {

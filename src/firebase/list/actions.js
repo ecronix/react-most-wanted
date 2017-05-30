@@ -1,5 +1,5 @@
-import FirebaseList from './firebase-list';
-import getTypes from './firebase-list-types';
+import FirebaseList from './index';
+import getTypes from './types';
 
 export default class ListActions {
   constructor(listName) {

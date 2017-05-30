@@ -1,6 +1,6 @@
 import * as types from './types';
 import * as selectors from './selectors';
-import FirebaseAuth from '../../utils/firebase-auth';
+import FirebaseAuth from '../../firebase/auth';
 
 const firebaseAuth= new FirebaseAuth({
   onAuthStateChanged: onAuthStateChanged,

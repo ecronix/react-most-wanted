@@ -1,4 +1,4 @@
-import getTypes from './firebase-list-types';
+import getTypes from './types';
 
 export const initialState={
   isFetching: false,

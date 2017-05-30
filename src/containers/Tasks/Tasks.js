@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import ListActions from '../../utils/firebase-list-actions';
+import ListActions from '../../firebase/list/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
@@ -106,7 +106,7 @@ class Tasks extends Component {
       backgroundColor={green800}
     />
     :
-    <Avatar src={task.userPhotoURL} icon={<FontIcon className="material-icons" >person</FontIcon>}/>
+    <Avatar src={task.userPhotoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>
   }
 
   rednerTasks(tasks) {

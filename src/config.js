@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 const config= {
   FIREBASE_CONFIG: {
     apiKey: "AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY",
@@ -7,8 +9,14 @@ const config= {
     storageBucket: "react-most-wanted-3b1b2.appspot.com",
     messagingSenderId: "258373383650"
   },
-  providers:['google','facebook', 'twitter', 'github']
+  FIREBASE_SIGNIN_OPTIONS: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  ]
 }
-
 
 export default config;

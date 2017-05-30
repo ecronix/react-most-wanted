@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import { persistStore, autoRehydrate} from 'redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
-import { isAuthorised } from '../utils/firebase-auth';
+import { isAuthorised } from '../firebase/auth';
 import { initialState } from '../store/auth/reducer';
 
 export default function configureStore() {

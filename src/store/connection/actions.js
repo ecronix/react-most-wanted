@@ -1,4 +1,4 @@
-import FirebaseConnection from '../../utils/firebase-connection';
+import FirebaseConnection from '../../firebase/connection';
 import * as types from './types';
 
 const firebaseConnection= new FirebaseConnection({

@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import {injectIntl} from 'react-intl';
 import { Activity } from '../../containers/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import firebase from 'firebase';
 import firebaseui from 'firebaseui';
-import {firebaseAuth} from '../../utils/firebase';
+import {firebaseAuth} from '../../firebase';
+import config from '../../config';
 import { initMessaging } from '../../store/messaging/actions';
 import {withRouter} from 'react-router-dom';
 
@@ -29,14 +29,7 @@ class SignIn extends Component {
           return false;
         }
       },
-      signInOptions: [
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.PhoneAuthProvider.PROVIDER_ID
-      ]
+      signInOptions: config.FIREBASE_SIGNIN_OPTIONS
     };
 
     authUi.start('#firebaseui-auth', uiConfig);

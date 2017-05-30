@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import ListActions from '../../utils/firebase-list-actions';
+import ListActions from '../../firebase/list/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -42,7 +42,7 @@ class Users extends Component {
         <ListItem
           key={key}
           id={key}
-          leftAvatar={<Avatar src={user.photoURL} icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
+          leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
           rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}
           primaryText={user.displayName}
           secondaryTextLines={1}

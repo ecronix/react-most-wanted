@@ -31,6 +31,7 @@ I tried to make the project as clean as possible and to use all libraries in the
   - [sw-precache](#sw-precache)
 - [TO DO](#to-do)
 - [License](#license)
+- [Logo](#logo)
 
 
 ## Features
@@ -70,6 +71,7 @@ react-most-wanted/
   src/
     components/
     containers/
+    firebase/
     utils/
     locales/
     store/
@@ -95,7 +97,7 @@ You can eather fork this project or clone it into your own repo. I use the secon
 
 After cloning the repo into your own you should change the configuration like project name and the firebase config. Here is a list of all changes you should make:
 * **package.json**  - here you should change the name and version
-* **src/config.js**  - here you should change all firebase data and the providers array for your needs
+* **src/config.js**  - here you should change all firebase data and the signin options
 * **public/index.html**  - change the title (it will be overriden but it looks bether)
 * **public/firebase-messaging-sw.js**  - change the ``messagingSenderId``
 
@@ -218,6 +220,10 @@ Is also a dev library that helps us to create a service worker during build proc
 ## License
 
 MIT
+
+## Logo
+
+Thanks to Sirad Salkanovic for creating the logo for this project :)
 
 [logo-image]: public/favicon-32x32.png
 [logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md

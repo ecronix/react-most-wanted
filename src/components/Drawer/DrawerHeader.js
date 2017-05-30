@@ -5,7 +5,7 @@ import FontIcon from 'material-ui/FontIcon';
 import ListItem from 'material-ui/List/ListItem';
 import List from 'material-ui/List/List';
 import Paper from 'material-ui/Paper';
-import {ReduxIcon} from '../Icons';
+import {RMWIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
@@ -51,6 +51,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
                   <Avatar
                     size={45}
                     src={auth.photoURL}
+                    alt="person"
                     icon={<FontIcon className="material-icons" >person</FontIcon>}
                   />
                 }
@@ -80,7 +81,7 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
             disabled={true}
             primaryText={intl.formatMessage({id: 'app_name'})}
             leftAvatar={
-              <ReduxIcon color={muiTheme.palette.accent1Color} style={styles.icon}/>
+              <RMWIcon color={muiTheme.palette.accent1Color} style={styles.icon}/>
             }
           />
         </List>

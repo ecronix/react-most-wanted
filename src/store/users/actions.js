@@ -1,4 +1,4 @@
-import FirebaseList from '../../utils/firebase-list';
+import FirebaseList from '../../firebase/list';
 import * as types from './types';
 
 const taskList= new FirebaseList({

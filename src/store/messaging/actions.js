@@ -1,4 +1,4 @@
-import FirebaseMessaging from '../../utils/firebase-messaging';
+import FirebaseMessaging from '../../firebase/messaging';
 import * as types from './types';
 
 const firebaseMessaging= new FirebaseMessaging({
