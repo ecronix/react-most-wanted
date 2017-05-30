@@ -29,7 +29,7 @@ class SignIn extends Component {
           return false;
         }
       },
-      signInOptions: config.FIREBASE_SIGNIN_OPTIONS
+      signInOptions: config.firebase_providers
     };
 
     authUi.start('#firebaseui-auth', uiConfig);

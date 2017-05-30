@@ -28,7 +28,6 @@ I tried to make the project as clean as possible and to use all libraries in the
   - [material-ui-responsive-drawer](#material-ui-responsive-drawer)
   - [material-ui-selectable-menu-list](#material-ui-selectable-menu-list)
   - [redux-logger](#redux-logger)
-  - [sw-precache](#sw-precache)
 - [TO DO](#to-do)
 - [License](#license)
 - [Logo](#logo)

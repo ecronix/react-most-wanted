@@ -17,7 +17,7 @@ export default function configureStore() {
   const initState={
     auth: {...initialState, isAuthorised: isAuthorised()},
     theme: 'dark',
-    locale: 'de'
+    locale: 'en'
   };
 
   let middlewares=[thunk];

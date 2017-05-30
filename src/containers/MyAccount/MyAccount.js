@@ -141,16 +141,42 @@ export class MyAccount extends Component {
 
     const color=muiTheme.palette.primary2Color;
 
-    return <IconButton
-      key={provider}
-      disabled={isLinkedWithProvider(auth, provider)}
-      onTouchTap={()=>{linkUserWithPopup(provider)}}
-      tooltip={intl.formatMessage({id: `link_with_${provider}`})}>
-      {provider==='google'&&<GoogleIcon color={color}/>}
-      {provider==='facebook'&&<FacebookIcon color={color}/>}
-      {provider==='twitter'&&<TwitterIcon color={color}/>}
-      {provider==='github'&&<GitHubIcon color={color}/>}
-    </IconButton>
+    switch (provider) {
+      case 'google.com':
+      return <IconButton
+        key={provider}
+        disabled={isLinkedWithProvider(auth, provider)}
+        onTouchTap={()=>{linkUserWithPopup(provider)}}
+        tooltip={intl.formatMessage({id: `link_with_google`})}>
+        <GoogleIcon color={color}/>
+      </IconButton>
+      case 'facebook.com':
+      return <IconButton
+        key={provider}
+        disabled={isLinkedWithProvider(auth, provider)}
+        onTouchTap={()=>{linkUserWithPopup(provider)}}
+        tooltip={intl.formatMessage({id: `link_with_facebook`})}>
+        <FacebookIcon color={color}/>
+      </IconButton>
+      case 'twitter.com':
+      return <IconButton
+        key={provider}
+        disabled={isLinkedWithProvider(auth, provider)}
+        onTouchTap={()=>{linkUserWithPopup(provider)}}
+        tooltip={intl.formatMessage({id: `link_with_twitter`})}>
+        <TwitterIcon color={color}/>
+      </IconButton>
+      case 'github.com':
+      return <IconButton
+        key={provider}
+        disabled={isLinkedWithProvider(auth, provider)}
+        onTouchTap={()=>{linkUserWithPopup(provider)}}
+        tooltip={intl.formatMessage({id: `link_with_github`})}>
+        <GitHubIcon color={color}/>
+      </IconButton>
+      default:
+      return undefined;
+    }
   }
 
   render(){
@@ -202,9 +228,9 @@ export class MyAccount extends Component {
                 </FlatButton>
               }
 
-              { !auth.isEditing &&
+              { !auth.isEditing && config.firebase_providers!==null && config.firebase_providers!==undefined &&
                 <div style={styles.buttons_container}>
-                  {config.providers.map((p)=>{
+                  {config.firebase_providers.map((p)=>{
                     return this.getProviderIcon(p);
                   })}
 

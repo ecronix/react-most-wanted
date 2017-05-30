@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 
 const config= {
-  FIREBASE_CONFIG: {
+  firebase_config: {
     apiKey: "AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY",
     authDomain: "react-most-wanted-3b1b2.firebaseapp.com",
     databaseURL: "https://react-most-wanted-3b1b2.firebaseio.com",
@@ -9,7 +9,7 @@ const config= {
     storageBucket: "react-most-wanted-3b1b2.appspot.com",
     messagingSenderId: "258373383650"
   },
-  FIREBASE_SIGNIN_OPTIONS: [
+  firebase_providers: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
     firebase.auth.TwitterAuthProvider.PROVIDER_ID,
