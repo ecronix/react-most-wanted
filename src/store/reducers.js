@@ -8,7 +8,7 @@ import connection from './connection/reducer';
 import messaging from './messaging/reducer';
 import locale from './locale/reducer';
 import theme from './theme/reducer';
-
+ 
 const reducers = combineReducers({
   browser: responsiveStateReducer,
   responsiveDrawer: responsiveDrawer,

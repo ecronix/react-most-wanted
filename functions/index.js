@@ -49,8 +49,8 @@ exports.recountUsers = functions.database.ref('/users_count').onWrite(
 exports.handleUserCreated = functions.auth.user().onCreate(
   (event)=> {
     return Promise.all([
-      userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME),
-      userSync.userCreatedDefaults(event, admin)
+      userSync.userCreatedDefaults(event, admin),
+      userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME)     
     ])
   }
 );

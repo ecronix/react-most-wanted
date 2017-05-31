@@ -78,7 +78,6 @@ react-most-wanted/
       reducers.js
     themes/
     config.js
-    index.css
     index.js
 ```
 
@@ -222,7 +221,7 @@ MIT
 
 ## Logo
 
-Thanks to Sirad Salkanovic for creating the logo for this project :)
+Thanks to @SiradDev for creating the logo for this project :)
 
 [logo-image]: public/favicon-32x32.png
 [logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md

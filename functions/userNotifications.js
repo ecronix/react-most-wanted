@@ -6,6 +6,10 @@ module.exports = {
     const email = user.email; // The email of the user.
     const displayName = user.displayName; // The display name of the user.
 
+    if(!email){
+      return;
+    }
+
     const mailOptions = {
       from: '"Tarik Huber" <huber.tarik@gmail.com>',
       to: email
@@ -22,6 +26,10 @@ module.exports = {
 
     const email = user.email;
     const displayName = user.displayName;
+
+    if(!email){
+      return;
+    }
 
     const mailOptions = {
       from: '"Tarik Huber" <huber.tarik@gmail.com>',

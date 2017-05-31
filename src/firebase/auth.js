@@ -34,6 +34,10 @@ const  getProvider = (provider) => {
     return new firebase.auth.TwitterAuthProvider();
   }
 
+  if(provider.indexOf('phone')>-1){
+    return new firebase.auth.PhoneAuthProvider();
+  }
+
   throw new Error('Provider is not supported!!!');
 
 };

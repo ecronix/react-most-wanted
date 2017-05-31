@@ -139,7 +139,7 @@ class Tasks extends Component {
             </IconButton>
 
             <IconButton
-              onTouchTap={()=>{history.push(`/tasks/edit/${key}`)}}>
+              onTouchTap={()=>{history.push(`/tasks/edit/${key}`); setIsEditing(false)}}>
               <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'open_in_new'}</FontIcon>
             </IconButton>
 
@@ -161,7 +161,7 @@ class Tasks extends Component {
       {!isEditing &&
         <ListItem
           key={key}
-          onTouchTap={()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}}
+          onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
           leftAvatar={this.userAvatar(task)}
           primaryText={task.title}
           secondaryText={`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}

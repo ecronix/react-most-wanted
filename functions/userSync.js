@@ -40,6 +40,9 @@ module.exports = {
     const user = event.data; // The Firebase user.
     const uid = user.uid; // The display name of the user.
 
+    console.log('New User created:', user);
+
+
     if(!user.displayName){
 
       const displayName = 'UserName'; //Default name
