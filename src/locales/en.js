@@ -54,11 +54,15 @@ const messages=defineMessages({
   send_verification_email: 'Send verification E-Mail',
   send_verification_email_again: 'Send verification E-Mail again',
   tasks: 'Tasks',
+  create_task: 'Create task',
+  edit_task: 'Edit task',
   users: 'Users',
   edit: 'Edit',
   online: 'Online',
   offline: 'Offline',
   no_connection_warning: 'No connection!',
+  title_label: 'Title',
+  title_hint: 'Enter title',
 
 });
 

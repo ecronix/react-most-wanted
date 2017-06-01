@@ -263,20 +263,22 @@ export class MyAccount extends Component {
               </div>
             }
 
-            { !auth.isEditing && <div>
+            { !auth.isEditing &&  <div>
               <h3>{auth.displayName}</h3>
               <span>
                 {auth.email}
-                <IconButton
-                  onTouchTap={auth.emailVerified===true?undefined:()=>{sendEmailVerification()}}
-                  tooltip={intl.formatMessage({id: auth.emailVerified===true?'email_verified':'email_not_verified'})}>
-                  <FontIcon
-                    color={auth.emailVerified===true?muiTheme.palette.primary1Color:muiTheme.palette.accent1Color}
-                    style={{'paddingLeft': 10}}
-                    className="material-icons">
-                    {auth.emailVerified===true?'verified_user':'error'}
-                  </FontIcon>
-                </IconButton>
+                { auth.email &&
+                  <IconButton
+                    onTouchTap={auth.emailVerified===true?undefined:()=>{sendEmailVerification()}}
+                    tooltip={intl.formatMessage({id: auth.emailVerified===true?'email_verified':'email_not_verified'})}>
+                    <FontIcon
+                      color={auth.emailVerified===true?muiTheme.palette.primary1Color:muiTheme.palette.accent1Color}
+                      style={{'paddingLeft': 10}}
+                      className="material-icons">
+                      {auth.emailVerified===true?'verified_user':'error'}
+                    </FontIcon>
+                  </IconButton>
+                }
               </span>
             </div>
           }

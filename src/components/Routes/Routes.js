@@ -30,6 +30,7 @@ const Routes = (props, context) => {
         <RestrictedRoute type='private' path="/dashboard" exact component={Dashboard} />
         <RestrictedRoute type='private' path="/tasks" exact component={Tasks} />
         <RestrictedRoute type='private' path="/tasks/edit/:taskUid" exact component={Task} />
+        <RestrictedRoute type='private' path="/tasks/create" exact component={Task} />
         <RestrictedRoute type='private' path="/users" exact component={Users} />
         <RestrictedRoute type='private' path="/about" exact component={About}  />
         <RestrictedRoute type='private' path="/my_account"  exact component={MyAccount} />

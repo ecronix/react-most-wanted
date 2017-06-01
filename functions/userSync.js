@@ -19,8 +19,15 @@ module.exports = {
 
       var updates = {};
       snapshot.forEach((childSnapshot) => {
-        updates[`/${childSnapshot.key}/userName`] = userName;
-        updates[`/${childSnapshot.key}/userPhotoURL`] = userPhotoURL;
+
+        //Update if user is edited and delete if user is deleted
+        if(event.data.exists()){
+          updates[`/${childSnapshot.key}/userName`] = userName;
+          updates[`/${childSnapshot.key}/userPhotoURL`] = userPhotoURL;
+        }else{
+          updates[`/${childSnapshot.key}`] = null;
+        }
+
       });
 
 
@@ -36,6 +43,7 @@ module.exports = {
 
   },
   userCreatedDefaults: (event, admin) => {
+
 
     const user = event.data; // The Firebase user.
     const uid = user.uid; // The display name of the user.
@@ -69,6 +77,7 @@ module.exports = {
         });
       });
     }
+
 
     return;
 

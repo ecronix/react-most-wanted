@@ -1,67 +1,92 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { injectIntl } from 'react-intl';
-import { Activity } from '../../containers/Activity'
 import { withRouter } from 'react-router-dom';
 import { firebaseDb } from '../../firebase';
-import FontIcon from 'material-ui/FontIcon';
-import IconButton from 'material-ui/IconButton';
 
 class FireForm extends Component {
 
-  handleSubmit =(values) => {
-    const { history , path} = this.props;
+  getCreateValues= (values) => {
+    const { handleCreateValues } = this.props;
 
-    firebaseDb.ref().child(`${path}`).update(values).then(()=>{
-      history.goBack()
-    })
+    if(handleCreateValues!==undefined && handleCreateValues instanceof Function){
+      return handleCreateValues(values);
+    }
+
+    return values;
+
+  }
+
+  getUpdateValues= (values) => {
+    const { handleUpdateValues } = this.props;
+
+    if(handleUpdateValues!==undefined && handleUpdateValues instanceof Function){
+      return handleUpdateValues(values);
+    }
+
+    return values;
+
+  }
+
+
+  handleSubmit =(values) => {
+    const { history , path, uid} = this.props;
+
+    console.log(values);
+
+    if(uid){
+      firebaseDb.ref().child(`${path}${uid}`).update(this.getUpdateValues(values)).then(()=>{
+        history.goBack()
+      })
+    }else{
+      firebaseDb.ref().child(`${path}`).push(this.getCreateValues(values)).then(()=>{
+        history.goBack()
+      })
+    }
+
   }
 
   handleDelete = () => {
-    const { history, path} = this.props;
+    const { history, path, uid} = this.props;
 
-    firebaseDb.ref().child(`${path}`).remove().then(()=>{
-      history.goBack()
-    })
+    if(uid){
+      firebaseDb.ref().child(`${path}${uid}`).remove().then(()=>{
+        history.goBack()
+      })
+    }
+
   }
 
   componentDidMount(){
-    const {  path} = this.props;
+    const { path, uid, initialValues} = this.props;
 
-    firebaseDb.ref(`${path}`).once('value').then(
-      snapshot => {
-        this.setState(snapshot.val())
-      }
-    )
+    if(uid){
+      this.setState({initialized:false})
+      firebaseDb.ref(`${path}${uid}`).once('value').then(
+        snapshot => {
+          this.setState({initialValues:snapshot.val(), initialized: true})
+        }
+      )
+    }else{
+      this.setState({initialValues:initialValues?initialValues:{}, initialized:true})
+    }
+
   }
 
   render() {
-    const { intl, history} = this.props;
-
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
         onSubmit: this.handleSubmit,
-        initialValues: this.state
+        ...this.state,
+        ...this.props
       })
     );
 
     return (
-      <Activity
-        onBackClick={()=>{history.goBack()}}
-        iconElementRight={
-          <IconButton onTouchTap={this.handleDelete}>
-            <FontIcon className="material-icons" >delete</FontIcon>
-          </IconButton>
-        }
-        title={intl.formatMessage({id: 'tasks'})}>
-        <div style={{margin: 15}}>
-          {childrenWithProps}
-        </div>
-      </Activity>
+      <div>
+        {childrenWithProps}
+      </div>
     );
   }
 }
 
-export default connect(
-
-)(injectIntl(withRouter(FireForm)));
+export default connect()(withRouter(FireForm));

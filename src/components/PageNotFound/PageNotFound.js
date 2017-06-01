@@ -1,10 +1,10 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import {ReduxIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
+import {RMWIcon} from '../Icons';
 
 const styles={
   paper:{
@@ -31,7 +31,7 @@ const PageNotFound = ({muiTheme, intl }) => {
   return (
     <Paper  zDepth={1} style={styles.paper}>
       <div style={styles.container}>
-        <ReduxIcon color={muiTheme.palette.primary2Color} style={styles.icon}/>
+        <RMWIcon color={muiTheme.palette.primary2Color} style={styles.icon}/>
         <h3>{intl.formatMessage({id: 'warning_404_message'})}</h3>
         <p>{intl.formatMessage({id: 'warning_404_description'})}</p>
         <FloatingActionButton secondary={true} href='/'>

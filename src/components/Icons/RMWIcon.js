@@ -3,7 +3,7 @@ import SvgIcon from 'material-ui/SvgIcon';
 
 const RMWIcon = (props) => {
   return (
-    <SvgIcon width={48} height={48} viewBox="0 0 600 600" {...props}>
+    <SvgIcon width={22} height={22} viewBox="0 0 600 600" {...props}>
 
 <path d="M195.607,226.063l39.777,10.658l-26.518,0.019c37.883,33.406,66.295,0,66.295,0
 	C244.855,211.427,195.607,226.063,195.607,226.063z"/>

@@ -54,11 +54,15 @@ const messages=defineMessages({
   send_verification_email: 'Verifizierungs E-Mail senden',
   send_verification_email_again: 'Verifizierungs E-Mail wieder senden',
   tasks: 'Aufgaben',
+  create_task: 'Aufgabe erstellen',
+  edit_task: 'Aufgabe bearbeiten',
   users: 'Benutzer',
   edit: 'Bearbeiten',
   online: 'Online',
   offline: 'Offline',
   no_connection_warning: 'Keine Verbindung!',
+  title_label: 'Titel',
+  title_hint: 'Titel eingeben',
 
 });
 

@@ -54,12 +54,15 @@ const messages=defineMessages({
   send_verification_email: 'Posalji E-Mail za verifikaciju',
   send_verification_email_again: 'Posalji ponove E-Mail za verifikaciju',
   tasks: 'Zadaci',
+  create_task: 'Dodaj zadatak',
+  edit_task: 'Uredi zadatak',
   users: 'Korisnici',
   edit: 'Izmjeniti',
   online: 'Online',
   offline: 'Offline',
   no_connection_warning: 'Nema konekcije!',
-
+  title_label: 'Naslov',
+  title_hint: 'Unesi naslov',
 });
 
 export default messages;

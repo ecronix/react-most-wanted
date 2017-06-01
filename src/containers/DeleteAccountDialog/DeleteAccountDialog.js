@@ -16,7 +16,7 @@ export const DeleteAccountDialog = (props) => {
 
   const {
     auth,
-    intl, 
+    intl,
     setDeleteDialogOpen,
     deleteUser,
     reauthenticateUser
@@ -28,8 +28,9 @@ export const DeleteAccountDialog = (props) => {
 
   const hanldeSubmit = () => {
 
-    handleClose();
-    reauthenticateUser(auth, ()=>{deleteUser()})
+    handleClose();        
+    reauthenticateUser(auth, ()=>{deleteUser()});
+
   }
 
 

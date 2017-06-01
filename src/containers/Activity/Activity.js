@@ -28,15 +28,27 @@ export class Activity extends Component {
 
   render(){
 
-    const {muiTheme, title, children, onBackClick, history, intl, isConnected, isLoading, dispatch,    ...rest} = this.props;
+    const {
+      muiTheme,
+      title,
+      children,
+      onBackClick,
+      history,
+      intl,
+      isConnected,
+      isLoading,
+      dispatch,
+      containerStyle,
+      ...rest
+    } = this.props;
 
-    const styles={
-      container:{
-        backgroundColor: muiTheme.palette.canvasColor,
-        marginTop: 66,
-        height: '100%'
-      },
-    }
+    const bodyContainerStyle={
+      backgroundColor: muiTheme.palette.canvasColor,
+      top:64,
+      bottom: 0,
+      overflow: 'auto',
+      ...containerStyle
+    };
 
     return (
       <div style={{backgroundColor: muiTheme.palette.canvasColor, height: '100%'}}>
@@ -66,10 +78,8 @@ export class Activity extends Component {
           <LinearProgress mode="indeterminate" color="green" style={{zIndex:9998, position: 'fixed', top: 0}}/>
         }
 
-        <BodyContainer style={{backgroundColor: muiTheme.palette.canvasColor, bottom: undefined}} >
-          <div style={styles.container}>
-            {children}
-          </div>
+        <BodyContainer id="bodyContainer" ref="bodyContainer" withRef style={bodyContainerStyle} >
+          {children}
         </BodyContainer>
       </div>
     );

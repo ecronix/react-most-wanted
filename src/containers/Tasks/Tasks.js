@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import ReactDOM  from 'react-dom';
 import firebase from 'firebase';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
@@ -48,13 +49,28 @@ class Tasks extends Component {
   constructor(props) {
     super(props);
     this.name = null;
+    this.listEnd=null
     this.new_task_title = null;
+  }
+
+  scrollToBottom = () => {
+    const node = ReactDOM.findDOMNode(this.listEnd);
+    node.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+
+    if(Object.keys(prevProps.tasks.list).length!==Object.keys(this.props.tasks.list).length && !this.props.tasks.isEditing){
+      this.scrollToBottom();
+    }
+
   }
 
   componentDidMount() {
     const {initialiseList}=this.props;
 
     initialiseList();
+    this.scrollToBottom();
   }
 
   handleKeyDown = (event, onSucces) => {
@@ -69,10 +85,6 @@ class Tasks extends Component {
     unsubscribeList();
   }
 
-  componentDidUpdate() {
-    // TODO: just a fast solution. Repair it ASAP
-    window.scrollTo(0, 100000)
-  }
 
   handleAddTask = () => {
     const {pushChild, auth}=this.props;
@@ -99,18 +111,35 @@ class Tasks extends Component {
     updateChild(key, task);
   }
 
-  userAvatar(task){
+  handleCompletedChange = () => {
+
+  }
+
+  userAvatar = (key, task) => {
+    const {auth} =this.props;
+
     return task.completed?
     <Avatar
+      onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
+      alt="person"
       icon={<FontIcon className="material-icons" >done</FontIcon>}
       backgroundColor={green800}
     />
     :
-    <Avatar src={task.userPhotoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>
+    <Avatar
+      src={task.userPhotoURL}
+      onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
+      alt="person"
+      icon={
+        <FontIcon className="material-icons">
+          person
+        </FontIcon>
+      }
+    />
   }
 
   rednerTasks(tasks) {
-    const {removeChild, muiTheme, setIsEditing, auth, intl, history} =this.props;
+    const {removeChild, muiTheme, setIsEditing, auth, intl, history, browser} =this.props;
 
     return _.map(tasks.list, (task, key) => {
 
@@ -119,7 +148,7 @@ class Tasks extends Component {
       return <div key={key}>
 
         {isEditing && <ListItem
-          leftAvatar={this.userAvatar(task)}
+          leftAvatar={this.userAvatar(key, task)}
           key={key} >
           <TextField
             id="new_task_title"
@@ -161,18 +190,59 @@ class Tasks extends Component {
       {!isEditing &&
         <ListItem
           key={key}
-          onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
-          leftAvatar={this.userAvatar(task)}
-          primaryText={task.title}
-          secondaryText={`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}
-          id={key}
-          rightIconButton={task.userId===auth.uid?
-            <IconButton
-              onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
-              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
-            </IconButton>:undefined
-          }
-        />
+          //onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
+          leftAvatar={this.userAvatar(key, task)}
+          id={key}>
+
+          <div style={{display: 'flex'}}>
+            <div>
+              <div>
+                {task.title}
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: '16px',
+                  height: 16,
+                  margin: 0,
+                  marginTop: 4,
+                  color: muiTheme.listItem.secondaryTextColor,
+                }}>
+                {`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}
+              </div>
+              {task.description && <br/>}
+              {task.description && task.description.split('\n').map(function(item, key) {
+                return (
+                  <span key={key}>
+                    {item}
+                    <br/>
+                  </span>
+                )
+              })}
+            </div>
+
+            <div style={{alignSelf: 'center'}}>
+              {task.userId===auth.uid?
+                <div>
+                  <IconButton
+                    onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
+                    <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
+                  </IconButton>
+                  <IconButton
+                    style={{display:browser.lessThan.medium?'none':undefined}}
+                    onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{history.push(`/tasks/edit/${key}`)}}>
+                    <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>open_in_new</FontIcon>
+                  </IconButton>
+                  <IconButton
+                    style={{display:browser.lessThan.medium?'none':undefined}}
+                    onTouchTap={()=>{removeChild(key);}}>
+                    <FontIcon className="material-icons" color={'red'}>{'delete'}</FontIcon>
+                  </IconButton>
+                </div>:undefined
+              }
+            </div>
+          </div>
+        </ListItem>
       }
       <Divider inset={true}/>
     </div>
@@ -181,13 +251,15 @@ class Tasks extends Component {
 
 
 render(){
-  const {intl, tasks, setIsCreating, muiTheme} =this.props;
+  const {intl, tasks, setIsCreating, muiTheme, history} =this.props;
 
   return (
     <Activity
       isLoading={tasks.isFetching}
+      containerStyle={{overflow:'hidden'}}
       title={intl.formatMessage({id: 'tasks'})}>
-      <div >
+
+      <div id="scroller" style={{overflow: 'auto', height: '100%'}}>
         {tasks.isFetching && tasks.isConnected && !Object.keys(tasks.list).length &&
           <div style={styles.center_container}>
             <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
@@ -198,6 +270,9 @@ render(){
           <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
             {this.rednerTasks(tasks)}
           </List>
+          <div style={{ float:"left", clear: "both" }}
+            ref={(el) => { this.listEnd = el; }}
+          />
         </div>
 
 
@@ -225,18 +300,22 @@ render(){
 
         { !tasks.isCreating &&
           <div style={styles.button}>
-            <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
-              <FontIcon className="material-icons" >add</FontIcon>
-            </FloatingActionButton>
-          </div>
-        }
+            <FloatingActionButton onTouchTap={()=>{history.push(`/tasks/create`)}} style={{zIndex:3}}>
+            <FontIcon className="material-icons" >add_to_photos</FontIcon>
+          </FloatingActionButton>
+          <div style={{margin:5}}></div>
+          <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+            <FontIcon className="material-icons" >add</FontIcon>
+          </FloatingActionButton>
+        </div>
+      }
 
 
-      </div>
+    </div>
 
 
-    </Activity>
-  );
+  </Activity>
+);
 
 }
 
@@ -251,10 +330,11 @@ Tasks.propTypes = {
 const publicTasksActions = new ListActions('public_tasks').createActions();
 
 const mapStateToProps = (state) => {
-  const { tasks, auth } = state;
+  const { tasks, auth, browser } = state;
   return {
     tasks,
-    auth
+    auth,
+    browser
   };
 };
 
