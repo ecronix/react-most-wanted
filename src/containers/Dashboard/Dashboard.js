@@ -2,9 +2,14 @@ import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import { injectIntl, intlShape } from 'react-intl';
 import { GitHubIcon } from '../../components/Icons';
-import { Activity } from '../../containers/Activity'
+import { Activity } from '../../containers/Activity';
+import {MarkdownElement} from '../../components/MarkdownElement';
+
+import readMe from './dashboard.md.js';
 
 const Dashboard = ({intl}) => {
+
+  console.log(readMe);
 
   return (
     <Activity
@@ -18,6 +23,10 @@ const Dashboard = ({intl}) => {
         />
       }
       title={intl.formatMessage({id: 'dashboard'})}>
+
+      <div style={{backgroundColor: 'white', marginTop: -20}}>
+        <MarkdownElement  text={readMe}  style={{padding: 15}}/>
+      </div>
 
     </Activity>
   );
