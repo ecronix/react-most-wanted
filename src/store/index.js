@@ -6,6 +6,7 @@ import { persistStore, autoRehydrate} from 'redux-persist';
 import { responsiveStoreEnhancer } from 'redux-responsive';
 import { isAuthorised } from '../firebase/auth';
 import { initialState } from '../store/auth/reducer';
+import config from '../config';
 
 export default function configureStore() {
   let store;
@@ -16,8 +17,7 @@ export default function configureStore() {
 
   const initState={
     auth: {...initialState, isAuthorised: isAuthorised()},
-    theme: 'dark',
-    locale: 'en'
+    ...config.initial_state
   };
 
   let middlewares=[thunk];

@@ -16,7 +16,11 @@ const config= {
     firebase.auth.GithubAuthProvider.PROVIDER_ID,
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
     firebase.auth.PhoneAuthProvider.PROVIDER_ID
-  ]
+  ],
+  initial_state: {
+    theme: 'dark',
+    intl: 'en'
+  }
 }
 
 export default config;

@@ -9,8 +9,6 @@ import readMe from './dashboard.md.js';
 
 const Dashboard = ({intl}) => {
 
-  console.log(readMe);
-
   return (
     <Activity
       iconElementRight={
