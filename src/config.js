@@ -19,7 +19,7 @@ const config= {
   ],
   initial_state: {
     theme: 'dark',
-    intl: 'en'
+    locale: 'en'
   }
 }
 
