@@ -55,6 +55,7 @@ class Task extends Component {
 
 const usersActions = new ListActions('users').createActions();
 
+
 const mapStateToProps = (state) => {
   const { auth, intl } = state;
 

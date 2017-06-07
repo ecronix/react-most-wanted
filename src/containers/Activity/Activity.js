@@ -8,6 +8,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
 import { DrawerHeader } from '../../containers/Drawer';
 import { DrawerContent } from '../../containers/Drawer';
+import { isConnected } from '../../store/connection/selector';
 import LinearProgress from 'material-ui/LinearProgress';
 
 export class Activity extends Component {
@@ -89,8 +90,9 @@ export class Activity extends Component {
 
 const mapStateToProps = (state) => {
   const { connection } = state;
+
   return {
-    isConnected: connection?connection.isConnected:false,
+    isConnected: isConnected(connection),
   };
 };
 

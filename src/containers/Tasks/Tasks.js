@@ -251,7 +251,7 @@ class Tasks extends Component {
 
 
 render(){
-  const {intl, tasks, setIsCreating, muiTheme, history} =this.props;
+  const {intl, tasks,  setIsCreating, muiTheme, history} =this.props;
 
   return (
     <Activity
@@ -331,12 +331,15 @@ const publicTasksActions = new ListActions('public_tasks').createActions();
 
 const mapStateToProps = (state) => {
   const { tasks, auth, browser } = state;
+
   return {
     tasks,
     auth,
-    browser
+    browser,
   };
 };
+
+
 
 
 export default connect(

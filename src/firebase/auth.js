@@ -371,7 +371,7 @@ class FirebaseAuth {
 
   }
 
-  subscribe(emit, getState) {
+  subscribe(emit, getState, onSuccess=undefined) {
 
     this._emit=emit;
     this._getState=getState;
@@ -384,6 +384,11 @@ class FirebaseAuth {
       }else{
         emit(this._actions.onLogoutUser());
       }
+
+      if(onSuccess && onSuccess instanceof Function){
+        onSuccess();
+      }
+
     }, (error) => {
       emit(this._actions.onAuthError(error));
     });

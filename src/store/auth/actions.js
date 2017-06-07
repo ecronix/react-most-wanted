@@ -10,9 +10,9 @@ const firebaseAuth= new FirebaseAuth({
 }, selectors.getUser);
 
 
-export function initAuth() {
+export function initAuth(onSuccess) {
   return (dispatch, getState) => {
-    firebaseAuth.subscribe(dispatch, getState);
+    firebaseAuth.subscribe(dispatch, getState, onSuccess);
   };
 }
 
