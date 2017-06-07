@@ -63,6 +63,7 @@ const messages=defineMessages({
   no_connection_warning: 'Nema konekcije!',
   title_label: 'Naslov',
   title_hint: 'Unesi naslov',
+  no_connection: 'Nema konekcije',
 });
 
 export default messages;

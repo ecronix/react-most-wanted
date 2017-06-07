@@ -10,6 +10,11 @@ import { DrawerHeader } from '../../containers/Drawer';
 import { DrawerContent } from '../../containers/Drawer';
 import { isConnected } from '../../store/connection/selector';
 import LinearProgress from 'material-ui/LinearProgress';
+import {injectIntl} from 'react-intl';
+import {
+  deepOrange500,
+  darkWhite,
+} from 'material-ui/styles/colors';
 
 export class Activity extends Component {
 
@@ -72,7 +77,26 @@ export class Activity extends Component {
           {...rest}
         />
         {!isConnected &&
-          <LinearProgress mode="determinate" value={100} color="red" style={{zIndex:9999, position: 'fixed', top: 0}} />
+          <div
+            id="offline-inicator"
+            style={{
+              zIndex:9999,
+              position: 'fixed',
+              top: 0,
+              height: 12,
+              backgroundColor: deepOrange500,
+              color: darkWhite,
+              width: '100%',
+              fontSize: 12,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+
+            }} >
+            <span>
+              {intl.formatMessage({id:'no_connection'})}
+            </span>
+          </div>
         }
 
         {isLoading &&
@@ -89,13 +113,14 @@ export class Activity extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { connection } = state;
+  const { connection, intl } = state;
 
   return {
     isConnected: isConnected(connection),
+    intl
   };
 };
 
 export default connect(
   mapStateToProps,
-)(muiThemeable()(Activity));
+)(injectIntl(muiThemeable()(Activity)));

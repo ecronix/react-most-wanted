@@ -63,6 +63,7 @@ const messages=defineMessages({
   no_connection_warning: 'Keine Verbindung!',
   title_label: 'Titel',
   title_hint: 'Titel eingeben',
+  no_connection: 'Keine Verbindung',
 
 });
 

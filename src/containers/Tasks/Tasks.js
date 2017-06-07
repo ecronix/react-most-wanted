@@ -300,11 +300,11 @@ render(){
 
         { !tasks.isCreating &&
           <div style={styles.button}>
-            <FloatingActionButton onTouchTap={()=>{history.push(`/tasks/create`)}} style={{zIndex:3}}>
+            <FloatingActionButton secondary={true} onTouchTap={()=>{history.push(`/tasks/create`)}} style={{zIndex:3}}>
             <FontIcon className="material-icons" >add_to_photos</FontIcon>
           </FloatingActionButton>
           <div style={{margin:5}}></div>
-          <FloatingActionButton onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
+          <FloatingActionButton secondary={true} onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
             <FontIcon className="material-icons" >add</FontIcon>
           </FloatingActionButton>
         </div>
