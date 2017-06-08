@@ -64,6 +64,8 @@ const messages=defineMessages({
   title_label: 'Title',
   title_hint: 'Enter title',
   no_connection: 'No connection',
+  delete_task_title: 'Delete task?',
+  delete_task_message: 'The task will be deleted!',
 
 });
 

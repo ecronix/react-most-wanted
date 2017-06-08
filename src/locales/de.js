@@ -64,7 +64,8 @@ const messages=defineMessages({
   title_label: 'Titel',
   title_hint: 'Titel eingeben',
   no_connection: 'Keine Verbindung',
-
+  delete_task_title: 'Aufgabe löschen?',
+  delete_task_message: 'Aufgabe wird gelöscht!',
 });
 
 export default messages;

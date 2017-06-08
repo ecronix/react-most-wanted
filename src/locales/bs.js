@@ -64,6 +64,8 @@ const messages=defineMessages({
   title_label: 'Naslov',
   title_hint: 'Unesi naslov',
   no_connection: 'Nema konekcije',
+  delete_task_title: 'Izbrisati zadatak?',
+  delete_task_message: 'Zadatak ce bit izbrisan!',
 });
 
 export default messages;

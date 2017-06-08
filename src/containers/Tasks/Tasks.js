@@ -8,6 +8,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
 import ListActions from '../../firebase/list/actions';
+import { setDialogIsOpen } from '../../store/dialogs/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
@@ -19,6 +20,8 @@ import Avatar from 'material-ui/Avatar';
 import { green800} from 'material-ui/styles/colors';
 import {BottomNavigation} from 'material-ui/BottomNavigation';
 import {withRouter} from 'react-router-dom';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 
 const styles={
   center_container:{
@@ -139,7 +142,7 @@ class Tasks extends Component {
   }
 
   rednerTasks(tasks) {
-    const {removeChild, muiTheme, setIsEditing, auth, intl, history, browser} =this.props;
+    const {muiTheme, setIsEditing, auth, intl, history, browser, setDialogIsOpen} =this.props;
 
     return _.map(tasks.list, (task, key) => {
 
@@ -173,7 +176,7 @@ class Tasks extends Component {
             </IconButton>
 
             <IconButton
-              onTouchTap={()=>{removeChild(key);}}>
+              onTouchTap={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
               <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'delete'}</FontIcon>
             </IconButton>
 
@@ -235,7 +238,7 @@ class Tasks extends Component {
                   </IconButton>
                   <IconButton
                     style={{display:browser.lessThan.medium?'none':undefined}}
-                    onTouchTap={()=>{removeChild(key);}}>
+                    onTouchTap={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
                     <FontIcon className="material-icons" color={'red'}>{'delete'}</FontIcon>
                   </IconButton>
                 </div>:undefined
@@ -249,9 +252,39 @@ class Tasks extends Component {
   });
 }
 
+handleClose = () => {
+  const { setDialogIsOpen }=this.props;
+
+  setDialogIsOpen('delete_task_from_list', undefined);
+
+}
+
+handleDelete = (key) => {
+
+  const {removeChild, dialogs} =this.props;
+
+  removeChild(dialogs.delete_task_from_list)
+  this.handleClose();
+
+}
+
 
 render(){
-  const {intl, tasks,  setIsCreating, muiTheme, history} =this.props;
+  const {intl, tasks,  setIsCreating, muiTheme, history, dialogs} =this.props;
+
+
+  const actions = [
+    <FlatButton
+      label={intl.formatMessage({id: 'cancel'})}
+      primary={true}
+      onTouchTap={this.handleClose}
+    />,
+    <FlatButton
+      label={intl.formatMessage({id: 'delete'})}
+      secondary={true}
+      onTouchTap={this.handleDelete}
+    />,
+  ];
 
   return (
     <Activity
@@ -274,6 +307,15 @@ render(){
             ref={(el) => { this.listEnd = el; }}
           />
         </div>
+
+        <Dialog
+          title={intl.formatMessage({id: 'delete_task_title'})}
+          actions={actions}
+          modal={false}
+          open={dialogs.delete_task_from_list!==undefined}
+          onRequestClose={this.handleClose}>
+          {intl.formatMessage({id: 'delete_task_message'})}
+        </Dialog>
 
 
         { tasks.isCreating &&
@@ -330,12 +372,13 @@ Tasks.propTypes = {
 const publicTasksActions = new ListActions('public_tasks').createActions();
 
 const mapStateToProps = (state) => {
-  const { tasks, auth, browser } = state;
+  const { tasks, auth, browser, dialogs } = state;
 
   return {
     tasks,
     auth,
     browser,
+    dialogs
   };
 };
 
@@ -344,7 +387,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  {
-    ...publicTasksActions
-  }
+  { ...publicTasksActions, setDialogIsOpen }
 )(injectIntl(muiThemeable()(withRouter(Tasks))));
