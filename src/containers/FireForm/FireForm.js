@@ -31,8 +31,6 @@ class FireForm extends Component {
   handleSubmit =(values) => {
     const { history , path, uid} = this.props;
 
-    console.log(values);
-
     if(uid){
       firebaseDb.ref().child(`${path}${uid}`).update(this.getUpdateValues(values)).then(()=>{
         history.goBack()
