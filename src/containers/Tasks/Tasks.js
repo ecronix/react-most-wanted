@@ -90,7 +90,7 @@ class Tasks extends Component {
 
 
   handleAddTask = () => {
-    const {pushChild, auth}=this.props;
+    const {pushChild, auth, setIsCreating}=this.props;
 
     const title=this.name.getValue();
 
@@ -106,12 +106,14 @@ class Tasks extends Component {
     if(title.length>0){
       pushChild(newTask);
     }
+    setIsCreating(false);
 
   }
 
   handleUpdateTask = (key, task) => {
-    const { updateChild }=this.props;
+    const { updateChild, setIsEditing }=this.props;
     updateChild(key, task);
+    setIsEditing(false);
   }
 
   handleCompletedChange = () => {
