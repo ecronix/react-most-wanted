@@ -15,6 +15,7 @@ import { PasswordDialog } from '../../containers/PasswordDialog';
 import { ImageCropDialog } from '../../containers/ImageCropDialog';
 import { ChangePasswordDialog } from '../../containers/ChangePasswordDialog';
 import { DeleteAccountDialog } from '../../containers/DeleteAccountDialog';
+import { setDialogIsOpen } from '../../store/dialogs/actions';
 import Snackbar from 'material-ui/Snackbar';
 import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
 import IconButton from 'material-ui/IconButton';
@@ -74,31 +75,12 @@ export class MyAccount extends Component {
     super(props);
     this.email = null;
     this.name = null;
-    this.photoURL = null;
     this.password = null;
     this.confirm_password = null;
     this.tempPath = null;
     this.cropper = null;
 
   }
-
-  hanldePhotoULRChange = (e) => {
-    const {setNewPhotoURL}=this.props;
-
-    e.preventDefault();
-    let files;
-    if (e.dataTransfer) {
-      files = e.dataTransfer.files;
-    } else if (e.target) {
-      files = e.target.files;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      setNewPhotoURL(reader.result);
-    };
-    reader.readAsDataURL(files[0]);
-  }
-
 
 
   hanleUpdateSubmit = () => {
@@ -180,7 +162,18 @@ export class MyAccount extends Component {
   }
 
   render(){
-    const {intl, getValidationErrorMessage, auth, authError, muiTheme, sendEmailVerification, setIsEditing } =this.props;
+    const {
+      intl,
+      getValidationErrorMessage,
+      auth,
+      authError,
+      muiTheme,
+      sendEmailVerification,
+      setIsEditing,
+      updateUserPhoto,
+      dialogs,
+      setDialogIsOpen
+    } =this.props;
 
     const isSnackbarOpen=auth.error !==undefined
     && auth.error.message
@@ -207,25 +200,20 @@ export class MyAccount extends Component {
 
               { auth.isEditing &&
                 <FlatButton
+                  onTouchTap={()=>{
+                    setDialogIsOpen('new_user_photo_url', true)
+                  }}
                   containerElement='label'
                   primary={true}
                   style={styles.button}
-                  //fullWidth={true}
                   icon={
                     <FontIcon
                       className="material-icons">
                       photo_camera
                     </FontIcon>
-                  }>
+                  }
+                />
 
-                  <input
-                    ref={(field) => { this.photoURL = field; }}
-                    type="file"
-                    accept="image/*"
-                    style={{display:'none'}}
-                    onChange={this.hanldePhotoULRChange}
-                  />
-                </FlatButton>
               }
 
               { !auth.isEditing && config.firebase_providers!==null && config.firebase_providers!==undefined &&
@@ -340,7 +328,15 @@ export class MyAccount extends Component {
     <PasswordDialog />
     <DeleteAccountDialog />
     <ImageCropDialog
-      open={auth.newPhotoURL!==null}
+      onSubmit={img=>{
+        updateUserPhoto(img, auth.uid);
+        setDialogIsOpen('new_user_photo_url', undefined);
+      }}
+      open={dialogs.new_user_photo_url!==undefined}
+      src={dialogs.new_user_photo_url}
+      handleClose={()=>{
+        setDialogIsOpen('new_user_photo_url', undefined);
+      }}
       title={intl.formatMessage({id: 'change_photo'})}
     />
 
@@ -384,9 +380,10 @@ MyAccount.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  const { auth } = state;
+  const { auth, dialogs } = state;
   return {
     auth,
+    dialogs,
     getValidationErrorMessage: (fieldID)=>getValidationErrorMessage(auth, fieldID)
   };
 };
@@ -394,8 +391,5 @@ const mapStateToProps = (state) => {
 export const MyAccountTest = injectIntl(muiThemeable()(MyAccount));
 
 export default connect(
-  mapStateToProps,
-  {
-    ...authActions
-  }
+  mapStateToProps, {...authActions, setDialogIsOpen  }
 )(injectIntl(muiThemeable()(MyAccount)));
