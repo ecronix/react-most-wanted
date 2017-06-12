@@ -38,6 +38,9 @@ export default class ListActions {
   }
 
   listError = (error) => {
+
+    console.log(error);
+
     return {
       type: this._types.ERROR,
       payload: {error}

@@ -29,7 +29,7 @@ export default function getListReducers(listName){
       return {...state, ...payload};
 
       case types.ERROR:
-      return {...state, isFetching: false};
+      return {...state, isFetching: false, ...payload};
 
       case types.LOAD_SUCCESS:
       return  {...state, isFetching: false, ...payload};

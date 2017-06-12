@@ -66,6 +66,7 @@ const messages=defineMessages({
   no_connection: 'Nema konekcije',
   delete_task_title: 'Izbrisati zadatak?',
   delete_task_message: 'Zadatak ce bit izbrisan!',
+  error: 'Error!',
 });
 
 export default messages;

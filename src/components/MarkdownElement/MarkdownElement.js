@@ -31,10 +31,7 @@ export default class MarkdownElement extends Component {
       pedantic: false,
       sanitize: false,
       smartLists: true,
-      smartypants: false,
-      highlight: function(code, lang) {
-        return require('highlight.js').highlight(lang, code).value;
-      },
+      smartypants: false
     });
   }
 

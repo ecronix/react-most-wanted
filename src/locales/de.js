@@ -66,6 +66,7 @@ const messages=defineMessages({
   no_connection: 'Keine Verbindung',
   delete_task_title: 'Aufgabe löschen?',
   delete_task_message: 'Aufgabe wird gelöscht!',
+  error: 'Fehler!',
 });
 
 export default messages;

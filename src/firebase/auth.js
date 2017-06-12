@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import cuid  from 'cuid';
 import { firebaseAuth, firebaseDb, firebaseApp } from './index';
 
 
@@ -305,7 +304,7 @@ class FirebaseAuth {
       this._emit(this._actions.onFetchChanged(true));
       let storageRef=firebaseApp.storage().ref(`users/${firebaseAuth.currentUser.uid}`);
 
-      storageRef.child(`${cuid()}`).putString(dataURL, 'data_url')
+      storageRef.child(`photoURL`).putString(dataURL, 'data_url')
       .then((snapshot)=>{
         this.updateProfile({photoURL: snapshot.downloadURL});
       })

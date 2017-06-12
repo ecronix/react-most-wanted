@@ -319,7 +319,6 @@ render(){
           {intl.formatMessage({id: 'delete_task_message'})}
         </Dialog>
 
-
         { tasks.isCreating &&
           <BottomNavigation style={{width: '100%'}}>
             <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
