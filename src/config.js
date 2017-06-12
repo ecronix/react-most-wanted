@@ -20,7 +20,8 @@ const config= {
   initial_state: {
     theme: 'dark',
     locale: 'en'
-  }
+  },
+  drawer_width: 256
 }
 
 export default config;

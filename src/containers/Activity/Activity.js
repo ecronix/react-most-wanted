@@ -15,6 +15,7 @@ import {
   deepOrange500,
   darkWhite,
 } from 'material-ui/styles/colors';
+import config from '../../config';
 
 export class Activity extends Component {
 
@@ -48,6 +49,8 @@ export class Activity extends Component {
       ...rest
     } = this.props;
 
+    const drawerWidth=config.drawer_width;
+
     const bodyContainerStyle={
       backgroundColor: muiTheme.palette.canvasColor,
       top:64,
@@ -64,12 +67,12 @@ export class Activity extends Component {
           <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color}/>
           <title>{title}</title>
         </Helmet>
-        <ResponsiveDrawer>
+        <ResponsiveDrawer width={drawerWidth}>
           <DrawerHeader/>
           <DrawerContent/>
         </ResponsiveDrawer>
 
-        <ResponsiveAppBar
+        <ResponsiveAppBar width={drawerWidth}
           title={title}
           showMenuIconButton={onBackClick!==undefined?true:undefined}
           onLeftIconButtonTouchTap={onBackClick}
@@ -103,7 +106,7 @@ export class Activity extends Component {
           <LinearProgress mode="indeterminate" color="green" style={{zIndex:9998, position: 'fixed', top: 0}}/>
         }
 
-        <BodyContainer id="bodyContainer" ref="bodyContainer" withRef style={bodyContainerStyle} >
+        <BodyContainer width={drawerWidth} id="bodyContainer" ref="bodyContainer" withRef style={bodyContainerStyle} >
           {children}
         </BodyContainer>
       </div>

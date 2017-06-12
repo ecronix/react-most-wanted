@@ -5,6 +5,7 @@
   "devDependencies": {
     "enzyme": "^2.8.2",
     "react-scripts": "^1.0.7",
+    "react-test-renderer": "^15.5.4",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6"
   },
