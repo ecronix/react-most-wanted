@@ -15,8 +15,27 @@ function createComponent(MaterialUIComponent, mapProps) {
     }
 
     render() {
+
+
+      const {input, ...rest} = this.props;
+      const {value, ...inputRest} = input;
+
+      let newProps=this.props;
+
+      if(typeof value === 'string' || value instanceof String){
+
+        newProps={
+          input: {
+            value: undefined,
+            ...inputRest
+          },
+          ...rest
+        }
+
+      }
+
       return createElement(MaterialUIComponent, {
-        ...mapProps(this.props),
+        ...mapProps(newProps),
         ref: 'component'
       })
     }

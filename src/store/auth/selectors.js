@@ -44,5 +44,10 @@ export const isAuthorised = (auth) => {
 }
 
 export const isLinkedWithProvider = (auth, providerId) => {
-  return auth && auth.providerData && auth.providerData.find((provider)=>{return provider.providerId.indexOf(providerId)>-1})!==undefined;
+  try{
+    return auth && auth.providerData && auth.providerData.find((provider)=>{return provider.providerId.indexOf(providerId)>-1})!==undefined;
+  }catch(e){
+    return false;
+  }
+
 }

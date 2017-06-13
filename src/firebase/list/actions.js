@@ -2,15 +2,20 @@ import FirebaseList from './index';
 import getTypes from './types';
 
 export default class ListActions {
-  constructor(listName) {
+  constructor(listName, reducerName) {
+
+    if(reducerName===undefined){
+      reducerName=listName
+    }
+
     this._listName = listName;
-    this._namespace = listName.toUpperCase();
-    this._types = getTypes(listName);
+    this._types = getTypes(reducerName);
 
     this._list= new FirebaseList({
       onAdd: this.createSuccess,
       onChange: this.updateSuccess,
       onLoad: this.loadSuccess,
+      onUnLoad: this.unloadSuccess,
       onRemove: this.deleteSuccess
     }, listName);
 
@@ -38,9 +43,6 @@ export default class ListActions {
   }
 
   listError = (error) => {
-
-    console.log(error);
-
     return {
       type: this._types.ERROR,
       payload: {error}
@@ -57,6 +59,13 @@ export default class ListActions {
   loadSuccess = (list) => {
     return {
       type: this._types.LOAD_SUCCESS,
+      payload: {list}
+    };
+  }
+
+  unloadSuccess = (list) => {
+    return {
+      type: this._types.UNLOAD_SUCCESS,
       payload: {list}
     };
   }
@@ -89,7 +98,7 @@ export default class ListActions {
       };
     }
 
-    const initialiseList = () => {
+    const initialiseList = (dispatch) => {
       return (dispatch, getState) => {
         dispatch(this.setIsFetching(true));
         this._list.subscribe(dispatch);

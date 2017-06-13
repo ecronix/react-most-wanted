@@ -14,10 +14,10 @@ export default function getListReducers(listName){
   const reducers = (state = initialState, {payload, type}) => {
     switch (type) {
       case types.CREATE_SUCCESS:
-      return {...state, list:{...state.list, [payload.key]: payload.data}};
+      return {...state, isCreating:false, list:{...state.list, [payload.key]: payload.data}};
 
       case types.UPDATE_SUCCESS:
-      return {...state, list:{...state.list, [payload.key]: payload.data}};
+      return {...state, isEditing:false, list:{...state.list, [payload.key]: payload.data}};
 
       case types.DELETE_SUCCESS:
       let { [payload.key]: undefined, ...rest}= state.list;
@@ -29,10 +29,13 @@ export default function getListReducers(listName){
       return {...state, ...payload};
 
       case types.ERROR:
-      return {...state, isFetching: false, ...payload};
+      return {...state, isFetching: false};
 
       case types.LOAD_SUCCESS:
       return  {...state, isFetching: false, ...payload};
+
+      case types.UNLOAD_SUCCESS:
+      return  {...state, isFetching: false};
 
       default:
       return state;

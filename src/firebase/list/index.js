@@ -68,11 +68,15 @@ class FirebaseList {
       emit(this._actions.onRemove(this.getPayload(snapshot)));
     });
 
-    this._unsubscribe = () => {ref.off()};
+    this._unsubscribe=()=>{ref.off()};
+    this._emit=(action)=>{emit(action)};
   }
 
-  unsubscribe() {
-    this._unsubscribe();
+  unsubscribe(){
+    if(this._unsubscribe){
+      this._unsubscribe();
+      this._emit(this._actions.onUnLoad());
+    }
   }
 
   getPayload(snapshot) {
