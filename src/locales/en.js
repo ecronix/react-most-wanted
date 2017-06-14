@@ -67,6 +67,19 @@ const messages=defineMessages({
   delete_task_title: 'Delete task?',
   delete_task_message: 'The task will be deleted!',
   error: 'Error!',
+  companies: 'Companies',
+  create_companie: 'Create companie',
+  edit_companie: 'Edit companie',
+  delete_companie_title: 'Delete companie?',
+  delete_companie_message: 'The companie will be deleted!',
+  full_name_label: 'Full name',
+  full_name_hint: 'Enter full name',
+  vat_label: 'UID',
+  vat_hint: 'Enter UID',
+  description_label: 'Description',
+  description_hint: 'Enter description',
+  name_label: 'Name',
+  name_hint: 'Enter name',
 
 });
 

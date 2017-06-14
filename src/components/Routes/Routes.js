@@ -2,8 +2,8 @@ import React from 'react';
 import { Dashboard } from '../../containers/Dashboard';
 import { About } from '../../containers/About';
 import { MyAccount } from '../../containers/MyAccount';
-import { Tasks } from '../../containers/Tasks';
-import { Task } from '../../containers/Tasks';
+import { Tasks, Task } from '../../containers/Tasks';
+import { Companies, Companie } from '../../containers/Companies';
 import { Users } from '../../containers/Users';
 import { ResetPassword } from '../../containers/ResetPassword';
 import { PageNotFound } from '../../components/PageNotFound';
@@ -23,14 +23,20 @@ const history = createHistory();
 const Routes = (props, context) => {
 
   return (
-
+    
     <Router history={history} >
       <Switch >
         <RestrictedRoute type='private' path="/" exact component={Dashboard} />
         <RestrictedRoute type='private' path="/dashboard" exact component={Dashboard} />
+
         <RestrictedRoute type='private' path="/tasks" exact component={Tasks} />
         <RestrictedRoute type='private' path="/tasks/edit/:uid" exact component={Task} />
         <RestrictedRoute type='private' path="/tasks/create" exact component={Task} />
+
+        <RestrictedRoute type='private' path="/companies" exact component={Companies} />
+        <RestrictedRoute type='private' path="/companies/edit/:uid" exact component={Companie} />
+        <RestrictedRoute type='private' path="/companies/create" exact component={Companie} />
+
         <RestrictedRoute type='private' path="/users" exact component={Users} />
         <RestrictedRoute type='private' path="/about" exact component={About}  />
         <RestrictedRoute type='private' path="/my_account"  exact component={MyAccount} />

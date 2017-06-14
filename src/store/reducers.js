@@ -21,6 +21,7 @@ const reducers = combineReducers({
   locale,
   theme,
   tasks: getListReducers('public_tasks'),
+  companies: getListReducers('companies'),
   users: getListReducers('users')
 })
 

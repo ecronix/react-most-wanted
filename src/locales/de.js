@@ -67,6 +67,19 @@ const messages=defineMessages({
   delete_task_title: 'Aufgabe löschen?',
   delete_task_message: 'Aufgabe wird gelöscht!',
   error: 'Fehler!',
+  companies: 'Unternehmen',
+  create_companie: 'Unternehmen erstellen',
+  edit_companie: 'Unternehmen bearbeiten',
+  delete_companie_title: 'Unternehmen löschen?',
+  delete_companie_message: 'Unternehmen wird gelöscht!',
+  full_name_label: 'Voller Name',
+  full_name_hint: 'Vollen Namen eingeben',
+  vat_label: 'UID',
+  vat_hint: 'UID eingeben',
+  description_label: 'Beschreibung',
+  description_hint: 'Beschreibung eingeben',
+  name_label: 'Name',
+  name_hint: 'Name eingeben',
 });
 
 export default messages;

@@ -5,36 +5,31 @@ import { Activity } from '../../containers/Activity'
 import { FireForm } from '../../containers/FireForm'
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import Form from './Form';
-import { firebaseDb } from '../../firebase';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
-import ListActions from '../../firebase/list/actions';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import { firebaseDb } from '../../firebase';
 
-const path='/public_tasks/';
+const path='/companies/';
 
-class Task extends Component {
 
-  componentDidMount() {
-    this.props.initialiseList();
-  }
+class Companie extends Component {
 
-  componentWillUnmount() {
-    this.props.unsubscribeList();
-  }
 
   handleCreateValues = (values) => {
-
-    const {auth}=this.props;
-
     return {
       created: firebase.database.ServerValue.TIMESTAMP ,
-      userName: auth.displayName,
-      userPhotoURL: auth.photoURL,
-      userId: auth.uid,
-      completed: false,
+      updated: firebase.database.ServerValue.TIMESTAMP ,
+      ...values
+    }
+  }
+
+  handleUpdateValues = (values) => {
+
+    return {
+      updated: firebase.database.ServerValue.TIMESTAMP ,
       ...values
     }
   }
@@ -42,7 +37,7 @@ class Task extends Component {
   handleClose = () => {
     const { setDialogIsOpen }=this.props;
 
-    setDialogIsOpen('delete_vehicle', false);
+    setDialogIsOpen('delete_companie', false);
 
   }
 
@@ -59,9 +54,10 @@ class Task extends Component {
     }
   }
 
+
   render() {
 
-    const {history, intl, dialogs, match, setDialogIsOpen}=this.props;
+    const {history, intl, setDialogIsOpen, dialogs, match}=this.props;
 
     const actions = [
       <FlatButton
@@ -81,47 +77,47 @@ class Task extends Component {
         iconElementRight={
           match.params.uid?<FlatButton
             style={{marginTop: 4}}
-            onTouchTap={()=>{setDialogIsOpen('delete_vehicle', true);}}
+            onTouchTap={()=>{setDialogIsOpen('delete_companie', true);}}
             icon={<FontIcon className="material-icons" >delete</FontIcon>}
           />:undefined
         }
         onBackClick={()=>{history.goBack()}}
-        title={intl.formatMessage({id: this.props.match.params.uid?'edit_task':'create_task'})}>
+        title={intl.formatMessage({id: match.params.uid?'edit_companie':'create_companie'})}>
+
         <div style={{margin: 15, display: 'flex'}}>
+
           <FireForm
-            name={'task'}
-            path={path}
+            name={'companie'}
+            path={`${path}`}
             handleCreateValues={this.handleCreateValues}
-            uid={this.props.match.params.uid}>
+            uid={match.params.uid}>
             <Form />
           </FireForm>
         </div>
         <Dialog
-          title={intl.formatMessage({id: 'delete_task_title'})}
+          title={intl.formatMessage({id: 'delete_companie_title'})}
           actions={actions}
           modal={false}
-          open={dialogs.delete_vehicle===true}
+          open={dialogs.delete_companie===true}
           onRequestClose={this.handleClose}>
-          {intl.formatMessage({id: 'delete_task_message'})}
+          {intl.formatMessage({id: 'delete_companie_message'})}
         </Dialog>
+
       </Activity>
     );
   }
 }
 
-const usersActions = new ListActions('users').createActions();
-
 
 const mapStateToProps = (state) => {
-  const { auth, intl, dialogs } = state;
+  const { intl, dialogs } = state;
 
   return {
-    auth,
     intl,
     dialogs
   };
 };
 
 export default connect(
-  mapStateToProps, {...usersActions, setDialogIsOpen}
-)(injectIntl(withRouter(Task)));
+  mapStateToProps, {setDialogIsOpen}
+)(injectIntl(withRouter(Companie)));

@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import { firebaseAuth, firebaseDb, firebaseApp } from './index';
+import { firebaseAuth, firebaseDb } from './index';
 
 
 export const isAuthorised = () => {
@@ -294,23 +294,6 @@ class FirebaseAuth {
       })
       .catch((error) => {this.handleError(error); reject(error)});
     });
-  }
-
-
-  updateUserPhoto(dataURL){
-
-    return new Promise((resolve, reject) => {
-
-      this._emit(this._actions.onFetchChanged(true));
-      let storageRef=firebaseApp.storage().ref(`users/${firebaseAuth.currentUser.uid}`);
-
-      storageRef.child(`photoURL`).putString(dataURL, 'data_url')
-      .then((snapshot)=>{
-        this.updateProfile({photoURL: snapshot.downloadURL});
-      })
-      .catch((error) => {this.handleError(error); reject(error)});
-    });
-
   }
 
   signOut() {

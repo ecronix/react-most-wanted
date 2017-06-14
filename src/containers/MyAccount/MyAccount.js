@@ -82,6 +82,13 @@ export class MyAccount extends Component {
 
   }
 
+  handlePhotoUploadSuccess = (snapshot) =>{
+    const { setDialogIsOpen, updateUser}=this.props;
+
+    updateUser({photoURL: snapshot.downloadURL});
+    setDialogIsOpen('new_user_photo_url', undefined);
+  }
+
 
   hanleUpdateSubmit = () => {
     const {updateUser} =this.props;
@@ -170,7 +177,6 @@ export class MyAccount extends Component {
       muiTheme,
       sendEmailVerification,
       setIsEditing,
-      updateUserPhoto,
       dialogs,
       setDialogIsOpen
     } =this.props;
@@ -328,10 +334,9 @@ export class MyAccount extends Component {
     <PasswordDialog />
     <DeleteAccountDialog />
     <ImageCropDialog
-      onSubmit={img=>{
-        updateUserPhoto(img, auth.uid);
-        setDialogIsOpen('new_user_photo_url', undefined);
-      }}
+      path={`users/${auth.uid}`}
+      fileName={`photoURL`}
+      onUploadSuccess={(s)=>{this.handlePhotoUploadSuccess(s) }}
       open={dialogs.new_user_photo_url!==undefined}
       src={dialogs.new_user_photo_url}
       handleClose={()=>{

@@ -55,7 +55,7 @@ class TaskForm extends Component {
             floatingLabelText="Description"
             hintText="Enter description"
             multiLine
-            rows={2}
+            rows={3}
             ref="description"
             withRef
           />

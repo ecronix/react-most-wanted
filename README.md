@@ -17,17 +17,14 @@ I tried to make the project as clean as possible and to use all libraries in the
 
 - [Features](#features)
 - [Folder Structure](#folder-structure)
-- [How to use](#how-to-use)
-- [Libraries](#libraries)
-  - [react and redux](#react-and-redux)
-  - [create-react-app](#create-react-app)
-  - [material-ui](#material-ui)
-  - [react-router](#react-router)
-  - [react-intl](#react-intl)
-  - [redux-persist](#redux-persist)
-  - [material-ui-responsive-drawer](#material-ui-responsive-drawer)
-  - [material-ui-selectable-menu-list](#material-ui-selectable-menu-list)
-  - [redux-logger](#redux-logger)
+- [Usage](#usage)
+  - [Simple run](#simple-run)
+  - [Reuse for own project](#reuse-for-own-project)
+- [Customatisation](#customatisation)
+  - [Internationalization](#internationalization)
+  - [Theming](#theming)
+  - [Firebase lists](#firebase-lists)
+  - [Drawer width](#drawer-width)
 - [TO DO](#to-do)
 - [License](#license)
 - [Logo](#logo)
@@ -36,18 +33,28 @@ I tried to make the project as clean as possible and to use all libraries in the
 ## Features
 
 `React Most Wanted` is a "base project", "starter kit", "boilerplate" (call it however you want) project with my **personal** "Most Wanted" features:
-* *easy to maintain*
-* *PWA* - has Progressive Web App features
-* *responsive* - included with PWA
-* *material-ui*
-* *routing*
-* *theming*
-* *internationalization*
-* *authentication*
+* **easy to maintain**
+* ***PWA** - has Progressive Web App features
+* **responsive** - included with PWA
+* **material-ui**
+* **routing**
+* **theming**
+* **forms** - with realtime sync of untouched fields
+* **internationalization**
+* **authentication**
 
 All these features can be programmed from scratch. But why should you do this? Out there are so mutch greate developers creating greate applications, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier.
 
 If all that is true why did I create this project? There must be already a starter kit for react applications! Well, there are lots of them but unfortunaly non of them was as I would like it to be. Some don't have enough fatures to just start and some are have so many that I had to delete features I don't need. I want to create a starting point that has, as said before, my **personal** "Most Wanted" features. If someone likes it, greate :)
+
+There are also other cool features:
+* **realtime database**
+* **realtime forms**
+* **messaging/notifications** - every loged user that approved messaging on login will recieve notifications for new tasks created
+* **full authentication** - with google, facebook, twitter, github, email and **phone**
+* **online and last time offline state for users**
+* **file uploads to the firebase storage**
+
 
 The further text explains witch libraries/modules are used and why. Some of them are installed and used in they're `pure` way as in documentation described so in that cases we will just show the link to the official documentation to awoid outdated descriptions of the usage.
 
@@ -89,123 +96,203 @@ All `redux` related files are in the `store` folder. You can find more about red
 
 The folders `locales` and `themes` are used to store data for different locales and themes.
 
-## How to use
+## Usage
 
-You can eather fork this project or clone it into your own repo. I use the second. You can find [here](https://help.github.com/articles/duplicating-a-repository/) more information about how to clone/duplicate a repo into your own.
+### Simple run
 
-After cloning the repo into your own you should change the configuration like project name and the firebase config. Here is a list of all changes you should make:
+
+To just run the project on you won device you should have installed: git, node and npm. Let's asume that this is the case.
+
+Now in your concole go to the destionation where you want to save the project and run this command:
+
+```js
+git clone https://github.com/TarikHuber/react-most-wanted
+```
+
+or
+
+```js
+git clone https://github.com/TarikHuber/react-most-wanted my_project
+```
+
+if you want to save the project into a specific folder (inthis example "my_project"). The folder must be empty!
+
+Now go with the console into the folder. If you havn't provided a name like "my_project" then it will be the default "react-most-wanted".
+
+In he folder run this command to start the develeoplemt mode of the project:
+
+```js
+npm run dev
+```
+
+For publishing run:
+
+```js
+npm run build
+```
+
+After it finished folloe the instructions or publish the project build folder to your prefered  provider or own server.
+
+### Reuse for own project
+
+You can eather fork this project or clone it into your own repo. I use the second for new projects. You can find [here](https://help.github.com/articles/duplicating-a-repository/) more information about how to clone/duplicate a repo into your own.
+
+After cloning the repo into your own you should change the configurations like project name and the firebase config. Here is a list of all changes you should make:
 * **package.json**  - here you should change the name and version
-* **src/config.js**  - here you should change all firebase data and the signin options
-* **public/index.html**  - change the title (it will be overriden but it looks bether)
+* **src/config.js**  - here you should change all firebase data and other options
+* **public/index.html**  - change the title (it will be overriden but it looks better)
 * **public/firebase-messaging-sw.js**  - change the ``messagingSenderId``
+
 
 After setting up the code we need to deploy our application to firebase. As first create an application biuld with runing `npm run build`.
 
 To use firebase we need to install the firebase tools by running `npm install -g firebase-tools` and after that login to firebase with `firebase login`.
 
-After the login run `fribease init` to setup the firebase project. Override the existing project and select yours from your firebase console. Don't forget to setup the email configs into the firebase functions using `firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"`.
+After the login run `fribease init` to setup the firebase project. Override the existing project and select yours from your firebase console.
+Override only the '.firebasesrc' file and leave the other as they are because the database and storage rules, functions and firebase settings should stay as they are. If you override them the project would probably not work as it should.
+
+Don't forget to setup the email configs into the firebase functions using `firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"`.
 
 You should now be able to deploy your application to your firebase using `firebase deploy`.
 
 
-## Libraries
+##Customatisation
 
-### React and Redux
+### Internationalization
 
-You want to make a web application and use only `react` without any library to manage the state. Hmm... well, I won't say thats madness but... ;) It is possible but you can also go without shoes to work. I'll stay with my confortable `redux` "shoes". There are also other libraries but I think that `redux` is one of the best and if you know that you are building a application that will get bigger and bigger `redux` should be your choise.
+Internationalization is very importand. Even if you use just a single language your application should be prepared for a more of them. It is easy to aply it from beginning than refactoring the whole application afterwads.
 
-Yes, you will need to write more code but there are much more pros than cons! There are lots of discussions on witch library is the best to use with `react` even if you should use `react` or some other project like [preact](https://github.com/developit/preact), [inferno](https://github.com/infernojs/inferno) and a very loooong etc....
-
-My private favorits are `react` and `redux` because I can shurely say that they are not some hiped projects that will die in a couple of months or years. `react` is maintained by Facebook so I can be shure that lots of greate developers will take care of witch path the library will go.
-
-
-### create-react-app
-
-The project should be easy to update in long term. That brings me to the first used and base library `create-react-app`. I will not explain how to use it. There is enough [documentation](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md) on that. But I would like to explain why I use it:
-* maintained by Facebook
-* it is very easy to use
-* it will take care of the nasty environment configuration
-* it can be updated to the latest version without any or small changes to your application and
-* if you feel strangled by the configs and setup you can `eyect` and leave the prepared path and go your own way.
-
-There is a large team from Facebook taking care that everything is up to date witch makes me more confortable using this tool than any other there. And there are others! My second favorite would be [nwb](https://github.com/insin/nwb). I havend made applications with it but for making standalone react or react-redux components it is just fantastic.
-
-
-### material-ui
-
-Because I make most of the time web applications and not "just" web pages and because I'm not a designer there is only one solution that I could use for design and that is Googles Material-UI design patterns. And ofcourse there is a greate react library that we can use for that: [material-ui](https://github.com/callemall/material-ui).
-
-It has most of the parts you would need for a Material-UI designed application. It comes with a greate feature that we can use in our application and that is `theming` or "customatisation" how they call it in they'r [documentation](http://www.material-ui.com/#/get-started/required-knowledge).
-
-This application uses 100% `material-ui`! There are no other libraries for styling. But there are other libraries that rely on `material-ui`. We will explain them in the further text.
-
-The team around `material-ui` is working in the `@next` branch on a greate new version with lots of modifications and new features and components like `Layouts`. For now it isn't stable so we will stick with the current stable version untill the `@next` brantch is satable enough.
-
-This library gives use all we need for theming our application. All you have to do is to provide some theme in the `themes` folder and update the `index.js` file in the `themes` folder. After that your theme should be visible and ready to use. Just watch how it is done with the `ics_theme`.
-
-### react-router
-
-Every application would need some kind of routing. I desided to use `react-router` in this project.
-
-### react-helmet
-
-This library allows us to change the HTML meta data during runtime. With this one we change the title in our application on page change. In the `App.js`, one of the root elements of the project, we use it to change the `theme-color` of our application witch gives a greate user expiriences when changing the application theme.
-
-### react-intl
-
-Internationalization is very importand. Even if you use just a single language your application should be prepared for a more of them. It is easy to aply it from beginning than refactoring the whole application afterwads. `react-intl` has also a huge maintainer Yahoo. It is one of the larges or maby the larges Internationalization library for react so I desided to use it for our application.
-
-There is also a redux project that should make the usage with redux easier but it has a modified `Provider` and I'm not confortable with it to put my application `Provider` in hands of a external library than `react-redux`. Because of that I implemented a simple solution that is very similar to the `theming` solution. You just have to provide the locales in the `locales` folder and to update the `index.js` file in it. Just follow the `de` example.
-
-The only thing you'll have to do more than by the `theming` feature is that you have to add the localisationData in the [Root.js](https://github.com/TarikHuber/react-most-wanted/blob/master/src/components/Root/Root.js) folder:
+The only thing you'll have to do to add a new language is that you have to add the localisationData in the locales [index.js](https://github.com/TarikHuber/react-most-wanted/blob/master/src/locales/index.js) folder like in the code sniped below. Here we add the language fr to the project:
 
 ```js
 
-import {addLocaleData} from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import de from 'react-intl/locale-data/de';
-
-addLocaleData([...en, ...de]);
-
-```
-
-For example after adding the `fr` locale it would look like this:
-
-```js
-
-import {addLocaleData} from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import de from 'react-intl/locale-data/de';
 import fr from 'react-intl/locale-data/fr';
+import fr_messages from './fr';
 
-addLocaleData([...en, ...de, ...fr]);
+//... other code
+
+const locales = [
+  {
+    locale: 'en',
+    messages: en_messages,
+    data: en
+  },
+  {
+    locale: 'de',
+    messages: de_messages,
+    data: de
+  },
+  {
+    locale: 'bs',
+    messages: bs_messages,
+    data: bs
+  },
+  {
+    locale: 'fr',
+    messages: fr_messages,
+    data: fr
+  },
+
+]
 
 ```
 
-### redux-persist
+We also need to create a file 'fr.js' into the 'locales' fodler. I would recommend to juts copy the 'en.js' file and to translate the strings.
 
-It allows us to save the state to the `localStoreage` or another storage and to rehidrate it on full oage reload or page visit after longer time. It allows us to load the full store even if the client is offline witch is one of the requirements for Pgrogressive Web Apps.
+To add more translated strings just add them to every language file you have in the 'locales' folder.
 
+### Theming
 
-### material-ui-responsive-drawer
+To change or to add a new theme you would habe to add or edit a theme file into the 'themes' folder and a reference to it into the 'index.js' file.
 
-This library helps us to make the main `Drawer` menu responsible and even to enable or disable the responsive behavior in runtime. It uses the libraries `material-ui` and `redux-responsive`. You can find more about this library [here](https://github.com/TarikHuber/material-ui-responsive-drawer).
+FOr example we crate a file 'my_theme.js' and change the 'index.j' file like below. You can use the 'ics_theme' as bootstrapp for new projects or get a new one from the offical 'material-ui' documentation.
 
-I hope that the `@next` branch of `material-ui` has some features that allow us to make the `Drawer` responsible without such libraries.
+```js
 
+import ics_theme from './ics_theme';
+import my_theme from './my_theme';
 
-### material-ui-selectable-menu-list
+const themes= [
+  {
+    id: 'light',
+    source: lightBaseTheme,
+  },
+  {
+    id: 'dark',
+    source: darkBaseTheme,
+  },
+  {
+    id: 'ics',
+    source: ics_theme,
+  },
+  {
+    id: 'my_theme',
+    source: my_theme,
+  },
+];
 
-This is also a library that should make our life easier. It also uses `material-ui` as peer dependency. It allows us to send to a single component an array of menu items we would like to have in it and the component renders all of them. You can find more about it [here](https://github.com/TarikHuber/material-ui-selectable-menu-list).
+```
 
+### Firebase lists
 
-### redux-logger
+To add a new list that is synced with firebase there are more steps to do.
+First of all ist to crete a component that will represent the list. You can use the 'Tasks.js' component as example.
 
-We use the simple `redux-logger` dev library to see how the redux state changes during application usage.
+In that you should change folowing code parts to make it work:
 
-### sw-precache
+```js
+//....code before
+const actions = new ListActions('your_list').createActions();
+//....code after
 
-Is also a dev library that helps us to create a service worker during build proccess. The service worker then allows the user to open our application even if he has no connection. Because the implementation is fully used how it is described in [this](https://github.com/jeffposnick/create-react-pwa) project we leave the detaile explanation to them.
+```
+
+And in the folder 'store' you should add the generated reducers into the 'reducers.js' file, like this
+
+```js
+//....code before
+const reducers = combineReducers({
+  browser: responsiveStateReducer,
+  responsiveDrawer,
+  form: formReducer,
+  auth,
+  connection,
+  dialogs,
+  messaging,
+  locale,
+  theme,
+  tasks: getListReducers('public_tasks'),
+  companies: getListReducers('companies'),
+  your_list: getListReducers('your_list'), //your new list
+  users: getListReducers('users')
+})
+//....code after
+
+```
+
+That is all you have to do to add a new list. It is up to you how the lists will be presented. Just don't forget to leave into the mounting and unmounting part of you component following code parts:
+
+```js
+//....code before
+componentDidMount() {
+  const {initialiseList}=this.props;
+  initialiseList();
+}
+
+componentWillUnmount() {
+  const {unsubscribeList}=this.props;
+  unsubscribeList();
+}
+//....code after
+
+```
+
+They are initialising the list and unsubscribing from it if we leave the component. You can add other code to those functions or move thos calls on other places of your component life cycle if you wish.
+
+### Drawer width
+
+To change the drawer (left menu) width go to the 'config.js' file and change the value of  'drawer_width' :)
+
 
 
 ## TO DO

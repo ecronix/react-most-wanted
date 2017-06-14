@@ -66,7 +66,20 @@ const messages=defineMessages({
   no_connection: 'Nema konekcije',
   delete_task_title: 'Izbrisati zadatak?',
   delete_task_message: 'Zadatak ce bit izbrisan!',
-  error: 'Error!',
+  error: 'Greska!',
+  companies: 'Preduzece',
+  create_companie: 'Dodaj preduzece',
+  edit_companie: 'Uredi preduzece',
+  delete_companie_title: 'Izbrici preduzece?',
+  delete_companie_message: 'Preduzece ce biti izbrisano!',
+  full_name_label: 'Puno ime',
+  full_name_hint: 'Unesi puno ime',
+  vat_label: 'UID',
+  vat_hint: 'Unesi UID',
+  description_label: 'Opis',
+  description_hint: 'Unesi opis',
+  name_label: 'Ime',
+  name_hint: 'Puno ime',
 });
 
 export default messages;

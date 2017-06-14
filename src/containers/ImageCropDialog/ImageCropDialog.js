@@ -5,6 +5,10 @@ import {injectIntl, intlShape} from 'react-intl';
 import {Cropper} from 'react-image-cropper';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import { firebaseApp } from '../../firebase';
+import firebase from 'firebase';
+import CircularProgress from 'material-ui/CircularProgress';
+import LinearProgress from 'material-ui/LinearProgress';
 
 const styles={
   container: {
@@ -30,11 +34,40 @@ export class ImageCropDialog extends Component {
     this.cropper = null;
     this.state={
       src: undefined,
+      isLoading: false,
+      isUploading: false,
+      uploadProgress: 0
     }
+  }
+
+  handlePhotoURLUpload = (photo_url) => {
+    const {path, fileName, onUploadSuccess}=this.props;
+
+    this.setState({isUploading: true, uploadProgress: 0});
+
+    let uploadTask=firebaseApp.storage().ref(`${path}/${fileName}`).putString(photo_url, 'data_url');
+
+
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, snapshot =>{
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      this.setState({isUploading: true, uploadProgress: progress})
+    }, error => {
+      console.log(error);
+    }, () => {
+      this.setState({isUploading: false, uploadProgress: 100}, ()=>{
+        onUploadSuccess(uploadTask.snapshot);
+      })
+
+    })
+
+
   }
 
   hanldePhotoULRChange = (e) => {
     e.preventDefault();
+
+    this.setState({isLoading: true});
+
     let files;
     if (e.dataTransfer) {
       files = e.dataTransfer.files;
@@ -43,7 +76,7 @@ export class ImageCropDialog extends Component {
     }
     const reader = new FileReader();
     reader.onload = () => {
-      this.setState({src: reader.result})
+      this.setState({src: reader.result, isLoading: false, file: files[0]})
     };
     reader.readAsDataURL(files[0]);
   }
@@ -55,13 +88,14 @@ export class ImageCropDialog extends Component {
   }
 
   render(){
-    const {intl, open, title, onSubmit } =this.props;
+    const {intl, open, title } =this.props;
 
     const actions = [
       <FlatButton
+        disabled={!this.state.src || this.state.isLoading || this.state.isUploading}
         label={intl.formatMessage({id: 'submit'})}
         primary={true}
-        onTouchTap={()=>{onSubmit(this.cropper.crop())}}
+        onTouchTap={()=>{this.handlePhotoURLUpload(this.cropper.crop())}}
       />,
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
@@ -82,7 +116,7 @@ export class ImageCropDialog extends Component {
 
           <div style={styles.cropper}>
 
-            {!this.state.src &&
+            {(!this.state.src || this.state.isLoading) &&
               <input
                 ref={(field) => {
                   if(field!==null){
@@ -94,6 +128,14 @@ export class ImageCropDialog extends Component {
                 //style={{visibility:'hidden'}}
                 onChange={this.hanldePhotoULRChange}
               />
+            }
+
+            {this.state.isLoading &&
+              <CircularProgress size={80} thickness={5} />
+            }
+
+            {this.state.isUploading &&
+              <LinearProgress mode="determinate" value={this.state.uploadProgress} />
             }
 
             {this.state.src &&
@@ -119,7 +161,9 @@ ImageCropDialog.propTypes = {
   intl: intlShape.isRequired,
   open: PropTypes.bool.isRequired,
   title: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
+  fileName: PropTypes.string.isRequired,
+  onUploadSuccess: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 

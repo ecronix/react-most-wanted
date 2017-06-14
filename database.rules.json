@@ -17,6 +17,10 @@
       ".read": true,
       ".write": "auth != null"
     },
+    "companies":{
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "users_count":{
       ".read": true,
       ".write": "auth != null"

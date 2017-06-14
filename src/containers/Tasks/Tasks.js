@@ -143,7 +143,7 @@ class Tasks extends Component {
     />
   }
 
-  rednerTasks(tasks) {
+  renderList(tasks) {
     const {muiTheme, setIsEditing, auth, intl, history, browser, setDialogIsOpen} =this.props;
 
     return _.map(tasks.list, (task, key) => {
@@ -303,7 +303,7 @@ render(){
 
         <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
           <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
-            {this.rednerTasks(tasks)}
+            {this.renderList(tasks)}
           </List>
           <div style={{ float:"left", clear: "both" }}
             ref={(el) => { this.listEnd = el; }}
