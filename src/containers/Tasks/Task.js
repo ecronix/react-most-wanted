@@ -2,28 +2,25 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { Activity } from '../../containers/Activity'
-import { FireForm } from '../../containers/FireForm'
+import { FireForm } from 'firekit'
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import Form from './Form';
 import { firebaseDb } from '../../firebase';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
-import ListActions from '../../firebase/list/actions';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import { withFirebase } from 'firekit';
 
 const path='/public_tasks/';
 
 class Task extends Component {
 
   componentDidMount() {
-    this.props.initialiseList();
+    this.props.watchList('users');
   }
 
-  componentWillUnmount() {
-    this.props.unsubscribeList();
-  }
 
   handleCreateValues = (values) => {
 
@@ -91,6 +88,8 @@ class Task extends Component {
           <FireForm
             name={'task'}
             path={path}
+            onSubmitSuccess={(values)=>{history.push('/tasks');}}
+            onDelete={(values)=>{history.push('/tasks');}}
             handleCreateValues={this.handleCreateValues}
             uid={this.props.match.params.uid}>
             <Form />
@@ -109,8 +108,6 @@ class Task extends Component {
   }
 }
 
-const usersActions = new ListActions('users').createActions();
-
 
 const mapStateToProps = (state) => {
   const { auth, intl, dialogs } = state;
@@ -123,5 +120,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(
-  mapStateToProps, {...usersActions, setDialogIsOpen}
-)(injectIntl(withRouter(Task)));
+  mapStateToProps, {setDialogIsOpen}
+)(injectIntl(withRouter(withFirebase(Task))));

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { Activity } from '../../containers/Activity'
-import { FireForm } from '../../containers/FireForm'
+import { FireForm } from 'firekit'
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import Form from './Form';
 import { withRouter } from 'react-router-dom';
@@ -89,6 +89,8 @@ class Companie extends Component {
           <FireForm
             name={'companie'}
             path={`${path}`}
+            onSubmitSuccess={(values)=>{history.push('/companies');}}
+            onDelete={(values)=>{history.push('/companies');}}
             handleCreateValues={this.handleCreateValues}
             uid={match.params.uid}>
             <Form />

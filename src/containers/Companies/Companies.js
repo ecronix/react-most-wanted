@@ -5,30 +5,29 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import ListActions from '../../firebase/list/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import {withRouter} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
+import { withFirebase } from 'firekit';
 
 class Vehicles extends Component {
 
   componentDidMount() {
-    const {initialiseList}=this.props;
-    initialiseList();
-  }
-
-  componentWillUnmount() {
-    const {unsubscribeList}=this.props;
-    unsubscribeList();
+    const { watchList}=this.props;
+    watchList('companies');
   }
 
   renderList(companies) {
     const {history} =this.props;
 
-    return _.map(companies.list, (row, key) => {
+    if(companies===undefined){
+      return <div></div>
+    }
+
+    return _.map(companies, (row, key) => {
 
       return <div key={key}>
         <ListItem
@@ -60,7 +59,7 @@ class Vehicles extends Component {
 
     return (
       <Activity
-        isLoading={companies.isFetching}
+        isLoading={companies===undefined}
         containerStyle={{overflow:'hidden'}}
         title={intl.formatMessage({id: 'companies'})}>
 
@@ -91,13 +90,11 @@ Vehicles.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
-const actions = new ListActions('companies').createActions();
-
 const mapStateToProps = (state) => {
-  const { companies, auth, browser } = state;
+  const { auth, browser, lists } = state;
 
   return {
-    companies,
+    companies: lists.companies,
     auth,
     browser,
   };
@@ -106,7 +103,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  {
-    ...actions
-  }
-)(injectIntl(muiThemeable()(withRouter(Vehicles))));
+)(injectIntl(muiThemeable()(withRouter(withFirebase(Vehicles)))));

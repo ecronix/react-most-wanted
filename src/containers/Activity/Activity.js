@@ -8,7 +8,6 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
 import { DrawerHeader } from '../../containers/Drawer';
 import { DrawerContent } from '../../containers/Drawer';
-import { isConnected } from '../../store/connection/selector';
 import LinearProgress from 'material-ui/LinearProgress';
 import {injectIntl} from 'react-intl';
 import {
@@ -16,6 +15,7 @@ import {
   darkWhite,
 } from 'material-ui/styles/colors';
 import config from '../../config';
+import { withFirebase } from 'firekit';
 
 export class Activity extends Component {
 
@@ -46,6 +46,15 @@ export class Activity extends Component {
       isLoading,
       dispatch,
       containerStyle,
+      firebaseApp,
+      initConnection,
+      unsubscribeConnection,
+      watchList,
+      unwatchList,
+      unwatchAllLists,
+      watchPath,
+      unwatchPath,
+      unwatchAllPaths,
       ...rest
     } = this.props;
 
@@ -119,11 +128,11 @@ const mapStateToProps = (state) => {
   const { connection, intl } = state;
 
   return {
-    isConnected: isConnected(connection),
+    isConnected: connection?connection.isConnected:false,
     intl
   };
 };
 
 export default connect(
   mapStateToProps,
-)(injectIntl(muiThemeable()(Activity)));
+)(injectIntl(muiThemeable()(withFirebase(Activity))));

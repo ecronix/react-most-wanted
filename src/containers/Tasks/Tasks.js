@@ -7,45 +7,19 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import ListActions from '../../firebase/list/actions';
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
 import { green800} from 'material-ui/styles/colors';
 import {BottomNavigation} from 'material-ui/BottomNavigation';
 import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-
-const styles={
-  center_container:{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    margin: 16,
-  },
-  button: {
-    position: 'fixed',
-    right: 18,
-    zIndex:3,
-    bottom: 18,
-  },
-
-  text_input: {
-    position: 'fixed',
-    zIndex:3,
-    bottom: 15,
-    marginLeft: -155
-  }
-}
-
+import { withFirebase } from 'firekit';
 
 class Tasks extends Component {
 
@@ -54,6 +28,7 @@ class Tasks extends Component {
     this.name = null;
     this.listEnd=null
     this.new_task_title = null;
+    this.state={value: '' }
   }
 
   scrollToBottom = () => {
@@ -63,16 +38,14 @@ class Tasks extends Component {
 
   componentDidUpdate(prevProps, prevState) {
 
-    if(Object.keys(prevProps.tasks.list).length!==Object.keys(this.props.tasks.list).length && !this.props.tasks.isEditing){
-      this.scrollToBottom();
-    }
+    this.scrollToBottom();
 
   }
 
   componentDidMount() {
-    const {initialiseList}=this.props;
+    const {watchList}=this.props;
 
-    initialiseList();
+    watchList('public_tasks')
     this.scrollToBottom();
   }
 
@@ -82,15 +55,8 @@ class Tasks extends Component {
     }
   }
 
-  componentWillUnmount() {
-    const {unsubscribeList}=this.props;
-
-    unsubscribeList();
-  }
-
-
   handleAddTask = () => {
-    const {pushChild, auth, setIsCreating}=this.props;
+    const { auth, firebaseApp}=this.props;
 
     const title=this.name.getValue();
 
@@ -103,22 +69,21 @@ class Tasks extends Component {
       completed: false
     }
 
+    this.name.input.value='';
+
     if(title.length>0){
-      pushChild(newTask);
+      firebaseApp.database().ref('public_tasks').push(newTask);
     }
-    setIsCreating(false);
+
+
 
   }
 
   handleUpdateTask = (key, task) => {
-    const { updateChild, setIsEditing }=this.props;
-    updateChild(key, task);
-    setIsEditing(false);
+    const { firebaseApp }=this.props;
+    firebaseApp.database().ref(`public_tasks/${key}`).update(task);
   }
 
-  handleCompletedChange = () => {
-
-  }
 
   userAvatar = (key, task) => {
     const {auth} =this.props;
@@ -144,223 +109,119 @@ class Tasks extends Component {
   }
 
   renderList(tasks) {
-    const {muiTheme, setIsEditing, auth, intl, history, browser, setDialogIsOpen} =this.props;
+    const { auth, intl, history, browser, setDialogIsOpen} =this.props;
 
-    return _.map(tasks.list, (task, key) => {
+    if(tasks===undefined){
+      return <div></div>
+    }
 
-      const isEditing=tasks.isEditing===key;
+    return _.map(tasks, (task, key) => {
 
       return <div key={key}>
 
-        {isEditing && <ListItem
-          leftAvatar={this.userAvatar(key, task)}
-          key={key} >
-          <TextField
-            id="new_task_title"
-            style={{height: 26}}
-            underlineShow={false}
-            defaultValue={task.title}
-            fullWidth={true}
-            onKeyDown={(event)=>{this.handleKeyDown(event, ()=>{this.handleUpdateTask(key, {...task, title: this.new_task_title.getValue()})})}}
-            ref={(field) => { this.new_task_title = field; this.new_task_title && this.new_task_title.focus(); }}
-            type="Text"
-          />
-
-          <div>
-            <IconButton
-              onTouchTap={tasks.isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
-              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'save'}</FontIcon>
-            </IconButton>
-
-            <IconButton
-              onTouchTap={()=>{history.push(`/tasks/edit/${key}`); setIsEditing(false)}}>
-              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'open_in_new'}</FontIcon>
-            </IconButton>
-
-            <IconButton
-              onTouchTap={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
-              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{'delete'}</FontIcon>
-            </IconButton>
-
-            <IconButton
-              onTouchTap={()=>{setIsEditing(false);}}>
-              <FontIcon className="material-icons" color={'red'}>{'cancel'}</FontIcon>
-            </IconButton>
-          </div>
-
-        </ListItem>
-
-      }
-
-      {!isEditing &&
         <ListItem
           key={key}
-          //onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
+          onTouchTap={task.userId===auth.uid?()=>{history.push(`/tasks/edit/${key}`)}:undefined}
+          primaryText={task.title}
+          secondaryText={`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}
           leftAvatar={this.userAvatar(key, task)}
-          id={key}>
+          rightIconButton={
+            task.userId===auth.uid?
+            <IconButton
+              style={{display:browser.lessThan.medium?'none':undefined}}
+              onTouchTap={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
+              <FontIcon className="material-icons" color={'red'}>{'delete'}</FontIcon>
+            </IconButton>:undefined
+          }
+          id={key}
+        />
 
-          <div style={{display: 'flex'}}>
-            <div>
-              <div>
-                {task.title}
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  lineHeight: '16px',
-                  height: 16,
-                  margin: 0,
-                  marginTop: 4,
-                  color: muiTheme.listItem.secondaryTextColor,
-                }}>
-                {`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}
-              </div>
-              {task.description && <br/>}
-              {task.description && task.description.split('\n').map(function(item, key) {
-                return (
-                  <span key={key}>
-                    {item}
-                    <br/>
-                  </span>
-                )
-              })}
-            </div>
 
-            <div style={{alignSelf: 'center'}}>
-              {task.userId===auth.uid?
-                <div>
-                  <IconButton
-                    onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{setIsEditing(key);}}>
-                    <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>{isEditing?'save':'edit'}</FontIcon>
-                  </IconButton>
-                  <IconButton
-                    style={{display:browser.lessThan.medium?'none':undefined}}
-                    onTouchTap={isEditing?()=>{this.handleUpdateTask(key,{...task, title: this.new_task_title.getValue()})}:()=>{history.push(`/tasks/edit/${key}`)}}>
-                    <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>open_in_new</FontIcon>
-                  </IconButton>
-                  <IconButton
-                    style={{display:browser.lessThan.medium?'none':undefined}}
-                    onTouchTap={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
-                    <FontIcon className="material-icons" color={'red'}>{'delete'}</FontIcon>
-                  </IconButton>
-                </div>:undefined
-              }
-            </div>
+        <Divider inset={true}/>
+      </div>
+    });
+  }
+
+  handleClose = () => {
+    const { setDialogIsOpen }=this.props;
+    setDialogIsOpen('delete_task_from_list', undefined);
+  }
+
+  handleDelete = (key) => {
+    const {firebaseApp, dialogs} =this.props;
+    firebaseApp.database().ref(`public_tasks/${dialogs.delete_task_from_list}`).remove();
+    this.handleClose();
+  }
+
+  render(){
+    const {intl, tasks, muiTheme, dialogs} =this.props;
+
+
+    const actions = [
+      <FlatButton
+        label={intl.formatMessage({id: 'cancel'})}
+        primary={true}
+        onTouchTap={this.handleClose}
+      />,
+      <FlatButton
+        label={intl.formatMessage({id: 'delete'})}
+        secondary={true}
+        onTouchTap={this.handleDelete}
+      />,
+    ];
+
+    return (
+      <Activity
+        isLoading={tasks===undefined}
+        containerStyle={{overflow:'hidden'}}
+        title={intl.formatMessage({id: 'tasks'})}>
+
+        <div id="scroller" style={{overflow: 'auto', height: '100%'}}>
+
+          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
+            <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
+              {this.renderList(tasks)}
+            </List>
+            <div style={{ float:"left", clear: "both" }}
+              ref={(el) => { this.listEnd = el; }}
+            />
           </div>
-        </ListItem>
-      }
-      <Divider inset={true}/>
-    </div>
-  });
-}
-
-handleClose = () => {
-  const { setDialogIsOpen }=this.props;
-
-  setDialogIsOpen('delete_task_from_list', undefined);
-
-}
-
-handleDelete = (key) => {
-
-  const {removeChild, dialogs} =this.props;
-
-  removeChild(dialogs.delete_task_from_list)
-  this.handleClose();
-
-}
 
 
-render(){
-  const {intl, tasks,  setIsCreating, muiTheme, history, dialogs} =this.props;
+          {tasks &&
+            <BottomNavigation style={{width: '100%'}}>
+              <div style={{display:'flex', alignItems: 'center', justifyContent: 'center', padding: 15 }}>
+                <TextField
+                  id="public_task"
+                  fullWidth={true}
+                  onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
+                  ref={(field) => { this.name = field; this.name && this.name.focus(); }}
+                  type="Text"
+                />
+                <IconButton
+                  onTouchTap={this.handleAddTask}>
+                  <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
+                </IconButton>
+              </div>
+            </BottomNavigation>
+          }
+
+          <Dialog
+            title={intl.formatMessage({id: 'delete_task_title'})}
+            actions={actions}
+            modal={false}
+            open={dialogs.delete_task_from_list!==undefined}
+            onRequestClose={this.handleClose}>
+            {intl.formatMessage({id: 'delete_task_message'})}
+          </Dialog>
 
 
-  const actions = [
-    <FlatButton
-      label={intl.formatMessage({id: 'cancel'})}
-      primary={true}
-      onTouchTap={this.handleClose}
-    />,
-    <FlatButton
-      label={intl.formatMessage({id: 'delete'})}
-      secondary={true}
-      onTouchTap={this.handleDelete}
-    />,
-  ];
-
-  return (
-    <Activity
-      isLoading={tasks.isFetching}
-      containerStyle={{overflow:'hidden'}}
-      title={intl.formatMessage({id: 'tasks'})}>
-
-      <div id="scroller" style={{overflow: 'auto', height: '100%'}}>
-        {tasks.isFetching && tasks.isConnected && !Object.keys(tasks.list).length &&
-          <div style={styles.center_container}>
-            <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
-          </div>
-        }
-
-        <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
-          <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
-            {this.renderList(tasks)}
-          </List>
-          <div style={{ float:"left", clear: "both" }}
-            ref={(el) => { this.listEnd = el; }}
-          />
         </div>
 
-        <Dialog
-          title={intl.formatMessage({id: 'delete_task_title'})}
-          actions={actions}
-          modal={false}
-          open={dialogs.delete_task_from_list!==undefined}
-          onRequestClose={this.handleClose}>
-          {intl.formatMessage({id: 'delete_task_message'})}
-        </Dialog>
+      </Activity>
+    );
 
-        { tasks.isCreating &&
-          <BottomNavigation style={{width: '100%'}}>
-            <div style={{display:'flex', alignItems: 'center', justifyContent: 'space-between', }}>
-              <IconButton
-                onTouchTap={()=>{setIsCreating(false)}}>
-                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>highlight_off</FontIcon>
-              </IconButton>
-              <TextField
-                id="public_task"
-                fullWidth={true}
-                onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
-                ref={(field) => { this.name = field; this.name && this.name.focus(); }}
-                type="Text"
-              />
-              <IconButton
-                onTouchTap={this.handleAddTask}>
-                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
-              </IconButton>
-            </div>
-          </BottomNavigation>
-        }
-
-        { !tasks.isCreating &&
-          <div style={styles.button}>
-            <FloatingActionButton secondary={true} onTouchTap={()=>{history.push(`/tasks/create`)}} style={{zIndex:3}}>
-            <FontIcon className="material-icons" >add_to_photos</FontIcon>
-          </FloatingActionButton>
-          <div style={{margin:5}}></div>
-          <FloatingActionButton secondary={true} onTouchTap={()=>{setIsCreating(true)}} style={{zIndex:3}}>
-            <FontIcon className="material-icons" >add</FontIcon>
-          </FloatingActionButton>
-        </div>
-      }
-
-
-    </div>
-
-
-  </Activity>
-);
-
-}
+  }
 
 }
 
@@ -370,13 +231,11 @@ Tasks.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
-const publicTasksActions = new ListActions('public_tasks').createActions();
-
 const mapStateToProps = (state) => {
-  const { tasks, auth, browser, dialogs } = state;
+  const { lists, auth, browser, dialogs } = state;
 
   return {
-    tasks,
+    tasks: lists.public_tasks,
     auth,
     browser,
     dialogs
@@ -388,5 +247,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { ...publicTasksActions, setDialogIsOpen }
-)(injectIntl(muiThemeable()(withRouter(Tasks))));
+  { setDialogIsOpen }
+)(injectIntl(muiThemeable()(withRouter(withFirebase(Tasks)))));

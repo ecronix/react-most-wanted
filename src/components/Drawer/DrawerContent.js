@@ -51,8 +51,6 @@ const DrawerContent = (props, context) => {
     }
   });
 
-
-
   const localeItems=allLocales.map((l)=>{
 
     return {
@@ -153,6 +151,7 @@ const DrawerContent = (props, context) => {
     },
 
   ];
+
 
   return (
     <div style={{

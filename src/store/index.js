@@ -33,7 +33,7 @@ export default function configureStore() {
   ));
 
   try{
-    persistStore(store, {blacklist:['auth', 'form', 'connection'] }, ()=>{});
+    persistStore(store, {blacklist:['auth', 'form', 'connection', 'initialization'] }, ()=>{});
   }catch(e){
 
   }

@@ -9,7 +9,7 @@ import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import { ImageCropDialog } from '../../containers/ImageCropDialog';
-
+import { withRouter } from 'react-router-dom';
 
 class Form extends Component {
 
@@ -20,17 +20,8 @@ class Form extends Component {
   }
 
   render() {
-    const {handleSubmit, intl, users, initialized, setDialogIsOpen, dialogs, match} = this.props;
+    const {handleSubmit, intl, initialized, setDialogIsOpen, dialogs, match} = this.props;
     const uid=match.params.uid;
-
-    let usersSource=[];
-
-    const usersList=users.list;
-
-    Object.keys(usersList).forEach((key,index) => {
-      const user= usersList[key];
-      usersSource.push({id: key, name: user.displayName});
-    });
 
     return (
       <form onSubmit={handleSubmit} style={{
@@ -168,4 +159,4 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, { setDialogIsOpen }
-)(injectIntl(Form));
+)(injectIntl(withRouter(Form)));

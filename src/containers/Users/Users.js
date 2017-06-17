@@ -5,33 +5,18 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import ListActions from '../../firebase/list/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import CircularProgress from 'material-ui/CircularProgress';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
 import IconButton from 'material-ui/IconButton';
-
-const styles={
-  center_container:{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    margin: 16,
-  },
-}
+import { withFirebase } from 'firekit';
 
 class Users extends Component {
 
   componentDidMount() {
-    this.props.initialiseList();
-  }
-
-  componentWillUnmount() {
-    this.props.unsubscribeList();
+    this.props.watchList('users');
   }
 
   getProviderIcon = (provider) => {
@@ -74,7 +59,11 @@ class Users extends Component {
     const {intl, muiTheme} =this.props;
 
 
-    return _.map(users.list, (user, key) => {
+    if(users===undefined){
+      return <div></div>
+    }
+
+    return _.map(users, (user, key) => {
 
       return <div key={key}>
         <ListItem
@@ -127,14 +116,9 @@ class Users extends Component {
 
     return (
       <Activity
-        isLoading={users.isFetching}
+        isLoading={users===undefined}
         title={intl.formatMessage({id: 'users'})}>
         <div >
-          {users.isFetching && users.isConnected && !Object.keys(users.list).length &&
-            <div style={styles.center_container}>
-              <CircularProgress  style={{padding: 20}} size={80} thickness={5} />
-            </div>
-          }
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
             <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
@@ -158,20 +142,15 @@ Users.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
-const usersActions = new ListActions('users').createActions();
-
 const mapStateToProps = (state) => {
-  const { users, auth } = state;
+  const { lists, auth } = state;
   return {
-    users,
+    users: lists.users,
     auth
   };
 };
 
 
 export default connect(
-  mapStateToProps,
-  {
-    ...usersActions
-  }
-)(injectIntl(muiThemeable()(Users)));
+  mapStateToProps
+)(injectIntl(muiThemeable()(withFirebase(Users))));

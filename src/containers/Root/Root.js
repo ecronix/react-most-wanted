@@ -5,24 +5,29 @@ import {getLocaleMessages} from '../../locales';
 import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import { initAuth } from '../../store/auth/actions';
-import { initConnection, unsubscribeConnection } from '../../store/connection/actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
 import {Routes} from '../../components/Routes';
+import {  withFirebase } from 'firekit';
 
 class Root extends Component {
 
   componentWillMount () {
-    const { initAuth, initConnection }= this.props;
+    const { initAuth, initConnection, watchPath }= this.props;
     initAuth();
+
+    watchPath('public_tasks_count');
+
 
     //Set connection listener with delay
     setTimeout(function(){ initConnection();}, 3000);
   }
 
   componentWillUnmount() {
-    const { unsubscribeConnection }= this.props;
+    const { unsubscribeConnection, unwatchAllLists, unwatchAllPaths }= this.props;
     unsubscribeConnection();
+    unwatchAllLists();
+    unwatchAllPaths();
   }
 
   render() {
@@ -31,7 +36,7 @@ class Root extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <IntlProvider locale={locale} messages={messages}>
-          <Routes />
+            <Routes />
         </IntlProvider>
       </MuiThemeProvider>
     );
@@ -66,5 +71,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {initAuth, initConnection, unsubscribeConnection}
-)(Root);
+  mapStateToProps, {initAuth}
+)(withFirebase(Root));

@@ -23,7 +23,7 @@ const history = createHistory();
 const Routes = (props, context) => {
 
   return (
-    
+
     <Router history={history} >
       <Switch >
         <RestrictedRoute type='private' path="/" exact component={Dashboard} />

@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
+import { withFirebase } from 'firekit';
 
-export const About = ({intl}) => {
+class About extends Component {
 
-  return (
-    <Activity
-      title={intl.formatMessage({id: 'about'})}>
+  render() {
+    const { intl }= this.props;
 
-
-    </Activity>
-  );
+    return (
+      <Activity
+        title={intl.formatMessage({id: 'about'})}>
+      </Activity>
+    );
+  }
 
 }
 
@@ -19,4 +22,4 @@ About.propTypes = {
 };
 
 
-export default injectIntl(About);
+export default injectIntl(withFirebase(About));

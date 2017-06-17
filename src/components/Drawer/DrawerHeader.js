@@ -11,7 +11,6 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import CircularProgress from 'material-ui/CircularProgress';
 
 const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
-
   const styles={
     header:{
       padding: 5,
@@ -32,50 +31,43 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
     }
   }
 
-
-
   return (
-    <Paper  zDepth={1} style={styles.paper}>
-
-      {auth.isAuthorised&&
+    <Paper zDepth={1} style={styles.paper}>
+      {auth.isAuthorised &&
         <div>
-
-          {auth.isFetching && <CircularProgress size={80} thickness={5} />}
-
+          {auth.isFetching &&
+            <CircularProgress size={80} thickness={5} />
+          }
           {!auth.isFetching &&
-
             <List>
               <ListItem
                 disabled={true}
                 leftAvatar={
-                  <Avatar
-                    size={45}
-                    src={auth.photoURL}
-                    alt="person"
-                    icon={<FontIcon className="material-icons" >person</FontIcon>}
-                  />
+                  <Avatar size={45} src={auth.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>} />
                 }
               />
+
               <ListItem
-                disabled={true}
                 primaryText={auth.displayName}
                 secondaryText={auth.email}
                 rightIconButton={
-                  <IconButton
-                    onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
-                    touch={true}>
-                    <FontIcon className="material-icons" >{auth.isMenuOpen?'arrow_drop_up':'arrow_drop_down'}</FontIcon>
+                  <IconButton onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}>
+                    <FontIcon className="material-icons" >{auth.isMenuOpen?'arrow_drop_up': 'arrow_drop_down'}</FontIcon>
                   </IconButton>
                 }
 
+                disableFocusRipple={true}
+                disableTouchRipple={true}
+
+                style={{ backgroundColor: 'transparent' }}
+                onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
               />
             </List>
           }
         </div>
       }
 
-      {!auth.isAuthorised&&
-
+      {!auth.isAuthorised &&
         <List>
           <ListItem
             disabled={true}
@@ -89,7 +81,6 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
       }
     </Paper>
   );
-
 }
 
 export default injectIntl(muiThemeable()(DrawerHeader));
