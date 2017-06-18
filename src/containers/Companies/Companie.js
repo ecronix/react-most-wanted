@@ -10,7 +10,7 @@ import firebase from 'firebase';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import { firebaseDb } from '../../firebase';
+import { withFirebase } from 'firekit';
 
 const path='/companies/';
 
@@ -43,11 +43,11 @@ class Companie extends Component {
 
   handleDelete = () => {
 
-    const {history, match}=this.props;
+    const {history, match, firebaseApp}=this.props;
     const uid=match.params.uid;
 
     if(uid){
-      firebaseDb.ref().child(`${path}${uid}`).remove().then(()=>{
+      firebaseApp.database().ref().child(`${path}${uid}`).remove().then(()=>{
         this.handleClose();
         history.goBack();
       })
@@ -122,4 +122,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps, {setDialogIsOpen}
-)(injectIntl(withRouter(Companie)));
+)(injectIntl(withRouter(withFirebase(Companie))));

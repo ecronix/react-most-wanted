@@ -20,7 +20,7 @@ import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { withFirebase } from 'firekit';
-
+ 
 class Tasks extends Component {
 
   constructor(props) {
@@ -43,9 +43,9 @@ class Tasks extends Component {
   }
 
   componentDidMount() {
-    const {watchList}=this.props;
-
-    watchList('public_tasks')
+    const {watchList, firebaseApp}=this.props;
+    let tasksRef=firebaseApp.database().ref('public_tasks').orderByKey().limitToLast(20);
+    watchList(tasksRef)
     this.scrollToBottom();
   }
 
