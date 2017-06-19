@@ -57,10 +57,9 @@ class Users extends Component {
 
 
   renderItem = (index, key) => {
-    const { user_keys, users, intl, muiTheme} =this.props;
+    const { users, intl, muiTheme} =this.props;
 
-    const userUid=user_keys[index];
-    const user=users[userUid];
+    const user=users[index].val;
 
     return <div key={key}>
         <ListItem
@@ -107,7 +106,7 @@ class Users extends Component {
   }
 
   render(){
-    const {intl, users, muiTheme, user_keys} =this.props;
+    const {intl, users, muiTheme } =this.props;
 
     return (
       <Activity
@@ -119,7 +118,7 @@ class Users extends Component {
             <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
               <ReactList
                 itemRenderer={this.renderItem}
-                length={user_keys.length}
+                length={users?users.length:0}
                 type='simple'
               />
             </List>
@@ -146,7 +145,6 @@ const mapStateToProps = (state) => {
 
   return {
     users: lists.users,
-    user_keys: lists.users?Object.keys(lists.users):[],
     auth
   };
 };

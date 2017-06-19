@@ -12,7 +12,7 @@
   "dependencies": {
     "firebase": "^4.1.2",
     "firebaseui": "^2.1.1",
-    "firekit": "^0.1.13",
+    "firekit": "^0.1.14",
     "github-markdown-css": "^2.7.0",
     "immutable": "^3.8.1",
     "intl": "^1.2.5",
