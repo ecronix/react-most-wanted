@@ -17,7 +17,7 @@ class Root extends Component {
     initAuth();
 
     watchPath('public_tasks_count');
-    initMessaging();
+    initMessaging((payload)=>{console.log(payload);});
 
     //Set connection listener with delay
     setTimeout(function(){ initConnection();}, 3000);

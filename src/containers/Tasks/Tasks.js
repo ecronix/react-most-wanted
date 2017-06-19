@@ -20,7 +20,7 @@ import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { withFirebase } from 'firekit';
- 
+
 class Tasks extends Component {
 
   constructor(props) {
