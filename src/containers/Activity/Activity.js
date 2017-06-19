@@ -55,6 +55,7 @@ export class Activity extends Component {
       watchPath,
       unwatchPath,
       unwatchAllPaths,
+      initMessaging,
       ...rest
     } = this.props;
 

@@ -13,11 +13,11 @@ import {  withFirebase } from 'firekit';
 class Root extends Component {
 
   componentWillMount () {
-    const { initAuth, initConnection, watchPath }= this.props;
+    const { initAuth, initConnection, watchPath,initMessaging }= this.props;
     initAuth();
 
     watchPath('public_tasks_count');
-
+    initMessaging();
 
     //Set connection listener with delay
     setTimeout(function(){ initConnection();}, 3000);

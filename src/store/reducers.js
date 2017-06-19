@@ -4,7 +4,6 @@ import { responsiveDrawer } from 'material-ui-responsive-drawer';
 import { reducer as formReducer } from 'redux-form'
 import auth from './auth/reducer';
 import dialogs from './dialogs/reducer';
-import messaging from './messaging/reducer';
 import locale from './locale/reducer';
 import theme from './theme/reducer';
 import firekitReducers from 'firekit';
@@ -15,7 +14,6 @@ const reducers = combineReducers({
   form: formReducer,
   auth,
   dialogs,
-  messaging,
   locale,
   theme,
   ...firekitReducers

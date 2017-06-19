@@ -7,15 +7,15 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import firebaseui from 'firebaseui';
 import {firebaseAuth} from '../../firebase';
 import config from '../../config';
-import { initMessaging } from '../../store/messaging/actions';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { withFirebase } from 'firekit';
 
 var authUi = new firebaseui.auth.AuthUI(firebaseAuth);
 
 class SignIn extends Component {
 
   componentDidMount() {
-    const {browser, initMessaging}= this.props;
+    const {browser}= this.props;
 
     var uiConfig = {
       signInSuccessUrl: '/',
@@ -23,7 +23,7 @@ class SignIn extends Component {
       callbacks: {
         signInSuccess: function(user, credentials, redirect) {
 
-          initMessaging();
+          //initMessaging((payload)=>{console.log(payload);});
 
           //To avoid page reload on single page applications
           return false;
@@ -74,5 +74,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initMessaging}
-)(injectIntl(muiThemeable()(withRouter(SignIn))));
+)(injectIntl(muiThemeable()(withRouter(withFirebase(SignIn)))));
