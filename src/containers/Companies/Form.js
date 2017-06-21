@@ -40,6 +40,12 @@ class Form extends Component {
             name="photoURL"
             size={120}
             component={Avatar}
+            icon={
+              <FontIcon
+                className="material-icons">
+                business
+              </FontIcon>
+            }
             ref="photoURL"
             withRef
           />

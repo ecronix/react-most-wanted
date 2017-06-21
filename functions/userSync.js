@@ -7,15 +7,12 @@ module.exports = {
     }
 
     const eventSnapshot=event.data;
-    
+
     //Sync only if displayName and photoURL changed
-    if(!eventSnapshot.child('displayName').changed()){
+    if(!eventSnapshot.child('displayName').changed() && !eventSnapshot.child('photoURL').changed()){
       return;
     }
 
-    if(!eventSnapshot.child('photoURL').changed()){
-      return;
-    }
 
     let tasksRef=admin.database().ref("/public_tasks");
 

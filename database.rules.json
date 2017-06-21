@@ -21,6 +21,22 @@
       ".read": "auth != null",
       ".write": "auth != null"
     },
+    "public_chats":{
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "private_chats":{
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "private_chat_members":{
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "messages":{
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "users_count":{
       ".read": true,
       ".write": "auth != null"

@@ -8,7 +8,12 @@ export default `
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-V 0.1.15
+Because this project uses service workers I use this to check if the newest version is really loaded:
+
+[firekit](https://github.com/TarikHuber/firekit) version: **v0.1.16**
+
+React Most Wanted version: **v0.1.16**
+
 
 It should be a @shell@ for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
 
