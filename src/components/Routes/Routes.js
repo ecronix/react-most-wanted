@@ -5,7 +5,6 @@ import { MyAccount } from '../../containers/MyAccount';
 import { Tasks, Task } from '../../containers/Tasks';
 import { Companies, Companie } from '../../containers/Companies';
 import { Users } from '../../containers/Users';
-import { ResetPassword } from '../../containers/ResetPassword';
 import { PageNotFound } from '../../components/PageNotFound';
 import { SignIn } from '../../containers/SignIn';
 import { RestrictedRoute } from '../../containers/RestrictedRoute';
@@ -41,7 +40,6 @@ const Routes = (props, context) => {
         <RestrictedRoute type='private' path="/about" exact component={About}  />
         <RestrictedRoute type='private' path="/my_account"  exact component={MyAccount} />
         <RestrictedRoute type='public' path="/signin" component={SignIn} />
-        <RestrictedRoute type='public' path="/reset" component={ResetPassword} />
         <Route component={PageNotFound} />
       </Switch>
     </Router>

@@ -4,30 +4,81 @@ import { connect } from 'react-redux';
 import {getLocaleMessages} from '../../locales';
 import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { initAuth } from '../../store/auth/actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
-import {Routes} from '../../components/Routes';
-import {  withFirebase } from 'firekit';
+import { Routes } from '../../components/Routes';
+import firebase from 'firebase';
+import { withFirebase } from 'firekit';
 
 class Root extends Component {
 
-  componentWillMount () {
-    const { initAuth, initConnection, watchPath,initMessaging }= this.props;
-    initAuth();
 
-    watchPath('public_tasks_count');
-    initMessaging((payload)=>{console.log(payload);});
+  handlePresence = (user) => {
+    const { firebaseApp }= this.props;
+    let myConnectionsRef = firebaseApp.database().ref(`users/${user.uid}/connections`);
 
-    //Set connection listener with delay
-    setTimeout(function(){ initConnection();}, 3000);
+    let lastOnlineRef = firebaseApp.database().ref(`users/${user.uid}/lastOnline`);
+    lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+
+    var con = myConnectionsRef.push(true)
+    con.onDisconnect().remove();
+  }
+
+
+  handleTokenChange = (token) => {
+    const { firebaseApp }= this.props;
+
+    firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/notificationTokens/${token}`).set(true);
+  }
+
+
+  onAuthStateChanged = (user) => {
+    const {
+      clearInitialization,
+      watchConnection,
+      messaging,
+      initMessaging,
+      firebaseApp
+    }= this.props;
+
+    clearInitialization();
+
+    if(user){
+
+      this.handlePresence(user);
+      setTimeout(()=>{ watchConnection();}, 1000);
+
+      const userData={
+        displayName: user.displayName?user.displayName:'UserName',
+        email: user.email?user.email:'-',
+        photoURL: user.photoURL,
+        emailVerified:user.emailVerified,
+        isAnonymous:user.isAnonymous,
+        uid: user.uid,
+        providerData: user.providerData,
+      };
+
+      if(messaging===undefined || !messaging.isInitialized){
+        initMessaging(token=>{this.handleTokenChange(token)})
+        firebaseApp.database().ref(`users/${user.uid}`).update(userData);
+      }
+
+      return userData;
+
+    }else{
+      return null;
+    }
+
+  }
+
+  componentDidMount () {
+    const { watchAuth }= this.props;
+    watchAuth(this.onAuthStateChanged);
   }
 
   componentWillUnmount() {
-    const { unsubscribeConnection, unwatchAllLists, unwatchAllPaths }= this.props;
-    unsubscribeConnection();
-    unwatchAllLists();
-    unwatchAllPaths();
+    const { clearApp }= this.props;
+    clearApp();
   }
 
   render() {
@@ -36,7 +87,7 @@ class Root extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <IntlProvider locale={locale} messages={messages}>
-            <Routes />
+          <Routes />
         </IntlProvider>
       </MuiThemeProvider>
     );
@@ -49,9 +100,6 @@ Root.propTypes = {
   source: PropTypes.object.isRequired,
   messages: PropTypes.object.isRequired,
   muiTheme: PropTypes.object.isRequired,
-  initAuth: PropTypes.func.isRequired,
-  initConnection: PropTypes.func.isRequired,
-  unsubscribeConnection: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -71,5 +119,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {initAuth}
+  mapStateToProps
 )(withFirebase(Root));

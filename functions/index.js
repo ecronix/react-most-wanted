@@ -20,6 +20,7 @@ const messaging = require('./messaging');
 const userNotifications = require('./userNotifications');
 const userSync = require('./userSync');
 
+
 exports.handleTasksChange = functions.database.ref('/public_tasks/{taskUid}').onWrite(
   (event)=> {
     return Promise.all([
@@ -28,6 +29,8 @@ exports.handleTasksChange = functions.database.ref('/public_tasks/{taskUid}').on
     ])
   }
 );
+
+
 
 exports.recountTasks = functions.database.ref('/public_tasks_count').onWrite(
   (event)=> counting.handleRecount(event, 'public_tasks')

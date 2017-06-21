@@ -8,9 +8,9 @@ import Paper from 'material-ui/Paper';
 import {RMWIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import CircularProgress from 'material-ui/CircularProgress';
+import { withFirebase } from 'firekit';
 
-const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
+const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser, dialogs, setDialogIsOpen, firebaseApp}) => {
   const styles={
     header:{
       padding: 5,
@@ -33,12 +33,8 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
 
   return (
     <Paper zDepth={1} style={styles.paper}>
-      {auth.isAuthorised &&
+      {auth.isAuthorised  &&
         <div>
-          {auth.isFetching &&
-            <CircularProgress size={80} thickness={5} />
-          }
-          {!auth.isFetching &&
             <List>
               <ListItem
                 disabled={true}
@@ -51,19 +47,15 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
                 primaryText={auth.displayName}
                 secondaryText={auth.email}
                 rightIconButton={
-                  <IconButton onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}>
-                    <FontIcon className="material-icons" >{auth.isMenuOpen?'arrow_drop_up': 'arrow_drop_down'}</FontIcon>
+                  <IconButton onTouchTap={()=>{setDialogIsOpen('auth_menu', dialogs.auth_menu?false:true)}}>
+                    <FontIcon className="material-icons" >{dialogs.auth_menu?'arrow_drop_up': 'arrow_drop_down'}</FontIcon>
                   </IconButton>
                 }
-
                 disableFocusRipple={true}
-                disableTouchRipple={true}
-
                 style={{ backgroundColor: 'transparent' }}
-                onTouchTap={()=>{setAuthMenuOpen(!auth.isMenuOpen)}}
+                onTouchTap={()=>{setDialogIsOpen('auth_menu', dialogs.auth_menu?false:true)}}
               />
             </List>
-          }
         </div>
       }
 
@@ -83,4 +75,4 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser}) => {
   );
 }
 
-export default injectIntl(muiThemeable()(DrawerHeader));
+export default injectIntl(muiThemeable()(withFirebase(DrawerHeader)));

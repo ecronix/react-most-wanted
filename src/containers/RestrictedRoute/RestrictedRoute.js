@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as authSelectors from '../../store/auth/selectors'
 import { Route , Redirect } from 'react-router';
 
 
@@ -28,7 +27,7 @@ const mapStateToProps = (state) => {
   const { auth } = state;
 
   return {
-    isAuthorised: authSelectors.isAuthorised(auth)
+    isAuthorised: auth.isAuthorised
   };
 };
 

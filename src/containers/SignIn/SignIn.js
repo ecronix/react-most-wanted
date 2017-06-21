@@ -15,7 +15,7 @@ var authUi = new firebaseui.auth.AuthUI(firebaseAuth);
 class SignIn extends Component {
 
   componentDidMount() {
-    const {browser}= this.props;
+    const {browser, initMessaging}= this.props;
 
     var uiConfig = {
       signInSuccessUrl: '/',
@@ -23,13 +23,13 @@ class SignIn extends Component {
       callbacks: {
         signInSuccess: function(user, credentials, redirect) {
 
-          //initMessaging((payload)=>{console.log(payload);});
+          initMessaging();
 
           //To avoid page reload on single page applications
           return false;
         }
       },
-      signInOptions: config.firebase_providers
+      signInOptions: config.firebase_providers.map((p)=>p.PROVIDER_ID)
     };
 
     authUi.start('#firebaseui-auth', uiConfig);

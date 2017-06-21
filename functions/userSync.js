@@ -6,13 +6,26 @@ module.exports = {
       return;
     }
 
+    const eventSnapshot=event.data;
+    
+    //Sync only if displayName and photoURL changed
+    if(!eventSnapshot.child('displayName').changed()){
+      return;
+    }
+
+    if(!eventSnapshot.child('photoURL').changed()){
+      return;
+    }
+
     let tasksRef=admin.database().ref("/public_tasks");
 
     var query = tasksRef.orderByChild("userId").equalTo(event.params.userUid);
 
-    const eventSnapshot=event.data;
+
     const userName=eventSnapshot.child('displayName').val();
     const userPhotoURL=eventSnapshot.child('photoURL').val();
+
+
 
     return query.once('value')
     .then((snapshot) =>{

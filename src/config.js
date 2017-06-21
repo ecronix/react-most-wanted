@@ -10,12 +10,12 @@ const config= {
     messagingSenderId: "258373383650"
   },
   firebase_providers: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+    firebase.auth.GoogleAuthProvider,
+    firebase.auth.FacebookAuthProvider,
+    firebase.auth.TwitterAuthProvider,
+    firebase.auth.GithubAuthProvider,
+    firebase.auth.EmailAuthProvider,
+    firebase.auth.PhoneAuthProvider
   ],
   initial_state: {
     theme: 'dark',

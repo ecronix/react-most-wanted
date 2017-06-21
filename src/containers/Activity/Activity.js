@@ -15,7 +15,7 @@ import {
   darkWhite,
 } from 'material-ui/styles/colors';
 import config from '../../config';
-import { withFirebase } from 'firekit';
+
 
 export class Activity extends Component {
 
@@ -47,8 +47,8 @@ export class Activity extends Component {
       dispatch,
       containerStyle,
       firebaseApp,
-      initConnection,
-      unsubscribeConnection,
+      watchConnection,
+      unwatchConnection,
       watchList,
       unwatchList,
       unwatchAllLists,
@@ -56,6 +56,7 @@ export class Activity extends Component {
       unwatchPath,
       unwatchAllPaths,
       initMessaging,
+      watchAuth,
       ...rest
     } = this.props;
 
@@ -136,4 +137,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-)(injectIntl(muiThemeable()(withFirebase(Activity))));
+)(injectIntl(muiThemeable()(Activity)));

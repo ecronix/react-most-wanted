@@ -8,7 +8,7 @@ export default `
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-V 0.1.14
+V 0.1.15
 
 It should be a @shell@ for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
 
