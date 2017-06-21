@@ -3,6 +3,7 @@ import { Dashboard } from '../../containers/Dashboard';
 import { About } from '../../containers/About';
 import { MyAccount } from '../../containers/MyAccount';
 import { Tasks, Task } from '../../containers/Tasks';
+import { PublicChats } from '../../containers/PublicChats';
 import { Companies, Companie } from '../../containers/Companies';
 import { Users } from '../../containers/Users';
 import { PageNotFound } from '../../components/PageNotFound';
@@ -27,6 +28,8 @@ const Routes = (props, context) => {
       <Switch >
         <RestrictedRoute type='private' path="/" exact component={Dashboard} />
         <RestrictedRoute type='private' path="/dashboard" exact component={Dashboard} />
+
+        <RestrictedRoute type='private' path="/public_chats" exact component={PublicChats} />
 
         <RestrictedRoute type='private' path="/tasks" exact component={Tasks} />
         <RestrictedRoute type='private' path="/tasks/edit/:uid" exact component={Task} />

@@ -80,6 +80,9 @@ const messages=defineMessages({
   description_hint: 'Unesi opis',
   name_label: 'Ime',
   name_hint: 'Puno ime',
+  public_chats: 'Javni chat',
+  delete_message_title: 'Izbrisi poruku?',
+  delete_message_message: 'Poruka ce biti izbrisana!',
 });
 
 export default messages;

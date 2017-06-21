@@ -80,6 +80,9 @@ const messages=defineMessages({
   description_hint: 'Enter description',
   name_label: 'Name',
   name_hint: 'Enter name',
+  public_chats: 'Public chat',
+  delete_message_title: 'Delete message?',
+  delete_message_message: 'Message will be deleted!',
 
 });
 

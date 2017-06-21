@@ -30,7 +30,13 @@ exports.handleTasksChange = functions.database.ref('/public_tasks/{taskUid}').on
   }
 );
 
-
+exports.handlePublicChatChange = functions.database.ref('/public_chats/{taskUid}').onWrite(
+  (event)=> {
+    return Promise.all([
+      messaging.handlePublicMessageAdded(event, admin)
+    ])
+  }
+);
 
 exports.recountTasks = functions.database.ref('/public_tasks_count').onWrite(
   (event)=> counting.handleRecount(event, 'public_tasks')
@@ -40,7 +46,8 @@ exports.handleUserChange = functions.database.ref('/users/{userUid}').onWrite(
   (event)=> {
     return Promise.all([
       counting.handleListChange(event, 'users_count'),
-      userSync.syncPublicTasks(event, admin)
+      userSync.syncPublicTasks(event, admin),
+      userSync.syncPublicChats(event, admin)
     ])
   }
 );

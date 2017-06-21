@@ -80,6 +80,9 @@ const messages=defineMessages({
   description_hint: 'Beschreibung eingeben',
   name_label: 'Name',
   name_hint: 'Name eingeben',
+  public_chats: 'Öffentlicher Chat',
+  delete_message_title: 'Nachricht löschen?',
+  delete_message_message: 'Die Nachrricht wird gelöscht!',
 });
 
 export default messages;

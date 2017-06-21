@@ -152,9 +152,17 @@ class Tasks extends Component {
   }
 
   handleDelete = (key) => {
-    const {firebaseApp, dialogs} =this.props;
+    const {firebaseApp, dialogs, unwatchList, watchList} =this.props;
+
+    unwatchList('public_tasks');
+
     firebaseApp.database().ref(`public_tasks/${dialogs.delete_task_from_list}`).remove();
+
+    let messagesRef=firebaseApp.database().ref('public_tasks').orderByKey().limitToLast(20);
+    watchList(messagesRef)
+
     this.handleClose();
+
   }
 
   render(){
@@ -182,7 +190,7 @@ class Tasks extends Component {
 
         <div id="scroller" style={{overflow: 'auto', height: '100%'}}>
 
-          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
+          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor, paddingBottom: 56}}>
             <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
               {this.renderList(tasks)}
             </List>
@@ -193,7 +201,7 @@ class Tasks extends Component {
 
 
           {tasks &&
-            <BottomNavigation style={{width: '100%'}}>
+            <BottomNavigation style={{width: '100%', position: 'absolute', bottom: 0, right: 0, left: 0, zIndex: 50}}>
               <div style={{display:'flex', alignItems: 'center', justifyContent: 'center', padding: 15 }}>
                 <TextField
                   id="public_task"
