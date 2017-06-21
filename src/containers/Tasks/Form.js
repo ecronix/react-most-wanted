@@ -22,18 +22,12 @@ class TaskForm extends Component {
 
     let userSource=[];
 
-
     if(users){
-      Object.keys(users).forEach(function(key,index) {
-        const user= users[key];
-
-        if(user.uid!==undefined){
-          userSource.push({id: user.uid, name: user.displayName});
-        }
-
-      });
+      userSource=users.map(user=>{
+        return {id: user.key, name: user.val.displayName}
+      })
     }
-      
+
     return (
       <form onSubmit={handleSubmit} style={{height: '100%', alignItems: 'strech'}}>
         <div>
@@ -73,7 +67,7 @@ class TaskForm extends Component {
                 <div key={val.id} value={val.id?val.id:i} label={val.name}>
                   <div style={{display: 'flex', alignItems: 'center' }}>
                     <Avatar
-                      src={users[val.id]?users[val.id].photoURL:undefined}
+                      src={users[i]?users[i].val.photoURL:undefined}
                       alt="person"
                       icon={
                         <FontIcon className="material-icons" >

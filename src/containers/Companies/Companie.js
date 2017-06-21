@@ -17,7 +17,6 @@ const path='/companies/';
 
 class Companie extends Component {
 
-
   handleCreateValues = (values) => {
 
     return {
