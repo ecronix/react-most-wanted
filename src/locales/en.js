@@ -83,6 +83,7 @@ const messages=defineMessages({
   public_chats: 'Public chat',
   delete_message_title: 'Delete message?',
   delete_message_message: 'Message will be deleted!',
+  users_count_title: '{number} Users',
 
 });
 

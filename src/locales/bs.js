@@ -83,6 +83,7 @@ const messages=defineMessages({
   public_chats: 'Javni chat',
   delete_message_title: 'Izbrisi poruku?',
   delete_message_message: 'Poruka ce biti izbrisana!',
+  users_count_title: '{number} korisnika',
 });
 
 export default messages;

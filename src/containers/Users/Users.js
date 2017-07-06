@@ -17,6 +17,7 @@ class Users extends Component {
 
   componentDidMount() {
     this.props.watchList('users');
+    this.props.watchPath('users_count');
   }
 
   getProviderIcon = (provider) => {
@@ -106,12 +107,12 @@ class Users extends Component {
   }
 
   render(){
-    const {intl, users, muiTheme } =this.props;
+    const {intl, users, muiTheme, users_count } =this.props;
 
     return (
       <Activity
         isLoading={users===undefined}
-        title={intl.formatMessage({id: 'users'})}>
+        title={intl.formatMessage({id: 'users_count_title'}, {number: users_count})}>
         <div >
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
@@ -141,10 +142,11 @@ Users.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { lists, auth } = state;
+  const { lists, auth, paths } = state;
 
   return {
     users: lists.users,
+    users_count: paths.users_count,
     auth
   };
 };

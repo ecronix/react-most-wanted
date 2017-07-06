@@ -83,6 +83,7 @@ const messages=defineMessages({
   public_chats: 'Öffentlicher Chat',
   delete_message_title: 'Nachricht löschen?',
   delete_message_message: 'Die Nachrricht wird gelöscht!',
+  users_count_title: '{number} Benutzer',
 });
 
 export default messages;
