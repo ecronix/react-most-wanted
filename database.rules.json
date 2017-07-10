@@ -40,6 +40,14 @@
     "users_count":{
       ".read": true,
       ".write": "auth != null"
+    },
+    "user_registrations_per_day":{
+      ".read": "auth != null",
+      ".write": false
+    },
+    "user_registrations_per_month":{
+      ".read": "auth != null",
+      ".write": false
     }
   }
 }

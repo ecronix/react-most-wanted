@@ -113,7 +113,6 @@ module.exports = {
 
     console.log('New User created:', user);
 
-
     if(!user.displayName){
 
       const displayName = 'UserName'; //Default name
@@ -146,6 +145,35 @@ module.exports = {
 
 
   },
+  populateUserRegistrationChartsPerDay: (event, admin) => {
+
+    const year=event.data.metadata.createdAt.toISOString().slice(0, 4);
+    const month=event.data.metadata.createdAt.toISOString().slice(5, 7);
+    const day=event.data.metadata.createdAt.toISOString().slice(8, 10);
+    const dayCountRef = admin.database().ref(`/user_registrations_per_day/${year}/${month}/${day}`);
+
+    return dayCountRef.transaction(current => {
+        return (current || 0) + 1;
+    }).then(() => {
+      console.log(`User registration counter per day updated.`);
+    });
+
+  },
+  populateUserRegistrationChartsPerMonth: (event, admin) => {
+
+    const year=event.data.metadata.createdAt.toISOString().slice(0, 4);
+    const month=event.data.metadata.createdAt.toISOString().slice(5, 7);
+    const dayCountRef = admin.database().ref(`/user_registrations_per_month/${year}/${month}`);
+
+    return dayCountRef.transaction(current => {
+        return (current || 0) + 1;
+    }).then(() => {
+      console.log(`User registration counter per month updated.`);
+    });
+
+  },
+
+
   userDeleted: (event, admin) => {
 
     const user = event.data; // The Firebase user.

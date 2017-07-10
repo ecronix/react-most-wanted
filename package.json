@@ -10,6 +10,7 @@
     "redux-testkit": "^1.0.6"
   },
   "dependencies": {
+    "chart.js": "^2.6.0",
     "firebase": "^4.1.3",
     "firebaseui": "^2.2.1",
     "firekit": "^0.1.16",
@@ -25,6 +26,7 @@
     "material-ui-superselectfield": "^1.5.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-chartjs-2": "^2.1.0",
     "react-dom": "^15.6.1",
     "react-helmet": "^5.1.3",
     "react-image-cropper": "^1.1.0",

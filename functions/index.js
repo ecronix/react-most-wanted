@@ -53,13 +53,14 @@ exports.handleUserChange = functions.database.ref('/users/{userUid}').onWrite(
 );
 
 exports.recountUsers = functions.database.ref('/users_count').onWrite(
-  (event)=> counting.handleRecount(event, 'users', 7)
+  (event)=> counting.handleRecount(event, 'users', 8)
 );
 
 exports.handleUserCreated = functions.auth.user().onCreate(
   (event)=> {
     return Promise.all([
-      //userSync.userCreatedDefaults(event, admin),
+      userSync.populateUserRegistrationChartsPerDay(event, admin),
+      userSync.populateUserRegistrationChartsPerMonth(event, admin),
       userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME)
     ])
   }
