@@ -84,6 +84,7 @@ const messages=defineMessages({
   delete_message_title: 'Izbrisi poruku?',
   delete_message_message: 'Poruka ce biti izbrisana!',
   users_count_title: '{number} korisnika',
+  user_registrationg_graph_label: 'Registracije korisnika',
 });
 
 export default messages;

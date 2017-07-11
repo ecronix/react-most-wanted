@@ -84,6 +84,7 @@ const messages=defineMessages({
   delete_message_title: 'Delete message?',
   delete_message_message: 'Message will be deleted!',
   users_count_title: '{number} Users',
+  user_registrationg_graph_label: 'User registrations',
 
 });
 

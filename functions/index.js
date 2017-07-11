@@ -53,7 +53,7 @@ exports.handleUserChange = functions.database.ref('/users/{userUid}').onWrite(
 );
 
 exports.recountUsers = functions.database.ref('/users_count').onWrite(
-  (event)=> counting.handleRecount(event, 'users', 8)
+  (event)=> counting.handleRecount(event, 'users', 9)
 );
 
 exports.handleUserCreated = functions.auth.user().onCreate(

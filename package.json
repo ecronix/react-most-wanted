@@ -32,6 +32,7 @@
     "react-image-cropper": "^1.1.0",
     "react-intl": "^2.3.0",
     "react-list": "^0.8.6",
+    "react-loadable": "^4.0.3",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
@@ -42,9 +43,11 @@
     "redux-persist": "^4.8.2",
     "redux-responsive": "^4.3.2",
     "redux-thunk": "^2.2.0",
-    "seamless-immutable": "^7.1.2"
+    "seamless-immutable": "^7.1.2",
+    "source-map-explorer": "^1.4.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --collectCoverageFrom=src/store/**/*js --collectCoverageFrom=!src/store/*js",

@@ -8,9 +8,9 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Line} from 'react-chartjs-2';
 import { withFirebase } from 'firekit';
 
-
-const daysPath=`/user_registrations_per_day/${new Date().getFullYear()}/${new Date().toISOString().slice(5, 7)}`;
-const monthsPath=`/user_registrations_per_month/${new Date().getFullYear()}`;
+const currentYear=new Date().getFullYear();
+const daysPath=`/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`;
+const monthsPath=`/user_registrations_per_month/${currentYear}`;
 
 
 class Dashboard extends Component {
@@ -43,7 +43,7 @@ class Dashboard extends Component {
       labels: daysLabels,
       datasets: [
         {
-          label: 'User registratioins per day',
+          label: intl.formatDate(Date.now(),{month: 'long'}),
           fill: false,
           lineTension: 0.1,
           backgroundColor: muiTheme.palette.primary1Color,
@@ -71,7 +71,11 @@ class Dashboard extends Component {
 
     if(months){
       Object.keys(months).sort().map(key =>{
-        monthsLabels.push(key);
+
+        let date=new Date(`${currentYear}-${key}-1`);
+        monthsLabels.push(intl.formatDate(date,{month: 'long'}));
+
+
         monthsData.push(months[key]);
         return key;
       })
@@ -81,7 +85,7 @@ class Dashboard extends Component {
       labels: monthsLabels,
       datasets: [
         {
-          label: 'User registratioins per month',
+          label: intl.formatMessage({id: 'user_registrationg_graph_label'}),
           fill: false,
           maintainAspectRatio: true,
           lineTension: 0.1,
@@ -125,7 +129,7 @@ class Dashboard extends Component {
               options={{
                 maintainAspectRatio: true,
               }}
-              data={daysComponentData}
+              data={monthsComponentData}
             />
           </div>
           <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
@@ -133,7 +137,7 @@ class Dashboard extends Component {
               options={{
                 maintainAspectRatio: true,
               }}
-              data={monthsComponentData}
+              data={daysComponentData}
             />
           </div>
         </div>
