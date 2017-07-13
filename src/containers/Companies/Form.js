@@ -16,7 +16,7 @@ class Form extends Component {
   handlePhotoUploadSuccess = (snapshot) =>{
     const { setDialogIsOpen, change}=this.props;
     change('photoURL', snapshot.downloadURL);
-    setDialogIsOpen('new_companie_photo', undefined);
+    setDialogIsOpen('new_company_photo', undefined);
   }
 
   render() {
@@ -54,7 +54,7 @@ class Form extends Component {
 
         <FlatButton
           onTouchTap={()=>{
-            setDialogIsOpen('new_companie_photo', true)
+            setDialogIsOpen('new_company_photo', true)
           }}
           disabled={uid===undefined || !initialized}
           containerElement='label'
@@ -135,9 +135,9 @@ class Form extends Component {
           path={`companies/${uid}`}
           fileName={`photoURL`}
           onUploadSuccess={(s)=>{this.handlePhotoUploadSuccess(s) }}
-          open={dialogs.new_companie_photo!==undefined}
-          src={dialogs.new_companie_photo}
-          handleClose={()=>{setDialogIsOpen('new_companie_photo',undefined)}}
+          open={dialogs.new_company_photo!==undefined}
+          src={dialogs.new_company_photo}
+          handleClose={()=>{setDialogIsOpen('new_company_photo',undefined)}}
           title={intl.formatMessage({id: 'change_photo'})}
         />
       </div>
@@ -148,8 +148,8 @@ class Form extends Component {
 }
 
 
-Form=reduxForm({form: 'companie'})(Form);
-const selector = formValueSelector('companie')
+Form=reduxForm({form: 'company'})(Form);
+const selector = formValueSelector('company')
 
 const mapStateToProps = state => {
   const { intl, vehicleTypes, users, dialogs } = state;

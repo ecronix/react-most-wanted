@@ -55,7 +55,7 @@ class Form extends Component {
   handlePhotoUploadSuccess = (snapshot) => {
     const { setDialogIsOpen, change}=this.props;
     change('photoURL', snapshot.downloadURL);
-    setDialogIsOpen('new_companie_photo', undefined);
+    setDialogIsOpen('new_company_photo', undefined);
   }
 
   handleUserDeletion = () => {
@@ -105,7 +105,7 @@ class Form extends Component {
         <div>
           <FlatButton
             onTouchTap={()=>{
-              setDialogIsOpen('new_companie_photo', true)
+              setDialogIsOpen('new_company_photo', true)
             }}
             disabled={uid===undefined || !initialized}
             containerElement='label'
@@ -246,9 +246,9 @@ class Form extends Component {
       path={`users/${uid}`}
       fileName={`photoURL`}
       onUploadSuccess={(s)=>{this.handlePhotoUploadSuccess(s) }}
-      open={dialogs.new_companie_photo!==undefined}
-      src={dialogs.new_companie_photo}
-      handleClose={()=>{setDialogIsOpen('new_companie_photo',undefined)}}
+      open={dialogs.new_company_photo!==undefined}
+      src={dialogs.new_company_photo}
+      handleClose={()=>{setDialogIsOpen('new_company_photo',undefined)}}
       title={intl.formatMessage({id: 'change_photo'})}
     />
 

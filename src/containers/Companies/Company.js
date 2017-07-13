@@ -15,7 +15,7 @@ import { withFirebase } from 'firekit';
 const path='/companies/';
 
 
-class Companie extends Component {
+class Company extends Component {
 
   handleCreateValues = (values) => {
 
@@ -37,7 +37,7 @@ class Companie extends Component {
   handleClose = () => {
     const { setDialogIsOpen }=this.props;
 
-    setDialogIsOpen('delete_companie', false);
+    setDialogIsOpen('delete_company', false);
 
   }
 
@@ -91,17 +91,17 @@ class Companie extends Component {
         iconElementRight={
           match.params.uid?<FlatButton
             style={{marginTop: 4}}
-            onTouchTap={()=>{setDialogIsOpen('delete_companie', true);}}
+            onTouchTap={()=>{setDialogIsOpen('delete_company', true);}}
             icon={<FontIcon className="material-icons" >delete</FontIcon>}
           />:undefined
         }
         onBackClick={()=>{history.goBack()}}
-        title={intl.formatMessage({id: match.params.uid?'edit_companie':'create_companie'})}>
+        title={intl.formatMessage({id: match.params.uid?'edit_company':'create_company'})}>
 
         <div style={{margin: 15, display: 'flex'}}>
 
           <FireForm
-            name={'companie'}
+            name={'company'}
             path={`${path}`}
             validate={validate}
             onSubmitSuccess={(values)=>{history.push('/companies');}}
@@ -112,12 +112,12 @@ class Companie extends Component {
           </FireForm>
         </div>
         <Dialog
-          title={intl.formatMessage({id: 'delete_companie_title'})}
+          title={intl.formatMessage({id: 'delete_company_title'})}
           actions={actions}
           modal={false}
-          open={dialogs.delete_companie===true}
+          open={dialogs.delete_company===true}
           onRequestClose={this.handleClose}>
-          {intl.formatMessage({id: 'delete_companie_message'})}
+          {intl.formatMessage({id: 'delete_company_message'})}
         </Dialog>
 
       </Activity>
@@ -137,4 +137,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps, {setDialogIsOpen}
-)(injectIntl(withRouter(withFirebase(Companie))));
+)(injectIntl(withRouter(withFirebase(Company))));
