@@ -13,7 +13,7 @@ import {withRouter} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import { withFirebase } from 'firekit';
 
-class Vehicles extends Component {
+class Companies extends Component {
 
   componentDidMount() {
     const { watchList, firebaseApp}=this.props;
@@ -87,7 +87,7 @@ class Vehicles extends Component {
 
 }
 
-Vehicles.propTypes = {
+Companies.propTypes = {
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
@@ -106,4 +106,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-)(injectIntl(muiThemeable()(withRouter(withFirebase(Vehicles)))));
+)(injectIntl(muiThemeable()(withRouter(withFirebase(Companies)))));
