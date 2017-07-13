@@ -72,6 +72,20 @@ class Companie extends Component {
       />,
     ];
 
+    const validate = values => {
+      const errors = {}
+
+      if (!values.name) {
+        errors.name = intl.formatMessage({id: 'required'});
+      }
+
+      if (!values.full_name) {
+        errors.full_name = intl.formatMessage({id: 'required'});
+      }
+
+      return errors
+    }
+
     return (
       <Activity
         iconElementRight={
@@ -89,6 +103,7 @@ class Companie extends Component {
           <FireForm
             name={'companie'}
             path={`${path}`}
+            validate={validate}
             onSubmitSuccess={(values)=>{history.push('/companies');}}
             onDelete={(values)=>{history.push('/companies');}}
             handleCreateValues={this.handleCreateValues}
