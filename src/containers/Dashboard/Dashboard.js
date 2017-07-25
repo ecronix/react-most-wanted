@@ -5,7 +5,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { GitHubIcon } from '../../components/Icons';
 import { Activity } from '../../containers/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import {Line} from 'react-chartjs-2';
+import {Line, Bar} from 'react-chartjs-2';
 import { withFirebase } from 'firekit';
 
 const currentYear=new Date().getFullYear();
@@ -133,7 +133,7 @@ class Dashboard extends Component {
             />
           </div>
           <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
-            <Line
+            <Bar
               options={{
                 maintainAspectRatio: true,
               }}
