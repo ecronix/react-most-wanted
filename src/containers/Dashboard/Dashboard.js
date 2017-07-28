@@ -5,12 +5,13 @@ import { injectIntl, intlShape } from 'react-intl';
 import { GitHubIcon } from '../../components/Icons';
 import { Activity } from '../../containers/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import {Line, Bar} from 'react-chartjs-2';
+import {Line, Bar, Doughnut} from 'react-chartjs-2';
 import { withFirebase } from 'firekit';
 
 const currentYear=new Date().getFullYear();
 const daysPath=`/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`;
 const monthsPath=`/user_registrations_per_month/${currentYear}`;
+const providerPath=`/provider_count`;
 
 
 class Dashboard extends Component {
@@ -20,16 +21,19 @@ class Dashboard extends Component {
 
     watchPath(daysPath);
     watchPath(monthsPath);
+    watchPath(providerPath);
 
   }
 
   render() {
 
-    const {muiTheme, intl, days, months}= this.props;
+    const {muiTheme, intl, days, months, providers}= this.props;
 
 
     let daysLabels=[];
     let daysData=[]
+
+
 
     if(days){
       Object.keys(days).sort().map(key =>{
@@ -109,6 +113,29 @@ class Dashboard extends Component {
       ]
     };
 
+
+    let providersData=[];
+    let providersLabels=[];
+    let providersBackgrounColors=[];
+
+    if(providers){
+      Object.keys(providers).sort().map((key) =>{
+        providersLabels.push(intl.formatMessage({id: key}));
+        providersBackgrounColors.push(intl.formatMessage({id: `${key}_color`}));
+        providersData.push(providers[key]);
+        return key;
+      })
+    }
+
+    const providersComponentData = {
+      labels: providersLabels,
+      datasets: [{
+        data: providersData,
+        backgroundColor: providersBackgrounColors,
+        hoverBackgroundColor: providersBackgrounColors
+      }]
+    };
+
     return (
       <Activity
         iconElementRight={
@@ -132,12 +159,24 @@ class Dashboard extends Component {
               data={monthsComponentData}
             />
           </div>
+
           <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
             <Bar
               options={{
                 maintainAspectRatio: true,
               }}
               data={daysComponentData}
+            />
+          </div>
+
+        </div>
+
+        <br/>
+        <div style={{margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center'}}>
+
+          <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
+            <Doughnut
+              data={providersComponentData}
             />
           </div>
         </div>
@@ -158,6 +197,7 @@ const mapStateToProps = (state) => {
   return {
     days: paths[daysPath],
     months: paths[monthsPath],
+    providers: paths[providerPath],
   };
 };
 

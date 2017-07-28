@@ -11,9 +11,19 @@ import {
 
 const history = createHistory();
 
-function MyLoadable(opts) {
+function MyLoadable(opts, preloadComponents) {
+
   return Loadable(Object.assign({
     loading: LoadingComponent,
+    render(loaded, props) {
+
+      if(preloadComponents!==undefined && preloadComponents instanceof Array){
+        preloadComponents.map(component=>component.preload());
+      }
+
+      let Component = loaded.default;
+      return <Component {...props}/>;
+    }
   }, opts));
 };
 
@@ -21,10 +31,15 @@ const AsyncDashboard = MyLoadable({loader: () => import('../../containers/Dashbo
 const AsyncAbout = MyLoadable({loader: () => import('../../containers/About/About')});
 const AsyncPublicChats = MyLoadable({loader: () => import('../../containers/PublicChats/PublicChats')});
 const AsyncMyAccount = MyLoadable({loader: () => import('../../containers/MyAccount/MyAccount')});
-const AsyncTasks = MyLoadable({loader: () => import('../../containers/Tasks/Tasks')});
+
 const AsyncTask = MyLoadable({loader: () => import('../../containers/Tasks/Task')});
-const AsyncCompanies = MyLoadable({loader: () => import('../../containers/Companies/Companies')});
+const AsyncTasks = MyLoadable({loader: () => import('../../containers/Tasks/Tasks')}, [AsyncTask]);
+
+
 const AsyncCompany = MyLoadable({loader: () => import('../../containers/Companies/Company')});
+const AsyncCompanies = MyLoadable({loader: () => import('../../containers/Companies/Companies')}, [AsyncCompany]);
+
+
 const AsyncUsers = MyLoadable({loader: () => import('../../containers/Users/Users')});
 const AsyncSignIn = MyLoadable({loader: () => import('../../containers/SignIn/SignIn')});
 const AsyncPageNotFound = MyLoadable({loader: () => import('../../components/PageNotFound/PageNotFound')});

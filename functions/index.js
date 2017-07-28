@@ -53,7 +53,12 @@ exports.handleUserChange = functions.database.ref('/users/{userUid}').onWrite(
 );
 
 exports.recountUsers = functions.database.ref('/users_count').onWrite(
-  (event)=> counting.handleRecount(event, 'users', 8)
+  (event)=> {
+    return Promise.all([
+      counting.handleRecount(event, 'users', 8),
+      counting.handleProviderRecount(event, admin)
+    ])
+  }
 );
 
 exports.handleUserCreated = functions.auth.user().onCreate(
@@ -69,9 +74,9 @@ exports.handleUserCreated = functions.auth.user().onCreate(
 
 exports.handleUserDeleted = functions.auth.user().onDelete(
   (event)=> {
-  return Promise.all([
-    userNotifications.sendByeEmail(event, mailTransport, APP_NAME),
-    userSync.userDeleted(event, admin)
-  ])
-}
+    return Promise.all([
+      userNotifications.sendByeEmail(event, mailTransport, APP_NAME),
+      userSync.userDeleted(event, admin)
+    ])
+  }
 );

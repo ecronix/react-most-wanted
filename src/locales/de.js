@@ -86,6 +86,17 @@ const messages=defineMessages({
   users_count_title: '{number} Benutzer',
   user_registrationg_graph_label: 'Benutzer registrierungen',
   required: 'Erforderlich',
+  facebook: 'Facebook',
+  github: 'Github',
+  twitter: 'Twitter',
+  phone: 'Phone',
+  google: 'Google',
+  facebook_color: '#303F9F',
+  github_color: '#263238',
+  twitter_color: '#36A2EB',
+  phone_color: '#90A4AE',
+  google_color: '#EA4335',
+  password_color: '#4CAF50',
 });
 
 export default messages;
