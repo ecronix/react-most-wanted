@@ -32,7 +32,6 @@ export class Activity extends Component {
     }
   }
 
-
   render(){
 
     const {
@@ -57,6 +56,7 @@ export class Activity extends Component {
       unwatchAllPaths,
       initMessaging,
       watchAuth,
+      pageTitle,
       ...rest
     } = this.props;
 
@@ -70,13 +70,21 @@ export class Activity extends Component {
       ...containerStyle
     };
 
+    let headerTitle=''
+
+    if(typeof title === 'string' || title instanceof String){
+      headerTitle=title;
+    }else{
+      headerTitle=pageTitle;
+    }
+
     return (
       <div style={{backgroundColor: muiTheme.palette.canvasColor, height: '100%'}}>
         <Helmet>
           <meta name="theme-color" content={muiTheme.palette.primary1Color}/>
           <meta name="apple-mobile-web-app-status-bar-style" content={muiTheme.palette.primary1Color}/>
           <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color}/>
-          <title>{title}</title>
+          <title>{headerTitle}</title>
         </Helmet>
         <ResponsiveDrawer width={drawerWidth}>
           <DrawerHeader/>

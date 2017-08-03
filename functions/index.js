@@ -15,10 +15,19 @@ const mailTransport = nodemailer.createTransport(`smtps://${gmailEmail}:${gmailP
 
 const APP_NAME = 'React Most Wanted';
 
+const chat = require('./chat');
 const counting = require('./counting');
 const messaging = require('./messaging');
 const userNotifications = require('./userNotifications');
 const userSync = require('./userSync');
+
+exports.handleUserChatMessageCreate = functions.database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}').onCreate(
+  (event)=> {
+    return Promise.all([
+      chat.handleUserChatMessageCreate(event, admin),
+    ])
+  }
+);
 
 
 exports.handleTasksChange = functions.database.ref('/public_tasks/{taskUid}').onWrite(

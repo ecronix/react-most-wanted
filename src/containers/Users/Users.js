@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
+import * as filterSelectors from '../../store/filters/selectors';
 import {List, ListItem} from 'material-ui/List';
+import { ResponsiveMenu } from 'material-ui-responsive-menu';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
@@ -12,12 +14,19 @@ import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../component
 import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
+import { FilterDrawer }  from '../../containers/FilterDrawer';
+import { getOperators } from '../../store/filters/selectors';
+import { setFilterIsOpen } from '../../store/filters/actions';
 
 class Users extends Component {
 
   componentDidMount() {
-    this.props.watchList('users');
-    this.props.watchPath('users_count');
+    const {watchList, watchPath, firebaseApp}=this.props;
+
+    let usersRef=firebaseApp.database().ref('users').orderByChild('displayName');
+
+    watchList(usersRef);
+    watchPath('users_count');
   }
 
   getProviderIcon = (provider) => {
@@ -63,55 +72,107 @@ class Users extends Component {
     const user=users[index].val;
 
     return <div key={key}>
-        <ListItem
-          key={key}
-          id={key}
-          leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
-          rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
+      <ListItem
+        key={key}
+        id={key}
+        leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
+        rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
 
-          <div style={{display: 'flex'}}>
+        <div style={{display: 'flex'}}>
+          <div>
             <div>
-              <div>
-                {user.displayName}
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  lineHeight: '16px',
-                  height: 16,
-                  margin: 0,
-                  marginTop: 4,
-                  color: muiTheme.listItem.secondaryTextColor,
-                }}>
-                <p>
-                  {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
-                  {' '}
-                  {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
-                </p>
-              </div>
-
+              {user.displayName}
+            </div>
+            <div
+              style={{
+                fontSize: 14,
+                lineHeight: '16px',
+                height: 16,
+                margin: 0,
+                marginTop: 4,
+                color: muiTheme.listItem.secondaryTextColor,
+              }}>
+              <p>
+                {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
+                {' '}
+                {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
+              </p>
             </div>
 
-            <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
-              {user.providerData && user.providerData.map(
-                (p)=>{
-                  return this.getProviderIcon(p);
-                })
-              }
-            </div>
           </div>
 
-        </ListItem>
-        <Divider inset={true}/>
-      </div>;
+          <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
+            {user.providerData && user.providerData.map(
+              (p)=>{
+                return this.getProviderIcon(p);
+              })
+            }
+          </div>
+        </div>
+
+      </ListItem>
+      <Divider inset={true}/>
+    </div>;
   }
 
   render(){
-    const {intl, users, muiTheme, users_count } =this.props;
+    const {intl, users, muiTheme, users_count, setFilterIsOpen, hasFilters } =this.props;
+
+
+    const allOperators = getOperators(intl);
+
+    const operatorForType = [
+      {
+        type: 'string',
+        operators: allOperators
+      },
+      {
+        type: 'date',
+        operators: allOperators.filter((operator) => {
+          return (operator.value === '=' ||
+          operator.value === '!=' ||
+          operator.value === '<=' ||
+          operator.value === '>=' ||
+          operator.value === '<' ||
+          operator.value === '>');
+        })
+      },
+      {
+        type: 'bool',
+        operators: allOperators.filter((operator) => {
+          return operator.value === '=';
+        })
+      }
+    ]
+
+    const filterFields = [
+      {
+        name: 'displayName',
+        label: intl.formatMessage({id: 'name_label'})
+      },
+    ]
+
+    const menuList=[
+      {
+        text: intl.formatMessage({id: 'open_filter'}),
+        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
+        tooltip:intl.formatMessage({id: 'open_filter'}),
+        onTouchTap: ()=>{setFilterIsOpen('users', true)}
+      },
+    ]
 
     return (
       <Activity
         isLoading={users===undefined}
+        iconStyleRight={{width:'50%'}}
+        iconElementRight={
+          <div>
+            <ResponsiveMenu
+              iconMenuColor={muiTheme.palette.canvasColor}
+              menuList={menuList}
+            />
+          </div>
+        }
         title={intl.formatMessage({id: 'users_count_title'}, {number: users_count})}>
         <div >
 
@@ -126,6 +187,12 @@ class Users extends Component {
           </div>
 
         </div>
+
+        <FilterDrawer
+          name={'users'}
+          fields={filterFields}
+          operators={operatorForType}
+        />
 
 
       </Activity>
@@ -142,16 +209,19 @@ Users.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { lists, auth, paths } = state;
+  const { lists, auth, paths, filters } = state;
+
+  const { hasFilters } = filterSelectors.selectFilterProps('users', filters);
+  const users=filterSelectors.getFilteredList('users', filters, lists['users']);
 
   return {
-    users: lists.users,
+    hasFilters,
+    users,
     users_count: paths.users_count,
     auth
   };
 };
 
-
 export default connect(
-  mapStateToProps
+  mapStateToProps, {setFilterIsOpen}
 )(injectIntl(muiThemeable()(withFirebase(Users))));

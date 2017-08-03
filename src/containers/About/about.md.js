@@ -10,9 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Because this project uses service workers I use this to check if the newest version is really loaded:
 
-[firekit](https://github.com/TarikHuber/firekit) version: **v0.1.17**
+[firekit](https://github.com/TarikHuber/firekit) version: **v0.1.20**
 
-React Most Wanted version: **v0.1.22**
+React Most Wanted version: **v0.1.23**
 
 
 It should be a @shell@ for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.

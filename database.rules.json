@@ -6,6 +6,18 @@
         ".write": "auth != null && $uid === auth.uid"
       }
     },
+    "user_chats": {
+      "$uid": {
+        ".read": "auth != null && $uid===auth.uid",
+        ".write": "auth != null && $uid===auth.uid"
+      }
+    },
+    "user_chat_messages": {
+      "$uid": {
+        ".read": "auth != null && $uid===auth.uid",
+        ".write": "auth != null && $uid===auth.uid"
+      }
+    },
     "public_tasks":{
       ".indexOn": ["userId"],
       "$tid":{

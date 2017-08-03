@@ -97,6 +97,15 @@ const messages=defineMessages({
   phone_color: '#90A4AE',
   google_color: '#EA4335',
   password_color: '#4CAF50',
+  chats: 'Chats',
+  write_message_hint: 'Eine Nachricht schreiben...',
+  load_more_label: 'Mehr...',
+  select_user: 'Benutzer auswählen',
+  operator_like_label: 'wie',
+  operator_notlike_label: 'nicht wie',
+  operator_equal_label: 'gleich',
+  operator_notequal_label: 'nicht equal',
+  operator_novalue_label: 'kein Wert',
 });
 
 export default messages;

@@ -87,6 +87,12 @@ const DrawerContent = (props, context) => {
       leftIcon: <FontIcon className="material-icons" >group</FontIcon>
     },
     {
+      value:'/chats',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({id: 'chats'}),
+      leftIcon: <FontIcon className="material-icons" >chats</FontIcon>
+    },
+    {
       value:'/public_chats',
       visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'public_chats'}),
