@@ -13,11 +13,7 @@ import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../component
 import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
-import { FilterDrawer }  from '../../containers/FilterDrawer';
-import { getOperators } from '../../store/filters/selectors';
-import { setFilterIsOpen } from '../../store/filters/actions';
-import * as filterSelectors from '../../store/filters/selectors';
-import { ResponsiveMenu } from 'material-ui-responsive-menu';
+import { setPeristentValue } from '../../store/persistentValues/actions';
 
 const path=`users`;
 
@@ -64,7 +60,7 @@ class Users extends Component {
   }
 
   handleRowClick = (user) => {
-    const {auth, firebaseApp, history} =this.props;
+    const {auth, firebaseApp, history, usePreview, setPeristentValue} =this.props;
 
     const key=user.key;
     const userValues=user.val;
@@ -73,12 +69,18 @@ class Users extends Component {
     const chatData={
       displayName: userValues.displayName,
       photoURL: userValues.photoURL?userValues.photoURL:'',
-      lastMessage: ''
     };
 
     userChatsRef.update({...chatData});
 
-    history.push(`/chats/edit/${key}`);
+    if(usePreview){
+      setPeristentValue('current_chat_uid', key)
+      history.push(`/chats`);
+    }else{
+      history.push(`/chats/edit/${key}`);
+    }
+
+
   }
 
 
@@ -137,63 +139,11 @@ class Users extends Component {
   }
 
   render(){
-    const { intl, users, muiTheme, setFilterIsOpen, hasFilters } =this.props;
-
-
-    const allOperators = getOperators(intl);
-
-    const operatorForType = [
-      {
-        type: 'string',
-        operators: allOperators
-      },
-      {
-        type: 'date',
-        operators: allOperators.filter((operator) => {
-          return (operator.value === '=' ||
-          operator.value === '!=' ||
-          operator.value === '<=' ||
-          operator.value === '>=' ||
-          operator.value === '<' ||
-          operator.value === '>');
-        })
-      },
-      {
-        type: 'bool',
-        operators: allOperators.filter((operator) => {
-          return operator.value === '=';
-        })
-      }
-    ]
-
-    const filterFields = [
-      {
-        name: 'displayName',
-        label: intl.formatMessage({id: 'name_label'})
-      },
-    ]
-
-    const menuList=[
-      {
-        text: intl.formatMessage({id: 'open_filter'}),
-        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
-        tooltip:intl.formatMessage({id: 'open_filter'}),
-        onTouchTap: ()=>{setFilterIsOpen('select_user', true)}
-      },
-    ]
+    const { intl, users, muiTheme } =this.props;
 
     return (
       <Activity
         isLoading={users===undefined}
-        iconStyleRight={{width:'50%'}}
-        iconElementRight={
-          <div>
-            <ResponsiveMenu
-              iconMenuColor={muiTheme.palette.canvasColor}
-              menuList={menuList}
-            />
-          </div>
-        }
         title={intl.formatMessage({id: 'select_user'})}>
         <div >
 
@@ -208,12 +158,6 @@ class Users extends Component {
           </div>
 
         </div>
-
-        <FilterDrawer
-          name={'select_user'}
-          fields={filterFields}
-          operators={operatorForType}
-        />
 
 
       </Activity>
@@ -231,19 +175,18 @@ Users.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { lists, auth, filters } = state;
+  const { lists, auth, browser } = state;
 
-  const { hasFilters } = filterSelectors.selectFilterProps('select_user', filters);
-  const users=filterSelectors.getFilteredList('select_user', filters, lists['users']);
+  const usePreview=browser.greaterThan.small;
 
   return {
-    hasFilters,
-    users,
+    usePreview,
+    users: lists.users,
     auth
   };
 };
 
 
 export default connect(
-  mapStateToProps, {setFilterIsOpen}
+  mapStateToProps, { setPeristentValue }
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));

@@ -4,6 +4,7 @@ import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 import { withFirebase } from 'firekit';
 import { withRouter } from 'react-router-dom';
 import ReactList from 'react-list';
@@ -11,6 +12,8 @@ import Avatar from 'material-ui/Avatar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FontIcon from 'material-ui/FontIcon';
 import PropTypes from 'prop-types';
+import { setPeristentValue } from '../../store/persistentValues/actions';
+import ChatMessages from './ChatMessages';
 
 class Chats extends Component {
 
@@ -20,13 +23,24 @@ class Chats extends Component {
     watchList(path);
   }
 
+  handleItemClick = (val, key) => {
+    const { usePreview, history, setPeristentValue } = this.props;
+
+    if(usePreview){
+      setPeristentValue('current_chat_uid', key);
+    }else{
+      history.push(`/chats/edit/${key}`);
+    }
+  }
+
   renderItem = (i, k) => {
-    const { list, history, intl } = this.props;
+    const { list, intl, currentChatUid, usePreview, muiTheme } = this.props;
 
     const key=list[i].key;
     const val=list[i].val;
+    const isPreviewed=usePreview && currentChatUid===key;
 
-    return <div key={key}>
+    return <div key={i}>
       <ListItem
         leftAvatar={
           <Avatar
@@ -35,70 +49,96 @@ class Chats extends Component {
             icon={<FontIcon className="material-icons">person</FontIcon>}
           />
         }
-        onTouchTap={()=>{history.push(`/chats/edit/${key}`)}}
+        style={isPreviewed?{backgroundColor: muiTheme.toolbar.separatorColor}:undefined}
+        onTouchTap={()=>{this.handleItemClick(val, key)}}
         key={key}
         id={key}
+        rightIcon={
+          <div style={{fontSize: 11,color: muiTheme.listItem.secondaryTextColor }}>
+            {val.lastCreated?intl.formatTime(new Date(val.lastCreated)):undefined}
+          </div>
+        }
         primaryText={val.displayName}
-        secondaryText={`${val.lastMessage} ${val.lastCreated?intl.formatRelative(new Date(val.lastCreated)):undefined}` }
+        secondaryText={`${val.lastMessage}`}
       />
       <Divider inset={true}/>
     </div>;
   }
 
   render(){
-    const { intl, list, history } =this.props;
+    const { intl, list, history, currentChatUid, usePreview } =this.props;
 
+    const isDisplayingMessages=usePreview && currentChatUid;
 
     return (
       <Activity
         isLoading={list===undefined}
         title={intl.formatMessage({id: 'chats'})}>
 
-        <div >
-          <List style={{height: '100%'}} ref={(field) => { this.list = field; }}>
-            <ReactList
-              itemRenderer={this.renderItem}
-              length={list?list.length:0}
-              type='simple'
-            />
-          </List>
-          <div
-            style={{ float:"left", clear: "both" }}
+        <div style={{
+          height: '100%',
+          width: '100%',
+          alignItems: 'strech',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start',
+          flexDirection: 'row'
+        }}>
+        <List style={{padding:0, height: '100%', width:'100%', overflowY: 'auto', maxWidth: usePreview?300:undefined}} >
+          <ReactList
+            style={{maxWidth: 300}}
+            itemRenderer={this.renderItem}
+            length={list?list.length:0}
+            type='simple'
           />
+        </List>
+        <div style={{marginLeft: 3, flexGrow: 1}}>
+          {isDisplayingMessages &&
+            <ChatMessages uid={currentChatUid} />
+          }
+        </div>
+        <div
+          style={{ float:"left", clear: "both" }}
+        />
           <FloatingActionButton
             onTouchTap={()=>{history.push(`/chats/create`)}}
-            style={{position: 'fixed', bottom:15, right: 20, zIndex: 99}}
+            style={{position: 'fixed', bottom:isDisplayingMessages?60:15, right: 20, zIndex: 99}}
             secondary={true}>
             <FontIcon className="material-icons" >chat</FontIcon>
           </FloatingActionButton>
-        </div>
+      </div>
 
-      </Activity>
+    </Activity>
 
-    );
+  );
 
-  }
+}
 
 }
 
 Chats.propTypes = {
-  list: PropTypes.array,
+  list: PropTypes.array.isRequired,
   history: PropTypes.object,
   intl: intlShape,
+  isGranted: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownPops) => {
-  const { lists, auth } = state;
+  const { lists, auth, browser, persistantValues } = state;
 
-  const path=`/user_chats/${auth.uid}`
+  const path=`/user_chats/${auth.uid}`;
+  const usePreview=browser.greaterThan.small;
+  const currentChatUid=persistantValues['current_chat_uid']?persistantValues['current_chat_uid']:undefined;
 
   return {
     path,
+    usePreview,
+    currentChatUid,
     list: lists[path],
   };
 };
 
 
 export default connect(
-  mapStateToProps
-)(injectIntl(withFirebase(withRouter(Chats))));
+  mapStateToProps, { setPeristentValue }
+)(injectIntl(withFirebase(withRouter(muiThemeable()(Chats)))));
