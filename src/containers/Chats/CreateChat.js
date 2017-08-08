@@ -143,7 +143,7 @@ class Users extends Component {
   }
 
   render(){
-    const { intl, users, muiTheme, setFilterIsOpen, hasFilters } =this.props;
+    const { intl, users, muiTheme, setFilterIsOpen, hasFilters, history } =this.props;
 
 
     const allOperators = getOperators(intl);
@@ -191,6 +191,7 @@ class Users extends Component {
     return (
       <Activity
         isLoading={users===undefined}
+        onBackClick={()=>{history.push('/chats')}}
         iconStyleRight={{width:'50%'}}
         iconElementRight={
           <div>
