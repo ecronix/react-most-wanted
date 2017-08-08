@@ -18,9 +18,10 @@ import ChatMessages from './ChatMessages';
 class Chats extends Component {
 
   componentDidMount(){
-    const {watchList, path} =this.props;
+    const {watchList, path, firebaseApp} =this.props;
 
-    watchList(path);
+    let chatsRef=firebaseApp.database().ref(path).orderByChild('lastCreated');
+    watchList(chatsRef);
   }
 
   handleItemClick = (val, key) => {
@@ -126,15 +127,16 @@ Chats.propTypes = {
 const mapStateToProps = (state, ownPops) => {
   const { lists, auth, browser, persistantValues } = state;
 
-  const path=`/user_chats/${auth.uid}`;
+  const path=`user_chats/${auth.uid}`;
   const usePreview=browser.greaterThan.small;
   const currentChatUid=persistantValues['current_chat_uid']?persistantValues['current_chat_uid']:undefined;
+  const list=lists[path]?lists[path]:[];
 
   return {
     path,
     usePreview,
     currentChatUid,
-    list: lists[path],
+    list,
   };
 };
 
