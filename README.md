@@ -25,6 +25,7 @@ I tried to make the project as clean as possible and to use all libraries in the
   - [Theming](#theming)
   - [Firebase lists](#firebase-lists)
   - [Drawer width](#drawer-width)
+  - [Authorisation](#authorisation)
 - [TO DO](#to-do)
 - [License](#license)
 - [Logo](#logo)
@@ -42,6 +43,7 @@ I tried to make the project as clean as possible and to use all libraries in the
 * **forms** - with realtime sync of untouched fields
 * **internationalization**
 * **authentication**
+* **authorisation**
 
 All these features can be programmed from scratch. But why should you do this? Out there are so mutch greate developers creating greate applications, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier.
 
@@ -292,6 +294,38 @@ They are initialising the list and unsubscribing from it if we leave the compone
 ### Drawer width
 
 To change the drawer (left menu) width go to the 'config.js' file and change the value of  'drawer_width' :)
+
+### Authorisation
+
+Authentication and authorisation are not the same thing! With authentication we identify who we have as user and with athorisation we identify what that user can do in our application. In this project authorisation is managed over `grants` and `roles`. Every grant gives the user the authorisation to do a specific action (read, create, edit or delete) in the database. Roles are defining a group of grants you can give a user. They are just for managing large number of grants easely. Every grant can still be managed seperately.
+
+Only administrators have access to add or remove grants and roles to a user. Only administrators can make other users to administrators.
+
+**WARNING:** In this demo the rules are manipulated that everyone can make other users to admins and even himselfe. So everyone can see how it works. In production there should be made a change in the database.rules file.
+
+From:
+
+```js
+"admins":{
+  ".read": "auth != null",
+  "$uid":{
+    ".write": "auth != null || root.child('admins/'+auth.uid).exists()"
+  }
+},
+
+```
+
+To:
+
+```js
+"admins":{
+  ".read": "auth != null",
+  "$uid":{
+    ".write": "auth != null && root.child('admins/'+auth.uid).exists()"
+  }
+},
+
+```
 
 
 

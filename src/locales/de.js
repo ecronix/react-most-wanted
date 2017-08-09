@@ -106,6 +106,15 @@ const messages=defineMessages({
   operator_equal_label: 'gleich',
   operator_notequal_label: 'nicht equal',
   operator_novalue_label: 'kein Wert',
+  administration: 'Administration',
+  roles: 'Rollen',
+  grants: 'Berechtigungen',
+  private: 'Private',
+  public: 'Öffentlich',
+  read_companies: 'Unternehmen lesen',
+  create_company: 'Unternehmen erstellen',
+  edit_company: 'Unternehmen bearbeiten',
+  delete_company: 'Unternehmen löschen',
 });
 
 export default messages;

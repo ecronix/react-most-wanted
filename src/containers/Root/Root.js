@@ -38,7 +38,9 @@ class Root extends Component {
       watchConnection,
       messaging,
       initMessaging,
-      firebaseApp
+      firebaseApp,
+      watchList,
+      watchPath
     }= this.props;
 
     clearInitialization();
@@ -57,6 +59,9 @@ class Root extends Component {
         uid: user.uid,
         providerData: user.providerData,
       };
+
+      watchList(`user_grants/${user.uid}`);
+      watchPath(`admins/${user.uid}`);
 
       if(messaging===undefined || !messaging.isInitialized){
         initMessaging(token=>{this.handleTokenChange(token)})

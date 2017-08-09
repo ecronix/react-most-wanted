@@ -121,7 +121,6 @@ Chats.propTypes = {
   list: PropTypes.array.isRequired,
   history: PropTypes.object,
   intl: intlShape,
-  isGranted: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownPops) => {

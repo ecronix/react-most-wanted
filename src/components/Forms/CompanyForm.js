@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 import {Field, reduxForm, formValueSelector } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
-import RaisedButton from 'material-ui/RaisedButton';
 import {Avatar} from '../../containers/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import { ImageCropDialog } from '../../containers/ImageCropDialog';
 import { withRouter } from 'react-router-dom';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import PropTypes from 'prop-types';
+
+
 
 class Form extends Component {
 
@@ -20,7 +23,15 @@ class Form extends Component {
   }
 
   render() {
-    const {handleSubmit, intl, initialized, setDialogIsOpen, dialogs, match} = this.props;
+    const{
+      handleSubmit,
+      intl,
+      initialized,
+      setDialogIsOpen,
+      dialogs,
+      match,
+    } = this.props;
+
     const uid=match.params.uid;
 
     return (
@@ -31,7 +42,7 @@ class Form extends Component {
         flexWrap: 'wrap',
         justifyContent: 'center'
       }}>
-
+      <button type="submit" style={{display: 'none'}} />
 
       <div style={{margin: 15, display: 'flex', flexDirection: 'column'}}>
 
@@ -93,7 +104,6 @@ class Form extends Component {
           />
         </div>
 
-
         <div>
           <Field
             name="vat"
@@ -121,16 +131,6 @@ class Form extends Component {
           />
         </div>
 
-
-        <div>
-          <RaisedButton
-            label={intl.formatMessage({id: 'submit'})}
-            type="submit"
-            primary={true}
-            disabled={!initialized}
-          />
-        </div>
-
         <ImageCropDialog
           path={`companies/${uid}`}
           fileName={`photoURL`}
@@ -146,6 +146,15 @@ class Form extends Component {
   );
 }
 }
+
+Form.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
+  initialized: PropTypes.bool.isRequired,
+  setDialogIsOpen: PropTypes.func.isRequired,
+  dialogs: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
 
 
 Form=reduxForm({form: 'company'})(Form);
@@ -165,4 +174,4 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps, { setDialogIsOpen }
-)(injectIntl(withRouter(Form)));
+)(injectIntl(withRouter(muiThemeable()(Form))));

@@ -35,6 +35,9 @@ const AsyncMyAccount = MyLoadable({loader: () => import('../../containers/MyAcco
 const AsyncTask = MyLoadable({loader: () => import('../../containers/Tasks/Task')});
 const AsyncTasks = MyLoadable({loader: () => import('../../containers/Tasks/Tasks')}, [AsyncTask]);
 
+const AsyncRole = MyLoadable({loader: () => import('../../containers/Roles/Role')});
+const AsyncRoles = MyLoadable({loader: () => import('../../containers/Roles/Roles')}, AsyncRole);
+
 const AsyncChat = MyLoadable({loader: () => import('../../containers/Chats/Chat')});
 const AsyncCreateChat = MyLoadable({loader: () => import('../../containers/Chats/CreateChat')});
 const AsyncChats = MyLoadable({loader: () => import('../../containers/Chats/Chats')}, [AsyncChat, AsyncCreateChat]);
@@ -42,8 +45,9 @@ const AsyncChats = MyLoadable({loader: () => import('../../containers/Chats/Chat
 const AsyncCompany = MyLoadable({loader: () => import('../../containers/Companies/Company')});
 const AsyncCompanies = MyLoadable({loader: () => import('../../containers/Companies/Companies')}, [AsyncCompany]);
 
+const AsyncUser = MyLoadable({loader: () => import('../../containers/Users/User')});
+const AsyncUsers = MyLoadable({loader: () => import('../../containers/Users/Users')}, [AsyncUser]);
 
-const AsyncUsers = MyLoadable({loader: () => import('../../containers/Users/Users')});
 const AsyncSignIn = MyLoadable({loader: () => import('../../containers/SignIn/SignIn')});
 const AsyncPageNotFound = MyLoadable({loader: () => import('../../components/PageNotFound/PageNotFound')});
 
@@ -64,6 +68,10 @@ const Routes = (props, context) => {
         <RestrictedRoute type='private' path="/tasks/edit/:uid" exact component={AsyncTask} />
         <RestrictedRoute type='private' path="/tasks/create" exact component={AsyncTask} />
 
+        <RestrictedRoute type='private' path="/roles" exact component={AsyncRoles} />
+        <RestrictedRoute type='private' path="/roles/edit/:uid" exact component={AsyncRole} />
+        <RestrictedRoute type='private' path="/roles/create" exact component={AsyncRole} />
+
         <RestrictedRoute type='private' path="/companies" exact component={AsyncCompanies} />
         <RestrictedRoute type='private' path="/companies/edit/:uid" exact component={AsyncCompany} />
         <RestrictedRoute type='private' path="/companies/create" exact component={AsyncCompany} />
@@ -73,6 +81,8 @@ const Routes = (props, context) => {
         <RestrictedRoute type='private' path="/chats/create" exact component={AsyncCreateChat} />
 
         <RestrictedRoute type='private' path="/users" exact component={AsyncUsers} />
+        <RestrictedRoute type='private' path="/users/edit/:uid" exact component={AsyncUser} />
+
         <RestrictedRoute type='private' path="/about" exact component={AsyncAbout}  />
         <RestrictedRoute type='private' path="/my_account"  exact component={AsyncMyAccount} />
         <RestrictedRoute type='public' path="/signin" component={AsyncSignIn} />

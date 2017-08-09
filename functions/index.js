@@ -89,3 +89,30 @@ exports.handleUserDeleted = functions.auth.user().onDelete(
     ])
   }
 );
+
+
+//Authorisation - START
+exports.handleRoleChange = functions.database.ref('/roles/{roleUid}').onWrite(
+  (event)=> {
+    return Promise.all([
+      authorisation.handleRoleChange(event, admin)
+    ])
+  }
+);
+
+exports.handleRoleGrantChange = functions.database.ref('/role_grants/{roleUid}/{grantUid}').onWrite(
+  (event)=> {
+    return Promise.all([
+      authorisation.handleRoleGrantChange(event, admin)
+    ])
+  }
+);
+
+exports.hanldeUserRoleChange = functions.database.ref('/user_roles/{userUid}/{roleUid}').onWrite(
+  (event)=> {
+    return Promise.all([
+      authorisation.hanldeUserRoleChange(event, admin)
+    ])
+  }
+);
+//Authorisation - END

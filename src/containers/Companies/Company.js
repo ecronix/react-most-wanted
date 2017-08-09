@@ -1,29 +1,38 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { injectIntl } from 'react-intl';
-import { Activity } from '../../containers/Activity'
-import { FireForm } from 'firekit'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
+import muiThemeable from 'material-ui/styles/muiThemeable';
+import { Activity } from '../../containers/Activity';
+import { ResponsiveMenu } from 'material-ui-responsive-menu';
+import { FireForm } from 'firekit';
 import { setDialogIsOpen } from '../../store/dialogs/actions';
-import Form from './Form';
+import CompanyForm from '../../components/Forms/CompanyForm';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { withFirebase } from 'firekit';
+import { change, submit } from 'redux-form';
+import isGranted  from '../../utils/auth';
+
 
 const path='/companies/';
+const form_name='company';
 
 
 class Company extends Component {
 
-  handleCreateValues = (values) => {
+  validate = (values) => {
+    const { intl } = this.props;
+    const errors = {}
 
-    return {
-      created: firebase.database.ServerValue.TIMESTAMP ,
-      updated: firebase.database.ServerValue.TIMESTAMP ,
-      ...values
-    }
+    errors.name = !values.name?intl.formatMessage({id: 'error_required_field'}):'';
+    errors.full_name = !values.full_name?intl.formatMessage({id: 'error_required_field'}):'';
+    errors.vat = !values.vat?intl.formatMessage({id: 'error_required_field'}):'';
+
+    return errors
   }
 
   handleUpdateValues = (values) => {
@@ -57,7 +66,19 @@ class Company extends Component {
 
   render() {
 
-    const {history, intl, setDialogIsOpen, dialogs, match}=this.props;
+    const {
+      history,
+      intl,
+      setDialogIsOpen,
+      dialogs,
+      match,
+      submit,
+      muiTheme,
+      isGranted
+    }=this.props;
+
+    const uid=match.params.uid;
+
 
     const actions = [
       <FlatButton
@@ -72,29 +93,35 @@ class Company extends Component {
       />,
     ];
 
-    const validate = values => {
-      const errors = {}
-
-      if (!values.name) {
-        errors.name = intl.formatMessage({id: 'required'});
+    const menuList=[
+      {
+        hidden: (uid===undefined && !isGranted(`create_${form_name}`)) || (uid!==undefined && !isGranted(`edit_${form_name}`)),
+        text: intl.formatMessage({id: 'save'}),
+        icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
+        tooltip:intl.formatMessage({id: 'save'}),
+        onTouchTap: ()=>{submit('company')}
+      },
+      {
+        hidden: uid===undefined || !isGranted(`delete_${form_name}`),
+        text: intl.formatMessage({id: 'delete'}),
+        icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>delete</FontIcon>,
+        tooltip: intl.formatMessage({id: 'delete'}),
+        onTouchTap: ()=>{setDialogIsOpen('delete_company', true);}
       }
-
-      if (!values.full_name) {
-        errors.full_name = intl.formatMessage({id: 'required'});
-      }
-
-      return errors
-    }
+    ]
 
     return (
       <Activity
+        iconStyleRight={{width:'50%'}}
         iconElementRight={
-          match.params.uid?<FlatButton
-            style={{marginTop: 4}}
-            onTouchTap={()=>{setDialogIsOpen('delete_company', true);}}
-            icon={<FontIcon className="material-icons" >delete</FontIcon>}
-          />:undefined
+          <div>
+            <ResponsiveMenu
+              iconMenuColor={muiTheme.palette.canvasColor}
+              menuList={menuList}
+            />
+          </div>
         }
+
         onBackClick={()=>{history.goBack()}}
         title={intl.formatMessage({id: match.params.uid?'edit_company':'create_company'})}>
 
@@ -103,12 +130,11 @@ class Company extends Component {
           <FireForm
             name={'company'}
             path={`${path}`}
-            validate={validate}
+            validate={this.validate}
             onSubmitSuccess={(values)=>{history.push('/companies');}}
             onDelete={(values)=>{history.push('/companies');}}
-            handleCreateValues={this.handleCreateValues}
             uid={match.params.uid}>
-            <Form />
+            <CompanyForm />
           </FireForm>
         </div>
         <Dialog
@@ -125,16 +151,28 @@ class Company extends Component {
   }
 }
 
+Company.propTypes = {
+  history: PropTypes.object,
+  intl: intlShape.isRequired,
+  setDialogIsOpen: PropTypes.func.isRequired,
+  dialogs: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  submit: PropTypes.func.isRequired,
+  muiTheme: PropTypes.object.isRequired,
+  isGranted: PropTypes.func.isRequired,
+};
+
 
 const mapStateToProps = (state) => {
   const { intl, dialogs } = state;
 
   return {
     intl,
-    dialogs
+    dialogs,
+    isGranted: grant=>isGranted(state, grant)
   };
 };
 
 export default connect(
-  mapStateToProps, {setDialogIsOpen}
-)(injectIntl(withRouter(withFirebase(Company))));
+  mapStateToProps, {setDialogIsOpen, change, submit}
+)(injectIntl(withRouter(withFirebase(muiThemeable()(Company)))));

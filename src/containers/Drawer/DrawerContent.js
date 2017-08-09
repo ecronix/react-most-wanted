@@ -5,6 +5,7 @@ import { updateTheme } from '../../store/theme/actions';
 import { updateLocale } from '../../store/locale/actions';
 import { DrawerContent } from '../../components/Drawer';
 import { setDialogIsOpen } from '../../store/dialogs/actions';
+import isGranted, {isAnyGranted}  from '../../utils/auth';
 
 DrawerContent.propTypes = {
   responsiveDrawer: PropTypes.object.isRequired,
@@ -25,7 +26,9 @@ const mapStateToProps = (state) => {
     locale,
     auth,
     dialogs,
-    messaging
+    messaging,
+    isGranted: grant=>isGranted(state, grant),
+    isAnyGranted: grants=>isAnyGranted(state, grants)
   };
 };
 

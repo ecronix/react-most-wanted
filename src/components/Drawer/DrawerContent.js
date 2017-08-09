@@ -26,7 +26,8 @@ const DrawerContent = (props, context) => {
     match,
     firebaseApp,
     setDialogIsOpen,
-    messaging
+    messaging,
+    isGranted
   }=props;
 
   const isAuthorised = auth.isAuthorised;
@@ -81,26 +82,28 @@ const DrawerContent = (props, context) => {
       leftIcon: <FontIcon className="material-icons" >dashboard</FontIcon>
     },
     {
-      value:'/users',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({id: 'users'}),
-      leftIcon: <FontIcon className="material-icons" >group</FontIcon>
-    },
-    {
-      value:'/chats',
       visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'chats'}),
-      leftIcon: <FontIcon className="material-icons" >chats</FontIcon>
-    },
-    {
-      value:'/public_chats',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({id: 'public_chats'}),
-      leftIcon: <FontIcon className="material-icons" >public</FontIcon>
+      primaryTogglesNestedList: true,
+      leftIcon: <FontIcon className="material-icons" >chats</FontIcon>,
+      nestedItems:[
+        {
+          value:'/chats',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({id: 'private'}),
+          leftIcon: <FontIcon className="material-icons" >person</FontIcon>
+        },
+        {
+          value:'/public_chats',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({id: 'public'}),
+          leftIcon: <FontIcon className="material-icons" >group</FontIcon>
+        },
+      ]
     },
     {
       value:'/companies',
-      visible: isAuthorised,
+      visible: isGranted('read_companies'),
       primaryText: intl.formatMessage({id: 'companies'}),
       leftIcon: <FontIcon className="material-icons" >business</FontIcon>
     },
@@ -115,6 +118,26 @@ const DrawerContent = (props, context) => {
       visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'about'}),
       leftIcon: <FontIcon className="material-icons" >info_outline</FontIcon>
+    },
+    {
+      visible: isAuthorised, //In prod: isGranted('administration'),
+      primaryTogglesNestedList: true,
+      primaryText: intl.formatMessage({id: 'administration'}),
+      leftIcon: <FontIcon className="material-icons" >security</FontIcon>,
+      nestedItems:[
+        {
+          value:'/users',
+          visible: isAuthorised, //In prod: isGranted('read_users'),
+          primaryText: intl.formatMessage({id: 'users'}),
+          leftIcon: <FontIcon className="material-icons" >group</FontIcon>
+        },
+        {
+          value:'/roles',
+          visible: isGranted('read_roles'),
+          primaryText: intl.formatMessage({id: 'roles'}),
+          leftIcon: <FontIcon className="material-icons" >account_box</FontIcon>
+        },
+      ]
     },
     {
       divider:true,

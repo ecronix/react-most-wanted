@@ -106,6 +106,15 @@ const messages=defineMessages({
   operator_equal_label: 'equal',
   operator_notequal_label: 'not equal',
   operator_novalue_label: 'no value',
+  administration: 'Administration',
+  roles: 'Uloge',
+  grants: 'Prava',
+  private: 'Privatni',
+  public: 'Javni',
+  read_companies: 'Citati firme',
+  create_company: 'Dodati firmu',
+  edit_company: 'Urediti firmu',
+  delete_company: 'Obrisati firmu',
 });
 
 export default messages;

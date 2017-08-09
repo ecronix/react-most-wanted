@@ -1,17 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import {injectIntl, intlShape} from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import {List, ListItem} from 'material-ui/List';
+import {List, ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import {withRouter} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import { withFirebase } from 'firekit';
+import isGranted  from '../../utils/auth';
+
 
 class Companies extends Component {
 
@@ -58,7 +60,7 @@ class Companies extends Component {
 
 
   render(){
-    const {intl, companies, muiTheme, history} =this.props;
+    const { intl, companies, muiTheme, history, isGranted } =this.props;
 
     return (
       <Activity
@@ -75,10 +77,13 @@ class Companies extends Component {
           </div>
 
           <div style={{position: 'fixed', right: 18, zIndex:3, bottom: 18, }}>
-            <FloatingActionButton secondary={true} onTouchTap={()=>{history.push(`/companies/create`)}} style={{zIndex:3}}>
-            <FontIcon className="material-icons" >add</FontIcon>
-          </FloatingActionButton>
-        </div>
+          {
+              isGranted('create_company') &&
+              <FloatingActionButton secondary={true} onTouchTap={()=>{history.push(`/companies/create`)}} style={{zIndex:3}}>
+                <FontIcon className="material-icons" >add</FontIcon>
+              </FloatingActionButton>
+          }
+          </div>
       </div>
     </Activity>
   );
@@ -88,9 +93,9 @@ class Companies extends Component {
 }
 
 Companies.propTypes = {
-  intl: intlShape.isRequired,
-  muiTheme: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
+  companies: PropTypes.array.isRequired,
+  history: PropTypes.object,
+  isGranted: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -100,6 +105,7 @@ const mapStateToProps = (state) => {
     companies: lists.companies,
     auth,
     browser,
+    isGranted: grant=>isGranted(state, grant)
   };
 };
 

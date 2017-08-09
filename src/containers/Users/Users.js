@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
-import * as filterSelectors from '../../store/filters/selectors';
 import {List, ListItem} from 'material-ui/List';
-import { ResponsiveMenu } from 'material-ui-responsive-menu';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
+import { withRouter } from 'react-router-dom';
 import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
 import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
@@ -17,16 +16,16 @@ import ReactList from 'react-list';
 import { FilterDrawer }  from '../../containers/FilterDrawer';
 import { getOperators } from '../../store/filters/selectors';
 import { setFilterIsOpen } from '../../store/filters/actions';
+import * as filterSelectors from '../../store/filters/selectors';
+import { ResponsiveMenu } from 'material-ui-responsive-menu';
+import { setPeristentValue } from '../../store/persistentValues/actions';
+
+const path=`users`;
 
 class Users extends Component {
 
   componentDidMount() {
-    const {watchList, watchPath, firebaseApp}=this.props;
-
-    let usersRef=firebaseApp.database().ref('users').orderByChild('displayName');
-
-    watchList(usersRef);
-    watchPath('users_count');
+    this.props.watchList(path);
   }
 
   getProviderIcon = (provider) => {
@@ -65,16 +64,24 @@ class Users extends Component {
     }
   }
 
+  handleRowClick = (user) => {
+    const {history} =this.props;
+
+    history.push(`/users/edit/${user.key}`);
+  }
+
 
   renderItem = (index, key) => {
     const { users, intl, muiTheme} =this.props;
 
     const user=users[index].val;
 
+
     return <div key={key}>
       <ListItem
         key={key}
         id={key}
+        onTouchTap={()=>{this.handleRowClick(users[index])}}
         leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
         rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
 
@@ -116,7 +123,7 @@ class Users extends Component {
   }
 
   render(){
-    const {intl, users, muiTheme, users_count, setFilterIsOpen, hasFilters } =this.props;
+    const { intl, users, muiTheme, setFilterIsOpen, hasFilters } =this.props;
 
 
     const allOperators = getOperators(intl);
@@ -150,6 +157,10 @@ class Users extends Component {
         name: 'displayName',
         label: intl.formatMessage({id: 'name_label'})
       },
+      {
+        name: 'email',
+        label: intl.formatMessage({id: 'email_label'})
+      },
     ]
 
     const menuList=[
@@ -157,7 +168,7 @@ class Users extends Component {
         text: intl.formatMessage({id: 'open_filter'}),
         icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
         tooltip:intl.formatMessage({id: 'open_filter'}),
-        onTouchTap: ()=>{setFilterIsOpen('users', true)}
+        onTouchTap: ()=>{setFilterIsOpen('select_user', true)}
       },
     ]
 
@@ -173,7 +184,7 @@ class Users extends Component {
             />
           </div>
         }
-        title={intl.formatMessage({id: 'users_count_title'}, {number: users_count})}>
+        title={intl.formatMessage({id: 'select_user'})}>
         <div >
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
@@ -189,7 +200,7 @@ class Users extends Component {
         </div>
 
         <FilterDrawer
-          name={'users'}
+          name={'select_user'}
           fields={filterFields}
           operators={operatorForType}
         />
@@ -203,25 +214,28 @@ class Users extends Component {
 }
 
 Users.propTypes = {
+  users: PropTypes.array.isRequired,
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { lists, auth, paths, filters } = state;
+  const { lists, auth, filters, browser } = state;
 
-  const { hasFilters } = filterSelectors.selectFilterProps('users', filters);
-  const users=filterSelectors.getFilteredList('users', filters, lists['users']);
+  const { hasFilters } = filterSelectors.selectFilterProps('select_user', filters);
+  const users=filterSelectors.getFilteredList('select_user', filters, lists['users']);
+  const usePreview=browser.greaterThan.small;
 
   return {
+    usePreview,
     hasFilters,
     users,
-    users_count: paths.users_count,
     auth
   };
 };
 
+
 export default connect(
-  mapStateToProps, {setFilterIsOpen}
-)(injectIntl(muiThemeable()(withFirebase(Users))));
+  mapStateToProps, {setFilterIsOpen, setPeristentValue}
+)(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));
