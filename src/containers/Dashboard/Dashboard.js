@@ -7,6 +7,8 @@ import { Activity } from '../../containers/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Line, Bar, Doughnut} from 'react-chartjs-2';
 import { withFirebase } from 'firekit';
+import CountUp from 'react-countup';
+import FontIcon from 'material-ui/FontIcon';
 
 const currentYear=new Date().getFullYear();
 const daysPath=`/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`;
@@ -22,12 +24,13 @@ class Dashboard extends Component {
     watchPath(daysPath);
     watchPath(monthsPath);
     watchPath(providerPath);
+    watchPath('users_count');
 
   }
 
   render() {
 
-    const {muiTheme, intl, days, months, providers}= this.props;
+    const {muiTheme, intl, days, months, providers, usersCount}= this.props;
 
 
     let daysLabels=[];
@@ -179,7 +182,30 @@ class Dashboard extends Component {
               data={providersComponentData}
             />
           </div>
+
+          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 30}}>
+            <CountUp
+              style={{
+                fontSize: 100,
+                color: muiTheme.palette.primary1Color,
+                fontFamily: muiTheme.fontFamily,
+              }}
+              start={0}
+              end={usersCount}
+            />
+            <div>
+              <FontIcon
+                color={muiTheme.palette.accent1Color}
+                className="material-icons"
+                style={{fontSize: 70, marginLeft: 16}}>
+                group
+              </FontIcon>
+            </div>
+
+          </div>
         </div>
+
+
 
       </Activity>
     );
@@ -198,6 +224,7 @@ const mapStateToProps = (state) => {
     days: paths[daysPath],
     months: paths[monthsPath],
     providers: paths[providerPath],
+    usersCount: paths['users_count']?paths['users_count']:0,
   };
 };
 

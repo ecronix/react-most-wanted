@@ -111,10 +111,11 @@ const messages=defineMessages({
   grants: 'Berechtigungen',
   private: 'Private',
   public: 'Öffentlich',
-  read_companies: 'Unternehmen lesen',
-  create_company: 'Unternehmen erstellen',
-  edit_company: 'Unternehmen bearbeiten',
-  delete_company: 'Unternehmen löschen',
+  grant_read_companies: 'Unternehmen lesen',
+  grant_create_company: 'Unternehmen erstellen',
+  grant_edit_company: 'Unternehmen bearbeiten',
+  grant_delete_company: 'Unternehmen löschen',
+  is_admin_label: 'Administrator',
 });
 
 export default messages;

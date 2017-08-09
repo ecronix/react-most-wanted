@@ -111,10 +111,11 @@ const messages=defineMessages({
   grants: 'Grants',
   private: 'Private',
   public: 'Public',
-  read_companies: 'Read companies',
-  create_company: 'Create company',
-  edit_company: 'Edit company',
-  delete_company: 'Delete company',
+  grant_read_companies: 'Read companies',
+  grant_create_company: 'Create company',
+  grant_edit_company: 'Edit company',
+  grant_delete_company: 'Delete company',
+  is_admin_label: 'Administrator',
 
 });
 

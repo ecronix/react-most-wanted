@@ -111,10 +111,11 @@ const messages=defineMessages({
   grants: 'Prava',
   private: 'Privatni',
   public: 'Javni',
-  read_companies: 'Citati firme',
-  create_company: 'Dodati firmu',
-  edit_company: 'Urediti firmu',
-  delete_company: 'Obrisati firmu',
+  grant_read_companies: 'Citati firme',
+  grant_create_company: 'Dodati firmu',
+  grant_edit_company: 'Urediti firmu',
+  grant_delete_company: 'Obrisati firmu',
+  is_admin_label: 'Administrator',
 });
 
 export default messages;
