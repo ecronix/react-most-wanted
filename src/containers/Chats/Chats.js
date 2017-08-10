@@ -28,7 +28,7 @@ class Chats extends Component {
   handleItemClick = (val, key) => {
     const { usePreview, history, setPersistentValue, firebaseApp, auth } = this.props;
 
-    if(val.unread>0){
+    if(val.unread>0){ 
       firebaseApp.database().ref(`user_chats/${auth.uid}/${key}/unread`).remove();
     }
 
@@ -60,9 +60,9 @@ class Chats extends Component {
         key={key}
         id={key}
         rightIcon={
-          <div style={{fontSize: 11,color: muiTheme.listItem.secondaryTextColor }}>
-            <div style={{color: val.unread>0?muiTheme.palette.primary1Color:undefined}} >
-              {val.lastCreated?intl.formatTime(new Date(val.lastCreated)):undefined}
+          <div style={{width: 'auto',fontSize: 11,color: muiTheme.listItem.secondaryTextColor }}>
+            <div style={{width: 'auto',color: val.unread>0?muiTheme.palette.primary1Color:undefined}} >
+              {val.lastCreated?intl.formatTime(new Date(val.lastCreated), 'hh:mm'):undefined}
             </div>
             {val.unread>0 &&
               <div style={{textAlign: 'right'}}>
