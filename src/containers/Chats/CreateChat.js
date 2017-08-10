@@ -18,7 +18,7 @@ import { getOperators } from '../../store/filters/selectors';
 import { setFilterIsOpen } from '../../store/filters/actions';
 import * as filterSelectors from '../../store/filters/selectors';
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import { setPeristentValue } from '../../store/persistentValues/actions';
+import { setPersistentValue } from '../../store/persistentValues/actions';
 
 const path=`users`;
 
@@ -65,7 +65,7 @@ class Users extends Component {
   }
 
   handleRowClick = (user) => {
-    const {auth, firebaseApp, history, usePreview, setPeristentValue} =this.props;
+    const {auth, firebaseApp, history, usePreview, setPersistentValue} =this.props;
 
     const key=user.key;
     const userValues=user.val;
@@ -80,7 +80,7 @@ class Users extends Component {
     userChatsRef.update({...chatData});
 
     if(usePreview){
-      setPeristentValue('current_chat_uid', key)
+      setPersistentValue('current_chat_uid', key)
       history.push(`/chats`);
     }else{
       history.push(`/chats/edit/${key}`);
@@ -254,5 +254,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {setFilterIsOpen, setPeristentValue}
+  mapStateToProps, {setFilterIsOpen, setPersistentValue}
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));

@@ -18,7 +18,7 @@ import { getOperators } from '../../store/filters/selectors';
 import { setFilterIsOpen } from '../../store/filters/actions';
 import * as filterSelectors from '../../store/filters/selectors';
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import { setPeristentValue } from '../../store/persistentValues/actions';
+import { setPersistentValue } from '../../store/persistentValues/actions';
 
 const path=`users`;
 
@@ -237,5 +237,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {setFilterIsOpen, setPeristentValue}
+  mapStateToProps, {setFilterIsOpen, setPersistentValue}
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));

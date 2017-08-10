@@ -12,23 +12,28 @@ import Avatar from 'material-ui/Avatar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FontIcon from 'material-ui/FontIcon';
 import PropTypes from 'prop-types';
-import { setPeristentValue } from '../../store/persistentValues/actions';
+import { setPersistentValue } from '../../store/persistentValues/actions';
 import ChatMessages from './ChatMessages';
+
 
 class Chats extends Component {
 
   componentDidMount(){
-    const {watchList, path, firebaseApp} =this.props;
+    const { watchList, path } =this.props;
 
-    let chatsRef=firebaseApp.database().ref(path).orderByChild('lastCreated');
-    watchList(chatsRef);
+    //let chatsRef=firebaseApp.database().ref(path).orderByChild('lastCreated');
+    watchList(path);
   }
 
   handleItemClick = (val, key) => {
-    const { usePreview, history, setPeristentValue } = this.props;
+    const { usePreview, history, setPersistentValue, firebaseApp, auth } = this.props;
+
+    if(val.unread>0){
+      firebaseApp.database().ref(`user_chats/${auth.uid}/${key}/unread`).remove();
+    }
 
     if(usePreview){
-      setPeristentValue('current_chat_uid', key);
+      setPersistentValue('current_chat_uid', key);
     }else{
       history.push(`/chats/edit/${key}`);
     }
@@ -56,11 +61,26 @@ class Chats extends Component {
         id={key}
         rightIcon={
           <div style={{fontSize: 11,color: muiTheme.listItem.secondaryTextColor }}>
-            {val.lastCreated?intl.formatTime(new Date(val.lastCreated)):undefined}
+            <div style={{color: val.unread>0?muiTheme.palette.primary1Color:undefined}} >
+              {val.lastCreated?intl.formatTime(new Date(val.lastCreated)):undefined}
+            </div>
+            {val.unread>0 &&
+              <div style={{textAlign: 'right'}}>
+                <Avatar
+                  size={20}
+                  backgroundColor={muiTheme.palette.primary1Color}
+                  color={muiTheme.palette.primaryTextColor}
+                  alt="unread">
+                  <div style={{color: muiTheme.listItem.secondaryTextColor}} >
+                    {val.unread}
+                  </div>
+                </Avatar>
+              </div>
+            }
           </div>
         }
-        primaryText={val.displayName}
-        secondaryText={`${val.lastMessage}`}
+        primaryText={val.unread>0?<div><b>{val.displayName}</b></div>:val.displayName}
+        secondaryText={val.unread>0?<div><b>{val.lastMessage}</b></div>:val.lastMessage}
       />
       <Divider inset={true}/>
     </div>;
@@ -101,12 +121,12 @@ class Chats extends Component {
         <div
           style={{ float:"left", clear: "both" }}
         />
-          <FloatingActionButton
-            onTouchTap={()=>{history.push(`/chats/create`)}}
-            style={{position: 'fixed', bottom:isDisplayingMessages?60:15, right: 20, zIndex: 99}}
-            secondary={true}>
-            <FontIcon className="material-icons" >chat</FontIcon>
-          </FloatingActionButton>
+        <FloatingActionButton
+          onTouchTap={()=>{history.push(`/chats/create`)}}
+          style={{position: 'fixed', bottom:isDisplayingMessages?60:15, right: 20, zIndex: 99}}
+          secondary={true}>
+          <FontIcon className="material-icons" >chat</FontIcon>
+        </FloatingActionButton>
       </div>
 
     </Activity>
@@ -124,14 +144,15 @@ Chats.propTypes = {
 };
 
 const mapStateToProps = (state, ownPops) => {
-  const { lists, auth, browser, persistantValues } = state;
+  const { lists, auth, browser, persistentValues } = state;
 
   const path=`user_chats/${auth.uid}`;
   const usePreview=browser.greaterThan.small;
-  const currentChatUid=persistantValues['current_chat_uid']?persistantValues['current_chat_uid']:undefined;
+  const currentChatUid=persistentValues['current_chat_uid']?persistentValues['current_chat_uid']:undefined;
   const list=lists[path]?lists[path]:[];
 
   return {
+    auth,
     path,
     usePreview,
     currentChatUid,
@@ -141,5 +162,5 @@ const mapStateToProps = (state, ownPops) => {
 
 
 export default connect(
-  mapStateToProps, { setPeristentValue }
+  mapStateToProps, { setPersistentValue }
 )(injectIntl(withFirebase(withRouter(muiThemeable()(Chats)))));
