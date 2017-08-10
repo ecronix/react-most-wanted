@@ -75,6 +75,7 @@ exports.handleUserCreated = functions.auth.user().onCreate(
     return Promise.all([
       userSync.populateUserRegistrationChartsPerDay(event, admin),
       userSync.populateUserRegistrationChartsPerMonth(event, admin),
+      userSync.updateProviderCount(event, admin),
       userNotifications.sendWelcomeEmail(event, mailTransport, APP_NAME)
     ])
   }

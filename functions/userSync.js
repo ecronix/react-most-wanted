@@ -147,13 +147,13 @@ module.exports = {
   },
   populateUserRegistrationChartsPerDay: (event, admin) => {
 
-    const year=event.data.metadata.createdAt.toISOString().slice(0, 4);
-    const month=event.data.metadata.createdAt.toISOString().slice(5, 7);
-    const day=event.data.metadata.createdAt.toISOString().slice(8, 10);
+    const year=event.data.metadata.creationTime.slice(0, 4);
+    const month=event.data.metadata.creationTime.slice(5, 7);
+    const day=event.data.metadata.creationTime.slice(8, 10);
     const dayCountRef = admin.database().ref(`/user_registrations_per_day/${year}/${month}/${day}`);
 
     return dayCountRef.transaction(current => {
-        return (current || 0) + 1;
+      return (current || 0) + 1;
     }).then(() => {
       console.log(`User registration counter per day updated.`);
     });
@@ -161,19 +161,35 @@ module.exports = {
   },
   populateUserRegistrationChartsPerMonth: (event, admin) => {
 
-    const year=event.data.metadata.createdAt.toISOString().slice(0, 4);
-    const month=event.data.metadata.createdAt.toISOString().slice(5, 7);
+    const year=event.data.metadata.creationTime.slice(0, 4);
+    const month=event.data.metadata.creationTime.slice(5, 7);
     const dayCountRef = admin.database().ref(`/user_registrations_per_month/${year}/${month}`);
 
     return dayCountRef.transaction(current => {
-        return (current || 0) + 1;
+      return (current || 0) + 1;
     }).then(() => {
       console.log(`User registration counter per month updated.`);
     });
 
   },
 
+  updateProviderCount: (event, admin) =>{
+    console.log('Count user providerd');
 
+    const user=event.data;
+    const provider=user.providerData?user.providerData[0]:{};
+
+    console.log(user);
+    console.log(provider);
+
+    const providerId=provider.providerId.replace('.com','');
+
+    return admin.database().ref(`/provider_count/${providerId}`).transaction(current => {
+      return (current || 0) + 1;
+    }).then(() => {
+      console.log(`Provider counter updated.`);
+    });
+  },
   userDeleted: (event, admin) => {
 
     const user = event.data; // The Firebase user.
