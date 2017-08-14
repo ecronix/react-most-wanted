@@ -16,7 +16,7 @@ module.exports = {
     };
 
     mailOptions.subject = `Welcome to ${APP_NAME}!`;
-    mailOptions.text = `Hey ${displayName}!, Welcome to ${APP_NAME}. I hope you will enjoy the demo application.`;
+    mailOptions.text = `Hey ${displayName?displayName:''}!, Welcome to ${APP_NAME}. I hope you enjoy the demo application. If you like it don't forget to star it :)`;
     return mailTransport.sendMail(mailOptions).then(() => {
       console.log('New welcome email sent to:', email);
     });
