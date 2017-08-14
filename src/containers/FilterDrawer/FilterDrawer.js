@@ -1,7 +1,6 @@
 import React, { Component }  from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape } from 'react-intl';
 import SuperSelectField from 'material-ui-superselectfield';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
@@ -38,9 +37,9 @@ class FilterDrawer extends Component {
   }
 
   handleAddFilterQuery = () => {
-    const { addFilterQuery, name, intl } = this.props;
+    const { addFilterQuery, name, formatMessage } = this.props;
 
-    addFilterQuery(name, {operator: {value: 'like', label: intl.formatMessage({id: 'operator_like_label'})}});
+    addFilterQuery(name, {operator: {value: 'like', label: formatMessage?formatMessage({id: 'operator_like_label'}):'operator_like_label'}});
   }
 
   handleQueryChange = (index, field, value, operator) => {
@@ -108,32 +107,32 @@ class FilterDrawer extends Component {
 
 
   render() {
-    const { muiTheme, intl, filters, name, fields, operators }= this.props;
+    const { muiTheme, formatMessage, filters, name, fields, operators }= this.props;
 
     const { isOpen, sortField, sortOrientation, queries } = filterSelectors.selectFilterProps(name, filters);
 
     return (
       <Drawer width={config.filter_drawer_width} openSecondary={true} open={isOpen} >
         <AppBar
-          title={intl.formatMessage({id:'filter'})}
+          title={formatMessage?formatMessage({id:'filter'}):'filter'}
           onLeftIconButtonTouchTap={this.handleCloseFilter}
           iconElementLeft={
             <IconButton
               tooltipPosition={'bottom-right'}
-              tooltip={intl.formatMessage({id:'close_filter'})}>
+              tooltip={formatMessage?formatMessage({id:'close_filter'}):'close_filter'}>
               <FontIcon className="material-icons" >chevron_right</FontIcon>
             </IconButton>
           }
         />
         <div>
           <div style={{display: 'flex', flexDirectiaron: 'row', alignItems: 'center'}}>
-            <Subheader style={{maxWidth: config.filter_drawer_width-67}}>{intl.formatMessage({id:'sorting'})}</Subheader>
+            <Subheader style={{maxWidth: config.filter_drawer_width-67}}>{formatMessage?formatMessage({id:'sorting'}):'sorting'}</Subheader>
             <div>
               <IconButton
                 style={{padding: 0}}
                 onTouchTap={()=>{this.handleSortOrientationChange(!sortOrientation)}}
                 tooltipPosition={'bottom-left'}
-                tooltip={intl.formatMessage({id:'change_sort_orientation'})}>
+                tooltip={formatMessage?formatMessage({id:'change_sort_orientation'}):'change_sort_orientation'}>
                 <FontIcon
                   className="material-icons"
                   color={sortOrientation===false?muiTheme.palette.accent1Color:muiTheme.palette.primary1Color}>
@@ -151,9 +150,9 @@ class FilterDrawer extends Component {
                 onChange={this.handleSortFieldChange}
                 fullWidth={true}
                 showAutocompleteThreshold={4}
-                hintTextAutocomplete={intl.formatMessage({id: 'hint_autocomplete'})}
-                noMatchFound={intl.formatMessage({id: 'not_match_found'})}
-                hintText={intl.formatMessage({id:'select_field'})}
+                hintTextAutocomplete={formatMessage?formatMessage({id: 'hint_autocomplete'}):'hint_autocomplete'}
+                noMatchFound={formatMessage?formatMessage({id: 'not_match_found'}):'not_match_found'}
+                hintText={formatMessage?formatMessage({id:'select_field'}):'select_field'}
                 style={{marginLeft: 15, marginRight: 10}}>
                 {fields.map((field)=>{
                   return <div
@@ -169,13 +168,13 @@ class FilterDrawer extends Component {
           </div>
           <Divider />
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-            <Subheader style={{maxWidth: config.filter_drawer_width-67}}>{intl.formatMessage({id:'filters'})}</Subheader>
+            <Subheader style={{maxWidth: config.filter_drawer_width-67}}>{formatMessage?formatMessage({id:'filters'}):'filters'}</Subheader>
             <div>
               <IconButton
                 style={{padding: 0}}
                 onTouchTap={this.handleAddFilterQuery}
                 tooltipPosition={'bottom-left'}
-                tooltip={intl.formatMessage({id:'add_filter'})}>
+                tooltip={formatMessage?formatMessage({id:'add_filter'}):'add_filter'}>
                 <FontIcon
                   className="material-icons"
                   color={muiTheme.palette.primary1Color}>
@@ -195,10 +194,10 @@ class FilterDrawer extends Component {
                   name='field'
                   value={field}
                   showAutocompleteThreshold={4}
-                  hintTextAutocomplete={intl.formatMessage({id: 'hint_autocomplete'})}
-                  noMatchFound={intl.formatMessage({id: 'not_match_found'})}
+                  hintTextAutocomplete={formatMessage?formatMessage({id: 'hint_autocomplete'}):'hint_autocomplete'}
+                  noMatchFound={formatMessage?formatMessage({id: 'not_match_found'}):'not_match_found'}
                   onChange={(val)=>{this.handleFieldChange(i, 'field', val)}}
-                  hintText={intl.formatMessage({id:'select_field'})}
+                  hintText={formatMessage?formatMessage({id:'select_field'}):'select_field'}
                   style={{marginLeft: 15, marginRight: 10 }}>
                   {fields.map((field)=>{
                     return <div
@@ -220,7 +219,7 @@ class FilterDrawer extends Component {
                   fields={fields}
                   operators={operators}
                   handleQueryChange={this.handleQueryChange}
-                  intl={intl}
+                  formatMessage={formatMessage}
                 />
 
 
@@ -229,7 +228,7 @@ class FilterDrawer extends Component {
                     style={{padding: 0}}
                     onTouchTap={()=>{this.handleQueryDelete(i)}}
                     tooltipPosition={'bottom-left'}
-                    tooltip={intl.formatMessage({id:'delete_filter'})}>
+                    tooltip={formatMessage?formatMessage({id:'delete_filter'}):'delete_filter'}>
                     <FontIcon
                       className="material-icons"
                       color={muiTheme.palette.accent1Color}>
@@ -246,7 +245,7 @@ class FilterDrawer extends Component {
                 currentField={field}
                 query={query}
                 muiTheme={muiTheme}
-                intl={intl}
+                formatMessage={formatMessage}
                 handleQueryChange={this.handleQueryChange}
                 fields={fields}
               />
@@ -264,7 +263,7 @@ class FilterDrawer extends Component {
 }
 
 FilterDrawer.propTypes = {
-  intl: intlShape.isRequired,
+  formatMessage: PropTypes.func,
   muiTheme: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   fields: PropTypes.array.isRequired,
@@ -272,15 +271,55 @@ FilterDrawer.propTypes = {
 };
 
 
-const mapStateToProps = (state) => {
-  const { filters, intl } = state;
+const mapStateToProps = (state, ownProps) => {
+  const { filters, userSetOperators } = state;
+  const { formatMessage } = ownProps;
+
+
+  const  allOperators = [
+    {value: 'like', label: formatMessage?formatMessage({id: 'operator_like_label'}):'like'},
+    {value: 'notlike', label: formatMessage?formatMessage({id: 'operator_notlike_label'}):'not like'},
+    {value: '=', label: formatMessage?formatMessage({id: 'operator_equal_label'}):'='},
+    {value: '!=', label: formatMessage?formatMessage({id: 'operator_notequal_label'}):'!='},
+    {value: '>', label: '>'},
+    {value: '>=', label: '>='},
+    {value: '<', label: '<'},
+    {value: '<=', label: '<='},
+    {value: 'novalue', label: formatMessage?formatMessage({id: 'operator_novalue_label'}):'no value'},
+  ]
+
+
+  const operators = [
+    {
+      type: 'string',
+      operators: allOperators
+    },
+    {
+      type: 'date',
+      operators: allOperators.filter((operator) => {
+        return (operator.value === '=' ||
+        operator.value === '!=' ||
+        operator.value === '<=' ||
+        operator.value === '>=' ||
+        operator.value === '<' ||
+        operator.value === '>');
+      })
+    },
+    {
+      type: 'bool',
+      operators: allOperators.filter((operator) => {
+        return operator.value === '=';
+      })
+    }
+  ];
 
   return {
+    operators: userSetOperators?userSetOperators:operators,
     filters,
-    intl,
+    formatMessage,
   };
 };
 
 export default connect(
   mapStateToProps, {...filterActions}
-)(injectIntl(muiThemeable()(FilterDrawer)));
+)(muiThemeable()(FilterDrawer));

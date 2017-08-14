@@ -9,14 +9,17 @@ export default function LoadingComponent(props) {
       return <div>Loader timed out!</div>;
     } else if (props.pastDelay) {
       // Display a loading screen after a set delay.
-      return <div className="container">
-        <img src="/logo.svg" className="loader" alt="logo" />
+      return <div className="shell">
+        <div className="container">
+          <img src="/logo.svg" className="loader" alt="logo" />
+        </div>
       </div>;
     } else {
       // Don't flash "Loading..." when we don't need to.
       return null;
     }
   } else if (props.error) {
+    window.location.reload();
     // If we aren't loading, maybe
     return <div>Error! Component failed to load</div>;
   } else {

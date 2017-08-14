@@ -14,7 +14,6 @@ import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
 import { FilterDrawer }  from '../../containers/FilterDrawer';
-import { getOperators } from '../../store/filters/selectors';
 import { setFilterIsOpen } from '../../store/filters/actions';
 import * as filterSelectors from '../../store/filters/selectors';
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
@@ -146,32 +145,6 @@ class Users extends Component {
     const { intl, users, muiTheme, setFilterIsOpen, hasFilters, history } =this.props;
 
 
-    const allOperators = getOperators(intl);
-
-    const operatorForType = [
-      {
-        type: 'string',
-        operators: allOperators
-      },
-      {
-        type: 'date',
-        operators: allOperators.filter((operator) => {
-          return (operator.value === '=' ||
-          operator.value === '!=' ||
-          operator.value === '<=' ||
-          operator.value === '>=' ||
-          operator.value === '<' ||
-          operator.value === '>');
-        })
-      },
-      {
-        type: 'bool',
-        operators: allOperators.filter((operator) => {
-          return operator.value === '=';
-        })
-      }
-    ]
-
     const filterFields = [
       {
         name: 'displayName',
@@ -217,9 +190,9 @@ class Users extends Component {
         </div>
 
         <FilterDrawer
+          formatMessage={intl.formatMessage}
           name={'select_user'}
           fields={filterFields}
-          operators={operatorForType}
         />
 
 

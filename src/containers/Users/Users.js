@@ -13,12 +13,6 @@ import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../component
 import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
-import { FilterDrawer }  from '../../containers/FilterDrawer';
-import { getOperators } from '../../store/filters/selectors';
-import { setFilterIsOpen } from '../../store/filters/actions';
-import * as filterSelectors from '../../store/filters/selectors';
-import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import { setPersistentValue } from '../../store/persistentValues/actions';
 
 const path=`users`;
 
@@ -67,7 +61,15 @@ class Users extends Component {
   handleRowClick = (user) => {
     const {history} =this.props;
 
-    history.push(`/users/edit/${user.key}`);
+    /*
+    const chatsRef=firebaseApp.database().ref(`/chats`);
+    const newChatRef=chatsRef.push();
+
+    newChatRef.update({[auth.uid]:true});
+    newChatRef.update({[user.key]:true});
+    */
+
+    history.push(`${path}/edit/${user.key}`);
   }
 
 
@@ -76,115 +78,58 @@ class Users extends Component {
 
     const user=users[index].val;
 
-
     return <div key={key}>
-      <ListItem
-        key={key}
-        id={key}
-        onTouchTap={()=>{this.handleRowClick(users[index])}}
-        leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
-        rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
+        <ListItem
+          key={key}
+          id={key}
+          onTouchTap={()=>{this.handleRowClick(users[index])}}
+          leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
+          rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
 
-        <div style={{display: 'flex'}}>
-          <div>
+          <div style={{display: 'flex'}}>
             <div>
-              {user.displayName}
-            </div>
-            <div
-              style={{
-                fontSize: 14,
-                lineHeight: '16px',
-                height: 16,
-                margin: 0,
-                marginTop: 4,
-                color: muiTheme.listItem.secondaryTextColor,
-              }}>
-              <p>
-                {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
-                {' '}
-                {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
-              </p>
+              <div>
+                {user.displayName}
+              </div>
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: '16px',
+                  height: 16,
+                  margin: 0,
+                  marginTop: 4,
+                  color: muiTheme.listItem.secondaryTextColor,
+                }}>
+                <p>
+                  {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
+                  {' '}
+                  {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
+                </p>
+              </div>
+
             </div>
 
+            <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
+              {user.providerData && user.providerData.map(
+                (p)=>{
+                  return this.getProviderIcon(p);
+                })
+              }
+            </div>
           </div>
 
-          <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
-            {user.providerData && user.providerData.map(
-              (p)=>{
-                return this.getProviderIcon(p);
-              })
-            }
-          </div>
-        </div>
-
-      </ListItem>
-      <Divider inset={true}/>
-    </div>;
+        </ListItem>
+        <Divider inset={true}/>
+      </div>;
   }
 
   render(){
-    const { intl, users, muiTheme, setFilterIsOpen, hasFilters } =this.props;
-
-
-    const allOperators = getOperators(intl);
-
-    const operatorForType = [
-      {
-        type: 'string',
-        operators: allOperators
-      },
-      {
-        type: 'date',
-        operators: allOperators.filter((operator) => {
-          return (operator.value === '=' ||
-          operator.value === '!=' ||
-          operator.value === '<=' ||
-          operator.value === '>=' ||
-          operator.value === '<' ||
-          operator.value === '>');
-        })
-      },
-      {
-        type: 'bool',
-        operators: allOperators.filter((operator) => {
-          return operator.value === '=';
-        })
-      }
-    ]
-
-    const filterFields = [
-      {
-        name: 'displayName',
-        label: intl.formatMessage({id: 'name_label'})
-      },
-      {
-        name: 'email',
-        label: intl.formatMessage({id: 'email_label'})
-      },
-    ]
-
-    const menuList=[
-      {
-        text: intl.formatMessage({id: 'open_filter'}),
-        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
-        tooltip:intl.formatMessage({id: 'open_filter'}),
-        onTouchTap: ()=>{setFilterIsOpen('select_user', true)}
-      },
-    ]
+    const { intl, users, muiTheme } =this.props;
 
     return (
       <Activity
         isLoading={users===undefined}
-        iconStyleRight={{width:'50%'}}
-        iconElementRight={
-          <div>
-            <ResponsiveMenu
-              iconMenuColor={muiTheme.palette.canvasColor}
-              menuList={menuList}
-            />
-          </div>
-        }
-        title={intl.formatMessage({id: 'select_user'})}>
+        title={intl.formatMessage({id: 'users'})}>
         <div >
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
@@ -199,12 +144,6 @@ class Users extends Component {
 
         </div>
 
-        <FilterDrawer
-          name={'select_user'}
-          fields={filterFields}
-          operators={operatorForType}
-        />
-
 
       </Activity>
     );
@@ -214,28 +153,22 @@ class Users extends Component {
 }
 
 Users.propTypes = {
-  users: PropTypes.array.isRequired,
+  users: PropTypes.array,
   intl: intlShape.isRequired,
   muiTheme: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {
-  const { lists, auth, filters, browser } = state;
-
-  const { hasFilters } = filterSelectors.selectFilterProps('select_user', filters);
-  const users=filterSelectors.getFilteredList('select_user', filters, lists['users']);
-  const usePreview=browser.greaterThan.small;
+  const { lists, auth } = state;
 
   return {
-    usePreview,
-    hasFilters,
-    users,
+    users: lists.users,
     auth
   };
 };
 
 
 export default connect(
-  mapStateToProps, {setFilterIsOpen, setPersistentValue}
+  mapStateToProps
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));

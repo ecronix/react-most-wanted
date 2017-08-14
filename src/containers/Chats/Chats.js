@@ -14,7 +14,8 @@ import FontIcon from 'material-ui/FontIcon';
 import PropTypes from 'prop-types';
 import { setPersistentValue } from '../../store/persistentValues/actions';
 import ChatMessages from './ChatMessages';
-
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
+import { dynamicSort } from '../../store/filters/selectors'
 
 class Chats extends Component {
 
@@ -28,7 +29,7 @@ class Chats extends Component {
   handleItemClick = (val, key) => {
     const { usePreview, history, setPersistentValue, firebaseApp, auth } = this.props;
 
-    if(val.unread>0){ 
+    if(val.unread>0){
       firebaseApp.database().ref(`user_chats/${auth.uid}/${key}/unread`).remove();
     }
 
@@ -86,6 +87,7 @@ class Chats extends Component {
     </div>;
   }
 
+
   render(){
     const { intl, list, history, currentChatUid, usePreview } =this.props;
 
@@ -105,15 +107,27 @@ class Chats extends Component {
           justifyContent: 'flex-start',
           flexDirection: 'row'
         }}>
-        <List style={{padding:0, height: '100%', width:'100%', overflowY: 'auto', maxWidth: usePreview?300:undefined}} >
-          <ReactList
-            style={{maxWidth: 300}}
-            itemRenderer={this.renderItem}
-            length={list?list.length:0}
-            type='simple'
-          />
-        </List>
-        <div style={{marginLeft: 3, flexGrow: 1}}>
+        <Scrollbar style={{ maxWidth: usePreview?300:undefined}}>
+          <List style={{padding:0, height: '100%', width:'100%', maxWidth: usePreview?300:undefined}} >
+            <ReactList
+              style={{maxWidth: 300}}
+              itemRenderer={this.renderItem}
+              length={list?list.length:0}
+              type='simple'
+            />
+          </List>
+        </Scrollbar>
+
+        <div style={{position: 'absolute', width: usePreview?300:'100%', height: '100%'}}>
+          <FloatingActionButton
+            onTouchTap={()=>{history.push(`/chats/create`)}}
+            style={{position: 'absolute', right: 20, bottom: 10, zIndex: 99}}
+            secondary={true}>
+            <FontIcon className="material-icons" >chat</FontIcon>
+          </FloatingActionButton>
+        </div>
+
+        <div style={{marginLeft: 0, flexGrow: 1}}>
           {isDisplayingMessages &&
             <ChatMessages uid={currentChatUid} />
           }
@@ -121,12 +135,6 @@ class Chats extends Component {
         <div
           style={{ float:"left", clear: "both" }}
         />
-        <FloatingActionButton
-          onTouchTap={()=>{history.push(`/chats/create`)}}
-          style={{position: 'fixed', bottom:isDisplayingMessages?60:15, right: 20, zIndex: 99}}
-          secondary={true}>
-          <FontIcon className="material-icons" >chat</FontIcon>
-        </FloatingActionButton>
       </div>
 
     </Activity>
@@ -149,7 +157,7 @@ const mapStateToProps = (state, ownPops) => {
   const path=`user_chats/${auth.uid}`;
   const usePreview=browser.greaterThan.small;
   const currentChatUid=persistentValues['current_chat_uid']?persistentValues['current_chat_uid']:undefined;
-  const list=lists[path]?lists[path]:[];
+  const list=lists[path]?lists[path].sort(dynamicSort('lastCreated', 1)).reverse():[];
 
   return {
     auth,

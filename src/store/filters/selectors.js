@@ -10,7 +10,7 @@ export const ARRAY_TYPE = 'array';
 export const SELECT_FIELD_TYPE = 'select_field';
 
 
-function getValue(snapshot, fieldName, isCaseSensitive=false){
+function getValue(snapshot, fieldName, isCaseSensitive){
 
   if(snapshot!==undefined && snapshot!==null){
     const fieldValue=snapshot.val[fieldName];
@@ -22,12 +22,12 @@ function getValue(snapshot, fieldName, isCaseSensitive=false){
       return fieldValue.toLocaleString('de-DE', options);
     } else if(typeof fieldValue === 'object' || fieldValue instanceof Object){
       if(fieldValue.hasOwnProperty('label')){
-        return isCaseSensitive?fieldValue.label:fieldValue.label.toUpperCase();
+        return isCaseSensitive===true?fieldValue.label:fieldValue.label.toUpperCase();
       }
     } else if(fieldValue === 'true' || fieldValue === 'false' || fieldValue === undefined) {
       return fieldValue===undefined?'false':fieldValue;
     } else {
-      return isCaseSensitive?fieldValue:fieldValue.toUpperCase();
+      return isCaseSensitive===true?fieldValue:fieldValue.toUpperCase();
     }
 
   }
@@ -36,7 +36,7 @@ function getValue(snapshot, fieldName, isCaseSensitive=false){
 }
 
 
-function dynamicSort(sortField, sortOrientation) {
+export function dynamicSort(sortField, sortOrientation) {
   var sortOrder = sortOrientation?1:-1;
 
   return (x,y) => {
@@ -46,21 +46,6 @@ function dynamicSort(sortField, sortOrientation) {
     return result * sortOrder;
   }
 
-}
-
-export function getOperators(intl){
-
-  return [
-    {value: 'like', label: intl.formatMessage({id: 'operator_like_label'})},
-    {value: 'notlike', label: intl.formatMessage({id: 'operator_notlike_label'})},
-    {value: '=', label: intl.formatMessage({id: 'operator_equal_label'})},
-    {value: '!=', label: intl.formatMessage({id: 'operator_notequal_label'})},
-    {value: '>', label: '>'},
-    {value: '>=', label: '>='},
-    {value: '<', label: '<'},
-    {value: '<=', label: '<='},
-    {value: 'novalue', label: intl.formatMessage({id: 'operator_novalue_label'})},
-  ]
 }
 
 export function selectFilterProps(filterName, filters){
@@ -117,7 +102,7 @@ export function selectQueryProps(query){
 
 
 export function getFilteredList(filterName, filters, list){
-  const { sortField, sortOrientation, queries } =selectFilterProps(filterName, filters);
+  const { sortField, sortOrientation, queries } = selectFilterProps(filterName, filters);
 
   let result=list;
 
@@ -133,12 +118,12 @@ export function getFilteredList(filterName, filters, list){
 
         if(isSet){
 
-          let fieldValue=getValue(row, field.value, false);
-          let queryValue=value;
+          let fieldValue = getValue(row, field.value, isCaseSensitive);
+          let queryValue = value;
 
           const yearMonthDayOptions = { year: 'numeric', month: '2-digit', day: '2-digit' }
           const tempDate = new Date(fieldValue);
-          if(fieldValue!==undefined && tempDate.toString() !== "Invalid Date") {
+          if(fieldValue !== undefined && tempDate.toString() !== "Invalid Date") {
 
 
             const queryDateString = new Date(queryValue).toLocaleString('de-DE', config.date_format_options);
@@ -194,8 +179,7 @@ export function getFilteredList(filterName, filters, list){
 
           else if( fieldValue!==undefined && (typeof fieldValue === 'string' || fieldValue instanceof String)){
             const valueString = String(value);
-
-            let queryValueString=isCaseSensitive?valueString:valueString.toUpperCase();
+            let queryValueString=isCaseSensitive===true?valueString:valueString.toUpperCase();
 
             switch (operator.value) {
               case 'like':

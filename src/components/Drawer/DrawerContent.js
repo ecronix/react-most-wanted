@@ -99,6 +99,12 @@ const DrawerContent = (props, context) => {
           primaryText: intl.formatMessage({id: 'public'}),
           leftIcon: <FontIcon className="material-icons" >group</FontIcon>
         },
+        {
+          value:'/predefined_chat_messages',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({id: 'predefined_messages'}),
+          leftIcon: <FontIcon className="material-icons" >textsms</FontIcon>
+        }
       ]
     },
     {

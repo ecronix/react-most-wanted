@@ -12,7 +12,6 @@ import { withFirebase } from 'firekit';
 
 class Root extends Component {
 
-
   handlePresence = (user) => {
     const { firebaseApp }= this.props;
     let myConnectionsRef = firebaseApp.database().ref(`users/${user.uid}/connections`);
@@ -25,19 +24,10 @@ class Root extends Component {
   }
 
 
-  handleTokenChange = (token) => {
-    const { firebaseApp }= this.props;
-
-    firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/notificationTokens/${token}`).set(true);
-  }
-
-
   onAuthStateChanged = (user) => {
     const {
       clearInitialization,
       watchConnection,
-      messaging,
-      initMessaging,
       firebaseApp,
       watchList,
       watchPath
@@ -63,10 +53,7 @@ class Root extends Component {
       watchList(`user_grants/${user.uid}`);
       watchPath(`admins/${user.uid}`);
 
-      if(messaging===undefined || !messaging.isInitialized){
-        initMessaging(token=>{this.handleTokenChange(token)})
-        firebaseApp.database().ref(`users/${user.uid}`).update(userData);
-      }
+      firebaseApp.database().ref(`users/${user.uid}`).update(userData);
 
       return userData;
 
@@ -76,7 +63,7 @@ class Root extends Component {
 
   }
 
-  componentDidMount () {
+  componentWillMount () {
     const { watchAuth }= this.props;
     watchAuth(this.onAuthStateChanged);
   }

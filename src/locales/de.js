@@ -116,6 +116,9 @@ const messages=defineMessages({
   grant_edit_company: 'Unternehmen bearbeiten',
   grant_delete_company: 'Unternehmen löschen',
   is_admin_label: 'Administrator',
+  predefined_messages: 'Vorgefertigte Nachrichten',
+  delete_predefined_chat_message_title: 'Vorgefertigte Nachricht löschen?',
+  delete_predefined_chat_message_message: 'Vorgefertigte Nachricht wird gelöscht!',
 });
 
 export default messages;

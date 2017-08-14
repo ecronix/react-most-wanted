@@ -32,6 +32,9 @@ const AsyncAbout = MyLoadable({loader: () => import('../../containers/About/Abou
 const AsyncPublicChats = MyLoadable({loader: () => import('../../containers/PublicChats/PublicChats')});
 const AsyncMyAccount = MyLoadable({loader: () => import('../../containers/MyAccount/MyAccount')});
 
+const AsyncPredefinedChatMessages = MyLoadable({loader: () => import('../../containers/PredefinedChatMessages/PredefinedChatMessages')});
+
+
 const AsyncTask = MyLoadable({loader: () => import('../../containers/Tasks/Task')});
 const AsyncTasks = MyLoadable({loader: () => import('../../containers/Tasks/Tasks')}, [AsyncTask]);
 
@@ -75,6 +78,8 @@ const Routes = (props, context) => {
         <RestrictedRoute type='private' path="/companies" exact component={AsyncCompanies} />
         <RestrictedRoute type='private' path="/companies/edit/:uid" exact component={AsyncCompany} />
         <RestrictedRoute type='private' path="/companies/create" exact component={AsyncCompany} />
+
+        <RestrictedRoute type='private' path="/predefined_chat_messages" exact component={AsyncPredefinedChatMessages} />
 
         <RestrictedRoute type='private' path="/chats" exact component={AsyncChats} />
         <RestrictedRoute type='private' path="/chats/edit/:uid" exact component={AsyncChat} />

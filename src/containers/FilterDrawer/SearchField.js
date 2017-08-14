@@ -34,7 +34,7 @@ export class SearchField extends React.Component {
 
   render() {
 
-    const { muiTheme, queryIndex, currentField, query, intl, fields, handleQueryChange } = this.props;
+    const { muiTheme, queryIndex, currentField, query, formatMessage, fields, handleQueryChange } = this.props;
     const { value,  isCaseSensitive } = filterSelectors.selectQueryProps(query);
 
     if(queryIndex===undefined ||
@@ -65,7 +65,7 @@ export class SearchField extends React.Component {
                 value={query.textValue?query.textValue:''}
                 onChange={(e, val)=>{this.handleDateInputTextChange(queryIndex, 'value', val)}}
                 style={{maxWidth: config.filter_drawer_width-75, marginLeft: 15, marginRight: 10 }}
-                hintText={intl.formatMessage({id:'enter_query_text'})}
+                hintText={formatMessage?formatMessage({id:'enter_query_text'}):''}
               />
             </div>
             <div>
@@ -76,7 +76,7 @@ export class SearchField extends React.Component {
                 style={{display: 'none'}}
                 onChange={(e, val)=>{this.handleDatePickerChange(queryIndex, 'value', val)}}
                 DateTimeFormat={global.Intl.DateTimeFormat}
-                locale={intl.formatMessage({id: 'current_locale'})}
+                locale={formatMessage?formatMessage({id: 'current_locale'}):''}
                 ref='value'
               />
               <IconButton
@@ -84,7 +84,7 @@ export class SearchField extends React.Component {
                 onTouchTap={()=>{this.refs['value'].openDialog();}}
                 tooltipPosition={'bottom-left'}
                 tabIndex={-1}
-                tooltip={intl.formatMessage({id: 'date_picker_text'})}>
+                tooltip={formatMessage?formatMessage({id: 'date_picker_text'}):''}>
                 <FontIcon
                   className="material-icons"
                   style={{fontSize: 12}}
@@ -120,7 +120,7 @@ export class SearchField extends React.Component {
                 onChange={(e, val)=>{handleQueryChange(queryIndex, 'value', val)}}
                 value={value}
                 style={{maxWidth: config.filter_drawer_width-75, marginLeft: 15, marginRight: 10 }}
-                hintText={intl.formatMessage({id:'enter_query_text'})}
+                hintText={formatMessage?formatMessage({id:'enter_query_text'}):''}
               />
             </div>
             <div>
@@ -128,7 +128,7 @@ export class SearchField extends React.Component {
                 style={{padding: 0}}
                 onTouchTap={()=>{handleQueryChange(queryIndex, 'isCaseSensitive', !isCaseSensitive)}}
                 tooltipPosition={'bottom-left'}
-                tooltip={intl.formatMessage({id:isCaseSensitive?'disable_case_sensitivity':'enable_case_sensitivity'})}>
+                tooltip={formatMessage?formatMessage({id:isCaseSensitive?'disable_case_sensitivity':'enable_case_sensitivity'}):''}>
                 <FontIcon
                   className="material-icons"
                   color={isCaseSensitive?muiTheme.palette.primary1Color:muiTheme.palette.disabledColor}>
