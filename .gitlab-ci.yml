@@ -33,6 +33,6 @@ deploy:
   only:
     - master
   script:
-    - cd functions && npm install && cd -
-    - firebase use --token $FIREBASE_DEPLOY_KEY
+    - npm run build
+    - firebase use default --token $FIREBASE_DEPLOY_KEY
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --only hosting --token $FIREBASE_DEPLOY_KEY
