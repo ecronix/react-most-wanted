@@ -17,7 +17,6 @@ yarn-debug.log*
 yarn-error.log*
 
 #firebase
-.firebaserc
 firebase-debug.log
 
 #codecov
