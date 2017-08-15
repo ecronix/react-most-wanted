@@ -22,7 +22,7 @@ class Chats extends Component {
   componentDidMount(){
     const { watchList, path } =this.props;
 
-    //let chatsRef=firebaseApp.database().ref(path).orderByChild('lastCreated');
+    //let chatsRef=firebaseApp.database().ref(path).orderByChild('lastCreatedReversed');
     watchList(path);
   }
 

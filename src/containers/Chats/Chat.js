@@ -14,6 +14,11 @@ import ChatMessages from './ChatMessages';
 
 class Chat extends Component {
 
+  componentDidMount(){
+    const { watchList, chatsPath } = this.props;
+    watchList(chatsPath)
+  }
+
 render(){
   const {messages, muiTheme, history, receiverDisplayName, receiverPhotoURL, uid} =this.props;
 
@@ -63,8 +68,8 @@ const mapStateToProps = (state, ownPops) => {
   const uid=match.params.uid;
 
   const path=`user_chat_messages/${auth.uid}/${uid}`;
-  const cathsPath=`/user_chats/${auth.uid}`;
-  const chats=lists[cathsPath]?lists[cathsPath]:[];
+  const chatsPath=`user_chats/${auth.uid}`;
+  const chats=lists[chatsPath]?lists[chatsPath]:[];
 
   let receiverDisplayName='';
   let receiverPhotoURL='';
@@ -81,6 +86,7 @@ const mapStateToProps = (state, ownPops) => {
     uid,
     receiverDisplayName,
     receiverPhotoURL,
+    chatsPath,
     auth,
     messages: lists[path],
   };

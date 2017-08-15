@@ -59,7 +59,7 @@ class ChatMessages extends Component {
   }
 
   initMessages = (props) => {
-    const {watchList, firebaseApp, path }=props;
+    const {watchList, firebaseApp, path}=props;
 
     let messagesRef=firebaseApp.database().ref(path).orderByKey().limitToLast(pageStep);
     watchList(messagesRef);
@@ -197,7 +197,7 @@ class ChatMessages extends Component {
                       </div>
                       <div style={{textAlign: 'center', width: '100%', height: '100%'}}>
                         <a target="_blank" href={values.message} style={{width: '100%', height: '100%'}}>
-                          <img src={googleMapsLogo} alt='location' height={50} width={50}/>
+                          <img src={googleMapsLogo} alt='' height={50} width={50}/>
                         </a>
                       </div>
                     </div>
@@ -426,16 +426,11 @@ const mapStateToProps = (state, ownPops) => {
   const path=`user_chat_messages/${auth.uid}/${uid}`;
   const chatMessageMenuOpen = simpleValues['chatMessageMenuOpen']===true;
 
-  let receiverDisplayName='';
-  let receiverPhotoURL='';
-
   return {
     simpleValues,
     path,
     uid,
     chatMessageMenuOpen,
-    receiverDisplayName,
-    receiverPhotoURL,
     messages: lists[path],
     predefinedMessages: lists['predefined_chat_messages'],
     auth,
