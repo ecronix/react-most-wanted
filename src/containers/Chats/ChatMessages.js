@@ -59,11 +59,10 @@ class ChatMessages extends Component {
   }
 
   initMessages = (props) => {
-    const {watchList, firebaseApp, path, cathsPath}=props;
+    const {watchList, firebaseApp, path }=props;
 
     let messagesRef=firebaseApp.database().ref(path).orderByKey().limitToLast(pageStep);
     watchList(messagesRef);
-    watchList(cathsPath);
     watchList('predefined_chat_messages');
 
   }
@@ -425,32 +424,19 @@ const mapStateToProps = (state, ownPops) => {
   const { uid } = ownPops;
 
   const path=`user_chat_messages/${auth.uid}/${uid}`;
-  const cathsPath=`/user_chats/${auth.uid}`;
-  const chats=lists[cathsPath]?lists[cathsPath]:[];
   const chatMessageMenuOpen = simpleValues['chatMessageMenuOpen']===true;
 
   let receiverDisplayName='';
   let receiverPhotoURL='';
 
-  chats.map(chat=>{
-    if(chat.key===uid){
-      receiverDisplayName=chat.val.displayName;
-      receiverPhotoURL=chat.val.photoURL;
-    }
-    return chat;
-  })
-
-
   return {
     simpleValues,
     path,
-    cathsPath,
     uid,
     chatMessageMenuOpen,
     receiverDisplayName,
     receiverPhotoURL,
     messages: lists[path],
-    chats: lists[cathsPath],
     predefinedMessages: lists['predefined_chat_messages'],
     auth,
     browser
