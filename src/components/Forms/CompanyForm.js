@@ -64,7 +64,7 @@ class Form extends Component {
 
 
         <FlatButton
-          onTouchTap={()=>{
+          onClick={()=>{
             setDialogIsOpen('new_company_photo', true)
           }}
           disabled={uid===undefined || !initialized}

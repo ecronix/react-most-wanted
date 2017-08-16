@@ -91,7 +91,7 @@ class Tasks extends Component {
 
     return task.completed?
     <Avatar
-      onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
+      onClick={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
       alt="person"
       icon={<FontIcon className="material-icons" >done</FontIcon>}
       backgroundColor={green800}
@@ -99,7 +99,7 @@ class Tasks extends Component {
     :
     <Avatar
       src={task.userPhotoURL}
-      onTouchTap={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
+      onClick={auth.uid===task.userId?()=>{this.handleUpdateTask(key,{...task, completed: !task.completed})}:undefined}
       alt="person"
       icon={
         <FontIcon className="material-icons">
@@ -125,7 +125,7 @@ class Tasks extends Component {
 
         <ListItem
           key={key}
-          onTouchTap={task.userId===auth.uid?()=>{history.push(`/tasks/edit/${key}`)}:undefined}
+          onClick={task.userId===auth.uid?()=>{history.push(`/tasks/edit/${key}`)}:undefined}
           primaryText={task.title}
           secondaryText={`${task.userName} ${task.created?intl.formatRelative(new Date(task.created)):undefined}`}
           leftAvatar={this.userAvatar(key, task)}
@@ -133,7 +133,7 @@ class Tasks extends Component {
             task.userId===auth.uid?
             <IconButton
               style={{display:browser.lessThan.medium?'none':undefined}}
-              onTouchTap={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
+              onClick={()=>{setDialogIsOpen('delete_task_from_list', key);}}>
               <FontIcon className="material-icons" color={'red'}>{'delete'}</FontIcon>
             </IconButton>:undefined
           }
@@ -173,12 +173,12 @@ class Tasks extends Component {
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
         primary={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
       <FlatButton
         label={intl.formatMessage({id: 'delete'})}
         secondary={true}
-        onTouchTap={this.handleDelete}
+        onClick={this.handleDelete}
       />,
     ];
 
@@ -211,7 +211,7 @@ class Tasks extends Component {
                   type="Text"
                 />
                 <IconButton
-                  onTouchTap={this.handleAddTask}>
+                  onClick={this.handleAddTask}>
                   <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
                 </IconButton>
               </div>

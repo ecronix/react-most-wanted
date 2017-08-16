@@ -95,12 +95,12 @@ export class ImageCropDialog extends Component {
         disabled={!this.state.src || this.state.isLoading || this.state.isUploading}
         label={intl.formatMessage({id: 'submit'})}
         primary={true}
-        onTouchTap={()=>{this.handlePhotoURLUpload(this.cropper.crop())}}
+        onClick={()=>{this.handlePhotoURLUpload(this.cropper.crop())}}
       />,
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
         secondary={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
     ];
 

@@ -55,7 +55,7 @@ export default class AvatarImageField extends Component {
         <div>
           <FlatButton
             style={{width: '100%'}}
-            onTouchTap={()=>{
+            onClick={()=>{
               this.state = this.setState({selected_avatar_image: 'true'})
             }}
             disabled={disabled===true?true:(uid===undefined || !initialized)}

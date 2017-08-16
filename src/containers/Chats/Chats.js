@@ -57,7 +57,7 @@ class Chats extends Component {
           />
         }
         style={isPreviewed?{backgroundColor: muiTheme.toolbar.separatorColor}:undefined}
-        onTouchTap={()=>{this.handleItemClick(val, key)}}
+        onClick={()=>{this.handleItemClick(val, key)}}
         key={key}
         id={key}
         rightIcon={
@@ -120,7 +120,7 @@ class Chats extends Component {
 
         <div style={{position: 'absolute', width: usePreview?300:'100%', height: '100%'}}>
           <FloatingActionButton
-            onTouchTap={()=>{history.push(`/chats/create`)}}
+            onClick={()=>{history.push(`/chats/create`)}}
             style={{position: 'absolute', right: 20, bottom: 10, zIndex: 99}}
             secondary={true}>
             <FontIcon className="material-icons" >chat</FontIcon>

@@ -47,7 +47,7 @@ class Roles extends Component {
             icon={<FontIcon className="material-icons" >account_box</FontIcon>}
           />
         }
-        onTouchTap={()=>{history.push(`${path}/edit/${key}`)}}
+        onClick={()=>{history.push(`${path}/edit/${key}`)}}
         key={key}
         id={key}
         primaryText={val.name}
@@ -78,7 +78,7 @@ class Roles extends Component {
             style={{ float:"left", clear: "both" }}
           />
           <FloatingActionButton
-            onTouchTap={this.handleCreateClick}
+            onClick={this.handleCreateClick}
             style={{position: 'fixed', bottom:15, right: 20, zIndex: 99}}
             secondary={true}>
             <FontIcon className="material-icons" >add</FontIcon>

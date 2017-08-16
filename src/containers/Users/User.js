@@ -187,7 +187,7 @@ class Role extends Component {
         text: intl.formatMessage({id: 'save'}),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
         tooltip:intl.formatMessage({id: 'save'}),
-        onTouchTap: ()=>{submit('role')}
+        onClick: ()=>{submit('role')}
       }
     ]
 

@@ -256,12 +256,12 @@ class MyAccount extends Component {
         <FlatButton
           label={intl.formatMessage({id: 'cancel'})}
           primary={true}
-          onTouchTap={this.handleClose}
+          onClick={this.handleClose}
         />,
         <FlatButton
           label={intl.formatMessage({id: 'delete'})}
           secondary={true}
-          onTouchTap={this.handleDelete}
+          onClick={this.handleDelete}
         />,
       ];
 
@@ -270,7 +270,7 @@ class MyAccount extends Component {
           iconElementRight={
             auth.uid?<FlatButton
               style={{marginTop: 4}}
-              onTouchTap={()=>{setDialogIsOpen('delete_user', true);}}
+              onClick={()=>{setDialogIsOpen('delete_user', true);}}
               icon={<FontIcon className="material-icons" >delete</FontIcon>}
             />:undefined
           }

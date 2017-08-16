@@ -77,7 +77,7 @@ class PredefinedChatMessages extends Component {
           primaryText={message}
           rightIconButton={
             <IconButton
-              onTouchTap={() => setSimpleValue('delete_predefined_chat_message', key)}>
+              onClick={() => setSimpleValue('delete_predefined_chat_message', key)}>
               <FontIcon className="material-icons" color={'red'}>{'delete'}</FontIcon>
             </IconButton>
           }
@@ -102,12 +102,12 @@ class PredefinedChatMessages extends Component {
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
         primary={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
       <FlatButton
         label={intl.formatMessage({id: 'delete'})}
         secondary={true}
-        onTouchTap={this.handleDelete}
+        onClick={this.handleDelete}
       />,
     ];
 
@@ -144,7 +144,7 @@ class PredefinedChatMessages extends Component {
                 />
 
                 <IconButton
-                  onTouchTap={this.handleAddMessage}>
+                  onClick={this.handleAddMessage}>
                   <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
                 </IconButton>
               </div>

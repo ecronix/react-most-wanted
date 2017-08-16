@@ -50,7 +50,7 @@ class Companies extends Component {
           key={index}
           primaryText={company.val.name}
           secondaryText={company.val.full_name}
-          onTouchTap={()=>{history.push(`/companies/edit/${company.key}`)}}
+          onClick={()=>{history.push(`/companies/edit/${company.key}`)}}
           id={index}
         />
         <Divider inset={true}/>
@@ -79,7 +79,7 @@ class Companies extends Component {
           <div style={{position: 'fixed', right: 18, zIndex:3, bottom: 18, }}>
           {
               isGranted('create_company') &&
-              <FloatingActionButton secondary={true} onTouchTap={()=>{history.push(`/companies/create`)}} style={{zIndex:3}}>
+              <FloatingActionButton secondary={true} onClick={()=>{history.push(`/companies/create`)}} style={{zIndex:3}}>
                 <FontIcon className="material-icons" >add</FontIcon>
               </FloatingActionButton>
           }

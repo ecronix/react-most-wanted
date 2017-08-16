@@ -7,7 +7,7 @@ const ToggleButton = (props) => {
   const isToggled=value===true;
 
   return <IconButton
-    onTouchTap={()=>{onChange(!isToggled)}}
+    onClick={()=>{onChange(!isToggled)}}
     {...rest}>
 
     {isToggled && checkedIcon}

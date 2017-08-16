@@ -242,7 +242,7 @@ renderItem = (i, k) => {
     <ListItem
       rightIconButton={
         <IconButton
-          onTouchTap={() => {
+          onClick={() => {
             setSimpleValue('chatMessageMenuOpen', false);
             this.name.input.value = message;
             this.handleAddMessage();
@@ -250,7 +250,7 @@ renderItem = (i, k) => {
           <FontIcon className="material-icons" color={muiTheme.palette.text1Color}>send</FontIcon>
         </IconButton>
       }
-      onTouchTap={()=>{
+      onClick={()=>{
         setSimpleValue('chatMessageMenuOpen', false);
         this.name.input.value = message;
         this.name.state.hasValue = true;
@@ -303,7 +303,7 @@ render(){
           <div  style={{maxWidth: 600, margin: 8, width: '100%'}} >
             <div style={{display: 'flex', justifyContent:'center'}}>
               <Chip
-                onTouchTap={this.handleLoadMore}
+                onClick={this.handleLoadMore}
                 backgroundColor={muiTheme.palette.primary3Color}>
                 {intl.formatMessage({id:'load_more_label'})}
               </Chip>
@@ -328,7 +328,7 @@ render(){
       >
         <div style={{display:'flex', alignItems: 'center', justifyContent: 'center'}}>
           <IconButton
-            onTouchTap={() => {
+            onClick={() => {
               if(chatMessageMenuOpen === true) {
                 setSimpleValue('chatMessageMenuOpen', false);
               } else {
@@ -362,7 +362,7 @@ render(){
                 style={{position: 'absolute', right: 25, top: -3, width: 20, height: 0}}
                 >
                   <IconButton
-                    onTouchTap={() =>
+                    onClick={() =>
                       getGeolocation((pos) => {
                         if(!pos) {
                           return;
@@ -386,7 +386,7 @@ render(){
           </div>
           <IconButton
             disabled={messages===undefined}
-            onTouchTap={this.handleAddMessage}>
+            onClick={this.handleAddMessage}>
             <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
           </IconButton>
         </div>

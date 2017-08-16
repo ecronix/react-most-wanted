@@ -130,7 +130,7 @@ class FilterDrawer extends Component {
             <div>
               <IconButton
                 style={{padding: 0}}
-                onTouchTap={()=>{this.handleSortOrientationChange(!sortOrientation)}}
+                onClick={()=>{this.handleSortOrientationChange(!sortOrientation)}}
                 tooltipPosition={'bottom-left'}
                 tooltip={formatMessage?formatMessage({id:'change_sort_orientation'}):'change_sort_orientation'}>
                 <FontIcon
@@ -172,7 +172,7 @@ class FilterDrawer extends Component {
             <div>
               <IconButton
                 style={{padding: 0}}
-                onTouchTap={this.handleAddFilterQuery}
+                onClick={this.handleAddFilterQuery}
                 tooltipPosition={'bottom-left'}
                 tooltip={formatMessage?formatMessage({id:'add_filter'}):'add_filter'}>
                 <FontIcon
@@ -226,7 +226,7 @@ class FilterDrawer extends Component {
                 <div>
                   <IconButton
                     style={{padding: 0}}
-                    onTouchTap={()=>{this.handleQueryDelete(i)}}
+                    onClick={()=>{this.handleQueryDelete(i)}}
                     tooltipPosition={'bottom-left'}
                     tooltip={formatMessage?formatMessage({id:'delete_filter'}):'delete_filter'}>
                     <FontIcon

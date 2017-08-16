@@ -82,7 +82,7 @@ class Users extends Component {
         <ListItem
           key={key}
           id={key}
-          onTouchTap={()=>{this.handleRowClick(users[index])}}
+          onClick={()=>{this.handleRowClick(users[index])}}
           leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
           rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
 

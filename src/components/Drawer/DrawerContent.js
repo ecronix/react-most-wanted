@@ -49,7 +49,7 @@ const DrawerContent = (props, context) => {
       value:undefined,
       visible: true,
       primaryText: intl.formatMessage({id: t.id}),
-      onTouchTap: ()=>{updateTheme(t.id)},
+      onClick: ()=>{updateTheme(t.id)},
       rightIcon: <FontIcon
         className="material-icons"
         color={t.id===theme?muiTheme.palette.primary1Color:undefined}>
@@ -64,7 +64,7 @@ const DrawerContent = (props, context) => {
       value: undefined,
       visible: true,
       primaryText: intl.formatMessage({id: l.locale}) ,
-      onTouchTap: ()=>{updateLocale(l.locale)},
+      onClick: ()=>{updateLocale(l.locale)},
       rightIcon: <FontIcon
         className="material-icons"
         color={l.locale===locale?muiTheme.palette.primary1Color:undefined}>
@@ -200,7 +200,7 @@ const DrawerContent = (props, context) => {
     },
     {
       value:'/signin',
-      onTouchTap: handleSignOut,
+      onClick: handleSignOut,
       primaryText: intl.formatMessage({id: 'sign_out'}),
       leftIcon: <FontIcon className="material-icons" >lock</FontIcon>
     },

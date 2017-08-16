@@ -111,7 +111,7 @@ class DateField extends Component {
           withRef
         />
         <IconButton
-          onTouchTap={()=>{this.refs[name].getRenderedComponent().refs.component.openDialog();}}
+          onClick={()=>{this.refs[name].getRenderedComponent().refs.component.openDialog();}}
           tabIndex={-1}
           disabled={disabled}
           tooltip={datePickerText}>

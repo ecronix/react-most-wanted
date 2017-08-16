@@ -81,7 +81,7 @@ export class SearchField extends React.Component {
               />
               <IconButton
                 style={{padding: 0}}
-                onTouchTap={()=>{this.refs['value'].openDialog();}}
+                onClick={()=>{this.refs['value'].openDialog();}}
                 tooltipPosition={'bottom-left'}
                 tabIndex={-1}
                 tooltip={formatMessage?formatMessage({id: 'date_picker_text'}):''}>
@@ -126,7 +126,7 @@ export class SearchField extends React.Component {
             <div>
               <IconButton
                 style={{padding: 0}}
-                onTouchTap={()=>{handleQueryChange(queryIndex, 'isCaseSensitive', !isCaseSensitive)}}
+                onClick={()=>{handleQueryChange(queryIndex, 'isCaseSensitive', !isCaseSensitive)}}
                 tooltipPosition={'bottom-left'}
                 tooltip={formatMessage?formatMessage({id:isCaseSensitive?'disable_case_sensitivity':'enable_case_sensitivity'}):''}>
                 <FontIcon

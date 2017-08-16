@@ -2,12 +2,12 @@ import React from 'react';
 import IconButton from 'material-ui/IconButton';
 
 const ActionToggleButton = (props) => {
-    const { isToggled, getIcon, onTouchTap, meta, input,  ...rest } = props;
+    const { isToggled, getIcon, onClick, meta, input,  ...rest } = props;
     const { value } = input;
     const toggled=isToggled(value);
 
     return <IconButton
-      onTouchTap={()=>{onTouchTap(toggled)}}
+      onClick={()=>{onClick(toggled)}}
       {...rest}>
       {getIcon(toggled)}
     </IconButton>

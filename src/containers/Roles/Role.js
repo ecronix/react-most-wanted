@@ -136,12 +136,12 @@ class Role extends Component {
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
         primary={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
       <FlatButton
         label={intl.formatMessage({id: 'delete'})}
         secondary={true}
-        onTouchTap={this.handleDelete}
+        onClick={this.handleDelete}
       />,
     ];
 
@@ -150,14 +150,14 @@ class Role extends Component {
         text: intl.formatMessage({id: 'save'}),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
         tooltip:intl.formatMessage({id: 'save'}),
-        onTouchTap: ()=>{submit('role')}
+        onClick: ()=>{submit('role')}
       },
       {
         hidden: uid===undefined,
         text: intl.formatMessage({id: 'delete'}),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>delete</FontIcon>,
         tooltip: intl.formatMessage({id: 'delete'}),
-        onTouchTap: ()=>{setDialogIsOpen('delete_role', true);}
+        onClick: ()=>{setDialogIsOpen('delete_role', true);}
       }
     ]
 

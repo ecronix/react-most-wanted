@@ -104,7 +104,7 @@ class Form extends Component {
 
         <div>
           <FlatButton
-            onTouchTap={()=>{
+            onClick={()=>{
               setDialogIsOpen('new_company_photo', true)
             }}
             disabled={uid===undefined || !initialized}
@@ -125,7 +125,7 @@ class Form extends Component {
               return <IconButton
                 key={i}
                 disabled={isLinkedWithProvider(p)}
-                onTouchTap={()=>{linkUserWithPopup(p)}}
+                onClick={()=>{linkUserWithPopup(p)}}
                 tooltip={intl.formatMessage({id: `link_with_${p.PROVIDER_ID}`})}>
                 {this.getProviderIcon(p)}
               </IconButton>
@@ -165,7 +165,7 @@ class Form extends Component {
 
           <div>
             <IconButton
-              onTouchTap={auth.emailVerified===true?undefined:this.handleEmailVerificationsSend}
+              onClick={auth.emailVerified===true?undefined:this.handleEmailVerificationsSend}
               tooltip={intl.formatMessage({id: auth.emailVerified===true?'email_verified':'email_not_verified'})}>
               <FontIcon
                 color={auth.emailVerified===true?muiTheme.palette.primary1Color:muiTheme.palette.accent1Color}

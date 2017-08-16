@@ -215,7 +215,7 @@ render(){
             <div  style={{height: '100%', maxWidth: 600, width: '100%', margin: 8}} ref={(field) => { this.list = field; }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 5}}>
                 <Chip
-                  onTouchTap={this.handleLoadMore}
+                  onClick={this.handleLoadMore}
                   backgroundColor={muiTheme.palette.primary3Color}>
                   {intl.formatMessage({id:'load_more_label'})}
                 </Chip>
@@ -256,7 +256,7 @@ render(){
           </div>
           <IconButton
             disabled={messages===undefined}
-            onTouchTap={this.handleAddMessage}>
+            onClick={this.handleAddMessage}>
             <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
           </IconButton>
         </div>

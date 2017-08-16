@@ -84,12 +84,12 @@ class Company extends Component {
       <FlatButton
         label={intl.formatMessage({id: 'cancel'})}
         primary={true}
-        onTouchTap={this.handleClose}
+        onClick={this.handleClose}
       />,
       <FlatButton
         label={intl.formatMessage({id: 'delete'})}
         secondary={true}
-        onTouchTap={this.handleDelete}
+        onClick={this.handleDelete}
       />,
     ];
 
@@ -99,14 +99,14 @@ class Company extends Component {
         text: intl.formatMessage({id: 'save'}),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
         tooltip:intl.formatMessage({id: 'save'}),
-        onTouchTap: ()=>{submit('company')}
+        onClick: ()=>{submit('company')}
       },
       {
         hidden: uid===undefined || !isGranted(`delete_${form_name}`),
         text: intl.formatMessage({id: 'delete'}),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>delete</FontIcon>,
         tooltip: intl.formatMessage({id: 'delete'}),
-        onTouchTap: ()=>{setDialogIsOpen('delete_company', true);}
+        onClick: ()=>{setDialogIsOpen('delete_company', true);}
       }
     ]
 
