@@ -13,6 +13,12 @@ import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../component
 import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
+import { ResponsiveMenu } from 'material-ui-responsive-menu';
+import * as filterSelectors from '../../store/filters/selectors';
+import { setFilterIsOpen } from '../../store/filters/actions';
+import { FilterDrawer }  from '../../containers/FilterDrawer';
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
+
 
 const path=`users`;
 
@@ -74,77 +80,113 @@ class Users extends Component {
 
 
   renderItem = (index, key) => {
-    const { users, intl, muiTheme} =this.props;
+    const { list, intl, muiTheme} =this.props;
 
-    const user=users[index].val;
+    const user=list[index].val;
 
     return <div key={key}>
-        <ListItem
-          key={key}
-          id={key}
-          onClick={()=>{this.handleRowClick(users[index])}}
-          leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
-          rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
+      <ListItem
+        key={key}
+        id={key}
+        onClick={()=>{this.handleRowClick(list[index])}}
+        leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
+        rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
 
-          <div style={{display: 'flex'}}>
+        <div style={{display: 'flex'}}>
+          <div>
             <div>
-              <div>
-                {user.displayName}
-              </div>
-              <div
-                style={{
-                  fontSize: 14,
-                  lineHeight: '16px',
-                  height: 16,
-                  margin: 0,
-                  marginTop: 4,
-                  color: muiTheme.listItem.secondaryTextColor,
-                }}>
-                <p>
-                  {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
-                  {' '}
-                  {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
-                </p>
-              </div>
-
+              {user.displayName}
+            </div>
+            <div
+              style={{
+                fontSize: 14,
+                lineHeight: '16px',
+                height: 16,
+                margin: 0,
+                marginTop: 4,
+                color: muiTheme.listItem.secondaryTextColor,
+              }}>
+              <p>
+                {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
+                {' '}
+                {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
+              </p>
             </div>
 
-            <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
-              {user.providerData && user.providerData.map(
-                (p)=>{
-                  return this.getProviderIcon(p);
-                })
-              }
-            </div>
           </div>
 
-        </ListItem>
-        <Divider inset={true}/>
-      </div>;
+          <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
+            {user.providerData && user.providerData.map(
+              (p)=>{
+                return this.getProviderIcon(p);
+              })
+            }
+          </div>
+        </div>
+
+      </ListItem>
+      <Divider inset={true}/>
+    </div>;
   }
 
   render(){
-    const { intl, users, muiTheme } =this.props;
+    const {
+      intl,
+      list,
+      muiTheme,
+      setFilterIsOpen,
+      hasFilters,
+    } =this.props;
+
+    const menuList=[
+      {
+        text: intl.formatMessage({id: 'open_filter'}),
+        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
+        tooltip:intl.formatMessage({id: 'open_filter'}),
+        onClick: ()=>{setFilterIsOpen('users', true)}
+      }
+    ]
+
+    const filterFields = [
+      {
+        name: 'name',
+        label: intl.formatMessage({id: 'name_label'})
+      },
+      {
+        name: 'email',
+        label: intl.formatMessage({id: 'email_label'})
+      }
+    ]
 
     return (
       <Activity
-        isLoading={users===undefined}
+        iconStyleRight={{width:'50%'}}
+        iconElementRight={
+          <div>
+            <ResponsiveMenu
+              iconMenuColor={muiTheme.palette.canvasColor}
+              menuList={menuList}
+            />
+          </div>
+        }
+        isLoading={list===undefined}
         title={intl.formatMessage({id: 'users'})}>
-        <div >
-
-          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
-            <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
+        <div style={{height: '100%', overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
+          <Scrollbar>
+            <List id='test' ref={(field) => { this.list = field; }}>
               <ReactList
                 itemRenderer={this.renderItem}
-                length={users?users.length:0}
+                length={list?list.length:0}
                 type='simple'
               />
             </List>
-          </div>
-
+          </Scrollbar>
         </div>
-
-
+        <FilterDrawer
+          name={'users'}
+          fields={filterFields}
+          formatMessage={intl.formatMessage}
+        />
       </Activity>
     );
 
@@ -160,15 +202,19 @@ Users.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { lists, auth } = state;
+  const { lists, auth, filters } = state;
+
+  const { hasFilters } = filterSelectors.selectFilterProps('users', filters);
+  const list = filterSelectors.getFilteredList('users', filters, lists[path]);
 
   return {
-    users: lists.users,
+    hasFilters,
+    list,
     auth
   };
 };
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps, { setFilterIsOpen }
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));
