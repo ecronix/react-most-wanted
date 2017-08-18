@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import { setPersistentValue } from '../../store/persistentValues/actions';
 import ChatMessages from './ChatMessages';
 import Scrollbar from '../../components/Scrollbar/Scrollbar';
-import { dynamicSort } from '../../store/filters/selectors'
+import { filterSelectors } from 'material-ui-filter'
 
 class Chats extends Component {
 
@@ -157,7 +157,7 @@ const mapStateToProps = (state, ownPops) => {
   const path=`user_chats/${auth.uid}`;
   const usePreview=browser.greaterThan.small;
   const currentChatUid=persistentValues['current_chat_uid']?persistentValues['current_chat_uid']:undefined;
-  const list=lists[path]?lists[path].sort(dynamicSort('lastCreated', 1)).reverse():[];
+  const list=lists[path]?lists[path].sort(filterSelectors.dynamicSort('lastCreated', 1)).reverse():[];
 
   return {
     auth,
