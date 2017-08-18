@@ -9,7 +9,6 @@ const Scrollbar = (props) => {
 
   const thumbStyle = {
     backgroundColor: fade(muiTheme.palette.primary1Color, 0.65),
-    zIndex: 9999,
     borderRadius: 3
   };
 

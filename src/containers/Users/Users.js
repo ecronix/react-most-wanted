@@ -14,10 +14,8 @@ import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import * as filterSelectors from '../../store/filters/selectors';
-import { setFilterIsOpen } from '../../store/filters/actions';
-import { FilterDrawer }  from '../../containers/FilterDrawer';
 import Scrollbar from '../../components/Scrollbar/Scrollbar';
+import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
 
 
 const path=`users`;
@@ -149,7 +147,7 @@ class Users extends Component {
 
     const filterFields = [
       {
-        name: 'name',
+        name: 'displayName',
         label: intl.formatMessage({id: 'name_label'})
       },
       {
@@ -189,9 +187,7 @@ class Users extends Component {
         />
       </Activity>
     );
-
   }
-
 }
 
 Users.propTypes = {
@@ -205,7 +201,7 @@ const mapStateToProps = (state) => {
   const { lists, auth, filters } = state;
 
   const { hasFilters } = filterSelectors.selectFilterProps('users', filters);
-  const list = filterSelectors.getFilteredList('users', filters, lists[path]);
+  const list = filterSelectors.getFilteredList('users', filters, lists[path], fieldValue => fieldValue.val);
 
   return {
     hasFilters,
@@ -216,5 +212,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, { setFilterIsOpen }
+  mapStateToProps, { ...filterActions }
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));

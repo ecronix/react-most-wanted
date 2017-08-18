@@ -13,9 +13,7 @@ import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../component
 import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
-import { FilterDrawer }  from '../../containers/FilterDrawer';
-import { setFilterIsOpen } from '../../store/filters/actions';
-import * as filterSelectors from '../../store/filters/selectors';
+import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
 import { setPersistentValue } from '../../store/persistentValues/actions';
 
@@ -64,13 +62,13 @@ class Users extends Component {
   }
 
   handleRowClick = (user) => {
-    const {auth, firebaseApp, history, usePreview, setPersistentValue} =this.props;
+    const { auth, firebaseApp, history, usePreview, setPersistentValue } =this.props;
 
-    const key=user.key;
-    const userValues=user.val;
-    const userChatsRef=firebaseApp.database().ref(`/user_chats/${auth.uid}/${key}`);
+    const key = user.key;
+    const userValues = user.val;
+    const userChatsRef = firebaseApp.database().ref(`/user_chats/${auth.uid}/${key}`);
 
-    const chatData={
+    const chatData = {
       displayName: userValues.displayName,
       photoURL: userValues.photoURL?userValues.photoURL:'',
       lastMessage: ''
@@ -124,7 +122,6 @@ class Users extends Component {
                 {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
               </p>
             </div>
-
           </div>
 
           <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
@@ -186,7 +183,6 @@ class Users extends Component {
               />
             </List>
           </div>
-
         </div>
 
         <FilterDrawer
@@ -194,13 +190,9 @@ class Users extends Component {
           name={'select_user'}
           fields={filterFields}
         />
-
-
       </Activity>
     );
-
   }
-
 }
 
 Users.propTypes = {
@@ -214,7 +206,7 @@ const mapStateToProps = (state) => {
   const { lists, auth, filters, browser } = state;
 
   const { hasFilters } = filterSelectors.selectFilterProps('select_user', filters);
-  const users=filterSelectors.getFilteredList('select_user', filters, lists['users']);
+  const users=filterSelectors.getFilteredList('select_user', filters, lists['users'], fieldValue => fieldValue.val);
   const usePreview=browser.greaterThan.small;
 
   return {
@@ -227,5 +219,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps, {setFilterIsOpen, setPersistentValue}
+  mapStateToProps, { ...filterActions, setPersistentValue }
 )(injectIntl(muiThemeable()(withFirebase(withRouter(Users)))));
