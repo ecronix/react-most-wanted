@@ -88,9 +88,13 @@ class Users extends Component {
   renderItem = (index, key) => {
     const { auth, users, intl, muiTheme} =this.props;
 
+    if(users[index] == null) {
+      return <div></div>;
+    }
+
     const user=users[index].val;
 
-    if(users[index].key===auth.uid){
+    if(users[index].key === auth.uid){
       return <div key={key}></div>;
     }
 

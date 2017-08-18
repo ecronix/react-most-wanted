@@ -157,7 +157,7 @@ const mapStateToProps = (state, ownPops) => {
   const path=`user_chats/${auth.uid}`;
   const usePreview=browser.greaterThan.small;
   const currentChatUid=persistentValues['current_chat_uid']?persistentValues['current_chat_uid']:undefined;
-  const list=lists[path]?lists[path].sort(filterSelectors.dynamicSort('lastCreated', 1)).reverse():[];
+  const list=lists[path]?lists[path].sort(filterSelectors.dynamicSort('lastCreated', false, fieldValue => fieldValue.val)):[];
 
   return {
     auth,
