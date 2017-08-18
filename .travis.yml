@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - 6
-  - 7
 cache:
   directories:
   - node_modules
@@ -17,16 +16,8 @@ after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - npm run build
-
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - firebase use default --token $FIREBASE_TOKEN
-    - firebase deploy -m "Travis deploy" --non-interactive --only hosting --token $FIREBASE_TOKEN
-  on:
-    branch: master
-
+  - firebase use default --token $FIREBASE_TOKEN
+  - firebase deploy -m "Travis deploy" --non-interactive --only hosting --token $FIREBASE_TOKEN
 
 branches:
   only:
