@@ -37,11 +37,20 @@ export default function configureStore() {
     middlewares.push(logger); //DEV middlewares
   }
 
-  store = createStore(reducers, initState, compose(
-    applyMiddleware(...middlewares),
-    autoRehydrate(),
-    responsiveStoreEnhancer
-  ));
+  const composeEnhancers =
+  typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(...middlewares),
+  autoRehydrate(),
+  responsiveStoreEnhancer
+);
+
+store = createStore(reducers, initState, enhancer);
 
   try{
     persistStore(store, {blacklist:['auth', 'form', 'connection', 'initialization', 'messaging'] }, ()=>{});
