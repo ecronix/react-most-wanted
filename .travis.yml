@@ -8,6 +8,9 @@ cache:
 before_install:
   - npm install -g firebase-tools
   - npm install codecov.io coveralls
+  - cd functions
+  - npm install
+  - cd ..
 
 script:
   - npm test
@@ -17,7 +20,7 @@ after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - npm run build
   - firebase use default --token $FIREBASE_TOKEN
-  - firebase deploy -m "Travis deploy" --non-interactive --only hosting --token $FIREBASE_TOKEN
+  - firebase deploy -m "Travis deploy" --non-interactive --token $FIREBASE_TOKEN
 
 branches:
   only:

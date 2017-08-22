@@ -44,6 +44,7 @@ I tried to make the project as clean as possible and to use all libraries in the
 * **internationalization**
 * **authentication**
 * **authorisation**
+* **CI** and **CD**
 
 All these features can be programmed from scratch. But why should you do this? Out there are so mutch greate developers creating greate applications, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier.
 
@@ -333,7 +334,7 @@ To:
 
 - [X] implement all or most firebase functionalities
 - [ ] finish tests
-- [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
+- [X] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
 - [ ] update to material-ui@next
 
 ## License
