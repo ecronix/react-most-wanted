@@ -88,11 +88,11 @@ class ChatMessages extends Component {
   }
 
   handleAddMessage = () => {
-    const { auth, firebaseApp, path}=this.props;
+    const { auth, firebaseApp, path } = this.props;
 
-    const message=this.name.getValue();
+    const message = this.name.getValue();
 
-    const newTask={
+    const newTask = {
       message: message,
       created: firebase.database.ServerValue.TIMESTAMP ,
       authorName: auth.displayName,
@@ -100,14 +100,12 @@ class ChatMessages extends Component {
       authorPhotoUrl: auth.photoURL,
     }
 
-    this.name.input.value='';
+    this.name.input.value = '';
+    this.name.state.hasValue = false;
 
-    if(message.length>0){
+    if (message.length > 0) {
       firebaseApp.database().ref(path).push(newTask);
     }
-
-
-
   }
 
 
