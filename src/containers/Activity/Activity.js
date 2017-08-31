@@ -5,76 +5,15 @@ import { Helmet } from 'react-helmet';
 import IconButton from 'material-ui/IconButton';
 import FontIcon from 'material-ui/FontIcon';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { ResponsiveDrawer, BodyContainer } from 'material-ui-responsive-drawer';
-import { DrawerHeader } from '../../containers/Drawer';
-import { DrawerContent } from '../../containers/Drawer';
+import { BodyContainer } from 'material-ui-responsive-drawer';
 import LinearProgress from 'material-ui/LinearProgress';
-import ReactMaterialUiNotifications from 'react-materialui-notifications';
 import {injectIntl} from 'react-intl';
-import {
-  deepOrange500,
-  darkWhite,
-} from 'material-ui/styles/colors';
+import { deepOrange500, darkWhite } from 'material-ui/styles/colors';
 import config from '../../config';
 import { withFirebase } from 'firekit';
 import { withRouter } from 'react-router-dom';
-import Scrollbar from '../../components/Scrollbar/Scrollbar';
 
 export class Activity extends Component {
-
-  componentDidMount(){
-    const { messaging, initMessaging }= this.props;
-
-    if(messaging===undefined || !messaging.isInitialized){
-      initMessaging(token=>{this.handleTokenChange(token)}, this.handleMessageReceived)
-    }
-  }
-
-  handleTokenChange = (token) => {
-    const { firebaseApp }= this.props;
-
-    firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/notificationTokens/${token}`).set(true);
-  }
-
-  getNotifications = (notification) => {
-    const { history }= this.props;
-    return {
-      chat: {
-        path: 'chats',
-        autoHide: 3000,
-        title: notification.title,
-        icon: <div><FontIcon className="material-icons" style={{fontSize: 12}}>chat</FontIcon></div>,
-        additionalText: notification.body,
-        onClick: ()=>{history.push(`/chats`)}
-      },
-    }
-  }
-
-
-
-  handleMessageReceived = (payload) => {
-    const { muiTheme, location }= this.props;
-
-    const notification=payload.notification;
-    const pathname=location?location.pathname:'';
-    const tag=notification.tag;
-    const notifications=this.getNotifications(notification);
-    const notificationData=notifications[tag]?notifications[tag]:false;
-
-    if(notificationData){
-      if(pathname.indexOf(notificationData.path)===-1){
-        ReactMaterialUiNotifications.showNotification({
-          avatar: notification.icon,
-          iconBadgeColor: muiTheme.palette.accent1Color,
-          timestamp: notification.timestamp,
-          personalised: true,
-          ...notificationData
-        })
-      }
-    }
-
-  }
-
 
   getIconElementLeft = () => {
 
@@ -153,15 +92,6 @@ export class Activity extends Component {
           <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color}/>
           <title>{headerTitle}</title>
         </Helmet>
-        <ResponsiveDrawer
-          //containerStyle={{overflow: undefined, height: '100%'}}
-          width={drawerWidth}>
-          <Scrollbar>
-            <DrawerHeader/>
-            <DrawerContent/>
-          </Scrollbar>
-        </ResponsiveDrawer>
-
         <ResponsiveAppBar width={drawerWidth}
           title={title}
           showMenuIconButton={onBackClick!==undefined?true:undefined}
@@ -199,20 +129,6 @@ export class Activity extends Component {
         <BodyContainer width={drawerWidth} id="bodyContainer" ref="bodyContainer" withRef style={bodyContainerStyle} >
           {children}
         </BodyContainer>
-
-        <ReactMaterialUiNotifications
-          desktop={true}
-          transitionName={{
-            leave: 'dummy',
-            leaveActive: 'fadeOut',
-            appear: 'dummy',
-            appearActive: 'zoomInUp'
-          }}
-          rootStyle={{top: 30, right: 30, zIndex:999999}}
-          maxNotifications={5}
-          transitionAppear={true}
-          transitionLeave={true}
-        />
       </div>
     );
 

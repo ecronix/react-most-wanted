@@ -2,10 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import LoadingComponent   from '../../components/LoadingComponent/LoadingComponent';
 import { RestrictedRoute }   from '../../containers/RestrictedRoute';
-import createHistory from 'history/createBrowserHistory'
-import { Router, Route, Switch } from 'react-router-dom';
-
-const history = createHistory();
+import { Route, Switch } from 'react-router-dom';
 
 function MyLoadable(opts, preloadComponents) {
 
@@ -53,44 +50,40 @@ const AsyncPageNotFound = MyLoadable({loader: () => import('../../components/Pag
 const Routes = (props, context) => {
 
   return (
+    <Switch >
+      <RestrictedRoute type='private' path="/" exact component={AsyncDashboard} />
+      <RestrictedRoute type='private' path="/dashboard" exact component={AsyncDashboard} />
 
-    <Router history={history} >
-      <Switch >
-        <RestrictedRoute type='private' path="/" exact component={AsyncDashboard} />
-        <RestrictedRoute type='private' path="/dashboard" exact component={AsyncDashboard} />
+      <RestrictedRoute type='private' path="/loading" exact component={LoadingComponent} />
 
-        <RestrictedRoute type='private' path="/loading" exact component={LoadingComponent} />
+      <RestrictedRoute type='private' path="/public_chats" exact component={AsyncPublicChats} />
 
-        <RestrictedRoute type='private' path="/public_chats" exact component={AsyncPublicChats} />
+      <RestrictedRoute type='private' path="/tasks" exact component={AsyncTasks} />
+      <RestrictedRoute type='private' path="/tasks/edit/:uid" exact component={AsyncTask} />
+      <RestrictedRoute type='private' path="/tasks/create" exact component={AsyncTask} />
 
-        <RestrictedRoute type='private' path="/tasks" exact component={AsyncTasks} />
-        <RestrictedRoute type='private' path="/tasks/edit/:uid" exact component={AsyncTask} />
-        <RestrictedRoute type='private' path="/tasks/create" exact component={AsyncTask} />
+      <RestrictedRoute type='private' path="/roles" exact component={AsyncRoles} />
+      <RestrictedRoute type='private' path="/roles/edit/:uid" exact component={AsyncRole} />
+      <RestrictedRoute type='private' path="/roles/create" exact component={AsyncRole} />
 
-        <RestrictedRoute type='private' path="/roles" exact component={AsyncRoles} />
-        <RestrictedRoute type='private' path="/roles/edit/:uid" exact component={AsyncRole} />
-        <RestrictedRoute type='private' path="/roles/create" exact component={AsyncRole} />
+      <RestrictedRoute type='private' path="/companies" exact component={AsyncCompanies} />
+      <RestrictedRoute type='private' path="/companies/edit/:uid" exact component={AsyncCompany} />
+      <RestrictedRoute type='private' path="/companies/create" exact component={AsyncCompany} />
 
-        <RestrictedRoute type='private' path="/companies" exact component={AsyncCompanies} />
-        <RestrictedRoute type='private' path="/companies/edit/:uid" exact component={AsyncCompany} />
-        <RestrictedRoute type='private' path="/companies/create" exact component={AsyncCompany} />
+      <RestrictedRoute type='private' path="/predefined_chat_messages" exact component={AsyncPredefinedChatMessages} />
 
-        <RestrictedRoute type='private' path="/predefined_chat_messages" exact component={AsyncPredefinedChatMessages} />
+      <RestrictedRoute type='private' path="/chats" exact component={AsyncChats} />
+      <RestrictedRoute type='private' path="/chats/edit/:uid" exact component={AsyncChat} />
+      <RestrictedRoute type='private' path="/chats/create" exact component={AsyncCreateChat} />
 
-        <RestrictedRoute type='private' path="/chats" exact component={AsyncChats} />
-        <RestrictedRoute type='private' path="/chats/edit/:uid" exact component={AsyncChat} />
-        <RestrictedRoute type='private' path="/chats/create" exact component={AsyncCreateChat} />
+      <RestrictedRoute type='private' path="/users" exact component={AsyncUsers} />
+      <RestrictedRoute type='private' path="/users/edit/:uid" exact component={AsyncUser} />
 
-        <RestrictedRoute type='private' path="/users" exact component={AsyncUsers} />
-        <RestrictedRoute type='private' path="/users/edit/:uid" exact component={AsyncUser} />
-
-        <RestrictedRoute type='private' path="/about" exact component={AsyncAbout}  />
-        <RestrictedRoute type='private' path="/my_account"  exact component={AsyncMyAccount} />
-        <RestrictedRoute type='public' path="/signin" component={AsyncSignIn} />
-        <Route component={AsyncPageNotFound} />
-      </Switch>
-    </Router>
-
+      <RestrictedRoute type='private' path="/about" exact component={AsyncAbout}  />
+      <RestrictedRoute type='private' path="/my_account"  exact component={AsyncMyAccount} />
+      <RestrictedRoute type='public' path="/signin" component={AsyncSignIn} />
+      <Route component={AsyncPageNotFound} />
+    </Switch>
 
   );
 }

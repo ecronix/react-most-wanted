@@ -6,9 +6,13 @@ import {getThemeSource} from '../../themes';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
-import { Routes } from '../../components/Routes';
+import { AppLayout }  from '../../containers/AppLayout';
 import firebase from 'firebase';
 import { withFirebase } from 'firekit';
+import createHistory from 'history/createBrowserHistory'
+import { Router, Route, Switch } from 'react-router-dom';
+
+const history = createHistory();
 
 class Root extends Component {
 
@@ -79,7 +83,11 @@ class Root extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <IntlProvider locale={locale} messages={messages}>
-          <Routes />
+          <Router history={history} >
+            <Switch>
+              <Route children={(props)=><AppLayout {...props}/>}/>
+            </Switch>
+          </Router>
         </IntlProvider>
       </MuiThemeProvider>
     );
