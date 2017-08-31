@@ -3,11 +3,7 @@ import Loadable from 'react-loadable';
 import LoadingComponent   from '../../components/LoadingComponent/LoadingComponent';
 import { RestrictedRoute }   from '../../containers/RestrictedRoute';
 import createHistory from 'history/createBrowserHistory'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch
-} from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 
 const history = createHistory();
 

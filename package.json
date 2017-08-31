@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^2.9.1",
-    "react-scripts": "1.0.11",
+    "react-scripts": "1.0.12",
     "react-test-renderer": "^15.5.4",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6"
@@ -33,11 +33,11 @@
     "react-countup": "^2.2.0",
     "react-custom-scrollbars": "^4.1.2",
     "react-dom": "^15.6.1",
-    "react-helmet": "^5.1.3",
+    "react-helmet": "^5.2.0",
     "react-image-cropper": "^1.1.1",
     "react-intl": "^2.3.0",
     "react-list": "^0.8.7",
-    "react-loadable": "^4.0.4",
+    "react-loadable": "^4.0.5",
     "react-materialui-notifications": "^0.5.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
