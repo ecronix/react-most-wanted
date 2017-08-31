@@ -62,13 +62,13 @@ class Users extends Component {
   }
 
   handleRowClick = (user) => {
-    const { auth, firebaseApp, history, usePreview, setPersistentValue } =this.props;
+    const {auth, firebaseApp, history, usePreview, setPersistentValue} =this.props;
 
-    const key = user.key;
-    const userValues = user.val;
-    const userChatsRef = firebaseApp.database().ref(`/user_chats/${auth.uid}/${key}`);
+    const key=user.key;
+    const userValues=user.val;
+    const userChatsRef=firebaseApp.database().ref(`/user_chats/${auth.uid}/${key}`);
 
-    const chatData = {
+    const chatData={
       displayName: userValues.displayName,
       photoURL: userValues.photoURL?userValues.photoURL:'',
       lastMessage: ''
@@ -86,19 +86,19 @@ class Users extends Component {
 
 
   renderItem = (index, key) => {
-    const { auth, users, intl, muiTheme} =this.props;
+    const { auth, users, intl, muiTheme } =this.props;
 
-    if(users[index] == null) {
-      return <div></div>;
+    if (users[index] == null) {
+      return <div key={index}></div>;
     }
 
-    const user=users[index].val;
+    const user = users[index].val;
 
-    if(users[index].key === auth.uid){
-      return <div key={key}></div>;
+    if (users[index].key === auth.uid) {
+      return <div key={index}></div>;
     }
 
-    return <div key={key}>
+    return <div key={index}>
       <ListItem
         key={key}
         id={key}
@@ -126,6 +126,7 @@ class Users extends Component {
                 {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
               </p>
             </div>
+
           </div>
 
           <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
@@ -143,15 +144,21 @@ class Users extends Component {
   }
 
   render(){
-    const { intl, users, muiTheme, setFilterIsOpen, hasFilters, history } =this.props;
-
+    const {
+      intl,
+      users,
+      muiTheme,
+      setFilterIsOpen,
+      hasFilters,
+      history
+    } = this.props;
 
     const filterFields = [
       {
         name: 'displayName',
-        label: intl.formatMessage({id: 'name_label'})
-      },
-    ]
+        label: intl.formatMessage({id: 'name'})
+       }
+    ];
 
     const menuList=[
       {
@@ -187,6 +194,7 @@ class Users extends Component {
               />
             </List>
           </div>
+
         </div>
 
         <FilterDrawer
@@ -194,9 +202,13 @@ class Users extends Component {
           name={'select_user'}
           fields={filterFields}
         />
+
+
       </Activity>
     );
+
   }
+
 }
 
 Users.propTypes = {

@@ -22,7 +22,6 @@ class Chats extends Component {
   componentDidMount(){
     const { watchList, path } =this.props;
 
-    //let chatsRef=firebaseApp.database().ref(path).orderByChild('lastCreatedReversed');
     watchList(path);
   }
 
@@ -89,7 +88,13 @@ class Chats extends Component {
 
 
   render(){
-    const { intl, list, history, currentChatUid, usePreview } =this.props;
+    const {
+      intl,
+      list,
+      history,
+      currentChatUid,
+      usePreview
+    } = this.props;
 
     const isDisplayingMessages=usePreview && currentChatUid;
 
@@ -136,11 +141,8 @@ class Chats extends Component {
           style={{ float:"left", clear: "both" }}
         />
       </div>
-
     </Activity>
-
   );
-
 }
 
 }
@@ -157,6 +159,7 @@ const mapStateToProps = (state, ownPops) => {
   const path=`user_chats/${auth.uid}`;
   const usePreview=browser.greaterThan.small;
   const currentChatUid=persistentValues['current_chat_uid']?persistentValues['current_chat_uid']:undefined;
+
   const list=lists[path]?lists[path].sort(filterSelectors.dynamicSort('lastCreated', false, fieldValue => fieldValue.val)):[];
 
   return {
