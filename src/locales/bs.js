@@ -119,6 +119,22 @@ const messages=defineMessages({
   predefined_messages: 'Predefined messages',
   delete_predefined_chat_message_title: 'Delete predefined message?',
   delete_predefined_chat_message_message: 'Predefined message will be deleted!',
+  select_field: 'Select field',
+  sorting: 'Sorting',
+  filters: 'Filter',
+  filter: 'Filter',
+  add_filter: 'Add filter',
+  delete_filter: 'Delete filter',
+  change_sort_orientation: 'Change orientation',
+  enable_case_sensitivity: 'Case sensitivity',
+  hint_autocomplete: 'Select',
+  enter_query_text: 'Enter text',
+  email_label: 'Email',
+  close_filter: 'Close filter',
+  open_filter: 'Open filter',
+  select_operator: 'Select operator',
+  not_match_found: 'No match found',
+  edit_user: 'Edit user',
 });
 
 export default messages;

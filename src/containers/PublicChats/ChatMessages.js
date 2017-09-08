@@ -110,7 +110,7 @@ class ChatMessages extends Component {
 
 
   renderList(messages) {
-    const { auth, intl, muiTheme} =this.props;
+    const { auth, intl, muiTheme, history} =this.props;
 
     let currentDate='';
     let currentAuthor='';
@@ -176,7 +176,11 @@ class ChatMessages extends Component {
                   overflowWrap: 'break-word',
                   fontFamily: muiTheme.fontFamily}}>
                   {values.authorUid!==auth.uid &&
-                    <div style={{color: muiTheme.palette.accent1Color, fontSize: 12, marginLeft: 0}}>{values.authorName}</div>
+                    <div
+                      onClick={()=>{history.push(`/chats/edit/${values.authorUid}`)}}
+                      style={{color: muiTheme.palette.accent1Color, fontSize: 12, marginLeft: 0, cursor: 'pointer'}}>
+                      {values.authorName}
+                    </div>
                   }
                   {values.message}
                 </div>

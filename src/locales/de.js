@@ -119,6 +119,22 @@ const messages=defineMessages({
   predefined_messages: 'Vorgefertigte Nachrichten',
   delete_predefined_chat_message_title: 'Vorgefertigte Nachricht löschen?',
   delete_predefined_chat_message_message: 'Vorgefertigte Nachricht wird gelöscht!',
+  select_field: 'Feld auswählen',
+  sorting: 'Sortierung',
+  filters: 'Filter',
+  filter: 'Filter',
+  add_filter: 'Filter hinzufügen',
+  delete_filter: 'Filter löschen',
+  change_sort_orientation: 'Anordnung ändern',
+  enable_case_sensitivity: 'Grosschreibung',
+  hint_autocomplete: 'Auswählen',
+  enter_query_text: 'Tekst eingeben',
+  email_label: 'Email',
+  close_filter: 'Filter schliesen',
+  open_filter: 'Filter öffnen',
+  select_operator: 'Operator auswählen',
+  not_match_found: 'Nichst gefunden',
+  edit_user: 'Benutzer bearbeiten',
 });
 
 export default messages;
