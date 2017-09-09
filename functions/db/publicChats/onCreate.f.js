@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 try {admin.initializeApp(functions.config().firebase);} catch(e) {} // You do that because the admin SDK can only be initialized once.
-const notifications = require('../utils/notifications')
+const notifications = require('../../utils/notifications')
 
 exports = module.exports = functions.database.ref('/public_chats/{taskUid}').onCreate(event => {
   const taskUid = event.params.taskUid;
