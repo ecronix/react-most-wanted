@@ -1,4 +1,6 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+try {admin.initializeApp(functions.config().firebase);} catch(e) {} // You do that because the admin SDK can only be initialized once.
 const nodemailer = require('nodemailer')
 const gmailEmail = encodeURIComponent(functions.config().gmail.email)
 const gmailPassword = encodeURIComponent(functions.config().gmail.password)
@@ -9,10 +11,6 @@ exports = module.exports = functions.auth.user().onDelete( event => {
   const uid = user.uid
   const email = user.email
   const displayName = user.displayName
-
-  if (!email) {
-    return
-  }
 
   const mailOptions = {
     from: '"Tarik Huber" <huber.tarik@gmail.com>',
@@ -26,8 +24,10 @@ exports = module.exports = functions.auth.user().onDelete( event => {
     console.log('Account deletion confirmation email sent to:', email)
   })
 
-  const deleteUser=admin.database().ref('/users').child(uid).remove()
+  const deleteUser=admin.database().ref(`/users/${uid}`).remove()
 
-  return Promise.all([sendEmail, deleteUser])
+  return Promise.all([sendEmail, deleteUser]).then(results=>{
+    console.log(results);
+  })
 
 })

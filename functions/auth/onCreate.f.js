@@ -10,27 +10,19 @@ exports = module.exports = functions.auth.user().onCreate( event => {
   const user = event.data // The Firebase user.
   const email = user.email // The email of the user.
   const displayName = user.displayName // The display name of the user.
-  const provider=user.providerData?user.providerData[0]:{}
   const year=event.data.metadata.creationTime.slice(0, 4)
   const month=event.data.metadata.creationTime.slice(5, 7)
   const day=event.data.metadata.creationTime.slice(8, 10)
-  const providerId=provider.providerId.replace('.com','')
-
 
   const dayCount = admin.database()
   .ref(`/user_registrations_per_day/${year}/${month}/${day}`)
-  .transaction(current => current || 0 + 1)
+  .transaction(current => (current || 0) + 1)
 
   const monthCount = admin.database()
   .ref(`/user_registrations_per_month/${year}/${month}`)
-  .transaction(current => current || 0 + 1)
+  .transaction(current => (current || 0) + 1)
 
-  const providerCount = admin.database()
-  .ref(`/provider_count/${providerId}`)
-  .transaction(current => current || 0 + 1)
-
-  let promises=[dayCount, monthCount, providerCount]
-
+  let promises=[dayCount, monthCount]
 
   if(email){
     const mailOptions = {
@@ -43,5 +35,7 @@ exports = module.exports = functions.auth.user().onCreate( event => {
     promises.push(mailTransport.sendMail(mailOptions))
   }
 
-  return Promise.all(promises)
+  return Promise.all(promises).then(results=>{
+    console.log(results);
+  })
 })
