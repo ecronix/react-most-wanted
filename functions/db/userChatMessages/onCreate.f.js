@@ -20,16 +20,30 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
 
   console.log(`Message ${messageUid} ${snapValues.message} created! Sender ${senderUid}, receiver ${receiverUid}`)
 
+  let lastMessage=snapValues.message
+
+  if(!lastMessage){
+    if(snapValues.link){
+      lastMessage='Link'
+    }
+    if(snapValues.image){
+      lastMessage='Image'
+    }
+    if(snapValues.location){
+      lastMessage='Position'
+    }
+  }
+
   const udateReceiverChatMessage = receiverChatMessageRef.update(snapValues)
   const udateSenderChat = senderChatRef.update({
     unread: 0,
-    lastMessage: snapValues.message,
+    lastMessage: lastMessage,
     lastCreated: snapValues.created
   })
   const udateReceiverChat = receiverChatRef.update({
     displayName: snapValues.authorName,
     photoURL: snapValues.authorPhotoUrl ? snapValues.authorPhotoUrl : '',
-    lastMessage: snapValues.message,
+    lastMessage: lastMessage,
     lastCreated: snapValues.created
   })
   const updateReceiverUnred = receiverChatUnreadRef.transaction(number => {
@@ -42,7 +56,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     const payload = {
       notification: {
         title: `${snapValues.authorName} `,
-        body: snapValues.message,
+        body: lastMessage,
         icon: snapValues.authorPhotoUrl ? snapValues.authorPhotoUrl : '/apple-touch-icon.png',
         click_action: `https://www.react-most-wanted.com/chats/edit/${senderUid}`,
         tag: `chat`
