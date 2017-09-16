@@ -6,30 +6,41 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { Activity } from '../../containers/Activity'
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
 import { FireForm } from 'firekit'
-import { setDialogIsOpen } from '../../store/dialogs/actions';
+import { setSimpleValue } from '../../store/simpleValues/actions';
 import { withRouter } from 'react-router-dom';
 import FontIcon from 'material-ui/FontIcon';
 import { withFirebase } from 'firekit';
 import { change, submit } from 'redux-form';
 import UserForm from '../../components/Forms/UserForm';
+import UserGrants from './UserGrants';
 import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';
 import Toggle from 'material-ui/Toggle';
 import { grants } from '../../utils/auth';
+import { Tabs, Tab } from 'material-ui/Tabs';
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
+import { filterSelectors, filterActions } from 'material-ui-filter'
+import isGranted  from '../../utils/auth';
 
 const path='/users';
 const form_name='user';
 
 
-class Role extends Component {
+class User extends Component {
 
 
   componentWillMount() {
     this.props.watchList('roles');
     this.props.watchList('user_roles');
-    this.props.watchList('user_grants');
     this.props.watchList('admins');
+  }
+
+  handleTabActive = (value) => {
+    const { history, uid } = this.props;
+
+    history.push(`${path}/edit/${uid}/${value}`);
+
   }
 
   hanldeRoleToggleChange = (e, isInputChecked, key) => {
@@ -55,7 +66,6 @@ class Role extends Component {
     }
 
   }
-
 
   handleAdminChange = (e, isInputChecked) => {
     const { firebaseApp, match } = this.props;
@@ -165,8 +175,12 @@ class Role extends Component {
       submit,
       muiTheme,
       match,
-      admins
-    }=this.props;
+      admins,
+      editType,
+      setFilterIsOpen,
+      hasFilters,
+      isGranted
+    } = this.props;
 
     const uid=match.params.uid;
     let isAdmin=false;
@@ -181,15 +195,24 @@ class Role extends Component {
     }
 
 
-    const menuList=[
+    const menuList = [
       {
-        hidden: true, //activate later if needed
+        hidden: (uid===undefined && !isGranted(`administration`)) || editType !== 'profile' ,
         text: intl.formatMessage({id: 'save'}),
         icon: <FontIcon className="material-icons" color={muiTheme.palette.canvasColor}>save</FontIcon>,
         tooltip:intl.formatMessage({id: 'save'}),
-        onClick: ()=>{submit('role')}
+        onClick: ()=>{submit(form_name)}
+      },
+      {
+        hidden: editType !== 'grants',
+        text: intl.formatMessage({id: 'open_filter'}),
+        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
+        tooltip:intl.formatMessage({id: 'open_filter'}),
+        onClick: () => setFilterIsOpen('user_grants', true)
       }
     ]
+
+
 
 
     return (
@@ -206,29 +229,57 @@ class Role extends Component {
 
         onBackClick={()=>{history.goBack()}}
         title={intl.formatMessage({id: 'edit_user'})}>
-        <div style={{margin: 15, display: 'flex'}}>
-          <FireForm
-            name={form_name}
-            path={`${path}/`}
-            onSubmitSuccess={(values)=>{history.push(`${path}`);}}
-            onDelete={(values)=>{history.push(`${path}`);}}
-            uid={uid}>
-            <UserForm
-              renderRoleItem={this.renderRoleItem}
-              renderGrantItem={this.renderGrantItem}
-              handleAdminChange={this.handleAdminChange}
-              isAdmin={isAdmin}
-              {...this.props}
-            />
-          </FireForm>
-        </div>
+
+        <Scrollbar>
+          <Tabs
+            value={editType}
+            onChange={this.handleTabActive}>
+
+
+            <Tab
+              value={'profile'}
+              icon={<FontIcon className="material-icons">account_box</FontIcon>}>
+              {
+                editType==='profile' &&
+                <div style={{margin: 15, display: 'flex'}}>
+                  <FireForm
+                    name={form_name}
+                    path={`${path}/`}
+                    onSubmitSuccess={(values)=>{history.push(`${path}`);}}
+                    onDelete={(values)=>{history.push(`${path}`);}}
+                    uid={uid}>
+                    <UserForm
+                      renderRoleItem={this.renderRoleItem}
+                      renderGrantItem={this.renderGrantItem}
+                      handleAdminChange={this.handleAdminChange}
+                      isAdmin={isAdmin}
+                      {...this.props}
+                    />
+                  </FireForm>
+                </div>
+              }
+
+            </Tab>
+            <Tab
+              value={'grants'}
+              icon={<FontIcon className="material-icons">lock</FontIcon>}>
+              {
+                editType==='grants' &&
+                <UserGrants {...this.props}/>
+              }
+
+            </Tab>
+          </Tabs>
+        </Scrollbar>
+
+
       </Activity>
     );
   }
 }
 
 
-Role.propTypes = {
+User.propTypes = {
   history: PropTypes.object,
   intl: intlShape.isRequired,
   submit: PropTypes.func.isRequired,
@@ -238,19 +289,28 @@ Role.propTypes = {
 };
 
 
-const mapStateToProps = (state) => {
-  const { auth, intl, lists } = state;
+const mapStateToProps = (state, ownProps) => {
+  const { auth, intl, lists, filters } = state;
+  const { match } = ownProps;
+
+  const uid=match.params.uid;
+  const editType = match.params.editType?match.params.editType:'data';
+  const { hasFilters } = filterSelectors.selectFilterProps('user_grants', filters)
 
   return {
+    hasFilters,
     auth,
+    uid,
+    editType,
     intl,
     roles: lists.roles,
     user_roles: lists.user_roles,
     user_grants: lists.user_grants,
-    admins: lists.admins
+    admins: lists.admins,
+    isGranted: grant=>isGranted(state, grant)
   };
 };
 
 export default connect(
-  mapStateToProps, {setDialogIsOpen, change, submit}
-)(injectIntl(withRouter(withFirebase(muiThemeable()(Role)))));
+  mapStateToProps, { setSimpleValue, change, submit, ...filterActions }
+)(injectIntl(withRouter(withFirebase(muiThemeable()(User)))));

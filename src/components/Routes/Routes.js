@@ -77,7 +77,7 @@ const Routes = (props, context) => {
       <RestrictedRoute type='private' path="/chats/create" exact component={AsyncCreateChat} />
 
       <RestrictedRoute type='private' path="/users" exact component={AsyncUsers} />
-      <RestrictedRoute type='private' path="/users/edit/:uid" exact component={AsyncUser} />
+      <RestrictedRoute type='private' path="/users/edit/:uid/:editType" exact component={AsyncUser} />
 
       <RestrictedRoute type='private' path="/about" exact component={AsyncAbout}  />
       <RestrictedRoute type='private' path="/my_account"  exact component={AsyncMyAccount} />

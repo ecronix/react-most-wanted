@@ -10,14 +10,16 @@ import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import { withRouter } from 'react-router-dom';
 import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
-import IconButton from 'material-ui/IconButton';
 import { withFirebase } from 'firekit';
 import ReactList from 'react-list';
-import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
-import { ResponsiveMenu } from 'material-ui-responsive-menu';
+import { filterSelectors, filterActions } from 'material-ui-filter'
 import { setPersistentValue } from '../../store/persistentValues/actions';
+import TextField from 'material-ui/TextField';
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
+import { fade } from 'material-ui/utils/colorManipulator';
 
-const path=`users`;
+
+const path = `users`;
 
 class Users extends Component {
 
@@ -26,49 +28,35 @@ class Users extends Component {
   }
 
   getProviderIcon = (provider) => {
-
-    const {muiTheme} =this.props;
-
-    const color=muiTheme.palette.primary2Color;
+    const { muiTheme } = this.props;
+    const color = muiTheme.palette.primary2Color;
 
     switch (provider.providerId) {
       case 'google.com':
-      return <IconButton key={provider.providerId}>
-        <GoogleIcon color={color}/>
-      </IconButton>
+      return <GoogleIcon color={color}/>
       case 'facebook.com':
-      return <IconButton key={provider.providerId}>
-        <FacebookIcon color={color}/>
-      </IconButton>
+      return <FacebookIcon color={color}/>
       case 'twitter.com':
-      return <IconButton key={provider.providerId}>
-        <TwitterIcon color={color}/>
-      </IconButton>
+      return <TwitterIcon color={color}/>
       case 'github.com':
-      return <IconButton   key={provider.providerId}>
-        <GitHubIcon color={color}/>
-      </IconButton>
+      return <GitHubIcon color={color}/>
       case 'phone':
-      return <IconButton   key={provider.providerId} >
-        <FontIcon className="material-icons" color={color} >phone</FontIcon>
-      </IconButton>
+      return <FontIcon className="material-icons" color={color} >phone</FontIcon>
       case 'password':
-      return <IconButton   key={provider.providerId}>
-        <FontIcon className="material-icons" color={color} >email</FontIcon>
-      </IconButton>
+      return <FontIcon className="material-icons" color={color} >email</FontIcon>
       default:
-      return undefined;
+      return undefined
     }
   }
 
   handleRowClick = (user) => {
     const {auth, firebaseApp, history, usePreview, setPersistentValue} =this.props;
 
-    const key=user.key;
-    const userValues=user.val;
-    const userChatsRef=firebaseApp.database().ref(`/user_chats/${auth.uid}/${key}`);
+    const key = user.key;
+    const userValues = user.val;
+    const userChatsRef = firebaseApp.database().ref(`/user_chats/${auth.uid}/${key}`);
 
-    const chatData={
+    const chatData = {
       displayName: userValues.displayName,
       photoURL: userValues.photoURL?userValues.photoURL:'',
       lastMessage: ''
@@ -76,38 +64,33 @@ class Users extends Component {
 
     userChatsRef.update({...chatData});
 
-    if(usePreview){
+    if (usePreview) {
       setPersistentValue('current_chat_uid', key)
       history.push(`/chats`);
-    }else{
+    } else {
       history.push(`/chats/edit/${key}`);
     }
   }
 
 
   renderItem = (index, key) => {
-    const { auth, users, intl, muiTheme } =this.props;
-
-    if (users[index] == null) {
-      return <div key={index}></div>;
-    }
-
+    const { users, intl, muiTheme, auth } = this.props;
     const user = users[index].val;
 
-    if (users[index].key === auth.uid) {
-      return <div key={index}></div>;
+    if (user.uid === auth.uid) {
+      return <div key={key}></div>
     }
 
-    return <div key={index}>
+    return <div key={key}>
       <ListItem
         key={key}
         id={key}
         onClick={()=>{this.handleRowClick(users[index])}}
-        leftAvatar={<Avatar src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
-        rightIcon={<FontIcon className="material-icons" color={user.connections?'green':'red'}>offline_pin</FontIcon>}>
+        leftAvatar={<Avatar style={{marginTop: 10}} src={user.photoURL} alt="person" icon={<FontIcon className="material-icons" >person</FontIcon>}/>}
+        rightIcon={<FontIcon style={{marginTop: 22}} className="material-icons" color={user.connections?muiTheme.palette.primary1Color:muiTheme.palette.disabledColor}>offline_pin</FontIcon>}>
 
-        <div style={{display: 'flex'}}>
-          <div>
+        <div style={{display: 'flex', flexWrap: 'wrap', alignItems: 'strech'}}>
+          <div style={{display: 'flex', flexDirection:'column', width: 120}}>
             <div>
               {user.displayName}
             </div>
@@ -120,27 +103,27 @@ class Users extends Component {
                 marginTop: 4,
                 color: muiTheme.listItem.secondaryTextColor,
               }}>
-              <p>
-                {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
-                {' '}
-                {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
-              </p>
+              {(!user.connections && !user.lastOnline)?intl.formatMessage({id: 'offline'}):intl.formatMessage({id: 'online'})}
+              {' '}
+              {(!user.connections && user.lastOnline)?intl.formatRelative(new Date(user.lastOnline)):undefined}
             </div>
-
           </div>
 
-          <div style={{alignSelf: 'center', flexDirection: 'row', display: 'flex'}}>
+          <div style={{marginLeft: 20, display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}>
             {user.providerData && user.providerData.map(
-              (p)=>{
-                return this.getProviderIcon(p);
+              (p, i)=>{
+                return (
+                  <div key={i} style={{paddingLeft: 10}}>
+                    {this.getProviderIcon(p)}
+                  </div>
+                )
               })
             }
           </div>
         </div>
-
       </ListItem>
       <Divider inset={true}/>
-    </div>;
+    </div>
   }
 
   render(){
@@ -148,67 +131,62 @@ class Users extends Component {
       intl,
       users,
       muiTheme,
-      setFilterIsOpen,
-      hasFilters,
-      history
+      setSearch
     } = this.props;
-
-    const filterFields = [
-      {
-        name: 'displayName',
-        label: intl.formatMessage({id: 'name'})
-       }
-    ];
-
-    const menuList=[
-      {
-        text: intl.formatMessage({id: 'open_filter'}),
-        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
-        tooltip:intl.formatMessage({id: 'open_filter'}),
-        onClick: ()=>{setFilterIsOpen('select_user', true)}
-      },
-    ]
 
     return (
       <Activity
-        isLoading={users===undefined}
-        onBackClick={()=>{history.push('/chats')}}
-        iconStyleRight={{width:'50%'}}
+        iconStyleLeft={{width: 'auto'}}
+        iconStyleRight={{width: '100%', textAlign: 'center', marginLeft: 0}}
         iconElementRight={
-          <div>
-            <ResponsiveMenu
-              iconMenuColor={muiTheme.palette.canvasColor}
-              menuList={menuList}
-            />
+          <div style={{
+            paddingRight: 30
+          }}
+          >
+            <div style={{
+              display: 'inline-block',
+              backgroundColor: '#fff',
+              borderRadius: 5,
+              width: 600,
+              maxWidth: '100%'
+            }}
+            >
+              <div style={{
+                display: 'flex',
+                backgroundColor: fade(muiTheme.palette.primary1Color, 0.70),
+                borderRadius: 4,
+                paddingLeft: 10,
+                paddingRight: 10
+              }}
+              >
+                <FontIcon style={{marginLeft: 10, marginTop: 12, marginRight: 15}} className="material-icons" color={muiTheme.palette.textColor}>search</FontIcon>
+                <TextField
+                  style={{width: '100%'}}
+                  underlineShow={false}
+                  onChange={(e, newVal) => {
+                    setSearch('select_user', 'displayName', newVal)
+                  }}
+                  hintText={intl.formatMessage({id: 'search'})}
+                />
+              </div>
+            </div>
           </div>
         }
-        title={intl.formatMessage({id: 'select_user'})}>
-        <div >
-
-          <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
-            <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
+        isLoading={users===undefined}>
+        <div style={{height: '100%', overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
+          <Scrollbar>
+            <List id='test' ref={(field) => { this.users = field; }}>
               <ReactList
                 itemRenderer={this.renderItem}
                 length={users?users.length:0}
                 type='simple'
               />
             </List>
-          </div>
-
+          </Scrollbar>
         </div>
-
-        <FilterDrawer
-          formatMessage={intl.formatMessage}
-          name={'select_user'}
-          fields={filterFields}
-        />
-
-
       </Activity>
     );
-
   }
-
 }
 
 Users.propTypes = {
@@ -221,13 +199,11 @@ Users.propTypes = {
 const mapStateToProps = (state) => {
   const { lists, auth, filters, browser } = state;
 
-  const { hasFilters } = filterSelectors.selectFilterProps('select_user', filters);
-  const users=filterSelectors.getFilteredList('select_user', filters, lists['users'], fieldValue => fieldValue.val);
-  const usePreview=browser.greaterThan.small;
+  const users = filterSelectors.getFilteredList('select_user', filters, lists['users'], fieldValue => fieldValue.val);
+  const usePreview = browser.greaterThan.small;
 
   return {
     usePreview,
-    hasFilters,
     users,
     auth
   };

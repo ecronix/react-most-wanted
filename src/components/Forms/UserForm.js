@@ -8,7 +8,6 @@ import ReactList from 'react-list';
 import {List} from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
 import Subheader from 'material-ui/Subheader';
-import { grants } from '../../utils/auth';
 
 class UserForm extends Component {
 
@@ -19,7 +18,6 @@ class UserForm extends Component {
       initialized,
       uid,
       renderRoleItem,
-      renderGrantItem,
       roles,
       handleAdminChange,
       isAdmin
@@ -94,16 +92,6 @@ class UserForm extends Component {
           />
         </List>
       </div>
-      <div>
-        <Subheader>{intl.formatMessage({id: 'grants'})}</Subheader>
-        <List style={{height: '100%'}} ref={(field) => { this.grants = field; }}>
-          <ReactList
-            itemRenderer={renderGrantItem}
-            length={grants?grants.length:0}
-            type='simple'
-          />
-        </List>
-      </div>
 
     </form>
   );
@@ -115,7 +103,6 @@ UserForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   renderRoleItem: PropTypes.func.isRequired,
   renderTerminalNotifierItem: PropTypes.func.isRequired,
-  renderGrantItem: PropTypes.func.isRequired,
   handleAdminChange: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
