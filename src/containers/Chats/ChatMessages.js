@@ -397,7 +397,7 @@ render(){
         <div style={{position: 'relative', display: 'inline-block', width: '100%'}}>
           <TextField
             id="message"
-            style={{height:42, lineHeight: undefined}}
+            style={{height:42, width: 'calc(100% - 72px)', lineHeight: undefined}}
             underlineShow={false}
             fullWidth={true}
             hintText={intl.formatMessage({id:'write_message_hint'})}
@@ -421,7 +421,7 @@ render(){
                 },
                 (error) => console.log(error))
               }>
-              <FontIcon className="material-icons" color={muiTheme.palette.borderColor}>my_location</FontIcon>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>my_location</FontIcon>
             </IconButton>
           </div>
 
@@ -437,7 +437,7 @@ render(){
             <IconButton
               containerElement='label'
               onClick={() => this.fileInput.click()}>
-              <FontIcon className="material-icons" color={muiTheme.palette.borderColor}>photo</FontIcon>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>photo</FontIcon>
             </IconButton>
           </div>
         </div>

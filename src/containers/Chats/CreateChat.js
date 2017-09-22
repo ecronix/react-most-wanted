@@ -1,22 +1,21 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import {injectIntl, intlShape} from 'react-intl';
-import { Activity } from '../../containers/Activity';
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
-import { withRouter } from 'react-router-dom';
-import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
-import { withFirebase } from 'firekit';
-import ReactList from 'react-list';
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import muiThemeable from 'material-ui/styles/muiThemeable'
+import {injectIntl, intlShape} from 'react-intl'
+import { Activity } from '../../containers/Activity'
+import {List, ListItem} from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+import Avatar from 'material-ui/Avatar'
+import FontIcon from 'material-ui/FontIcon'
+import { withRouter } from 'react-router-dom'
+import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons'
+import { withFirebase } from 'firekit'
+import ReactList from 'react-list'
 import { filterSelectors, filterActions } from 'material-ui-filter'
-import { setPersistentValue } from '../../store/persistentValues/actions';
-import TextField from 'material-ui/TextField';
-import Scrollbar from '../../components/Scrollbar/Scrollbar';
-import { fade } from 'material-ui/utils/colorManipulator';
+import { setPersistentValue } from '../../store/persistentValues/actions'
+import Scrollbar from '../../components/Scrollbar/Scrollbar'
+import SearchField from '../../components/SearchField/SearchField'
 
 
 const path = `users`;
@@ -128,48 +127,24 @@ class Users extends Component {
 
   render(){
     const {
-      intl,
       users,
       muiTheme,
-      setSearch
-    } = this.props;
+      setSearch,
+      intl
+    } = this.props
 
     return (
       <Activity
         iconStyleLeft={{width: 'auto'}}
         iconStyleRight={{width: '100%', textAlign: 'center', marginLeft: 0}}
         iconElementRight={
-          <div style={{
-            paddingRight: 30
-          }}
-          >
-            <div style={{
-              display: 'inline-block',
-              backgroundColor: '#fff',
-              borderRadius: 5,
-              width: 600,
-              maxWidth: '100%'
-            }}
-            >
-              <div style={{
-                display: 'flex',
-                backgroundColor: fade(muiTheme.palette.primary1Color, 0.70),
-                borderRadius: 4,
-                paddingLeft: 10,
-                paddingRight: 10
+          <div style={{width: 'calc(100% - 48px)'}}>
+            <SearchField
+              onChange={(e, newVal) => {
+                setSearch('select_user', 'displayName', newVal)
               }}
-              >
-                <FontIcon style={{marginLeft: 10, marginTop: 12, marginRight: 15}} className="material-icons" color={muiTheme.palette.textColor}>search</FontIcon>
-                <TextField
-                  style={{width: '100%'}}
-                  underlineShow={false}
-                  onChange={(e, newVal) => {
-                    setSearch('select_user', 'displayName', newVal)
-                  }}
-                  hintText={intl.formatMessage({id: 'search'})}
-                />
-              </div>
-            </div>
+              hintText={`${intl.formatMessage({id: 'user_label'})} ${intl.formatMessage({id: 'search'})}`}
+            />
           </div>
         }
         isLoading={users===undefined}>
@@ -185,7 +160,7 @@ class Users extends Component {
           </Scrollbar>
         </div>
       </Activity>
-    );
+    )
   }
 }
 

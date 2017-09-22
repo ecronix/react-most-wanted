@@ -1,24 +1,24 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import {injectIntl, intlShape} from 'react-intl';
-import { Activity } from '../../containers/Activity';
-import {List, ListItem} from 'material-ui/List';
-import Divider from 'material-ui/Divider';
-import Avatar from 'material-ui/Avatar';
-import FontIcon from 'material-ui/FontIcon';
-import { withRouter } from 'react-router-dom';
-import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons';
-import { withFirebase } from 'firekit';
-import ReactList from 'react-list';
-import { filterSelectors, filterActions } from 'material-ui-filter'
-import Scrollbar from '../../components/Scrollbar/Scrollbar';
-import { fade } from 'material-ui/utils/colorManipulator';
-import TextField from 'material-ui/TextField';
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import muiThemeable from 'material-ui/styles/muiThemeable'
+import {injectIntl, intlShape} from 'react-intl'
+import { Activity } from '../../containers/Activity'
+import {List, ListItem} from 'material-ui/List'
+import Divider from 'material-ui/Divider'
+import Avatar from 'material-ui/Avatar'
+import FontIcon from 'material-ui/FontIcon'
+import { withRouter } from 'react-router-dom'
+import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons'
+import { withFirebase } from 'firekit'
+import ReactList from 'react-list'
+import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
+import Scrollbar from '../../components/Scrollbar/Scrollbar'
+import SearchField from '../../components/SearchField/SearchField'
+import { ResponsiveMenu } from 'material-ui-responsive-menu'
 
 
-const path = `users`;
+const path = `/users`
 
 class Users extends Component {
 
@@ -49,14 +49,14 @@ class Users extends Component {
   }
 
   handleRowClick = (user) => {
-    const { history } = this.props
-    history.push(`${path}/edit/${user.key}/profile`);
+    const { history, isSelecting } = this.props
+    history.push(isSelecting?`/${isSelecting}/${user.key}`:`${path}/edit/${user.key}/profile`)
   }
 
 
   renderItem = (index, key) => {
-    const { list, intl, muiTheme } = this.props;
-    const user = list[index].val;
+    const { list, intl, muiTheme } = this.props
+    const user = list[index].val
 
     return <div key={key}>
       <ListItem
@@ -88,9 +88,9 @@ class Users extends Component {
 
           <div style={{marginLeft: 20, display: 'flex', flexWrap: 'wrap', alignItems: 'center'}}>
             {user.providerData && user.providerData.map(
-              (p)=>{
+              (p, i)=>{
                 return (
-                  <div key={key} style={{paddingLeft: 10}}>
+                  <div key={i} style={{paddingLeft: 10}}>
                     {this.getProviderIcon(p)}
                   </div>
                 )
@@ -106,54 +106,60 @@ class Users extends Component {
 
   render(){
     const {
-      intl,
       list,
       muiTheme,
-      setSearch
+      setSearch,
+      intl,
+      setFilterIsOpen,
+      hasFilters
     } = this.props
+
+    const menuList=[
+      {
+        text: intl.formatMessage({id: 'open_filter'}),
+        icon: <FontIcon className="material-icons" color={hasFilters?muiTheme.palette.accent1Color:muiTheme.palette.canvasColor}>filter_list</FontIcon>,
+        tooltip:intl.formatMessage({id: 'open_filter'}),
+        onClick: ()=>{setFilterIsOpen('users', true)}
+      }
+    ]
+
+    const filterFields = [
+      {
+        name: 'displayName',
+        label: intl.formatMessage({id: 'name'})
+      },
+      {
+        name: 'email',
+        label: intl.formatMessage({id: 'email_label'})
+      }
+    ];
 
     return (
       <Activity
         iconStyleLeft={{width: 'auto'}}
         iconStyleRight={{width: '100%', textAlign: 'center', marginLeft: 0}}
         iconElementRight={
-          <div style={{
-            paddingRight: 30
-          }}
-          >
-            <div style={{
-              display: 'inline-block',
-              backgroundColor: '#fff',
-              borderRadius: 5,
-              width: 600,
-              maxWidth: '100%'
-            }}
-            >
-              <div style={{
-                display: 'flex',
-                backgroundColor: fade(muiTheme.palette.primary1Color, 0.70),
-                borderRadius: 4,
-                paddingLeft: 10,
-                paddingRight: 10
-              }}
-              >
-                <FontIcon style={{marginLeft: 10, marginTop: 12, marginRight: 15}} className="material-icons" color={muiTheme.palette.textColor}>search</FontIcon>
-                <TextField
-                  style={{width: '100%'}}
-                  underlineShow={false}
-                  onChange={(e, newVal) => {
-                    setSearch('users', 'displayName', newVal)
-                  }}
-                  hintText={intl.formatMessage({id: 'search'})}
-                />
-              </div>
+          <div style={{display: 'flex'}}>
+            <div style={{width: 'calc(100% - 84px)'}}>
+              <SearchField
+                onChange={(e, newVal) => {
+                  setSearch('users', 'displayName', newVal)
+                }}
+                hintText={`${intl.formatMessage({id: 'user_label'})} ${intl.formatMessage({id: 'search'})}`}
+              />
+            </div>
+            <div style={{position: 'absolute', right: 10, width: 100}}>
+              <ResponsiveMenu
+                iconMenuColor={muiTheme.palette.canvasColor}
+                menuList={menuList}
+              />
             </div>
           </div>
         }
         isLoading={list===undefined}>
         <div style={{height: '100%', overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
           <Scrollbar>
-            <List id='test' ref={(field) => { this.list = field; }}>
+            <List id='test' ref={field => this.list = field}>
               <ReactList
                 itemRenderer={this.renderItem}
                 length={list?list.length:0}
@@ -162,6 +168,11 @@ class Users extends Component {
             </List>
           </Scrollbar>
         </div>
+        <FilterDrawer
+          name={'users'}
+          fields={filterFields}
+          formatMessage={intl.formatMessage}
+        />
       </Activity>
     )
   }
@@ -174,12 +185,18 @@ Users.propTypes = {
   auth: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   const { lists, auth, filters } = state
+  const { match } = ownProps
 
-  const list = filterSelectors.getFilteredList('users', filters, lists[path], fieldValue => fieldValue.val);
+  const isSelecting = match.params.select?match.params.select:false
+
+  const { hasFilters } = filterSelectors.selectFilterProps('companies', filters)
+  const list = filterSelectors.getFilteredList('users', filters, lists[path], fieldValue => fieldValue.val)
 
   return {
+    isSelecting,
+    hasFilters,
     list,
     auth
   }
