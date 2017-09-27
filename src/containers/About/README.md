@@ -348,7 +348,7 @@ MIT
 
 Thanks to @SiradDev for creating the logo for this project :)
 
-[logo-image]: public/favicon-32x32.png
+[logo-image]: https://www.react-most-wanted.com/favicon-32x32.png
 [logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md
 [travis-image]: https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master
 [travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted

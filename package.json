@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^3.0.0",
-    "react-scripts": "1.0.13",
+    "react-scripts": "1.0.14",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6"
   },
