@@ -25,9 +25,6 @@ class About extends Component {
     fetch(README)
     .then(response => response.text())
     .then(text => {
-      // Logs a string of Markdown content.
-      // Now you could use e.g. <rexxars/react-markdown> to render it.
-      console.log(text);
       this.setState({text:text})
     });
   }
