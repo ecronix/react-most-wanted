@@ -22,4 +22,4 @@ after_success:
   - travis_wait 40 ./build.sh
   - chmod +x deploy.sh
   - travis_wait 40 ./deploy.sh
-  - node node_modules/lighthouse-ci/runlighthouse.js https://smart-dispo.com
+  - node node_modules/lighthouse-ci/runlighthouse.js https://react-most-wanted.com

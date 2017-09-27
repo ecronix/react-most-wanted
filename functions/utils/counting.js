@@ -23,7 +23,7 @@ module.exports = {
       console.log(`${counterName} counter updated.`)
     })
   },
-  handleRecount: (event, listName) => {
+  handleRecount: (event, listName, correction=0) => {
     if (!event.data.exists()) {
       const counterRef = event.data.adminRef
       const collectionRef = counterRef.parent.child(listName)
@@ -31,7 +31,7 @@ module.exports = {
       // Return the promise from counterRef.set() so our function
       // waits for this async event to complete before it exits.
       return collectionRef.once('value')
-      .then(messagesData => counterRef.set(messagesData.numChildren()))
+      .then(messagesData => counterRef.set(messagesData.numChildren()+correction))
     }
   },
   handleProviderRecount: (event) =>{
