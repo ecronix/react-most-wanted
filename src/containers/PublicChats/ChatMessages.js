@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import ReactDOM  from 'react-dom';
 import firebase from 'firebase';
@@ -119,7 +118,7 @@ class ChatMessages extends Component {
       return <div></div>
     }
 
-    return _.map(messages, (row, i) => {
+    return messages.map((row, i) => {
 
       const values=row.val;
       const stringDate=new Date(values.created).toISOString().slice(0,10)

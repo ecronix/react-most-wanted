@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
@@ -32,7 +31,7 @@ class Companies extends Component {
       return <div></div>
     }
 
-    return _.map(companies, (company, index) => {
+    return companies.map((company, index) => {
 
       return <div key={index}>
         <ListItem
@@ -93,7 +92,7 @@ class Companies extends Component {
 }
 
 Companies.propTypes = {
-  companies: PropTypes.array.isRequired,
+  companies: PropTypes.array,
   history: PropTypes.object,
   isGranted: PropTypes.func.isRequired,
 };

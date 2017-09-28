@@ -291,7 +291,8 @@ class MyAccount extends Component {
       delete_user,
       auth,
       muiTheme,
-      submit
+      submit,
+      firebaseApp
     } = this.props;
 
     const actions = [
@@ -339,6 +340,7 @@ class MyAccount extends Component {
           auth.uid &&
           <div style={{margin: 15, display: 'flex'}}>
             <FireForm
+              firebaseApp={firebaseApp}
               validate={this.validate}
               name={form_name}
               path={path}

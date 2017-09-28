@@ -192,7 +192,6 @@ const mapStateToProps = (state, ownProps) => {
   const isSelecting = match.params.select?match.params.select:false
 
   const { hasFilters } = filterSelectors.selectFilterProps('companies', filters)
-  console.log(lists[path]);
   const list = filterSelectors.getFilteredList('users', filters, lists[path], fieldValue => fieldValue.val)
 
   return {
