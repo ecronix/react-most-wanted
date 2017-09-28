@@ -11,7 +11,7 @@ import FontIcon from 'material-ui/FontIcon';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import {withRouter} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import isGranted  from '../../utils/auth';
 
 

@@ -8,7 +8,7 @@ import { Activity } from '../../containers/Activity';
 import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import ChatMessages from './ChatMessages';
 
 

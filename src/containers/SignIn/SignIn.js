@@ -8,7 +8,7 @@ import firebaseui from 'firebaseui';
 import {firebaseAuth} from '../../firebase';
 import config from '../../config';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 
 var authUi = new firebaseui.auth.AuthUI(firebaseAuth);
 

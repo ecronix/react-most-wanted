@@ -5,7 +5,6 @@ import { injectIntl, intlShape } from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { Activity } from '../../containers/Activity';
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import { FireForm } from 'firekit';
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import CompanyForm from '../../components/Forms/CompanyForm';
 import { withRouter } from 'react-router-dom';
@@ -13,7 +12,8 @@ import firebase from 'firebase';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
+import FireForm from 'fireform'
 import { change, submit } from 'redux-form';
 import isGranted  from '../../utils/auth';
 
@@ -74,7 +74,8 @@ class Company extends Component {
       match,
       submit,
       muiTheme,
-      isGranted
+      isGranted,
+      firebaseApp
     }=this.props;
 
     const uid=match.params.uid;
@@ -128,6 +129,7 @@ class Company extends Component {
         <div style={{margin: 15, display: 'flex'}}>
 
           <FireForm
+            firebaseApp={firebaseApp}
             name={'company'}
             path={`${path}`}
             validate={this.validate}

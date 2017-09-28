@@ -10,7 +10,7 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import Chip from 'material-ui/Chip';
 import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';

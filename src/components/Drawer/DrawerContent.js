@@ -8,7 +8,7 @@ import allLocales from '../../locales';
 import firebase from 'firebase';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 
 const DrawerContent = (props, context) => {
 

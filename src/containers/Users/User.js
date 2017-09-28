@@ -5,11 +5,11 @@ import { injectIntl, intlShape } from 'react-intl'
 import muiThemeable from 'material-ui/styles/muiThemeable'
 import { Activity } from '../../containers/Activity'
 import { ResponsiveMenu } from 'material-ui-responsive-menu'
-import { FireForm } from 'firekit'
 import { setSimpleValue } from '../../store/simpleValues/actions'
 import { withRouter } from 'react-router-dom'
 import FontIcon from 'material-ui/FontIcon'
-import { withFirebase } from 'firekit'
+import { withFirebase } from 'firekit-provider'
+import FireForm from 'fireform'
 import { change, submit } from 'redux-form'
 import UserForm from '../../components/Forms/UserForm'
 import UserGrants from './UserGrants'
@@ -55,7 +55,8 @@ class User extends Component {
       admins,
       editType,
       setFilterIsOpen,
-      hasFilters
+      hasFilters,
+      firebaseApp
     } = this.props
 
     const uid=match.params.uid
@@ -108,6 +109,7 @@ class User extends Component {
                 editType==='profile' &&
                 <div style={{margin: 15, display: 'flex', justifyContent: 'center'}}>
                   <FireForm
+                    firebaseApp={firebaseApp}
                     name={form_name}
                     path={`${path}/`}
                     onSubmitSuccess={(values)=>{history.push(`${path}`)}}

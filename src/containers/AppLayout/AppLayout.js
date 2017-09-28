@@ -8,7 +8,7 @@ import { DrawerContent } from '../../containers/Drawer';
 import ReactMaterialUiNotifications from 'react-materialui-notifications';
 import { Routes } from '../../components/Routes';
 import config from '../../config';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import { withRouter } from 'react-router-dom';
 import Scrollbar from '../../components/Scrollbar/Scrollbar';
 

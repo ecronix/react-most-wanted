@@ -4,13 +4,13 @@ import { injectIntl } from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { Activity } from '../../containers/Activity'
 import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import { FireForm } from 'firekit'
 import { setDialogIsOpen } from '../../store/dialogs/actions';
 import { withRouter } from 'react-router-dom';
 import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
+import FireForm from 'fireform'
 import { change, submit } from 'redux-form';
 import RoleForm from '../../components/Forms/RoleForm';
 import {ListItem} from 'material-ui/List';

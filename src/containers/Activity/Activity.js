@@ -10,7 +10,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import {injectIntl} from 'react-intl';
 import { deepOrange500, darkWhite } from 'material-ui/styles/colors';
 import config from '../../config';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import { withRouter } from 'react-router-dom';
 
 export class Activity extends Component {

@@ -10,7 +10,7 @@ import Avatar from 'material-ui/Avatar'
 import FontIcon from 'material-ui/FontIcon'
 import { withRouter } from 'react-router-dom'
 import {GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon} from '../../components/Icons'
-import { withFirebase } from 'firekit'
+import { withFirebase } from 'firekit-provider'
 import ReactList from 'react-list'
 import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
 import Scrollbar from '../../components/Scrollbar/Scrollbar'
@@ -18,7 +18,7 @@ import SearchField from '../../components/SearchField/SearchField'
 import { ResponsiveMenu } from 'material-ui-responsive-menu'
 
 
-const path = `/users`
+const path = `users`
 
 class Users extends Component {
 
@@ -50,7 +50,7 @@ class Users extends Component {
 
   handleRowClick = (user) => {
     const { history, isSelecting } = this.props
-    history.push(isSelecting?`/${isSelecting}/${user.key}`:`${path}/edit/${user.key}/profile`)
+    history.push(isSelecting?`/${isSelecting}/${user.key}`:`/${path}/edit/${user.key}/profile`)
   }
 
 
@@ -143,7 +143,7 @@ class Users extends Component {
             <div style={{width: 'calc(100% - 84px)'}}>
               <SearchField
                 onChange={(e, newVal) => {
-                  setSearch('users', 'displayName', newVal)
+                  setSearch('users', newVal)
                 }}
                 hintText={`${intl.formatMessage({id: 'user_label'})} ${intl.formatMessage({id: 'search'})}`}
               />
@@ -192,6 +192,7 @@ const mapStateToProps = (state, ownProps) => {
   const isSelecting = match.params.select?match.params.select:false
 
   const { hasFilters } = filterSelectors.selectFilterProps('companies', filters)
+  console.log(lists[path]);
   const list = filterSelectors.getFilteredList('users', filters, lists[path], fieldValue => fieldValue.val)
 
   return {

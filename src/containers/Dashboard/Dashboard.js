@@ -6,7 +6,7 @@ import { GitHubIcon } from '../../components/Icons';
 import { Activity } from '../../containers/Activity';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {Line, Bar, Doughnut} from 'react-chartjs-2';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import CountUp from 'react-countup';
 import FontIcon from 'material-ui/FontIcon';
 

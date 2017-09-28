@@ -19,7 +19,7 @@ import {BottomNavigation} from 'material-ui/BottomNavigation';
 import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 
 class Tasks extends Component {
 

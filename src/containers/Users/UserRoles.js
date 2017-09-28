@@ -6,7 +6,7 @@ import muiThemeable from 'material-ui/styles/muiThemeable';
 import { setSimpleValue } from '../../store/simpleValues/actions';
 import { withRouter } from 'react-router-dom';
 import FontIcon from 'material-ui/FontIcon';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Avatar from 'material-ui/Avatar';

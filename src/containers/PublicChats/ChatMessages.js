@@ -12,7 +12,7 @@ import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import {BottomNavigation} from 'material-ui/BottomNavigation';
 import {withRouter} from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import Chip from 'material-ui/Chip';
 
 const pageStep=20;

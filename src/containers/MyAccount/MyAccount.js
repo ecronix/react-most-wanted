@@ -10,7 +10,8 @@ import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import firebase from 'firebase';
-import { withFirebase, FireForm } from 'firekit';
+import { withFirebase } from 'firekit-provider'
+import FireForm from 'fireform'
 import { GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon } from '../../components/Icons';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { change, submit, formValueSelector } from 'redux-form';

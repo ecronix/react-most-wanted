@@ -8,7 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
 import { AppLayout }  from '../../containers/AppLayout';
 import firebase from 'firebase';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import createHistory from 'history/createBrowserHistory'
 import { Router, Route, Switch } from 'react-router-dom';
 
