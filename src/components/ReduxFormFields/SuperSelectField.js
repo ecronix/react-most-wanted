@@ -1,4 +1,4 @@
-import {SelectField} from 'material-ui-selectfield'
+import SelectField from 'material-ui-selectfield'
 import { Component, createElement } from 'react'
 import { mapError } from '../../utils/mapError'
 
