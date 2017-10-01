@@ -73,8 +73,14 @@ class Users extends Component {
 
 
   renderItem = (index, key) => {
-    const { users, intl, muiTheme, auth } = this.props;
-    const user = users[index].val;
+    const {
+      users,
+      intl,
+      muiTheme,
+      auth
+    } = this.props
+
+    const user = users[index].val
 
     if (user.uid === auth.uid) {
       return <div key={key}></div>
@@ -141,7 +147,7 @@ class Users extends Component {
           <div style={{width: 'calc(100% - 48px)'}}>
             <SearchField
               onChange={(e, newVal) => {
-                setSearch('select_user', 'displayName', newVal)
+                setSearch('select_user', newVal)
               }}
               hintText={`${intl.formatMessage({id: 'user_label'})} ${intl.formatMessage({id: 'search'})}`}
             />
