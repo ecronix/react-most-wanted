@@ -63,6 +63,7 @@ export class Activity extends Component {
       match,
       location,
       staticContext,
+      clearMessage,
       ...rest
     } = this.props;
 
