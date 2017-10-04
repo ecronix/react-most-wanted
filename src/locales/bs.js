@@ -135,6 +135,9 @@ const messages=defineMessages({
   select_operator: 'Select operator',
   not_match_found: 'No match found',
   edit_user: 'Edit user',
+  firestore: 'Firestore',
+  hot_dog_status: 'Hot dog status',
+  user_label_search: 'Search user',
 });
 
 export default messages;

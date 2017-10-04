@@ -145,7 +145,7 @@ class Users extends Component {
                 onChange={(e, newVal) => {
                   setSearch('users', newVal)
                 }}
-                hintText={`${intl.formatMessage({id: 'user_label'})} ${intl.formatMessage({id: 'search'})}`}
+                hintText={`${intl.formatMessage({id: 'user_label_search'})}`}
               />
             </div>
             <div style={{position: 'absolute', right: 10, width: 100}}>

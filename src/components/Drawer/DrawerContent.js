@@ -120,6 +120,12 @@ const DrawerContent = (props, context) => {
       leftIcon: <FontIcon className="material-icons" >list</FontIcon>
     },
     {
+      value:'/firestore',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({id: 'firestore'}),
+      leftIcon: <FontIcon className="material-icons" >flash_on</FontIcon>
+    },
+    {
       value:'/about',
       visible: isAuthorised,
       primaryText: intl.formatMessage({id: 'about'}),
