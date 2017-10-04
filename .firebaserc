@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "react-most-wanted-3b1b2",
+    "default": "react-most-wanted-dev",
     "dev": "react-most-wanted-dev",
     "prod": "react-most-wanted-3b1b2"
   }

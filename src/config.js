@@ -9,6 +9,14 @@ const config= {
     storageBucket: "react-most-wanted-3b1b2.appspot.com",
     messagingSenderId: "258373383650"
   },
+  firebase_config_dev: {
+    apiKey: "AIzaSyB31cMH9nJnERC1WCWA7lQHnY08voLs-Z0",
+    authDomain: "react-most-wanted-dev.firebaseapp.com",
+    databaseURL: "https://react-most-wanted-dev.firebaseio.com",
+    projectId: "react-most-wanted-dev",
+    storageBucket: "react-most-wanted-dev.appspot.com",
+    messagingSenderId: "70650394824"
+  },
   firebase_providers: [
     firebase.auth.GoogleAuthProvider,
     firebase.auth.FacebookAuthProvider,

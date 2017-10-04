@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.0",
-    "firebase": "^4.4.0",
+    "firebase": "^4.5.0",
     "firebaseui": "^2.3.0",
     "fireform": "^0.2.1",
     "firekit": "^0.2.12",
