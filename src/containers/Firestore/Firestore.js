@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { injectIntl, intlShape } from 'react-intl'
 import { Activity } from '../../containers/Activity'
 import RaisedButton from 'material-ui/RaisedButton'
-import { withFirebase } from 'firekit-provider'
+import {withFirebase} from 'firekit-provider';
 import TextField from 'material-ui/TextField'
 
-class About extends Component {
+class Firestore extends Component {
 
   constructor(props) {
     super(props);
@@ -17,18 +18,11 @@ class About extends Component {
   }
 
   componentWillMount(){
-    const { firebaseApp }= this.props
+    this.handleWatch()
+  }
 
-    let firestore=firebaseApp.firestore()
-
-    const docRef=firestore.doc('samples/sandwichData')
-
-    docRef.onSnapshot(doc=>{
-      console.log(doc.data());
-      this.setState({...doc.data()})
-    })
-
-
+  componentWillUnmount(){
+    this.handleUnwatch()
   }
 
   handleSave = () => {
@@ -43,26 +37,32 @@ class About extends Component {
     })
   }
 
+  handleWatch = () => {
+    const { watchDoc }= this.props
+
+    watchDoc('samples/sandwichData')
+  }
+
   handleUnwatch = () => {
-    const { firebaseApp }= this.props
+    const { unwatchDoc }= this.props
 
-    let firestore=firebaseApp.firestore()
+    unwatchDoc('samples/sandwichData')
+  }
 
-    const unsub=firestore.doc('samples/sandwichData').onSnapshot(()=>{})
+  handleDestroy = () => {
+    const { destroyDoc }= this.props
 
-    console.log(firestore.doc('samples/sandwichData'));
-    unsub()
-
+    destroyDoc('samples/sandwichData')
   }
 
   render() {
-    const { intl, muiTheme }= this.props
+    const { intl, muiTheme, sandwichData, isWatching }= this.props
 
     return (
       <Activity title={intl.formatMessage({id: 'firestore'})}>
 
         <div style={{padding: 15}}>
-          <h1 style={{color: muiTheme.palette.textColor}}>{`${intl.formatMessage({id: 'hot_dog_status'})}: ${this.state.hotDogStatus}`}</h1>
+          <h1 style={{color: muiTheme.palette.textColor}}>{`${intl.formatMessage({id: 'hot_dog_status'})}: ${sandwichData.hotDogStatus}`}</h1>
           <TextField
             value={this.state.value}
             onChange={(ev, value)=>{
@@ -78,8 +78,22 @@ class About extends Component {
             style={{margin: 12, marginLeft:0}}
           />
           <RaisedButton
+            disabled={isWatching}
+            onClick={this.handleWatch}
+            label="Watch"
+            primary={true}
+            style={{margin: 12, marginLeft:0}}
+          />
+          <RaisedButton
+            disabled={!isWatching}
             onClick={this.handleUnwatch}
             label="Unwatch"
+            primary={true}
+            style={{margin: 12, marginLeft:0}}
+          />
+          <RaisedButton
+            onClick={this.handleDestroy}
+            label="Destroy"
             primary={true}
             style={{margin: 12, marginLeft:0}}
           />
@@ -91,8 +105,22 @@ class About extends Component {
   }
 }
 
-About.propTypes = {
+Firestore.propTypes = {
   intl: intlShape.isRequired,
 };
 
-export default injectIntl(muiThemeable()(withFirebase(About)));
+const mapStateToProps = (state) => {
+  const { docs, initialization } = state;
+
+  const sandwichData=docs['samples/sandwichData']?docs['samples/sandwichData']:{}
+  const isWatching=initialization['samples/sandwichData']?true:false
+
+  return {
+    sandwichData,
+    isWatching
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(injectIntl(muiThemeable()(withFirebase(Firestore))));
