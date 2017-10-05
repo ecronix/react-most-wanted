@@ -120,10 +120,22 @@ const DrawerContent = (props, context) => {
       leftIcon: <FontIcon className="material-icons" >list</FontIcon>
     },
     {
-      value:'/firestore',
       visible: isAuthorised,
+      primaryTogglesNestedList: true,
       primaryText: intl.formatMessage({id: 'firestore'}),
-      leftIcon: <FontIcon className="material-icons" >flash_on</FontIcon>
+      leftIcon: <FontIcon className="material-icons" >flash_on</FontIcon>,
+      nestedItems:[
+        {
+          value: '/document',
+          primaryText: intl.formatMessage({id: 'document'}),
+          leftIcon: <FontIcon className="material-icons" >flash_on</FontIcon>,
+        },
+        {
+          value: '/collection',
+          primaryText: intl.formatMessage({id: 'collection'}),
+          leftIcon: <FontIcon className="material-icons" >flash_on</FontIcon>,
+        }
+      ]
     },
     {
       value:'/about',

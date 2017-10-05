@@ -21,7 +21,8 @@ function MyLoadable(opts, preloadComponents) {
 };
 
 const AsyncDashboard = MyLoadable({loader: () => import('../../containers/Dashboard/Dashboard')});
-const AsyncFirestore = MyLoadable({loader: () => import('../../containers/Firestore/Firestore')});
+const AsyncDocument = MyLoadable({loader: () => import('../../containers/Document/Document')});
+const AsyncCollection = MyLoadable({loader: () => import('../../containers/Collection/Collection')});
 const AsyncAbout = MyLoadable({loader: () => import('../../containers/About/About')});
 const AsyncPublicChats = MyLoadable({loader: () => import('../../containers/PublicChats/PublicChats')});
 const AsyncMyAccount = MyLoadable({loader: () => import('../../containers/MyAccount/MyAccount')});
@@ -81,7 +82,8 @@ const Routes = (props, context) => {
       <RestrictedRoute type='private' path="/users/edit/:uid/:editType" exact component={AsyncUser} />
 
       <RestrictedRoute type='private' path="/about" exact component={AsyncAbout}  />
-      <RestrictedRoute type='private' path="/firestore" exact component={AsyncFirestore}  />
+      <RestrictedRoute type='private' path="/document" exact component={AsyncDocument}  />
+      <RestrictedRoute type='private' path="/collection" exact component={AsyncCollection}  />
       <RestrictedRoute type='private' path="/my_account"  exact component={AsyncMyAccount} />
       <RestrictedRoute type='public' path="/signin" component={AsyncSignIn} />
       <Route component={AsyncPageNotFound} />

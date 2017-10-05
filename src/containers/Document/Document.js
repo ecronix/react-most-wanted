@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import {withFirebase} from 'firekit-provider';
 import TextField from 'material-ui/TextField'
 
-class Firestore extends Component {
+class Document extends Component {
 
   constructor(props) {
     super(props);
@@ -59,7 +59,7 @@ class Firestore extends Component {
     const { intl, muiTheme, sandwichData, isWatching }= this.props
 
     return (
-      <Activity title={intl.formatMessage({id: 'firestore'})}>
+      <Activity title={intl.formatMessage({id: 'document'})}>
 
         <div style={{padding: 15}}>
           <h1 style={{color: muiTheme.palette.textColor}}>{`${intl.formatMessage({id: 'hot_dog_status'})}: ${sandwichData.hotDogStatus}`}</h1>
@@ -105,7 +105,7 @@ class Firestore extends Component {
   }
 }
 
-Firestore.propTypes = {
+Document.propTypes = {
   intl: intlShape.isRequired,
 };
 
@@ -122,5 +122,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(
-  mapStateToProps
-)(injectIntl(muiThemeable()(withFirebase(Firestore))));
+  mapStateToProps, {}
+)(injectIntl(withFirebase(muiThemeable()(Document))));

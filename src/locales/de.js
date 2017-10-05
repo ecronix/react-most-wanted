@@ -138,6 +138,8 @@ const messages=defineMessages({
   firestore: 'Firestore',
   hot_dog_status: 'Hot dog status',
   user_label_search: 'Suchen',
+  document: 'Document',
+  collection: 'Collection',
 });
 
 export default messages;
