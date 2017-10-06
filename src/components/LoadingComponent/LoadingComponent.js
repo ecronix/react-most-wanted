@@ -19,7 +19,7 @@ export default function LoadingComponent(props) {
       return null;
     }
   } else if (props.error) {
-    //window.location.reload();
+    window.location.reload();
     // If we aren't loading, maybe
     return <div>Error! Component failed to load</div>;
   } else {
