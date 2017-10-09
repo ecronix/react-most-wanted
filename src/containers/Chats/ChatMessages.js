@@ -222,8 +222,8 @@ class ChatMessages extends Component {
                   type === 'image' && values.image != null &&
 
                   <Image
-                    style={{width: 'auto', height: 'auto'}}
-                    imageStyle={{maxWidth: '100%', padding: 7}}
+                    style={{width: 'auto', height: 'auto', paddingTop: 0}}
+                    imageStyle={{maxWidth: '100%', padding: 7, position: 'relative'}}
                     onLoad={this.scrollToBottom}
                     src={values.image}
                     color={backgroundColor}
