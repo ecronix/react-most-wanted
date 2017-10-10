@@ -6,6 +6,8 @@ import { Activity } from '../../containers/Activity'
 import RaisedButton from 'material-ui/RaisedButton'
 import {withFirebase} from 'firekit-provider';
 import TextField from 'material-ui/TextField'
+// eslint-disable-next-line
+import firestore from 'firebase/firestore'
 
 class Document extends Component {
 

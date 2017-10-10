@@ -9,6 +9,8 @@ import TextField from 'material-ui/TextField'
 import {List, ListItem} from 'material-ui/List';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
+// eslint-disable-next-line
+import firestore from 'firebase/firestore'
 
 class Collection extends Component {
 
