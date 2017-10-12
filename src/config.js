@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 
 const config= {
   firebase_config: {
@@ -18,12 +17,12 @@ const config= {
     messagingSenderId: "70650394824"
   },
   firebase_providers: [
-    firebase.auth.GoogleAuthProvider,
-    firebase.auth.FacebookAuthProvider,
-    firebase.auth.TwitterAuthProvider,
-    firebase.auth.GithubAuthProvider,
-    firebase.auth.EmailAuthProvider,
-    firebase.auth.PhoneAuthProvider
+    'google.com',
+    'facebook.com',
+    'twitter.com',
+    'github.com',
+    'password',
+    'phone',
   ],
   initial_state: {
     theme: 'dark',

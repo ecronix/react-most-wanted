@@ -10,7 +10,6 @@ import LinearProgress from 'material-ui/LinearProgress';
 import {injectIntl} from 'react-intl';
 import { deepOrange500, darkWhite } from 'material-ui/styles/colors';
 import config from '../../config';
-import { withFirebase } from 'firekit-provider';
 import { withRouter } from 'react-router-dom';
 
 export class Activity extends Component {
@@ -41,37 +40,10 @@ export class Activity extends Component {
       isLoading,
       dispatch,
       containerStyle,
-      firebaseApp,
-      watchConnection,
-      unwatchConnection,
-      watchList,
-      unwatchList,
-      unwatchAllLists,
-      watchPath,
-      unwatchPath,
-      unwatchAllPaths,
-      initMessaging,
-      watchAuth,
       pageTitle,
       height,
-      clearInitialization,
-      authStateChanged,
-      authError,
-      destroyList,
-      destroyPath,
-      clearApp,
-      match,
-      location,
-      clearMessage,
       staticContext,
-      watchCol,
-      unwatchCol,
-      destroyCol,
-      unwatchAllCols,
-      watchDoc,
-      unwatchDoc,
-      destroyDoc,
-      unwatchAllDocs,
+      valueLink,
       ...rest
     } = this.props;
 
@@ -101,7 +73,8 @@ export class Activity extends Component {
           <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color}/>
           <title>{headerTitle}</title>
         </Helmet>
-        <ResponsiveAppBar width={drawerWidth}
+        <ResponsiveAppBar
+          width={drawerWidth}
           title={title}
           showMenuIconButton={onBackClick!==undefined?true:undefined}
           onLeftIconButtonTouchTap={onBackClick}
@@ -155,4 +128,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-)(injectIntl(muiThemeable()(withFirebase(withRouter(Activity)))));
+)(injectIntl(muiThemeable()(withRouter(Activity))));

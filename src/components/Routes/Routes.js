@@ -3,10 +3,16 @@ import Loadable from 'react-loadable';
 import LoadingComponent   from '../../components/LoadingComponent/LoadingComponent';
 import { RestrictedRoute }   from '../../containers/RestrictedRoute';
 import { Route, Switch } from 'react-router-dom';
+import FirebaseProvider from 'firekit-provider';
 
 function MyLoadable(opts, preloadComponents) {
 
-  return Loadable(Object.assign({
+
+  return Loadable.Map({
+    loader: {
+      Component: opts.loader,
+      firebase: () => import('../../firebase'),
+    },
     loading: LoadingComponent,
     render(loaded, props) {
 
@@ -14,10 +20,14 @@ function MyLoadable(opts, preloadComponents) {
         preloadComponents.map(component=>component.preload());
       }
 
-      let Component = loaded.default;
-      return <Component {...props}/>;
+      let Component = loaded.Component.default;
+      let firebaseApp = loaded.firebase.firebaseApp;
+      return <FirebaseProvider firebaseApp={firebaseApp}>
+        <Component {...props}/>
+      </FirebaseProvider>;
     }
-  }, opts));
+  });
+
 };
 
 const AsyncDashboard = MyLoadable({loader: () => import('../../containers/Dashboard/Dashboard')});

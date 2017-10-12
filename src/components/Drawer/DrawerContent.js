@@ -5,10 +5,9 @@ import FontIcon from 'material-ui/FontIcon';
 import Toggle from 'material-ui/Toggle';
 import allThemes from '../../themes';
 import allLocales from '../../locales';
-import firebase from 'firebase';
+//import firebase from 'firebase';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit-provider'
 
 const DrawerContent = (props, context) => {
 
@@ -24,7 +23,6 @@ const DrawerContent = (props, context) => {
     auth,
     dialogs,
     match,
-    firebaseApp,
     setDialogIsOpen,
     messaging,
     isGranted
@@ -202,12 +200,16 @@ const DrawerContent = (props, context) => {
 
   const handleSignOut = () =>{
 
-    firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/connections`).remove();
-    firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/notificationTokens/${messaging.token}`).remove();
-    firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/lastOnline`).set(firebase.database.ServerValue.TIMESTAMP);
-    firebaseApp.auth().signOut().then(()=>{
-      setDialogIsOpen('auth_menu', false);
-    });
+    import('../../firebase').then(({firebaseApp}) => {
+      this.firebaseApp=firebaseApp
+
+      firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/connections`).remove();
+      firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/notificationTokens/${messaging.token}`).remove();
+      firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/lastOnline`).set(new Date());
+      firebaseApp.auth().signOut().then(()=>{setDialogIsOpen('auth_menu', false);});
+
+    })
+
   };
 
   const authItems=[
@@ -242,4 +244,4 @@ const DrawerContent = (props, context) => {
 );
 }
 
-export default injectIntl(muiThemeable()(withRouter(withFirebase(DrawerContent))));
+export default injectIntl(muiThemeable()(withRouter(DrawerContent)));
