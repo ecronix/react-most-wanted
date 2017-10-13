@@ -10,6 +10,7 @@ const store = configureStore();
 
 addLocalizationData();
 
+
 ReactDOM.render(
   <Provider store={store}>
     <Root/>

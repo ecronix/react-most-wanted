@@ -79,7 +79,7 @@ class Root extends Component {
       this.firebaseApp=firebaseApp
       watchAuth(firebaseApp, this.onAuthStateChanged)
     })
-
+    
   }
 
   componentWillUnmount() {
