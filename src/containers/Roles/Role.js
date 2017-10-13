@@ -127,7 +127,8 @@ class Role extends Component {
       setDialogIsOpen,
       submit,
       muiTheme,
-      match
+      match,
+      firebaseApp
     }=this.props;
 
     const uid=match.params.uid;
@@ -179,6 +180,7 @@ class Role extends Component {
           id: this.props.match.params.uid?'edit_role':'create_role'})}>
           <div style={{margin: 15, display: 'flex'}}>
             <FireForm
+              firebaseApp={firebaseApp}
               name={form_name}
               path={`${path}/`}
               validate={this.validate}
