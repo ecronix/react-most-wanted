@@ -12,6 +12,7 @@ function MyLoadable(opts, preloadComponents) {
     loader: {
       Component: opts.loader,
       firebase: () => import('../../firebase'),
+      NotificationLayout: () => import('../../containers/NotificationLayout/NotificationLayout'),
     },
     loading: LoadingComponent,
     render(loaded, props) {
@@ -20,10 +21,15 @@ function MyLoadable(opts, preloadComponents) {
         preloadComponents.map(component=>component.preload());
       }
 
-      let Component = loaded.Component.default;
-      let firebaseApp = loaded.firebase.firebaseApp;
+      const Component = loaded.Component.default;
+      const NotificationLayout=loaded.NotificationLayout.default
+      const firebaseApp = loaded.firebase.firebaseApp;
+
       return <FirebaseProvider firebaseApp={firebaseApp}>
-        <Component {...props}/>
+        <div>
+          <Component {...props}/>
+          <NotificationLayout />
+        </div>
       </FirebaseProvider>;
     }
   });
