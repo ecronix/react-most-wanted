@@ -33,6 +33,7 @@ const messages=defineMessages({
   name: 'Ime',
   email: 'E-Mail',
   password: 'Sifra',
+  new_password: 'Nowa Sifra',
   confirm_password: 'Potvrdi sifru',
   forgort_password: 'Zaboravio sifru?',
   reset_password: 'Resetuj sifru',
