@@ -8,10 +8,10 @@ export default function LoadingComponent(props) {
       // In case we've timed out loading our other component.
       return <div>Loader timed out!</div>;
     } else if (props.pastDelay) {
-      // Display a loading screen after a set delay.
+      // Display a loading screen after a set delay. <img src="/logo.svg" className="loader" alt="logo" />
       return <div className="shell">
         <div className="container">
-          <img src="/logo.svg" className="loader" alt="logo" />
+            <img src="/logo.svg" className="loader" alt="logo" />
         </div>
       </div>;
     } else {

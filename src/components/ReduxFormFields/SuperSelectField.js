@@ -1,4 +1,4 @@
-import SuperSelectField from 'material-ui-superselectfield'
+import SelectField from 'material-ui-selectfield'
 import { Component, createElement } from 'react'
 import { mapError } from '../../utils/mapError'
 
@@ -45,7 +45,7 @@ function createComponent(MaterialUIComponent, mapProps) {
 }
 
 export default createComponent(
-  SuperSelectField,
+  SelectField,
   ({ input: { onChange,value, onBlur, ...inputProps }, onChange:onChangeFromField, ...props }) => ({
     ...mapError(props),
     ...inputProps,

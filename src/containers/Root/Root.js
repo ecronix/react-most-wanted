@@ -7,8 +7,13 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { IntlProvider } from 'react-intl'
 import { AppLayout }  from '../../containers/AppLayout';
-import firebase from 'firebase';
-import { withFirebase } from 'firekit';
+import {
+  watchAuth,
+  clearInitialization,
+  initConnection,
+  watchList,
+  watchPath
+} from 'firekit';
 import createHistory from 'history/createBrowserHistory'
 import { Router, Route, Switch } from 'react-router-dom';
 
@@ -17,32 +22,32 @@ const history = createHistory();
 class Root extends Component {
 
   handlePresence = (user) => {
-    const { firebaseApp }= this.props;
-    let myConnectionsRef = firebaseApp.database().ref(`users/${user.uid}/connections`);
 
-    let lastOnlineRef = firebaseApp.database().ref(`users/${user.uid}/lastOnline`);
-    lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+    let myConnectionsRef = this.firebaseApp.database().ref(`users/${user.uid}/connections`);
+
+    let lastOnlineRef = this.firebaseApp.database().ref(`users/${user.uid}/lastOnline`);
+    lastOnlineRef.onDisconnect().set(new Date());
 
     var con = myConnectionsRef.push(true)
     con.onDisconnect().remove();
-  }
 
+  }
 
   onAuthStateChanged = (user) => {
     const {
       clearInitialization,
       watchConnection,
-      firebaseApp,
       watchList,
       watchPath
     }= this.props;
+
 
     clearInitialization();
 
     if(user){
 
       this.handlePresence(user);
-      setTimeout(()=>{ watchConnection();}, 1000);
+      setTimeout(()=>{ watchConnection(this.firebaseApp);}, 1000);
 
       const userData={
         displayName: user.displayName?user.displayName:'UserName',
@@ -54,10 +59,10 @@ class Root extends Component {
         providerData: user.providerData,
       };
 
-      watchList(`user_grants/${user.uid}`);
-      watchPath(`admins/${user.uid}`);
+      watchList(this.firebaseApp, `user_grants/${user.uid}`);
+      watchPath(this.firebaseApp, `admins/${user.uid}`);
 
-      firebaseApp.database().ref(`users/${user.uid}`).update(userData);
+      this.firebaseApp.database().ref(`users/${user.uid}`).update(userData);
 
       return userData;
 
@@ -68,13 +73,18 @@ class Root extends Component {
   }
 
   componentWillMount () {
-    const { watchAuth }= this.props;
-    watchAuth(this.onAuthStateChanged);
+    const {  watchAuth }= this.props;
+
+    import('../../firebase').then(({firebaseApp}) => {
+      this.firebaseApp=firebaseApp
+      watchAuth(firebaseApp, this.onAuthStateChanged)
+    })
+    
   }
 
   componentWillUnmount() {
-    const { clearApp }= this.props;
-    clearApp();
+    //const { clearApp }= this.props;
+    //clearApp(this.firebaseApp); //TO DO: add it afte firekit update
   }
 
   render() {
@@ -119,5 +129,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-  mapStateToProps
-)(withFirebase(Root));
+  mapStateToProps, {watchAuth, clearInitialization, watchConnection:initConnection, watchList, watchPath }
+)(Root);

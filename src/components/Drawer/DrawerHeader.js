@@ -8,9 +8,8 @@ import Paper from 'material-ui/Paper';
 import {RMWIcon} from '../Icons';
 import {injectIntl} from 'react-intl';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { withFirebase } from 'firekit';
 
-const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser, dialogs, setDialogIsOpen, firebaseApp}) => {
+const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser, dialogs, setDialogIsOpen}) => {
   const styles={
     header:{
       padding: 5,
@@ -75,4 +74,4 @@ const DrawerHeader = ({muiTheme, intl, auth, setAuthMenuOpen, fetchUser, dialogs
   );
 }
 
-export default injectIntl(muiThemeable()(withFirebase(DrawerHeader)));
+export default injectIntl(muiThemeable()(DrawerHeader));

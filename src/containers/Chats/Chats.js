@@ -5,7 +5,7 @@ import { Activity } from '../../containers/Activity';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import muiThemeable from 'material-ui/styles/muiThemeable';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider';
 import { withRouter } from 'react-router-dom';
 import ReactList from 'react-list';
 import Avatar from 'material-ui/Avatar';
@@ -21,7 +21,6 @@ class Chats extends Component {
 
   componentDidMount(){
     const { watchList, path } =this.props;
-
     watchList(path);
   }
 
@@ -79,6 +78,7 @@ class Chats extends Component {
             }
           </div>
         }
+
         primaryText={val.unread>0?<div><b>{val.displayName}</b></div>:val.displayName}
         secondaryText={val.unread>0?<div><b>{val.lastMessage}</b></div>:val.lastMessage}
       />
@@ -123,7 +123,8 @@ class Chats extends Component {
           </List>
         </Scrollbar>
 
-        <div style={{position: 'absolute', width: usePreview?300:'100%', height: '100%'}}>
+
+        <div style={{position: 'absolute', width: usePreview?300:'100%', bottom:5}}>
           <FloatingActionButton
             onClick={()=>{history.push(`/chats/create`)}}
             style={{position: 'absolute', right: 20, bottom: 10, zIndex: 99}}

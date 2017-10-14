@@ -10,7 +10,8 @@ import FontIcon from 'material-ui/FontIcon';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import firebase from 'firebase';
-import { withFirebase, FireForm } from 'firekit';
+import { withFirebase } from 'firekit-provider'
+import FireForm from 'fireform'
 import { GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon } from '../../components/Icons';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { change, submit, formValueSelector } from 'redux-form';
@@ -290,7 +291,8 @@ class MyAccount extends Component {
       delete_user,
       auth,
       muiTheme,
-      submit
+      submit,
+      firebaseApp
     } = this.props;
 
     const actions = [
@@ -338,6 +340,7 @@ class MyAccount extends Component {
           auth.uid &&
           <div style={{margin: 15, display: 'flex'}}>
             <FireForm
+              firebaseApp={firebaseApp}
               validate={this.validate}
               name={form_name}
               path={path}

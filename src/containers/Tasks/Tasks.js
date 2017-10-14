@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 import ReactDOM  from 'react-dom';
 import firebase from 'firebase';
@@ -19,7 +18,7 @@ import {BottomNavigation} from 'material-ui/BottomNavigation';
 import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 
 class Tasks extends Component {
 
@@ -116,7 +115,7 @@ class Tasks extends Component {
       return <div></div>
     }
 
-    return _.map(tasks, (row, i) => {
+    return tasks.map((row, i) => {
 
       const task=row.val;
       const key=row.key;

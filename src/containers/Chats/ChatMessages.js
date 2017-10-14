@@ -10,7 +10,7 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import Chip from 'material-ui/Chip';
 import { ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -222,8 +222,8 @@ class ChatMessages extends Component {
                   type === 'image' && values.image != null &&
 
                   <Image
-                    style={{width: 'auto', height: 'auto'}}
-                    imageStyle={{maxWidth: '100%', padding: 7}}
+                    style={{width: 'auto', height: 'auto', paddingTop: 0}}
+                    imageStyle={{maxWidth: '100%', padding: 7, position: 'relative'}}
                     onLoad={this.scrollToBottom}
                     src={values.image}
                     color={backgroundColor}
@@ -397,7 +397,7 @@ render(){
         <div style={{position: 'relative', display: 'inline-block', width: '100%'}}>
           <TextField
             id="message"
-            style={{height:42, lineHeight: undefined}}
+            style={{height:42, width: 'calc(100% - 72px)', lineHeight: undefined}}
             underlineShow={false}
             fullWidth={true}
             hintText={intl.formatMessage({id:'write_message_hint'})}
@@ -421,7 +421,7 @@ render(){
                 },
                 (error) => console.log(error))
               }>
-              <FontIcon className="material-icons" color={muiTheme.palette.borderColor}>my_location</FontIcon>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>my_location</FontIcon>
             </IconButton>
           </div>
 
@@ -437,7 +437,7 @@ render(){
             <IconButton
               containerElement='label'
               onClick={() => this.fileInput.click()}>
-              <FontIcon className="material-icons" color={muiTheme.palette.borderColor}>photo</FontIcon>
+              <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>photo</FontIcon>
             </IconButton>
           </div>
         </div>

@@ -136,6 +136,11 @@ const messages=defineMessages({
   select_operator: 'Operator auswählen',
   not_match_found: 'Nichst gefunden',
   edit_user: 'Benutzer bearbeiten',
+  firestore: 'Firestore',
+  hot_dog_status: 'Hot dog status',
+  user_label_search: 'Suchen',
+  document: 'Document',
+  collection: 'Collection',
 });
 
 export default messages;

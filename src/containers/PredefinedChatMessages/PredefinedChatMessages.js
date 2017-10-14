@@ -4,7 +4,7 @@ import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
 import { withRouter } from 'react-router-dom';
 import FontIcon from 'material-ui/FontIcon';
 import isGranted  from '../../utils/auth';

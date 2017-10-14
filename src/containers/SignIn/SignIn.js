@@ -8,7 +8,8 @@ import firebaseui from 'firebaseui';
 import {firebaseAuth} from '../../firebase';
 import config from '../../config';
 import { withRouter } from 'react-router-dom';
-import { withFirebase } from 'firekit';
+import { withFirebase } from 'firekit-provider'
+//import 'firebaseui/dist/firebaseui.css'
 
 var authUi = new firebaseui.auth.AuthUI(firebaseAuth);
 
@@ -21,7 +22,7 @@ class SignIn extends Component {
       signInSuccessUrl: '/',
       signInFlow: browser.greaterThan.medium?'popup':'redirect',
       callbacks: {
-        signInSuccess: function(user, credentials, redirect) {
+        signInSuccess: (user, credentials, redirect) => {
 
           initMessaging();
 
@@ -29,7 +30,7 @@ class SignIn extends Component {
           return false;
         }
       },
-      signInOptions: config.firebase_providers.map((p)=>p.PROVIDER_ID)
+      signInOptions: config.firebase_providers
     };
 
     authUi.start('#firebaseui-auth', uiConfig);

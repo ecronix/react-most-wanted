@@ -4,10 +4,7 @@ import { intlShape } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
 import { AvatarImageField } from '../ReduxFormFields';
-import ReactList from 'react-list';
-import {List} from 'material-ui/List';
 import Toggle from 'material-ui/Toggle';
-import Subheader from 'material-ui/Subheader';
 
 class UserForm extends Component {
 
@@ -17,8 +14,6 @@ class UserForm extends Component {
       intl,
       initialized,
       uid,
-      renderRoleItem,
-      roles,
       handleAdminChange,
       isAdmin
     } = this.props;
@@ -81,18 +76,6 @@ class UserForm extends Component {
         </div>
 
       </div>
-
-      <div>
-        <Subheader>{intl.formatMessage({id: 'roles'})}</Subheader>
-        <List style={{height: '100%'}} ref={(field) => { this.roles = field; }}>
-          <ReactList
-            itemRenderer={renderRoleItem}
-            length={roles?roles.length:0}
-            type='simple'
-          />
-        </List>
-      </div>
-
     </form>
   );
 }
@@ -101,8 +84,6 @@ class UserForm extends Component {
 
 UserForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  renderRoleItem: PropTypes.func.isRequired,
-  renderTerminalNotifierItem: PropTypes.func.isRequired,
   handleAdminChange: PropTypes.func.isRequired,
   isAdmin: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,

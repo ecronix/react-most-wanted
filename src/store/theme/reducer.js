@@ -1,7 +1,6 @@
 import * as types from './types';
-import Immutable from 'seamless-immutable';
 
-const theme = (state = Immutable('light') , action) => {
+const theme = (state = 'light' , action) => {
 
   switch (action.type) {
     case types.UPDATE_THEME:

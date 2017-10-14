@@ -1,4 +1,3 @@
-export default `
 # ‌‌ [![LOGO][logo-image]][logo-url] React Most Wanted
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
@@ -8,16 +7,9 @@ export default `
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Because this project uses service workers I use this to check if the newest version is really loaded:
+It should be a `shell` for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
 
-[firekit](https://github.com/TarikHuber/firekit) version: **v0.1.23**
-
-React Most Wanted version: **v0.1.25**
-
-
-It should be a @shell@ for my further applications with the minimum features I would like them to have. Because of that it should be as simple as possible but with no regrets for the feature implementation.
-
-You can find the **source code** of this project [here](https://github.com/TarikHuber/react-most-wanted). And don't forget to put a star on it ;)
+You can find a example of this project in this [DEMO](https://www.react-most-wanted.com/).
 
 I tried to make the project as clean as possible and to use all libraries in they're pure way.
 
@@ -33,6 +25,7 @@ I tried to make the project as clean as possible and to use all libraries in the
   - [Theming](#theming)
   - [Firebase lists](#firebase-lists)
   - [Drawer width](#drawer-width)
+  - [Authorisation](#authorisation)
 - [TO DO](#to-do)
 - [License](#license)
 - [Logo](#logo)
@@ -40,9 +33,9 @@ I tried to make the project as clean as possible and to use all libraries in the
 
 ## Features
 
-@React Most Wanted@ is a "base project", "starter kit", "boilerplate" (call it however you want) project with my **personal** "Most Wanted" features:
+`React Most Wanted` is a "base project", "starter kit", "boilerplate" (call it however you want) project with my **personal** "Most Wanted" features:
 * **easy to maintain**
-* **PWA** - has Progressive Web App features
+* ***PWA** - has Progressive Web App features
 * **responsive** - included with PWA
 * **material-ui**
 * **routing**
@@ -50,6 +43,9 @@ I tried to make the project as clean as possible and to use all libraries in the
 * **forms** - with realtime sync of untouched fields
 * **internationalization**
 * **authentication**
+* **authorisation**
+* **code splitting**
+* **CI** and **CD**
 
 All these features can be programmed from scratch. But why should you do this? Out there are so mutch greate developers creating greate applications, libraries and tools to help them and you to develop fast and easy. This should also be a small part from my side to help other make they'r starting with react much easier.
 
@@ -61,15 +57,16 @@ There are also other cool features:
 * **messaging/notifications** - every loged user that approved messaging on login will recieve notifications for new tasks created
 * **full authentication** - with google, facebook, twitter, github, email and **phone**
 * **online and last time offline state for users**
-* **file uploads to the firebase storage**s
+* **file uploads to the firebase storage**
 
-The further text explains witch libraries/modules are used and why. Some of them are installed and used in they're @pure@ way as in documentation described so in that cases we will just show the link to the official documentation to awoid outdated descriptions of the usage.
+
+The further text explains witch libraries/modules are used and why. Some of them are installed and used in they're `pure` way as in documentation described so in that cases we will just show the link to the official documentation to awoid outdated descriptions of the usage.
 
 ## Folder Structure
 
 The project has following folder structure:
 
-@@@
+```
 react-most-wanted/
   .gitignore
   README.md
@@ -93,15 +90,15 @@ react-most-wanted/
     themes/
     config.js
     index.js
-@@@
+```
 
-All application parts and code should be stored in the @src@ folder.
+All application parts and code should be stored in the `src` folder.
 
-All @react@ components shold be seperated in presentational and container compnents. This greate [article](https://www.fullstackreact.com/p/using-presentational-and-container-components-with-redux/) is describing it why and how. For that purpose we have the @components@ and @containers@ folders.
+All `react` components shold be seperated in presentational and container compnents. This greate [article](https://www.fullstackreact.com/p/using-presentational-and-container-components-with-redux/) is describing it why and how. For that purpose we have the `components` and `containers` folders.
 
-All @redux@ related files are in the @store@ folder. You can find more about redux [here](http://redux.js.org/docs/introduction/).
+All `redux` related files are in the `store` folder. You can find more about redux [here](http://redux.js.org/docs/introduction/).
 
-The folders @locales@ and @themes@ are used to store data for different locales and themes.
+The folders `locales` and `themes` are used to store data for different locales and themes.
 
 ## Usage
 
@@ -112,15 +109,15 @@ To just run the project on you won device you should have installed: git, node a
 
 Now in your concole go to the destionation where you want to save the project and run this command:
 
-@@@js
+```js
 git clone https://github.com/TarikHuber/react-most-wanted
-@@@
+```
 
 or
 
-@@@js
+```js
 git clone https://github.com/TarikHuber/react-most-wanted my_project
-@@@
+```
 
 if you want to save the project into a specific folder (inthis example "my_project"). The folder must be empty!
 
@@ -128,15 +125,15 @@ Now go with the console into the folder. If you havn't provided a name like "my_
 
 In he folder run this command to start the develeoplemt mode of the project:
 
-@@@js
+```js
 npm run dev
-@@@
+```
 
 For publishing run:
 
-@@@js
+```js
 npm run build
-@@@
+```
 
 After it finished folloe the instructions or publish the project build folder to your prefered  provider or own server.
 
@@ -148,19 +145,19 @@ After cloning the repo into your own you should change the configurations like p
 * **package.json**  - here you should change the name and version
 * **src/config.js**  - here you should change all firebase data and other options
 * **public/index.html**  - change the title (it will be overriden but it looks better)
-* **public/firebase-messaging-sw.js**  - change the @@messagingSenderId@@
+* **public/firebase-messaging-sw.js**  - change the ``messagingSenderId``
 
 
-After setting up the code we need to deploy our application to firebase. As first create an application biuld with runing @npm run build@.
+After setting up the code we need to deploy our application to firebase. As first create an application biuld with runing `npm run build`.
 
-To use firebase we need to install the firebase tools by running @npm install -g firebase-tools@ and after that login to firebase with @firebase login@.
+To use firebase we need to install the firebase tools by running `npm install -g firebase-tools` and after that login to firebase with `firebase login`.
 
-After the login run @fribease init@ to setup the firebase project. Override the existing project and select yours from your firebase console.
+After the login run `fribease init` to setup the firebase project. Override the existing project and select yours from your firebase console.
 Override only the '.firebasesrc' file and leave the other as they are because the database and storage rules, functions and firebase settings should stay as they are. If you override them the project would probably not work as it should.
 
-Don't forget to setup the email configs into the firebase functions using @firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"@.
+Don't forget to setup the email configs into the firebase functions using `firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"`.
 
-You should now be able to deploy your application to your firebase using @firebase deploy@.
+You should now be able to deploy your application to your firebase using `firebase deploy`.
 
 
 ##Customatisation
@@ -171,7 +168,7 @@ Internationalization is very importand. Even if you use just a single language y
 
 The only thing you'll have to do to add a new language is that you have to add the localisationData in the locales [index.js](https://github.com/TarikHuber/react-most-wanted/blob/master/src/locales/index.js) folder like in the code sniped below. Here we add the language fr to the project:
 
-@@@js
+```js
 
 import fr from 'react-intl/locale-data/fr';
 import fr_messages from './fr';
@@ -202,7 +199,7 @@ const locales = [
 
 ]
 
-@@@
+```
 
 We also need to create a file 'fr.js' into the 'locales' fodler. I would recommend to juts copy the 'en.js' file and to translate the strings.
 
@@ -214,7 +211,7 @@ To change or to add a new theme you would habe to add or edit a theme file into 
 
 FOr example we crate a file 'my_theme.js' and change the 'index.j' file like below. You can use the 'ics_theme' as bootstrapp for new projects or get a new one from the offical 'material-ui' documentation.
 
-@@@js
+```js
 
 import ics_theme from './ics_theme';
 import my_theme from './my_theme';
@@ -238,7 +235,7 @@ const themes= [
   },
 ];
 
-@@@
+```
 
 ### Firebase lists
 
@@ -247,16 +244,16 @@ First of all ist to crete a component that will represent the list. You can use 
 
 In that you should change folowing code parts to make it work:
 
-@@@js
+```js
 //....code before
 const actions = new ListActions('your_list').createActions();
 //....code after
 
-@@@
+```
 
 And in the folder 'store' you should add the generated reducers into the 'reducers.js' file, like this
 
-@@@js
+```js
 //....code before
 const reducers = combineReducers({
   browser: responsiveStateReducer,
@@ -275,11 +272,11 @@ const reducers = combineReducers({
 })
 //....code after
 
-@@@
+```
 
 That is all you have to do to add a new list. It is up to you how the lists will be presented. Just don't forget to leave into the mounting and unmounting part of you component following code parts:
 
-@@@js
+```js
 //....code before
 componentDidMount() {
   const {initialiseList}=this.props;
@@ -292,7 +289,7 @@ componentWillUnmount() {
 }
 //....code after
 
-@@@
+```
 
 They are initialising the list and unsubscribing from it if we leave the component. You can add other code to those functions or move thos calls on other places of your component life cycle if you wish.
 
@@ -300,14 +297,48 @@ They are initialising the list and unsubscribing from it if we leave the compone
 
 To change the drawer (left menu) width go to the 'config.js' file and change the value of  'drawer_width' :)
 
+### Authorisation
+
+Authentication and authorisation are not the same thing! With authentication we identify who we have as user and with athorisation we identify what that user can do in our application. In this project authorisation is managed over `grants` and `roles`. Every grant gives the user the authorisation to do a specific action (read, create, edit or delete) in the database. Roles are defining a group of grants you can give a user. They are just for managing large number of grants easely. Every grant can still be managed seperately.
+
+Only administrators have access to add or remove grants and roles to a user. Only administrators can make other users to administrators.
+
+**WARNING:** In this demo the rules are manipulated that everyone can make other users to admins and even himselfe. So everyone can see how it works. In production there should be made a change in the database.rules file.
+
+From:
+
+```js
+"admins":{
+  ".read": "auth != null",
+  "$uid":{
+    ".write": "auth != null || root.child('admins/'+auth.uid).exists()"
+  }
+},
+
+```
+
+To:
+
+```js
+"admins":{
+  ".read": "auth != null",
+  "$uid":{
+    ".write": "auth != null && root.child('admins/'+auth.uid).exists()"
+  }
+},
+
+```
+
 
 
 ## TO DO
 
 - [X] implement all or most firebase functionalities
-- [ ] finish tests
-- [ ] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
+- [X] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
+- [X] implement code splitting
+- [X] implement continuous integration
 - [ ] update to material-ui@next
+- [ ] finish tests
 
 ## License
 
@@ -315,7 +346,7 @@ MIT
 
 ## Logo
 
-Thanks to SiradDev for creating the logo for this project :)
+Thanks to @SiradDev for creating the logo for this project :)
 
 [logo-image]: https://www.react-most-wanted.com/favicon-32x32.png
 [logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md
@@ -329,4 +360,3 @@ Thanks to SiradDev for creating the logo for this project :)
 [license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
 [code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [code-style-url]: http://standardjs.com/
-`.trim().split("@").join("`");
