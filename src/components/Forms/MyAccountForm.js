@@ -133,7 +133,7 @@ class MyAccountForm extends Component {
                   component={TextField}
                   fullWidth={true}
                   hintText={intl.formatMessage({id: 'password'})}
-                  floatingLabelText={intl.formatMessage({id: 'new_password'})}
+                  floatingLabelText={intl.formatMessage({id: 'password'})}
                   ref="new_password"
                   withRef
                 />
