@@ -1,9 +1,11 @@
 import {addLocaleData} from 'react-intl';
 import en_messages from './en';
 import de_messages from './de';
+import ru_messages from './ru';
 import bs_messages from './bs';
 import en from 'react-intl/locale-data/en';
 import de from 'react-intl/locale-data/de';
+import ru from 'react-intl/locale-data/ru';
 import bs from 'react-intl/locale-data/bs';
 
 var areIntlLocalesSupported = require('intl-locales-supported');
