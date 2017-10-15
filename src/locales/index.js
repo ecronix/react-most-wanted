@@ -49,6 +49,11 @@ const locales = [
     messages: bs_messages,
     data: bs
   },
+  {
+    locale: 'ru',
+    messages: ru_messages,
+    data: ru
+  },
 
 ]
 
