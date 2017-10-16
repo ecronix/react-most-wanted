@@ -8,5 +8,8 @@
     "glob": "^7.1.2",
     "nodemailer": "^4.2.0"
   },
-  "private": true
+  "private": true,
+  "scripts": {
+    "check": "npm-check -s -u"
+  }
 }
