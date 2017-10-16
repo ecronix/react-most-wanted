@@ -199,36 +199,38 @@ class Tasks extends Component {
             />
           </div>
 
-
-          {tasks &&
-            <BottomNavigation style={{width: '100%', position: 'absolute', bottom: 0, right: 0, left: 0, zIndex: 50}}>
-              <div style={{display:'flex', alignItems: 'center', justifyContent: 'center', padding: 15 }}>
-                <TextField
-                  id="public_task"
-                  fullWidth={true}
-                  onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
-                  ref={(field) => { this.name = field; this.name && this.name.focus(); }}
-                  type="Text"
-                />
-                <IconButton
-                  onClick={this.handleAddTask}>
-                  <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
-                </IconButton>
-              </div>
-            </BottomNavigation>
-          }
-
-          <Dialog
-            title={intl.formatMessage({id: 'delete_task_title'})}
-            actions={actions}
-            modal={false}
-            open={dialogs.delete_task_from_list!==undefined}
-            onRequestClose={this.handleClose}>
-            {intl.formatMessage({id: 'delete_task_message'})}
-          </Dialog>
-
-
         </Scrollbar>
+
+
+        {tasks &&
+          <BottomNavigation style={{width: '100%', position: 'absolute', bottom: 0, right: 0, left: 0, zIndex: 50}}>
+            <div style={{display:'flex', alignItems: 'center', justifyContent: 'center', padding: 15 }}>
+              <TextField
+                id="public_task"
+                fullWidth={true}
+                onKeyDown={(event)=>{this.handleKeyDown(event, this.handleAddTask)}}
+                ref={(field) => { this.name = field; this.name && this.name.focus(); }}
+                type="Text"
+              />
+              <IconButton
+                onClick={this.handleAddTask}>
+                <FontIcon className="material-icons" color={muiTheme.palette.primary1Color}>send</FontIcon>
+              </IconButton>
+            </div>
+          </BottomNavigation>
+        }
+
+        <Dialog
+          title={intl.formatMessage({id: 'delete_task_title'})}
+          actions={actions}
+          modal={false}
+          open={dialogs.delete_task_from_list!==undefined}
+          onRequestClose={this.handleClose}>
+          {intl.formatMessage({id: 'delete_task_message'})}
+        </Dialog>
+
+
+
 
       </Activity>
     );
