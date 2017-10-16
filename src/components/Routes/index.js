@@ -1,1 +1,1 @@
-export { default as Routes } from './Routes.js';
+export { default as Routes } from './Routes.js'

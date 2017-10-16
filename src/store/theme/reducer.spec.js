@@ -1,8 +1,8 @@
-import { Reducer } from 'redux-testkit';
+import { Reducer } from 'redux-testkit'
 import reducer from './reducer'
-import {updateTheme} from './actions';
+import {updateTheme} from './actions'
 
-const initialState='light';
+const initialState = 'light'
 
 describe('locale reducer', () => {
   it('should return the initial state', () => {
@@ -12,14 +12,11 @@ describe('locale reducer', () => {
   })
 
   it('should not affect state', () => {
-    Reducer(reducer).expect({type: 'NOT_EXISTING'}).toReturnState(initialState);
-  });
-
-  it('should handle UPDATE_THEME', () => {
-
-    const theme='dark';
-    Reducer(reducer).expect(updateTheme(theme)).toReturnState(theme)
-
+    Reducer(reducer).expect({type: 'NOT_EXISTING'}).toReturnState(initialState)
   })
 
+  it('should handle UPDATE_THEME', () => {
+    const theme = 'dark'
+    Reducer(reducer).expect(updateTheme(theme)).toReturnState(theme)
+  })
 })

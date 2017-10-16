@@ -6,7 +6,8 @@
     "enzyme": "^3.1.0",
     "react-scripts": "1.0.14",
     "redux-logger": "^3.0.6",
-    "redux-testkit": "^1.0.6"
+    "redux-testkit": "^1.0.6",
+    "standard": "^10.0.3"
   },
   "dependencies": {
     "chart.js": "^2.7.0",
@@ -56,6 +57,7 @@
     "check": "npm-check -s -u",
     "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
+    "standard": "standard src/**/*.js ",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --collectCoverageFrom=src/store/**/*js --collectCoverageFrom=!src/store/*js",
     "eject": "react-scripts eject"

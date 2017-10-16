@@ -1,1 +1,1 @@
-export const UPDATE_THEME = 'theme.UPDATE_THEME';
+export const UPDATE_THEME = 'theme.UPDATE_THEME'

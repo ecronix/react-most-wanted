@@ -1,9 +1,8 @@
-import {getThemeSource}  from './index';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import ics_theme from './ics_theme';
+import {getThemeSource} from './index'
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
+import ics_theme from './ics_theme'
 
 describe('locales', () => {
-
   it('should return theme source', () => {
     expect(
       getThemeSource('ics')
@@ -15,6 +14,4 @@ describe('locales', () => {
       getThemeSource('themeX')
     ).toEqual(lightBaseTheme)
   })
-
-
 })

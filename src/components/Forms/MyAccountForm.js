@@ -9,10 +9,9 @@ import IconButton from 'material-ui/IconButton'
 import config from '../../config'
 import { AvatarImageField } from '../ReduxFormFields'
 
-
 class MyAccountForm extends Component {
 
-  render() {
+  render () {
     const {
       handleSubmit,
       intl,
@@ -25,7 +24,7 @@ class MyAccountForm extends Component {
       linkUserWithPopup,
       getProviderIcon,
       handleEmailVerificationsSend,
-      handlePhotoUploadSuccess,
+      handlePhotoUploadSuccess
     } = this.props
 
     const uid = auth.uid
@@ -40,27 +39,27 @@ class MyAccountForm extends Component {
         justifyContent: 'center'
       }}>
 
-      <div style={{margin: 15, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <AvatarImageField
-          uid={uid}
-          change={this.props.change}
-          initialized={initialized}
-          intl={intl}
-          path={'users'}/>
+        <div style={{margin: 15, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+          <AvatarImageField
+            uid={uid}
+            change={this.props.change}
+            initialized={initialized}
+            intl={intl}
+            path={'users'} />
 
           <div>
             {
-              config.firebase_providers.map((p, i)=>{
-                if(p.PROVIDER_ID!=='email' && p.PROVIDER_ID!=='password' && p.PROVIDER_ID!=='phone'){
+              config.firebase_providers.map((p, i) => {
+                if (p.PROVIDER_ID !== 'email' && p.PROVIDER_ID !== 'password' && p.PROVIDER_ID !== 'phone') {
                   return <IconButton
                     key={i}
                     disabled={isLinkedWithProvider(p)}
-                    onClick={()=>{linkUserWithPopup(p)}}
+                    onClick={() => { linkUserWithPopup(p) }}
                     tooltip={intl.formatMessage({id: `link_with_${p.PROVIDER_ID}`})}>
                     {getProviderIcon(p)}
                   </IconButton>
-                }else{
-                  return <div key={i}></div>
+                } else {
+                  return <div key={i} />
                 }
               })
             }
@@ -70,13 +69,13 @@ class MyAccountForm extends Component {
         <div>
           <div>
             <Field
-              name="displayName"
+              name='displayName'
               disabled={!initialized}
               component={TextField}
-              fullWidth={true}
+              fullWidth
               hintText={intl.formatMessage({id: 'name_hint'})}
               floatingLabelText={intl.formatMessage({id: 'name_label'})}
-              ref="displayName"
+              ref='displayName'
               withRef
             />
           </div>
@@ -84,25 +83,25 @@ class MyAccountForm extends Component {
           <div style={{display: 'flex', alignItems: 'flex-end', flexWrap: 'wrap'}}>
             <div>
               <Field
-                name="email"
+                name='email'
                 disabled={!initialized}
                 component={TextField}
                 hintText={intl.formatMessage({id: 'email'})}
                 floatingLabelText={intl.formatMessage({id: 'email'})}
-                ref="email"
+                ref='email'
                 withRef
               />
             </div>
 
             <div>
               <IconButton
-                onClick={auth.emailVerified===true?undefined:handleEmailVerificationsSend}
-                tooltip={intl.formatMessage({id: auth.emailVerified===true?'email_verified':'email_not_verified'})}>
+                onClick={auth.emailVerified === true ? undefined : handleEmailVerificationsSend}
+                tooltip={intl.formatMessage({id: auth.emailVerified === true ? 'email_verified' : 'email_not_verified'})}>
                 <FontIcon
-                  color={auth.emailVerified===true?muiTheme.palette.primary1Color:muiTheme.palette.accent1Color}
+                  color={auth.emailVerified === true ? muiTheme.palette.primary1Color : muiTheme.palette.accent1Color}
                   style={{'paddingLeft': 10}}
-                  className="material-icons">
-                  {auth.emailVerified===true?'verified_user':'error'}
+                  className='material-icons'>
+                  {auth.emailVerified === true ? 'verified_user' : 'error'}
                 </FontIcon>
               </IconButton>
             </div>
@@ -113,42 +112,42 @@ class MyAccountForm extends Component {
             <div>
               <div>
                 <Field
-                  name="old_password"
+                  name='old_password'
                   disabled={!initialized}
-                  type="Password"
+                  type='Password'
                   component={TextField}
-                  fullWidth={true}
+                  fullWidth
                   hintText={intl.formatMessage({id: 'password'})}
                   floatingLabelText={intl.formatMessage({id: 'password'})}
-                  ref="old_password"
+                  ref='old_password'
                   withRef
                 />
               </div>
 
               <div>
                 <Field
-                  name="new_password"
+                  name='new_password'
                   disabled={!initialized}
-                  type="Password"
+                  type='Password'
                   component={TextField}
-                  fullWidth={true}
+                  fullWidth
                   hintText={intl.formatMessage({id: 'password'})}
                   floatingLabelText={intl.formatMessage({id: 'new_password'})}
-                  ref="new_password"
+                  ref='new_password'
                   withRef
                 />
               </div>
 
               <div>
                 <Field
-                  name="new_password_confirmation"
+                  name='new_password_confirmation'
                   disabled={!initialized}
-                  type="Password"
+                  type='Password'
                   component={TextField}
-                  fullWidth={true}
+                  fullWidth
                   hintText={intl.formatMessage({id: 'confirm_password'})}
                   floatingLabelText={intl.formatMessage({id: 'confirm_password'})}
-                  ref="new_password_confirmation"
+                  ref='new_password_confirmation'
                   withRef
                 />
               </div>
@@ -159,14 +158,14 @@ class MyAccountForm extends Component {
         <ImageCropDialog
           path={`users/${uid}`}
           fileName={`photoURL`}
-          onUploadSuccess={(s)=>{handlePhotoUploadSuccess(s) }}
-          open={new_company_photo!==undefined}
+          onUploadSuccess={(s) => { handlePhotoUploadSuccess(s) }}
+          open={new_company_photo !== undefined}
           src={new_company_photo}
-          handleClose={()=>{setSimpleValue('new_company_photo',undefined)}}
+          handleClose={() => { setSimpleValue('new_company_photo', undefined) }}
           title={intl.formatMessage({id: 'change_photo'})}
         />
       </form>
-    );
+    )
   }
 }
 
@@ -182,7 +181,7 @@ MyAccountForm.propTypes = {
   isLinkedWithProvider: PropTypes.func.isRequired,
   linkUserWithPopup: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
-  auth: PropTypes.object.isRequired,
-};
+  auth: PropTypes.object.isRequired
+}
 
 export default reduxForm({form: 'my_account'})(MyAccountForm)
