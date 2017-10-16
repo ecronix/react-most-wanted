@@ -41,11 +41,11 @@ class ChatMessages extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {uid: currentUid, destroyPath, path, auth} =this.props;
-    const {uid: nextUid, auth: nextAuth} =nextProps;
+    const {unwatchList, path} =this.props;
+    const {path: nextPath} =nextProps;
 
-    if(currentUid!==nextUid || auth.uid!==nextAuth.uid){
-      destroyPath(path);
+    if(path!==nextPath){
+      unwatchList(path);
       this.initMessages(nextProps);
     }
 
@@ -121,7 +121,7 @@ class ChatMessages extends Component {
 
 
   renderList(messages) {
-    const { auth, intl, muiTheme} = this.props;
+    const { auth, intl, muiTheme, history} = this.props;
 
     let currentDate='';
     let currentAuthor='';
@@ -201,6 +201,13 @@ class ChatMessages extends Component {
                 whiteSpace: 'pre-wrap',
                 overflowWrap: 'break-word',
                 fontFamily: muiTheme.fontFamily}}>
+                {values.authorUid!==auth.uid &&
+                  <div
+                    onClick={()=>{history.push(`/chats/edit/${values.authorUid}`)}}
+                    style={{color: muiTheme.palette.accent1Color, fontSize: 12, marginLeft: 0, cursor: 'pointer'}}>
+                    {values.authorName}
+                  </div>
+                }
                 {
                   type === 'location' &&
                   <div style={{padding: 7}}>
@@ -400,6 +407,7 @@ render(){
             style={{height:42, width: 'calc(100% - 72px)', lineHeight: undefined}}
             underlineShow={false}
             fullWidth={true}
+            autocomplete="off"
             hintText={intl.formatMessage({id:'write_message_hint'})}
             onKeyDown={(event)=>{this.handleKeyDown(event, () => this.handleAddMessage("text", this.name.getValue()))}}
             ref={(field) => { this.name = field}}
@@ -474,9 +482,8 @@ ChatMessages.propTypes = {
 
 const mapStateToProps = (state, ownPops) => {
   const { lists, auth, browser, simpleValues } = state;
-  const { uid } = ownPops;
+  const { uid, path } = ownPops;
 
-  const path=`user_chat_messages/${auth.uid}/${uid}`
   const chatMessageMenuOpen = simpleValues['chatMessageMenuOpen']===true
   const imageDialogOpen = simpleValues.chatOpenImageDialog;
 

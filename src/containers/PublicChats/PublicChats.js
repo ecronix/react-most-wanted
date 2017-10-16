@@ -7,7 +7,7 @@ import { setSimpleValue } from '../../store/simpleValues/actions';
 import { Activity } from '../../containers/Activity';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from 'firekit-provider'
-import ChatMessages from './ChatMessages';
+import { ChatMessages } from '../../containers/ChatMessages';
 
 class Chat extends Component {
 
@@ -19,7 +19,7 @@ class Chat extends Component {
         containerStyle={{overflow:'hidden', backgroundColor: muiTheme.chip.backgroundColor}}
         title={intl.formatMessage({id: 'public_chats'})}>
 
-        <ChatMessages />
+        <ChatMessages path={'public_chats'}/>
 
       </Activity>
     );

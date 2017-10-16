@@ -13,7 +13,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FontIcon from 'material-ui/FontIcon';
 import PropTypes from 'prop-types';
 import { setPersistentValue } from '../../store/persistentValues/actions';
-import ChatMessages from './ChatMessages';
+import { ChatMessages } from '../../containers/ChatMessages';
 import Scrollbar from '../../components/Scrollbar/Scrollbar';
 import { filterSelectors } from 'material-ui-filter'
 
@@ -93,7 +93,8 @@ class Chats extends Component {
       list,
       history,
       currentChatUid,
-      usePreview
+      usePreview,
+      auth
     } = this.props;
 
     const isDisplayingMessages=usePreview && currentChatUid;
@@ -135,7 +136,7 @@ class Chats extends Component {
 
         <div style={{marginLeft: 0, flexGrow: 1}}>
           {isDisplayingMessages &&
-            <ChatMessages uid={currentChatUid} />
+            <ChatMessages path={`user_chat_messages/${auth.uid}/${currentChatUid}`} />
           }
         </div>
         <div

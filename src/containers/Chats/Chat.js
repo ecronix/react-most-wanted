@@ -9,7 +9,7 @@ import FontIcon from 'material-ui/FontIcon';
 import Avatar from 'material-ui/Avatar';
 import { withRouter } from 'react-router-dom';
 import { withFirebase } from 'firekit-provider'
-import ChatMessages from './ChatMessages';
+import { ChatMessages } from '../../containers/ChatMessages';
 
 
 class Chat extends Component {
@@ -20,7 +20,7 @@ class Chat extends Component {
   }
 
 render(){
-  const {messages, muiTheme, history, receiverDisplayName, receiverPhotoURL, uid} =this.props;
+  const {messages, muiTheme, history, receiverDisplayName, receiverPhotoURL, path} =this.props;
 
   return (
     <Activity
@@ -47,7 +47,7 @@ render(){
         </div>
       </div>}>
 
-      <ChatMessages uid={uid}/>
+      <ChatMessages path={path}/>
 
   </Activity>
 );
@@ -84,6 +84,7 @@ const mapStateToProps = (state, ownPops) => {
 
   return {
     uid,
+    path,
     receiverDisplayName,
     receiverPhotoURL,
     chatsPath,
