@@ -12,7 +12,7 @@ import {withRouter} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import { withFirebase } from 'firekit-provider'
 import isGranted  from '../../utils/auth';
-
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
 
 class Companies extends Component {
 
@@ -67,7 +67,7 @@ class Companies extends Component {
         containerStyle={{overflow:'hidden'}}
         title={intl.formatMessage({id: 'companies'})}>
 
-        <div id="scroller" style={{overflow: 'auto', height: '100%'}}>
+        <Scrollbar>
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor}}>
             <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
@@ -83,7 +83,7 @@ class Companies extends Component {
               </FloatingActionButton>
           }
           </div>
-      </div>
+      </Scrollbar>
     </Activity>
   );
 

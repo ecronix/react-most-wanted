@@ -19,6 +19,7 @@ import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { withFirebase } from 'firekit-provider'
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
 
 class Tasks extends Component {
 
@@ -187,7 +188,7 @@ class Tasks extends Component {
         containerStyle={{overflow:'hidden'}}
         title={intl.formatMessage({id: 'tasks'})}>
 
-        <div id="scroller" style={{overflow: 'auto', height: '100%'}}>
+        <Scrollbar>
 
           <div style={{overflow: 'none', backgroundColor: muiTheme.palette.convasColor, paddingBottom: 56}}>
             <List  id='test' style={{height: '100%'}} ref={(field) => { this.list = field; }}>
@@ -227,7 +228,7 @@ class Tasks extends Component {
           </Dialog>
 
 
-        </div>
+        </Scrollbar>
 
       </Activity>
     );

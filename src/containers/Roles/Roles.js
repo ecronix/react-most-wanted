@@ -4,12 +4,14 @@ import {injectIntl, intlShape} from 'react-intl';
 import { Activity } from '../../containers/Activity';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import { withFirebase } from 'firekit-provider'
+import { withFirebase } from 'firekit-provider';
 import { withRouter } from 'react-router-dom';
 import ReactList from 'react-list';
 import Avatar from 'material-ui/Avatar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FontIcon from 'material-ui/FontIcon';
+import Scrollbar from '../../components/Scrollbar/Scrollbar';
+
 
 const path=`roles`;
 
@@ -24,10 +26,10 @@ class Roles extends Component {
   handleCreateClick = () => {
     const { firebaseApp, history} =this.props;
 
-    const newRole=firebaseApp.database().ref(`${path}`).push();
+    const newRole=firebaseApp.database().ref(`/${path}`).push();
 
     newRole.update({description: ' '}).then(()=>{
-      history.push(`${path}/edit/${newRole.key}`);
+      history.push(`/${path}/edit/${newRole.key}`);
     })
 
   }
@@ -47,7 +49,7 @@ class Roles extends Component {
             icon={<FontIcon className="material-icons" >account_box</FontIcon>}
           />
         }
-        onClick={()=>{history.push(`${path}/edit/${key}`)}}
+        onClick={()=>{history.push(`/${path}/edit/${key}`)}}
         key={key}
         id={key}
         primaryText={val.name}
@@ -66,14 +68,16 @@ class Roles extends Component {
         isLoading={list===undefined}
         title={intl.formatMessage({id: 'roles'})}>
 
-        <div >
-          <List style={{height: '100%'}} ref={(field) => { this.list = field; }}>
-            <ReactList
-              itemRenderer={this.renderItem}
-              length={list?list.length:0}
-              type='simple'
-            />
-          </List>
+        <div style={{height: '100%'}}>
+          <Scrollbar>
+            <List ref={(field) => { this.list = field; }}>
+              <ReactList
+                itemRenderer={this.renderItem}
+                length={list?list.length:0}
+                type='simple'
+              />
+            </List>
+          </Scrollbar>
           <div
             style={{ float:"left", clear: "both" }}
           />
