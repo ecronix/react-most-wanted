@@ -139,7 +139,7 @@ const messages=defineMessages({
   edit_user: 'Редактирование пользователя',
   firestore: ' Фиресторе',
   hot_dog_status: 'Статус хот-дога',
-  user_label_search: 'Поиск пользователя',
+  user_label_search: 'Поиск людей',
   document: 'Документ',
   collection: 'Коллекция',
 
