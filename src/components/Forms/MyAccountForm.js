@@ -50,12 +50,12 @@ class MyAccountForm extends Component {
           <div>
             {
               config.firebase_providers.map((p, i) => {
-                if (p.PROVIDER_ID !== 'email' && p.PROVIDER_ID !== 'password' && p.PROVIDER_ID !== 'phone') {
+                if (p !== 'email' && p !== 'password' && p !== 'phone') {
                   return <IconButton
                     key={i}
                     disabled={isLinkedWithProvider(p)}
                     onClick={() => { linkUserWithPopup(p) }}
-                    tooltip={intl.formatMessage({id: `link_with_${p.PROVIDER_ID}`})}>
+                    tooltip={intl.formatMessage({id: `link_with_${p}`})}>
                     {getProviderIcon(p)}
                   </IconButton>
                 } else {

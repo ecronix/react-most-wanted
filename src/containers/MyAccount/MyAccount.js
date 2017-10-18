@@ -23,11 +23,11 @@ const form_name='my_account'
 
 class MyAccount extends Component {
 
-  getProviderIcon = (provider) => {
+  getProviderIcon = (p) => {
     const { muiTheme } = this.props
     const color = muiTheme.palette.primary2Color
 
-    switch (provider.PROVIDER_ID) {
+    switch (p) {
       case 'google.com':
       return <GoogleIcon color={color}/>
 
@@ -115,16 +115,9 @@ class MyAccount extends Component {
   isLinkedWithProvider = (provider) => {
     const { auth } = this.props;
 
-    let providerId = ''
-
-    if (typeof provider === 'string' || provider instanceof String) {
-      providerId = provider
-    } else {
-      providerId = provider.PROVIDER_ID
-    }
 
     try {
-      return auth && auth.providerData && auth.providerData.find((p)=>{return p.providerId===providerId})!==undefined;
+      return auth && auth.providerData && auth.providerData.find((p)=>{return p.providerId===provider})!==undefined;
     } catch(e) {
       return false;
     }
@@ -133,7 +126,7 @@ class MyAccount extends Component {
   linkUserWithPopup = (provider) => {
     const { firebaseApp, authError, authStateChanged } =this.props;
 
-    firebaseApp.auth().currentUser.linkWithPopup(this.getProvider(provider.PROVIDER_ID))
+    firebaseApp.auth().currentUser.linkWithPopup(this.getProvider(provider))
     .then((payload) => {
       authStateChanged(firebaseApp.auth().currentUser);
     }, e=>{authError(e)})
