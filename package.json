@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.0",
-    "firebase": "^4.5.1",
+    "firebase": "^4.5.2",
     "firebaseui": "^2.4.0",
     "fireform": "^0.2.11",
     "firekit": "^0.2.14",
@@ -39,7 +39,7 @@
     "react-infinite": "^0.12.1",
     "react-intl": "^2.4.0",
     "react-list": "^0.8.8",
-    "react-loadable": "^5.2.2",
+    "react-loadable": "^5.2.4",
     "react-markdown": "^2.5.0",
     "react-materialui-notifications": "^0.5.1",
     "react-redux": "^5.0.6",
