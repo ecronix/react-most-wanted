@@ -48,7 +48,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.1",
     "redux-form-material-ui": "^4.3.0",
-    "redux-persist": "^4.10.1",
+    "redux-persist": "^5.0.1",
     "redux-responsive": "^4.3.4",
     "redux-thunk": "^2.2.0",
     "source-map-explorer": "^1.5.0"

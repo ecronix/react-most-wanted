@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
-import { persistStore, autoRehydrate } from 'redux-persist'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
 import { responsiveStoreEnhancer } from 'redux-responsive'
 import config from '../config'
 
@@ -36,21 +37,28 @@ export default function configureStore () {
 
   const composeEnhancers =
   typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-    }) : compose
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+  }) : compose
 
   const enhancer = composeEnhancers(
-  applyMiddleware(...middlewares),
-  autoRehydrate(),
-  responsiveStoreEnhancer
-)
+    applyMiddleware(...middlewares),
+    responsiveStoreEnhancer
+  )
 
-  store = createStore(reducers, initState, enhancer)
+  const persistorConfig = {
+    key: 'root',
+    storage,
+    blacklist: ['auth', 'form', 'connection', 'initialization', 'messaging']
+  }
+
+  const reducer = persistReducer(persistorConfig, reducers)
+
+  store = createStore(reducer, initState, enhancer)
 
   try {
-    persistStore(store, {blacklist: ['auth', 'form', 'connection', 'initialization', 'messaging'] }, () => {})
+    persistStore(store)
   } catch (e) {
 
   }
