@@ -22,7 +22,6 @@ const DrawerContent = (props, context) => {
     auth,
     dialogs,
     match,
-    setDialogIsOpen,
     messaging,
     isGranted
   }=props;
