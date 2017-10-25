@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { setResponsive, setDrawerOpen } from 'material-ui-responsive-drawer';
-import { updateTheme } from '../../store/theme/actions';
-import { updateLocale } from '../../store/locale/actions';
-import { DrawerContent } from '../../components/Drawer';
-import { setDialogIsOpen } from '../../store/dialogs/actions';
-import isGranted, {isAnyGranted}  from '../../utils/auth';
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { setResponsive, setDrawerOpen } from 'material-ui-responsive-drawer'
+import { updateTheme } from '../../store/theme/actions'
+import { updateLocale } from '../../store/locale/actions'
+import { DrawerContent } from '../../components/Drawer'
+import { setDialogIsOpen } from '../../store/dialogs/actions'
+import isGranted, {isAnyGranted} from '../../utils/auth'
+import { userLogout } from '../../store/auth/actions'
 
 DrawerContent.propTypes = {
   responsiveDrawer: PropTypes.object.isRequired,
@@ -14,11 +15,11 @@ DrawerContent.propTypes = {
   setResponsive: PropTypes.func.isRequired,
   setDrawerOpen: PropTypes.func.isRequired,
   updateTheme: PropTypes.func.isRequired,
-  updateLocale: PropTypes.func.isRequired,
-};
+  updateLocale: PropTypes.func.isRequired
+}
 
 const mapStateToProps = (state) => {
-  const { responsiveDrawer, theme, locale, auth, dialogs, messaging } = state;
+  const { responsiveDrawer, theme, locale, auth, dialogs, messaging } = state
 
   return {
     responsiveDrawer,
@@ -27,12 +28,12 @@ const mapStateToProps = (state) => {
     auth,
     dialogs,
     messaging,
-    isGranted: grant=>isGranted(state, grant),
-    isAnyGranted: grants=>isAnyGranted(state, grants)
-  };
-};
+    isGranted: grant => isGranted(state, grant),
+    isAnyGranted: grants => isAnyGranted(state, grants)
+  }
+}
 
 export default connect(
   mapStateToProps,
-  {setResponsive, setDrawerOpen, updateTheme, updateLocale, setDialogIsOpen}
-)(DrawerContent);
+  {setResponsive, setDrawerOpen, updateTheme, updateLocale, setDialogIsOpen, userLogout}
+)(DrawerContent)

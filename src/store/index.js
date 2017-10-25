@@ -5,29 +5,12 @@ import reducers from './reducers'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
 import { responsiveStoreEnhancer } from 'redux-responsive'
-import config from '../config'
+import initState from './init'
 
 export default function configureStore () {
   let store
 
-  const logger = createLogger({
-
-  })
-
-  const isAuthorised = () => {
-    try {
-      const key = Object.keys(localStorage).find(e => e.match(/firebase:authUser/))
-      const data = JSON.parse(localStorage.getItem(key))
-      return data != null
-    } catch (ex) {
-      return false
-    }
-  }
-
-  const initState = {
-    auth: { isAuthorised: isAuthorised() },
-    ...config.initial_state
-  }
+  const logger = createLogger({})
 
   let middlewares = [thunk]
 

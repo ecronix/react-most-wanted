@@ -5,7 +5,6 @@ import FontIcon from 'material-ui/FontIcon';
 import Toggle from 'material-ui/Toggle';
 import allThemes from '../../themes';
 import allLocales from '../../locales';
-//import firebase from 'firebase';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 
@@ -199,6 +198,7 @@ const DrawerContent = (props, context) => {
   ];
 
   const handleSignOut = () =>{
+    const { userLogout, setDialogIsOpen } = props;
 
     import('../../firebase').then(({firebaseApp}) => {
       this.firebaseApp=firebaseApp
@@ -207,6 +207,7 @@ const DrawerContent = (props, context) => {
       firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/notificationTokens/${messaging.token}`).remove();
       firebaseApp.database().ref(`users/${firebaseApp.auth().currentUser.uid}/lastOnline`).set(new Date());
       firebaseApp.auth().signOut().then(()=>{setDialogIsOpen('auth_menu', false);});
+      userLogout();
 
     })
 
