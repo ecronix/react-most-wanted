@@ -20,7 +20,7 @@ I tried to make the project as clean as possible and to use all libraries in the
 - [Usage](#usage)
   - [Simple run](#simple-run)
   - [Reuse for own project](#reuse-for-own-project)
-- [Customatisation](#customatisation)
+- [Customization](#customization)
   - [Internationalization](#internationalization)
   - [Theming](#theming)
   - [Firebase lists](#firebase-lists)
@@ -160,7 +160,7 @@ Don't forget to setup the email configs into the firebase functions using `fireb
 You should now be able to deploy your application to your Firebase using `firebase deploy`.
 
 
-##Customatisation
+##Customization
 
 ### Internationalization
 
