@@ -9,8 +9,8 @@ import { BodyContainer } from 'material-ui-responsive-drawer';
 import LinearProgress from 'material-ui/LinearProgress';
 import { injectIntl } from 'react-intl';
 import { deepOrange500, darkWhite } from 'material-ui/styles/colors';
-import config from '../../config';
-import { withRouter } from 'react-router-dom';
+import config from '../../config'
+import { withRouter } from 'react-router-dom'
 
 export class Activity extends Component {
 
