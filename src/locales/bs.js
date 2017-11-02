@@ -102,6 +102,7 @@ const messages=defineMessages({
   chats: 'Chats',
   write_message_hint: 'Napisi poruku...',
   load_more_label: 'Vise...',
+  my_location: 'Mojoj lokacija',
   select_user: 'Izaberi korisnika',
   operator_like_label: 'like',
   operator_notlike_label: 'not like',
