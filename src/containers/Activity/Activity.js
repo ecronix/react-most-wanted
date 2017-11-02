@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ResponsiveAppBar } from 'material-ui-responsive-drawer';
 import { Helmet } from 'react-helmet';
@@ -7,7 +7,7 @@ import FontIcon from 'material-ui/FontIcon';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { BodyContainer } from 'material-ui-responsive-drawer';
 import LinearProgress from 'material-ui/LinearProgress';
-import {injectIntl} from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { deepOrange500, darkWhite } from 'material-ui/styles/colors';
 import config from '../../config';
 import { withRouter } from 'react-router-dom';
@@ -16,18 +16,18 @@ export class Activity extends Component {
 
   getIconElementLeft = () => {
 
-    const {onBackClick} = this.props;
+    const { onBackClick } = this.props;
 
-    if(onBackClick){
+    if (onBackClick) {
       return <IconButton>
         <FontIcon className="material-icons" >chevron_left</FontIcon>
       </IconButton>
-    }else {
+    } else {
       return undefined;
     }
   }
 
-  render(){
+  render() {
 
     const {
       muiTheme,
@@ -47,36 +47,36 @@ export class Activity extends Component {
       ...rest
     } = this.props;
 
-    const drawerWidth=config.drawer_width;
+    const drawerWidth = config.drawer_width;
 
-    const bodyContainerStyle={
+    const bodyContainerStyle = {
       backgroundColor: muiTheme.palette.canvasColor,
-      top:64,
+      top: 64,
       bottom: 0,
       overflow: 'auto',
       ...containerStyle
     };
 
-    let headerTitle=''
+    let headerTitle = ''
 
-    if(typeof title === 'string' || title instanceof String){
-      headerTitle=title;
-    }else{
-      headerTitle=pageTitle;
+    if (typeof title === 'string' || title instanceof String) {
+      headerTitle = title;
+    } else {
+      headerTitle = pageTitle;
     }
 
     return (
-      <div style={{backgroundColor: muiTheme.palette.canvasColor, height: '100%'}}>
+      <div style={{ backgroundColor: muiTheme.palette.canvasColor, height: '100%' }}>
         <Helmet>
-          <meta name="theme-color" content={muiTheme.palette.primary1Color}/>
-          <meta name="apple-mobile-web-app-status-bar-style" content={muiTheme.palette.primary1Color}/>
-          <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color}/>
+          <meta name="theme-color" content={muiTheme.palette.primary1Color} />
+          <meta name="apple-mobile-web-app-status-bar-style" content={muiTheme.palette.primary1Color} />
+          <meta name="msapplication-navbutton-color" content={muiTheme.palette.primary1Color} />
           <title>{headerTitle}</title>
         </Helmet>
         <ResponsiveAppBar
           width={drawerWidth}
           title={title}
-          showMenuIconButton={onBackClick!==undefined?true:undefined}
+          showMenuIconButton={onBackClick !== undefined ? true : undefined}
           onLeftIconButtonTouchTap={onBackClick}
           iconElementLeft={this.getIconElementLeft()}
           {...rest}
@@ -85,7 +85,7 @@ export class Activity extends Component {
           <div
             id="offline-inicator"
             style={{
-              zIndex:9999,
+              zIndex: 9999,
               position: 'fixed',
               top: 0,
               height: 12,
@@ -99,13 +99,13 @@ export class Activity extends Component {
 
             }} >
             <span>
-              {intl.formatMessage({id:'no_connection'})}
+              {intl.formatMessage({ id: 'no_connection' })}
             </span>
           </div>
         }
 
         {isLoading &&
-          <LinearProgress mode="indeterminate" color={muiTheme.palette.accent1Color} style={{zIndex:9998, position: 'fixed', top: 0, height: height?height:5}}/>
+          <LinearProgress mode="indeterminate" color={muiTheme.palette.accent1Color} style={{ zIndex: 9998, position: 'fixed', top: 0, height: height ? height : 5 }} />
         }
 
         <BodyContainer width={drawerWidth} id="bodyContainer" ref="bodyContainer" withRef style={bodyContainerStyle} >
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => {
   const { connection, intl } = state;
 
   return {
-    isConnected: connection?connection.isConnected:false,
+    isConnected: connection ? connection.isConnected : false,
     intl
   };
 };
