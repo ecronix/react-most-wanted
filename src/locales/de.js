@@ -102,6 +102,7 @@ const messages=defineMessages({
   chats: 'Chats',
   write_message_hint: 'Eine Nachricht schreiben...',
   load_more_label: 'Mehr...',
+  my_location: 'Mein Standort',
   select_user: 'Benutzer auswählen',
   operator_like_label: 'wie',
   operator_notlike_label: 'nicht wie',
