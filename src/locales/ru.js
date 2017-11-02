@@ -102,6 +102,7 @@ const messages=defineMessages({
   chats: 'Чаты',
   write_message_hint: 'Написать сообщение...',
   load_more_label: 'Больше...',
+  my_location: 'Моё местоположение',
   select_user: 'Выберите пользователя',
   operator_like_label: 'нравиться',
   operator_notlike_label: 'не нравишься',
