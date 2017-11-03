@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Field } from 'redux-form';
-import FontIcon from 'material-ui/FontIcon';
-import { Avatar } from '../../containers/Avatar';
-import FlatButton from 'material-ui/FlatButton';
-import { ImageCropDialog } from '../../containers/ImageCropDialog';
-import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
+import FlatButton from 'material-ui/FlatButton'
+import FontIcon from 'material-ui/FontIcon'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Avatar } from '../../containers/Avatar'
+import { Field } from 'redux-form'
+import { ImageCropDialog } from '../../containers/ImageCropDialog'
+import { intlShape } from 'react-intl'
 
 
 export default class AvatarImageField extends Component {
@@ -17,26 +17,26 @@ export default class AvatarImageField extends Component {
     }
   }
 
-  handlePhotoUploadSuccess = (snapshot) =>{
+  handlePhotoUploadSuccess = (snapshot) => {
     const { change } = this.props;
 
     change('photoURL', snapshot.downloadURL);
-    this.state = this.setState({selected_avatar_image: undefined})
+    this.setState({ selected_avatar_image: undefined })
   }
 
 
   render() {
     const {
+      altIconName,
       disabled,
       initialized,
-      uid,
       intl,
-      altIconName,
-      path
+      path,
+      uid
     } = this.props;
 
     return (
-      <div style={{margin: 20}}>
+      <div style={{ margin: 20 }}>
         <div>
           <Field
             name="photoURL"
@@ -54,11 +54,11 @@ export default class AvatarImageField extends Component {
         </div>
         <div>
           <FlatButton
-            style={{width: '100%'}}
-            onClick={()=>{
-              this.state = this.setState({selected_avatar_image: 'true'})
+            style={{ width: '100%' }}
+            onClick={() => {
+              this.setState({ selected_avatar_image: 'true' })
             }}
-            disabled={disabled===true?true:(uid===undefined || !initialized)}
+            disabled={disabled === true ? true : (uid === undefined || !initialized)}
             containerElement='label'
             primary={true}
             icon={
@@ -68,16 +68,16 @@ export default class AvatarImageField extends Component {
               </FontIcon>
             }
           />
-      </div>
+        </div>
 
         <ImageCropDialog
           path={`${path}/${uid}`}
           fileName={`photoURL`}
-          onUploadSuccess={(s)=>{this.handlePhotoUploadSuccess(s)}}
-          open={this.state.selected_avatar_image!==undefined}
+          onUploadSuccess={(s) => { this.handlePhotoUploadSuccess(s) }}
+          open={this.state.selected_avatar_image !== undefined}
           src={this.state.selected_avatar_image}
-          handleClose={()=>{this.setState({'selected_avatar_image': undefined})}}
-          title={intl.formatMessage({id: 'change_photo'})}
+          handleClose={() => { this.setState({ 'selected_avatar_image': undefined }) }}
+          title={intl.formatMessage({ id: 'change_photo' })}
         />
 
       </div>
