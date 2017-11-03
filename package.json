@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.1",
-    "firebase": "^4.6.0",
+    "firebase": "^4.6.1",
     "firebaseui": "^2.4.1",
     "fireform": "^0.2.13",
     "firekit": "^0.2.15",
@@ -31,7 +31,7 @@
     "react": "^16.0.0",
     "react-chartjs-2": "^2.6.4",
     "react-container-dimensions": "^1.3.2",
-    "react-countup": "^2.4.0",
+    "react-countup": "^3.0.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.0.0",
     "react-helmet": "^5.2.0",
