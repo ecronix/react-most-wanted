@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "enzyme": "^3.1.0",
-    "react-scripts": "^1.0.16",
+    "enzyme": "^3.1.1",
+    "react-scripts": "^1.0.17",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6",
     "standard": "^10.0.3"
