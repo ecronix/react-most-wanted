@@ -123,10 +123,16 @@ if you want to save the project into a specific folder (in this example "my_proj
 
 Now go with the console into the folder. If you haven't provided a name like "my_project" then it will be the default "react-most-wanted".
 
-In he folder run this command to start the development mode of the project:
+Once in the project folder, you should install NPM dependendencies by running:
 
 ```js
-npm run dev
+npm install
+```
+
+Then, run this command to start the development mode of the project:
+
+```js
+npm start
 ```
 
 For publishing run:
