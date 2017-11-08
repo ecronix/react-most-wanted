@@ -10,7 +10,7 @@ import de from 'react-intl/locale-data/de';
 import ru from 'react-intl/locale-data/ru';
 import bs from 'react-intl/locale-data/bs';
 import es from 'react-intl/locale-data/es';
-import pt-br from 'react-intl/locale-data/pt-br';
+import pt_br from 'react-intl/locale-data/pt_br';
 
 var areIntlLocalesSupported = require('intl-locales-supported');
 
@@ -64,9 +64,9 @@ const locales = [
     data: es
   },
   {
-    locale: 'pt-br',
-    messages: pt-br_messages,
-    data: pt-br
+    locale: 'pt_br',
+    messages: pt_br_messages,
+    data: pt_br
   },
 
 ]
