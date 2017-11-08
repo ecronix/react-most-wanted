@@ -4,7 +4,7 @@ import de_messages from './de';
 import ru_messages from './ru';
 import bs_messages from './bs';
 import es_messages from './es';
-import pt-br_messages from './pt-br';
+import pt_br_messages from './pt_br';
 import en from 'react-intl/locale-data/en';
 import de from 'react-intl/locale-data/de';
 import ru from 'react-intl/locale-data/ru';
