@@ -1,4 +1,4 @@
-import {defineMessages} from 'react-intl';
+﻿import {defineMessages} from 'react-intl';
 
 const messages=defineMessages({
   app_name: 'React Najtrazeniji',
@@ -17,6 +17,7 @@ const messages=defineMessages({
   bs: 'Bosanski',
   ru: 'Ruski',
   es: 'Španski',
+  pt-br: 'Portugalski',
   dark: 'Tamna',
   light: 'Svijetla',
   ics: 'ICS',

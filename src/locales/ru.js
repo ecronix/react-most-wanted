@@ -1,4 +1,4 @@
-import {defineMessages} from 'react-intl';
+﻿import {defineMessages} from 'react-intl';
 
 const messages=defineMessages({
   app_name: 'React Самый разыскиваемый',
@@ -17,6 +17,7 @@ const messages=defineMessages({
   bs: 'Боснийский',
   ru: 'Русский',
   es: 'Испанский',
+  pt-br: 'португальский',
   dark: 'Темная',
   light: 'Светла',
   ics: 'ICS',
