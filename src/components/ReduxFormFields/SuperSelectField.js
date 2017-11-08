@@ -1,4 +1,4 @@
-import SelectField from 'material-ui-selectfield'
+import SelectField from 'material-ui-superselectfield'
 import { Component, createElement } from 'react'
 import { mapError } from '../../utils/mapError'
 
@@ -9,29 +9,26 @@ import { mapError } from '../../utils/mapError'
 * @param mapProps A mapping of props provided by redux-form to the props the Material UI
 * component needs
 */
-function createComponent(MaterialUIComponent, mapProps) {
+function createComponent (MaterialUIComponent, mapProps) {
   class InputComponent extends Component {
-    getRenderedComponent() {
+    getRenderedComponent () {
       return this.refs.component
     }
 
-    render() {
+    render () {
+      const {input, ...rest } = this.props
+      const {value, ...inputRest} = input
 
-      const {input,  ...rest } = this.props;
-      const {value, ...inputRest} = input;
+      let newProps = this.props
 
-      let newProps=this.props;
-
-      if(typeof value === 'string' || value instanceof String){
-
-        newProps={
+      if (typeof value === 'string' || value instanceof String) {
+        newProps = {
           input: {
             value: undefined,
             ...inputRest
           },
           ...rest
         }
-
       }
 
       return createElement(MaterialUIComponent, {
@@ -46,13 +43,13 @@ function createComponent(MaterialUIComponent, mapProps) {
 
 export default createComponent(
   SelectField,
-  ({ input: { onChange,value, onBlur, ...inputProps }, onChange:onChangeFromField, ...props }) => ({
+  ({ input: { onChange, value, onBlur, ...inputProps }, onChange: onChangeFromField, ...props }) => ({
     ...mapError(props),
     ...inputProps,
     value: value,
     onChange: (selectedValues, name) => {
       onChange(selectedValues)
-      if(onChangeFromField) {
+      if (onChangeFromField) {
         onChangeFromField(selectedValues)
       }
     },
