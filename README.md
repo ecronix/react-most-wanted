@@ -303,7 +303,7 @@ These are initializing the list and unsubscribing from it if we leave the compon
 
 To change the drawer (left menu) width go to the 'config.js' file and change the value of  'drawer_width' :)
 
-### Authorisation
+### Authorization
 
 Note that authentication and authorization are not the same thing! With authentication we identify who we have as user and with authorization we identify what that user can do in our application. In this project authorization is managed over `grants` and `roles`. Every grant gives the user the authorization to do a specific action (read, create, edit or delete) in the database. Roles are defining a group of grants you can give a user. They are just for managing large number of grants easily. Every grant can still be managed separately.
 
