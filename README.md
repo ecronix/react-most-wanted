@@ -158,7 +158,7 @@ After setting up the code we need to deploy our application to Firebase. As firs
 
 To use firebase we need to install the firebase tools by running `npm install -g firebase-tools` and after that login to firebase with `firebase login`.
 
-After the login run `fribease init` to setup the Firebase project. Override the existing project and select yours from your Firebase console.
+After the login run `firebase init` to setup the Firebase project. Override the existing project and select yours from your Firebase console.
 Override only the '.firebasesrc' file and leave the other as they are because the database and storage rules, functions and firebase settings should stay as they are. If you override them the project will probably not work as it should.
 
 Don't forget to setup the email configs into the firebase functions using `firebase functions:config:set gmail.email="myusername@gmail.com" gmail.password="secretpassword"`.
