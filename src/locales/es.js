@@ -1,4 +1,4 @@
-import {defineMessages} from 'react-intl';
+﻿import {defineMessages} from 'react-intl';
 
 const messages=defineMessages({
   app_name: 'React Most Wanted',
@@ -17,6 +17,7 @@ const messages=defineMessages({
   bs: 'Bosnio',
   ru: 'Ruso',
   es: 'Español',
+  pt_br: 'portugués',
   dark: 'Oscuro',
   light: 'Claro',
   ics: 'ICS',
