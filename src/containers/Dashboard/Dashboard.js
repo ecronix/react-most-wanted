@@ -1,48 +1,41 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import FlatButton from 'material-ui/FlatButton';
-import { injectIntl, intlShape } from 'react-intl';
-import { GitHubIcon } from '../../components/Icons';
-import { Activity } from '../../containers/Activity';
-import muiThemeable from 'material-ui/styles/muiThemeable';
-import {Line, Bar, Doughnut} from 'react-chartjs-2';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import FlatButton from 'material-ui/FlatButton'
+import { injectIntl, intlShape } from 'react-intl'
+import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
+import { Activity } from 'rmw-shell'
+import muiThemeable from 'material-ui/styles/muiThemeable'
+import { Line, Bar, Doughnut } from 'react-chartjs-2'
 import { withFirebase } from 'firekit-provider'
-import CountUp from 'react-countup';
-import FontIcon from 'material-ui/FontIcon';
+import CountUp from 'react-countup'
+import FontIcon from 'material-ui/FontIcon'
 
-const currentYear=new Date().getFullYear();
-const daysPath=`/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`;
-const monthsPath=`/user_registrations_per_month/${currentYear}`;
-const providerPath=`/provider_count`;
-
+const currentYear = new Date().getFullYear()
+const daysPath = `/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`
+const monthsPath = `/user_registrations_per_month/${currentYear}`
+const providerPath = `/provider_count`
 
 class Dashboard extends Component {
+  componentDidMount() {
+    const { watchPath } = this.props
 
-  componentDidMount(){
-    const { watchPath }=this.props;
-
-    watchPath(daysPath);
-    watchPath(monthsPath);
-    watchPath(providerPath);
-    watchPath('users_count');
-
+    watchPath(daysPath)
+    watchPath(monthsPath)
+    watchPath(providerPath)
+    watchPath('users_count')
   }
 
   render() {
+    const { muiTheme, intl, days, months, providers, usersCount } = this.props
 
-    const {muiTheme, intl, days, months, providers, usersCount}= this.props;
+    let daysLabels = []
+    let daysData = []
 
-
-    let daysLabels=[];
-    let daysData=[]
-
-
-
-    if(days){
-      Object.keys(days).sort().map(key =>{
-        daysLabels.push(key);
-        daysData.push(days[key]);
-        return key;
+    if (days) {
+      Object.keys(days).sort().map(key => {
+        daysLabels.push(key)
+        daysData.push(days[key])
+        return key
       })
     }
 
@@ -50,7 +43,7 @@ class Dashboard extends Component {
       labels: daysLabels,
       datasets: [
         {
-          label: intl.formatDate(Date.now(),{month: 'long'}),
+          label: intl.formatDate(Date.now(), { month: 'long' }),
           fill: false,
           lineTension: 0.1,
           backgroundColor: muiTheme.palette.primary1Color,
@@ -71,20 +64,18 @@ class Dashboard extends Component {
           data: daysData
         }
       ]
-    };
+    }
 
-    let monthsLabels=[];
-    let monthsData=[]
+    let monthsLabels = []
+    let monthsData = []
 
-    if(months){
-      Object.keys(months).sort().map(key =>{
+    if (months) {
+      Object.keys(months).sort().map(key => {
+        let date = new Date(`${currentYear}-${key}-1`)
+        monthsLabels.push(intl.formatDate(date, { month: 'long' }))
 
-        let date=new Date(`${currentYear}-${key}-1`);
-        monthsLabels.push(intl.formatDate(date,{month: 'long'}));
-
-
-        monthsData.push(months[key]);
-        return key;
+        monthsData.push(months[key])
+        return key
       })
     }
 
@@ -92,7 +83,7 @@ class Dashboard extends Component {
       labels: monthsLabels,
       datasets: [
         {
-          label: intl.formatMessage({id: 'user_registrationg_graph_label'}),
+          label: intl.formatMessage({ id: 'user_registrationg_graph_label' }),
           fill: false,
           maintainAspectRatio: true,
           lineTension: 0.1,
@@ -114,19 +105,18 @@ class Dashboard extends Component {
           data: monthsData
         }
       ]
-    };
+    }
 
+    let providersData = []
+    let providersLabels = []
+    let providersBackgrounColors = []
 
-    let providersData=[];
-    let providersLabels=[];
-    let providersBackgrounColors=[];
-
-    if(providers){
-      Object.keys(providers).sort().map((key) =>{
-        providersLabels.push(intl.formatMessage({id: key}));
-        providersBackgrounColors.push(intl.formatMessage({id: `${key}_color`}));
-        providersData.push(providers[key]);
-        return key;
+    if (providers) {
+      Object.keys(providers).sort().map((key) => {
+        providersLabels.push(intl.formatMessage({ id: key }))
+        providersBackgrounColors.push(intl.formatMessage({ id: `${key}_color` }))
+        providersData.push(providers[key])
+        return key
       })
     }
 
@@ -137,36 +127,36 @@ class Dashboard extends Component {
         backgroundColor: providersBackgrounColors,
         hoverBackgroundColor: providersBackgrounColors
       }]
-    };
+    }
 
     return (
       <Activity
         iconElementRight={
           <FlatButton
-            style={{marginTop: 4}}
-            href="https://github.com/TarikHuber/react-most-wanted"
-            target="_blank"
-            rel="noopener"
-            secondary={true}
-            icon={<GitHubIcon/>}
+            style={{ marginTop: 4 }}
+            href='https://github.com/TarikHuber/react-most-wanted'
+            target='_blank'
+            rel='noopener'
+            secondary
+            icon={<GitHubIcon />}
           />
         }
-        title={intl.formatMessage({id: 'dashboard'})}>
+        title={intl.formatMessage({ id: 'dashboard' })}>
 
-        <div style={{margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center'}}>
-          <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
+        <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
             <Line
               options={{
-                maintainAspectRatio: true,
+                maintainAspectRatio: true
               }}
               data={monthsComponentData}
             />
           </div>
 
-          <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
             <Bar
               options={{
-                maintainAspectRatio: true,
+                maintainAspectRatio: true
               }}
               data={daysComponentData}
             />
@@ -174,21 +164,21 @@ class Dashboard extends Component {
 
         </div>
 
-        <br/>
-        <div style={{margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center'}}>
+        <br />
+        <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
 
-          <div style={{flexGrow: 1, flexShrink: 1, maxWidth: 600}}>
+          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
             <Doughnut
               data={providersComponentData}
             />
           </div>
 
-          <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 30}}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 30 }}>
             <CountUp
               style={{
                 fontSize: 100,
                 color: muiTheme.palette.primary1Color,
-                fontFamily: muiTheme.fontFamily,
+                fontFamily: muiTheme.fontFamily
               }}
               start={0}
               end={usersCount}
@@ -196,8 +186,8 @@ class Dashboard extends Component {
             <div>
               <FontIcon
                 color={muiTheme.palette.accent1Color}
-                className="material-icons"
-                style={{fontSize: 70, marginLeft: 16}}>
+                className='material-icons'
+                style={{ fontSize: 70, marginLeft: 16 }}>
                 group
               </FontIcon>
             </div>
@@ -205,29 +195,26 @@ class Dashboard extends Component {
           </div>
         </div>
 
-
-
       </Activity>
-    );
+    )
   }
-
 }
 
 Dashboard.propTypes = {
-  intl: intlShape.isRequired,
-};
+  intl: intlShape.isRequired
+}
 
 const mapStateToProps = (state) => {
-  const { paths } = state;
+  const { paths } = state
 
   return {
     days: paths[daysPath],
     months: paths[monthsPath],
     providers: paths[providerPath],
-    usersCount: paths['users_count']?paths['users_count']:0,
-  };
-};
+    usersCount: paths['users_count'] ? paths['users_count'] : 0
+  }
+}
 
 export default connect(
   mapStateToProps
-)(injectIntl(muiThemeable()(withFirebase(Dashboard))));
+)(injectIntl(muiThemeable()(withFirebase(Dashboard))))

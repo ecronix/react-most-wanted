@@ -1,19 +1,16 @@
+import App from 'rmw-shell/lib/App'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
 import configureStore from './store'
-import { Root } from './containers/Root'
-import { addLocalizationData } from './locales'
-import registerServiceWorker from './registerServiceWorker'
+import config from './config'
+import locales from './locales'
+import registerServiceWorker from 'rmw-shell/lib/registerServiceWorker'
+import { addLocalizationData } from 'rmw-shell/lib/locales'
 
-const store = configureStore()
-
-addLocalizationData()
+addLocalizationData(locales)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Root />
-  </Provider>
+  <App appConfig={{ configureStore, ...config }} />
   , document.getElementById('root')
 )
 

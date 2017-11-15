@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "enzyme": "^3.1.1",
+    "enzyme": "^3.2.0",
     "react-scripts": "^1.0.17",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.1",
-    "firebase": "^4.6.1",
+    "firebase": "^4.6.2",
     "firebaseui": "^2.4.1",
     "fireform": "^0.2.13",
     "firekit": "^0.2.17",
@@ -25,21 +25,21 @@
     "material-ui-responsive-drawer": "^1.19.2",
     "material-ui-responsive-menu": "^1.19.2",
     "material-ui-selectable-menu-list": "^1.19.3",
-    "material-ui-superselectfield": "^1.7.0",
+    "material-ui-superselectfield": "^1.7.1",
     "prop-types": "^15.6.0",
-    "react": "^16.0.0",
+    "react": "^16.1.1",
     "react-chartjs-2": "^2.6.4",
     "react-container-dimensions": "^1.3.2",
     "react-countup": "^3.0.2",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.0.0",
+    "react-dom": "^16.1.1",
     "react-helmet": "^5.2.0",
     "react-image-cropper": "^1.1.2",
     "react-infinite": "^0.12.1",
     "react-intl": "^2.4.0",
     "react-list": "^0.8.8",
     "react-loadable": "^5.3.1",
-    "react-markdown": "^2.5.0",
+    "react-markdown": "^2.5.1",
     "react-materialui-notifications": "^0.5.1",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
@@ -47,9 +47,11 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-form-material-ui": "^4.3.0",
-    "redux-persist": "^5.2.2",
+    "redux-persist": "^5.3.5",
     "redux-responsive": "^4.3.4",
     "redux-thunk": "^2.2.0",
+    "rmw-core": "^1.0.1",
+    "rmw-shell": "^0.1.46",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
@@ -58,7 +60,17 @@
     "start": "react-scripts start",
     "standard": "standard src/**/*.js ",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --collectCoverageFrom=src/store/**/*js --collectCoverageFrom=!src/store/*js",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "author": "Tarik Huber",
+  "homepage": "https://www.react-most-wanted.com/",
+  "license": "MIT",
+  "repository": "https://github.com/TarikHuber/react-most-wanted",
+  "keywords": [
+    "react-most-wanted",
+    "react",
+    "redux",
+    "firebase"
+  ]
 }

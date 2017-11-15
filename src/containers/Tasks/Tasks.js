@@ -5,8 +5,8 @@ import firebase from 'firebase';
 import PropTypes from 'prop-types';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import {injectIntl, intlShape} from 'react-intl';
-import { Activity } from '../../containers/Activity';
-import { setDialogIsOpen } from '../../store/dialogs/actions';
+import { Activity } from 'rmw-shell'
+import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
@@ -19,7 +19,7 @@ import {withRouter} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import { withFirebase } from 'firekit-provider'
-import Scrollbar from '../../components/Scrollbar/Scrollbar';
+import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar';
 
 class Tasks extends Component {
 
