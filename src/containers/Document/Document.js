@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import muiThemeable from 'material-ui/styles/muiThemeable';
 import { injectIntl, intlShape } from 'react-intl'
-import { Activity } from '../../containers/Activity'
+import { Activity } from 'rmw-shell'
 import RaisedButton from 'material-ui/RaisedButton'
 import {withFirebase} from 'firekit-provider';
 import TextField from 'material-ui/TextField'
