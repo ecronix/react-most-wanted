@@ -47,10 +47,10 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-form-material-ui": "^4.3.0",
-    "redux-persist": "^5.3.5",
+    "redux-persist": "^5.4.0",
     "redux-responsive": "^4.3.4",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.0.6",
+    "rmw-shell": "^1.0.13",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
