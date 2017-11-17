@@ -11,6 +11,8 @@ This is a `shell` for my future applications with the minimum features I would l
 
 You can find an example of this project in this [DEMO](https://www.react-most-wanted.com/).
 
+For quesions you can join our [gitter room](https://gitter.im/react-most-wanted/Lobby).
+
 I tried to make the project as clean as possible and to use all libraries in their pure ways.
 
 ## Table of Contents
