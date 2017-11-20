@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import config from './config'
 // eslint-disable-next-line
 //import firestore from 'firebase/firestore'
