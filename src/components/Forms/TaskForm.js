@@ -8,7 +8,6 @@ import { SuperSelectField } from 'rmw-shell/lib/components/ReduxFormFields'
 import Avatar from 'material-ui/Avatar'
 import FontIcon from 'material-ui/FontIcon'
 
-
 class TaskForm extends Component {
   componentDidMount () {
     this.refs.title // the Field
@@ -105,7 +104,7 @@ const mapStateToProps = state => {
     intl,
     users: lists.users
   }
-};
+}
 
 TaskForm = reduxForm({ form: 'task' })(TaskForm)
 

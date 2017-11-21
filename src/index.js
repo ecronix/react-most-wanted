@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom'
 import configureStore from './store'
 import config from './config'
 import locales from './locales'
+import firebaseApp from './firebase'
 import registerServiceWorker from 'rmw-shell/lib/registerServiceWorker'
 import { addLocalizationData } from 'rmw-shell/lib/locales'
 
 addLocalizationData(locales)
 
 ReactDOM.render(
-  <App appConfig={{ configureStore, ...config }} />
+  <App appConfig={{ configureStore, firebaseApp, ...config }} />
   , document.getElementById('root')
 )
 
