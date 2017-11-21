@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 import { Activity } from 'rmw-shell'
 import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions';
-import Form from './Form';
+import TaskForm from '../../components/Forms/TaskForm';
 import { withRouter } from 'react-router-dom';
 import firebase from 'firebase';
 import FontIcon from 'material-ui/FontIcon';
@@ -92,7 +92,7 @@ class Task extends Component {
             onDelete={(values) => { history.push('/tasks'); }}
             handleCreateValues={this.handleCreateValues}
             uid={this.props.match.params.uid}>
-            <Form />
+            <TaskForm />
           </FireForm>
         </div>
         <Dialog
