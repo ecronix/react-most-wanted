@@ -5,10 +5,11 @@ import { injectIntl, intlShape } from 'react-intl'
 import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
 import { Activity } from 'rmw-shell'
 import muiThemeable from 'material-ui/styles/muiThemeable'
-import { Line, Bar, Doughnut } from 'react-chartjs-2'
+import { Line, Bar } from 'react-chartjs-2'
 import { withFirebase } from 'firekit-provider'
 import CountUp from 'react-countup'
 import FontIcon from 'material-ui/FontIcon'
+import ReactEcharts from 'echarts-for-react'
 
 const currentYear = new Date().getFullYear()
 const daysPath = `/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`
@@ -16,7 +17,7 @@ const monthsPath = `/user_registrations_per_month/${currentYear}`
 const providerPath = `/provider_count`
 
 class Dashboard extends Component {
-  componentDidMount() {
+  componentDidMount () {
     const { watchPath } = this.props
 
     watchPath(daysPath)
@@ -25,7 +26,7 @@ class Dashboard extends Component {
     watchPath('users_count')
   }
 
-  render() {
+  render () {
     const { muiTheme, intl, days, months, providers, usersCount } = this.props
 
     let daysLabels = []
@@ -107,26 +108,44 @@ class Dashboard extends Component {
       ]
     }
 
-    let providersData = []
-    let providersLabels = []
-    let providersBackgrounColors = []
+    let providerOptionsData = []
 
     if (providers) {
       Object.keys(providers).sort().map((key) => {
-        providersLabels.push(intl.formatMessage({ id: key }))
-        providersBackgrounColors.push(intl.formatMessage({ id: `${key}_color` }))
-        providersData.push(providers[key])
+        providerOptionsData.push({ name: intl.formatMessage({ id: key }), value: providers[key], color: 'red' })
         return key
       })
     }
 
-    const providersComponentData = {
-      labels: providersLabels,
-      datasets: [{
-        data: providersData,
-        backgroundColor: providersBackgrounColors,
-        hoverBackgroundColor: providersBackgrounColors
-      }]
+    const providerOptions = {
+      title: {
+        text: 'Providers',
+        x: 'center',
+        textStyle: {
+          color: muiTheme.palette.primary1Color
+        }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)'
+      },
+      calculable: true,
+      series: [
+        {
+          name: 'Provider',
+          type: 'pie',
+          roseType: 'radius',
+          radius: [40, 110],
+          data: providerOptionsData,
+          itemStyle: {
+            emphasis: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
     }
 
     return (
@@ -141,7 +160,7 @@ class Dashboard extends Component {
             icon={<GitHubIcon />}
           />
         }
-        title={intl.formatMessage({ id: 'dashboard' })}>
+        title={intl.formatMessage({ id: 'dashboard' })} >
 
         <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
           <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
@@ -167,10 +186,12 @@ class Dashboard extends Component {
         <br />
         <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
 
-          <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-            <Doughnut
-              data={providersComponentData}
-            />
+          <div style={{ flexGrow: 1, flexShrink: 1, width: '100%', maxWidth: 600 }}>
+            <ReactEcharts
+              option={providerOptions}
+              notMerge
+              lazyUpdate
+              theme={'theme_name'} />
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 30 }}>
@@ -195,7 +216,7 @@ class Dashboard extends Component {
           </div>
         </div>
 
-      </Activity>
+      </Activity >
     )
   }
 }
