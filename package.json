@@ -27,7 +27,7 @@
     "material-ui-responsive-drawer": "^1.19.2",
     "material-ui-responsive-menu": "^1.19.2",
     "material-ui-selectable-menu-list": "^1.19.3",
-    "material-ui-superselectfield": "^1.7.2",
+    "material-ui-superselectfield": "^1.7.4",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-chartjs-2": "^2.6.4",
