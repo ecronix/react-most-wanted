@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "enzyme": "^3.2.0",
+    "enzyme": "^3.3.0",
     "react-scripts": "^1.0.17",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6",
@@ -12,7 +12,7 @@
   "dependencies": {
     "chart.js": "^2.7.1",
     "echarts": "^3.8.5",
-    "echarts-for-react": "^2.0.3",
+    "echarts-for-react": "^2.0.4",
     "firebase": "^4.8.1",
     "firebaseui": "^2.5.1",
     "fireform": "^0.2.13",
@@ -27,7 +27,7 @@
     "material-ui-responsive-drawer": "^1.19.4",
     "material-ui-responsive-menu": "^1.19.3",
     "material-ui-selectable-menu-list": "^1.19.4",
-    "material-ui-superselectfield": "^1.8.0",
+    "material-ui-superselectfield": "^1.8.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-chartjs-2": "^2.6.4",
