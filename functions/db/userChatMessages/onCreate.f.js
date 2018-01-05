@@ -1,6 +1,6 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-try {admin.initializeApp(functions.config().firebase);} catch(e) {} // You do that because the admin SDK can only be initialized once.
+const functions = require('firebase-functions')
+const admin = require('firebase-admin')
+try { admin.initializeApp(functions.config().firebase) } catch (e) { } // You do that because the admin SDK can only be initialized once.
 const notifications = require('../../utils/notifications')
 
 exports = module.exports = functions.database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}').onCreate(event => {
@@ -20,17 +20,20 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
 
   console.log(`Message ${messageUid} ${snapValues.message} created! Sender ${senderUid}, receiver ${receiverUid}`)
 
-  let lastMessage=snapValues.message
+  let lastMessage = snapValues.message
 
-  if(!lastMessage){
-    if(snapValues.link){
-      lastMessage='Link'
+  if (!lastMessage) {
+    if (snapValues.link) {
+      lastMessage = 'Link'
     }
-    if(snapValues.image){
-      lastMessage='Image'
+    if (snapValues.image) {
+      lastMessage = 'Image'
     }
-    if(snapValues.location){
-      lastMessage='Position'
+    if (snapValues.location) {
+      lastMessage = 'Position'
+    }
+    if (snapValues.audio) {
+      lastMessage = 'Audio'
     }
   }
 
@@ -73,5 +76,4 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     updateReceiverUnred,
     notifyUser
   ])
-
-});
+})
