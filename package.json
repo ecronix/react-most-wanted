@@ -16,7 +16,7 @@
     "firebase": "^4.8.1",
     "firebaseui": "^2.5.1",
     "fireform": "^0.2.13",
-    "firekit": "^0.2.18",
+    "firekit": "^0.2.20",
     "firekit-provider": "^0.2.16",
     "github-markdown-css": "^2.10.0",
     "intl": "^1.2.5",
@@ -54,7 +54,7 @@
     "redux-persist": "^5.4.0",
     "redux-responsive": "^4.3.5",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.4.11",
+    "rmw-shell": "^1.4.12",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
