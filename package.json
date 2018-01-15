@@ -54,7 +54,7 @@
     "redux-persist": "^5.4.0",
     "redux-responsive": "^4.3.5",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.4.14",
+    "rmw-shell": "^1.4.15",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
