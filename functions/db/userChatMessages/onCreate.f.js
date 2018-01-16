@@ -49,6 +49,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     lastMessage: lastMessage,
     authorUid: senderUid,
     lastCreated: snapValues.created,
+    isSend: event.timestamp,
     isRead: null
   })
   const udateReceiverChat = receiverChatRef.update({
@@ -64,7 +65,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     return (number || 0) + 1
   })
 
-  let notifyUser = false
+  let notifyUser = null
 
   if (snapValues.authorUid !== receiverUid) {
     const payload = {
@@ -81,7 +82,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
       senderChatMessageRef.update({
         isReceived: event.timestamp
       }).then(() => {
-        receiverChatRef.update({
+        udateSenderChat.update({
           isReceived: event.timestamp
         })
       })
