@@ -5,7 +5,7 @@ const notifications = require('../../utils/notifications')
 
 exports = module.exports = functions.database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}').onCreate(event => {
   if (event.auth.admin) {
-    return
+    return null
   }
 
   const senderUid = event.params.senderUid
@@ -17,6 +17,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
   const receiverChatRef = admin.database().ref(`/user_chats/${receiverUid}/${senderUid}`)
   const receiverChatUnreadRef = admin.database().ref(`/user_chats/${receiverUid}/${senderUid}/unread`)
   const receiverChatMessageRef = admin.database().ref(`/user_chat_messages/${receiverUid}/${senderUid}/${messageUid}`)
+  const senderChatMessageRef = admin.database().ref(`/user_chat_messages/${senderUid}/${receiverUid}/${messageUid}`)
 
   console.log(`Message ${messageUid} ${snapValues.message} created! Sender ${senderUid}, receiver ${receiverUid}`)
 
@@ -37,17 +38,27 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     }
   }
 
-  const udateReceiverChatMessage = receiverChatMessageRef.update(snapValues)
+  const udateReceiverChatMessage = receiverChatMessageRef.update(snapValues).then(() => {
+    senderChatMessageRef.update({
+      isSend: event.timestamp
+    })
+  })
+
   const udateSenderChat = senderChatRef.update({
     unread: 0,
     lastMessage: lastMessage,
-    lastCreated: snapValues.created
+    authorUid: senderUid,
+    lastCreated: snapValues.created,
+    isRead: null
   })
   const udateReceiverChat = receiverChatRef.update({
     displayName: snapValues.authorName,
+    authorUid: senderUid,
     photoURL: snapValues.authorPhotoUrl ? snapValues.authorPhotoUrl : '',
     lastMessage: lastMessage,
-    lastCreated: snapValues.created
+    lastCreated: snapValues.created,
+    isSend: event.timestamp,
+    isRead: null
   })
   const updateReceiverUnred = receiverChatUnreadRef.transaction(number => {
     return (number || 0) + 1
@@ -66,7 +77,15 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
       }
     }
 
-    notifyUser = notifications.notifyUser(receiverUid, payload)
+    notifyUser = notifications.notifyUser(receiverUid, payload).then(() => {
+      senderChatMessageRef.update({
+        isReceived: event.timestamp
+      }).then(() => {
+        receiverChatRef.update({
+          isReceived: event.timestamp
+        })
+      })
+    })
   }
 
   return Promise.all([
