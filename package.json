@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.1",
-    "echarts": "^3.8.5",
+    "echarts": "^4.0.1",
     "echarts-for-react": "^2.0.4",
     "firebase": "^4.8.2",
     "firebaseui": "^2.5.1",
@@ -54,7 +54,7 @@
     "redux-persist": "^5.4.0",
     "redux-responsive": "^4.3.5",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.4.19",
+    "rmw-shell": "^1.4.20",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
