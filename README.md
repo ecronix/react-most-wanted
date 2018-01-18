@@ -18,6 +18,7 @@ I tried to make the project as clean as possible and to use all libraries in the
 This readme is just a brief overview of the project. Here are some related articles that descripe some parts of this project in depth:
 - [Beyond create-react-app](https://codeburst.io/beyond-create-react-app-cra-a2063196a124)
 - [Organising your Firebase CLoud Functions](https://codeburst.io/organizing-your-firebase-cloud-functions-67dc17b3b0da)
+- [Firekit concepts to sync Firebase and redux](https://codeburst.io/firekit-concepts-to-sync-firebase-and-redux-606a1e3e50d6)
 - [Firebase and react Continuous Deployment](https://codeburst.io/firebase-and-react-continuous-deployment-2e6d81f0b6a1)
 - [Redux simple values](https://codeburst.io/redux-simple-values-7712694f311)
 - [React Most Wanted](https://medium.com/@tarikhuber/react-most-wanted-d4e916782c2e)
