@@ -14,7 +14,7 @@
     "echarts": "^4.0.2",
     "echarts-for-react": "^2.0.6",
     "firebase": "^4.9.1",
-    "firebaseui": "^2.5.1",
+    "firebaseui": "^2.6.0",
     "fireform": "^0.2.13",
     "firekit": "^1.0.0",
     "firekit-provider": "^0.2.16",
@@ -51,10 +51,10 @@
     "redux": "^3.7.2",
     "redux-form": "^7.2.3",
     "redux-form-material-ui": "^4.3.3",
-    "redux-persist": "^5.6.8",
+    "redux-persist": "^5.6.12",
     "redux-responsive": "^4.3.5",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.4.23",
+    "rmw-shell": "^1.4.24",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
