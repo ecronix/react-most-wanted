@@ -9,14 +9,14 @@ import Avatar from 'material-ui/Avatar'
 import FontIcon from 'material-ui/FontIcon'
 
 class TaskForm extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.refs.title // the Field
       .getRenderedComponent() // on Field, returns ReduxFormMaterialUITextField
       .getRenderedComponent() // on ReduxFormMaterialUITextField, returns TextField
       .focus() // on TextField
   }
 
-  render () {
+  render() {
     const { handleSubmit, intl, users, initialized } = this.props
 
     let userSource = []
