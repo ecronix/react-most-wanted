@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "chart.js": "^2.7.1",
-    "echarts": "^4.0.2",
+    "echarts": "^4.0.3",
     "echarts-for-react": "^2.0.6",
     "firebase": "^4.10.1",
-    "firebaseui": "^2.6.1",
+    "firebaseui": "^2.6.2",
     "fireform": "^0.2.13",
     "firekit": "^1.0.2",
     "firekit-provider": "^0.2.16",
@@ -55,7 +55,7 @@
     "redux-persist": "^5.9.1",
     "redux-responsive": "^4.3.5",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.5.2",
+    "rmw-shell": "^1.5.3",
     "source-map-explorer": "^1.5.0"
   },
   "scripts": {
