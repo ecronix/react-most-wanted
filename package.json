@@ -10,7 +10,7 @@
     "standard": "^11.0.0"
   },
   "dependencies": {
-    "chart.js": "^2.7.1",
+    "chart.js": "^2.7.2",
     "echarts": "^4.0.4",
     "echarts-for-react": "^2.0.7",
     "firebase": "^4.10.1",
