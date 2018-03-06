@@ -1,6 +1,5 @@
 {
   "rules": {
-    ".read": "auth != null",
     "admins":{
       ".read": "auth != null",
       "$uid":{
@@ -66,6 +65,7 @@
       }
     },
     "public_tasks":{
+      ".read": "auth != null",
       ".indexOn": ["userId"],
       "$tid":{
         ".indexOn": ["userId"],
