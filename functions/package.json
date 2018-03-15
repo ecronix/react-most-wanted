@@ -4,9 +4,9 @@
   "dependencies": {
     "camelcase": "^4.1.0",
     "firebase-admin": "^5.10.0",
-    "firebase-functions": "^0.8.1",
+    "firebase-functions": "^0.8.2",
     "glob": "^7.1.2",
-    "nodemailer": "^4.6.2"
+    "nodemailer": "^4.6.3"
   },
   "private": true,
   "scripts": {
