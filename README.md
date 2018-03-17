@@ -352,11 +352,6 @@ To:
 Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
 
 ## TO DO
-
-- [X] implement all or most firebase functionalities
-- [X] implement [redux-offline](https://github.com/jevakallio/redux-offline) with examples
-- [X] implement code splitting
-- [X] implement continuous integration
 - [ ] update to material-ui@next
 - [ ] finish tests
 
