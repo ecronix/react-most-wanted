@@ -162,7 +162,7 @@ class Dashboard extends Component {
         }
         title={intl.formatMessage({ id: 'dashboard' })} >
 
-        <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ margin: 5, marginTop: 16, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-evenly' }}>
           <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
             <Line
               options={{
@@ -184,7 +184,7 @@ class Dashboard extends Component {
         </div>
 
         <br />
-        <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ margin: 5, marginTop: 16, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-evenly' }}>
 
           <div style={{ flexGrow: 1, flexShrink: 1, width: '100%', maxWidth: 600 }}>
             <ReactEcharts
