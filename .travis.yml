@@ -20,9 +20,12 @@ before_deploy:
   - travis_wait 40 ./build.sh
 
 deploy:
-  - chmod +x deploy.sh
-  - travis_wait 40 ./deploy.sh
-  - node bs.js $BSNAME $BSKEY
+   provider: script
+   script:   
+        - chmod +x deploy.sh
+        - travis_wait 40 ./deploy.sh
+        - node bs.js $BSNAME $BSKEY
+
 
 after_deploy:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
