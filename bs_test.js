@@ -21,6 +21,8 @@ module.exports.runTest = function (driver) {
   }).catch(e => {
     driver.quit()
     console.log('Test Failed')
-    process.exit(1)
+    console.error(e)
+    process.exitCode = 1
+    process.abort()
   })
 }
