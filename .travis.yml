@@ -8,26 +8,20 @@ cache:
   - functions/node_modules
 
 before_install:
-  - npm install codecov.io coveralls
   - chmod +x before_install.sh
   - ./before_install.sh
 
-script:
-  - npm test
 
-before_deploy:
+before_script:
+  - npm test
   - chmod +x build.sh
   - travis_wait 40 ./build.sh
 
-deploy:
-   provider: script
-   script:   
-        - chmod +x deploy.sh
-        - travis_wait 40 ./deploy.sh
-        - node bs.js $BSNAME $BSKEY
+script:
+  - chmod +x deploy.sh
+  - travis_wait 40 ./deploy.sh
 
-
-after_deploy:
+after_script:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - node node_modules/lighthouse-ci/runlighthouse.js https://react-most-wanted.com
