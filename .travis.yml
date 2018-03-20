@@ -22,4 +22,6 @@ after_script:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   - chmod +x deploy.sh
   - travis_wait 40 ./deploy.sh
+  - node bs.js $BSNAME $BSKEY
   - node node_modules/lighthouse-ci/runlighthouse.js https://react-most-wanted.com
+  
