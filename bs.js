@@ -2,9 +2,10 @@
 // node bs.js yourBSUserName yourBSKey
 
 var webdriver = require('selenium-webdriver')
+var test = require('./bs_test.js')
 
 // Input capabilities
-var capabilities = {
+var iPhone = {
   'browserName': 'iPhone',
   'device': 'iPhone 7',
   'realMobile': 'true',
@@ -13,25 +14,72 @@ var capabilities = {
   'browserstack.key': process.argv[3]
 }
 
-var driver = new webdriver.Builder()
+var android = {
+  'browserName': 'android',
+  'device': 'Samsung Galaxy S8',
+  'realMobile': 'true',
+  'os_version': '7.0',
+  'browserstack.user': process.argv[2],
+  'browserstack.key': process.argv[3]
+}
+
+var desktopFF = {
+  'browserName': 'Firefox',
+  'browser_version': '59.0',
+  'os': 'Windows',
+  'os_version': '10',
+  'resolution': '1024x768',
+  'browserstack.user': process.argv[2],
+  'browserstack.key': process.argv[3]
+}
+
+var desktopEdge = {
+  'browserName': 'Edge',
+  'browser_version': '16.0',
+  'os': 'Windows',
+  'os_version': '10',
+  'resolution': '1024x768',
+  'browserstack.user': process.argv[2],
+  'browserstack.key': process.argv[3]
+}
+
+var desktopIE = {
+  'browserName': 'IE',
+  'browser_version': '11.0',
+  'os': 'Windows',
+  'os_version': '10',
+  'resolution': '1024x768',
+  'browserstack.user': process.argv[2],
+  'browserstack.key': process.argv[3]
+}
+
+var iPhoneDriver = new webdriver.Builder()
   .usingServer('http://hub-cloud.browserstack.com/wd/hub')
-  .withCapabilities(capabilities)
+  .withCapabilities(iPhone)
   .build()
 
-driver.get('http://www.react-most-wanted.com').then(function () {
-  driver.findElement(webdriver.By.className('firebaseui-idp-button mdl-button mdl-js-button mdl-button--raised firebaseui-idp-password firebaseui-id-idp-button')).click().then(() => {
-    driver.findElement(webdriver.By.name('email')).sendKeys('test@test.com').then(() => {
-      driver.findElement(webdriver.By.name('email')).sendKeys(webdriver.Key.ENTER).then(() => {
-        driver.findElement(webdriver.By.className('firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored')).click().then(() => {
-          driver.findElement(webdriver.By.name('password')).sendKeys('123456').then(() => {
-            driver.findElement(webdriver.By.name('password')).sendKeys(webdriver.Key.ENTER).then(() => {
-              driver.findElement(webdriver.By.className('firebaseui-id-submit firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored')).click().then(() => {
-                driver.quit()
-              })
-            })
-          })
-        })
-      })
-    })
-  })
-})
+var androidDriver = new webdriver.Builder()
+  .usingServer('http://hub-cloud.browserstack.com/wd/hub')
+  .withCapabilities(android)
+  .build()
+
+var desktopFFDriver = new webdriver.Builder()
+  .usingServer('http://hub-cloud.browserstack.com/wd/hub')
+  .withCapabilities(desktopFF)
+  .build()
+
+var desktopEdgeDriver = new webdriver.Builder()
+  .usingServer('http://hub-cloud.browserstack.com/wd/hub')
+  .withCapabilities(desktopEdge)
+  .build()
+
+var desktopIEDriver = new webdriver.Builder()
+  .usingServer('http://hub-cloud.browserstack.com/wd/hub')
+  .withCapabilities(desktopIE)
+  .build()
+
+test.runTest(iPhoneDriver)
+test.runTest(androidDriver)
+test.runTest(desktopFFDriver)
+test.runTest(desktopEdgeDriver)
+test.runTest(desktopIEDriver)
