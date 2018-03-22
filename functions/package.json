@@ -4,7 +4,7 @@
   "dependencies": {
     "camelcase": "^4.1.0",
     "firebase-admin": "^5.11.0",
-    "firebase-functions": "^0.8.2",
+    "firebase-functions": "^0.9.1",
     "glob": "^7.1.2",
     "nodemailer": "^4.6.3"
   },
