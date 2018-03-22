@@ -7,45 +7,45 @@ import allThemes from './themes'
 const getMenuItems = (props) => {
   const {
     responsiveDrawer,
-        setResponsive,
-        theme,
-        locale,
-        updateTheme,
-        updateLocale,
-        intl,
-        muiTheme,
-        auth,
-        isGranted
+    setResponsive,
+    theme,
+    locale,
+    updateTheme,
+    updateLocale,
+    intl,
+    muiTheme,
+    auth,
+    isGranted
   } = props
 
   const isAuthorised = auth.isAuthorised
 
   const themeItems = allThemes.map((t) => {
     return {
-        value: undefined,
-        visible: true,
-        primaryText: intl.formatMessage({ id: t.id }),
-        onClick: () => { updateTheme(t.id) },
-        rightIcon: <FontIcon
-            className='material-icons'
-            color={t.id === theme ? muiTheme.palette.primary1Color : undefined}>
-                style
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: t.id }),
+      onClick: () => { updateTheme(t.id) },
+      rightIcon: <FontIcon
+        className='material-icons'
+        color={t.id === theme ? muiTheme.palette.primary1Color : undefined}>
+        style
       </FontIcon>
-      }
+    }
   })
 
   const localeItems = allLocales.map((l) => {
     return {
-        value: undefined,
-        visible: true,
-        primaryText: intl.formatMessage({ id: l.locale }),
-        onClick: () => { updateLocale(l.locale) },
-        rightIcon: <FontIcon
-            className='material-icons'
-            color={l.locale === locale ? muiTheme.palette.primary1Color : undefined}>
-                language
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: l.locale }),
+      onClick: () => { updateLocale(l.locale) },
+      rightIcon: <FontIcon
+        className='material-icons'
+        color={l.locale === locale ? muiTheme.palette.primary1Color : undefined}>
+        language
       </FontIcon>
-      }
+    }
   })
 
   return [
@@ -61,25 +61,25 @@ const getMenuItems = (props) => {
       primaryTogglesNestedList: true,
       leftIcon: <FontIcon className='material-icons' >chats</FontIcon>,
       nestedItems: [
-          {
-            value: '/chats',
-            visible: isAuthorised,
-            primaryText: intl.formatMessage({ id: 'private' }),
-            leftIcon: <FontIcon className='material-icons' >person</FontIcon>
-          },
-          {
-            value: '/public_chats',
-            visible: isAuthorised,
-            primaryText: intl.formatMessage({ id: 'public' }),
-            leftIcon: <FontIcon className='material-icons' >group</FontIcon>
-          },
-          {
-            value: '/predefined_chat_messages',
-            visible: isAuthorised,
-            primaryText: intl.formatMessage({ id: 'predefined_messages' }),
-            leftIcon: <FontIcon className='material-icons' >textsms</FontIcon>
-          }
-        ]
+        {
+          value: '/chats',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({ id: 'private' }),
+          leftIcon: <FontIcon className='material-icons' >person</FontIcon>
+        },
+        {
+          value: '/public_chats',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({ id: 'public' }),
+          leftIcon: <FontIcon className='material-icons' >group</FontIcon>
+        },
+        {
+          value: '/predefined_chat_messages',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({ id: 'predefined_messages' }),
+          leftIcon: <FontIcon className='material-icons' >textsms</FontIcon>
+        }
+      ]
     },
     {
       value: '/companies',
@@ -99,17 +99,17 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'firestore' }),
       leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>,
       nestedItems: [
-          {
-            value: '/document',
-            primaryText: intl.formatMessage({ id: 'document' }),
-            leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
-          },
-          {
-            value: '/collection',
-            primaryText: intl.formatMessage({ id: 'collection' }),
-            leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
-          }
-        ]
+        {
+          value: '/document',
+          primaryText: intl.formatMessage({ id: 'document' }),
+          leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
+        },
+        {
+          value: '/collection',
+          primaryText: intl.formatMessage({ id: 'collection' }),
+          leftIcon: <FontIcon className='material-icons' >flash_on</FontIcon>
+        }
+      ]
     },
     {
       value: '/about',
@@ -123,19 +123,19 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'administration' }),
       leftIcon: <FontIcon className='material-icons' >security</FontIcon>,
       nestedItems: [
-          {
-            value: '/users',
-            visible: isAuthorised, // In prod: isGranted('read_users'),
-            primaryText: intl.formatMessage({ id: 'users' }),
-            leftIcon: <FontIcon className='material-icons' >group</FontIcon>
-          },
-          {
-            value: '/roles',
-            visible: isGranted('read_roles'),
-            primaryText: intl.formatMessage({ id: 'roles' }),
-            leftIcon: <FontIcon className='material-icons' >account_box</FontIcon>
-          }
-        ]
+        {
+          value: '/users',
+          visible: isAuthorised, // In prod: isGranted('read_users'),
+          primaryText: intl.formatMessage({ id: 'users' }),
+          leftIcon: <FontIcon className='material-icons' >group</FontIcon>
+        },
+        {
+          value: '/roles',
+          visible: isGranted('read_roles'),
+          primaryText: intl.formatMessage({ id: 'roles' }),
+          leftIcon: <FontIcon className='material-icons' >account_box</FontIcon>
+        }
+      ]
     },
     {
       divider: true,
@@ -146,31 +146,31 @@ const getMenuItems = (props) => {
       primaryTogglesNestedList: true,
       leftIcon: <FontIcon className='material-icons' >settings</FontIcon>,
       nestedItems: [
-          {
-            primaryText: intl.formatMessage({ id: 'theme' }),
-            secondaryText: intl.formatMessage({ id: theme }),
-            primaryTogglesNestedList: true,
-            leftIcon: <FontIcon className='material-icons' >style</FontIcon>,
-            nestedItems: themeItems
-          },
-          {
-            primaryText: intl.formatMessage({ id: 'language' }),
-            secondaryText: intl.formatMessage({ id: locale }),
-            primaryTogglesNestedList: true,
-            leftIcon: <FontIcon className='material-icons' >language</FontIcon>,
-            nestedItems: localeItems
-          },
-          {
-            primaryText: intl.formatMessage({ id: 'responsive' }),
-            leftIcon: <FontIcon className='material-icons' >chrome_reader_mode</FontIcon>,
-            rightToggle: <Toggle
-                  toggled={responsiveDrawer.responsive}
-                  onToggle={
-                            () => { setResponsive(!responsiveDrawer.responsive) }
-                        }
-                    />
-          }
-        ]
+        {
+          primaryText: intl.formatMessage({ id: 'theme' }),
+          secondaryText: intl.formatMessage({ id: theme }),
+          primaryTogglesNestedList: true,
+          leftIcon: <FontIcon className='material-icons' >style</FontIcon>,
+          nestedItems: themeItems
+        },
+        {
+          primaryText: intl.formatMessage({ id: 'language' }),
+          secondaryText: intl.formatMessage({ id: locale }),
+          primaryTogglesNestedList: true,
+          leftIcon: <FontIcon className='material-icons' >language</FontIcon>,
+          nestedItems: localeItems
+        },
+        {
+          primaryText: intl.formatMessage({ id: 'responsive' }),
+          leftIcon: <FontIcon className='material-icons' >chrome_reader_mode</FontIcon>,
+          rightToggle: <Toggle
+            toggled={responsiveDrawer.responsive}
+            onToggle={
+              () => { setResponsive(!responsiveDrawer.responsive) }
+            }
+          />
+        }
+      ]
     }
   ]
 }
