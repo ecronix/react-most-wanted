@@ -4,48 +4,38 @@ try { admin.initializeApp(functions.config().firebase) } catch (e) { } // You do
 
 exports = module.exports = functions.database.ref('/public_chats/{taskUid}').onCreate(event => {
   const eventSnapshot = event.data
-  const userId = eventSnapshot.child('userId').val()
+  const authorName = eventSnapshot.child('authorName').val()
+  const authorPhotoUrl = eventSnapshot.child('authorPhotoUrl').val()
 
-  return admin.database().ref(`/users`).once('value')
-    .then(snapshot => {
-      let user = null
-      let registrationTokens = []
+  return admin.database().ref(`/notification_tokens`).once('value').then(nTokens => {
+    let registrationTokens = []
 
-      snapshot.forEach(function (childSnapshot) {
-        const childData = childSnapshot.val()
-
-        if (childSnapshot.key === userId) {
-          user = childData
-        } else {
-          childSnapshot.child('notificationTokens').forEach(token => {
-            if (token.val()) {
-              registrationTokens.push(token.key)
-            }
-          })
-        }
+    nTokens.forEach(user => {
+      user.forEach(token => {
+        registrationTokens.push(token.key)
       })
-
-      const payload = {
-        notification: {
-          title: `${user ? user.displayName : 'Someone'} wrote a new message!`,
-          body: eventSnapshot.child('message').val(),
-          icon: (user && user.photoURL !== undefined) ? user.photoURL : '/apple-touch-icon.png',
-          click_action: 'https://www.react-most-wanted.com/public_chats'
-        }
-      }
-
-      if (registrationTokens.length) {
-        return admin.messaging().sendToDevice(registrationTokens, payload)
-          .then(function (response) {
-            // See the MessagingDevicesResponse reference documentation for
-            // the contents of response.
-            console.log('Successfully sent message:', response)
-          })
-          .catch(function (error) {
-            console.log('Error sending message:', error)
-          })
-      } else {
-        console.log('Not tokens registered:', error)
-      }
     })
+
+    const payload = {
+      notification: {
+        title: `${authorName || 'UserName'}`,
+        body: eventSnapshot.child('message').val(),
+        icon: authorPhotoUrl || '/apple-touch-icon.png',
+        click_action: 'https://www.react-most-wanted.com/public_chats',
+        tag: 'public_chat'
+      }
+    }
+
+    if (registrationTokens.length) {
+      return admin.messaging().sendToDevice(registrationTokens, payload)
+        .then(function (response) {
+          console.log('Successfully sent message:', response)
+        })
+        .catch(function (error) {
+          console.log('Error sending message:', error)
+        })
+    } else {
+      console.log('Not tokens registered')
+    }
+  })
 })
