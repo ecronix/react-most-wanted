@@ -33,18 +33,29 @@ class InfiniteList extends Component {
     })
   }
 
+  addElement = (snap, pageIndex) => {
+    const { pages, list, values } = this.state
+
+    if (list.indexOf(snap.key) === -1) {
+      list.push(snap.key)
+
+      return this.setState({
+        list,
+        pages: { ...pages, [list.length - 1]: snap.key },
+        values: { ...values, [snap.key]: snap.val() }
+      })
+    }
+
+
+  }
+
 
   loadRows = (startIndex, stopIndex, calls = 0) => {
     const { firebaseApp } = this.props
-    const { pages, list, values } = this.state
+    const { pages } = this.state
 
-
-    console.log(`start ${startIndex} end ${stopIndex} calls ${calls} key ${pages[startIndex]}`)
     console.log(this.state)
-
-    let newList = list
-    let newPages = pages
-    let newValues = values
+    console.log(`start ${startIndex} end ${stopIndex} calls ${calls} key ${pages[startIndex]}`)
 
     if (calls > 3) {
       return
@@ -54,8 +65,8 @@ class InfiniteList extends Component {
 
     let query
 
-    if (startIndex !== 0 && pages[startIndex]) {
-      query = firebaseApp.database().ref('users').orderByKey().startAt(pages[startIndex]).limitToFirst(stopIndex - startIndex + 1)
+    if (startIndex !== 0 && pages[startIndex - 1]) {
+      query = firebaseApp.database().ref('users').orderByKey().startAt(pages[startIndex - 1]).limitToFirst(stopIndex - startIndex + 1)
     } else if (startIndex === 0) {
       query = firebaseApp.database().ref('users').orderByKey().limitToFirst(stopIndex - startIndex + 1)
     } else {
@@ -65,32 +76,13 @@ class InfiniteList extends Component {
     }
 
     return query.once('value', snapshot => {
-      let index = 0
       let pageIndex = startIndex
-
-      console.log('To load', stopIndex - startIndex)
-      console.log('Loaded', snapshot.numChildren())
-
-      snapshot.forEach((snap, i) => {
-        index++
+      snapshot.forEach(snap => {
         pageIndex++
-
-        if (snapshot.numChildren() !== index && newList.indexOf(snap.key) === -1) {
-          newList.push(snap.key)
-        } else if (newList.indexOf(snap.key) === -1 && (stopIndex - startIndex) > snapshot.numChildren()) {
-          newList.push(snap.key)
-        }
-
-        newPages[pageIndex] = snap.key
-        newValues[snap.key] = snap.val()
-
+        this.addElement(snap, pageIndex)
       })
-
-      return this.setState({
-        list: newList,
-        pages: newPages,
-        values: newValues
-      })
+    }).catch(e => {
+      console.log(e)
     })
 
   }
@@ -125,7 +117,7 @@ class InfiniteList extends Component {
     const { values } = this.state
 
     const count = Object.keys(values).length + 30
-    //const count = 99999999
+    //const count = 2300
 
     return (
       <Activity title={intl.formatMessage({ id: 'infinitelist' })}>
@@ -137,11 +129,14 @@ class InfiniteList extends Component {
           isRowLoaded={this.isRowLoaded}
           loadMoreRows={this.loadMoreRows}
           rowCount={count}
+          minimumBatchSize={50}
+          threshold={50}
         >
           {({ onRowsRendered, registerChild }) => (
             <List
               height={400}
               onRowsRendered={onRowsRendered}
+
               ref={registerChild}
               rowCount={count}
               rowHeight={20}
