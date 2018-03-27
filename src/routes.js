@@ -13,6 +13,7 @@ const AsyncTask = MyLoadable({ loader: () => import('./containers/Tasks/Task') }
 const AsyncTasks = MyLoadable({ loader: () => import('./containers/Tasks/Tasks') }, [AsyncTask]);
 const AsyncCompany = MyLoadable({ loader: () => import('./containers/Companies/Company') });
 const AsyncCompanies = MyLoadable({ loader: () => import('./containers/Companies/Companies') }, [AsyncCompany]);
+const AsyncInfiniteList = MyLoadable({ loader: () => import('./containers/InfiniteList/InfiniteList') });
 
 const Routes = [
     <RestrictedRoute type='private' path="/" exact component={AsyncDashboard} />,
@@ -26,6 +27,7 @@ const Routes = [
     <RestrictedRoute type='private' path="/about" exact component={AsyncAbout} />,
     <RestrictedRoute type='private' path="/document" exact component={AsyncDocument} />,
     <RestrictedRoute type='private' path="/collection" exact component={AsyncCollection} />,
+    <RestrictedRoute type='private' path="/infinitelist" exact component={AsyncInfiniteList} />,
 ]
 
 export default Routes;
