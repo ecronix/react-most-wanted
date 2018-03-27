@@ -94,6 +94,12 @@ const getMenuItems = (props) => {
       leftIcon: <FontIcon className='material-icons' >list</FontIcon>
     },
     {
+      value: '/infinitelist',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({ id: 'infinitelist' }),
+      leftIcon: <FontIcon className='material-icons' >view_list</FontIcon>
+    },
+    {
       visible: isAuthorised,
       primaryTogglesNestedList: true,
       primaryText: intl.formatMessage({ id: 'firestore' }),

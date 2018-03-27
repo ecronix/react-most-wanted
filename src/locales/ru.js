@@ -1,6 +1,6 @@
-import {defineMessages} from 'react-intl';
+import { defineMessages } from 'react-intl'
 
-const messages=defineMessages({
+const messages = defineMessages({
   app_name: 'React Самый разыскиваемый',
   dashboard: 'Панель мониторинга',
   about: 'О нас',
@@ -144,7 +144,8 @@ const messages=defineMessages({
   user_label_search: 'Поиск людей',
   document: 'Документ',
   collection: 'Коллекция',
+  infinitelist: 'Infinitelist'
 
-});
+})
 
-export default messages;
+export default messages
