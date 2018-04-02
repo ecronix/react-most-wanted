@@ -7,7 +7,7 @@
     "firebase-functions": "^0.9.1",
     "glob": "^7.1.2",
     "moment": "^2.22.0",
-    "nodemailer": "^4.6.3",
+    "nodemailer": "^4.6.4",
     "request": "^2.85.0",
     "request-promise": "^4.2.2"
   },
