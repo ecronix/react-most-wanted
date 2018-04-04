@@ -1,17 +1,16 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-try { admin.initializeApp(functions.config().firebase) } catch (e) { } // You do that because the admin SDK can only be initialized once.
+try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK can only be initialized once.
 const notifications = require('../../utils/notifications')
 
-exports = module.exports = functions.database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}').onCreate(event => {
-  if (event.auth.admin) {
+exports = module.exports = functions.database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}').onCreate((eventSnapshot, context) => {
+  if (context.auth.admin) {
     return null
   }
 
-  const senderUid = event.params.senderUid
-  const receiverUid = event.params.receiverUid
-  const messageUid = event.params.messageUid
-  const eventSnapshot = event.data
+  const senderUid = context.params.senderUid
+  const receiverUid = context.params.receiverUid
+  const messageUid = context.params.messageUid
   const snapValues = eventSnapshot.val()
   const senderChatRef = admin.database().ref(`/user_chats/${senderUid}/${receiverUid}`)
   const receiverChatRef = admin.database().ref(`/user_chats/${receiverUid}/${senderUid}`)
@@ -40,7 +39,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
 
   const udateReceiverChatMessage = receiverChatMessageRef.update(snapValues).then(() => {
     senderChatMessageRef.update({
-      isSend: event.timestamp
+      isSend: context.timestamp
     })
   })
 
@@ -49,7 +48,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     lastMessage: lastMessage,
     authorUid: senderUid,
     lastCreated: snapValues.created,
-    isSend: event.timestamp,
+    isSend: context.timestamp,
     isRead: null
   })
   const udateReceiverChat = receiverChatRef.update({
@@ -58,7 +57,7 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
     photoURL: snapValues.authorPhotoUrl ? snapValues.authorPhotoUrl : '',
     lastMessage: lastMessage,
     lastCreated: snapValues.created,
-    isSend: event.timestamp,
+    isSend: context.timestamp,
     isRead: null
   })
   const updateReceiverUnred = receiverChatUnreadRef.transaction(number => {
@@ -80,10 +79,10 @@ exports = module.exports = functions.database.ref('/user_chat_messages/{senderUi
 
     notifyUser = notifications.notifyUser(receiverUid, payload).then(() => {
       senderChatMessageRef.update({
-        isReceived: event.timestamp
+        isReceived: context.timestamp
       }).then(() => {
         senderChatRef.update({
-          isReceived: event.timestamp
+          isReceived: context.timestamp
         })
       })
     })

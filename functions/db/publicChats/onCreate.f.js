@@ -1,9 +1,8 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-try { admin.initializeApp(functions.config().firebase) } catch (e) { } // You do that because the admin SDK can only be initialized once.
+try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK can only be initialized once.
 
-exports = module.exports = functions.database.ref('/public_chats/{taskUid}').onCreate(event => {
-  const eventSnapshot = event.data
+exports = module.exports = functions.database.ref('/public_chats/{taskUid}').onCreate((eventSnapshot, context) => {
   const authorName = eventSnapshot.child('authorName').val()
   const authorPhotoUrl = eventSnapshot.child('authorPhotoUrl').val()
 
