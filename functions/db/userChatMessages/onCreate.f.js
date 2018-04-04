@@ -4,7 +4,8 @@ try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK
 const notifications = require('../../utils/notifications')
 
 exports = module.exports = functions.database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}').onCreate((eventSnapshot, context) => {
-  if (context.auth.admin) {
+
+  if (context.authType === 'ADMIN') {
     return null
   }
 

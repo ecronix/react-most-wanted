@@ -14,7 +14,11 @@ exports = module.exports = functions.auth.user().onCreate((userMetadata, context
   const year = creationTime.format('YYYY')
   const month = creationTime.format('MM')
   const day = creationTime.format('DD')
-  const provider = userMetadata.providerData ? userMetadata.providerData[0] : {}
+
+  console.log(userMetadata)
+  console.log(context)
+
+  const provider = userMetadata.providerData.length ? userMetadata.providerData[0] : {}
   const providerId = provider.providerId ? provider.providerId.replace('.com', '') : provider.providerId
 
   let promises = []
