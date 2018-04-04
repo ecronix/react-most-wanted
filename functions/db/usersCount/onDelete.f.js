@@ -2,9 +2,9 @@ const functions = require('firebase-functions')
 const usersUtil = require('../../utils/users')
 const admin = require('firebase-admin')
 const moment = require('moment')
-try { admin.initializeApp(functions.config().firebase) } catch (e) { } // You do that because the admin SDK can only be initialized once.
+try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK can only be initialized once.
 
-exports = module.exports = functions.database.ref('/users_count').onDelete(event => {
+exports = module.exports = functions.database.ref('/users_count').onDelete((data, context) => {
   const getDBUsers = admin.database().ref('users').once('value')
   const getAuthUsers = usersUtil.listAllUsers()
 

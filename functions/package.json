@@ -2,9 +2,9 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
-    "camelcase": "^4.1.0",
+    "camelcase": "^5.0.0",
     "firebase-admin": "^5.11.0",
-    "firebase-functions": "^0.9.1",
+    "firebase-functions": "^1.0.0",
     "glob": "^7.1.2",
     "moment": "^2.22.0",
     "nodemailer": "^4.6.4",

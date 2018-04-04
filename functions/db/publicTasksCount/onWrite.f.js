@@ -1,6 +1,6 @@
-const functions = require('firebase-functions');
+const functions = require('firebase-functions')
 const counting = require('../../utils/counting')
 
 exports = module.exports = functions.database.ref('/public_tasks_count').onWrite(
-  (event) => counting.handleRecount(event, 'public_tasks')
+  (data, context) => counting.handleRecount(data, context, 'public_tasks')
 )
