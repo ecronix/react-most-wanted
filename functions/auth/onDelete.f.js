@@ -13,6 +13,10 @@ exports = module.exports = functions.auth.user().onDelete((userMetadata, context
   const provider = userMetadata.providerData ? userMetadata.providerData[0] : {}
   const providerId = provider.providerId ? provider.providerId.replace('.com', '') : provider.providerId
 
+  console.log(userMetadata.providerData)
+  console.log(userMetadata)
+  console.log(context)
+
   let promises = []
 
   const mailOptions = {
