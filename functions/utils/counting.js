@@ -3,7 +3,7 @@ try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK
 
 module.exports = {
   handleListChange: (data, context, counterName) => {
-    if (data.after.exists() && data.previous.exists()) {
+    if (data.after.exists() && data.before.exists()) {
       return
     }
 
