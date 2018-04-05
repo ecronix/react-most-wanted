@@ -3,17 +3,17 @@ try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK
 
 module.exports = {
   handleListChange: (data, context, counterName) => {
-    if (data.exists() && data.previous.exists()) {
+    if (data.after.exists() && data.previous.exists()) {
       return
     }
 
-    const collectionRef = event.data.adminRef.parent
+    const collectionRef = data.ref.parent
     const countRef = collectionRef.parent.child(counterName)
 
     // Return the promise from countRef.transaction() so our function
     // waits for this async event to complete before it exits.
     return countRef.transaction(current => {
-      if (data.exists()) {
+      if (data.after.exists()) {
         return (current || 0) + 1
       } else {
         return (current || 0) - 1
@@ -24,7 +24,7 @@ module.exports = {
   },
   handleRecount: (data, context, listName, correction = 0) => {
     if (!data.exists()) {
-      const counterRef = data.adminRef
+      const counterRef = data.ref
       const collectionRef = counterRef.parent.child(listName)
 
       // Return the promise from counterRef.set() so our function
