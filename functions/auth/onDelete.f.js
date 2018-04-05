@@ -11,12 +11,12 @@ exports = module.exports = functions.auth.user().onDelete((userMetadata, context
   const email = userMetadata.email
   const displayName = userMetadata.displayName
 
-  const provider = userMetadata.providerData !== [] ? userMetadata.providerData[0] : { providerId: email ? 'password' : 'phone' }
-  const providerId = provider.providerId ? provider.providerId.replace('.com', '') : provider.providerId
-
   console.log(userMetadata.providerData)
   console.log(userMetadata)
   console.log(context)
+
+  const provider = userMetadata.providerData.length ? userMetadata.providerData[0] : { providerId: email ? 'password' : 'phone' }
+  const providerId = provider.providerId ? provider.providerId.replace('.com', '') : provider.providerId
 
   let promises = []
 
@@ -32,6 +32,8 @@ exports = module.exports = functions.auth.user().onDelete((userMetadata, context
   })
 
   const deleteUser = admin.database().ref(`/users/${uid}`).remove()
+  const deleteTokens = admin.database().ref(`/notification_tokens/${uid}`).remove()
+  const deleteChats = admin.database().ref(`/users_chats/${uid}`).remove()
 
   const usersCount = admin.database()
     .ref(`/users_count`)
@@ -45,7 +47,7 @@ exports = module.exports = functions.auth.user().onDelete((userMetadata, context
     )
   }
 
-  promises.push(sendEmail, deleteUser, usersCount)
+  promises.push(sendEmail, deleteUser, usersCount, deleteTokens, deleteChats)
 
   return Promise.all(promises)
 })
