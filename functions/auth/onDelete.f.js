@@ -10,7 +10,8 @@ exports = module.exports = functions.auth.user().onDelete((userMetadata, context
   const uid = userMetadata.uid
   const email = userMetadata.email
   const displayName = userMetadata.displayName
-  const provider = userMetadata.providerData ? userMetadata.providerData[0] : {}
+
+  const provider = userMetadata.providerData !== [] ? userMetadata.providerData[0] : { providerId: email ? 'password' : 'phone' }
   const providerId = provider.providerId ? provider.providerId.replace('.com', '') : provider.providerId
 
   console.log(userMetadata.providerData)
