@@ -1,5 +1,4 @@
-const admin = require('firebase-admin')
-try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK can only be initialized once.
+const admin = require('../admin')
 
 // Source: https://firebase.google.com/docs/auth/admin/manage-users
 const listAllUsers = (userIds = [], nextPageToken) => {

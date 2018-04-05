@@ -1,6 +1,5 @@
 const functions = require('firebase-functions')
-const admin = require('firebase-admin')
-try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK can only be initialized once.
+const admin = require('../admin')
 const nodemailer = require('nodemailer')
 const gmailEmail = encodeURIComponent(functions.config().gmail.email)
 const gmailPassword = encodeURIComponent(functions.config().gmail.password)
