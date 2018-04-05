@@ -22,7 +22,7 @@ exports = module.exports = functions.auth.user().onCreate((userMetadata, context
     // User with provider data
     console.log(user)
 
-    const provider = user.providerData !== [] ? user.providerData[0] : { providerId: 'password' }
+    const provider = user.providerData !== [] ? user.providerData[0] : { providerId: email ? 'password' : 'phone' }
     const providerId = provider.providerId ? provider.providerId.replace('.com', '') : provider.providerId
 
     let promises = []
