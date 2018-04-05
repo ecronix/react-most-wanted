@@ -1,6 +1,3 @@
-const admin = require('firebase-admin')
-try { admin.initializeApp() } catch (e) { } // You do that because the admin SDK can only be initialized once.
-
 module.exports = {
   handleListChange: (data, context, counterName) => {
     if (data.after.exists() && data.before.exists()) {
