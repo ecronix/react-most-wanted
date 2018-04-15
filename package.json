@@ -56,7 +56,7 @@
     "redux-persist": "^5.9.1",
     "redux-responsive": "^4.3.6",
     "redux-thunk": "^2.2.0",
-    "rmw-shell": "^1.6.2",
+    "rmw-shell": "^1.6.3",
     "selenium-webdriver": "^4.0.0-alpha.1",
     "source-map-explorer": "^1.5.0"
   },
