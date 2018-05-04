@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import muiThemeable from 'material-ui/styles/muiThemeable'
+import { withTheme } from 'material-ui/styles'
 import { injectIntl } from 'react-intl'
-import { Activity } from 'rmw-shell'
-import { List, ListItem } from 'material-ui/List'
+import List, { ListItem, ListItemText } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
-import FontIcon from 'material-ui/FontIcon'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
+import Icon from 'material-ui/Icon'
+import Button from 'material-ui/Button'
 import { withRouter } from 'react-router-dom'
 import Avatar from 'material-ui/Avatar'
 import { withFirebase } from 'firekit-provider'
-import isGranted from 'rmw-shell/lib/utils/auth'
-import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
+import isGranted from 'rmw-shell/lib/utils/auth';
+import { Activity, Scrollbar } from 'rmw-shell'
 
 class Companies extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const { watchList, firebaseApp } = this.props
 
     let ref = firebaseApp.database().ref('companies').limitToFirst(20)
@@ -23,7 +22,7 @@ class Companies extends Component {
     watchList(ref)
   }
 
-  renderList (companies) {
+  renderList(companies) {
     const { history } = this.props
 
     if (companies === undefined) {
@@ -33,40 +32,29 @@ class Companies extends Component {
     return companies.map((company, index) => {
       return <div key={index}>
         <ListItem
-          leftAvatar={
-            <Avatar
-              src={company.val.photoURL}
-              alt='bussines'
-              icon={
-                <FontIcon className='material-icons'>
-                  business
-                </FontIcon>
-              }
-            />
-          }
           key={index}
-          primaryText={company.val.name}
-          secondaryText={company.val.full_name}
           onClick={() => { history.push(`/companies/edit/${company.key}`) }}
-          id={index}
-        />
+          id={index}>
+          {company.val.photoURL && <Avatar src={company.val.photoURL} alt='bussines' />}
+          {!company.val.photoURL && <Avatar> <Icon > business </Icon>  </Avatar>}
+          <ListItemText primary={company.val.name} secondary={company.val.full_name} />
+        </ListItem>
         <Divider inset />
       </div>
     })
   }
 
-  render () {
-    const { intl, companies, muiTheme, history, isGranted } = this.props
+  render() {
+    const { intl, companies, theme, history, isGranted, classes } = this.props
 
     return (
       <Activity
         isLoading={companies === undefined}
         containerStyle={{ overflow: 'hidden' }}
         title={intl.formatMessage({ id: 'companies' })}>
-
         <Scrollbar>
 
-          <div style={{ overflow: 'none', backgroundColor: muiTheme.palette.convasColor }}>
+          <div style={{ overflow: 'none', backgroundColor: theme.palette.convasColor }}>
             <List id='test' style={{ height: '100%' }} ref={(field) => { this.list = field }}>
               {this.renderList(companies)}
             </List>
@@ -75,12 +63,14 @@ class Companies extends Component {
           <div style={{ position: 'fixed', right: 18, zIndex: 3, bottom: 18 }}>
             {
               isGranted('create_company') &&
-              <FloatingActionButton secondary onClick={() => { history.push(`/companies/create`) }} style={{ zIndex: 3 }}>
-                <FontIcon className='material-icons' >add</FontIcon>
-              </FloatingActionButton>
+              <Button variant='fab' color='secondary' onClick={() => { history.push(`/companies/create`) }} >
+                <Icon className='material-icons' >add</Icon>
+              </Button>
             }
           </div>
+
         </Scrollbar>
+
       </Activity>
     )
   }
@@ -105,4 +95,4 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps
-)(injectIntl(muiThemeable()(withRouter(withFirebase(Companies)))))
+)(injectIntl(withTheme()(withRouter(withFirebase(Companies)))))
