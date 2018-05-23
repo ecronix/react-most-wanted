@@ -4,11 +4,11 @@
   "dependencies": {
     "camelcase": "^5.0.0",
     "firebase-admin": "^5.12.1",
-    "firebase-functions": "^1.0.2",
+    "firebase-functions": "^1.0.3",
     "glob": "^7.1.2",
     "moment": "^2.22.1",
     "nodemailer": "^4.6.4",
-    "request": "^2.86.0",
+    "request": "^2.87.0",
     "request-promise": "^4.2.2"
   },
   "private": true,
