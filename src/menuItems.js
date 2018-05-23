@@ -1,14 +1,10 @@
 import React from 'react'
-import Icon from 'material-ui/Icon'
-import Switch from 'material-ui/Switch'
+import Icon from '@material-ui/core/Icon'
 import allLocales from './locales'
 import allThemes from './themes'
 
 const getMenuItems = (props) => {
   const {
-    responsiveDrawer,
-    setResponsive,
-    theme,
     locale,
     updateTheme,
     updateLocale,
@@ -140,7 +136,7 @@ const getMenuItems = (props) => {
       nestedItems: [
         {
           primaryText: intl.formatMessage({ id: 'theme' }),
-          secondaryText: intl.formatMessage({ id: theme }),
+          secondaryText: intl.formatMessage({ id: themeSource }),
           primaryTogglesNestedList: true,
           leftIcon: <Icon className='material-icons' >style</Icon>,
           nestedItems: themeItems
