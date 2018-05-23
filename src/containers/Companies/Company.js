@@ -4,24 +4,23 @@ import PropTypes from 'prop-types';
 import { injectIntl, intlShape } from 'react-intl';
 import { Activity } from 'rmw-shell'
 //import { ResponsiveMenu } from 'material-ui-responsive-menu';
-import { withTheme, withStyles } from 'material-ui/styles'
-import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions';
+import { withTheme, withStyles } from '@material-ui/core/styles'
+import { setDialogIsOpen } from 'rmw-shell/lib/store/dialogs/actions'
 import CompanyForm from '../../components/Forms/CompanyForm';
 import { withRouter } from 'react-router-dom';
-import Icon from 'material-ui/Icon';
-import Button from 'material-ui/Button';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { withFirebase } from 'firekit-provider'
 import FireForm from 'fireform'
 import { isLoading } from 'firekit'
 import { change, submit } from 'redux-form';
 import isGranted from 'rmw-shell/lib/utils/auth';
-import IconButton from 'material-ui/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 
 const path = '/companies/';
 const form_name = 'company';
@@ -74,7 +73,6 @@ class Company extends Component {
       dialogs,
       match,
       submit,
-      theme,
       isGranted,
       firebaseApp,
       uid,
