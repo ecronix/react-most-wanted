@@ -7,6 +7,7 @@ const getMenuItems = (props) => {
   const {
     locale,
     updateTheme,
+    switchNightMode,
     updateLocale,
     intl,
     themeSource,
@@ -22,7 +23,7 @@ const getMenuItems = (props) => {
       visible: true,
       primaryText: intl.formatMessage({ id: t.id }),
       onClick: () => { updateTheme(t.id) },
-      leftIcon: <Icon >style</Icon>
+      leftIcon: <Icon style={{ color: t.color }} >style</Icon>
     }
   })
 
@@ -136,9 +137,9 @@ const getMenuItems = (props) => {
       nestedItems: [
         {
           primaryText: intl.formatMessage({ id: 'theme' }),
-          secondaryText: intl.formatMessage({ id: themeSource }),
+          secondaryText: intl.formatMessage({ id: themeSource.source }),
           primaryTogglesNestedList: true,
-          leftIcon: <Icon className='material-icons' >style</Icon>,
+          leftIcon: <Icon > style</Icon >,
           nestedItems: themeItems
         },
         {
@@ -149,6 +150,14 @@ const getMenuItems = (props) => {
           nestedItems: localeItems
         }
       ]
+    },
+    {
+      onClick: () => {
+        switchNightMode(!themeSource.isNightModeOn)
+      },
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({ id: themeSource.isNightModeOn ? 'day_mode' : 'night_mode' }),
+      leftIcon: <Icon className='material-icons' >{themeSource.isNightModeOn ? 'brightness_7' : 'brightness_2'}</Icon>
     }
   ]
 }
