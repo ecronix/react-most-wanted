@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
-import Scrollbar from 'rmw-shell/lib/components/Scrollbar'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -11,12 +10,19 @@ import { withRouter } from 'react-router-dom'
 import Toolbar from '@material-ui/core/Toolbar'
 
 const styles = theme => ({
+  main: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
   root: {
-    height: '100%'
+    flexGrow: 1,
+    flex: '1 0 100%'
+    // height: '100%',
+    // overflow: 'hidden'
   },
   hero: {
     height: '100%',
-    minHeight: '80vh',
+    // minHeight: '80vh',
     flex: '0 0 auto',
     display: 'flex',
     justifyContent: 'center',
@@ -83,16 +89,39 @@ const styles = theme => ({
 })
 
 class LandingPage extends Component {
+
+
+  isAuthorised = () => {
+    try {
+      const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
+      const data = JSON.parse(localStorage.getItem(key))
+      const auth = JSON.parse(data.auth)
+
+      return auth && auth.isAuthorised
+
+    } catch (ex) {
+      return false
+    }
+  }
+
+  componentDidMount() {
+    const { history } = this.props
+
+    if (this.isAuthorised()) {
+      history.push('/signin')
+    }
+  }
+
+
   render() {
     const { classes, history } = this.props
 
     return (
-
-      <div className={classes.root}>
+      <div className={classes.main}>
         <Helmet>
           <title>REACT MOST WANTED</title>
         </Helmet>
-        <AppBar position="static">
+        <AppBar position='static'>
           <Toolbar disableGutters>
             <div style={{ flex: 1 }} />
 
@@ -108,7 +137,10 @@ class LandingPage extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Scrollbar>
+
+        <div className={classes.root}>
+
+
           <div className={classes.hero}>
             <div className={classes.content}>
               <img
@@ -147,7 +179,7 @@ class LandingPage extends Component {
               </div>
             </div>
           </div>
-        </Scrollbar>
+        </div>
       </div>
 
     )
