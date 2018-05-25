@@ -2,6 +2,11 @@ import React from 'react'
 import Icon from '@material-ui/core/Icon'
 import allLocales from './locales'
 import allThemes from './themes'
+import LanguageIcon from '@material-ui/icons/Language'
+import StyleIcon from '@material-ui/icons/Style'
+import Brightness2 from '@material-ui/icons/Brightness2'
+import Brightness7 from '@material-ui/icons/Brightness7'
+import SettingsIcon from '@material-ui/icons/Settings'
 
 const getMenuItems = (props) => {
   const {
@@ -23,7 +28,7 @@ const getMenuItems = (props) => {
       visible: true,
       primaryText: intl.formatMessage({ id: t.id }),
       onClick: () => { updateTheme(t.id) },
-      leftIcon: <Icon style={{ color: t.color }} >style</Icon>
+      leftIcon: <StyleIcon style={{ color: t.color }} />
     }
   })
 
@@ -33,7 +38,7 @@ const getMenuItems = (props) => {
       visible: true,
       primaryText: intl.formatMessage({ id: l.locale }),
       onClick: () => { updateLocale(l.locale) },
-      leftIcon: <Icon >language</Icon>
+      leftIcon: <LanguageIcon />
     }
   })
 
@@ -133,31 +138,28 @@ const getMenuItems = (props) => {
     {
       primaryText: intl.formatMessage({ id: 'settings' }),
       primaryTogglesNestedList: true,
-      leftIcon: <Icon className='material-icons' >settings</Icon>,
+      leftIcon: <SettingsIcon />,
       nestedItems: [
         {
           primaryText: intl.formatMessage({ id: 'theme' }),
           secondaryText: intl.formatMessage({ id: themeSource.source }),
           primaryTogglesNestedList: true,
-          leftIcon: <Icon > style</Icon >,
+          leftIcon: <StyleIcon />,
           nestedItems: themeItems
         },
         {
           primaryText: intl.formatMessage({ id: 'language' }),
           secondaryText: intl.formatMessage({ id: locale }),
           primaryTogglesNestedList: true,
-          leftIcon: <Icon className='material-icons' >language</Icon>,
+          leftIcon: <LanguageIcon />,
           nestedItems: localeItems
         }
       ]
     },
     {
-      onClick: () => {
-        switchNightMode(!themeSource.isNightModeOn)
-      },
-      visible: isAuthorised,
+      onClick: () => { switchNightMode(!themeSource.isNightModeOn) },
       primaryText: intl.formatMessage({ id: themeSource.isNightModeOn ? 'day_mode' : 'night_mode' }),
-      leftIcon: <Icon className='material-icons' >{themeSource.isNightModeOn ? 'brightness_7' : 'brightness_2'}</Icon>
+      leftIcon: themeSource.isNightModeOn ? <Brightness7 /> : <Brightness2 />
     }
   ]
 }
