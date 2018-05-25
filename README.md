@@ -352,7 +352,7 @@ To:
 Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
 
 ## TO DO
-- [ ] update to material-ui@next
+- [X] update to material-ui@next
 - [ ] finish tests
 
 ## License

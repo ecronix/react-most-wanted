@@ -31,7 +31,7 @@ export default function configureStore () {
   const persistorConfig = {
     key: 'root',
     storage,
-    blacklist: ['auth', 'form', 'connection', 'initialization', 'messaging']
+    blacklist: ['form', 'connection', 'initialization', 'messaging']
   }
 
   const reducer = persistReducer(persistorConfig, reducers)
