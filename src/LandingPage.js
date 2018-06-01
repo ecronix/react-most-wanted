@@ -1,13 +1,18 @@
-import React, { Component } from 'react'
-import IconButton from '@material-ui/core/IconButton'
-import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
-import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import { Helmet } from 'react-helmet'
 import AppBar from '@material-ui/core/AppBar'
-import { withRouter } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import LockIcon from '@material-ui/icons/Lock'
+import React, { Component } from 'react'
 import Toolbar from '@material-ui/core/Toolbar'
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
+import { Helmet } from 'react-helmet'
+import { withRouter } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
 
 const styles = theme => ({
   main: {
@@ -61,7 +66,7 @@ const styles = theme => ({
     height: '100%',
     // paddingTop: theme.spacing.unit * 8,
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing.unit * 12
+      paddingTop: theme.spacing.unit
     }
   },
   button: {
@@ -84,7 +89,40 @@ const styles = theme => ({
   stepIcon: {
     marginBottom: theme.spacing.unit
   },
-  markdownElement: {}
+  markdownElement: {},
+  cardsContent: {
+    padding: 15,
+    display: 'flex',
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    [theme.breakpoints.only('xs')]: {
+      width: '100%',
+      padding: 0,
+      paddingTop: 15
+    }
+
+  },
+  card: {
+    minWidth: 275,
+    margin: 15,
+    [theme.breakpoints.only('xs')]: {
+      width: '100%',
+      margin: 0,
+      marginTop: 7
+    }
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  cardTitle: {
+    marginBottom: 16,
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
 
 })
 
@@ -125,16 +163,29 @@ class LandingPage extends Component {
           <Toolbar disableGutters>
             <div style={{ flex: 1 }} />
 
-            <IconButton
-              name='github'
-              aria-label='Open Github'
-              color='inherit'
-              href='https://github.com/TarikHuber/react-most-wanted'
-              target='_blank'
-              rel='noopener'
-            >
-              <GitHubIcon />
-            </IconButton>
+            <Tooltip id="tooltip-icon1" title="Sign in">
+              <IconButton
+                name='signin'
+                aria-label='Open Github'
+                color='inherit'
+                onClick={() => { history.push('/signin') }}
+                rel='noopener'
+              >
+                <LockIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip id="tooltip-icon2" title="GitHub repository">
+              <IconButton
+                name='github'
+                aria-label='Open Github'
+                color='inherit'
+                href='https://github.com/TarikHuber/react-most-wanted'
+                target='_blank'
+                rel='noopener'
+              >
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
 
@@ -176,6 +227,36 @@ class LandingPage extends Component {
                 >
                   {'Get Started'}
                 </Button>
+              </div>
+
+              <div className={classes.cardsContent}>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="headline" component="h2">Installation</Typography>
+                    <Typography className={classes.pos} color="textSecondary"> to do   </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Learn More</Button>
+                  </CardActions>
+                </Card>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="headline" component="h2">Usage</Typography>
+                    <Typography className={classes.pos} color="textSecondary"> to do   </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Learn More</Button>
+                  </CardActions>
+                </Card>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="headline" component="h2">Open Source</Typography>
+                    <Typography className={classes.pos} color="textSecondary"> to do   </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Learn More</Button>
+                  </CardActions>
+                </Card>
               </div>
             </div>
           </div>
