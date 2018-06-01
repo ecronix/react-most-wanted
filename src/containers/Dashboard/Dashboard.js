@@ -16,7 +16,7 @@ const monthsPath = `/user_registrations_per_month/${currentYear}`
 const providerPath = `/provider_count`
 
 class Dashboard extends Component {
-  componentDidMount () {
+  componentDidMount() {
     const { watchPath } = this.props
 
     watchPath(daysPath)
@@ -25,7 +25,7 @@ class Dashboard extends Component {
     watchPath('users_count')
   }
 
-  render () {
+  render() {
     const { theme, intl, days, months, providers, usersCount } = this.props
 
     let daysLabels = []
