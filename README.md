@@ -2,7 +2,6 @@
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][daviddm-image]][daviddm-url]
 [![License][license-image]][license-url]
-[![Code Coverage][coverage-image]][coverage-url]
 [![Code Style][code-style-image]][code-style-url]
 
 I like `short` README's so here we go :sunglasses:
@@ -101,8 +100,6 @@ Thanks to @SiradDev for creating the logo for this project :smile:
 [travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted
 [daviddm-image]: https://img.shields.io/david/TarikHuber/react-most-wanted.svg?style=flat-square
 [daviddm-url]: https://david-dm.org/TarikHuber/react-most-wanted
-[coverage-image]: https://img.shields.io/codecov/c/github/TarikHuber/react-most-wanted.svg?style=flat-square
-[coverage-url]: https://codecov.io/gh/TarikHuber/react-most-wanted
 [license-image]: https://img.shields.io/npm/l/express.svg
 [license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
 [code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
