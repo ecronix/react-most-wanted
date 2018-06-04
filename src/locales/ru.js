@@ -144,7 +144,7 @@ const messages = defineMessages({
   user_label_search: 'Поиск людей',
   document: 'Документ',
   collection: 'Коллекция',
-  infinitelist: 'Бесконечный скроллинг'
+  infinitelist: 'Бесконечный скроллинг',
   mark_chat_as_unread: 'Пометить как непрочитанное',
   delete_chat: 'Удалить чат',
   search: 'Поиск',
