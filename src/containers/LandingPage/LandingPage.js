@@ -134,6 +134,7 @@ class LandingPage extends Component {
                     {'React Starter-Kit with all Most Wanted features.'}
                   </Typography>
                   <Button
+                    name='getStarted'
                     onClick={() => { history.push('/signin') }}
                     className={classes.button}
                     variant='outlined'
