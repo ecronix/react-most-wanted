@@ -26,7 +26,7 @@ React Most Wanted is a react Starter Kit based on [Create React App](https://git
 
 Check this out:
 * it is build with CRA and even if you use this Starter Kit your CRA scripts will work properly. You will be able to make every CRA update as if you have started with it. We don't eject anyone from CRA :smile:
-* it is based on a library [rmw-shell](https://github.com/TarikHuber/rmw-shell) witch keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where are the hard work is already done for you.
+* it is based on a library [rmw-shell](https://github.com/TarikHuber/rmw-shell) witch keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where the hard work is already done for you.
 * there is a simple script to start a fresh project without forking anything `npx create-react-app test-app --scripts-version rmw-react-scripts`
 * it has all "MOST WANTED" features build in. That is where the name comes from :wink: We come to the features a little bit later.
 * it is customisable
@@ -53,7 +53,7 @@ Let's take a look at some of them:
 
 # Are there more in depth informations about this project?
 
-Sure. It is a project made over years and still fully supported. reason for that is that we use it in our company for production projects so it has to work for at least some years. Good enough for the JavaScript ecosystem :wink:
+Sure. It is a project made over years and still fully supported. Reason for that is that we use it in our company for production projects so it has to work for at least some years. Good enough for the JavaScript ecosystem :wink:
 
 The informations you are seeking are skatered over some Medium articles writen by me at the time I was working on solving some problems in this project. So they should explain some core parts in detail:
 - [Beyond create-react-app](https://codeburst.io/beyond-create-react-app-cra-a2063196a124)
@@ -82,6 +82,7 @@ YES! :trollface:
 [<img src="https://www.browserstack.com/images/mail/browserstack-logo-footer.png" width="120">](https://www.browserstack.com/)
 
 Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
+Thanks to @SiradDev for creating the logo for this project :smile:
 
 ## TO DO
 - [ ] finish tests
@@ -90,9 +91,6 @@ Thank you to [BrowserStack](https://www.browserstack.com/) for providing the inf
 
 MIT
 
-## Logo
-
-Thanks to @SiradDev for creating the logo for this project :smile:
 
 [logo-image]: https://www.react-most-wanted.com/favicon-32x32.png
 [logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md
