@@ -10,13 +10,13 @@ import { withA2HS } from 'a2hs'
 addLocalizationData(locales)
 
 class Main extends Component {
-  componentDidMount () {
-    const { setA2HPState } = this.props
-    console.log(this.props)
+  componentDidMount() {
+    //const { setA2HPState } = this.props
+    //console.log(this.props)
     // setA2HPState({ isAppInstallable: true })
   }
 
-  render () {
+  render() {
     return <div>
       <Helmet>
         <link async type='text/css' rel='stylesheet' href='https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.css' />
