@@ -4,6 +4,7 @@ import Loadable from 'react-loadable'
 import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import registerServiceWorker from 'rmw-shell/lib/registerServiceWorker'
+import A2HSProvider from 'a2hs'
 
 const MainAsync = Loadable({
   loader: () => import('./Main'),
@@ -16,12 +17,14 @@ const LPAsync = Loadable({
 });
 
 ReactDOM.render(
-  <Router>
-    <Switch>
-      <Route path='/' exact component={LPAsync} />
-      <Route component={MainAsync} />
-    </Switch>
-  </Router>
+  <A2HSProvider>
+    <Router>
+      <Switch>
+        <Route path='/' exact component={LPAsync} />
+        <Route component={MainAsync} />
+      </Switch>
+    </Router>
+  </A2HSProvider>
   , document.getElementById('root')
   , () => {
     setTimeout(() => {
