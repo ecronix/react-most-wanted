@@ -16,7 +16,7 @@ const AsyncCollection = MyLoadable({ loader: () => import('./containers/Collecti
 const routes = [
   <RestrictedRoute type='private' path="/" exact component={AsyncDashboard} />,
   <RestrictedRoute type='private' path="/dashboard" exact component={AsyncDashboard} />,
-  <RestrictedRoute path="/about" exact component={AsyncAbout} />,
+  <RestrictedRoute type='private' path="/about" exact component={AsyncAbout} />,
   <RestrictedRoute type='private' path="/companies" exact component={AsyncCompanies} />,
   <RestrictedRoute type='private' path="/companies/edit/:uid" exact component={AsyncCompany} />,
   <RestrictedRoute type='private' path="/companies/create" exact component={AsyncCompany} />,
