@@ -153,11 +153,14 @@ class LandingPage extends Component {
 
 
   render() {
-    const { classes, history } = this.props
+    const { classes, history, theme } = this.props
 
     return (
       <div className={classes.main}>
         <Helmet>
+          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="apple-mobile-web-app-status-bar-style" content={theme.palette.primary.main} />
+          <meta name="msapplication-navbutton-color" content={theme.palette.primary.main} />
           <title>REACT MOST WANTED</title>
         </Helmet>
         <AppBar position='static'>
