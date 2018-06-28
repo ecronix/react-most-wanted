@@ -1,9 +1,9 @@
 {
   "database": {
-    "rules": "database.rules.json"
+    "rules": "firebase/database.rules.json"
   },
   "storage": {
-    "rules": "storage.rules"
+    "rules": "firebase/storage.rules"
   },
   "hosting": {
     "public": "build",
@@ -26,7 +26,7 @@
     ]
   },
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "rules": "firebase/firestore.rules",
+    "indexes": "firebase/firestore.indexes.json"
   }
 }
