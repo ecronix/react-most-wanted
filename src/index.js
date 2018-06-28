@@ -7,12 +7,12 @@ import registerServiceWorker from 'rmw-shell/lib/registerServiceWorker'
 import A2HSProvider from 'a2hs'
 
 const MainAsync = Loadable({
-  loader: () => import('./Main'),
+  loader: () => import('../src/containers/Main'),
   loading: () => <LoadingComponent />
 });
 
 const LPAsync = Loadable({
-  loader: () => import('./LandingPage'),
+  loader: () => import('../src/pages/LandingPage'),
   loading: () => <LoadingComponent />
 });
 
