@@ -1,6 +1,0 @@
-/* istanbul ignore next */"use strict";const localStorageMock = {
-  intl: jest.object,
-  setItem: jest.fn(),
-  clear: jest.fn() };
-
-global.localStorage = localStorageMock;
