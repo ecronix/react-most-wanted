@@ -1,18 +1,18 @@
-import React, { Component } from 'react'
-import configureStore from './store'
-import { addLocalizationData } from 'rmw-shell/lib/locales'
-import locales from './locales'
 import App from 'rmw-shell'
+import React, { Component } from 'react'
+import config from '../config'
+import configureStore from '../store'
+import locales from '../locales'
 import { Helmet } from 'react-helmet'
-import config from './config'
+import { addLocalizationData } from 'rmw-shell/lib/locales'
 import { withA2HS } from 'a2hs'
 
 addLocalizationData(locales)
 
 class Main extends Component {
   componentDidMount() {
-    //const { setA2HPState } = this.props
-    //console.log(this.props)
+    // const { setA2HPState } = this.props
+    // console.log(this.props)
     // setA2HPState({ isAppInstallable: true })
   }
 
