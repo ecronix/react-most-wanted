@@ -17,7 +17,7 @@
     "downshift": "^2.0.10",
     "echarts": "^4.1.0",
     "echarts-for-react": "^2.0.13",
-    "firebase": "^5.0.4",
+    "firebase": "^5.2.0",
     "firebaseui": "^3.1.1",
     "fireform": "^0.2.13",
     "firekit": "^1.0.17",
