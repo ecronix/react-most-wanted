@@ -63,6 +63,20 @@ The informations you are seeking are skatered over some Medium articles writen b
 - [Redux simple values](https://codeburst.io/redux-simple-values-7712694f311)
 - [React Most Wanted](https://medium.com/@tarikhuber/react-most-wanted-d4e916782c2e)
 
+# How can I make it MY project?
+
+Nice project and easy to start but it starts with the React Most Wanted Firebase project. How can I make it my? We got you covered  :smile: First install the firebase CLI tools and sing in to firebase over them. More about that [here](https://github.com/firebase/firebase-tools). After we have them installed and are signed in just run this command in the project folder:
+
+```
+firebase use --add
+```
+
+After that you can select a project from all of your firebase projects. If you don't have one create it :wink: 
+After selecting one you will be asked to add an `alias` for your selected project. This is very importand! To add a project that will start only in development we add the alias `dev` and for a project that will start only in production we run the same command but add the production project and use the alias `prod`. Just to get all covered I prefer to add the development project also under the alias `default`.
+
+With that you are ready :smile:
+
+
 ## I have a problem. Where to ask?
 
 It depends on your problem. If you have a question please join our [gitter room](https://gitter.im/react-most-wanted/Lobby). If you notice a issue in the project don't hasitate to fill out a issue report to this project [here](https://github.com/TarikHuber/react-most-wanted/issues).
