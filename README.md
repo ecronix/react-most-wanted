@@ -65,16 +65,7 @@ The informations you are seeking are skatered over some Medium articles writen b
 
 # How can I make it MY project?
 
-Nice project and easy to start but it starts with the React Most Wanted Firebase project. How can I make it my? We got you covered  :smile: First install the firebase CLI tools and sing in to firebase over them. More about that [here](https://github.com/firebase/firebase-tools). After we have them installed and are signed in just run this command in the project folder:
-
-```
-firebase use --add
-```
-
-After that you can select a project from all of your firebase projects. If you don't have one create it :wink: 
-After selecting one you will be asked to add an `alias` for your selected project. This is very importand! To add a project that will start only in development we add the alias `dev` and for a project that will start only in production we run the same command but add the production project and use the alias `prod`. Just to get all covered I prefer to add the development project also under the alias `default`.
-
-With that you are ready :smile:
+We have you covered. Here is a [codelab](https://codelabs-preview.appspot.com/?file_id=1cAjbZYRZkq4gXsllPOsPcDGXNyFmsWvr-oKjD_ZKeJ0#0) that will walk you trough the whole process of creating a new project and deploying it.
 
 
 ## I have a problem. Where to ask?
