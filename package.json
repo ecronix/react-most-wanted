@@ -35,12 +35,12 @@
     "material-ui-selectable-menu-list": "^1.19.5",
     "muishift": "^1.0.8",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
+    "react": "^16.5.0",
     "react-chartjs-2": "^2.7.4",
     "react-container-dimensions": "^1.4.1",
     "react-countup": "^3.0.3",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.4.2",
+    "react-dom": "^16.5.0",
     "react-helmet": "^5.2.0",
     "react-image-cropper": "^1.3.0",
     "react-infinite": "^0.13.0",
@@ -61,7 +61,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.0.16"
+    "rmw-shell": "^4.0.19"
   },
   "scripts": {
     "check": "npm-check -s -u",
