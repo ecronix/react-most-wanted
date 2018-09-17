@@ -25,7 +25,7 @@
     "start": "npm run shell"
   },
   "devDependencies": {
-    "eslint": "^5.5.0",
+    "eslint": "^5.6.0",
     "eslint-plugin-promise": "^4.0.1"
   }
 }
