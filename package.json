@@ -54,14 +54,14 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-toastify": "^4.3.1",
+    "react-toastify": "^4.3.2",
     "react-virtualized": "^9.20.1",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.0.25"
+    "rmw-shell": "^4.0.34"
   },
   "scripts": {
     "check": "npm-check -s -u",
