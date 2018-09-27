@@ -107,3 +107,8 @@ MIT
 [license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
 [code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [code-style-url]: http://standardjs.com/
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/TarikHuber/react-most-wanted/badge.svg?style=beer-square)](https://beerpay.io/TarikHuber/react-most-wanted)  [![Beerpay](https://beerpay.io/TarikHuber/react-most-wanted/make-wish.svg?style=flat-square)](https://beerpay.io/TarikHuber/react-most-wanted?focus=wish)
