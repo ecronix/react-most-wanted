@@ -19,7 +19,7 @@
     "downshift": "^2.2.3",
     "echarts": "^4.1.0",
     "echarts-for-react": "^2.0.14",
-    "firebase": "^5.5.1",
+    "firebase": "^5.5.2",
     "firebaseui": "^3.4.1",
     "fireform": "^0.2.13",
     "firekit": "^1.0.26",
@@ -54,14 +54,14 @@
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-toastify": "^4.3.2",
+    "react-toastify": "^4.4.0",
     "react-virtualized": "^9.20.1",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.0.37"
+    "rmw-shell": "^4.0.38"
   },
   "scripts": {
     "check": "npm-check -s -u",
