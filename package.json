@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^3.6.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^2.0.2",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6",
     "selenium-webdriver": "^4.0.0-alpha.1",
@@ -81,5 +81,11 @@
     "react",
     "redux",
     "firebase"
+  ],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
   ]
 }
