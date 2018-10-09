@@ -12,11 +12,11 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "@material-ui/core": "^3.1.1",
+    "@material-ui/core": "^3.2.0",
     "@material-ui/icons": "^3.0.1",
     "a2hs": "^1.0.2",
     "chart.js": "^2.7.2",
-    "downshift": "^2.2.3",
+    "downshift": "^3.0.0",
     "echarts": "^4.1.0",
     "echarts-for-react": "^2.0.14",
     "firebase": "^5.5.3",
@@ -29,7 +29,7 @@
     "intl-locales-supported": "^1.0.0",
     "match-sorter": "^2.3.0",
     "material-ui-filter": "^2.1.2",
-    "material-ui-image": "^3.0.0",
+    "material-ui-image": "^3.0.1",
     "material-ui-pickers": "^1.0.0-rc.14",
     "material-ui-responsive-menu": "^1.19.3",
     "material-ui-selectable-menu-list": "^1.19.5",
@@ -44,10 +44,10 @@
     "react-helmet": "^5.2.0",
     "react-image-cropper": "^1.3.0",
     "react-infinite": "^0.13.0",
-    "react-intl": "^2.7.0",
+    "react-intl": "^2.7.1",
     "react-list": "^0.8.10",
     "react-loadable": "^5.5.0",
-    "react-markdown": "^4.0.1",
+    "react-markdown": "^4.0.2",
     "react-materialui-notifications": "^0.5.1",
     "react-mic": "^12.2.2",
     "react-player": "^1.6.6",
@@ -61,7 +61,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.1.0"
+    "rmw-shell": "^4.1.3"
   },
   "scripts": {
     "check": "npm-check -s -u",
