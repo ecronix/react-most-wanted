@@ -1,6 +1,6 @@
 {
   "name": "react-most-wanted",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "private": true,
   "devDependencies": {
     "enzyme": "^3.7.0",
@@ -61,7 +61,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.1.7"
+    "rmw-shell": "^4.1.8"
   },
   "scripts": {
     "check": "npm-check -s -u",
