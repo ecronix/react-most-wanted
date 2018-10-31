@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^3.7.0",
-    "react-scripts": "^2.0.5",
+    "react-scripts": "^2.1.0",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6",
     "selenium-webdriver": "^4.0.0-alpha.1",
@@ -12,14 +12,14 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
-    "@material-ui/core": "^3.3.1",
+    "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
     "a2hs": "^1.0.2",
     "chart.js": "^2.7.3",
     "downshift": "^3.1.4",
     "echarts": "^4.1.0",
     "echarts-for-react": "^2.0.14",
-    "firebase": "^5.5.5",
+    "firebase": "^5.5.6",
     "firebaseui": "^3.4.1",
     "fireform": "^0.2.13",
     "firekit": "^1.0.27",
@@ -30,7 +30,7 @@
     "match-sorter": "^2.3.0",
     "material-ui-filter": "^2.1.8",
     "material-ui-image": "^3.0.1",
-    "material-ui-pickers": "^1.0.0-rc.14",
+    "material-ui-pickers": "^1.0.1",
     "material-ui-responsive-menu": "^1.19.3",
     "material-ui-selectable-menu-list": "^1.19.5",
     "muishift": "^1.0.8",
@@ -38,7 +38,7 @@
     "react": "^16.6.0",
     "react-chartjs-2": "^2.7.4",
     "react-container-dimensions": "^1.4.1",
-    "react-countup": "^3.0.3",
+    "react-countup": "^4.0.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.6.0",
     "react-helmet": "^5.2.0",
@@ -51,7 +51,7 @@
     "react-materialui-notifications": "^0.5.1",
     "react-mic": "^12.2.3",
     "react-player": "^1.6.6",
-    "react-redux": "^5.0.7",
+    "react-redux": "^5.1.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-toastify": "^4.4.0",
@@ -61,7 +61,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.1.8"
+    "rmw-shell": "^4.1.9"
   },
   "scripts": {
     "check": "npm-check -s -u",
