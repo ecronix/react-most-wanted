@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "enzyme": "^3.7.0",
-    "react-scripts": "^2.1.0",
+    "react-scripts": "^2.1.1",
     "redux-logger": "^3.0.6",
     "redux-testkit": "^1.0.6",
     "selenium-webdriver": "^4.0.0-alpha.1",
@@ -19,7 +19,7 @@
     "downshift": "^3.1.4",
     "echarts": "^4.1.0",
     "echarts-for-react": "^2.0.14",
-    "firebase": "^5.5.6",
+    "firebase": "^5.5.7",
     "firebaseui": "^3.4.1",
     "fireform": "^0.2.13",
     "firekit": "^1.0.27",
@@ -61,7 +61,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.1.9"
+    "rmw-shell": "^4.1.10"
   },
   "scripts": {
     "check": "npm-check -s -u",
