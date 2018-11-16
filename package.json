@@ -12,6 +12,7 @@
     "standard": "^12.0.1"
   },
   "dependencies": {
+    "@date-io/moment": "0.0.2",
     "@material-ui/core": "^3.3.2",
     "@material-ui/icons": "^3.0.1",
     "a2hs": "^1.0.2",
@@ -30,7 +31,7 @@
     "match-sorter": "^2.3.0",
     "material-ui-filter": "^2.1.8",
     "material-ui-image": "^3.0.1",
-    "material-ui-pickers": "^1.0.1",
+    "material-ui-pickers": "^2.0.1",
     "material-ui-responsive-menu": "^1.19.3",
     "material-ui-selectable-menu-list": "^1.19.5",
     "muishift": "^1.0.8",
@@ -61,7 +62,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^4.1.10"
+    "rmw-shell": "^4.1.16"
   },
   "scripts": {
     "check": "npm-check -s -u",
