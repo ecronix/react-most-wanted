@@ -52,7 +52,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^5.0.4"
+    "rmw-shell": "^5.0.6"
   },
   "scripts": {
     "check": "npm-check -s -u",
