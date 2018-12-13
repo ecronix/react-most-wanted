@@ -1,7 +1,6 @@
 import React from 'react'
 import Loadable from 'react-loadable'
 import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import A2HSProvider from 'a2hs'
 
 const Loading = () => <LoadingComponent />
@@ -16,7 +15,14 @@ export const LPAsync = Loadable({
   loading: Loading
 })
 
-export default function App() {
+const App = () => {
+  return (
+    <A2HSProvider>
+      <MainAsync />
+    </A2HSProvider>
+  )
+
+  /*
   return (
     <A2HSProvider>
       <Router>
@@ -27,4 +33,7 @@ export default function App() {
       </Router>
     </A2HSProvider>
   )
+  */
 }
+
+export default App
