@@ -14,10 +14,9 @@ const AsyncTask = MyLoadable({ loader: () => import('../pages/Tasks/Task') })
 const AsyncTasks = MyLoadable({ loader: () => import('../pages/Tasks/Tasks') }, [AsyncTask])
 const AsyncDocument = MyLoadable({ loader: () => import('../pages/Document') })
 const AsyncCollection = MyLoadable({ loader: () => import('../pages/Collection') })
-const AsyncLandingPage = MyLoadable({ loader: () => import('../pages/LandingPage') })
 
 const routes = [
-  <RestrictedRoute type="private" path="/" exact component={AsyncDashboard} fallbackComponent={AsyncLandingPage} />,
+  <RestrictedRoute type="private" path="/" exact component={AsyncDashboard} />,
   <RestrictedRoute type="private" path="/dashboard" exact component={AsyncDashboard} />,
   <RestrictedRoute type="private" path="/about" exact component={AsyncAbout} />,
   <RestrictedRoute type="private" path="/companies" exact component={AsyncCompanies} />,
