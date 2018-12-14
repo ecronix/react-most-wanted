@@ -5,7 +5,8 @@
   "devDependencies": {
     "react-scripts": "^2.1.1",
     "redux-logger": "^3.0.6",
-    "selenium-webdriver": "^4.0.0-alpha.1"
+    "selenium-webdriver": "^4.0.0-alpha.1",
+    "source-map-explorer": "^1.6.0"
   },
   "dependencies": {
     "@date-io/moment": "0.0.2",
@@ -13,7 +14,7 @@
     "@material-ui/icons": "^3.0.1",
     "a2hs": "^1.0.2",
     "chart.js": "^2.7.3",
-    "downshift": "^3.1.6",
+    "downshift": "^3.1.7",
     "firebase": "^5.7.0",
     "firebaseui": "^3.4.1",
     "fireform": "^0.2.13",
@@ -52,7 +53,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^5.0.6"
+    "rmw-shell": "^5.0.9"
   },
   "scripts": {
     "check": "npm-check -s -u",
