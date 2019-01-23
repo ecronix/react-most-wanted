@@ -25,9 +25,9 @@
     "intl-locales-supported": "^1.0.0",
     "match-sorter": "^2.3.0",
     "material-ui-filter": "^2.1.13",
-    "material-ui-image": "^3.0.1",
+    "material-ui-image": "^3.1.0",
     "material-ui-pickers": "^2.1.1",
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "muishift": "^1.0.13",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
@@ -53,7 +53,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^5.0.11"
+    "rmw-shell": "^5.0.14"
   },
   "scripts": {
     "check": "npm-check -s -u",
