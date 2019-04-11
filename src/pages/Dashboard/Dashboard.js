@@ -14,7 +14,7 @@ import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
 const currentYear = new Date().getFullYear()
 const daysPath = `/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`
 const monthsPath = `/user_registrations_per_month/${currentYear}`
-const providerPath = `/provider_count`
+const providerPath = '/provider_count'
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -33,11 +33,13 @@ class Dashboard extends Component {
     let daysData = []
 
     if (days) {
-      Object.keys(days).sort().map(key => {
-        daysLabels.push(key)
-        daysData.push(days[key])
-        return key
-      })
+      Object.keys(days)
+        .sort()
+        .map(key => {
+          daysLabels.push(key)
+          daysData.push(days[key])
+          return key
+        })
     }
 
     const daysComponentData = {
@@ -71,13 +73,15 @@ class Dashboard extends Component {
     let monthsData = []
 
     if (months) {
-      Object.keys(months).sort().map(key => {
-        let date = new Date(`${currentYear}-${key}-1`)
-        monthsLabels.push(intl.formatDate(date, { month: 'long' }))
+      Object.keys(months)
+        .sort()
+        .map(key => {
+          let date = new Date(`${currentYear}-${key}-1`)
+          monthsLabels.push(intl.formatDate(date, { month: 'long' }))
 
-        monthsData.push(months[key])
-        return key
-      })
+          monthsData.push(months[key])
+          return key
+        })
     }
 
     const monthsComponentData = {
@@ -113,21 +117,25 @@ class Dashboard extends Component {
     let providersBackgrounColors = []
 
     if (providers) {
-      Object.keys(providers).sort().map((key) => {
-        providersLabels.push(intl.formatMessage({ id: key }))
-        providersBackgrounColors.push(intl.formatMessage({ id: `${key}_color` }))
-        providersData.push(providers[key])
-        return key
-      })
+      Object.keys(providers)
+        .sort()
+        .map(key => {
+          providersLabels.push(intl.formatMessage({ id: key }))
+          providersBackgrounColors.push(intl.formatMessage({ id: `${key}_color` }))
+          providersData.push(providers[key])
+          return key
+        })
     }
 
     const providersComponentData = {
       labels: providersLabels,
-      datasets: [{
-        data: providersData,
-        backgroundColor: providersBackgrounColors,
-        hoverBackgroundColor: providersBackgrounColors
-      }]
+      datasets: [
+        {
+          data: providersData,
+          backgroundColor: providersBackgrounColors,
+          hoverBackgroundColor: providersBackgrounColors
+        }
+      ]
     }
 
     return (
@@ -135,15 +143,15 @@ class Dashboard extends Component {
         iconElementRight={
           <Button
             style={{ marginTop: 4 }}
-            href='https://github.com/TarikHuber/react-most-wanted'
-            target='_blank'
-            rel='noopener'
+            href="https://github.com/TarikHuber/react-most-wanted"
+            target="_blank"
+            rel="noopener"
             secondary
             icon={<GitHubIcon />}
           />
         }
-        title={intl.formatMessage({ id: 'dashboard' })}>
-
+        title={intl.formatMessage({ id: 'dashboard' })}
+      >
         <Scrollbar>
           <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
             <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
@@ -163,16 +171,12 @@ class Dashboard extends Component {
                 data={daysComponentData}
               />
             </div>
-
           </div>
 
           <br />
           <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-
             <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
-              <Doughnut
-                data={providersComponentData}
-              />
+              <Doughnut data={providersComponentData} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 30 }}>
@@ -186,18 +190,14 @@ class Dashboard extends Component {
                 end={usersCount}
               />
               <div>
-                <Icon
-                  color='secondary'
-                  className='material-icons'
-                  style={{ fontSize: 70, marginLeft: 16 }}>
+                <Icon color="secondary" className="material-icons" style={{ fontSize: 70, marginLeft: 16 }}>
                   group
-              </Icon>
+                </Icon>
               </div>
-
             </div>
           </div>
         </Scrollbar>
-      </Activity >
+      </Activity>
     )
   }
 }
@@ -206,7 +206,7 @@ Dashboard.propTypes = {
   intl: intlShape.isRequired
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { paths } = state
 
   return {
@@ -217,6 +217,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(injectIntl(withTheme()(withFirebase(Dashboard))))
+export default connect(mapStateToProps)(injectIntl(withTheme()(withFirebase(Dashboard))))
