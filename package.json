@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^3.0.1",
     "redux-logger": "^3.0.6",
     "selenium-webdriver": "^4.0.0-alpha.1",
     "source-map-explorer": "^1.8.0"
