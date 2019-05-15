@@ -17,7 +17,7 @@
     "downshift": "^3.2.10",
     "firebase": "^6.0.2",
     "firebaseui": "^4.0.0",
-    "fireform": "^0.2.13",
+    "fireform": "^0.2.17",
     "firekit": "^1.0.30",
     "firekit-provider": "^1.0.1",
     "github-markdown-css": "^3.0.1",
@@ -25,11 +25,11 @@
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.0.0",
     "match-sorter": "^3.0.0",
-    "material-ui-filter": "^2.1.14",
+    "material-ui-filter": "^2.1.15",
     "material-ui-image": "^3.2.0",
     "material-ui-pickers": "^2.2.4",
     "moment": "^2.24.0",
-    "muishift": "^1.0.13",
+    "muishift": "^1.0.16",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
@@ -54,7 +54,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^5.0.31"
+    "rmw-shell": "^5.0.34"
   },
   "scripts": {
     "check": "npm-check -s -u",

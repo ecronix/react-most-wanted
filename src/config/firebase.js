@@ -30,7 +30,5 @@ firebase
 
 const perf = firebase.performance()
 
-console.log('perf', perf)
-
 export { firebaseApp, perf }
 export default firebaseApp
