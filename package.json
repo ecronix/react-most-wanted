@@ -16,11 +16,12 @@
     "chart.js": "^2.8.0",
     "downshift": "^3.2.10",
     "firebase": "^6.0.2",
-    "firebaseui": "^3.6.1",
+    "firebaseui": "^4.0.0",
     "fireform": "^0.2.13",
     "firekit": "^1.0.30",
     "firekit-provider": "^1.0.1",
     "github-markdown-css": "^3.0.1",
+    "history": "^4.9.0",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.0.0",
     "match-sorter": "^3.0.0",
@@ -53,7 +54,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^5.0.30"
+    "rmw-shell": "^5.0.31"
   },
   "scripts": {
     "check": "npm-check -s -u",
