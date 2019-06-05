@@ -3,6 +3,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Loadable from 'react-loadable'
 import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
+import App from './App'
 
 const Loading = () => <LoadingComponent />
 export const AppAsync = Loadable({
@@ -10,6 +11,8 @@ export const AppAsync = Loadable({
   loading: Loading
 })
 
-ReactDOM.render(<AppAsync />, document.getElementById('root'))
+console.log('test1')
+
+ReactDOM.render(<App />, document.getElementById('root'))
 
 serviceWorker.register({})
