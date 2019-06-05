@@ -6,7 +6,7 @@
     "react-scripts": "^3.0.1",
     "redux-logger": "^3.0.6",
     "selenium-webdriver": "^4.0.0-alpha.1",
-    "source-map-explorer": "^1.8.0"
+    "source-map-explorer": "^2.0.0"
   },
   "dependencies": {
     "@date-io/moment": "^1.3.6",
@@ -15,7 +15,7 @@
     "a2hs": "^1.0.2",
     "chart.js": "^2.8.0",
     "downshift": "^3.2.10",
-    "firebase": "^6.0.3",
+    "firebase": "^6.1.0",
     "firebaseui": "^4.0.0",
     "fireform": "^0.2.17",
     "firekit": "^1.0.30",
@@ -23,8 +23,8 @@
     "github-markdown-css": "^3.0.1",
     "history": "^4.9.0",
     "intl": "^1.2.5",
-    "intl-locales-supported": "^1.0.1",
-    "match-sorter": "^3.0.0",
+    "intl-locales-supported": "^1.0.10",
+    "match-sorter": "^3.0.1",
     "material-ui-filter": "^2.1.15",
     "material-ui-image": "^3.2.0",
     "material-ui-pickers": "^2.2.4",
@@ -45,16 +45,16 @@
     "react-mic": "^12.4.1",
     "react-player": "^1.11.0",
     "react-redux": "^7.0.3",
-    "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0",
-    "react-toastify": "^5.1.1",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-toastify": "^5.2.1",
     "react-virtualized": "^9.21.1",
     "redux": "^4.0.1",
-    "redux-form": "^8.2.0",
+    "redux-form": "^8.2.3",
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^5.0.40"
+    "rmw-shell": "^5.0.43"
   },
   "scripts": {
     "check": "npm-check -s -u",
