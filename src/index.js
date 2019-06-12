@@ -11,8 +11,6 @@ export const AppAsync = Loadable({
   loading: Loading
 })
 
-console.log('test1')
-
 ReactDOM.render(<App />, document.getElementById('root'))
 
 serviceWorker.register({})
