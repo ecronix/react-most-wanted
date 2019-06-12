@@ -7,8 +7,6 @@ import { addLocalizationData } from 'rmw-shell/lib/config/locales'
 
 addLocalizationData(locales)
 
-console.log('test2')
-
 const Main = () => <App appConfig={{ configureStore, ...config }} />
 
 export default Main
