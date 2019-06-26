@@ -1,5 +1,8 @@
 import AppBar from '@material-ui/core/AppBar'
 import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import LockIcon from '@material-ui/icons/Lock'
 import React, { Component } from 'react'
@@ -10,9 +13,6 @@ import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
 import { Helmet } from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
 
 const styles = theme => ({
   main: {
@@ -100,7 +100,6 @@ const styles = theme => ({
       padding: 0,
       paddingTop: 15
     }
-
   },
   card: {
     minWidth: 275,
@@ -115,21 +114,18 @@ const styles = theme => ({
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
-    transform: 'scale(0.8)',
+    transform: 'scale(0.8)'
   },
   cardTitle: {
     marginBottom: 16,
-    fontSize: 14,
+    fontSize: 14
   },
   pos: {
-    marginBottom: 12,
-  },
-
+    marginBottom: 12
+  }
 })
 
 class LandingPage extends Component {
-
-
   isAuthorised = () => {
     try {
       const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
@@ -137,7 +133,6 @@ class LandingPage extends Component {
       const auth = JSON.parse(data.auth)
 
       return auth && auth.isAuthorised
-
     } catch (ex) {
       return false
     }
@@ -151,7 +146,6 @@ class LandingPage extends Component {
     }
   }
 
-
   render() {
     const { classes, history, theme } = this.props
 
@@ -163,29 +157,31 @@ class LandingPage extends Component {
           <meta name="msapplication-navbutton-color" content={theme.palette.primary.main} />
           <title>REACT MOST WANTED</title>
         </Helmet>
-        <AppBar position='static'>
+        <AppBar position="static">
           <Toolbar disableGutters>
             <div style={{ flex: 1 }} />
 
             <Tooltip id="tooltip-icon1" title="Sign in">
               <IconButton
-                name='signin'
-                aria-label='Open Github'
-                color='inherit'
-                onClick={() => { history.push('/signin') }}
-                rel='noopener'
+                name="signin"
+                aria-label="Open Github"
+                color="inherit"
+                onClick={() => {
+                  history.push('/signin')
+                }}
+                rel="noopener"
               >
                 <LockIcon />
               </IconButton>
             </Tooltip>
             <Tooltip id="tooltip-icon2" title="GitHub repository">
               <IconButton
-                name='github'
-                aria-label='Open Github'
-                color='inherit'
-                href='https://github.com/TarikHuber/react-most-wanted'
-                target='_blank'
-                rel='noopener'
+                name="github"
+                aria-label="Open Github"
+                color="inherit"
+                href="https://github.com/TarikHuber/react-most-wanted"
+                target="_blank"
+                rel="noopener"
               >
                 <GitHubIcon />
               </IconButton>
@@ -194,40 +190,30 @@ class LandingPage extends Component {
         </AppBar>
 
         <div className={classes.root}>
-
-
           <div className={classes.hero}>
             <div className={classes.content}>
-              <img
-                src='/rmw.svg'
-                alt='Material-UI Logo'
-                className={classes.logo}
-              />
+              <img src="/rmw.svg" alt="Material-UI Logo" className={classes.logo} />
               <div className={classes.text}>
                 <Typography
-                  variant='display2'
-                  align='center'
-                  component='h1'
-                  color='inherit'
+                  variant="display2"
+                  align="center"
+                  component="h1"
+                  color="inherit"
                   gutterBottom
                   className={classes.title}
                 >
                   {'REACT MOST WANTED'}
                 </Typography>
-                <Typography
-                  variant='headline'
-                  component='h2'
-                  color='inherit'
-                  gutterBottom
-                  className={classes.headline}
-                >
+                <Typography variant="headline" component="h2" color="inherit" gutterBottom className={classes.headline}>
                   {'React Starter-Kit with all Most Wanted features.'}
                 </Typography>
                 <Button
-                  onClick={() => { history.push('/signin') }}
+                  onClick={() => {
+                    history.push('/signin')
+                  }}
                   className={classes.button}
-                  variant='outlined'
-                  color='primary'
+                  variant="outlined"
+                  color="primary"
                 >
                   {'Get Started'}
                 </Button>
@@ -236,41 +222,60 @@ class LandingPage extends Component {
               <div className={classes.cardsContent}>
                 <Card className={classes.card}>
                   <CardContent>
-                    <Typography variant="headline" component="h2">Installation</Typography>
+                    <Typography variant="headline" component="h2">
+                      Installation
+                    </Typography>
                     <br />
-                    <Typography  >{`Just run this script to start:`}</Typography>
-                    <br />
-                    <Typography className={classes.pos} color="textSecondary"> npx create-react-app test-app --scripts-version rmw-react-scripts   </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={() => {
-                      var win = window.open('https://github.com/TarikHuber/rmw-shell', '_blank')
-                      win.focus();
-                    }} >Learn More</Button>
-                  </CardActions>
-                </Card>
-                <Card className={classes.card}>
-                  <CardContent>
-                    <Typography variant="headline" component="h2">Usage</Typography>
-                    <br />
-                    <Typography  >{`Set your configuration to the App component:`}</Typography>
+                    <Typography>{'Just run this script to start:'}</Typography>
                     <br />
                     <Typography className={classes.pos} color="textSecondary">
-                      {`import App from 'rmw-shell'`}
-                      <br />
-                      {`<App appConfig={{ configureStore, ...config }} />`}
+                      {' '}
+                      npx create-react-app test-app --scripts-version rmw-react-scripts{' '}
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => {
-                      var win = window.open('https://github.com/TarikHuber/react-most-wanted', '_blank')
-                      win.focus();
-                    }} >Learn More</Button>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        var win = window.open('https://github.com/TarikHuber/rmw-shell', '_blank')
+                        win.focus()
+                      }}
+                    >
+                      Learn More
+                    </Button>
                   </CardActions>
                 </Card>
                 <Card className={classes.card}>
                   <CardContent>
-                    <Typography variant="headline" component="h2">What is this?</Typography>
+                    <Typography variant="headline" component="h2">
+                      Usage
+                    </Typography>
+                    <br />
+                    <Typography>{'Set your configuration to the App component:'}</Typography>
+                    <br />
+                    <Typography className={classes.pos} color="textSecondary">
+                      {'import App from \'rmw-shell\''}
+                      <br />
+                      {'<App appConfig={{ configureStore, ...config }} />'}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        var win = window.open('https://github.com/TarikHuber/react-most-wanted', '_blank')
+                        win.focus()
+                      }}
+                    >
+                      Learn More
+                    </Button>
+                  </CardActions>
+                </Card>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="headline" component="h2">
+                      What is this?
+                    </Typography>
                     <Typography noWrap={false} color="textSecondary">
                       {`This is a OPEN SOURCE demo application that demonstartes the usage of the rmw-shell library 
                     with react, Material-UI and firebase.  `}
@@ -280,7 +285,14 @@ class LandingPage extends Component {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" onClick={() => { history.push('/signin') }} >Get started</Button>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        history.push('/signin')
+                      }}
+                    >
+                      Get started
+                    </Button>
                   </CardActions>
                 </Card>
               </div>
@@ -288,7 +300,6 @@ class LandingPage extends Component {
           </div>
         </div>
       </div>
-
     )
   }
 }
