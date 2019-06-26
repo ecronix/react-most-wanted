@@ -23,15 +23,15 @@ Here you go [DEMO](https://www.react-most-wanted.com). The DEMO is just a DEMO. 
 
 React Most Wanted is a react Starter Kit based on [Create React App](https://github.com/facebookincubator/create-react-app) and [Material-UI](https://material-ui.com/) that uses [Firebase](https://firebase.google.com/).
 
-## Why shold I use it?
+## Why should I use it?
 
 Check this out:
 
-- it is build with CRA and even if you use this Starter Kit your CRA scripts will work properly. You will be able to make every CRA update as if you have started with it. We don't eject anyone from CRA :smile:
+- it is built with CRA and even if you use this Starter Kit your CRA scripts will work properly. You will be able to make every CRA update as if you have started with it. We don't eject anyone from CRA :smile:
 - it is based on a library [rmw-shell](https://github.com/TarikHuber/rmw-shell) witch keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where the hard work is already done for you.
 - there is a simple script to start a fresh project without forking anything `npx create-react-app test-app --scripts-version rmw-react-scripts`
-- it has all "MOST WANTED" features build in. That is where the name comes from :wink: We come to the features a little bit later.
-- it is customisable
+- it has all "MOST WANTED" features built in. That is where the name comes from :wink: We come to the features a little bit later.
+- it is customizable
 - it uses Firebase :smile:
 - it is Best Practice Project PWA (Progressive Web Application)
 - you will love it once you start using it :smile:
@@ -52,7 +52,7 @@ Let's take a look at some of them:
 - build in CI (Continuouos Integration)
 - build in CD (Continuouos Deployment)
 - realtime forms (isn't that awesome :smile: )
-- ... and lot more I just can't remember
+- ... and a lot more I just can't remember
 
 # Are there more in depth informations about this project?
 
@@ -113,6 +113,6 @@ MIT
 
 ## Support on Beerpay
 
-Hey dude! Help me out for a couple of :beers:!
+Hey dude! Help me out with a couple of :beers:!
 
 [![Beerpay](https://beerpay.io/TarikHuber/react-most-wanted/badge.svg?style=beer-square)](https://beerpay.io/TarikHuber/react-most-wanted) [![Beerpay](https://beerpay.io/TarikHuber/react-most-wanted/make-wish.svg?style=flat-square)](https://beerpay.io/TarikHuber/react-most-wanted?focus=wish)
