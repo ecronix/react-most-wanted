@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
-import { injectIntl, intlShape } from 'react-intl'
-import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
-import { Activity } from 'rmw-shell'
-import { withTheme } from '@material-ui/core/styles'
-import { Line, Bar, Doughnut } from 'react-chartjs-2'
-import { withFirebase } from 'firekit-provider'
 import CountUp from 'react-countup'
-import Icon from '@material-ui/core/Icon'
-import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
+import Group from '@material-ui/icons/Group'
+import React, { Component } from 'react'
+import { Activity } from 'rmw-shell'
+import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
+import { Line, Bar, Doughnut } from 'react-chartjs-2'
+import { connect } from 'react-redux'
+import { injectIntl, intlShape } from 'react-intl'
+import { withFirebase } from 'firekit-provider'
+import { withTheme } from '@material-ui/core/styles'
+import Scrollbar from 'rmw-shell/lib/components/Scrollbar'
 
 const currentYear = new Date().getFullYear()
 const daysPath = `/user_registrations_per_day/${currentYear}/${new Date().toISOString().slice(5, 7)}`
@@ -153,7 +153,18 @@ class Dashboard extends Component {
         title={intl.formatMessage({ id: 'dashboard' })}
       >
         <Scrollbar>
-          <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div
+            style={{
+              margin: 5,
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              marginTop: 50
+            }}
+          >
             <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
               <Line
                 options={{
@@ -174,8 +185,19 @@ class Dashboard extends Component {
           </div>
 
           <br />
-          <div style={{ margin: 5, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' }}>
-            <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600 }}>
+          <div
+            style={{
+              margin: 5,
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+              marginTop: 50
+            }}
+          >
+            <div style={{ flexGrow: 1, flexShrink: 1, maxWidth: 600, justifyContent: 'center' }}>
               <Doughnut data={providersComponentData} />
             </div>
 
@@ -190,9 +212,7 @@ class Dashboard extends Component {
                 end={usersCount}
               />
               <div>
-                <Icon color="secondary" className="material-icons" style={{ fontSize: 70, marginLeft: 16 }}>
-                  group
-                </Icon>
+                <Group color="secondary" className="material-icons" style={{ fontSize: 70, marginLeft: 16 }} />
               </div>
             </div>
           </div>
@@ -217,4 +237,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(injectIntl(withTheme()(withFirebase(Dashboard))))
+export default connect(mapStateToProps)(injectIntl(withTheme(withFirebase(Dashboard))))

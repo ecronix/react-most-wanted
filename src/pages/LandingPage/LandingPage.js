@@ -52,10 +52,10 @@ const styles = theme => ({
     },
     whiteSpace: 'nowrap'
   },
-  headline: {
-    paddingLeft: theme.spacing.unit * 4,
-    paddingRight: theme.spacing.unit * 4,
-    marginTop: theme.spacing.unit,
+  h5: {
+    paddingLeft: theme.spacing(1) * 4,
+    paddingRight: theme.spacing(1) * 4,
+    marginTop: theme.spacing(1),
     maxWidth: 600,
     textAlign: 'center',
     [theme.breakpoints.only('xs')]: {
@@ -64,30 +64,30 @@ const styles = theme => ({
   },
   content: {
     height: '100%',
-    // paddingTop: theme.spacing.unit * 8,
+    // paddingTop: theme.spacing(1) * 8,
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing.unit
+      paddingTop: theme.spacing(1)
     }
   },
   button: {
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing(1) * 3
   },
   logo: {
     color: 'red',
-    margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 4}px`,
+    margin: `${theme.spacing(1) * 3}px 0 ${theme.spacing(1) * 4}px`,
     width: '100%',
     height: '40vw',
     maxHeight: 250
   },
   steps: {
-    maxWidth: theme.spacing.unit * 130,
+    maxWidth: theme.spacing(1) * 130,
     margin: 'auto'
   },
   step: {
-    padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 2}px`
+    padding: `${theme.spacing(1) * 3}px ${theme.spacing(1) * 2}px`
   },
   stepIcon: {
-    marginBottom: theme.spacing.unit
+    marginBottom: theme.spacing(1)
   },
   markdownElement: {},
   cardsContent: {
@@ -195,7 +195,7 @@ class LandingPage extends Component {
               <img src="/rmw.svg" alt="Material-UI Logo" className={classes.logo} />
               <div className={classes.text}>
                 <Typography
-                  variant="display2"
+                  variant="h3"
                   align="center"
                   component="h1"
                   color="inherit"
@@ -204,7 +204,7 @@ class LandingPage extends Component {
                 >
                   {'REACT MOST WANTED'}
                 </Typography>
-                <Typography variant="headline" component="h2" color="inherit" gutterBottom className={classes.headline}>
+                <Typography variant="h5" component="h2" color="inherit" gutterBottom className={classes.h5}>
                   {'React Starter-Kit with all Most Wanted features.'}
                 </Typography>
                 <Button
@@ -222,7 +222,7 @@ class LandingPage extends Component {
               <div className={classes.cardsContent}>
                 <Card className={classes.card}>
                   <CardContent>
-                    <Typography variant="headline" component="h2">
+                    <Typography variant="h5" component="h2">
                       Installation
                     </Typography>
                     <br />
@@ -247,7 +247,7 @@ class LandingPage extends Component {
                 </Card>
                 <Card className={classes.card}>
                   <CardContent>
-                    <Typography variant="headline" component="h2">
+                    <Typography variant="h5" component="h2">
                       Usage
                     </Typography>
                     <br />
@@ -273,7 +273,7 @@ class LandingPage extends Component {
                 </Card>
                 <Card className={classes.card}>
                   <CardContent>
-                    <Typography variant="headline" component="h2">
+                    <Typography variant="h5" component="h2">
                       What is this?
                     </Typography>
                     <Typography noWrap={false} color="textSecondary">
