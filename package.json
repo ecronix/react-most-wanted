@@ -12,7 +12,7 @@
     "@date-io/moment": "^1.3.8",
     "@material-ui/core": "^4.3.0",
     "@material-ui/icons": "^4.2.1",
-    "a2hs": "^1.1.2",
+    "a2hs": "^1.1.3",
     "chart.js": "^2.8.0",
     "downshift": "^3.2.10",
     "firebase": "^6.3.3",
@@ -55,7 +55,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^6.0.4"
+    "rmw-shell": "^6.0.5"
   },
   "scripts": {
     "check": "npm-check -s -u",
