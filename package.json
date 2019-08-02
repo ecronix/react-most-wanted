@@ -15,7 +15,7 @@
     "a2hs": "^1.1.3",
     "chart.js": "^2.8.0",
     "downshift": "^3.2.10",
-    "firebase": "^6.3.3",
+    "firebase": "^6.3.4",
     "firebaseui": "^4.1.0",
     "fireform": "^1.0.0",
     "firekit": "^1.0.30",
@@ -55,7 +55,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^6.0.5"
+    "rmw-shell": "^6.0.9"
   },
   "scripts": {
     "check": "npm-check -s -u",
