@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@date-io/moment": "^1.3.9",
+    "@formatjs/intl-relativetimeformat": "^2.5.0",
     "@material-ui/core": "^4.3.1",
     "@material-ui/icons": "^4.2.1",
     "a2hs": "^1.1.3",
@@ -24,6 +25,7 @@
     "history": "^4.9.0",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.4.2",
+    "intl-pluralrules": "^1.0.3",
     "match-sorter": "^4.0.1",
     "material-ui-filter": "^3.0.2",
     "material-ui-image": "^3.2.0",
@@ -39,7 +41,7 @@
     "react-dropzone": "^10.1.7",
     "react-helmet": "^5.2.1",
     "react-image-cropper": "^1.3.0",
-    "react-intl": "^2.9.0",
+    "react-intl": "^3.0.0",
     "react-list": "^0.8.11",
     "react-loadable": "^5.5.0",
     "react-markdown": "^4.1.0",
@@ -55,7 +57,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^6.0.9"
+    "rmw-shell": "^7.0.0"
   },
   "scripts": {
     "check": "npm-check -s -u",
