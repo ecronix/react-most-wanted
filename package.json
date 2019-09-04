@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@date-io/moment": "^1.3.9",
-    "@formatjs/intl-relativetimeformat": "^2.8.3",
+    "@formatjs/intl-relativetimeformat": "^3.0.2",
     "@material-ui/core": "^4.4.0",
     "@material-ui/icons": "^4.2.1",
     "a2hs": "^1.1.3",
@@ -24,7 +24,7 @@
     "github-markdown-css": "^3.0.1",
     "history": "^4.9.0",
     "intl": "^1.2.5",
-    "intl-locales-supported": "^1.4.5",
+    "intl-locales-supported": "^1.4.7",
     "intl-pluralrules": "^1.0.3",
     "match-sorter": "^4.0.1",
     "material-ui-filter": "^3.0.2",
@@ -41,10 +41,10 @@
     "react-dropzone": "^10.1.8",
     "react-helmet": "^5.2.1",
     "react-image-cropper": "^1.3.0",
-    "react-intl": "^3.1.13",
+    "react-intl": "^3.2.0",
     "react-list": "^0.8.11",
     "react-loadable": "^5.5.0",
-    "react-markdown": "^4.2.1",
+    "react-markdown": "^4.2.2",
     "react-mic": "^12.4.1",
     "react-player": "^1.12.0",
     "react-redux": "^7.1.1",
@@ -57,7 +57,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^7.0.15"
+    "rmw-shell": "^7.0.16"
   },
   "scripts": {
     "check": "npm-check -s -u",
