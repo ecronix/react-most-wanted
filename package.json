@@ -15,9 +15,9 @@
     "@material-ui/icons": "^4.2.1",
     "a2hs": "^1.1.3",
     "chart.js": "^2.8.0",
-    "downshift": "^3.2.12",
-    "firebase": "^6.5.0",
-    "firebaseui": "^4.1.0",
+    "downshift": "^3.2.14",
+    "firebase": "^6.6.0",
+    "firebaseui": "^4.2.0",
     "fireform": "^1.0.0",
     "firekit": "^1.0.30",
     "firekit-provider": "^1.0.2",
@@ -57,7 +57,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^7.0.16"
+    "rmw-shell": "^7.0.18"
   },
   "scripts": {
     "check": "npm-check -s -u",
