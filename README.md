@@ -69,7 +69,7 @@ The informations you are seeking are skatered over some Medium articles writen b
 
 # How can I make it MY project?
 
-We have you covered. Here is a [codelab](https://codelabs-preview.appspot.com/?file_id=1cAjbZYRZkq4gXsllPOsPcDGXNyFmsWvr-oKjD_ZKeJ0#0) that will walk you trough the whole process of creating a new project and deploying it.
+We have you covered. Here is a [codelab](https://start-with-rmw.web.app/#0) that will walk you trough the whole process of creating a new project and deploying it.
 
 ## I have a problem. Where to ask?
 
