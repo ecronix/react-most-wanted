@@ -33,7 +33,7 @@ Check this out:
 - it has all "MOST WANTED" features built in. That is where the name comes from :wink: We come to the features a little bit later.
 - it is customizable
 - it uses Firebase :smile:
-- it is Best Practice Project PWA (Progressive Web Application)
+- it is a Best Practice Project PWA (Progressive Web Application)
 - you will love it once you start using it :smile:
 
 ## What are those "Most Wanted" features?
@@ -49,16 +49,16 @@ Let's take a look at some of them:
 - push notifications UI integration
 - theming
 - internationalisation
-- build in CI (Continuouos Integration)
-- build in CD (Continuouos Deployment)
+- built in CI (Continuous Integration)
+- built in CD (Continuous Deployment)
 - realtime forms (isn't that awesome :smile: )
 - ... and a lot more I just can't remember
 
-# Are there more in depth informations about this project?
+# Is there more in depth information about this project?
 
 Sure. It is a project made over years and still fully supported. Reason for that is that we use it in our company for production projects so it has to work for at least some years. Good enough for the JavaScript ecosystem :wink:
 
-The informations you are seeking are skatered over some Medium articles writen by me at the time I was working on solving some problems in this project. So they should explain some core parts in detail:
+The information you are seeking is scattered over some Medium articles written by me at the time I was working on solving some problems in this project. So they should explain some core parts in detail:
 
 - [Beyond create-react-app](https://codeburst.io/beyond-create-react-app-cra-a2063196a124)
 - [Organising your Firebase CLoud Functions](https://codeburst.io/organizing-your-firebase-cloud-functions-67dc17b3b0da)
@@ -73,15 +73,15 @@ We have you covered. Here is a [codelab](https://start-with-rmw.web.app/#0) that
 
 ## I have a problem. Where to ask?
 
-It depends on your problem. If you have a question please join our [gitter room](https://gitter.im/react-most-wanted/Lobby). If you notice a issue in the project don't hasitate to fill out a issue report to this project [here](https://github.com/TarikHuber/react-most-wanted/issues).
+It depends on your problem. If you have a question please join our [gitter room](https://gitter.im/react-most-wanted/Lobby). If you notice an issue in the project don't hesitate to fill out an issue report to this project [here](https://github.com/TarikHuber/react-most-wanted/issues).
 
 ## I like this. Can I help somehow?
 
 YEEEEEEES :smile: Everyone is welcome to send PRs and if you don't know where to start just write to me on [twitter](https://twitter.com/TarikHuber). There is always some work to do.
 
-And if you don't have time to code with use show some :blue_heart: and give this project a :star: and tell the :earth_africa: about it
+And if you don't have time to code with us show some :blue_heart: and give this project a :star: and tell the :earth_africa: about it
 
-## There are way to much :smile: in this README. Are you crazy?
+## There are way too much :smile: in this README. Are you crazy?
 
 YES! :trollface:
 
