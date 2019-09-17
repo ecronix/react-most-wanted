@@ -75,6 +75,14 @@ function tryGitInit(appPath) {
   }
 }
 
+const run = (command, args) => {
+  const proc = spawn.sync(command, args, { stdio: 'inherit' });
+  if (proc.status !== 0) {
+    console.error(`\`${command} ${args.join(' ')}\` failed`);
+    return;
+  }
+};
+
 module.exports = function(
   appPath,
   appName,
@@ -95,7 +103,10 @@ module.exports = function(
 
   // Setup the script rules
   appPackage.scripts = {
+    check: 'npm-check -s -u',
+    analyze: 'source-map-explorer build/static/js/main.*',
     start: 'react-scripts start',
+    standard: 'standard src/**/*.js',
     build: 'react-scripts build',
     test: 'react-scripts test',
     eject: 'react-scripts eject',
@@ -155,16 +166,29 @@ module.exports = function(
   }
 
   let command;
-  let args;
+  let uArgs;
+  let baseArgs;
+  let baseDevArgs;
 
   if (useYarn) {
     command = 'yarnpkg';
-    args = ['add'];
+    uArgs = ['remove', 'rmw-react-scripts'];
   } else {
     command = 'npm';
-    args = ['install', '--save', verbose && '--verbose'].filter(e => e);
+    uArgs = ['uninstall', '-S', 'rmw-react-scripts'];
   }
-  args.push('react', 'react-dom');
+
+  run(command, uArgs);
+
+  if (useYarn) {
+    command = 'yarnpkg';
+    baseArgs = ['add'];
+    baseDevArgs = ['add'];
+  } else {
+    command = 'npm';
+    baseArgs = ['install', '-S', verbose && '--verbose'].filter(e => e);
+    baseDevArgs = ['install', '-D', verbose && '--verbose'].filter(e => e);
+  }
 
   // Install additional template dependencies, if present
   const templateDependenciesPath = path.join(
@@ -173,11 +197,33 @@ module.exports = function(
   );
   if (fs.existsSync(templateDependenciesPath)) {
     const templateDependencies = require(templateDependenciesPath).dependencies;
-    args = args.concat(
+    const templateDevDependencies = require(templateDependenciesPath)
+      .devDependencies;
+    const args = baseArgs.concat(
       Object.keys(templateDependencies).map(key => {
         return `${key}@${templateDependencies[key]}`;
       })
     );
+
+    const devArgs = baseDevArgs.concat(
+      Object.keys(templateDevDependencies).map(key => {
+        return `${key}@${templateDevDependencies[key]}`;
+      })
+    );
+
+    if (args.length > baseArgs.length) {
+      console.log(`Installing template dependencies using ${command}...`);
+      console.log();
+
+      run(command, args);
+    }
+
+    if (devArgs.length > baseDevArgs.length) {
+      console.log(`Installing dev template dependencies using ${command}...`);
+      console.log();
+
+      run(command, devArgs);
+    }
     fs.unlinkSync(templateDependenciesPath);
   }
 
@@ -188,11 +234,8 @@ module.exports = function(
     console.log(`Installing react and react-dom using ${command}...`);
     console.log();
 
-    const proc = spawn.sync(command, args, { stdio: 'inherit' });
-    if (proc.status !== 0) {
-      console.error(`\`${command} ${args.join(' ')}\` failed`);
-      return;
-    }
+    const args = baseArgs.concat(['react', 'react-dom']);
+    run(command, args);
   }
 
   if (useTypeScript) {

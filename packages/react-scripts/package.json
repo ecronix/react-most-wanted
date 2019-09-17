@@ -1,12 +1,8 @@
 {
-  "name": "react-scripts",
-  "version": "3.1.0",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
-    "directory": "packages/react-scripts"
-  },
+  "name": "rmw-react-scripts",
+  "version": "4.0.5",
+  "description": "rmw-react-scripts",
+  "repository": "TarikHuber/create-react-app",
   "license": "MIT",
   "engines": {
     "node": ">=8.10"

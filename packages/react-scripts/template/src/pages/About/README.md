@@ -108,8 +108,8 @@ MIT
 [daviddm-url]: https://david-dm.org/TarikHuber/react-most-wanted
 [license-image]: https://img.shields.io/npm/l/express.svg
 [license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
-[code-style-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
-[code-style-url]: http://standardjs.com/
+[code-style-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
+[code-style-url]: https://github.com/prettier/prettier
 
 ## Support on Beerpay
 

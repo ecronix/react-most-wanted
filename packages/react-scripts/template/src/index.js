@@ -1,12 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from 'rmw-shell/lib/utils/serviceWorker'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Loadable from 'react-loadable'
+import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
+import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Loading = () => <LoadingComponent />
+export const AppAsync = Loadable({
+  loader: () => import('./App'),
+  loading: Loading
+})
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<App />, document.getElementById('root'))
+
+serviceWorker.register({})
