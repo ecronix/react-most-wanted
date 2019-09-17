@@ -8,6 +8,7 @@
   },
   "dependencies": {},
   "scripts": {
+    "start": "cd packages/react-scripts && node bin/react-scripts.js start",
     "update-demo": "cd packages && rimraf ./demo && npx create-react-app demo --scripts-version file:./react-scripts"
   },
   "author": "Tarik Huber",
