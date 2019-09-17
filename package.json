@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "rimraf": "^3.0.0"
+  },
+  "dependencies": {},
+  "scripts": {
+    "update-demo": "cd packages && rimraf ./demo && npx create-react-app demo --scripts-version file:./react-scripts"
+  },
+  "author": "Tarik Huber",
+  "homepage": "https://www.react-most-wanted.com/",
+  "license": "MIT",
+  "repository": "https://github.com/TarikHuber/react-most-wanted",
+  "keywords": [
+    "react-most-wanted",
+    "react",
+    "redux",
+    "firebase"
+  ]
+}
