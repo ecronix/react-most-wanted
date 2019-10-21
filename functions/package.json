@@ -3,7 +3,7 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "camelcase": "^5.3.1",
-    "firebase-admin": "^8.6.0",
+    "firebase-admin": "^8.6.1",
     "firebase-functions": "^3.3.0",
     "glob": "^7.1.4",
     "moment": "^2.24.0",
