@@ -45,7 +45,7 @@ Let's take a look at some of them:
 - Redux implementation
 - Firebase to Redux sync
 - Authentication
-- Authorisation
+- Authorization
 - Push notifications UI integration
 - Theming
 - Internationalisation
