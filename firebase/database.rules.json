@@ -42,6 +42,12 @@
         ".write": "auth != null && $uid===auth.uid"
       }
     },
+    "email_notifications": {
+      "$uid": {
+        ".read": "auth != null && $uid===auth.uid",
+        ".write": "auth != null && $uid===auth.uid"
+      }
+    },
     "users_count": {
       ".read": true,
       ".write": false
@@ -76,13 +82,9 @@
     },
     "public_tasks": {
       ".read": "auth != null",
-      ".indexOn": [
-        "userId"
-      ],
+      ".indexOn": ["userId"],
       "$tid": {
-        ".indexOn": [
-          "userId"
-        ],
+        ".indexOn": ["userId"],
         ".write": "data.child('userId').val() === auth.uid || newData.child('userId').val() === auth.uid"
       }
     },

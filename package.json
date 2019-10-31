@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@date-io/moment": "^1.3.11",
-    "@formatjs/intl-relativetimeformat": "^4.2.1",
+    "@formatjs/intl-relativetimeformat": "^4.4.0",
     "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/pickers": "^3.2.7",
@@ -25,7 +25,7 @@
     "github-markdown-css": "^3.0.1",
     "history": "^4.10.1",
     "intl": "^1.2.5",
-    "intl-locales-supported": "^1.6.0",
+    "intl-locales-supported": "^1.8.0",
     "intl-pluralrules": "^1.1.1",
     "match-sorter": "^4.0.2",
     "material-ui-filter": "^3.1.0",
@@ -58,7 +58,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^7.1.13"
+    "rmw-shell": "^7.1.16"
   },
   "scripts": {
     "check": "npm-check -s -u",
