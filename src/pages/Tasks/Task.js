@@ -25,6 +25,7 @@ const Edit = props => {
       fireFormProps={{
         validate
       }}
+      isGranted={s => g => true}
     >
       <Form {...props} />
     </EditDocumentActivity>

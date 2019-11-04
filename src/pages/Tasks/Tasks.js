@@ -36,6 +36,7 @@ class Tasks extends Component {
         createGrant="create_task"
         filterFields={filterFields}
         renderItem={this.renderItem}
+        isGranted={s => g => true}
       />
     )
   }
