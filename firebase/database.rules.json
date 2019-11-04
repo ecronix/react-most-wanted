@@ -82,11 +82,7 @@
     },
     "public_tasks": {
       ".read": "auth != null",
-      ".indexOn": ["userId"],
-      "$tid": {
-        ".indexOn": ["userId"],
-        ".write": "data.child('userId').val() === auth.uid || newData.child('userId').val() === auth.uid"
-      }
+      ".write": "auth != null"
     },
     "public_tasks_count": {
       ".read": true,
