@@ -20,11 +20,6 @@
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
     "react/prop-types": [1],
-    "no-console": "warn",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    }
+    "no-console": "warn"
   }
 }
