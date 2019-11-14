@@ -79,6 +79,12 @@
     "redux",
     "firebase"
   ],
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
