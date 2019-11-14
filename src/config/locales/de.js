@@ -1,4 +1,4 @@
-import { defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl'
 
 const messages = defineMessages({
   app_name: 'React Meist Gesucht',
@@ -7,7 +7,8 @@ const messages = defineMessages({
   page_not_found_demo: 'Seite nicht gefunden demo',
   '404': '404',
   warning_404_message: '404 Seite nicht gefunden',
-  warning_404_description: 'Es tut uns leid aber die angeforderte Seite existiert nicht.',
+  warning_404_description:
+    'Es tut uns leid aber die angeforderte Seite existiert nicht.',
   settings: 'Einstellungen',
   language: 'Sprache',
   theme: 'Thema',
@@ -51,7 +52,8 @@ const messages = defineMessages({
   delete: 'Löschen',
   ok: 'OK',
   delete_account_dialog_title: 'Konto löschen?',
-  delete_account_dialog_message: 'Dein Konto wird gelöscht und mit ihm alle Daten!',
+  delete_account_dialog_message:
+    'Dein Konto wird gelöscht und mit ihm alle Daten!',
   email_not_verified: 'E-Mail ist nicht verifiziert!',
   email_verified: 'E-Mail ist verifiziert',
   send_verification_email: 'Verifizierungs E-Mail senden',
@@ -122,7 +124,8 @@ const messages = defineMessages({
   is_admin_label: 'Administrator',
   predefined_messages: 'Vorgefertigte Nachrichten',
   delete_predefined_chat_message_title: 'Vorgefertigte Nachricht löschen?',
-  delete_predefined_chat_message_message: 'Vorgefertigte Nachricht wird gelöscht!',
+  delete_predefined_chat_message_message:
+    'Vorgefertigte Nachricht wird gelöscht!',
   select_field: 'Feld auswählen',
   sorting: 'Sortierung',
   filters: 'Filter',
@@ -145,6 +148,10 @@ const messages = defineMessages({
   document: 'Document',
   collection: 'Collection',
   infinitelist: 'Infinitelist',
-});
+  workers_hint: 'Angestellte eintragen',
+  workers_label: 'Angestellte',
+  worth_hint: 'Wert eintragen',
+  worth_label: 'Wert',
+})
 
-export default messages;
+export default messages

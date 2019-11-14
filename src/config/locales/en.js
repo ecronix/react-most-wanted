@@ -1,4 +1,4 @@
-import { defineMessages } from 'react-intl';
+import { defineMessages } from 'react-intl'
 
 const messages = defineMessages({
   app_name: 'React Most Wanted',
@@ -7,7 +7,8 @@ const messages = defineMessages({
   page_not_found_demo: 'Page not found demo',
   '404': '404',
   warning_404_message: '404 Page not found',
-  warning_404_description: 'We are sorry but the page you are looking for does not exist.',
+  warning_404_description:
+    'We are sorry but the page you are looking for does not exist.',
   settings: 'Settings',
   language: 'Language',
   theme: 'Theme',
@@ -51,7 +52,8 @@ const messages = defineMessages({
   delete: 'Delete',
   ok: 'OK',
   delete_account_dialog_title: 'Delete Account?',
-  delete_account_dialog_message: 'Your account will be deleted and you will lose all your data!',
+  delete_account_dialog_message:
+    'Your account will be deleted and you will lose all your data!',
   email_not_verified: 'E-Mail is not verified!',
   email_verified: 'E-Mail is verified',
   send_verification_email: 'Send verification E-Mail',
@@ -145,7 +147,10 @@ const messages = defineMessages({
   document: 'Document',
   collection: 'Collection',
   infinitelist: 'Infinitelist',
+  workers_hint: 'Enter workers',
+  workers_label: 'Workers',
+  worth_hint: 'Enter worth',
+  worth_label: 'Worth',
+})
 
-});
-
-export default messages;
+export default messages

@@ -1,6 +1,5 @@
 import AvatarImageField from 'rmw-shell/lib/components/ReduxFormFields/AvatarImageField'
 import Business from '@material-ui/icons/Business'
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import TextField from 'rmw-shell/lib/components/ReduxFormFields/TextField'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
@@ -13,7 +12,15 @@ import { withTheme } from '@material-ui/core/styles'
 
 class Form extends Component {
   render() {
-    const { handleSubmit, intl, initialized, setDialogIsOpen, dialogs, match } = this.props
+    const {
+      handleSubmit,
+      intl,
+      initialized,
+      setDialogIsOpen,
+      dialogs,
+      match,
+      change,
+    } = this.props
 
     const uid = match.params.uid
 
@@ -26,7 +33,7 @@ class Form extends Component {
           alignItems: 'strech',
           display: 'flex',
           flexWrap: 'wrap',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
       >
         <button type="submit" style={{ display: 'none' }} />
@@ -36,7 +43,7 @@ class Form extends Component {
             name="photoURL"
             disabled={!initialized}
             uid={uid}
-            change={this.props.change}
+            change={change}
             initialized={initialized}
             icon={<Business fontSize="large" />}
             intl={intl}
@@ -75,6 +82,27 @@ class Form extends Component {
 
           <div>
             <Field
+              name="workers"
+              disabled={!initialized}
+              component={TextField}
+              placeholder={intl.formatMessage({ id: 'workers_hint' })}
+              label={intl.formatMessage({ id: 'workers_label' })}
+              type="number"
+            />
+          </div>
+
+          <div>
+            <Field
+              name="worth"
+              disabled={!initialized}
+              component={TextField}
+              placeholder={intl.formatMessage({ id: 'worth_hint' })}
+              label={intl.formatMessage({ id: 'worth_label' })}
+            />
+          </div>
+
+          <div>
+            <Field
               name="description"
               disabled={!initialized}
               component={TextField}
@@ -104,14 +132,6 @@ class Form extends Component {
   }
 }
 
-Form.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  initialized: PropTypes.bool.isRequired,
-  setDialogIsOpen: PropTypes.func.isRequired,
-  dialogs: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
-}
-
 Form = reduxForm({ form: 'company' })(Form)
 const selector = formValueSelector('company')
 
@@ -123,11 +143,10 @@ const mapStateToProps = state => {
     vehicleTypes,
     users,
     dialogs,
-    photoURL: selector(state, 'photoURL')
+    photoURL: selector(state, 'photoURL'),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { setDialogIsOpen }
-)(injectIntl(withRouter(withTheme(Form))))
+export default connect(mapStateToProps, { setDialogIsOpen })(
+  injectIntl(withRouter(withTheme(Form)))
+)
