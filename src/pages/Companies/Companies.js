@@ -14,13 +14,25 @@ class Companies extends Component {
   renderItem = (key, val) => {
     const { history } = this.props
 
-    const { name = '', full_name = '' } = val
+    const { name = '', full_name = '', workers = '', worth = '' } = val
 
     return (
       <div key={key}>
-        <ListItem onClick={() => history.push(`/companies/edit/${key}`)} key={key}>
+        <ListItem
+          onClick={() => history.push(`/companies/edit/${key}`)}
+          key={key}
+        >
           <AltIconAvatar alt="company" src={val.photoURL} icon={<Business />} />
-          <ListItemText primary={name} secondary={full_name} style={{ minWidth: 120 }} />
+          <ListItemText
+            primary={name}
+            secondary={full_name}
+            style={{ maxWidth: 250 }}
+          />
+          <ListItemText
+            primary={workers}
+            secondary={worth}
+            style={{ maxWidth: 150 }}
+          />
         </ListItem>
         <Divider variant="inset" />
       </div>
@@ -28,7 +40,12 @@ class Companies extends Component {
   }
 
   render() {
-    const filterFields = [{ name: 'name' }, { name: 'full_name' }]
+    const filterFields = [
+      { name: 'name' },
+      { name: 'full_name' },
+      { name: 'workers', type: 'number' },
+      { name: 'worth', type: 'number' },
+    ]
 
     return (
       <ListActivity
@@ -41,8 +58,4 @@ class Companies extends Component {
   }
 }
 
-export default compose(
-  injectIntl,
-  withRouter,
-  withTheme
-)(Companies)
+export default compose(injectIntl, withRouter, withTheme)(Companies)
