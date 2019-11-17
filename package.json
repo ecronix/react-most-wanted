@@ -58,7 +58,7 @@
     "redux-form-material-ui": "^5.0.0-beta.3",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^7.1.20"
+    "rmw-shell": "^7.1.21"
   },
   "scripts": {
     "check": "npm-check -s -u",
