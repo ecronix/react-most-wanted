@@ -1,5 +1,7 @@
 import AvatarImageField from 'rmw-shell/lib/components/ReduxFormFields/AvatarImageField'
 import Business from '@material-ui/icons/Business'
+import MenuItem from '@material-ui/core/MenuItem'
+import renderSelectField from '../Select'
 import React, { Component } from 'react'
 import TextField from 'rmw-shell/lib/components/ReduxFormFields/TextField'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
@@ -59,7 +61,36 @@ class Form extends Component {
               label={intl.formatMessage({ id: 'name_label' })}
             />
           </div>
-
+          <div>
+         <Field
+          id="color"
+          disabled={!initialized}
+          label={intl.formatMessage({ id: 'color_label' })}
+          name="color"
+          component={renderSelectField}>
+           <MenuItem value={'amber'}> {intl.formatMessage({ id: 'amber_label' })} </MenuItem>
+           <MenuItem value={'black'}> {intl.formatMessage({ id: 'black_label' })} </MenuItem>
+           <MenuItem value={'blue'}> {intl.formatMessage({ id: 'blue_label' })} </MenuItem>
+           <MenuItem value={'gray'}> {intl.formatMessage({ id: 'gray_label' })} </MenuItem>
+          <MenuItem value={'green'}> {intl.formatMessage({ id: 'green_label' })} </MenuItem>
+          </Field>
+         </div>
+         <div>
+         <Field
+          id="dress"
+          label={intl.formatMessage({ id: 'dress_label' })}
+          name="dress"
+          component={renderSelectField}>
+        <MenuItem value={'XS'}> XS </MenuItem>
+        <MenuItem value={'S'}> S </MenuItem>
+        <MenuItem value={'S/M'}> S/M </MenuItem>
+        <MenuItem value={'M'}> M </MenuItem>
+        <MenuItem value={'M/L'}> M/L </MenuItem>
+        <MenuItem value={'L'}> L </MenuItem>
+        <MenuItem value={'XL'}> XL </MenuItem>
+        <MenuItem value={'XXL'}> XXL </MenuItem>
+        </Field>
+         </div>
           <div>
             <Field
               name="full_name"
