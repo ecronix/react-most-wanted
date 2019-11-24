@@ -11,6 +11,7 @@ const messages = defineMessages({
   settings: 'Настроики',
   language: 'Язык',
   theme: 'Темы',
+  email_notifications: 'Email-уведомления',
   responsive: 'Адаптивный',
   en: 'English',
   de: 'Deutsch',
