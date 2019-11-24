@@ -215,7 +215,7 @@ const LandingPage = ({ props, classes, history, theme }) => {
                 gutterBottom
                 className={classes.title}
               >
-                {'REACT MOST WANTED'}
+                <FormattedMessage id="main.title" />
               </Typography>
               <Typography variant="h5" component="h2" color="inherit" gutterBottom className={classes.h5}>
                <FormattedMessage id="main.intro" />
