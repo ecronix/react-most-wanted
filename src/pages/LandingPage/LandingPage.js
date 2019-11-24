@@ -5,6 +5,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import LockIcon from '@material-ui/icons/Lock'
+import NavigatorLanguagesParser from 'navigator-languages-parser'
 import React, { useEffect } from 'react'
 import Toolbar from '@material-ui/core/Toolbar'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -13,7 +14,19 @@ import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
 import { Helmet } from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
+import messages_de from './de.json'
+import messages_en from './en.json'
+import messages_ru from './ru.json'
+import messages_bs from './bs.json'
+import messages_es from './es.json'
 
+const messages = {
+  'de': messages_de,
+  'bs': messages_bs,
+  'es': messages_es,
+  'en': messages_en,
+  'ru': messages_ru
+};
 const styles = theme => ({
   main: {
     display: 'flex',
@@ -124,8 +137,9 @@ const styles = theme => ({
     marginBottom: 12
   }
 })
-
-const LandingPage = ({ classes, history, theme }) => {
+const match = NavigatorLanguagesParser.parseLanguages(['en', 'es', 'bs','ru', 'de'], 'en')
+const LandingPage = ({ props, classes, history, theme }) => {
+  const [locale] = React.useState(match);
   const isAuthorised = () => {
     try {
       const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
@@ -145,13 +159,16 @@ const LandingPage = ({ classes, history, theme }) => {
   })
 
   return (
+    <IntlProvider locale={ locale } messages={ messages[locale] }>
     <div className={classes.main}>
-      <Helmet>
+    <FormattedMessage id="main.title">
+      {title =><Helmet>
         <meta name="theme-color" content={theme.palette.primary.main} />
         <meta name="apple-mobile-web-app-status-bar-style" content={theme.palette.primary.main} />
         <meta name="msapplication-navbutton-color" content={theme.palette.primary.main} />
-        <title>REACT MOST WANTED</title>
-      </Helmet>
+        <title>{title}</title>
+      </Helmet>}
+    </FormattedMessage>
       <AppBar position="static">
         <Toolbar disableGutters>
           <div style={{ flex: 1 }} />
@@ -200,7 +217,7 @@ const LandingPage = ({ classes, history, theme }) => {
                 {'REACT MOST WANTED'}
               </Typography>
               <Typography variant="h5" component="h2" color="inherit" gutterBottom className={classes.h5}>
-                {'React Starter-Kit with all Most Wanted features.'}
+               <FormattedMessage id="main.intro" />
               </Typography>
               <Button
                 onClick={() => {
@@ -295,6 +312,7 @@ const LandingPage = ({ classes, history, theme }) => {
         </div>
       </div>
     </div>
+   </IntlProvider>
   )
 }
 
