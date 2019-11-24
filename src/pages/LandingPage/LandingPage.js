@@ -228,7 +228,7 @@ const LandingPage = ({ props, classes, history, theme }) => {
                 variant="outlined"
                 color="primary"
               >
-                {'Get Started'}
+                <FormattedMessage id="main.start" />
               </Button>
             </div>
 
@@ -236,10 +236,10 @@ const LandingPage = ({ props, classes, history, theme }) => {
               <Card className={classes.card}>
                 <CardContent>
                   <Typography variant="h5" component="h2">
-                    Installation
+                    <FormattedMessage id="main.instal" />
                   </Typography>
                   <br />
-                  <Typography>{'Just run this script to start:'}</Typography>
+                  <Typography><FormattedMessage id="main.run" /></Typography>
                   <br />
                   <Typography className={classes.pos} color="textSecondary">
                     {' '}
@@ -254,17 +254,17 @@ const LandingPage = ({ props, classes, history, theme }) => {
                       win.focus()
                     }}
                   >
-                    Learn More
+                    <FormattedMessage id="main.more" />
                   </Button>
                 </CardActions>
               </Card>
               <Card className={classes.card}>
                 <CardContent>
                   <Typography variant="h5" component="h2">
-                    Usage
+                  <FormattedMessage id="main.usage" />
                   </Typography>
                   <br />
-                  <Typography>{'Set your configuration to the App component:'}</Typography>
+                  <Typography><FormattedMessage id="main.set" /></Typography>
                   <br />
                   <Typography className={classes.pos} color="textSecondary">
                     {'import App from \'rmw-shell\''}
@@ -280,21 +280,19 @@ const LandingPage = ({ props, classes, history, theme }) => {
                       win.focus()
                     }}
                   >
-                    Learn More
+                    <FormattedMessage id="main.more" />
                   </Button>
                 </CardActions>
               </Card>
               <Card className={classes.card}>
                 <CardContent>
                   <Typography variant="h5" component="h2">
-                    What is this?
+                    <FormattedMessage id="main.what" />
                   </Typography>
                   <Typography noWrap={false} color="textSecondary">
-                    {`This is a OPEN SOURCE demo application that demonstartes the usage of the rmw-shell library 
-                    with react, Material-UI and firebase.  `}
+                    <FormattedMessage id="main.this" />
                     <br />
-                    {` This demo has no purpose to do something as an app. 
-                    It is here just to show how everthing works together. `}
+                  <FormattedMessage id="main.demo" />
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -304,7 +302,7 @@ const LandingPage = ({ props, classes, history, theme }) => {
                       history.push('/signin')
                     }}
                   >
-                    Get started
+                  <FormattedMessage id="main.start" />
                   </Button>
                 </CardActions>
               </Card>
