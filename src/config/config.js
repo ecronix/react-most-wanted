@@ -1,5 +1,6 @@
 import React from 'react'
 import Loadable from 'react-loadable'
+import NavigatorLanguagesParser from 'navigator-languages-parser'
 import getMenuItems from './menuItems'
 import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
 import locales from './locales'
@@ -8,7 +9,8 @@ import themes from './themes'
 import grants from './grants'
 
 const Loading = () => <LoadingComponent />
-
+      
+const match = NavigatorLanguagesParser.parseLanguages(['en', 'bs', 'es', 'ru', 'de'], 'en')
 const LPAsync = Loadable({
   loader: () => import('../../src/pages/LandingPage'),
   loading: Loading
@@ -39,7 +41,7 @@ const config = {
       isNightModeOn: true,
       source: 'light'
     },
-    locale: 'en'
+    locale: match
   },
   drawer_width: 256,
   locales,
