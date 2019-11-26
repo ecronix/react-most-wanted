@@ -5,7 +5,6 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import IconButton from '@material-ui/core/IconButton'
 import LockIcon from '@material-ui/icons/Lock'
-import NavigatorLanguagesParser from 'navigator-languages-parser'
 import { FormattedMessage, IntlProvider } from 'react-intl'
 import React, { useEffect } from 'react'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -15,27 +14,17 @@ import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
 import { Helmet } from 'react-helmet'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import messages_de from './de.json'
 import messages_en from './en.json'
-import messages_ru from './ru.json'
-import messages_bs from './bs.json'
-import messages_es from './es.json'
+import parseLanguages from '../../utils/langTools'
 
-const messages = {
-  'de': messages_de,
-  'bs': messages_bs,
-  'es': messages_es,
-  'en': messages_en,
-  'ru': messages_ru
-};
 const styles = theme => ({
   main: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   root: {
     flexGrow: 1,
-    flex: '1 0 100%'
+    flex: '1 0 100%',
     // height: '100%',
     // overflow: 'hidden'
   },
@@ -47,13 +36,16 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: theme.palette.background.paper,
-    color: theme.palette.type === 'light' ? theme.palette.primary.dark : theme.palette.primary.main
+    color:
+      theme.palette.type === 'light'
+        ? theme.palette.primary.dark
+        : theme.palette.primary.main,
   },
   text: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   title: {
     letterSpacing: '.7rem',
@@ -62,9 +54,9 @@ const styles = theme => ({
     [theme.breakpoints.only('xs')]: {
       fontSize: 24,
       letterSpacing: '.1em',
-      textIndent: '.1rem'
+      textIndent: '.1rem',
     },
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
   },
   h5: {
     paddingLeft: theme.spacing(1) * 4,
@@ -73,35 +65,35 @@ const styles = theme => ({
     maxWidth: 600,
     textAlign: 'center',
     [theme.breakpoints.only('xs')]: {
-      fontSize: 18
-    }
+      fontSize: 18,
+    },
   },
   content: {
     height: '100%',
     // paddingTop: theme.spacing(1) * 8,
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(1)
-    }
+      paddingTop: theme.spacing(1),
+    },
   },
   button: {
-    marginTop: theme.spacing(1) * 3
+    marginTop: theme.spacing(1) * 3,
   },
   logo: {
     color: 'red',
     margin: `${theme.spacing(1) * 3}px 0 ${theme.spacing(1) * 4}px`,
     width: '100%',
     height: '40vw',
-    maxHeight: 250
+    maxHeight: 250,
   },
   steps: {
     maxWidth: theme.spacing(1) * 130,
-    margin: 'auto'
+    margin: 'auto',
   },
   step: {
-    padding: `${theme.spacing(1) * 3}px ${theme.spacing(1) * 2}px`
+    padding: `${theme.spacing(1) * 3}px ${theme.spacing(1) * 2}px`,
   },
   stepIcon: {
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   markdownElement: {},
   cardsContent: {
@@ -112,8 +104,8 @@ const styles = theme => ({
     [theme.breakpoints.only('xs')]: {
       width: '100%',
       padding: 0,
-      paddingTop: 15
-    }
+      paddingTop: 15,
+    },
   },
   card: {
     minWidth: 275,
@@ -122,25 +114,44 @@ const styles = theme => ({
     [theme.breakpoints.only('xs')]: {
       width: '100%',
       margin: 0,
-      marginTop: 7
-    }
+      marginTop: 7,
+    },
   },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
-    transform: 'scale(0.8)'
+    transform: 'scale(0.8)',
   },
   cardTitle: {
     marginBottom: 16,
-    fontSize: 14
+    fontSize: 14,
   },
   pos: {
-    marginBottom: 12
-  }
+    marginBottom: 12,
+  },
 })
-const match = NavigatorLanguagesParser.parseLanguages(['en', 'es', 'bs','ru', 'de'], 'en')
+
+const match = parseLanguages(['en', 'es', 'bs', 'ru', 'de'], 'en')
+
 const LandingPage = ({ props, classes, history, theme }) => {
-  const [locale] = React.useState(match);
+  const [loc, setLocale] = React.useState({
+    locale: match,
+    messages: messages_en,
+  })
+
+  const locale = loc.locale
+  const messages = loc.messages
+
+  useEffect(() => {
+    import(`./${locale}.json`)
+      .then(m => {
+        setLocale({ locale, messages: m })
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [locale])
+
   const isAuthorised = () => {
     try {
       const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
@@ -160,158 +171,187 @@ const LandingPage = ({ props, classes, history, theme }) => {
   })
 
   return (
-    <IntlProvider locale={ locale } messages={ messages[locale] }>
-    <div className={classes.main}>
-    <FormattedMessage id="main.title">
-      {title =><Helmet>
-        <meta name="theme-color" content={theme.palette.primary.main} />
-        <meta name="apple-mobile-web-app-status-bar-style" content={theme.palette.primary.main} />
-        <meta name="msapplication-navbutton-color" content={theme.palette.primary.main} />
-        <title>{title}</title>
-      </Helmet>}
-    </FormattedMessage>
-      <AppBar position="static">
-        <Toolbar disableGutters>
-          <div style={{ flex: 1 }} />
+    <IntlProvider locale={locale} messages={messages}>
+      <div className={classes.main}>
+        <FormattedMessage id="main.title">
+          {title => (
+            <Helmet>
+              <meta name="theme-color" content={theme.palette.primary.main} />
+              <meta
+                name="apple-mobile-web-app-status-bar-style"
+                content={theme.palette.primary.main}
+              />
+              <meta
+                name="msapplication-navbutton-color"
+                content={theme.palette.primary.main}
+              />
+              <title>{title}</title>
+            </Helmet>
+          )}
+        </FormattedMessage>
+        <AppBar position="static">
+          <Toolbar disableGutters>
+            <div style={{ flex: 1 }} />
 
-          <Tooltip id="tooltip-icon1" title="Sign in">
-            <IconButton
-              name="signin"
-              aria-label="Open Github"
-              color="inherit"
-              onClick={() => {
-                history.push('/signin')
-              }}
-              rel="noopener"
-            >
-              <LockIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip id="tooltip-icon2" title="GitHub repository">
-            <IconButton
-              name="github"
-              aria-label="Open Github"
-              color="inherit"
-              href="https://github.com/TarikHuber/react-most-wanted"
-              target="_blank"
-              rel="noopener"
-            >
-              <GitHubIcon />
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
-      </AppBar>
-
-      <div className={classes.root}>
-        <div className={classes.hero}>
-          <div className={classes.content}>
-            <img src="/rmw.svg" alt="Material-UI Logo" className={classes.logo} />
-            <div className={classes.text}>
-              <Typography
-                variant="h3"
-                align="center"
-                component="h1"
+            <Tooltip id="tooltip-icon1" title="Sign in">
+              <IconButton
+                name="signin"
+                aria-label="Open Github"
                 color="inherit"
-                gutterBottom
-                className={classes.title}
-              >
-                <FormattedMessage id="main.title" />
-              </Typography>
-              <Typography variant="h5" component="h2" color="inherit" gutterBottom className={classes.h5}>
-               <FormattedMessage id="main.intro" />
-              </Typography>
-              <Button
                 onClick={() => {
                   history.push('/signin')
                 }}
-                className={classes.button}
-                variant="outlined"
-                color="primary"
+                rel="noopener"
               >
-                <FormattedMessage id="main.start" />
-              </Button>
-            </div>
+                <LockIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip id="tooltip-icon2" title="GitHub repository">
+              <IconButton
+                name="github"
+                aria-label="Open Github"
+                color="inherit"
+                href="https://github.com/TarikHuber/react-most-wanted"
+                target="_blank"
+                rel="noopener"
+              >
+                <GitHubIcon />
+              </IconButton>
+            </Tooltip>
+          </Toolbar>
+        </AppBar>
 
-            <div className={classes.cardsContent}>
-              <Card className={classes.card}>
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                    <FormattedMessage id="main.instal" />
-                  </Typography>
-                  <br />
-                  <Typography><FormattedMessage id="main.run" /></Typography>
-                  <br />
-                  <Typography className={classes.pos} color="textSecondary">
-                    {' '}
-                    npx create-react-app test-app --scripts-version rmw-react-scripts{' '}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size="small"
-                    onClick={() => {
-                      var win = window.open('https://github.com/TarikHuber/rmw-shell', '_blank')
-                      win.focus()
-                    }}
-                  >
-                    <FormattedMessage id="main.more" />
-                  </Button>
-                </CardActions>
-              </Card>
-              <Card className={classes.card}>
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                  <FormattedMessage id="main.usage" />
-                  </Typography>
-                  <br />
-                  <Typography><FormattedMessage id="main.set" /></Typography>
-                  <br />
-                  <Typography className={classes.pos} color="textSecondary">
-                    {'import App from \'rmw-shell\''}
-                    <br />
-                    {'<App appConfig={{ configureStore, ...config }} />'}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size="small"
-                    onClick={() => {
-                      var win = window.open('https://github.com/TarikHuber/react-most-wanted', '_blank')
-                      win.focus()
-                    }}
-                  >
-                    <FormattedMessage id="main.more" />
-                  </Button>
-                </CardActions>
-              </Card>
-              <Card className={classes.card}>
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                    <FormattedMessage id="main.what" />
-                  </Typography>
-                  <Typography noWrap={false} color="textSecondary">
-                    <FormattedMessage id="main.this" />
-                    <br />
-                  <FormattedMessage id="main.demo" />
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size="small"
-                    onClick={() => {
-                      history.push('/signin')
-                    }}
-                  >
+        <div className={classes.root}>
+          <div className={classes.hero}>
+            <div className={classes.content}>
+              <img
+                src="/rmw.svg"
+                alt="Material-UI Logo"
+                className={classes.logo}
+              />
+              <div className={classes.text}>
+                <Typography
+                  variant="h3"
+                  align="center"
+                  component="h1"
+                  color="inherit"
+                  gutterBottom
+                  className={classes.title}
+                >
+                  <FormattedMessage id="main.title" />
+                </Typography>
+                <Typography
+                  variant="h5"
+                  component="h2"
+                  color="inherit"
+                  gutterBottom
+                  className={classes.h5}
+                >
+                  <FormattedMessage id="main.intro" />
+                </Typography>
+                <Button
+                  onClick={() => {
+                    history.push('/signin')
+                  }}
+                  className={classes.button}
+                  variant="outlined"
+                  color="primary"
+                >
                   <FormattedMessage id="main.start" />
-                  </Button>
-                </CardActions>
-              </Card>
+                </Button>
+              </div>
+
+              <div className={classes.cardsContent}>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      <FormattedMessage id="main.instal" />
+                    </Typography>
+                    <br />
+                    <Typography>
+                      <FormattedMessage id="main.run" />
+                    </Typography>
+                    <br />
+                    <Typography className={classes.pos} color="textSecondary">
+                      {' '}
+                      npx create-react-app test-app --scripts-version
+                      rmw-react-scripts{' '}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        var win = window.open(
+                          'https://github.com/TarikHuber/rmw-shell',
+                          '_blank'
+                        )
+                        win.focus()
+                      }}
+                    >
+                      <FormattedMessage id="main.more" />
+                    </Button>
+                  </CardActions>
+                </Card>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      <FormattedMessage id="main.usage" />
+                    </Typography>
+                    <br />
+                    <Typography>
+                      <FormattedMessage id="main.set" />
+                    </Typography>
+                    <br />
+                    <Typography className={classes.pos} color="textSecondary">
+                      {'import App from \'rmw-shell\''}
+                      <br />
+                      {'<App appConfig={{ configureStore, ...config }} />'}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        var win = window.open(
+                          'https://github.com/TarikHuber/react-most-wanted',
+                          '_blank'
+                        )
+                        win.focus()
+                      }}
+                    >
+                      <FormattedMessage id="main.more" />
+                    </Button>
+                  </CardActions>
+                </Card>
+                <Card className={classes.card}>
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      <FormattedMessage id="main.what" />
+                    </Typography>
+                    <Typography noWrap={false} color="textSecondary">
+                      <FormattedMessage id="main.this" />
+                      <br />
+                      <FormattedMessage id="main.demo" />
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      onClick={() => {
+                        history.push('/signin')
+                      }}
+                    >
+                      <FormattedMessage id="main.start" />
+                    </Button>
+                  </CardActions>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-   </IntlProvider>
+    </IntlProvider>
   )
 }
 
