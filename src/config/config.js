@@ -1,19 +1,18 @@
 import React from 'react'
 import Loadable from 'react-loadable'
-import NavigatorLanguagesParser from 'navigator-languages-parser'
 import getMenuItems from './menuItems'
 import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
 import locales from './locales'
 import routes from './routes'
 import themes from './themes'
 import grants from './grants'
+import parseLanguages from '../utils/langTools'
 
 const Loading = () => <LoadingComponent />
-      
-const match = NavigatorLanguagesParser.parseLanguages(['en', 'bs', 'es', 'ru', 'de'], 'en')
+
 const LPAsync = Loadable({
   loader: () => import('../../src/pages/LandingPage'),
-  loading: Loading
+  loading: Loading,
 })
 
 const config = {
@@ -24,7 +23,7 @@ const config = {
     projectId: 'react-most-wanted-3b1b2',
     storageBucket: 'react-most-wanted-3b1b2.appspot.com',
     messagingSenderId: '258373383650',
-    appId: '1:258373383650:web:b49ad5dd28da999a'
+    appId: '1:258373383650:web:b49ad5dd28da999a',
   },
   firebase_config_dev: {
     apiKey: 'AIzaSyB31cMH9nJnERC1WCWA7lQHnY08voLs-Z0',
@@ -33,15 +32,22 @@ const config = {
     projectId: 'react-most-wanted-dev',
     storageBucket: 'react-most-wanted-dev.appspot.com',
     messagingSenderId: '70650394824',
-    appId: '1:70650394824:web:7cd3113c37741efc'
+    appId: '1:70650394824:web:7cd3113c37741efc',
   },
-  firebase_providers: ['google.com', 'facebook.com', 'twitter.com', 'github.com', 'password', 'phone'],
+  firebase_providers: [
+    'google.com',
+    'facebook.com',
+    'twitter.com',
+    'github.com',
+    'password',
+    'phone',
+  ],
   initial_state: {
     themeSource: {
       isNightModeOn: true,
-      source: 'light'
+      source: 'light',
     },
-    locale: match
+    locale: parseLanguages(['en', 'bs', 'es', 'ru', 'de'], 'en'),
   },
   drawer_width: 256,
   locales,
@@ -50,7 +56,7 @@ const config = {
   routes,
   getMenuItems,
   firebaseLoad: () => import('./firebase'),
-  landingPage: LPAsync
+  landingPage: LPAsync,
 }
 
 export default config
