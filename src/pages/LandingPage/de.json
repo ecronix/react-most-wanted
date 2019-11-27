@@ -1,13 +1,13 @@
 {
   "main.intro": "React Starterkit mit allen Meist Gesucht Ausstattungen",
   "main.title": "REACT MEIST GESUCHT",
-  "main.start": "GET STARTED",
+  "main.start": "STARTEN",
   "main.instal": "Installation",
-  "main.run": "Just run this script to start:",
-  "main.more": "Learn More",
-  "main.usage": "Usage",
-  "main.set": "Set your configuration to the App component:",
-  "main.what": "What is this?",
+  "main.run": "Einfach dieses Skript starten:",
+  "main.more": "Mehr",
+  "main.usage": "Nutzung",
+  "main.set": "Deine Einschtellungen einfach in die App Componente setzten",
+  "main.what": "Was ist das?",
   "main.this": "This is a OPEN SOURCE demo application that demonstartes the usage of the rmw-shell library with react, Material-UI and firebase.",
   "main.demo": "This demo has no purpose to do something as an app. It is here just to show how everthing works together."
 }
