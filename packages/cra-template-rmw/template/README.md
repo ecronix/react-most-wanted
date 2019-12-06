@@ -12,7 +12,7 @@ I like `short` README's so here we go :sunglasses:
 Just run this command:
 
 ```js
-npm react-app my-app --template rmw
+npm init react-app my-app --template rmw
 ```
 
 ## I rather checkout the DEMO first. Where is it?
