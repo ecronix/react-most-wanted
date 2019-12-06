@@ -6,6 +6,22 @@ matrix:
       node_js: lts
     - env: PROJECT=packages/rmw-shell
       node_js: lts
+      cache:
+      directories:
+        - node_modules
+      script:
+      - npm test
+      after_success:
+      - npm run build
+       deploy:
+        provider: npm
+        skip_cleanup: true
+        email: $NPM_EMAIL
+        api_key: $NPM_TOKEN
+        on:
+          branch: master
+          condition: $TRAVIS_PULL_REQUEST = false
+        branches:
+          only:
+            - master
 
-before_script: echo $TRAVIS_COMMIT_RANGE
-script: if .travis/project-has-new-commits.sh $TRAVIS_COMMIT_RANGE $PROJECT; then cd $PROJECT && npm run test; else echo "NO CHANGES SINCE LAST COMMIT"; fi
