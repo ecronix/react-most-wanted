@@ -1,0 +1,27 @@
+{
+  "name": "cra-template-rmw",
+  "version": "1.0.0",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template"
+  ],
+  "description": "The base template for React Most Wanted.",
+  "main": "template.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarikHuber/react-most-wanted.git",
+    "directory": "packages/cra-template-rmw"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bugs": {
+    "url": "https://github.com/TarikHuber/react-most-wanted/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ]
+}
