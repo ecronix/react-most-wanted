@@ -25,6 +25,6 @@ firebase-debug.log*
 
 
 # demo
-#.firebase
-#.package-lock.json
-#.package.json
+.firebase
+.package-lock.json
+.package.json
