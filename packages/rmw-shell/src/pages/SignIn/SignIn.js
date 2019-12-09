@@ -11,7 +11,7 @@ export class SignIn extends Component {
   render() {
     const { intl, firebaseApp, appConfig } = this.props
 
-    const {firebase_auth_props={}}=appConfig||{}
+    const { firebase_auth_props = {} } = appConfig || {}
 
     const uiConfig = {
       signInSuccessUrl: '/',
@@ -22,11 +22,11 @@ export class SignIn extends Component {
 
           // To avoid page reload on single page applications
           return false
-        }
+        },
       },
       signInOptions: appConfig.firebase_providers,
       credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-      ...firebase_auth_props
+      ...firebase_auth_props,
     }
 
     return (
@@ -38,7 +38,7 @@ export class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-  intl: PropTypes.object.isRequired
+  intl: PropTypes.object.isRequired,
 }
 
 export default injectIntl(withFirebase(withAppConfigs(SignIn)))
