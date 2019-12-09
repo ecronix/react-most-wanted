@@ -23,9 +23,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
-
-
-# demo
-.firebase
-.package-lock.json
-.package.json
