@@ -13,15 +13,16 @@ matrix:
       - npm test
       after_success:
       - npm run build
-       deploy:
-        provider: npm
-        skip_cleanup: true
-        email: $NPM_EMAIL
-        api_key: $NPM_TOKEN
-        on:
-          branch: master
-          condition: $TRAVIS_PULL_REQUEST = false
-        branches:
-          only:
-            - master
+   deploy:
+      provider: npm
+      skip_cleanup: true
+      email: $NPM_EMAIL
+      api_key: $NPM_TOKEN
+      on:
+        branch: master
+        condition: $TRAVIS_PULL_REQUEST = false
+
+    branches:
+      only:
+        - master
 
