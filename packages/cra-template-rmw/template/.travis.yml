@@ -4,8 +4,8 @@ node_js:
 
 cache:
   directories:
-  - node_modules
-  - functions/node_modules
+    - node_modules
+    - functions/node_modules
 
 before_install:
   - chmod +x ./continuous_deployment/before_install.sh
@@ -19,10 +19,3 @@ before_script:
 script:
   - chmod +x ./continuous_deployment/deploy.sh
   - travis_wait 40 ./continuous_deployment/deploy.sh
-
-after_script:
-  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-  - node node_modules/lighthouse-ci/runlighthouse.js https://react-most-wanted.com
-
-  
