@@ -13,12 +13,10 @@ before_install:
   - ./continuous_deployment/before_install.sh
 
 before_script:
-  - cd packages/cra-template-rmw/template
   - npm test
   - chmod +x ./continuous_deployment/build.sh
   - travis_wait 40 ./continuous_deployment/build.sh
 
 script:
-  - cd packages/cra-template-rmw/template
-  - chmod +x ./packages/cra-template-rmw/template/continuous_deployment/deploy.sh
-  - travis_wait 40 ./packages/cra-template-rmw/template/continuous_deployment/deploy.sh
+  - chmod +x ./continuous_deployment/deploy.sh
+  - travis_wait 40 ./continuous_deployment/deploy.sh
