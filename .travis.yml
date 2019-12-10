@@ -1,28 +1,22 @@
-language: generic
+language: node_js
+node_js:
+  - 8
 
-matrix:
-  include:
-    - env: PROJECT=packages/cra-template-rmw
-      node_js: lts
-    - env: PROJECT=packages/rmw-shell
-      node_js: lts
-      cache:
-      directories:
-        - node_modules
-      script:
-      - npm test
-      after_success:
-      - npm run build
-   deploy:
-      provider: npm
-      skip_cleanup: true
-      email: $NPM_EMAIL
-      api_key: $NPM_TOKEN
-      on:
-        branch: master
-        condition: $TRAVIS_PULL_REQUEST = false
+cache:
+  directories:
+    - ./packages/cra-template-rmw/template/node_modules
+    - ./packages/cra-template-rmw/template/functions/node_modules
 
-    branches:
-      only:
-        - master
+before_install:
+  - chmod +x ./packages/cra-template-rmw/template/continuous_deployment/before_install.sh
+  - ./packages/cra-template-rmw/template/continuous_deployment/before_install.sh
 
+before_script:
+  - cd ./packages/cra-template-rmw/template/
+  - npm test
+  - chmod +x ./packages/cra-template-rmw/template/continuous_deployment/build.sh
+  - travis_wait 40 ./packages/cra-template-rmw/template/continuous_deployment/build.sh
+
+script:
+  - chmod +x ./packages/cra-template-rmw/template/continuous_deployment/deploy.sh
+  - travis_wait 40 ./packages/cra-template-rmw/template/continuous_deployment/deploy.sh
