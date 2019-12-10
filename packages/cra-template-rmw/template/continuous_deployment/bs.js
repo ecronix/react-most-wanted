@@ -2,7 +2,7 @@
 // node bs.js yourBSUserName yourBSKey
 
 var webdriver = require('selenium-webdriver')
-var test = require('./bs_test.js.js')
+var test = require('./bs_test.js')
 
 // Input capabilities
 var iPhone = {
