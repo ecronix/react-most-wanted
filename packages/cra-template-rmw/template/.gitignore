@@ -28,3 +28,4 @@ firebase-debug.log*
 .firebase
 package-lock.json
 package.json
+.gitignore
