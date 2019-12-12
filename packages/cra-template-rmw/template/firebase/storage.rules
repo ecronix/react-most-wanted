@@ -13,5 +13,11 @@ service firebase.storage {
                 
     }
 
+    match /companies/{companyUid}/{allPaths=**} {
+        allow read: if request.auth!=null 
+        allow write: if request.auth!=null && request.resource.size < 50 * 1024 * 1024
+                
+    }
+
   }
 }
