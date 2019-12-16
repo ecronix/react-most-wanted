@@ -1,0 +1,45 @@
+{
+  "name": "firebase-function-tools",
+  "version": "1.0.11",
+  "description": "firebase-function-tools ",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build-react-component --no-demo",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "prepublishOnly": "npm run build",
+    "start": "nwb serve-react-demo",
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "16.x"
+  },
+  "devDependencies": {
+    "camelcase": "^5.3.1",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.6",
+    "nwb": "0.23.x",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "author": "Tarik Huber",
+  "homepage": "https://www.react-most-wanted.com/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarikHuber/react-most-wanted.git",
+    "directory": "packages/firebase-function-tools"
+  },
+  "keywords": [
+    "react-component"
+  ]
+}
