@@ -9,7 +9,11 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import ReactList from 'react-list'
 import Switch from '@material-ui/core/Switch'
-import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
+import {
+  FilterDrawer,
+  filterSelectors,
+  filterActions,
+} from 'material-ui-filter'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import { setSimpleValue } from '../../store/simpleValues/actions'
@@ -34,17 +38,32 @@ class UsersToggle extends Component {
 
     return (
       <div key={i}>
-        <ListItem key={userUid} id={userUid} onClick={onClick ? () => onClick(userUid, user) : undefined}>
-          <AltIconAvatar alt="person" src={user.photoURL} icon={<Person/>} />
+        <ListItem
+          key={userUid}
+          id={userUid}
+          onClick={onClick ? () => onClick(userUid, user) : undefined}
+        >
+          <AltIconAvatar
+            alt="person"
+            src={user.thumbnail || user.photoURL}
+            icon={<Person />}
+          />
           <ListItemText
-            primary={<div style={{ fontFamily: 'Roboto' }}>{user.displayName}</div>}
-            secondaryText={<div style={{ fontFamily: 'Roboto' }}>{user.email}</div>}
+            primary={
+              <div style={{ fontFamily: 'Roboto' }}>{user.displayName}</div>
+            }
+            secondaryText={
+              <div style={{ fontFamily: 'Roboto' }}>{user.email}</div>
+            }
           />
           <ListItemSecondaryAction>
-            <Switch checked={checked === true} onChange={(e, newVal) => onChange(userUid, newVal)} />
+            <Switch
+              checked={checked === true}
+              onChange={(e, newVal) => onChange(userUid, newVal)}
+            />
           </ListItemSecondaryAction>
         </ListItem>
-        <Divider variant='inset' />
+        <Divider variant="inset" />
       </div>
     )
   }
@@ -55,12 +74,12 @@ class UsersToggle extends Component {
     const filterFields = [
       {
         name: 'displayName',
-        label: intl.formatMessage({ id: 'name_label' })
+        label: intl.formatMessage({ id: 'name_label' }),
       },
       {
         name: 'value',
-        label: intl.formatMessage({ id: 'value_label' })
-      }
+        label: intl.formatMessage({ id: 'value_label' }),
+      },
     ]
 
     return (
@@ -77,16 +96,19 @@ class UsersToggle extends Component {
             type="simple"
           />
         </List>
-        <FilterDrawer name={'users_toggle'} fields={filterFields} formatMessage={intl.formatMessage} />
+        <FilterDrawer
+          name={'users_toggle'}
+          fields={filterFields}
+          formatMessage={intl.formatMessage}
+        />
       </div>
     )
   }
 }
 
 UsersToggle.propTypes = {
-  
   theme: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -94,7 +116,12 @@ const mapStateToProps = (state, ownProps) => {
   const { getValue, onChange } = ownProps
 
   const path = 'users'
-  const list = filterSelectors.getFilteredList('users_toggle', filters, lists[path], fieldValue => fieldValue.val)
+  const list = filterSelectors.getFilteredList(
+    'users_toggle',
+    filters,
+    lists[path],
+    fieldValue => fieldValue.val
+  )
 
   return {
     path,
@@ -104,11 +131,10 @@ const mapStateToProps = (state, ownProps) => {
     filters,
     auth,
     intl,
-    user_grants: lists.user_grants
+    user_grants: lists.user_grants,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { setSimpleValue, ...filterActions }
-)(injectIntl(withRouter(withFirebase(withTheme(UsersToggle)))))
+export default connect(mapStateToProps, { setSimpleValue, ...filterActions })(
+  injectIntl(withRouter(withFirebase(withTheme(UsersToggle))))
+)

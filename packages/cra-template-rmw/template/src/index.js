@@ -8,7 +8,7 @@ import LoadingComponent from 'rmw-shell/lib/components/LoadingComponent'
 const Loading = () => <LoadingComponent />
 export const AppAsync = Loadable({
   loader: () => import('./App'),
-  loading: Loading
+  loading: Loading,
 })
 
 ReactDOM.render(<AppAsync />, document.getElementById('root'))
