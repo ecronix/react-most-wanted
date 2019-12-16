@@ -15,8 +15,17 @@ import ReactList from 'react-list'
 import Scrollbar from '../../components/Scrollbar'
 import SearchField from '../../components/SearchField'
 import Toolbar from '@material-ui/core/Toolbar'
-import { FilterDrawer, filterSelectors, filterActions } from 'material-ui-filter'
-import { GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon } from '../../components/Icons'
+import {
+  FilterDrawer,
+  filterSelectors,
+  filterActions,
+} from 'material-ui-filter'
+import {
+  GoogleIcon,
+  FacebookIcon,
+  GitHubIcon,
+  TwitterIcon,
+} from '../../components/Icons'
 import { connect } from 'react-redux'
 import { getList, isLoading } from 'firekit'
 import { injectIntl } from 'react-intl'
@@ -57,12 +66,23 @@ export class Users extends Component {
 
   handleRowClick = user => {
     const { history, isSelecting } = this.props
-    history.push(isSelecting ? `/${isSelecting}/${user.key}` : `/${path}/edit/${user.key}/profile`)
+    history.push(
+      isSelecting
+        ? `/${isSelecting}/${user.key}`
+        : `/${path}/edit/${user.key}/profile`
+    )
   }
 
   renderItem = (index, key) => {
     const { list, intl } = this.props
-    const user = list[index].val
+    const {
+      displayName = 'User',
+      thumbnail,
+      photoURL,
+      lastOnline,
+      connections,
+      providerData,
+    } = list[index].val || {}
 
     return (
       <div key={key}>
@@ -73,43 +93,50 @@ export class Users extends Component {
           }}
           id={key}
         >
-          <AltIconAvatar src={user.photoURL}  icon={<Person/>}/>
+          <AltIconAvatar src={thumbnail || photoURL} icon={<Person />} />
 
           <ListItemText
-            primary={user.displayName}
+            primary={displayName}
             secondary={
-              !user.connections && !user.lastOnline
+              !connections && !lastOnline
                 ? intl.formatMessage({ id: 'offline' })
                 : intl.formatMessage({ id: 'online' })
             }
           />
 
           <Toolbar>
-            {user.providerData &&
-              user.providerData.map((p, i) => {
+            {providerData &&
+              providerData.map((p, i) => {
                 return <div key={i}>{this.getProviderIcon(p)}</div>
               })}
           </Toolbar>
-          <OfflinePin color={user.connections ? 'primary' : 'disabled'} />
+          <OfflinePin color={connections ? 'primary' : 'disabled'} />
         </ListItem>
-        <Divider variant='inset' />
+        <Divider variant="inset" />
       </div>
     )
   }
 
   render() {
-    const { list, theme, intl, setFilterIsOpen, hasFilters, isLoading } = this.props
+    const {
+      list,
+      theme,
+      intl,
+      setFilterIsOpen,
+      hasFilters,
+      isLoading,
+    } = this.props
 
     const filterFields = [
       {
         name: 'displayName',
-        label: intl.formatMessage({ id: 'name' })
+        label: intl.formatMessage({ id: 'name' }),
       },
       {
         name: 'creationTime',
         type: 'date',
-        label: intl.formatMessage({ id: 'creation_time' })
-      }
+        label: intl.formatMessage({ id: 'creation_time' }),
+      },
     ]
 
     return (
@@ -128,7 +155,11 @@ export class Users extends Component {
             >
               <FilterList
                 className="material-icons"
-                color={hasFilters ? theme.palette.accent1Color : theme.palette.canvasColor}
+                color={
+                  hasFilters
+                    ? theme.palette.accent1Color
+                    : theme.palette.canvasColor
+                }
               />
             </IconButton>
           </div>
@@ -138,7 +169,11 @@ export class Users extends Component {
         <div style={{ height: '100%', overflow: 'none' }}>
           <Scrollbar>
             <List id="test" component="div">
-              <ReactList itemRenderer={this.renderItem} length={list ? list.length : 0} type="simple" />
+              <ReactList
+                itemRenderer={this.renderItem}
+                length={list ? list.length : 0}
+                type="simple"
+              />
             </List>
           </Scrollbar>
         </div>
@@ -150,9 +185,9 @@ export class Users extends Component {
 
 Users.propTypes = {
   users: PropTypes.array,
-  
+
   theme: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -162,18 +197,22 @@ const mapStateToProps = (state, ownProps) => {
   const isSelecting = match.params.select ? match.params.select : false
 
   const { hasFilters } = filterSelectors.selectFilterProps('users', filters)
-  const list = filterSelectors.getFilteredList('users', filters, getList(state, path), fieldValue => fieldValue.val)
+  const list = filterSelectors.getFilteredList(
+    'users',
+    filters,
+    getList(state, path),
+    fieldValue => fieldValue.val
+  )
 
   return {
     isSelecting,
     hasFilters,
     isLoading: isLoading(state, path),
     list,
-    auth
+    auth,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { ...filterActions }
-)(injectIntl(withTheme(withFirebase(withRouter(Users)))))
+export default connect(mapStateToProps, { ...filterActions })(
+  injectIntl(withTheme(withFirebase(withRouter(Users))))
+)
