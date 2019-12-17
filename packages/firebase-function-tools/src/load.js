@@ -7,7 +7,7 @@
  *   Based on this thread:
  *     https://github.com/firebase/functions-samples/issues/170
  */
-
+require = require('esm')(module /*, options*/)
 import { resolve } from 'path'
 import glob from 'glob'
 import camelCase from 'camelcase'
