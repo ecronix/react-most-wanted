@@ -85,5 +85,5 @@ module.exports = async (object, config = {}) => {
   const thumbFileUrl = thumbResult[0]
   const fileUrl = originalResult[0]
 
-  return { file: thumbFile, downloadURL: thumbFileUrl, fileDir }
+  return { file: thumbFile, downloadURL: thumbFileUrl, fileDir, fileName }
 }
