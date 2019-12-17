@@ -1,6 +1,6 @@
 {
   "name": "firebase-function-tools",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "firebase-function-tools ",
   "main": "lib/index.js",
   "files": [

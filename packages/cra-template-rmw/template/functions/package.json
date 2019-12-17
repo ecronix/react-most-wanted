@@ -3,8 +3,10 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "axios": "^0.19.0",
+    "babel-runtime": "^6.26.0",
     "camelcase": "^5.3.1",
     "child-process-promise": "^2.2.1",
+    "esm": "^3.2.25",
     "firebase-admin": "^8.8.0",
     "firebase-function-tools": "^1.0.11",
     "firebase-functions": "^3.3.0",

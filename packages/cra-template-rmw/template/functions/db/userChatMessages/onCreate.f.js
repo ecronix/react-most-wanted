@@ -1,10 +1,12 @@
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 const admin = require('firebase-admin')
-const notifications = require('../../utils/notifications')
+const notifications = require('firebase-function-tools/lib/notifications')
 const gmailEmail = encodeURIComponent(functions.config().gmail.email)
 const gmailPassword = encodeURIComponent(functions.config().gmail.password)
-const mailTransport = nodemailer.createTransport(`smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`)
+const mailTransport = nodemailer.createTransport(
+  `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`
+)
 
 exports = module.exports = functions
   .region('europe-west1')
@@ -30,14 +32,26 @@ exports = module.exports = functions
       .database()
       .ref(`/users/${receiverUid}`)
       .once('value')
-    const senderChatRef = admin.database().ref(`/user_chats/${senderUid}/${receiverUid}`)
-    const receiverChatRef = admin.database().ref(`/user_chats/${receiverUid}/${senderUid}`)
-    const receiverChatUnreadRef = admin.database().ref(`/user_chats/${receiverUid}/${senderUid}/unread`)
-    const receiverChatMessageRef = admin.database().ref(`/user_chat_messages/${receiverUid}/${senderUid}/${messageUid}`)
-    const senderChatMessageRef = admin.database().ref(`/user_chat_messages/${senderUid}/${receiverUid}/${messageUid}`)
+    const senderChatRef = admin
+      .database()
+      .ref(`/user_chats/${senderUid}/${receiverUid}`)
+    const receiverChatRef = admin
+      .database()
+      .ref(`/user_chats/${receiverUid}/${senderUid}`)
+    const receiverChatUnreadRef = admin
+      .database()
+      .ref(`/user_chats/${receiverUid}/${senderUid}/unread`)
+    const receiverChatMessageRef = admin
+      .database()
+      .ref(`/user_chat_messages/${receiverUid}/${senderUid}/${messageUid}`)
+    const senderChatMessageRef = admin
+      .database()
+      .ref(`/user_chat_messages/${senderUid}/${receiverUid}/${messageUid}`)
 
     console.log('values', eventSnapshot.val())
-    console.log(`Message ${messageUid} ${snapValues.message} created! Sender ${senderUid}, receiver ${receiverUid}`)
+    console.log(
+      `Message ${messageUid} ${snapValues.message} created! Sender ${senderUid}, receiver ${receiverUid}`
+    )
 
     return Promise.all([senderRef, receiverRef]).then(results => {
       const senderSnap = results[0]
@@ -60,11 +74,13 @@ exports = module.exports = functions
         }
       }
 
-      const udateReceiverChatMessage = receiverChatMessageRef.update(snapValues).then(() => {
-        return senderChatMessageRef.update({
-          isSend: context.timestamp
+      const udateReceiverChatMessage = receiverChatMessageRef
+        .update(snapValues)
+        .then(() => {
+          return senderChatMessageRef.update({
+            isSend: context.timestamp,
+          })
         })
-      })
 
       const udateSenderChat = senderChatRef.update({
         unread: 0,
@@ -74,7 +90,7 @@ exports = module.exports = functions
         authorUid: senderUid,
         lastCreated: snapValues.created,
         isSend: context.timestamp,
-        isRead: null
+        isRead: null,
       })
       const udateReceiverChat = receiverChatRef.update({
         displayName: senderSnap.child('displayName').val(),
@@ -82,7 +98,7 @@ exports = module.exports = functions
         authorUid: senderUid,
         lastMessage: lastMessage,
         lastCreated: snapValues.created,
-        isRead: null
+        isRead: null,
       })
       const updateReceiverUnred = receiverChatUnreadRef.transaction(number => {
         return (number || 0) + 1
@@ -95,20 +111,22 @@ exports = module.exports = functions
           notification: {
             title: `${snapValues.authorName} `,
             body: lastMessage,
-            icon: snapValues.authorPhotoUrl ? snapValues.authorPhotoUrl : '/apple-touch-icon.png',
+            icon: snapValues.authorPhotoUrl
+              ? snapValues.authorPhotoUrl
+              : '/apple-touch-icon.png',
             click_action: `https://www.react-most-wanted.com/chats/edit/${senderUid}`,
-            tag: `chat`
-          }
+            tag: `chat`,
+          },
         }
 
         notifyUser = notifications.notifyUser(receiverUid, payload).then(() => {
           return senderChatMessageRef
             .update({
-              isReceived: context.timestamp
+              isReceived: context.timestamp,
             })
             .then(() => {
               return senderChatRef.update({
-                isReceived: context.timestamp
+                isReceived: context.timestamp,
               })
             })
         })
@@ -119,7 +137,7 @@ exports = module.exports = functions
         udateSenderChat,
         udateReceiverChat,
         updateReceiverUnred,
-        notifyUser
+        notifyUser,
       ])
     })
   })
