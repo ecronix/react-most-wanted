@@ -31,7 +31,8 @@ export default (folder, exports, extension = '.f.js') => {
       !process.env.FUNCTION_NAME ||
       process.env.FUNCTION_NAME === functionName
     ) {
-      exports[functionName] = require(resolve(folder, file))
+      const mod = require(resolve(folder, file))
+      exports[functionName] = mod.default || mod
     }
   }
 }

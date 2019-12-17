@@ -24,9 +24,12 @@ module.exports = {
 
       // Return the promise from counterRef.set() so our function
       // waits for this async event to complete before it exits.
-      return collectionRef.once('value')
-        .then(messagesData => counterRef.set(messagesData.numChildren() + correction))
+      return collectionRef
+        .once('value')
+        .then(messagesData =>
+          counterRef.set(messagesData.numChildren() + correction)
+        )
     }
     return null
-  }
+  },
 }
