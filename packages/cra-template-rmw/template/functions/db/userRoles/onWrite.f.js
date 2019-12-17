@@ -1,15 +1,15 @@
 const functions = require('firebase-functions')
 const admin = require('firebase-admin')
-try { admin.initializeApp() } catch (e) { console.log(e) }
 
-exports = module.exports = functions.database.ref('/user_roles/{userUid}/{roleUid}').onWrite((eventSnapshot, context) => {
-  const userUid = context.params.userUid
-  const roleUid = context.params.roleUid
+exports = module.exports = functions.database
+  .ref('/user_roles/{userUid}/{roleUid}')
+  .onWrite((eventSnapshot, context) => {
+    const userUid = context.params.userUid
+    const roleUid = context.params.roleUid
 
-  const roleGrantsRef = admin.database().ref(`role_grants/${roleUid}`)
+    const roleGrantsRef = admin.database().ref(`role_grants/${roleUid}`)
 
-  return roleGrantsRef.once('value')
-    .then((snapshot) => {
+    return roleGrantsRef.once('value').then(snapshot => {
       let promises = []
 
       snapshot.forEach(grant => {
@@ -18,9 +18,15 @@ exports = module.exports = functions.database.ref('/user_roles/{userUid}/{roleUi
         console.log('User role changed:', eventSnapshot.after.val())
 
         if (eventSnapshot.after.val()) {
-          grantRef = admin.database().ref(`user_grants/${userUid}/${grant.key}`).set(true)
+          grantRef = admin
+            .database()
+            .ref(`user_grants/${userUid}/${grant.key}`)
+            .set(true)
         } else {
-          grantRef = admin.database().ref(`user_grants/${userUid}/${grant.key}`).remove()
+          grantRef = admin
+            .database()
+            .ref(`user_grants/${userUid}/${grant.key}`)
+            .remove()
         }
 
         promises.push(grantRef)
@@ -28,4 +34,4 @@ exports = module.exports = functions.database.ref('/user_roles/{userUid}/{roleUi
 
       return Promise.all(promises)
     })
-})
+  })
