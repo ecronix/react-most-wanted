@@ -1,7 +1,7 @@
-const functions = require('firebase-functions')
-const admin = require('firebase-admin')
+import { database } from 'firebase-functions'
+import admin from 'firebase-admin'
 
-exports = module.exports = functions.database
+export default database
   .ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}')
   .onUpdate((data, context) => {
     if (context.authType === 'ADMIN') {
