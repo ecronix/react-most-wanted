@@ -1,8 +1,7 @@
-const functions = require('firebase-functions')
-const admin = require('firebase-admin')
-const createThumbnail = require('firebase-function-tools/lib/thumbnail')
+import admin from 'firebase-admin'
+import createThumbnail from 'firebase-function-tools/lib/thumbnail'
 
-module.exports = async object => {
+export default async function(object) {
   const thumbnail = await createThumbnail(object)
 
   if (thumbnail) {

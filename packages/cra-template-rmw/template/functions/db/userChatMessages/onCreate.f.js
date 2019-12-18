@@ -1,14 +1,16 @@
-const functions = require('firebase-functions')
-const nodemailer = require('nodemailer')
-const admin = require('firebase-admin')
-const notifications = require('firebase-function-tools/lib/notifications')
+import * as functions from 'firebase-functions'
+import admin from 'firebase-admin'
+import moment from 'moment'
+import nodemailer from 'nodemailer'
+import notifications from 'firebase-function-tools/lib/notifications'
+
 const gmailEmail = encodeURIComponent(functions.config().gmail.email)
 const gmailPassword = encodeURIComponent(functions.config().gmail.password)
 const mailTransport = nodemailer.createTransport(
   `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`
 )
 
-exports = module.exports = functions
+export default functions
   .region('europe-west1')
   .database.ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}')
   .onCreate((eventSnapshot, context) => {

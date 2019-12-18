@@ -1,8 +1,8 @@
-const functions = require('firebase-functions')
-const admin = require('firebase-admin')
-const thumbnails = require('./thumbnails')
+import * as functions from 'firebase-functions'
+import admin from 'firebase-admin'
+import thumbnails from './thumbnails'
 
-exports = module.exports = functions
+export default functions
   .region('europe-west1')
   .storage.object()
   .onFinalize(async (object, context) => {

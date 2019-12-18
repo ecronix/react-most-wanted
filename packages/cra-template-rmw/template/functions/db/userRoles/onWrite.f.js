@@ -1,7 +1,7 @@
-const functions = require('firebase-functions')
-const admin = require('firebase-admin')
+import { database } from 'firebase-functions'
+import admin from 'firebase-admin'
 
-exports = module.exports = functions.database
+exports = module.exports = database
   .ref('/user_roles/{userUid}/{roleUid}')
   .onWrite((eventSnapshot, context) => {
     const userUid = context.params.userUid
