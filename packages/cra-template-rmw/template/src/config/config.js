@@ -42,6 +42,9 @@ const config = {
     'password',
     'phone',
   ],
+  googleMaps: {
+    apiKey: 'AIzaSyByMSTTLt1Mf_4K1J9necAbw2NPDu2WD7g',
+  },
   initial_state: {
     themeSource: {
       isNightModeOn: true,
