@@ -27,6 +27,5 @@ firebase-debug.log*
 # demo
 .firebase
 package-lock.json
-package.json
 .gitignore
 .npmignore
