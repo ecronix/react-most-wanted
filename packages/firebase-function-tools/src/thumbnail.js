@@ -72,6 +72,7 @@ module.exports = async (object, config = {}) => {
   const tokenConfig = {
     action: 'read',
     expires: '03-01-2500',
+    content_type: 'image/jpg',
   }
 
   // Add this permission to the fiebase service account: Service Account Token Creator
