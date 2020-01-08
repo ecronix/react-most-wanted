@@ -10,7 +10,7 @@
     "@material-ui/pickers": "^3.2.8",
     "a2hs": "^1.1.4",
     "chart.js": "^2.9.3",
-    "downshift": "^4.0.2",
+    "downshift": "^4.0.3",
     "firebase": "^7.6.1",
     "firebaseui": "^4.4.0",
     "fireform": "^1.0.0",
