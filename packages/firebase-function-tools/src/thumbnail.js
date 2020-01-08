@@ -62,6 +62,7 @@ module.exports = async (object, config = {}) => {
 
   await bucket.upload(tempLocalThumbFile, {
     destination: thumbFilePath,
+    predefinedAcl: 'publicRead',
     metadata: metadata,
   })
   console.log('Thumbnail uploaded to Storage at', thumbFilePath)
@@ -69,22 +70,10 @@ module.exports = async (object, config = {}) => {
   fs.unlinkSync(tempLocalFile)
   fs.unlinkSync(tempLocalThumbFile)
 
-  const tokenConfig = {
-    action: 'read',
-    expires: '03-01-2500',
-    content_type: 'image/jpg',
-  }
+  const downloadURL = `https://storage.googleapis.com/${object.bucket.replace(
+    /\//g,
+    '%2F'
+  )}/${thumbFilePath}`
 
-  // Add this permission to the fiebase service account: Service Account Token Creator
-  const results = await Promise.all([
-    thumbFile.getSignedUrl(tokenConfig),
-    file.getSignedUrl(tokenConfig),
-  ])
-
-  const thumbResult = results[0]
-  const originalResult = results[1]
-  const thumbFileUrl = thumbResult[0]
-  const fileUrl = originalResult[0]
-
-  return { file: thumbFile, downloadURL: thumbFileUrl, fileDir, fileName }
+  return { file: thumbFile, downloadURL, fileDir, fileName }
 }
