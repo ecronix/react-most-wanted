@@ -28,7 +28,7 @@ React Most Wanted is a React Starter Kit based on [Create React App](https://git
 Check this out:
 
 - It is built with CRA and even if you use this Starter Kit your CRA scripts will work properly. You will be able to make every CRA update as if you have started with it. We don't eject anyone from CRA :smile:.
-- It is based on a library [rmw-shell](https://github.com/TarikHuber/rmw-shell) which keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where the hard work is already done for you.
+- It is based on our [rmw-shell](packages/rmw-shell) library which keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where the hard work is already done for you.
 - There is a simple script to start a fresh project without forking anything `npx create-react-app test-app --scripts-version rmw-react-scripts`.
 - It has all "MOST WANTED" features built in. That is where the name comes from :wink: We will come to the features bit a little bit later.
 - It is customizable.
