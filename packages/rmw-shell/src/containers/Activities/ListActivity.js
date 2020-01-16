@@ -46,7 +46,8 @@ class ListActivity extends Component {
       handleCreateClick,
       disableCreate,
       title,
-      activityProps = {}
+      activityProps = {},
+      reactListProps={}
     } = this.props
 
     const fields = filterFields.map(field => {
@@ -86,7 +87,8 @@ class ListActivity extends Component {
               <ReactList
                 itemRenderer={i => renderItem(list[i].key, list[i].val)}
                 length={list ? list.length : 0}
-                type="simple"
+                type="uniform"
+                {...reactListProps}
               />
             </List>
           </Scrollbar>
