@@ -172,7 +172,7 @@ export class Users extends Component {
               <ReactList
                 itemRenderer={this.renderItem}
                 length={list ? list.length : 0}
-                type="simple"
+                type="uniform"
               />
             </List>
           </Scrollbar>

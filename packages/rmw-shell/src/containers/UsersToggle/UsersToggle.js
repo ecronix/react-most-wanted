@@ -93,7 +93,7 @@ class UsersToggle extends Component {
           <ReactList
             itemRenderer={(i, k) => this.renderGrantItem(list, i, k)}
             length={list ? list.length : 0}
-            type="simple"
+            type="uniform"
           />
         </List>
         <FilterDrawer
