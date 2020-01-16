@@ -4,14 +4,14 @@
   "private": true,
   "dependencies": {
     "@date-io/moment": "^2.0.1",
-    "@formatjs/intl-relativetimeformat": "^4.5.5",
+    "@formatjs/intl-relativetimeformat": "^4.5.7",
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/pickers": "^3.2.8",
     "a2hs": "^1.1.4",
     "chart.js": "^2.9.3",
-    "downshift": "^4.0.3",
-    "firebase": "^7.6.1",
+    "downshift": "^4.0.6",
+    "firebase": "^7.6.2",
     "firebaseui": "^4.4.0",
     "fireform": "^1.0.0",
     "firekit": "^1.0.32",
@@ -36,7 +36,7 @@
     "react-dropzone": "^10.2.1",
     "react-helmet": "^5.2.1",
     "react-image-cropper": "^1.3.0",
-    "react-intl": "^3.9.3",
+    "react-intl": "^3.11.0",
     "react-list": "^0.8.13",
     "react-loadable": "^5.5.0",
     "react-markdown": "^4.3.1",
@@ -54,7 +54,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^7.1.30"
+    "rmw-shell": "^7.1.31"
   },
   "scripts": {
     "check": "npm-check -s -u",
