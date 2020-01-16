@@ -8,11 +8,14 @@ export default function makeLoadable(opts, preloadComponents) {
   return Loadable.Map({
     loader: {
       Component: opts.loader,
-      firebase: opts.firebase
+      firebase: opts.firebase,
     },
     loading: LoadingComponent,
     render(loaded, props) {
-      if (preloadComponents !== undefined && preloadComponents instanceof Array) {
+      if (
+        preloadComponents !== undefined &&
+        preloadComponents instanceof Array
+      ) {
         preloadComponents.map(component => component.preload())
       }
 
@@ -21,11 +24,11 @@ export default function makeLoadable(opts, preloadComponents) {
 
       return (
         <FirebaseProvider firebaseApp={firebaseApp} context={ReactReduxContext}>
-          <div>
+          <React.Fragment>
             <Component {...props} />
-          </div>
+          </React.Fragment>
         </FirebaseProvider>
       )
-    }
+    },
   })
 }
