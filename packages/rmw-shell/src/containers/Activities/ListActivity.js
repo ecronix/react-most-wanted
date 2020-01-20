@@ -87,7 +87,7 @@ class ListActivity extends Component {
               <ReactList
                 itemRenderer={i => renderItem(list[i].key, list[i].val)}
                 length={list ? list.length : 0}
-                type="uniform"
+                type="simple"
                 {...reactListProps}
               />
             </List>
