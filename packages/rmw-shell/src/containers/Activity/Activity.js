@@ -70,6 +70,7 @@ const Activity = ({
   title,
   pageTitle,
   appBarContent,
+  appBarProps,
   isLoading,
   onBackClick
 }) => {
@@ -119,6 +120,7 @@ const Activity = ({
             ? classNames(classes.appBar, drawer.open && classes.appBarShift)
             : classes.appBar
         }
+        {...appBarProps}
       >
         <Toolbar>
           <IconButton
