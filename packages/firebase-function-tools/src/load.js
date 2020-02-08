@@ -27,12 +27,8 @@ export default (folder, exports, extension = '.f.js') => {
         .split('/')
         .join('_')
     ) // Strip off '.f.js'
-    if (
-      !process.env.FUNCTION_NAME ||
-      process.env.FUNCTION_NAME === functionName
-    ) {
-      const mod = require(resolve(folder, file))
-      exports[functionName] = mod.default || mod
-    }
+
+    const mod = require(resolve(folder, file))
+    exports[functionName] = mod.default || mod
   }
 }

@@ -22,7 +22,7 @@ const parseLanguages = (acceptedLangs, defaultLang = false) => {
   return match
 }
 
-const formatMessage = (messages, id) => {
+const formatMessage = (messages=[], id) => {
   return messages[id] || id
 }
 
