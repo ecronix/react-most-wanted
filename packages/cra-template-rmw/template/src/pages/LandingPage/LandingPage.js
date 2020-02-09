@@ -28,6 +28,7 @@ import messages_de from './de.json'
 import messages_en from './en.json'
 import messages_es from './es.json'
 import messages_ru from './ru.json'
+import messages_it from './it.json'
 import moment from 'moment'
 import parseLanguages, { formatMessage } from 'rmw-shell/lib/utils/localeTools'
 import red from '@material-ui/core/colors/red'
@@ -41,9 +42,10 @@ const messageSources = {
   es: messages_es,
   en: messages_en,
   ru: messages_ru,
+  it: messages_it
 }
 
-const match = parseLanguages(['en', 'es', 'bs', 'ru', 'de'], 'en')
+const match = parseLanguages(['en', 'es', 'bs', 'ru', 'de', 'it'], 'en')
 
 const messages = messageSources[match]
 
