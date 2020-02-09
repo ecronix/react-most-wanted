@@ -1,0 +1,13 @@
+{
+    "main.intro": "React Starter-Kit con le features Most Wanted ",
+    "main.title": " REACT MOST WANTED ",
+    "main.start": "INIZIA ADESSO",
+    "main.instal": "Installazione",
+    "main.run": "Esegui solo questo script per iniziare:",
+    "main.more": "Scopri di più",
+    "main.usage": "Utilizzo",
+    "main.set": "Imposta la configurazione al componente App:",
+    "main.what": "Cos'è questo?",
+    "main.this": "E una applicazione demo OPEN SOURCE che mostra l'utilizzo della libreria rmw-shell con React, Material-UI e Firebase.",
+    "main.demo": "Questa demo non ha lo scopo di svolgere qualcosa come App. E' qui solo per mostrarti che tutto funziona :)"
+  }

@@ -3,12 +3,14 @@ import de_messages from './de'
 import ru_messages from './ru'
 import bs_messages from './bs'
 import es_messages from './es'
+import it_messages from './it'
 import '@formatjs/intl-relativetimeformat/polyfill'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/de'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/en'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/ru'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/bs'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/es'
+import '@formatjs/intl-relativetimeformat/dist/locale-data/it'
 
 const locales = [
   {
@@ -30,6 +32,10 @@ const locales = [
   {
     locale: 'es',
     messages: es_messages
+  },
+  {
+    locale: 'it',
+    messages: it_messages
   }
 ]
 
