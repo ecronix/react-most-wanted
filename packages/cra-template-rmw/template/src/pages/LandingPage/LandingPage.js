@@ -27,6 +27,7 @@ import { withRouter } from 'react-router-dom'
 import CustomFade from '../../components/CustomFade/CustomFade'
 import PagePart from '../../components/LandingPage/PagePart'
 import asyncComponent from '../../utils/asyncComponent'
+import 'lazysizes'
 
 const AsyncCompanies = asyncComponent(() =>
   import('../../containers/LandingPage/Companies')
@@ -98,7 +99,9 @@ class LandingPage extends Component {
 
   handleScroll = e => {
     const { transparent } = this.state
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    const scrollTop =
+      window.pageYOffset ||
+      (document.documentElement && document.documentElement.scrollTop)
 
     if (scrollTop > 50 && transparent) {
       this.setState({ ...this.state, transparent: false })
@@ -192,7 +195,7 @@ class LandingPage extends Component {
               style={{
                 height: '100%',
                 width: '100%',
-                backgroundImage: 'url(background.jpg)',
+                backgroundImage: 'url(background.webp)',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed',
                 backgroundSize: 'cover',

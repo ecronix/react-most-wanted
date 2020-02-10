@@ -29,8 +29,10 @@ const Company = ({ company, history }) => {
           <CardMedia
             component="img"
             style={{ height: 140 }}
-            image={photoURL || './background.jpg'}
+            image={'background.webp'}
+            data-src={photoURL}
             title="Main image"
+            className="lazyload"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
