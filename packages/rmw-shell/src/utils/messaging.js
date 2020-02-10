@@ -14,14 +14,10 @@ let updateMessageShown = false
 const initializeMessaging = (props, skipIfNoPermission = false) => {
   const { initMessaging, firebaseApp, auth } = props
 
-  console.log('test')
-
   firebaseApp
     .database()
     .ref(`disable_notifications/${auth.uid}`)
     .once('value', snap => {
-      console.log('snap', snap.val())
-
       if (snap.val()) {
         console.log('Notifications disabled by user')
         return
@@ -100,8 +96,6 @@ const handleMessageReceived = (props, payload) => {
   const tag = payload.notification ? payload.notification.tag : ''
   const notifications = appConfig.getNotifications(notification, props)
   const notificationData = notifications[tag] ? notifications[tag] : false
-
-  console.log('TEST')
 
   if (notificationData && pathname.indexOf(notificationData.path) === -1) {
     toast.info(
