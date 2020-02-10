@@ -36,7 +36,7 @@ class Companies extends Component {
 
     try {
       axios
-        .get('https://react-most-wanted-dev.web.app/api/companies?limit=5')
+        .get('https://www.react-most-wanted.com/api/companies?limit=5')
         .then(({ data, status }) => {
           if (status === 200) {
             this.setState({
