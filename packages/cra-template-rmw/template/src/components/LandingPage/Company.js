@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
+import { withRouter } from 'react-router-dom'
 
 const Company = ({ company, history }) => {
   const { uid, name = '', description = '', feed = '', photoURL } = company
@@ -29,8 +30,8 @@ const Company = ({ company, history }) => {
           <CardMedia
             component="img"
             style={{ height: 140 }}
-            image={'background.webp'}
-            data-src={photoURL}
+            image={photoURL || '/background.webp'}
+            data-src={photoURL || '/background.webp'}
             title="Main image"
             className="lazyload"
           />
@@ -55,4 +56,4 @@ const Company = ({ company, history }) => {
   )
 }
 
-export default Company
+export default withRouter(Company)
