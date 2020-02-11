@@ -50,13 +50,17 @@ export function saveAuthorisation(user) {
 }
 
 export function isAuthorised() {
-  if (typeof Storage !== 'undefined') {
-    try {
-      return localStorage.getItem(localStorageAuthKey)
-    } catch (ex) {
+  try {
+    if (typeof Storage !== 'undefined') {
+      const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
+      const data = JSON.parse(localStorage.getItem(key))
+      const auth = JSON.parse(data.auth)
+
+      return auth && auth.isAuthorised
+    } else {
       return false
     }
-  } else {
-    // No web storage Support.
+  } catch (ex) {
+    return false
   }
 }

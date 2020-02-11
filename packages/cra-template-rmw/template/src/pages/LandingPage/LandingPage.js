@@ -1,58 +1,25 @@
+import 'lazysizes'
 import AppBar from '@material-ui/core/AppBar'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import Button from '@material-ui/core/Button'
+import Code from '@material-ui/icons/Code'
+import CustomFade from 'rmw-shell/lib/components/CustomFade/CustomFade'
+import CustomLoad from 'rmw-shell/lib/components/CustomLoad/CustomLoad'
 import Fab from '@material-ui/core/Fab'
 import LockIcon from '@material-ui/icons/Lock'
+import PagePart from '../../components/LandingPage/PagePart'
+import Person from '../../components/Person/Person'
 import React, { Component } from 'react'
-import ResponsiveMenu from '../../containers/Menu/Menu'
+import ResponsiveMenu from 'rmw-shell/lib/containers/ResponsveMenu/ResponsiveMenu'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import Code from '@material-ui/icons/Code'
 import Zoom from '@material-ui/core/Zoom'
+import formatMessage from './messages'
 import grey from '@material-ui/core/colors/grey'
-import messages_de from './messages/de.json'
-import messages_en from './messages/en.json'
-import messages_bs from './messages/bs.json'
-import messages_es from './messages/es.json'
-import messages_ru from './messages/ru.json'
-import messages_it from './messages/it.json'
-import Person from '../../components/Person/Person'
-import parseLanguages, {
-  formatMessage as formatMessages,
-} from 'rmw-shell/lib/utils/localeTools'
-import red from '@material-ui/core/colors/red'
 import { Helmet } from 'react-helmet'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
-import CustomFade from '../../components/CustomFade/CustomFade'
-import PagePart from '../../components/LandingPage/PagePart'
-import asyncComponent from '../../utils/asyncComponent'
-import 'lazysizes'
-
-const AsyncCompanies = asyncComponent(() =>
-  import('../../containers/LandingPage/Companies')
-)
-
-const AsyncUsers = asyncComponent(() =>
-  import('../../containers/LandingPage/Users')
-)
-
-const messageSources = {
-  de: messages_de,
-  bs: messages_bs,
-  es: messages_es,
-  en: messages_en,
-  ru: messages_ru,
-  it: messages_it,
-}
-
-const match = parseLanguages(['en', 'es', 'bs', 'ru', 'de', 'it'], 'en')
-
-const messages = messageSources[match]
-
-const formatMessage = uid => {
-  return formatMessages(messages, uid)
-}
+//import { isAuthorised } from 'rmw-shell/lib/utils/auth'
 
 const theme = createMuiTheme({
   palette: {
@@ -60,23 +27,31 @@ const theme = createMuiTheme({
     secondary: {
       main: '#c62828',
     },
-    error: red,
   },
 })
 
+const isAuthorised = () => {
+  try {
+    const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
+    const data = JSON.parse(localStorage.getItem(key))
+    const auth = JSON.parse(data.auth)
+
+    return auth && auth.isAuthorised
+  } catch (ex) {
+    return false
+  }
+}
+
 class LandingPage extends Component {
-  constructor(props) {
-    super(props)
-    this.companies = React.createRef()
-    this.users = React.createRef()
-    this.about = React.createRef()
-    this.team = React.createRef()
-    this.state = {
-      anchorEl: null,
-      mobileMoreAnchorEl: null,
-      transparent: true,
-      users: [],
-    }
+  companies = React.createRef()
+  users = React.createRef()
+  about = React.createRef()
+  team = React.createRef()
+  state = {
+    anchorEl: null,
+    mobileMoreAnchorEl: null,
+    transparent: true,
+    users: [],
   }
 
   scroll(ref) {
@@ -85,23 +60,13 @@ class LandingPage extends Component {
       ref.current.scrollIntoView({ behavior: 'smooth', alignToTop: true })
   }
 
-  isAuthorised = () => {
-    try {
-      const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
-      const data = JSON.parse(localStorage.getItem(key))
-      const auth = JSON.parse(data.auth)
-
-      return auth && auth.isAuthorised
-    } catch (ex) {
-      return false
-    }
-  }
-
   handleScroll = e => {
     const { transparent } = this.state
     const scrollTop =
       window.pageYOffset ||
-      (document.documentElement && document.documentElement.scrollTop)
+      (document &&
+        document.documentElement &&
+        document.documentElement.scrollTop)
 
     if (scrollTop > 50 && transparent) {
       this.setState({ ...this.state, transparent: false })
@@ -117,7 +82,7 @@ class LandingPage extends Component {
 
     window.addEventListener('scroll', this.handleScroll)
 
-    if (this.isAuthorised()) {
+    if (isAuthorised()) {
       history.push('/signin')
     }
   }
@@ -125,11 +90,14 @@ class LandingPage extends Component {
   render() {
     const { history } = this.props
     const { transparent } = this.state
-    const isMobileMenuOpen = Boolean(this.state.mobileMoreAnchorEl)
+
     const sections = [
       {
         name: formatMessage('companies'),
-        onClick: () => this.scroll(this.companies),
+        onClick: handleClose => {
+          this.scroll(this.companies)
+          //handleClose()
+        },
       },
       {
         name: formatMessage('new_users'),
@@ -142,18 +110,22 @@ class LandingPage extends Component {
       },
     ]
 
-    const handleMobileMenuClose = () => {
-      this.setState({ ...this.state, mobileMoreAnchorEl: null })
-    }
-
-    const handleMobileMenuOpen = event => {
-      this.setState({ ...this.state, mobileMoreAnchorEl: event.currentTarget })
-    }
-
     return (
       <MuiThemeProvider theme={theme}>
         <React.Fragment>
           <Helmet>
+            <meta
+              name="keywords"
+              content={
+                'react,pwa,material-ui,redux,boilerplate,lighthouse,gdg,react.js'
+              }
+            />
+            <meta
+              name="description"
+              content={
+                'React PWA boilerplate that is using create-react-app, redux and firebase '
+              }
+            />
             <meta name="theme-color" content={theme.palette.primary.main} />
             <meta
               name="apple-mobile-web-app-status-bar-style"
@@ -165,6 +137,7 @@ class LandingPage extends Component {
             />
             <title>React Most Wanted</title>
           </Helmet>
+
           <AppBar
             style={{
               position: 'fixed',
@@ -179,14 +152,8 @@ class LandingPage extends Component {
           >
             <Toolbar disableGutters>
               <div style={{ flex: 1 }} />
-              <ResponsiveMenu
-                sections={sections}
-                transparent={transparent}
-                isMobileMenuOpen={isMobileMenuOpen}
-                handleMobileMenuClose={handleMobileMenuClose}
-                handleMobileMenuOpen={handleMobileMenuOpen}
-                statemobileMoreAnchorEl={this.state.mobileMoreAnchorEl}
-              />
+
+              <ResponsiveMenu sections={sections} transparent={transparent} />
             </Toolbar>
           </AppBar>
 
@@ -201,31 +168,37 @@ class LandingPage extends Component {
                 backgroundSize: 'cover',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
               }}
             >
-              <Zoom in={true} timeout={2000}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                }}
+              >
                 <img
                   src={'/rmw.svg'}
                   alt="logo"
-                  style={{ height: 200, maxWidth: 360, color: 'red' }}
+                  style={{ height: 180, maxWidth: 320, color: 'red' }}
                 />
-              </Zoom>
-              <Zoom in={true} timeout={2000}>
+
                 <Typography
                   variant="h3"
                   align="center"
-                  component="h1"
+                  component="h3"
                   color="inherit"
                   gutterBottom
-                  gutterTop
-                  style={{ color: 'white', marginTop: 18, textAlign: 'center' }}
+                  style={{
+                    color: 'white',
+                    marginTop: 18,
+                    textAlign: 'center',
+                  }}
                 >
                   REACT MOST WANTED
                 </Typography>
-              </Zoom>
-              <Zoom in={true} timeout={2000}>
+
                 <Typography
                   variant="h5"
                   component="h2"
@@ -235,39 +208,19 @@ class LandingPage extends Component {
                 >
                   {formatMessage('intro')}
                 </Typography>
-              </Zoom>
-              <Zoom in={true} timeout={2000}>
+
                 <Button
                   style={{ margin: 30, borderRadius: '40px' }}
                   variant="contained"
                   color="secondary"
                   onClick={() => {
-                    try {
-                      let sound = new Audio('prrprrSound.mp3')
-                      sound.play()
-                    } catch (error) {
-                      console.warn(error)
-                    }
                     history.push('/signin')
                   }}
                 >
                   {formatMessage('try_it_out')}
                 </Button>
-              </Zoom>
+              </div>
             </div>
-
-            <div ref={this.companies}>
-              <PagePart title={formatMessage('companies')}>
-                <AsyncCompanies history={history} />
-              </PagePart>
-            </div>
-
-            <div ref={this.users}>
-              <PagePart title={formatMessage('new_users')}>
-                <AsyncUsers />
-              </PagePart>
-            </div>
-
             <PagePart title={formatMessage('about')}>
               <div
                 style={{
@@ -303,6 +256,25 @@ class LandingPage extends Component {
                 </Typography>
               </div>
             </PagePart>
+            <div ref={this.companies} style={{ minHeight: 300 }}>
+              <PagePart title={formatMessage('companies')}>
+                <CustomLoad
+                  load={() => {
+                    return import('../../containers/LandingPage/Companies')
+                  }}
+                />
+              </PagePart>
+            </div>
+
+            <div ref={this.users} style={{ minHeight: 300 }}>
+              <PagePart title={formatMessage('new_users')}>
+                <CustomLoad
+                  load={() => {
+                    return import('../../containers/LandingPage/Users')
+                  }}
+                />
+              </PagePart>
+            </div>
 
             <PagePart title={formatMessage('team')}>
               <div
@@ -382,7 +354,6 @@ class LandingPage extends Component {
                 <ArrowUpward />
               </Fab>
             </Zoom>
-
             <AppBar
               position="relative"
               style={{

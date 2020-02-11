@@ -68,7 +68,7 @@ class Companies extends Component {
         >
           {companies &&
             companies.map(company => (
-              <Company company={company} history={history} />
+              <Company key={company.uid} company={company} history={history} />
             ))}
         </Carousel>
       </div>

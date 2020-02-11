@@ -58,7 +58,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
-    "rmw-shell": "^7.1.36"
+    "rmw-shell": "^7.1.37"
   },
   "scripts": {
     "check": "npm-check -s -u",

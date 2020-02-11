@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomFade from '../../components/CustomFade/CustomFade'
+import CustomFade from 'rmw-shell/lib/components/CustomFade/CustomFade'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 
