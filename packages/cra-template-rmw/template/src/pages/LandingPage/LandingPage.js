@@ -54,10 +54,17 @@ class LandingPage extends Component {
     users: [],
   }
 
-  scroll(ref) {
-    ref &&
-      ref.current &&
-      ref.current.scrollIntoView({ behavior: 'smooth', alignToTop: true })
+  scroll(name) {
+    console.log('name', name)
+    console.log('ref', this[name])
+    console.log('current', this[name].current)
+
+    this[name] &&
+      this[name].current &&
+      this[name].current.scrollIntoView({
+        behavior: 'smooth',
+        alignToTop: true,
+      })
   }
 
   handleScroll = e => {
@@ -95,13 +102,16 @@ class LandingPage extends Component {
       {
         name: formatMessage('companies'),
         onClick: handleClose => {
-          this.scroll(this.companies)
+          this.scroll('companies')
           //handleClose()
         },
       },
       {
         name: formatMessage('new_users'),
-        onClick: () => this.scroll(this.users),
+        onClick: () => this.scroll('users'),
+      },
+      {
+        isDivider: true,
       },
       {
         name: 'Anmelden',
@@ -213,6 +223,7 @@ class LandingPage extends Component {
                   style={{ margin: 30, borderRadius: '40px' }}
                   variant="contained"
                   color="secondary"
+                  name="signin"
                   onClick={() => {
                     history.push('/signin')
                   }}
@@ -256,7 +267,7 @@ class LandingPage extends Component {
                 </Typography>
               </div>
             </PagePart>
-            <div ref={this.companies} style={{ minHeight: 300 }}>
+            <div id="companies" ref={this.companies} style={{ minHeight: 300 }}>
               <PagePart title={formatMessage('companies')}>
                 <CustomLoad
                   load={() => {
@@ -266,7 +277,7 @@ class LandingPage extends Component {
               </PagePart>
             </div>
 
-            <div ref={this.users} style={{ minHeight: 300 }}>
+            <div id="users" ref={this.users} style={{ minHeight: 300 }}>
               <PagePart title={formatMessage('new_users')}>
                 <CustomLoad
                   load={() => {
