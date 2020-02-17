@@ -21,28 +21,28 @@ const styles = theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100vh'
+    height: '100vh',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
     }),
-    maxHeight: 64
+    maxHeight: 64,
   },
   menuButton: {
-    marginLeft: -12
+    marginLeft: -12,
     //marginRight: 12
   },
   toolbar: {
     alignItems: 'center',
     justifyContent: 'flex-end',
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   content: {
     flex: 1,
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
   },
 
   appBarShift: {
@@ -50,15 +50,15 @@ const styles = theme => ({
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   hide: {
-    display: 'none'
+    display: 'none',
   },
   grow: {
-    flex: '1 1 auto'
-  }
+    flex: '1 1 auto',
+  },
 })
 
 const Activity = ({
@@ -71,12 +71,19 @@ const Activity = ({
   pageTitle,
   appBarContent,
   appBarProps,
+  toolbarProps,
   isLoading,
-  onBackClick
+  onBackClick,
 }) => {
   const drawer = useSelector(state => state.drawer, shallowEqual)
-  const isOffline = useSelector(({ connection }) => (connection ? !connection.isConnected : false), shallowEqual)
-  const { setDrawerMobileOpen, setDrawerOpen } = bindActionCreators({ ...drawerActions }, useDispatch())
+  const isOffline = useSelector(
+    ({ connection }) => (connection ? !connection.isConnected : false),
+    shallowEqual
+  )
+  const { setDrawerMobileOpen, setDrawerOpen } = bindActionCreators(
+    { ...drawerActions },
+    useDispatch()
+  )
 
   const handleDrawerMenuClick = () => {
     const smDown = isWidthDown('sm', width)
@@ -108,8 +115,14 @@ const Activity = ({
     <div className={classes.root}>
       <Helmet>
         <meta name="theme-color" content={theme.palette.primary.main} />
-        <meta name="apple-mobile-web-app-status-bar-style" content={theme.palette.primary.main} />
-        <meta name="msapplication-navbutton-color" content={theme.palette.primary.main} />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content={theme.palette.primary.main}
+        />
+        <meta
+          name="msapplication-navbutton-color"
+          content={theme.palette.primary.main}
+        />
         <title>{headerTitle}</title>
       </Helmet>
 
@@ -122,7 +135,7 @@ const Activity = ({
         }
         {...appBarProps}
       >
-        <Toolbar>
+        <Toolbar {...toolbarProps}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -139,11 +152,16 @@ const Activity = ({
             color="inherit"
             aria-label="open drawer"
             onClick={onBackClick}
-            className={classNames(classes.menuButton, !onBackClick && classes.hide)}
+            className={classNames(
+              classes.menuButton,
+              !onBackClick && classes.hide
+            )}
           >
             <ChevronLeft />
           </IconButton>
-          {!onBackClick && drawer.open && false && <div style={{ marginRight: 32 }} />}
+          {!onBackClick && drawer.open && false && (
+            <div style={{ marginRight: 32 }} />
+          )}
 
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
@@ -161,7 +179,7 @@ const Activity = ({
             justifyContent: 'center',
             width: '100%',
             height: 15,
-            backgroundColor: theme.palette.secondary.main
+            backgroundColor: theme.palette.secondary.main,
           }}
         >
           <Typography variant="caption" color="textSecondary" noWrap>
