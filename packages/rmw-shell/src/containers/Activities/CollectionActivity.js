@@ -41,6 +41,7 @@ class CollectionActivity extends Component {
       isGranted,
       list,
       name,
+      path,
       setFilterIsOpen,
       renderItem,
       handleCreateClick,
@@ -63,13 +64,13 @@ class CollectionActivity extends Component {
         title={title ? title : intl.formatMessage({ id: name })}
         appBarContent={
           <div style={{ display: 'flex' }}>
-            <SearchField filterName={name} />
+            <SearchField filterName={path || name} />
             <Tooltip title={intl.formatMessage({ id: 'open_filter' })}>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={() => {
-                  setFilterIsOpen(name, true)
+                  setFilterIsOpen(path || name, true)
                 }}
               >
                 <FilterList color={hasFilters ? 'secondary' : 'inherit'} />
@@ -105,7 +106,7 @@ class CollectionActivity extends Component {
             </Fab>
           )}
         </div>
-        <FilterDrawer name={name} fields={fields} formatMessage={intl.formatMessage} />
+        <FilterDrawer name={path || name} fields={fields} formatMessage={intl.formatMessage} />
       </Activity>
     )
   }
