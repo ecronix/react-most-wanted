@@ -5,6 +5,7 @@ import messages_bs from './bs.json'
 import messages_es from './es.json'
 import messages_ru from './ru.json'
 import messages_it from './it.json'
+import messages_fr from './fr.json'
 
 const messageSources = {
   de: messages_de,
@@ -13,9 +14,10 @@ const messageSources = {
   en: messages_en,
   ru: messages_ru,
   it: messages_it,
+  fr: messages_fr,
 }
 
-const match = parseLanguages(['en', 'es', 'bs', 'ru', 'de', 'it'], 'en')
+const match = parseLanguages(['en', 'es', 'bs', 'ru', 'de', 'it', 'fr'], 'en')
 
 const messages = messageSources[match]
 

@@ -59,7 +59,7 @@ const config = {
       isNightModeOn: true,
       source: 'light',
     },
-    locale: parseLanguages(['en', 'bs', 'es', 'ru', 'de', 'it'], 'en'),
+    locale: parseLanguages(['en', 'bs', 'es', 'ru', 'de', 'it', 'fr'], 'en'),
   },
   drawer_width: 256,
   locales,
