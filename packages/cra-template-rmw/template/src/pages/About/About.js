@@ -15,11 +15,11 @@ class About extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      text: ''
+      text: '',
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch(README)
       .then(response => response.text())
       .then(text => {
@@ -33,7 +33,11 @@ class About extends Component {
     return (
       <Activity
         appBarContent={
-          <IconButton href="https://github.com/TarikHuber/react-most-wanted" target="_blank" rel="noopener">
+          <IconButton
+            href="https://github.com/TarikHuber/react-most-wanted"
+            target="_blank"
+            rel="noopener"
+          >
             <GitHubIcon />
           </IconButton>
         }
