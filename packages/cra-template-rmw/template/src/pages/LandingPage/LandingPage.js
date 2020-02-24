@@ -375,6 +375,7 @@ class LandingPage extends Component {
                 alignItems: 'center',
                 height: 50,
               }}
+                id="footer-text"
             >
               {`© ${new Date().getFullYear()} Copyright: yourcompany.com! All Rights Reserved`}
             </AppBar>
