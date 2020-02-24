@@ -67,6 +67,14 @@ The information you are seeking is scattered over some Medium articles written b
 - [Redux simple values](https://codeburst.io/redux-simple-values-7712694f311)
 - [React Most Wanted](https://medium.com/@tarikhuber/react-most-wanted-d4e916782c2e)
 
+# <img src="https://miro.medium.com/max/1200/1*ut6YmRIMX-hLkwsSUHz8yg.png" width="100"> end-to-end web testing 
+End-2-end web testing using TestCafe. Run them on Windows, MacOS, and Linux and view results on desktop, mobile, remote and cloud browsers (UI or headless).<br/>
+<br/><b>Quick Start</b><br/>
+Define in your ``.env`` file `E2E_URL` variable and then run ``npx testcafe``.<br/>
+Config file is ``.testcaferc.json``<br/>
+If test failed, reports will be automatically saved in ``e2e_tests/reports``. <br/>
+Full [Testcafe Documentation you can find here](https://devexpress.github.io/testcafe/documentation/getting-started/)
+ 
 # How can I make it MY project?
 
 We have you covered. Here is a [Codelab](https://start-with-rmw.web.app/#0) that will walk you trough the whole process of creating a new project and deploying it.
