@@ -12,7 +12,15 @@ I like `short` README's so here we go :sunglasses:
 Just run this command:
 
 ```js
-npm init react-app my-app --template rmw
+npx create-react-app my-app --template rmw
+cd my-app
+npm start
+```
+
+If you are using this `npx` command make sure to you uninstall `create-react-app` on your device to have the newest version. To do so run:
+
+```js
+npm uninstall create-react-app
 ```
 
 ## I rather checkout the DEMO first. Where is it?
