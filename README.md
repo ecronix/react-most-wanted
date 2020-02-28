@@ -17,7 +17,7 @@ cd my-app
 npm start
 ```
 
-If you are using this `npx` command make sure to you uninstall `create-react-app` on your device to have the newest version. To do so run:
+If you are using this `npx` command make sure to uninstall `create-react-app` on your device to have the newest version. To do so run:
 
 ```js
 npm uninstall create-react-app
