@@ -32,7 +32,7 @@ const getMenuItems = props => {
     isAppInstallable,
     isAppInstalled,
     isAuthMenu,
-    handleSignOut
+    handleSignOut,
   } = props
 
   const isAuthorised = auth.isAuthorised
@@ -45,7 +45,7 @@ const getMenuItems = props => {
       onClick: () => {
         updateTheme(t.id)
       },
-      leftIcon: <StyleIcon style={{ color: t.color }} />
+      leftIcon: <StyleIcon style={{ color: t.color }} />,
     }
   })
 
@@ -57,7 +57,7 @@ const getMenuItems = props => {
       onClick: () => {
         updateLocale(l.locale)
       },
-      leftIcon: <LanguageIcon />
+      leftIcon: <LanguageIcon />,
     }
   })
 
@@ -66,14 +66,14 @@ const getMenuItems = props => {
       {
         value: '/my_account',
         primaryText: intl.formatMessage({ id: 'my_account' }),
-        leftIcon: <AccountBoxIcon />
+        leftIcon: <AccountBoxIcon />,
       },
       {
         value: '/signin',
         onClick: handleSignOut,
         primaryText: intl.formatMessage({ id: 'sign_out' }),
-        leftIcon: <LockIcon />
-      }
+        leftIcon: <LockIcon />,
+      },
     ]
   }
 
@@ -82,7 +82,7 @@ const getMenuItems = props => {
       value: '/dashboard',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'dashboard' }),
-      leftIcon: <DaschboardIcon />
+      leftIcon: <DaschboardIcon />,
     },
     {
       visible: isAuthorised,
@@ -94,33 +94,33 @@ const getMenuItems = props => {
           value: '/chats',
           visible: isAuthorised,
           primaryText: intl.formatMessage({ id: 'private' }),
-          leftIcon: <PersonIcon />
+          leftIcon: <PersonIcon />,
         },
         {
           value: '/public_chats',
           visible: isAuthorised,
           primaryText: intl.formatMessage({ id: 'public' }),
-          leftIcon: <GroupIcon />
-        }
-      ]
+          leftIcon: <GroupIcon />,
+        },
+      ],
     },
     {
       value: '/companies',
       visible: isGranted('read_companies'),
       primaryText: intl.formatMessage({ id: 'companies' }),
-      leftIcon: <Business />
+      leftIcon: <Business />,
     },
     {
       value: '/tasks',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'tasks' }),
-      leftIcon: <ListIcon />
+      leftIcon: <ListIcon />,
     },
     {
       value: '/about',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'about' }),
-      leftIcon: <InfoOutlined />
+      leftIcon: <InfoOutlined />,
     },
     {
       visible: isAuthorised, // In prod: isGranted('administration'),
@@ -132,19 +132,19 @@ const getMenuItems = props => {
           value: '/users',
           visible: isAuthorised, // In prod: isGranted('read_users'),
           primaryText: intl.formatMessage({ id: 'users' }),
-          leftIcon: <GroupIcon />
+          leftIcon: <GroupIcon />,
         },
         {
           value: '/roles',
           visible: isGranted('read_roles'),
           primaryText: intl.formatMessage({ id: 'roles' }),
-          leftIcon: <AccountBoxIcon />
-        }
-      ]
+          leftIcon: <AccountBoxIcon />,
+        },
+      ],
     },
     {
       divider: true,
-      visible: isAuthorised
+      visible: isAuthorised,
     },
     {
       primaryText: intl.formatMessage({ id: 'settings' }),
@@ -156,23 +156,25 @@ const getMenuItems = props => {
           secondaryText: intl.formatMessage({ id: themeSource.source }),
           primaryTogglesNestedList: true,
           leftIcon: <StyleIcon />,
-          nestedItems: themeItems
+          nestedItems: themeItems,
         },
         {
           primaryText: intl.formatMessage({ id: 'language' }),
           secondaryText: intl.formatMessage({ id: locale }),
           primaryTogglesNestedList: true,
           leftIcon: <LanguageIcon />,
-          nestedItems: localeItems
-        }
-      ]
+          nestedItems: localeItems,
+        },
+      ],
     },
     {
       onClick: () => {
         switchNightMode(!themeSource.isNightModeOn)
       },
-      primaryText: intl.formatMessage({ id: themeSource.isNightModeOn ? 'day_mode' : 'night_mode' }),
-      leftIcon: themeSource.isNightModeOn ? <Brightness7 /> : <Brightness2 />
+      primaryText: intl.formatMessage({
+        id: themeSource.isNightModeOn ? 'day_mode' : 'night_mode',
+      }),
+      leftIcon: themeSource.isNightModeOn ? <Brightness7 /> : <Brightness2 />,
     },
     {
       visible: isAppInstallable && !isAppInstalled,
@@ -180,8 +182,8 @@ const getMenuItems = props => {
         deferredPrompt.prompt()
       },
       primaryText: intl.formatMessage({ id: 'install' }),
-      leftIcon: <VerticalAlignBottomIcon />
-    }
+      leftIcon: <VerticalAlignBottomIcon />,
+    },
   ]
 }
 

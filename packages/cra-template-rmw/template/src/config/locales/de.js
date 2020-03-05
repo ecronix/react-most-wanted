@@ -153,6 +153,7 @@ const messages = defineMessages({
   workers_label: 'Angestellte',
   worth_hint: 'Wert eintragen',
   worth_label: 'Wert',
+  imagerecognition: 'Bilderkennung',
 })
 
 export default messages
