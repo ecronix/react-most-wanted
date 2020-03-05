@@ -1,5 +1,7 @@
 const getPersistentValue = (state, name, defValue) => {
-  const { [name]: persistentValue = defValue } = state.simpleValues ? state.simpleValues : {}
+  const { [name]: persistentValue = defValue } = state.persistentValues
+    ? state.persistentValues
+    : {}
 
   return persistentValue
 }
