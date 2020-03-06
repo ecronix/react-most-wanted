@@ -23,7 +23,7 @@ class Form extends Component {
         style={{
           height: '100%',
           width: '100%',
-          alignItems: 'strech',
+          alignItems: 'stretch',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center'
@@ -65,7 +65,7 @@ class Form extends Component {
                 placeholder: intl.formatMessage({ id: 'helper_hint' }),
                 label: intl.formatMessage({ id: 'helper_label' })
               }}
-              renderSuggestion={({ rootProps, downshiftProps, suggestion, index }) => {
+              renderSuggestion={({ downshiftProps, suggestion, index }) => {
                 const { getItemProps, highlightedIndex } = downshiftProps
                 const itemProps = getItemProps({ item: suggestion })
                 const isHighlighted = highlightedIndex === index
