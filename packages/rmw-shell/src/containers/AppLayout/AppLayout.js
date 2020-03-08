@@ -5,6 +5,8 @@ import Routes from '../../containers/Routes'
 import { ToastContainer } from 'react-toastify'
 import { checkForUpdate } from '../../utils/messaging'
 import { makeStyles } from '@material-ui/styles'
+import withAppConfig from '../../contexts/AppConfigProvider/withAppConfigs'
+import Analytics from '../../containers/Analytics/Analytics'
 
 const useStyles = makeStyles({
   body: {
@@ -14,7 +16,7 @@ const useStyles = makeStyles({
     left: 0,
     right: 0,
     width: '100%',
-    height: '100%'
+    height: '100%',
   },
   root: {
     flexGrow: 1,
@@ -22,11 +24,11 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-    width: '100%'
-  }
+    width: '100%',
+  },
 })
 
-export const AppLayout = () => {
+export const AppLayout = ({ appConfig }) => {
   useEffect(() => {
     checkForUpdate()
   })
@@ -39,9 +41,12 @@ export const AppLayout = () => {
         <Drawer />
         <Routes />
         <ToastContainer />
+        {appConfig.analyticsProps && (
+          <Analytics {...appConfig.analyticsProps} />
+        )}
       </div>
     </div>
   )
 }
 
-export default AppLayout
+export default withAppConfig(AppLayout)
