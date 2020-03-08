@@ -1,5 +1,5 @@
 import AvatarImageField from 'rmw-shell/lib/components/ReduxFormFields/AvatarImageField'
-import Business from '@material-ui/icons/Business'
+import BusinessIcon from '@material-ui/icons/Business'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import TextField from 'rmw-shell/lib/components/ReduxFormFields/TextField'
@@ -23,7 +23,7 @@ class Form extends Component {
         style={{
           height: '100%',
           width: '100%',
-          alignItems: 'strech',
+          alignItems: 'stretch',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center'
@@ -38,7 +38,7 @@ class Form extends Component {
             uid={uid}
             change={this.props.change}
             initialized={initialized}
-            icon={<Business fontSize="large" />}
+            icon={<BusinessIcon fontSize="large" />}
             intl={intl}
             path={'companies'}
           />
