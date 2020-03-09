@@ -20,8 +20,8 @@ export class Chats extends Component {
           isWidthUp('sm', width)
             ? undefined
             : () => {
-              history.push('/chats')
-            }
+                history.push('/chats')
+              }
         }
         title={title || intl.formatMessage({ id: 'chats' })}
       >
@@ -31,14 +31,21 @@ export class Chats extends Component {
             width: '100%',
             alignItems: 'strech',
             display: 'flex',
-            // flexWrap: 'wrap',
             justifyContent: 'flex-start',
-            flexDirection: 'row'
+            flexDirection: 'row',
           }}
         >
           {isWidthUp('sm', width) && <ChatsList {...this.props} />}
 
-          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', marginLeft: 0, flexGrow: 1 }}>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              marginLeft: 0,
+              flexGrow: 1,
+            }}
+          >
             <Messages
               uid={uid}
               path={`user_chat_messages/${auth.uid}/${uid}`}
@@ -62,8 +69,10 @@ const mapStateToProps = state => {
 
   return {
     auth,
-    title: persistentValues['current_chat_name']
+    title: persistentValues['current_chat_name'],
   }
 }
 
-export default connect(mapStateToProps)(injectIntl(withRouter(withWidth()(Chats))))
+export default connect(mapStateToProps)(
+  injectIntl(withRouter(withWidth()(Chats)))
+)
