@@ -22,7 +22,12 @@ import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import classNames from 'classnames'
 import requestNotificationPermission from '../../utils/messaging'
-import { GoogleIcon, FacebookIcon, GitHubIcon, TwitterIcon } from '../../components/Icons'
+import {
+  GoogleIcon,
+  FacebookIcon,
+  GitHubIcon,
+  TwitterIcon,
+} from '../../components/Icons'
 import { ImageCropDialog } from '../../containers/ImageCropDialog'
 import { change, submit, formValueSelector } from 'redux-form'
 import { compose } from 'redux'
@@ -41,21 +46,19 @@ const form_name = 'my_account'
 
 const styles = theme => ({
   avatar: {
-    margin: 10
+    margin: 10,
   },
   bigAvatar: {
     width: 120,
-    height: 120
+    height: 120,
   },
   margin: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   withoutLabel: {
-    marginTop: theme.spacing(1) * 3
+    marginTop: theme.spacing(1) * 3,
   },
-  textField: {
-    //flexBasis: 200,
-  }
+  textField: {},
 })
 
 export class MyAccount extends Component {
@@ -66,28 +69,28 @@ export class MyAccount extends Component {
       photoURL: '',
       password: '',
       newPassword: '',
-      confirmPassword: ''
+      confirmPassword: '',
     },
     errors: {},
-    isPhotoDialogOpen: false
+    isPhotoDialogOpen: false,
   }
 
   getProviderIcon = p => {
     switch (p) {
-    case 'google.com':
-      return <GoogleIcon />
+      case 'google.com':
+        return <GoogleIcon />
 
-    case 'facebook.com':
-      return <FacebookIcon />
+      case 'facebook.com':
+        return <FacebookIcon />
 
-    case 'twitter.com':
-      return <TwitterIcon />
+      case 'twitter.com':
+        return <TwitterIcon />
 
-    case 'github.com':
-      return <GitHubIcon />
+      case 'github.com':
+        return <GitHubIcon />
 
-    default:
-      return undefined
+      default:
+        return undefined
     }
   }
 
@@ -103,16 +106,22 @@ export class MyAccount extends Component {
 
   handlePhotoUploadSuccess = snapshot => {
     snapshot.ref.getDownloadURL().then(downloadURL => {
-      this.setState({ values: { ...this.state.values, photoURL: downloadURL } }, () => {
-        this.setState({ isPhotoDialogOpen: false })
-      })
+      this.setState(
+        { values: { ...this.state.values, photoURL: downloadURL } },
+        () => {
+          this.setState({ isPhotoDialogOpen: false })
+        }
+      )
     })
   }
 
   handleValueChange = (name, value) => {
-    return this.setState({ values: { ...this.state.values, [name]: value } }, () => {
-      this.validate()
-    })
+    return this.setState(
+      { values: { ...this.state.values, [name]: value } },
+      () => {
+        this.validate()
+      }
+    )
   }
 
   getProvider = (firebase, provider) => {
@@ -144,7 +153,10 @@ export class MyAccount extends Component {
           onSuccess()
         }
       } else if (this.isLinkedWithProvider('password') && values) {
-        const credential = firebase.auth.EmailAuthProvider.credential(auth.email, values.password)
+        const credential = firebase.auth.EmailAuthProvider.credential(
+          auth.email,
+          values.password
+        )
         firebaseApp
           .auth()
           .currentUser.reauthenticateWithCredential(credential)
@@ -161,7 +173,9 @@ export class MyAccount extends Component {
       } else {
         firebaseApp
           .auth()
-          .currentUser.reauthenticateWithPopup(this.getProvider(firebase, auth.providerData[0].providerId))
+          .currentUser.reauthenticateWithPopup(
+            this.getProvider(firebase, auth.providerData[0].providerId)
+          )
           .then(
             () => {
               if (onSuccess && onSuccess instanceof Function) {
@@ -227,12 +241,13 @@ export class MyAccount extends Component {
     const values = this.state.values
 
     const simpleChange =
-      (values.displayName && values.displayName.localeCompare(auth.displayName)) ||
+      (values.displayName &&
+        values.displayName.localeCompare(auth.displayName)) ||
       (values.photoURL && values.photoURL.localeCompare(auth.photoURL))
 
     let simpleValues = {
       displayName: values.displayName,
-      photoURL: values.photoURL
+      photoURL: values.photoURL,
     }
 
     //Change simple data
@@ -386,9 +401,15 @@ export class MyAccount extends Component {
 
     if (!values.email) {
       errors.email = 'Required'
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
       errors.email = 'Invalid email address'
-    } else if (!values.password && providerId === 'password' && auth.email.localeCompare(values.email)) {
+    } else if (
+      !values.password &&
+      providerId === 'password' &&
+      auth.email.localeCompare(values.email)
+    ) {
       errors.password = 'For email change enter your password'
     }
 
@@ -416,7 +437,11 @@ export class MyAccount extends Component {
       return false
     }
 
-    if (values.displayName !== auth.displayName || values.email !== auth.email || values.photoURL !== auth.photoURL) {
+    if (
+      values.displayName !== auth.displayName ||
+      values.email !== auth.email ||
+      values.photoURL !== auth.photoURL
+    ) {
       return true
     }
 
@@ -433,7 +458,9 @@ export class MyAccount extends Component {
 
     watchList(`notification_tokens/${auth.uid}`)
     watchPath(`email_notifications/${auth.uid}`)
-    this.setState({ values: { ...this.state.values, displayName, email, photoURL } })
+    this.setState({
+      values: { ...this.state.values, displayName, email, photoURL },
+    })
   }
 
   handleDisableNotifications = () => {
@@ -488,7 +515,7 @@ export class MyAccount extends Component {
       classes,
       new_user_photo,
       notificationTokens,
-      emailNotifications = false
+      emailNotifications = false,
     } = this.props
 
     const showPasswords = this.isLinkedWithProvider('password')
@@ -512,7 +539,11 @@ export class MyAccount extends Component {
             )}
 
             {auth.uid && (
-              <IconButton color="inherit" aria-label="open drawer" onClick={() => setSimpleValue('delete_user', true)}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => setSimpleValue('delete_user', true)}
+              >
                 <Delete className="material-icons" />
               </IconButton>
             )}
@@ -522,8 +553,21 @@ export class MyAccount extends Component {
       >
         <div>
           {auth.uid && (
-            <div style={{ margin: 15, display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div
+              style={{
+                margin: 15,
+                display: 'flex',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 {this.state.values.photoURL && (
                   <Avatar
                     alt={auth.displayName}
@@ -532,7 +576,9 @@ export class MyAccount extends Component {
                   />
                 )}
                 {!this.state.values.photoURL && (
-                  <Avatar className={classNames(classes.avatar, classes.bigAvatar)}>
+                  <Avatar
+                    className={classNames(classes.avatar, classes.bigAvatar)}
+                  >
                     <Person style={{ fontSize: 60 }} />{' '}
                   </Avatar>
                 )}
@@ -595,12 +641,16 @@ export class MyAccount extends Component {
                 </div>
               </div>
 
-              <div style={{ margin: 15, display: 'flex', flexDirection: 'column' }}>
+              <div
+                style={{ margin: 15, display: 'flex', flexDirection: 'column' }}
+              >
                 <FormControl
                   className={classNames(classes.margin, classes.textField)}
                   error={!!this.state.errors.displayName}
                 >
-                  <InputLabel htmlFor="adornment-password">{intl.formatMessage({ id: 'name_label' })}</InputLabel>
+                  <InputLabel htmlFor="adornment-password">
+                    {intl.formatMessage({ id: 'name_label' })}
+                  </InputLabel>
                   <Input
                     id="displayName"
                     fullWidth
@@ -611,14 +661,18 @@ export class MyAccount extends Component {
                     }}
                   />
                   {this.state.errors.displayName && (
-                    <FormHelperText id="name-helper-text">{this.state.errors.displayName}</FormHelperText>
+                    <FormHelperText id="name-helper-text">
+                      {this.state.errors.displayName}
+                    </FormHelperText>
                   )}
                 </FormControl>
                 <FormControl
                   className={classNames(classes.margin, classes.textField)}
                   error={!!this.state.errors.email}
                 >
-                  <InputLabel htmlFor="adornment-password">{intl.formatMessage({ id: 'email' })}</InputLabel>
+                  <InputLabel htmlFor="adornment-password">
+                    {intl.formatMessage({ id: 'email' })}
+                  </InputLabel>
                   <Input
                     //id="email"
                     label="Email"
@@ -633,17 +687,25 @@ export class MyAccount extends Component {
                       <InputAdornment position="end">
                         <IconButton
                           aria-label="Toggle password visibility"
-                          onClick={auth.emailVerified === true ? undefined : this.handleEmailVerificationsSend}
+                          onClick={
+                            auth.emailVerified === true
+                              ? undefined
+                              : this.handleEmailVerificationsSend
+                          }
                           //onMouseDown={this.handleMouseDownPassword}
                         >
-                          {auth.emailVerified && <VerifiedUser color="primary" />}
+                          {auth.emailVerified && (
+                            <VerifiedUser color="primary" />
+                          )}
                           {!auth.emailVerified && <Error color="secondary" />}
                         </IconButton>
                       </InputAdornment>
                     }
                   />
                   {this.state.errors.email && (
-                    <FormHelperText id="name-helper-text">{this.state.errors.email}</FormHelperText>
+                    <FormHelperText id="name-helper-text">
+                      {this.state.errors.email}
+                    </FormHelperText>
                   )}
                 </FormControl>
 
@@ -653,7 +715,9 @@ export class MyAccount extends Component {
                       className={classNames(classes.margin, classes.textField)}
                       error={!!this.state.errors.password}
                     >
-                      <InputLabel htmlFor="adornment-password">Password</InputLabel>
+                      <InputLabel htmlFor="adornment-password">
+                        Password
+                      </InputLabel>
                       <Input
                         autoComplete="off"
                         type={this.state.showPassword ? 'text' : 'password'}
@@ -666,22 +730,34 @@ export class MyAccount extends Component {
                             <IconButton
                               color="primary"
                               aria-label="Toggle password visibility"
-                              onClick={() => this.setState({ showPassword: !this.state.showPassword })}
+                              onClick={() =>
+                                this.setState({
+                                  showPassword: !this.state.showPassword,
+                                })
+                              }
                             >
-                              {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                              {this.state.showPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
                             </IconButton>
                           </InputAdornment>
                         }
                       />
                       {this.state.errors.password && (
-                        <FormHelperText id="name-helper-text">{this.state.errors.password}</FormHelperText>
+                        <FormHelperText id="name-helper-text">
+                          {this.state.errors.password}
+                        </FormHelperText>
                       )}
                     </FormControl>
                     <FormControl
                       className={classNames(classes.margin, classes.textField)}
                       error={!!this.state.errors.newPassword}
                     >
-                      <InputLabel htmlFor="adornment-password">{intl.formatMessage({ id: 'new_password' })}</InputLabel>
+                      <InputLabel htmlFor="adornment-password">
+                        {intl.formatMessage({ id: 'new_password' })}
+                      </InputLabel>
                       <Input
                         autoComplete="off"
                         type={this.state.showNewPassword ? 'text' : 'password'}
@@ -694,15 +770,25 @@ export class MyAccount extends Component {
                             <IconButton
                               color="primary"
                               aria-label="Toggle password visibility"
-                              onClick={() => this.setState({ showNewPassword: !this.state.showNewPassword })}
+                              onClick={() =>
+                                this.setState({
+                                  showNewPassword: !this.state.showNewPassword,
+                                })
+                              }
                             >
-                              {this.state.showNewPassword ? <VisibilityOff /> : <Visibility />}
+                              {this.state.showNewPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
                             </IconButton>
                           </InputAdornment>
                         }
                       />
                       {this.state.errors.newPassword && (
-                        <FormHelperText id="name-helper-text">{this.state.errors.newPassword}</FormHelperText>
+                        <FormHelperText id="name-helper-text">
+                          {this.state.errors.newPassword}
+                        </FormHelperText>
                       )}
                     </FormControl>
                     <FormControl
@@ -714,25 +800,41 @@ export class MyAccount extends Component {
                       </InputLabel>
                       <Input
                         autoComplete="off"
-                        type={this.state.showConfirmPassword ? 'text' : 'password'}
+                        type={
+                          this.state.showConfirmPassword ? 'text' : 'password'
+                        }
                         value={this.state.values.confirmPassword}
                         onChange={e => {
-                          this.handleValueChange('confirmPassword', e.target.value)
+                          this.handleValueChange(
+                            'confirmPassword',
+                            e.target.value
+                          )
                         }}
                         endAdornment={
                           <InputAdornment position="end">
                             <IconButton
                               color="primary"
                               aria-label="Toggle password visibility"
-                              onClick={() => this.setState({ showConfirmPassword: !this.state.showConfirmPassword })}
+                              onClick={() =>
+                                this.setState({
+                                  showConfirmPassword: !this.state
+                                    .showConfirmPassword,
+                                })
+                              }
                             >
-                              {this.state.showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                              {this.state.showConfirmPassword ? (
+                                <VisibilityOff />
+                              ) : (
+                                <Visibility />
+                              )}
                             </IconButton>
                           </InputAdornment>
                         }
                       />
                       {this.state.errors.confirmPassword && (
-                        <FormHelperText id="name-helper-text">{this.state.errors.confirmPassword}</FormHelperText>
+                        <FormHelperText id="name-helper-text">
+                          {this.state.errors.confirmPassword}
+                        </FormHelperText>
                       )}
                     </FormControl>
                   </div>
@@ -745,15 +847,21 @@ export class MyAccount extends Component {
             name="delete_user"
             handleAction={this.handleDelete}
             title={intl.formatMessage({ id: 'delete_account_dialog_title' })}
-            message={intl.formatMessage({ id: 'delete_account_dialog_message' })}
+            message={intl.formatMessage({
+              id: 'delete_account_dialog_message',
+            })}
             action={intl.formatMessage({ id: 'delete' })}
           />
 
           <QuestionDialog
             name="disable_notifications"
             handleAction={this.handleDisableNotifications}
-            title={intl.formatMessage({ id: 'disable_notifications_dialog_title' })}
-            message={intl.formatMessage({ id: 'disable_notifications_dialog_message' })}
+            title={intl.formatMessage({
+              id: 'disable_notifications_dialog_title',
+            })}
+            message={intl.formatMessage({
+              id: 'disable_notifications_dialog_message',
+            })}
             action={intl.formatMessage({ id: 'disable' })}
           />
 
@@ -782,7 +890,7 @@ MyAccount.propTypes = {
 
   isGranted: PropTypes.func,
   auth: PropTypes.object.isRequired,
-  vehicle_types: PropTypes.array
+  vehicle_types: PropTypes.array,
 }
 
 const selector = formValueSelector(form_name)
@@ -805,15 +913,18 @@ const mapStateToProps = state => {
     old_password: selector(state, 'old_password'),
     notificationTokens: getList(state, `notification_tokens/${auth.uid}`),
     emailNotifications: getPath(state, `email_notifications/${auth.uid}`),
-    simpleValues
+    simpleValues,
   }
 }
 
 export default compose(
-  connect(
-    mapStateToProps,
-    { setSimpleValue, change, submit, setDialogIsOpen, setPersistentValue }
-  ),
+  connect(mapStateToProps, {
+    setSimpleValue,
+    change,
+    submit,
+    setDialogIsOpen,
+    setPersistentValue,
+  }),
   injectIntl,
   withRouter,
   withTheme,
