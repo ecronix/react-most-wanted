@@ -1,3 +1,7 @@
+import React, { Component } from 'react'
+import { Helmet } from 'react-helmet'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { withRouter } from 'react-router-dom'
 import 'lazysizes'
 import AppBar from '@material-ui/core/AppBar'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
@@ -9,17 +13,12 @@ import Fab from '@material-ui/core/Fab'
 import LockIcon from '@material-ui/icons/Lock'
 import PagePart from '../../components/LandingPage/PagePart'
 import Person from '../../components/Person/Person'
-import React, { Component } from 'react'
 import ResponsiveMenu from 'rmw-shell/lib/containers/ResponsveMenu/ResponsiveMenu'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Zoom from '@material-ui/core/Zoom'
 import formatMessage from './messages'
 import grey from '@material-ui/core/colors/grey'
-import { Helmet } from 'react-helmet'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { withRouter } from 'react-router-dom'
-//import { isAuthorised } from 'rmw-shell/lib/utils/auth'
 
 const theme = createMuiTheme({
   palette: {
@@ -375,7 +374,7 @@ class LandingPage extends Component {
                 alignItems: 'center',
                 height: 50,
               }}
-                id="footer-text"
+              id="footer-text"
             >
               {`© ${new Date().getFullYear()} Copyright: yourcompany.com! All Rights Reserved`}
             </AppBar>

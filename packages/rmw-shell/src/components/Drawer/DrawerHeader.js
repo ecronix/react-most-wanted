@@ -1,3 +1,9 @@
+import React from 'react'
+import { compose } from 'redux'
+import { injectIntl } from 'react-intl'
+import { withAppConfigs } from '../../contexts/AppConfigProvider'
+import withWidth from '@material-ui/core/withWidth'
+import { withStyles } from '@material-ui/core/styles'
 import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArroWDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import Avatar from '@material-ui/core/Avatar'
@@ -13,12 +19,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
-import React from 'react'
-import withWidth from '@material-ui/core/withWidth'
-import { compose } from 'redux'
-import { injectIntl } from 'react-intl'
-import { withAppConfigs } from '../../contexts/AppConfigProvider'
-import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   paper: {

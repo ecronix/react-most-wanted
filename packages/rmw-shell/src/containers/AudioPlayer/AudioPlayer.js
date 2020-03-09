@@ -1,10 +1,10 @@
+import React, { Component } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Person from '@material-ui/icons/Person'
 import Pause from '@material-ui/icons/Pause'
 import PlayArrow from '@material-ui/icons/PlayArrow'
-import React, { Component } from 'react'
 import ReactPlayer from 'react-player'
 import moment from 'moment'
 import { withTheme } from '@material-ui/core/styles'
@@ -21,7 +21,7 @@ export class AudioPlayer extends Component {
       duration: 0,
       playbackRate: 1.0,
       loop: false,
-      playedSeconds: 0
+      playedSeconds: 0,
     }
   }
 
@@ -91,10 +91,14 @@ export class AudioPlayer extends Component {
             marginTop: 25,
             display: 'flex',
             flexDirection: 'column',
-            width: 200
+            width: 200,
           }}
         >
-          <LinearProgress variant="determinate" value={played * 100} color={'secondary'} />
+          <LinearProgress
+            variant="determinate"
+            value={played * 100}
+            color={'secondary'}
+          />
 
           <div style={{ marginTop: 5, color: theme.palette.primary3Color }}>
             {moment()
@@ -112,14 +116,9 @@ export class AudioPlayer extends Component {
           style={{ display: 'none' }}
           playing={this.state.playing}
           url={src}
-          //onReady={() => console.log('onReady')}
-          //onStart={() => console.log('onStart')}
           onPlay={this.onPlay}
           onPause={this.onPause}
-          //onBuffer={() => console.log('onBuffer')}
-          //onSeek={e => console.log('onSeek', e)}
           onEnded={this.onEnded}
-          //onError={e => console.log('onError', e)}
           onProgress={this.onProgress}
           onDuration={this.onDuration}
         />
