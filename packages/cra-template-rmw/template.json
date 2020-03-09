@@ -36,7 +36,7 @@
     "react-dropzone": "10.x",
     "react-helmet": "5.x",
     "react-image-cropper": "1.x",
-    "react-intl": "3.x",
+    "react-intl": "4.x",
     "react-list": "0.x",
     "react-loadable": "5.x",
     "react-markdown": "4.x",

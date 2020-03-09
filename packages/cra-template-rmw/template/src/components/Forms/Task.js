@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import TextField from 'rmw-shell/lib/components/ReduxFormFields/TextField'
 import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { VirtualizedSelectField } from 'muishift'
