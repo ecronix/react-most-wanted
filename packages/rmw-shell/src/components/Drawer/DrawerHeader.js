@@ -32,9 +32,6 @@ const styles = theme => ({
   icon: {
     color: theme.palette.primary.contrastText,
   },
-  button: {
-    // width: 15
-  },
 })
 
 export const DrawerHeader = props => {
@@ -105,26 +102,26 @@ export const DrawerHeader = props => {
                 width !== 'sm' &&
                 width !== 'xs' &&
                 auth.photoURL && (
-                <ListItemAvatar>
-                  <Avatar
-                    src={auth.photoURL}
-                    alt="person"
-                    style={{ marginLeft: -7, marginTop: 3 }}
-                  />
-                </ListItemAvatar>
-              )}
+                  <ListItemAvatar>
+                    <Avatar
+                      src={auth.photoURL}
+                      alt="person"
+                      style={{ marginLeft: -7, marginTop: 3 }}
+                    />
+                  </ListItemAvatar>
+                )}
 
               {!drawer.open &&
                 width !== 'sm' &&
                 width !== 'xs' &&
                 !auth.photoURL && (
-                <ListItemAvatar>
-                  <Avatar style={{ marginLeft: -7, marginTop: 3 }}>
-                    {' '}
-                    <PersonIcon />{' '}
-                  </Avatar>
-                </ListItemAvatar>
-              )}
+                  <ListItemAvatar>
+                    <Avatar style={{ marginLeft: -7, marginTop: 3 }}>
+                      {' '}
+                      <PersonIcon />{' '}
+                    </Avatar>
+                  </ListItemAvatar>
+                )}
 
               <ListItemText
                 classes={{
