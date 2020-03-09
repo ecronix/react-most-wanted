@@ -1,22 +1,18 @@
 import React, { Component } from 'react'
-//import * as firebaseui from 'firebaseui'
-//const firebaseui=require('./npm__en.js')
-//import * as firebaseui2 from './firebaseui__de.js'
 import { injectIntl } from 'react-intl'
 let authUi = null
 
 export class AuthUI extends Component {
-
   async componentDidMount() {
     const { firebaseApp, uiConfig, intl } = this.props
 
-    let firebaseui=null
+    let firebaseui = null
 
     try {
-      const {default:defaultImport}=await import(`./npm__${intl.locale}`)
-      firebaseui=defaultImport
+      const { default: defaultImport } = await import(`./npm__${intl.locale}`)
+      firebaseui = defaultImport
     } catch (error) {
-      firebaseui=await import('firebaseui')
+      firebaseui = await import('firebaseui')
     }
 
     try {
