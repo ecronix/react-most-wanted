@@ -30,7 +30,7 @@ class Form extends Component {
         style={{
           height: '100%',
           width: '100%',
-          alignItems: 'strech',
+          alignItems: 'stretch',
           display: 'flex',
           flexWrap: 'wrap',
           justifyContent: 'center',

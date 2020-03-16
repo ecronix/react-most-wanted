@@ -16,7 +16,7 @@ export class Chats extends Component {
           style={{
             height: '100%',
             width: '100%',
-            alignItems: 'strech',
+            alignItems: 'stretch',
             display: 'flex',
             justifyContent: 'flex-start',
             flexDirection: 'row'

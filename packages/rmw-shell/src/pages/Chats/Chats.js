@@ -12,7 +12,7 @@ const Chats = props => {
       style={{
         height: '100%',
         width: '100%',
-        alignItems: 'strech',
+        alignItems: 'stretch',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'flex-start',
