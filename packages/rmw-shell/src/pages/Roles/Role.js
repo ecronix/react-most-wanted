@@ -39,36 +39,27 @@ const path = '/roles'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.background.default,
   },
   tabs: {
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
   form: {
     backgroundColor: theme.palette.background.default,
     margin: 15,
     display: 'flex',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 })
 
 export class Role extends Component {
   state = {
     values: {
       name: '',
-      description: ''
+      description: '',
     },
-    errors: {}
-  }
-
-  validate = values => {
-    const { intl } = this.props
-    const errors = {}
-
-    errors.name = !values.name ? intl.formatMessage({ id: 'error_required_field' }) : ''
-
-    return errors
+    errors: {},
   }
 
   clean = obj => {
@@ -97,9 +88,12 @@ export class Role extends Component {
   }
 
   handleValueChange = (name, value) => {
-    return this.setState({ values: { ...this.state.values, [name]: value } }, () => {
-      this.validate()
-    })
+    return this.setState(
+      { values: { ...this.state.values, [name]: value } },
+      () => {
+        this.validate()
+      }
+    )
   }
 
   componentDidMount() {
@@ -171,7 +165,7 @@ export class Role extends Component {
       hasFilters,
       setFilterIsOpen,
       isLoading,
-      classes
+      classes,
     } = this.props
 
     return (
@@ -193,7 +187,11 @@ export class Role extends Component {
             )}
 
             {editType === 'main' && (
-              <IconButton color="inherit" aria-label="open drawer" onClick={() => setDialogIsOpen('delete_role', true)}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={() => setDialogIsOpen('delete_role', true)}
+              >
                 <Delete className="material-icons" />
               </IconButton>
             )}
@@ -209,7 +207,11 @@ export class Role extends Component {
                 >
                   <FilterList
                     className="material-icons"
-                    color={hasFilters ? theme.palette.accent1Color : theme.palette.canvasColor}
+                    color={
+                      hasFilters
+                        ? theme.palette.accent1Color
+                        : theme.palette.canvasColor
+                    }
                   />
                 </IconButton>
               </div>
@@ -222,20 +224,39 @@ export class Role extends Component {
         <Scrollbar style={{ height: '100%' }}>
           <div className={classes.root}>
             <AppBar position="static">
-              <Tabs value={editType} onChange={this.handleTabActive} fullWidth centered>
-                <Tab value="main" icon={<AccountBox className="material-icons" />} />
-                <Tab value="grants" icon={<Lock className="material-icons" />} />
+              <Tabs
+                value={editType}
+                onChange={this.handleTabActive}
+                fullWidth
+                centered
+              >
+                <Tab
+                  value="main"
+                  icon={<AccountBox className="material-icons" />}
+                />
+                <Tab
+                  value="grants"
+                  icon={<Lock className="material-icons" />}
+                />
               </Tabs>
             </AppBar>
 
             {editType === 'main' && (
               <div className={classes.form}>
-                <div style={{ margin: 15, display: 'flex', flexDirection: 'column' }}>
+                <div
+                  style={{
+                    margin: 15,
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
                   <FormControl
                     className={classNames(classes.margin, classes.textField)}
                     error={!!this.state.errors.name}
                   >
-                    <InputLabel htmlFor="adornment-password">{intl.formatMessage({ id: 'name_label' })}</InputLabel>
+                    <InputLabel htmlFor="adornment-password">
+                      {intl.formatMessage({ id: 'name_label' })}
+                    </InputLabel>
                     <Input
                       id="name"
                       fullWidth
@@ -246,11 +267,15 @@ export class Role extends Component {
                       }}
                     />
                     {this.state.errors.displayName && (
-                      <FormHelperText id="name-helper-text">{this.state.errors.displayName}</FormHelperText>
+                      <FormHelperText id="name-helper-text">
+                        {this.state.errors.displayName}
+                      </FormHelperText>
                     )}
                   </FormControl>
                   <br />
-                  <FormControl className={classNames(classes.margin, classes.textField)}>
+                  <FormControl
+                    className={classNames(classes.margin, classes.textField)}
+                  >
                     <InputLabel htmlFor="adornment-password">
                       {intl.formatMessage({ id: 'description_label' })}
                     </InputLabel>
@@ -259,7 +284,9 @@ export class Role extends Component {
                       fullWidth
                       multiline
                       value={this.state.values.description}
-                      placeholder={intl.formatMessage({ id: 'description_hint' })}
+                      placeholder={intl.formatMessage({
+                        id: 'description_hint',
+                      })}
                       onChange={e => {
                         this.handleValueChange('description', e.target.value)
                       }}
@@ -278,7 +305,9 @@ export class Role extends Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{intl.formatMessage({ id: 'delete_role_dialog_title' })}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">
+            {intl.formatMessage({ id: 'delete_role_dialog_title' })}
+          </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               {intl.formatMessage({ id: 'delete_role_dialog_message' })}
@@ -304,7 +333,10 @@ const mapStateToProps = (state, ownProps) => {
   const { match } = ownProps
   const editType = match.params.editType ? match.params.editType : 'data'
   const uid = match.params.uid ? match.params.uid : ''
-  const { hasFilters } = filterSelectors.selectFilterProps('role_grants', filters)
+  const { hasFilters } = filterSelectors.selectFilterProps(
+    'role_grants',
+    filters
+  )
 
   return {
     auth,
@@ -314,11 +346,21 @@ const mapStateToProps = (state, ownProps) => {
     hasFilters,
     editType,
     role_grants: lists.role_grants,
-    isLoading: isLoading(state, 'role_grants')
+    isLoading: isLoading(state, 'role_grants'),
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { setDialogIsOpen, change, submit, ...filterActions }
-)(injectIntl(withRouter(withFirebase(withAppConfigs(withStyles(styles, { withTheme: true })(withTheme(Role)))))))
+export default connect(mapStateToProps, {
+  setDialogIsOpen,
+  change,
+  submit,
+  ...filterActions,
+})(
+  injectIntl(
+    withRouter(
+      withFirebase(
+        withAppConfigs(withStyles(styles, { withTheme: true })(withTheme(Role)))
+      )
+    )
+  )
+)
