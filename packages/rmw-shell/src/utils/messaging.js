@@ -9,8 +9,6 @@ import UpdateToast from '../components/Notifications/UpdateToast'
 import moment from 'moment'
 import { toast } from 'react-toastify'
 
-let updateMessageShown = false
-
 const initializeMessaging = (props, skipIfNoPermission = false) => {
   const { initMessaging, firebaseApp, auth } = props
 
@@ -136,8 +134,7 @@ const getNotification = (notification, closeToast) => {
 }
 
 const checkForUpdate = () => {
-  if (window.updateAvailable && !updateMessageShown) {
-    updateMessageShown = true
+  if (window.update) {
     toast.info(
       ({ closeToast }) => (
         <UpdateToast handleUpdate={handleUpdate} closeToast={closeToast} />
@@ -146,15 +143,18 @@ const checkForUpdate = () => {
         position: toast.POSITION.BOTTOM_CENTER,
         autoClose: false,
         closeButton: false,
+        onClose: () => {
+          setTimeout(checkForUpdate, 60000)
+        },
       }
     )
+  } else {
+    setTimeout(checkForUpdate, 15000)
   }
 }
 
 export function handleUpdate() {
-  window.updateAvailable = false
-  // eslint-disable-next-line no-self-assign
-  window.location.href = window.location.href
+  window.update && window.update()
 }
 
 export {

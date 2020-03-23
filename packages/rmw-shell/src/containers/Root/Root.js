@@ -26,7 +26,9 @@ import {
   initMessaging,
   watchPath,
 } from 'firekit'
+import { checkForUpdate } from '../../utils/messaging'
 
+checkForUpdate()
 const history = createBrowserHistory()
 
 const getActions = dispatch => {

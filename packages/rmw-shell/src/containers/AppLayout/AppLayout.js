@@ -3,7 +3,7 @@ import Drawer from '../../containers/Drawer'
 import React, { useEffect } from 'react'
 import Routes from '../../containers/Routes'
 import { ToastContainer } from 'react-toastify'
-import { checkForUpdate } from '../../utils/messaging'
+//import { checkForUpdate } from '../../utils/messaging'
 import { makeStyles } from '@material-ui/styles'
 import withAppConfig from '../../contexts/AppConfigProvider/withAppConfigs'
 import Analytics from '../../containers/Analytics/Analytics'
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 
 export const AppLayout = ({ appConfig }) => {
   useEffect(() => {
-    checkForUpdate()
+    //checkForUpdate()
   })
 
   const classes = useStyles()
