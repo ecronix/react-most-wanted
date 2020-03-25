@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "7.1.50",
+  "version": "7.2.0",
   "description": "rmw-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,7 +18,9 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react-ios-pwa-prompt": "^1.6.0"
+  },
   "peerDependencies": {
     "@date-io/moment": "1.x",
     "@formatjs/intl-relativetimeformat": "4.x",
@@ -95,7 +97,7 @@
     "material-ui-image": "^3.2.3",
     "moment": "^2.24.0",
     "muishift": "^1.1.4",
-    "nwb": "^0.23.0",
+    "nwb": "^0.24.5",
     "prettier-eslint": "^9.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
