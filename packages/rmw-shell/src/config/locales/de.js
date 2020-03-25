@@ -8,7 +8,8 @@ const messages = defineMessages({
   page_not_found_demo: 'Seite nicht gefunden demo',
   '404': '404',
   warning_404_message: '404 Seite nicht gefunden',
-  warning_404_description: 'Es tut uns leid aber die angeforderte Seite existiert nicht.',
+  warning_404_description:
+    'Es tut uns leid aber die angeforderte Seite existiert nicht.',
   settings: 'Einstellungen',
   language: 'Sprache',
   theme: 'Thema',
@@ -53,7 +54,8 @@ const messages = defineMessages({
   delete: 'Löschen',
   ok: 'OK',
   delete_account_dialog_title: 'Konto löschen?',
-  delete_account_dialog_message: 'Dein Konto wird gelöscht und mit ihm alle Daten!',
+  delete_account_dialog_message:
+    'Dein Konto wird gelöscht und mit ihm alle Daten!',
   email_not_verified: 'E-Mail ist nicht verifiziert!',
   email_verified: 'E-Mail ist verifiziert',
   send_verification_email: 'Verifizierungs E-Mail senden',
@@ -124,7 +126,8 @@ const messages = defineMessages({
   is_admin_label: 'Administrator',
   predefined_messages: 'Vorgefertigte Nachrichten',
   delete_predefined_chat_message_title: 'Vorgefertigte Nachricht löschen?',
-  delete_predefined_chat_message_message: 'Vorgefertigte Nachricht wird gelöscht!',
+  delete_predefined_chat_message_message:
+    'Vorgefertigte Nachricht wird gelöscht!',
   select_field: 'Feld auswählen',
   sorting: 'Sortierung',
   filters: 'Filter',
@@ -162,11 +165,18 @@ const messages = defineMessages({
   green: 'Grün',
   notifications: 'Benachrichtigungen',
   disable_notifications_dialog_title: 'Benachrichtigungen abschalten',
-  disable_notifications_dialog_message: 'Alle Benachrichtigungen auf all deinen Geräten werden abgeschaltet!',
+  disable_notifications_dialog_message:
+    'Alle Benachrichtigungen auf all deinen Geräten werden abgeschaltet!',
   update_title: 'Update verfügbar!',
   update_message: 'Für die Aktualisierung hier klicken',
   install: 'Installieren',
-  disable: 'Deaktivieren'
+  disable: 'Deaktivieren',
+  ios_prompt_title: 'Zum Home-Bildschirm hinzufügen',
+  ios_prompt_close: 'Schließen',
+  ios_prompt_body:
+    'Diese Website verfügt über App-Funktionen. Fügen Sie diese zu Ihrem Startbildschirm hinzu, um sie im Vollbildmodus und offline zu verwenden.',
+  ios_prompt_share_button: '1) Klicken Sie auf die Schaltfläche \'Teilen\'',
+  ios_prompt_add_to_home_button: '2) Klicken Sie auf \'Zum Home-Bildschirm\'',
 })
 
 export default messages

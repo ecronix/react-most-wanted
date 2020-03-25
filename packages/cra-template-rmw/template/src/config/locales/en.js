@@ -160,6 +160,12 @@ const messages = defineMessages({
   worth_hint: 'Enter worth',
   worth_label: 'Worth',
   imagerecognition: 'Image recognition',
+  ios_prompt_title: 'Add to Home Screen',
+  ios_prompt_close: 'Close',
+  ios_prompt_body:
+    'This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.',
+  ios_prompt_share_button: "1) Press the 'Share' button",
+  ios_prompt_add_to_home_button: "2) Press 'Add to Home Screen'",
 })
 
 export default messages
