@@ -8,7 +8,8 @@ const messages = defineMessages({
   page_not_found_demo: 'Page not found demo',
   '404': '404',
   warning_404_message: '404 Page not found',
-  warning_404_description: 'We are sorry but the page you are looking for does not exist.',
+  warning_404_description:
+    'We are sorry but the page you are looking for does not exist.',
   settings: 'Settings',
   language: 'Language',
   theme: 'Theme',
@@ -53,7 +54,8 @@ const messages = defineMessages({
   delete: 'Delete',
   ok: 'OK',
   delete_account_dialog_title: 'Delete Account?',
-  delete_account_dialog_message: 'Your account will be deleted and you will lose all your data!',
+  delete_account_dialog_message:
+    'Your account will be deleted and you will lose all your data!',
   email_not_verified: 'E-Mail is not verified!',
   email_verified: 'E-Mail is verified',
   send_verification_email: 'Send verification E-Mail',
@@ -162,11 +164,18 @@ const messages = defineMessages({
   green: 'Green',
   notifications: 'Notifications',
   disable_notifications_dialog_title: 'Disable all notifications',
-  disable_notifications_dialog_message: 'All notifications on all of your devices will be disabled!',
+  disable_notifications_dialog_message:
+    'All notifications on all of your devices will be disabled!',
   update_title: 'Update available!',
   update_message: 'Click here to get the new version.',
   install: 'Install',
-  disable: 'Disable'
+  disable: 'Disable',
+  ios_prompt_title: 'Add to Home Screen',
+  ios_prompt_close: 'Close',
+  ios_prompt_body:
+    'This website has app functionality. Add it to your home screen to use it in fullscreen and while offline.',
+  ios_prompt_share_button: '1) Press the \'Share\' button',
+  ios_prompt_add_to_home_button: '2) Press \'Add to Home Screen\'',
 })
 
 export default messages

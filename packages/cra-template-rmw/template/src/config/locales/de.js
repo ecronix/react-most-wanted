@@ -154,6 +154,12 @@ const messages = defineMessages({
   worth_hint: 'Wert eintragen',
   worth_label: 'Wert',
   imagerecognition: 'Bilderkennung',
+  ios_prompt_title: 'Zum Home-Bildschirm hinzufügen',
+  ios_prompt_close: 'Schließen',
+  ios_prompt_body:
+    'Diese Website verfügt über App-Funktionen. Fügen Sie diese zu Ihrem Startbildschirm hinzu, um sie im Vollbildmodus und offline zu verwenden.',
+  ios_prompt_share_button: "1) Klicken Sie auf die Schaltfläche 'Teilen'",
+  ios_prompt_add_to_home_button: "2) Klicken Sie auf 'Zum Home-Bildschirm'",
 })
 
 export default messages
