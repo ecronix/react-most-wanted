@@ -1,7 +1,7 @@
 import { defineMessages } from 'react-intl'
 
 const messages = defineMessages({
-  app_name: 'React Самый Нужный',
+  app_name: 'React самый популярный',
   dashboard: 'Дашборд',
   about: 'О нас',
   page_not_found_demo: 'Страница не найдена Демо',
@@ -171,8 +171,14 @@ const messages = defineMessages({
   disable_notifications_dialog_message: 'Все уведомления на всех ваших устройствах будут отключены!',
   update_title: 'Доступно обновление!',
   update_message: 'Нажмите здесь, чтобы получить новую версию.',
-  install: 'Установить'
-
+  install: 'Установить',
+  imagerecognition: 'Распознавание изображений',
+  ios_prompt_title: 'Добавить на экран «Домой»',
+  ios_prompt_close: 'Закрыть',
+  ios_prompt_body:
+    'Этот сайт имеет функциональность приложения. Добавьте его на свой домашний экран, чтобы использовать его в полноэкранном и в автономном режиме.',
+  ios_prompt_share_button: "1) Нажмите кнопку «Поделиться»",
+  ios_prompt_add_to_home_button: "2) Нажмите Добавить на экран «Домой»",
 })
 
 export default messages
