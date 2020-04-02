@@ -22,8 +22,8 @@ class Provider extends Component {
     const { update } = appConfig || {}
     const { checkInterval = 5000 } = update || {}
 
-    checkUpdate()
-    setTimeout(checkUpdate, checkInterval)
+    this.checkUpdate()
+    setTimeout(this.checkUpdate, checkInterval)
   }
 
   render() {
