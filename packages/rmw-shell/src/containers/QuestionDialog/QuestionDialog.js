@@ -14,9 +14,9 @@ import { injectIntl } from 'react-intl'
 import { setSimpleValue } from '../../store/simpleValues/actions'
 import getSimpleValue from '../../store/simpleValues/selectors'
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />
-}
+const Transition = React.forwardRef((props, ref) => (
+	<Slide direction='up' {...props} ref={ref} />
+))
 
 class QuestionDialog extends Component {
   handleClose = () => {
