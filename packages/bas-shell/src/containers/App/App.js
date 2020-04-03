@@ -1,13 +1,14 @@
-import ConfigProvider from '../../providers/ConfigProvider/Provider'
-import UpdateProvider from '../../providers/UpdateProvider/Provider'
 import A2HSProvider from 'a2hs'
+import AppLayout from '../../containers/AppLayout/AppLayout'
+import ConfigProvider from '../../providers/ConfigProvider/Provider'
 import Loadable from 'react-loadable'
 import React from 'react'
-import defaultConfig from '../../config'
+import Routes from '../../containers/Routes/Routes'
+import UpdateProvider from '../../providers/UpdateProvider/Provider'
 import configureStore from '../../store'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import defaultConfig from '../../config'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
-//import Analytics from '../../containers/Analytics/Analytics'
 
 const App = ({ config: appConfig }) => {
   const store = configureStore()
@@ -19,7 +20,7 @@ const App = ({ config: appConfig }) => {
       <UpdateProvider appConfig={config}>
         <A2HSProvider>
           <Provider store={store}>
-            <BrowserRouter>
+            <Router>
               <Switch>
                 {LandingPage && (
                   <Route path="/" exact>
@@ -28,13 +29,12 @@ const App = ({ config: appConfig }) => {
                     </React.Fragment>
                   </Route>
                 )}
-                <Switch>
-                  <Route>
-                    <div>ROUTES</div>
-                  </Route>
-                </Switch>
+
+                <Route>
+                  <AppLayout />
+                </Route>
               </Switch>
-            </BrowserRouter>
+            </Router>
           </Provider>
         </A2HSProvider>
       </UpdateProvider>
