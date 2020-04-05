@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import routes from './routes'
 
 const config = {
@@ -10,6 +10,7 @@ const config = {
   },
   routes,
   landingPage: () => <div>Landing Page</div>,
+  Menu: lazy(() => import('../containers/Menu/Menu')),
 }
 
 export default config

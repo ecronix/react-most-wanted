@@ -1,7 +1,6 @@
 import A2HSProvider from 'a2hs'
 import AppLayout from '../../containers/AppLayout/AppLayout'
 import ConfigProvider from '../../providers/ConfigProvider/Provider'
-import Loadable from 'react-loadable'
 import React from 'react'
 import Routes from '../../containers/Routes/Routes'
 import UpdateProvider from '../../providers/UpdateProvider/Provider'
