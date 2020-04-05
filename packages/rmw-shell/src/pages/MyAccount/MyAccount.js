@@ -716,7 +716,7 @@ export class MyAccount extends Component {
                       error={!!this.state.errors.password}
                     >
                       <InputLabel htmlFor="adornment-password">
-                        Password
+                        {intl.formatMessage({ id: 'password' })}
                       </InputLabel>
                       <Input
                         autoComplete="off"
