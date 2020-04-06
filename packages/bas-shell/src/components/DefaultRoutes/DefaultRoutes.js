@@ -1,14 +1,13 @@
-import React, { lazy } from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 
-const getDefaultRoutes = () => {
-  const AsyncPageNotFound = lazy(() =>
-    import('../../pages/PageNotFound/PageNotFound')
-  )
+const getDefaultRoutes = (appConfig) => {
+  const { pages } = appConfig || {}
+  const { PageNotFound = () => <div>Page not found</div> } = pages || {}
 
   return [
     <Route>
-      <AsyncPageNotFound />
+      <PageNotFound />
     </Route>,
   ]
 }
