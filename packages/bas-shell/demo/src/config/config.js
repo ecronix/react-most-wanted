@@ -9,7 +9,10 @@ const config = {
     signInURL: '/signin',
   },
   routes,
-  landingPage: () => <div>Landing Page</div>,
+  pages: {
+    LandingPage: () => <div>Landing Page</div>,
+    PageNotFound: () => <div>Page not found 2</div>,
+  },
   Menu: lazy(() => import('../containers/Menu/Menu')),
 }
 
