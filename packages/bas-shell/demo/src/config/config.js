@@ -13,7 +13,10 @@ const config = {
     LandingPage: () => <div>Landing Page</div>,
     PageNotFound: () => <div>Page not found 2</div>,
   },
-  Menu: lazy(() => import('../containers/Menu/Menu')),
+  components: {
+    Menu: lazy(() => import('../containers/Menu/Menu')),
+    Loading: () => <div>Loading...</div>,
+  },
 }
 
 export default config
