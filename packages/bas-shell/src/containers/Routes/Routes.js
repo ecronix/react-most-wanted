@@ -7,9 +7,6 @@ export const Routes = ({ appConfig }) => {
   const appRoutes = appConfig.routes ? appConfig.routes : []
   const defaultRoutes = getDefaultRoutes(appConfig)
 
-  console.log('appConfig', appConfig)
-  console.log('appRoutes', appRoutes)
-
   return (
     <React.Fragment>
       <Switch>

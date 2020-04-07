@@ -3,15 +3,16 @@ import Routes from '../../containers/Routes/Routes'
 import withConfig from '../../providers/ConfigProvider/withConfig'
 
 export const AppLayout = ({ appConfig, intl }) => {
-  const { Menu = null, LoadingComponent = <div>Loading...</div> } =
-    appConfig || {}
+  const { components } = appConfig || {}
+  const { Menu, Loading } = components || {}
+
   return (
-    <Suspense fallback={LoadingComponent}>
-      {<Menu />}
-      <Suspense fallback={LoadingComponent}>
+    <React.Fragment>
+      {Menu && <Menu />}
+      <Suspense fallback={Loading}>
         <Routes />
       </Suspense>
-    </Suspense>
+    </React.Fragment>
   )
 }
 
