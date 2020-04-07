@@ -5,11 +5,7 @@ const getDefaultRoutes = (appConfig) => {
   const { pages } = appConfig || {}
   const { PageNotFound = () => <div>Page not found</div> } = pages || {}
 
-  return [
-    <Route>
-      <PageNotFound />
-    </Route>,
-  ]
+  return [<Route component={PageNotFound} />]
 }
 
 export default getDefaultRoutes

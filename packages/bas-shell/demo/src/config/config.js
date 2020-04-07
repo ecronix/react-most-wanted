@@ -1,6 +1,8 @@
 import React, { lazy } from 'react'
 import routes from './routes'
 
+const Loading = () => <div>Loading...</div>
+
 const config = {
   auth: {
     isAuthenticated: () => {
@@ -11,11 +13,11 @@ const config = {
   routes,
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
-    PageNotFound: () => <div>Page not found 2</div>,
+    PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound'))
   },
   components: {
     Menu: lazy(() => import('../containers/Menu/Menu')),
-    Loading: () => <div>Loading...</div>,
+    Loading,
   },
 }
 
