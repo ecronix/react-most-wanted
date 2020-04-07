@@ -9,7 +9,7 @@ export const AppLayout = ({ appConfig, intl }) => {
   return (
     <React.Fragment>
       {Menu && <Menu />}
-      <Suspense fallback={Loading}>
+      <Suspense fallback={<Loading />}>
         <Routes />
       </Suspense>
     </React.Fragment>
