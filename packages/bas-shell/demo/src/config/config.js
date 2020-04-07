@@ -10,7 +10,7 @@ const config = {
   },
   routes,
   pages: {
-    LandingPage: () => <div>Landing Page</div>,
+    LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
     PageNotFound: () => <div>Page not found 2</div>,
   },
   components: {
