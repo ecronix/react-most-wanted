@@ -18,7 +18,7 @@ const App = ({ config: appConfig }) => {
   const { Loading } = components || {}
 
   return (
-    <Suspense fallback={Loading}>
+    <Suspense fallback={<Loading />}>
       <Router>
         <ConfigProvider appConfig={config}>
           <UpdateProvider appConfig={config}>
@@ -26,13 +26,9 @@ const App = ({ config: appConfig }) => {
               <Provider store={store}>
                 <Switch>
                   {LandingPage && (
-                    <Route path="/" exact>
-                      <LandingPage />
-                    </Route>
+                    <Route path="/" exact component={LandingPage} />
                   )}
-                  <Route>
-                    <AppLayout />
-                  </Route>
+                  <Route component={AppLayout} />
                 </Switch>
               </Provider>
             </A2HSProvider>
