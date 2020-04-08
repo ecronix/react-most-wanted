@@ -4,9 +4,10 @@ import { Route, Redirect } from 'react-router-dom'
 
 function PrivateRoute({ component: Component, appConfig, ...rest }) {
   const { auth } = appConfig || {}
+  console.log('PrivateRoute auth',auth)
   const { isAuthenticated = () => false, signInURL = '/signin' } =
     appConfig || {}
-
+    
   return (
     <Route
       {...rest}
