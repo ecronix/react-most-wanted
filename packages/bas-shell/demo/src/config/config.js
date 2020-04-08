@@ -19,6 +19,15 @@ const config = {
     Menu: lazy(() => import('../containers/Menu/Menu')),
     Loading,
   },
+  containers: {
+    AppContainer: ({ children }) => (
+      <div>App Container {children} App Container</div>
+    ),
+
+    LayoutContainer: ({ children }) => (
+      <div>Layout Container {children} Layout Container</div>
+    ),
+  },
 }
 
 export default config
