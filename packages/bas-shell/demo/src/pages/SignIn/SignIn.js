@@ -18,9 +18,15 @@ const SignIn = ({ history }) => {
     saveAuthorisation(user)
     let _location = history.location
     let isAuth = isAuthorised();
-    if (isAuth && _location.state && _location.state.from) {
-      let _route = _location.state.from.pathname;
-      history.push(_route);
+    if (isAuth) {
+      let _route = '/home';
+      if (_location.state && _location.state.from) {
+        _route = _location.state.from.pathname;
+        history.push(_route);
+      }
+      else {
+        history.push(_route);
+      }
       console.log('SignIn router push', _route)
     }
   };
