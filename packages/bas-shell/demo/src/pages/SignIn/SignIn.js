@@ -3,33 +3,30 @@ import { withRouter } from 'react-router-dom'
 import { saveAuthorisation, isAuthorised } from '../../utils/auth'
 
 const SignIn = ({ history }) => {
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     authenticate({
-      displayName: username
+      displayName: username,
     })
   }
 
   const authenticate = (user) => {
     saveAuthorisation(user)
     let _location = history.location
-    let isAuth = isAuthorised();
+    let isAuth = isAuthorised()
     if (isAuth) {
-      let _route = '/home';
+      let _route = '/home'
       if (_location.state && _location.state.from) {
-        _route = _location.state.from.pathname;
-        history.push(_route);
+        _route = _location.state.from.pathname
+        history.push(_route)
+      } else {
+        history.push(_route)
       }
-      else {
-        history.push(_route);
-      }
-      console.log('SignIn router push', _route)
     }
-  };
+  }
 
   return (
     <div>
@@ -37,11 +34,19 @@ const SignIn = ({ history }) => {
       <form onSubmit={handleSubmit}>
         <label>
           username:
-          <input type="text" id="username" onChange={e => setUsername(e.target.value)} />
+          <input
+            type="text"
+            id="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </label>
         <label>
           password
-          <input type="password" id="password" onChange={e => setPassword(e.target.value)} />
+          <input
+            type="password"
+            id="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
         <input type="submit" value="sign in" />
       </form>
