@@ -6,9 +6,9 @@ const getMenuItems = props => {
     auth,
     handleSignOut,
   } = props
-  console.log('getMenuItems', props)
+
   const isAuthorised = auth.isAuthenticated();
-  console.log('getMenuItems isAuthorised', isAuthorised)
+
   return [
     {
       value: '/signin',
