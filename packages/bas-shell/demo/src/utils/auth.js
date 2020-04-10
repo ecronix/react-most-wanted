@@ -28,7 +28,7 @@ export function isAuthorised() {
   try {
     if (typeof Storage !== 'undefined') {
       const auth = JSON.parse(localStorage.getItem(localStorageAuthKey))
-      return auth
+      return auth || false;
     } else {
       return false
     }
