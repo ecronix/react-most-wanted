@@ -5,7 +5,7 @@ import { default as withAppConfigs } from 'base-shell/lib/providers/ConfigProvid
 import { compose } from 'redux'
 
 const Menu = ({ history, appConfig }) => {
-  const handleSignOut = async (user) => {
+  const handleSignOut = (user) => {
     logout()
     history.push('/signin');
   }
