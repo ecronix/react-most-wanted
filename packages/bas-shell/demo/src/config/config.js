@@ -1,6 +1,8 @@
 import React, { lazy } from 'react'
 import routes from './routes'
 import { isAuthorised } from '../utils/auth'
+import getMenuItems from './menuItems'
+import LandingPage from '../pages/LandingPage/LandingPage'
 
 const Loading = () => <div>Loading...</div>
 
@@ -11,8 +13,9 @@ const config = {
     signInURL: '/signin',
   },
   routes,
+  getMenuItems,
   pages: {
-    LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
+    LandingPage: LandingPage,
     PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
   },
   components: {
