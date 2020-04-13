@@ -12,7 +12,7 @@ const parseLanguages = (acceptedLangs, defaultLang = false) => {
   const userPref = getUsersPreferredLanguages()
 
   const match = userPref
-    ? userPref.find(lang => acceptedLangs.includes(lang))
+    ? userPref.find((lang) => acceptedLangs.includes(lang))
     : undefined
 
   if (match === undefined && defaultLang !== false) {
@@ -22,9 +22,21 @@ const parseLanguages = (acceptedLangs, defaultLang = false) => {
   return match
 }
 
-const formatMessage = (messages=[], id) => {
+const getLocaleMessages = (l, ls) => {
+  if (ls) {
+    for (let i = 0; i < ls.length; i++) {
+      if (ls[i]['locale'] === l) {
+        return ls[i]['messages']
+      }
+    }
+  }
+
+  return {}
+}
+
+const formatMessage = (messages = [], id) => {
   return messages[id] || id
 }
 
-export { formatMessage }
+export { formatMessage, getLocaleMessages }
 export default parseLanguages
