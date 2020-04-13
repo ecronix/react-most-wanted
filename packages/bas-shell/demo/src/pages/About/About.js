@@ -1,5 +1,8 @@
 import React from 'react'
+import { injectIntl } from 'react-intl'
 
-export default function() {
-  return <div>ABOUT PAGE</div>
+const AboutPage = ({ intl }) => {
+  return <div>{intl.formatMessage({ id: 'about_page' })}</div>
 }
+
+export default injectIntl(AboutPage)

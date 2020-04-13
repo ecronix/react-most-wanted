@@ -1,8 +1,10 @@
 import en_messages from './en'
 import ru_messages from './ru'
+import de_messages from './de'
 import '@formatjs/intl-relativetimeformat/polyfill'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/en'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/ru'
+import '@formatjs/intl-relativetimeformat/dist/locale-data/de'
 import areIntlLocalesSupported from 'intl-locales-supported'
 import intl from 'intl'
 
@@ -31,11 +33,15 @@ if (global.Intl) {
 const locales = [
   {
     locale: 'en',
-    messages: en_messages
+    messages: en_messages,
   },
   {
     locale: 'ru',
-    messages: ru_messages
+    messages: ru_messages,
+  },
+  {
+    locale: 'de',
+    messages: de_messages,
   },
 ]
 
@@ -52,4 +58,3 @@ export function getLocaleMessages(l, ls) {
 }
 
 export default locales
-
