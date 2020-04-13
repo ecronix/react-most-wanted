@@ -10,7 +10,7 @@ const Loading = () => <div>Loading...</div>
 
 const config = {
   initial_state: {
-    locale: parseLanguages(['en', 'ru'], 'en'),
+    locale: parseLanguages(['en', 'de', 'ru'], 'en'),
   },
   auth: {
     isAuthenticated: isAuthorised,

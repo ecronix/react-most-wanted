@@ -2,14 +2,15 @@ import React from 'react'
 import { logout } from '../../utils/auth'
 import { withRouter, Link } from 'react-router-dom'
 import { default as withAppConfigs } from 'base-shell/lib/providers/ConfigProvider/withConfig'
+import { injectIntl } from 'react-intl'
 import { compose } from 'redux'
 
-const Menu = ({ history, appConfig }) => {
+const Menu = ({ history, appConfig, intl }) => {
   const handleSignOut = (user) => {
     logout()
     history.push('/signin');
   }
-  const itemsMenu = appConfig.getMenuItems({ auth: { ...appConfig.auth }, handleSignOut }).filter(item => {
+  const itemsMenu = appConfig.getMenuItems({ intl, auth: { ...appConfig.auth }, handleSignOut }).filter(item => {
     return item.visible !== false
   })
   return (
@@ -34,6 +35,7 @@ const Menu = ({ history, appConfig }) => {
   )
 }
 export default compose(
+  injectIntl,
   withRouter,
   withAppConfigs,
 )(Menu)
