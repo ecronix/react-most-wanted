@@ -8,34 +8,37 @@ import { compose } from 'redux'
 const Menu = ({ history, appConfig, intl }) => {
   const handleSignOut = (user) => {
     logout()
-    history.push('/signin');
+    history.push('/signin')
   }
-  const itemsMenu = appConfig.getMenuItems({ intl, auth: { ...appConfig.auth }, handleSignOut }).filter(item => {
-    return item.visible !== false
-  })
+  const itemsMenu = appConfig.getMenuItems
+    ? appConfig
+        .getMenuItems({ intl, auth: { ...appConfig.auth }, handleSignOut })
+        .filter((item) => {
+          return item.visible !== false
+        })
+    : []
   return (
     <div>
       MENU
       <nav>
-        {
-          itemsMenu.map((item, i) => {
-            return (
-              <li key={i}>
-                <Link to={item.value} onClick={e => {
+        {itemsMenu.map((item, i) => {
+          return (
+            <li key={i}>
+              <Link
+                to={item.value}
+                onClick={(e) => {
                   if (item.onClick) {
                     item.onClick()
                   }
-                }} >{item.primaryText}</Link>
-              </li>
-            );
-          })
-        }
+                }}
+              >
+                {item.primaryText}
+              </Link>
+            </li>
+          )
+        })}
       </nav>
     </div>
   )
 }
-export default compose(
-  injectIntl,
-  withRouter,
-  withAppConfigs,
-)(Menu)
+export default compose(injectIntl, withRouter, withAppConfigs)(Menu)

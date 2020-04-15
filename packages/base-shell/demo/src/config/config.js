@@ -18,7 +18,7 @@ const config = {
   },
   routes,
   locales,
-  getMenuItems,
+  //getMenuItems,
   pages: {
     LandingPage: LandingPage,
     PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
