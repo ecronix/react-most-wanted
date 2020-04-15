@@ -8,6 +8,8 @@ const messages = defineMessages({
   about: 'About',
   home: 'Home',
   page_not_found: 'Page not found',
+  settings: 'Settings',
+  language: 'Language',
   en: 'English',
   de: 'German',
   ru: 'Russian'
