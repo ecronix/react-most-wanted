@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { saveAuthorisation, isAuthorised } from '../../utils/auth'
+import { injectIntl } from 'react-intl'
+import { compose } from 'redux'
 
-const SignIn = ({ history }) => {
+const SignIn = ({ history, intl  }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -30,10 +32,10 @@ const SignIn = ({ history }) => {
 
   return (
     <div>
-      SIGN IN
+      {intl.formatMessage({ id: 'sign_in' }) }
       <form onSubmit={handleSubmit}>
         <label>
-          username:
+        {intl.formatMessage({ id: 'username' }) }
           <input
             type="text"
             id="username"
@@ -41,16 +43,17 @@ const SignIn = ({ history }) => {
           />
         </label>
         <label>
-          password
+        {intl.formatMessage({ id: 'password' }) }
           <input
             type="password"
             id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <input type="submit" value="sign in" />
+        <input type="submit" value={intl.formatMessage({ id: 'sign_in' })} />
       </form>
     </div>
   )
 }
-export default withRouter(SignIn)
+
+export default compose(injectIntl, withRouter)(SignIn)

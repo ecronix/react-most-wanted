@@ -5,6 +5,7 @@ const getMenuItems = props => {
   const {
     auth,
     handleSignOut,
+    intl
   } = props
 
   const isAuthorised = auth.isAuthenticated();
@@ -12,19 +13,19 @@ const getMenuItems = props => {
   return [
     {
       value: '/signin',
-      onClick:isAuthorised ? handleSignOut : ()=>{},
+      onClick: isAuthorised ? handleSignOut : () => { },
       visible: true,
-      primaryText: isAuthorised ? 'sign out' : 'sign in',
+      primaryText: isAuthorised ? intl.formatMessage({ id: 'sign_out' }) : intl.formatMessage({ id: 'sign_in' }),
     },
     {
       value: '/home',
       visible: isAuthorised,
-      primaryText: 'home',
+      primaryText: intl.formatMessage({ id: 'home' }),
     },
     {
       value: '/about',
       visible: true,
-      primaryText: 'about',
+      primaryText: intl.formatMessage({ id: 'about' }),
     },
   ]
 }
