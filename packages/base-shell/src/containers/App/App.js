@@ -18,8 +18,8 @@ const App = ({ config: appConfig }) => {
   const { AppContainer = React.Fragment } = containers || {}
 
   return (
-    <AppContainer>
-      <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading />}>
+      <AppContainer>
         <Router>
           <ConfigProvider appConfig={config}>
             <UpdateProvider appConfig={config}>
@@ -36,8 +36,8 @@ const App = ({ config: appConfig }) => {
             </UpdateProvider>
           </ConfigProvider>
         </Router>
-      </Suspense>
-    </AppContainer>
+      </AppContainer>
+    </Suspense>
   )
 }
 

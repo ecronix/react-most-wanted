@@ -16,6 +16,8 @@ export const AppLayout = ({ appConfig, intl }) => {
     ...getLocaleMessages(locale, appConfig.locales),
   }
 
+  console.log('appRoutes', appRoutes)
+
   return (
     <IntlProvider locale={locale} key={locale} messages={messages}>
       <LayoutContainer>
