@@ -74,18 +74,6 @@ const Menu = ({ history, appConfig, intl }) => {
     return null;
   }
 
-  // --------<br />
-  // Settings
-  // <li>
-  //   Language
-  //   <select>
-  //     <option>Пункт 1</option>
-  //     <option>Пункт 2</option>
-  //   </select>
-  // </li>
-  // (item.nestedItems && item.nestedItems.length > 0 ? item.nestedItems.map((nestedItem, k) => {
-  //   <div>{nestedItem.primaryText}</div>
-  // }) : '')
   return (
     <div>
       <nav>
