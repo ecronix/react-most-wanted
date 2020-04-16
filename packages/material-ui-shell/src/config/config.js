@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { lazy } from 'react'
+import Loading from '../components/Loading/Loading'
 
 const config = {
+  containers: {
+    AppContainer: lazy(() => import('../containers/AppContainer/AppContainer')),
+  },
+  components: {
+    Loading,
+  },
   pages: {
     LandingPage: () => <div>Landing Page MUI</div>,
-    LandingPage2: () => <div>Landing Page MUI</div>,
+    PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
   },
 }
 
