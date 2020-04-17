@@ -4,7 +4,7 @@ import rootReducer from './rootReducer'
 import simpleValues from './simpleValues/reducer'
 import locale from './locale/reducer'
 
-export const appReducers = { simpleValues, locale, }
+export const appReducers = { simpleValues, locale }
 
 const appReducer = combineReducers(appReducers)
 

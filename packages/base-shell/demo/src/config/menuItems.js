@@ -1,35 +1,32 @@
 import allLocales from './locales'
 // import allThemes from './themes'
 
-const getMenuItems = props => {
-  const {
-    auth,
-    handleSignOut,
-    locale,
-    updateLocale,
-    intl
-  } = props
-  
-  const localeItems = allLocales.map(l => {
+const getMenuItems = (props) => {
+  const { auth, handleSignOut, locale, updateLocale, intl } = props
+
+  const localeItems = allLocales.map((l) => {
     const result = {
       value: undefined,
       visible: true,
+      key: l.locale,
       primaryText: intl.formatMessage({ id: l.locale }),
       onClick: () => {
         updateLocale(l.locale)
       },
     }
-    return result;
+    return result
   })
 
-  const isAuthorised = auth.isAuthenticated();
+  const isAuthorised = auth.isAuthenticated()
 
   return [
     {
       value: '/signin',
-      onClick: isAuthorised ? handleSignOut : () => { },
+      onClick: isAuthorised ? handleSignOut : () => {},
       visible: true,
-      primaryText: isAuthorised ? intl.formatMessage({ id: 'sign_out' }) : intl.formatMessage({ id: 'sign_in' }),
+      primaryText: isAuthorised
+        ? intl.formatMessage({ id: 'sign_out' })
+        : intl.formatMessage({ id: 'sign_in' }),
     },
     {
       value: '/home',
