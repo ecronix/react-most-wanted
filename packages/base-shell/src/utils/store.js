@@ -3,19 +3,25 @@ import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
+import { combineReducers } from 'redux'
+import baseReducers from '../store/reducers'
+
+const rootReducer = (appReducer, initState, state, action) => {
+  if (action.type === 'auth@LOGOUT') {
+    // eslint-disable-next-line no-empty-pattern
+    const {} = state
+    state = { ...initState }
+  }
+
+  return appReducer(state, action)
+}
 
 const _persistorConfig = {
   key: 'root',
   storage,
-  blacklist: [
-    'auth',
-    'form',
-    'connection',
-    'initialization',
-    'messaging',
-    'simpleValues',
-  ],
+  blacklist: [],
 }
+
 export default function configureStore({
   persistorConfig = {},
   reducers = null,
@@ -41,11 +47,14 @@ export default function configureStore({
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares))
 
-  console.log('config', { ..._persistorConfig, ...persistorConfig })
+  const appReducer = combineReducers({ ...baseReducers, ...reducers })
+
+  const _reducers = (state, action) =>
+    rootReducer(appReducer, initState, state, action)
 
   const reducer = persistReducer(
     { ..._persistorConfig, ...persistorConfig },
-    reducers
+    _reducers
   )
 
   store = createStore(reducer, initState, enhancer)

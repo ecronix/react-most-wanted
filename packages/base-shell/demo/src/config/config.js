@@ -6,7 +6,6 @@ import getMenuItems from './menuItems'
 import LandingPage from '../pages/LandingPage/LandingPage'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import configureStore from 'base-shell/lib/utils/store'
-import reducers from 'base-shell/lib/store/reducers'
 
 const Loading = () => <div>Loading...</div>
 
@@ -28,8 +27,7 @@ const initState = {
 
 const config = {
   redux: {
-    configureStore: () =>
-      configureStore({ persistorConfig, reducers, initState }),
+    configureStore: () => configureStore({ persistorConfig, initState }),
   },
   auth: {
     isAuthenticated: isAuthorised,
