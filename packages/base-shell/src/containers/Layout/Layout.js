@@ -3,10 +3,11 @@ import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
 import withConfig from '../../providers/ConfigProvider/withConfig'
 import { IntlProvider } from 'react-intl'
 import { Switch } from 'react-router-dom'
-import { getLocaleMessages } from '../../utils/localeTools'
+import { getLocaleMessages } from '../../utils/locale'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
 
-export const AppLayout = ({ appConfig, intl }) => {
+export const LayoutContent = ({ appConfig, intl }) => {
   const { components, routes: appRoutes = [], containers } = appConfig || {}
   const { Menu, Loading } = components || {}
   const { LayoutContainer = React.Fragment } = containers || {}
@@ -35,4 +36,17 @@ export const AppLayout = ({ appConfig, intl }) => {
   )
 }
 
-export default withConfig(AppLayout)
+export const Layout = ({ appConfig }) => {
+  const { redux = {} } = appConfig || {}
+
+  const { configureStore } = redux || {}
+  const store = configureStore()
+
+  return (
+    <Provider store={store}>
+      <LayoutContent appConfig={appConfig} />
+    </Provider>
+  )
+}
+
+export default withConfig(Layout)

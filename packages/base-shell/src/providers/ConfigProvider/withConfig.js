@@ -1,7 +1,7 @@
 import Context from './Context'
 import React from 'react'
 import config from '../../config'
-import merge from '../../utils/configTools'
+import merge from '../../utils/config'
 
 const withAppConfigs = (Component) => {
   const ChildComponent = (props) => {
