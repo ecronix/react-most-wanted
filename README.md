@@ -7,6 +7,14 @@
 
 I like `short` README's so here we go :sunglasses:
 
+## Coming soon...
+
+`base-shell` with basic react settup (routing, intl, async load, redux)
+`material-ui-shell` expanded `base-shell` with Material-UI design and additional features like responsive menu, pwa features and some demo examples. Basicaly `rmw-shell` without Firebase
+`rmw-shell` will be updated to use `base-shell` and `material-ui-shell` with the addition that it uses Firebase
+
+Any help here is welcome :smile:
+
 ## How to start?
 
 Just run this command:
