@@ -7,6 +7,7 @@ const config = {
   },
   components: {
     Loading,
+    Menu: lazy(() => import('../containers/Menu/Menu')),
   },
   pages: {
     LandingPage: () => <div>Landing Page MUI</div>,

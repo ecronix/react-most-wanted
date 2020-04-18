@@ -1,7 +1,8 @@
 import React from 'react'
 import { injectIntl } from 'react-intl'
+import Page from 'material-ui-shell/lib/containers/Page/Page'
 
 const HomePage = ({ intl }) => {
-  return <div>{intl.formatMessage({ id: 'home' })}</div>
+  return <Page>{intl.formatMessage({ id: 'home' })}</Page>
 }
 export default injectIntl(HomePage)
