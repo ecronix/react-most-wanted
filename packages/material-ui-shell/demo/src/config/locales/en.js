@@ -10,7 +10,8 @@ const messages = defineMessages({
   page_not_found: 'Page not found',
   en: 'English',
   de: 'German',
-  ru: 'Russian'
+  ru: 'Russian',
+  offline: 'Offline',
 })
 
 export default messages
