@@ -3,8 +3,9 @@ import { withRouter } from 'react-router-dom'
 import { saveAuthorisation, isAuthorised } from '../../utils/auth'
 import { injectIntl } from 'react-intl'
 import { compose } from 'redux'
+import Page from 'material-ui-shell/lib/containers/Page/Page'
 
-const SignIn = ({ history, intl  }) => {
+const SignIn = ({ history, intl }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -31,28 +32,30 @@ const SignIn = ({ history, intl  }) => {
   }
 
   return (
-    <div>
-      {intl.formatMessage({ id: 'sign_in' }) }
-      <form onSubmit={handleSubmit}>
-        <label>
-        {intl.formatMessage({ id: 'username' }) }
-          <input
-            type="text"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-        <label>
-        {intl.formatMessage({ id: 'password' }) }
-          <input
-            type="password"
-            id="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <input type="submit" value={intl.formatMessage({ id: 'sign_in' })} />
-      </form>
-    </div>
+    <Page>
+      <div>
+        {intl.formatMessage({ id: 'sign_in' })}
+        <form onSubmit={handleSubmit}>
+          <label>
+            {intl.formatMessage({ id: 'username' })}
+            <input
+              type="text"
+              id="username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </label>
+          <label>
+            {intl.formatMessage({ id: 'password' })}
+            <input
+              type="password"
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <input type="submit" value={intl.formatMessage({ id: 'sign_in' })} />
+        </form>
+      </div>
+    </Page>
   )
 }
 
