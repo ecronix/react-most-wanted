@@ -20,6 +20,10 @@ import MailIcon from '@material-ui/icons/Mail'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import drawerActions from '../../store/drawer/actions'
+import { withRouter } from 'react-router-dom'
+import { default as withAppConfigs } from 'base-shell/lib/providers/ConfigProvider/withConfig'
+import { injectIntl } from 'react-intl'
+
 
 const drawerWidth = 240
 
@@ -80,17 +84,96 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Menu = ({ drawer, setDrawerOpen }) => {
+const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, match, history }) => {
   const classes = useStyles()
   const theme = useTheme()
   const { open = false } = drawer
 
+  const menuItems = appConfig
+    .getMenuItems({
+      intl,
+      auth: appConfig.auth,
+      //locale,
+      //updateLocale,
+    })
+    .filter((item) => {
+      return item.visible !== false
+    })
+ 
   const handleDrawerOpen = () => {
     setDrawerOpen(true)
   }
 
   const handleDrawerClose = () => {
     setDrawerOpen(false)
+  }
+
+  const index = match ? match.path : '/'
+
+  const onIndexChange = (event, index) => {
+   
+    if (index !== undefined) {
+      setDrawerMobileOpen(false)
+    }
+
+    if (index !== undefined && index !== Object(index)) {
+      history.push(index)
+    }
+  }
+
+  const useMinified = drawer.useMinified && !drawer.open
+  const getItem = (item, i) => {
+    //delete item.visible
+    if (item !== undefined) {
+      if (item.subheader !== undefined) {
+        return (
+          <div key={i} inset={item.inset} style={item.style}>
+            {item.subheader}
+          </div>
+        )
+      } else if (item.divider !== undefined) {
+        return <Divider key={i} inset={item.inset} style={item.style} />
+      } else {
+        return (
+          <ListItem
+            button
+            selected={index && index === item.value}
+            key={i}
+            onClick={e => {
+              onIndexChange(e, item.value)
+              // this.handleNestedItemsClick(item)
+              if (item.onClick) {
+                item.onClick()
+              }
+            }}
+            onMouseDown={e => {
+              if (e.button === 1) {
+                var win = window.open(`${item.value}`, '_blank')
+                win.focus()
+              }
+            }}
+          >
+            {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
+
+            {!useMinified && <ListItemText primary={item.primaryText} />}
+
+            {/* {item.nestedItems && !useMinified && (
+              <ListItemSecondaryAction
+                onClick={() => {
+                  this.handleNestedItemsClick(item)
+                }}
+              >
+                <IconButton style={{ marginRight: useMinified ? 150 : undefined }}>
+                  <KeyboardArrowRight color={'action'} />
+                </IconButton>
+              </ListItemSecondaryAction>
+            )} */}
+          </ListItem>
+        )
+      }
+    }
+
+    return null
   }
 
   return (
@@ -108,31 +191,19 @@ const Menu = ({ drawer, setDrawerOpen }) => {
           {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
           ) : (
-            <ChevronRightIcon />
-          )}
+              <ChevronRightIcon />
+            )}
         </IconButton>
       </div>
       <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+      <List value={index} onChange={onIndexChange}>
+        {menuItems
+          .filter(item => {
+            return item.visible !== false
+          })
+          .map((item, i) => {
+            return getItem(item, i)
+          })}
       </List>
     </Drawer>
   )
@@ -143,4 +214,4 @@ const mapStateToProps = (state) => {
   return { drawer }
 }
 
-export default compose(connect(mapStateToProps, { ...drawerActions }))(Menu)
+export default compose(connect(mapStateToProps, { ...drawerActions }), injectIntl, withRouter, withAppConfigs)(Menu)
