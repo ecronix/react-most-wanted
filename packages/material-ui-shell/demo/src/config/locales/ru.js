@@ -11,7 +11,8 @@ const messages = defineMessages({
   language: 'Язык',
   en: 'English',
   de: 'Deutsch',
-  ru: 'Русский'
+  ru: 'Русский',
+  offline: 'Офлайн',
 })
 
 export default messages
