@@ -19,9 +19,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import { injectIntl } from 'react-intl'
 import drawerActions from '../../store/drawer/actions'
+import withOnline from 'base-shell/lib/providers/OnlineProvider/withOnline'
 
 const drawerWidth = 240
+const offlineIndicatorHeight = 12
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,9 +65,19 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
   },
+  offlineIndicator: {
+    position: 'absolute',
+    display: 'flex',
+    alignItems: 'center',
+    backgroundColor: theme.palette.secondary.main,
+    justifyContent: 'center',
+    right: 0,
+    left: 0,
+    height: offlineIndicatorHeight,
+  },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    //padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -80,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({ children, setDrawerOpen, drawer }) => {
+const Page = ({ children, setDrawerOpen, drawer, isOnline, intl }) => {
   const classes = useStyles()
   const theme = useTheme()
   const { open = false } = drawer
@@ -117,12 +130,26 @@ const Page = ({ children, setDrawerOpen, drawer }) => {
         </Toolbar>
       </AppBar>
 
+      <div className={classes.drawerHeader} />
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
+        {!isOnline && (
+          <React.Fragment>
+            <div className={classes.offlineIndicator}>
+              <Typography variant="caption" noWrap>
+                {intl.formatMessage({
+                  id: 'offline',
+                  defaultMessage: 'Offline',
+                })}
+              </Typography>
+            </div>
+            <div style={{ height: offlineIndicatorHeight }}></div>
+          </React.Fragment>
+        )}
         {children}
       </main>
     </div>
@@ -134,4 +161,8 @@ const mapStateToProps = (state) => {
   return { drawer }
 }
 
-export default compose(connect(mapStateToProps, { ...drawerActions }))(Page)
+export default compose(
+  connect(mapStateToProps, { ...drawerActions }),
+  withOnline,
+  injectIntl
+)(Page)

@@ -5,7 +5,7 @@ import { isAuthorised } from '../utils/auth'
 import getMenuItems from './menuItems'
 import LandingPage from '../pages/LandingPage/LandingPage'
 import parseLanguages from 'base-shell/lib/utils/locale'
-import configureStore from 'base-shell/lib/utils/store'
+//import configureStore from 'base-shell/lib/utils/store'
 
 const Loading = () => <div>Loading...</div>
 
@@ -27,7 +27,8 @@ const initState = {
 
 const config = {
   redux: {
-    configureStore: () => configureStore({ persistorConfig, initState }),
+    configureStoreProps: { persistorConfig, initState },
+    //configureStore: () => configureStore({ persistorConfig, initState }),
   },
   auth: {
     isAuthenticated: isAuthorised,

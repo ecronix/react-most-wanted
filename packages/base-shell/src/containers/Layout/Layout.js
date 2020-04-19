@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react'
+import configureStore from '../..//utils/store'
 import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
 import withConfig from '../../providers/ConfigProvider/withConfig'
 import { IntlProvider } from 'react-intl'
+import { Provider } from 'react-redux'
 import { Switch } from 'react-router-dom'
 import { getLocaleMessages } from '../../utils/locale'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
-import { Provider } from 'react-redux'
 
 export const LayoutContent = ({ appConfig, intl }) => {
   const { components, routes: appRoutes = [], containers } = appConfig || {}
@@ -39,8 +40,10 @@ export const LayoutContent = ({ appConfig, intl }) => {
 export const Layout = ({ appConfig }) => {
   const { redux = {} } = appConfig || {}
 
-  const { configureStore } = redux || {}
-  const store = configureStore()
+  const { configureStore: _configureStore, configureStoreProps } = redux || {}
+  const store = _configureStore
+    ? _configureStore(configureStoreProps)
+    : configureStore(configureStoreProps)
 
   return (
     <Provider store={store}>
