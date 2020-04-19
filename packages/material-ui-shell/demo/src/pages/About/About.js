@@ -6,3 +6,4 @@ const AboutPage = ({ intl }) => {
   return <Page>{intl.formatMessage({ id: 'about' })}</Page>
 }
 export default injectIntl(AboutPage)
+
