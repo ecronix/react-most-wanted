@@ -22,12 +22,13 @@ const _persistorConfig = {
   blacklist: [],
 }
 
-export default function configureStore({
-  persistorConfig = {},
-  reducers = null,
-  initState = {},
-  middlewares: _middlewares = [],
-}) {
+export default function configureStore(props) {
+  const {
+    persistorConfig = {},
+    reducers = null,
+    initState = {},
+    middlewares: _middlewares = [],
+  } = props || {}
   let store
 
   const logger = createLogger({})
