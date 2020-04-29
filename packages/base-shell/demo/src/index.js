@@ -1,12 +1,5 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import App from 'base-shell/lib'
-import config from './config'
+import App from '../../cra-template-base/template/src/App'
 
-export default class Demo extends Component {
-  render() {
-    return <App config={config} />
-  }
-}
-
-render(<Demo />, document.querySelector('#demo'))
+render(<App />, document.querySelector('#demo'))
