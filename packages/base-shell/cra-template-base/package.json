@@ -1,0 +1,28 @@
+{
+  "name": "cra-template-base",
+  "version": "1.0.2",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "base-shell"
+  ],
+  "description": "The base-shell template for Create React App.",
+  "main": "template.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarikHuber/react-most-wanted",
+    "directory": "packages/base-shell/cra-template-base"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bugs": {
+    "url": "https://github.com/TarikHuber/react-most-wanted/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ]
+}
