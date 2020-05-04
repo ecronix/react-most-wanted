@@ -9,9 +9,24 @@ I like `short` README's so here we go :sunglasses:
 
 ## Coming soon...
 
-`base-shell` with basic react settup (routing, intl, async load, redux)
-`material-ui-shell` expanded `base-shell` with Material-UI design and additional features like responsive menu, pwa features and some demo examples. Basicaly `rmw-shell` without Firebase
-`rmw-shell` will be updated to use `base-shell` and `material-ui-shell` with the addition that it uses Firebase
+### [base-shell](./packages/base-shell/)
+The basic react setup (routing, intl, async load, redux)
+
+### [material-ui-shell](./packages/material-ui-shell/)
+[base-shell](./packages/base-shell/) +
+- [Material-UI](https://material-ui.com) frontend framework
+- Responsive menu
+- PWA features
+- Demo examples
+
+### [rmw-shell](./packages/rmw-shell)
+[base-shell](./packages/base-shell/) + [material-ui-shell](https://material-ui.com) +
+- [Firebase](https://firebase.google.com/) Take your app to the cloud, enabling the possibility to:
+  - Real time database updates
+  - OAuth with the major platforms
+  - Monitoring, metrics, reports...
+  - CDN as a storage layer for static assets, for Ultra Quick Delivery Anywhere in the World
+  - And much more...
 
 Any help here is welcome :smile:
 
@@ -56,18 +71,18 @@ Check this out:
 
 Let's take a look at some of them:
 
-- Material UI
-- Code splitting
-- Redux implementation
-- Firebase to Redux sync
-- Authentication
-- Authorization
-- Push notifications UI integration
-- Theming
-- Internationalisation
-- Built-in CI (Continuous Integration)
-- Built-in CD (Continuous Deployment)
-- Realtime forms (isn't that awesome :smile: )
+- [Material UI](https://material-ui.com/) Material Design ready-to-use React Components
+- [Code splitting](https://webpack.js.org/guides/code-splitting/) MPA (Multiple Page Application) ready. Large codebases can be splitted into separate bundles that load different parts of the application, lazy-loading the different bundles on demand.
+- [Redux](https://redux.js.org/) predictable state management, by enforcing a strict unidirectional data flow and state immutability.
+- **Firebase to Redux sync**: sync your state automatically to the cloud using firebase.
+- **Authentication**: User login / registration built in.
+- **Authorization** Roles and permissions built in.
+- **Push notifications UI integration** 
+- **Theming**
+- **Internationalisation**
+- **Built-in CI (Continuous Integration)**
+- **Built-in CD (Continuous Deployment)**
+- **Realtime forms** (isn't that awesome :smile:)
 - ... and a lot more I just can't remember
 
 # Is there more in depth information about this project?
