@@ -10,12 +10,7 @@
     "react": "16.x",
     "react-dom": "16.x",
     "react-intl": "4.x",
-    "react-redux": "7.x",
     "react-router-dom": "5.x",
-    "redux": "4.x",
-    "redux-logger": "3.x",
-    "redux-persist": "6.x",
-    "redux-thunk": "2.x",
     "base-shell": "1.x"
   }
 }
