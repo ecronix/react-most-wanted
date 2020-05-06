@@ -1,21 +1,23 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useContext } from 'react'
 import configureStore from '../..//utils/store'
 import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
 import withConfig from '../../providers/ConfigProvider/withConfig'
+import LocaleContext from '../../providers/Locale/Context'
+import LocaleProvider from '../../providers/Locale/Provider'
 import { IntlProvider } from 'react-intl'
-import { Provider } from 'react-redux'
 import { Switch } from 'react-router-dom'
 import { getLocaleMessages } from '../../utils/locale'
-import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 
 export const LayoutContent = ({ appConfig, intl }) => {
-  const { components, routes: appRoutes = [], containers } = appConfig || {}
+  const { components, routes: appRoutes = [], containers, locale: confLocale } =
+    appConfig || {}
   const { Menu, Loading } = components || {}
+  const { locales } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
   const defaultRoutes = getDefaultRoutes(appConfig)
-  const locale = useSelector((state) => state.locale, shallowEqual)
+  const { locale } = useContext(LocaleContext)
   const messages = {
-    ...getLocaleMessages(locale, appConfig.locales),
+    ...getLocaleMessages(locale, locales),
   }
 
   return (
@@ -38,17 +40,12 @@ export const LayoutContent = ({ appConfig, intl }) => {
 }
 
 export const Layout = ({ appConfig }) => {
-  const { redux = {} } = appConfig || {}
-
-  const { configureStore: _configureStore, configureStoreProps } = redux || {}
-  const store = _configureStore
-    ? _configureStore(configureStoreProps)
-    : configureStore(configureStoreProps)
-
+  const { locale } = appConfig
+  const { defaultLocale } = locale || {}
   return (
-    <Provider store={store}>
+    <LocaleProvider locale={defaultLocale}>
       <LayoutContent appConfig={appConfig} />
-    </Provider>
+    </LocaleProvider>
   )
 }
 

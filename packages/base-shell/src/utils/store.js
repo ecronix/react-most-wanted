@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/es/storage' // default: localStorage if web, AsyncStorage if react-native
 import { combineReducers } from 'redux'
-import baseReducers from '../store/reducers'
 
 const rootReducer = (appReducer, initState, state, action) => {
   if (action.type === 'auth@LOGOUT') {
@@ -48,7 +47,7 @@ export default function configureStore(props) {
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares))
 
-  const appReducer = combineReducers({ ...baseReducers, ...reducers })
+  const appReducer = combineReducers({ ...reducers })
 
   const _reducers = (state, action) =>
     rootReducer(appReducer, initState, state, action)
