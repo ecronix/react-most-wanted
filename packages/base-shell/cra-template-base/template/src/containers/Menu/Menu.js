@@ -1,24 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { default as withAppConfigs } from 'base-shell/lib/providers/ConfigProvider/withConfig'
 import { injectIntl } from 'react-intl'
 import { logout } from '../../utils/auth'
-import { updateLocale } from 'base-shell/lib/store/locale/actions'
 import { withRouter, NavLink } from 'react-router-dom'
+import LocaleContext from 'base-shell/lib/providers/Locale/Context'
+import ConfigContext from 'base-shell/lib/providers/ConfigProvider/Context'
 
-const Menu = ({ history, appConfig, intl, updateLocale, locale = 'en' }) => {
+const Menu = ({ history, intl }) => {
   const handleSignOut = (user) => {
     logout()
     history.push('/signin')
   }
+
+  const { setLocale, locale = 'en' } = useContext(LocaleContext)
+  const { appConfig } = useContext(ConfigContext)
 
   const itemsMenu = appConfig
     .getMenuItems({
       intl,
       auth: appConfig.auth,
       locale,
-      updateLocale,
+      updateLocale: setLocale,
       handleSignOut,
     })
     .filter((item) => {
@@ -107,15 +109,4 @@ const Menu = ({ history, appConfig, intl, updateLocale, locale = 'en' }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    locale: state.locale,
-  }
-}
-
-export default compose(
-  connect(mapStateToProps, { updateLocale }),
-  injectIntl,
-  withRouter,
-  withAppConfigs
-)(Menu)
+export default compose(injectIntl, withRouter)(Menu)
