@@ -12,6 +12,7 @@ const config = {
   locale: {
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
     locales,
+    persistKey: 'base-shell:locale',
   },
   auth: {
     isAuthenticated: isAuthorised,
