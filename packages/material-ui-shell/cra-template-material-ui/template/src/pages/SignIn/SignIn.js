@@ -60,7 +60,7 @@ const SignIn = ({ history, intl }) => {
   }
 
   return (
-    <Page>
+    <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
       <div
         style={{
           position: 'absolute',
