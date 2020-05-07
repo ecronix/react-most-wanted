@@ -5,7 +5,6 @@ import React, { Suspense, lazy } from 'react'
 import UpdateProvider from '../../providers/Update/Provider'
 import defaultConfig from '../../config'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { combineReducers } from 'redux'
 
 const Layout = lazy(() => import('../../containers/Layout/Layout'))
 
