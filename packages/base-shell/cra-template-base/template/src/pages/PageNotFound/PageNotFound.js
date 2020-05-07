@@ -1,7 +1,8 @@
 import React from 'react'
-import { injectIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 
-const PageNotFound = ({ intl }) => {
+const PageNotFound = () => {
+  const intl = useIntl()
   return <div>{intl.formatMessage({ id: 'page_not_found' })}</div>
 }
-export default injectIntl(PageNotFound)
+export default PageNotFound

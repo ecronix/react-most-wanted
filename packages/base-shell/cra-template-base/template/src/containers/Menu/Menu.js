@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
-import { compose } from 'redux'
-import { injectIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 import { logout } from '../../utils/auth'
-import { withRouter, NavLink } from 'react-router-dom'
+import { useHistory, NavLink } from 'react-router-dom'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
-import ConfigContext from 'base-shell/lib/providers/ConfigProvider/Context'
+import ConfigContext from 'base-shell/lib/providers/Config/Context'
 
-const Menu = ({ history, intl }) => {
+const Menu = () => {
+  let history = useHistory()
+  const intl = useIntl()
   const handleSignOut = (user) => {
     logout()
     history.push('/signin')
@@ -109,4 +110,4 @@ const Menu = ({ history, intl }) => {
   )
 }
 
-export default compose(injectIntl, withRouter)(Menu)
+export default Menu

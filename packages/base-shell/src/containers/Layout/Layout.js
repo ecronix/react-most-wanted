@@ -1,14 +1,15 @@
 import React, { Suspense, useContext } from 'react'
-import configureStore from '../..//utils/store'
 import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
-import withConfig from '../../providers/ConfigProvider/withConfig'
 import LocaleContext from '../../providers/Locale/Context'
+import ConfigContext from '../../providers/Config/Context'
 import LocaleProvider from '../../providers/Locale/Provider'
-import { IntlProvider } from 'react-intl'
+import { IntlProvider, useIntl } from 'react-intl'
 import { Switch } from 'react-router-dom'
 import { getLocaleMessages } from '../../utils/locale'
 
-export const LayoutContent = ({ appConfig, intl }) => {
+export const LayoutContent = () => {
+  const intl = useIntl()
+  const { appConfig } = useContext(ConfigContext)
   const { components, routes: appRoutes = [], containers, locale: confLocale } =
     appConfig || {}
   const { Menu, Loading } = components || {}
@@ -39,7 +40,8 @@ export const LayoutContent = ({ appConfig, intl }) => {
   )
 }
 
-export const Layout = ({ appConfig }) => {
+export const Layout = () => {
+  const { appConfig } = useContext(ConfigContext)
   const { locale } = appConfig
   const { defaultLocale } = locale || {}
   return (
@@ -49,4 +51,4 @@ export const Layout = ({ appConfig }) => {
   )
 }
 
-export default withConfig(Layout)
+export default Layout
