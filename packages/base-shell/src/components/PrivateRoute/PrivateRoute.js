@@ -1,8 +1,9 @@
-import React from 'react'
-import withConfig from '../../providers/ConfigProvider/withConfig'
+import React, { useContext } from 'react'
+import ConfigContext from '../../providers/Config/Context'
 import { Route, Redirect } from 'react-router-dom'
 
-function PrivateRoute({ component: Component, appConfig, ...rest }) {
+function PrivateRoute({ component: Component, ...rest }) {
+  const { appConfig } = useContext(ConfigContext)
   const { auth } = appConfig || {}
   const { isAuthenticated = () => false, signInURL = '/signin' } = auth || {}
 
@@ -26,4 +27,4 @@ function PrivateRoute({ component: Component, appConfig, ...rest }) {
   )
 }
 
-export default withConfig(PrivateRoute)
+export default PrivateRoute

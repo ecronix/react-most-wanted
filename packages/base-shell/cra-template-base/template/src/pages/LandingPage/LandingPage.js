@@ -1,8 +1,9 @@
-import React from 'react'
-import withOnline from 'base-shell/lib/providers/OnlineProvider/withOnline'
+import React, { useContext } from 'react'
+import OnlineContext from 'base-shell/lib/providers/Online/Context'
 import { Link } from 'react-router-dom'
 
-const LandingPage = ({ isOnline }) => {
+const LandingPage = () => {
+  const isOnline = useContext(OnlineContext)
   return (
     <div>
       Landing Page
@@ -15,4 +16,4 @@ const LandingPage = ({ isOnline }) => {
   )
 }
 
-export default withOnline(LandingPage)
+export default LandingPage
