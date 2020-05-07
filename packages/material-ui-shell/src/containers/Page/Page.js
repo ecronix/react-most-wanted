@@ -93,7 +93,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({ children, setDrawerOpen, drawer, isOnline, intl }) => {
+const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) => {
+  let headerTitle = ''
+
+  if (typeof pageTitle === 'string' || pageTitle instanceof String) {
+    headerTitle = pageTitle
+  }
+
   const classes = useStyles()
   const theme = useTheme()
   const { open = false } = drawer
@@ -125,7 +131,7 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            {headerTitle}
           </Typography>
         </Toolbar>
       </AppBar>
