@@ -5,7 +5,10 @@ export default function ({ children }) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <div style={{ display: 'flex' }}>{children}</div>
+      <div style={{
+        display: 'flex', 
+        flexGrow: 1,
+      }}>{children}</div>
     </React.Fragment>
   )
 }
