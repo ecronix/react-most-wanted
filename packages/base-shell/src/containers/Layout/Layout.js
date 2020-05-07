@@ -9,24 +9,25 @@ import { getLocaleMessages } from '../../utils/locale'
 
 export const LayoutContent = () => {
   const { appConfig } = useContext(ConfigContext)
-  const { components, routes: appRoutes = [], containers, locale: confLocale } =
+  const { components, routes = [], containers, locale: confLocale } =
     appConfig || {}
   const { Menu, Loading } = components || {}
   const { locales } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
   const defaultRoutes = getDefaultRoutes(appConfig)
   const { locale } = useContext(LocaleContext)
-  const messages = {
-    ...getLocaleMessages(locale, locales),
-  }
 
   return (
-    <IntlProvider locale={locale} key={locale} messages={messages}>
+    <IntlProvider
+      locale={locale}
+      key={locale}
+      messages={getLocaleMessages(locale, locales)}
+    >
       <LayoutContainer>
         {Menu && <Menu />}
         <Suspense fallback={<Loading />}>
           <Switch>
-            {appRoutes.map((Route, i) => {
+            {routes.map((Route, i) => {
               return React.cloneElement(Route, { key: `@customRoutes/${i}` })
             })}
             {defaultRoutes.map((Route, i) => {
@@ -41,7 +42,7 @@ export const LayoutContent = () => {
 
 export const Layout = () => {
   const { appConfig } = useContext(ConfigContext)
-  const { locale } = appConfig
+  const { locale } = appConfig || {}
   const { defaultLocale, persistKey } = locale || {}
   return (
     <LocaleProvider defaultLocale={defaultLocale} persistKey={persistKey}>
