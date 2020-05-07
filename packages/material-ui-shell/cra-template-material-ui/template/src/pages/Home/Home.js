@@ -6,4 +6,3 @@ const HomePage = ({ intl }) => {
   return <Page pageTitle={intl.formatMessage({ id: 'home' })}>{intl.formatMessage({ id: 'home' })}</Page>
 }
 export default injectIntl(HomePage)
-  ``
