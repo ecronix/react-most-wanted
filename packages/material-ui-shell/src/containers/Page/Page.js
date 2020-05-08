@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    height: '100vh',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -79,7 +78,6 @@ const useStyles = makeStyles((theme) => ({
     height: offlineIndicatorHeight,
   },
   content: {
-
     flexGrow: 1,
     //padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
