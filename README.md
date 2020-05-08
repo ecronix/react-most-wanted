@@ -10,7 +10,7 @@ I like `short` README's so here we go :sunglasses:
 ## Coming soon...
 
 ### [base-shell](./packages/base-shell/)
-The basic react setup (routing, intl, async load, redux)
+The basic react setup (routing, intl, async load)
 
 ### [material-ui-shell](./packages/material-ui-shell/)
 [base-shell](./packages/base-shell/) +
