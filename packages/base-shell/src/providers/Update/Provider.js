@@ -10,6 +10,7 @@ class Provider extends Component {
   }
 
   checkUpdate = () => {
+    let updateAvailable = this.state.updateAvailable;
     if (isUpdateAwailable()) {
       this.setState({ updateAvailable, handleUpdate })
     } else {
