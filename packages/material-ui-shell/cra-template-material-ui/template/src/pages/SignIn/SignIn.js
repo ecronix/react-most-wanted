@@ -4,17 +4,19 @@ import { injectIntl } from 'react-intl'
 import { compose } from 'redux'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React, { useState } from 'react'
-import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import Home from '@material-ui/icons/Home'
+import Paper from '@material-ui/core/Paper'
+import { withStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    backgroundColor: theme.palette.background.default,
+    margin: 0,
+    height: `calc(100vh - 64px)`,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -23,16 +25,21 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}))
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: `100%`,
+  },
+})
 
-const SignIn = ({ history, intl }) => {
-  const classes = useStyles()
+const SignIn = ({ history, intl, classes }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -61,20 +68,8 @@ const SignIn = ({ history, intl }) => {
 
   return (
     <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
-      <div
-        style={{
-          position: 'absolute',
-          left: 0,
-          top: -350,
-          bottom: 0,
-          right: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        <div className={classes.paper}>
+     <Paper className={classes.paper} elevation={6}>
+        <div className={classes.container}>
           <Typography component="h1" variant="h5">
             {intl.formatMessage({ id: 'sign_in' })}
           </Typography>
@@ -116,9 +111,10 @@ const SignIn = ({ history, intl }) => {
             </Button>
           </form>
         </div>
-      </div>
+      </Paper>
     </Page>
   )
 }
 
-export default compose(injectIntl, withRouter)(SignIn)
+export default compose(injectIntl, withRouter, withStyles(styles, { withTheme: true }))(SignIn)
+
