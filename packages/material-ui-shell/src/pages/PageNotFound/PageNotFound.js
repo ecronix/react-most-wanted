@@ -18,12 +18,12 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
+    height: `100%`,
   },
   paper: {
     backgroundColor: theme.palette.background.default,
-    height: '100%',
     margin: 0,
+    height: `calc(100vh - 64px)`,
   },
   button: {
     marginTop: 20,

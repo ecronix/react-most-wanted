@@ -15,8 +15,8 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => ({
   paper: {
     backgroundColor: theme.palette.background.default,
-    height: '100%',
-    margin: 0
+    margin: 0,
+    height: `calc(100vh - 64px)`,
   },
   avatar: {
     margin: theme.spacing(1),
@@ -35,7 +35,7 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
+    height: `100%`,
   },
 })
 
