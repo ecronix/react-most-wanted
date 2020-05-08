@@ -28,7 +28,9 @@ const offlineIndicatorHeight = 12
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: '100%',
     display: 'flex',
+    flexDirection: 'column',
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -113,7 +115,7 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) =>
   }
 
   return (
-    <div>
+    <div className={classes.root}>
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
