@@ -10,8 +10,9 @@ const Layout = lazy(() => import('../../containers/Layout/Layout'))
 
 const App = ({ config: appConfig }) => {
   const config = { ...defaultConfig, ...appConfig }
-  const { pages, components, containers } = config
+  const { pages, components, containers, update } = config
   const { LandingPage = false } = pages || {}
+  const { checkInterval = 5000 } = update || {}
   const { Loading } = components || {}
   const { AppContainer = React.Fragment } = containers || {}
 
@@ -20,7 +21,7 @@ const App = ({ config: appConfig }) => {
       <AppContainer>
         <Router>
           <ConfigProvider appConfig={config}>
-            <UpdateProvider appConfig={config}>
+            <UpdateProvider checkInterval={checkInterval}>
               <OnlineProvider>
                 <A2HSProvider>
                   <Switch>

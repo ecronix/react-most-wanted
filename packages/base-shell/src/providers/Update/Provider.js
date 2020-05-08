@@ -1,44 +1,33 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import Context from './Context'
 import isUpdateAwailable, { handleUpdate } from '../../utils/updates'
 
-class Provider extends Component {
-  state = {
-    updateAvailable: false,
-    handleUpdate: false,
-  }
+const Provider = ({ children, checkInterval }) => {
+  const [updateAvailable, setUpdaeAvailable] = useState(false)
 
-  checkUpdate = () => {
-    let updateAvailable = this.state.updateAvailable;
+  const checkUpdate = () => {
     if (isUpdateAwailable()) {
-      this.setState({ updateAvailable, handleUpdate })
+      setUpdaeAvailable(true)
     } else {
-      this.setState({ updateAvailable: false, handleUpdate: false })
+      setUpdaeAvailable(false)
+      setTimeout(checkUpdate, checkInterval)
     }
   }
 
-  componentDidMount() {
-    const { appConfig } = this.props
-    const { update } = appConfig || {}
-    const { checkInterval = 5000 } = update || {}
+  useEffect(() => {
+    checkUpdate()
+  }, [checkUpdate])
 
-    this.checkUpdate()
-    setTimeout(this.checkUpdate, checkInterval)
-  }
-
-  render() {
-    const { appConfig, children } = this.props
-
-    return (
-      <Context.Provider value={{ ...this.state }}>{children}</Context.Provider>
-    )
-  }
+  return (
+    <Context.Provider value={{ updateAvailable, handleUpdate }}>
+      {children}
+    </Context.Provider>
+  )
 }
 
 Provider.propTypes = {
   children: PropTypes.any,
-  appConfig: PropTypes.object.isRequired,
 }
 
 export default Provider
