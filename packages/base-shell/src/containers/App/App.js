@@ -1,11 +1,10 @@
 import A2HSProvider from 'a2hs'
-import ConfigProvider from '../../providers/ConfigProvider/Provider'
-import OnlineProvider from '../../providers/OnlineProvider/Provider'
+import ConfigProvider from '../../providers/Config/Provider'
+import OnlineProvider from '../../providers/Online/Provider'
 import React, { Suspense, lazy } from 'react'
-import UpdateProvider from '../../providers/UpdateProvider/Provider'
+import UpdateProvider from '../../providers/Update/Provider'
 import defaultConfig from '../../config'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { combineReducers } from 'redux'
 
 const Layout = lazy(() => import('../../containers/Layout/Layout'))
 
