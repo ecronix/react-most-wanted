@@ -1,7 +1,6 @@
-import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { saveAuthorisation, isAuthorised } from '../../utils/auth'
-import { injectIntl } from 'react-intl'
-import { compose } from 'redux'
+import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
@@ -10,9 +9,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Home from '@material-ui/icons/Home'
 import Paper from '@material-ui/core/Paper'
-import { withStyles } from '@material-ui/core/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.background.default,
     margin: 0,
@@ -37,10 +35,12 @@ const styles = theme => ({
     justifyContent: 'center',
     height: `100%`,
   },
-})
+}))
 
-const SignIn = ({ history, intl, classes }) => {
-
+const SignIn = () => {
+  const classes = useStyles()
+  const intl = useIntl()
+  const history = useHistory()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -68,7 +68,7 @@ const SignIn = ({ history, intl, classes }) => {
 
   return (
     <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
-     <Paper className={classes.paper} elevation={6}>
+      <Paper className={classes.paper} elevation={6}>
         <div className={classes.container}>
           <Typography component="h1" variant="h5">
             {intl.formatMessage({ id: 'sign_in' })}
@@ -116,5 +116,4 @@ const SignIn = ({ history, intl, classes }) => {
   )
 }
 
-export default compose(injectIntl, withRouter, withStyles(styles, { withTheme: true }))(SignIn)
-
+export default SignIn
