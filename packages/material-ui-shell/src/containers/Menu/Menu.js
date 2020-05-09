@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -17,13 +18,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import drawerActions from '../../store/drawer/actions'
-import { withRouter } from 'react-router-dom'
-import { default as withAppConfigs } from 'base-shell/lib/providers/ConfigProvider/withConfig'
-import { injectIntl } from 'react-intl'
-
+import { useHistory, useRouteMatch } from 'react-router-dom'
+import ConfigContext from 'base-shell/lib/providers/Config/Context'
+import MenuContext from '../../providers/Menu/Context'
+import { useIntl } from 'react-intl'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const drawerWidth = 240
 
@@ -84,36 +83,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, match, history }) => {
+const Menu = () => {
+  const intl = useIntl()
+  const history = useHistory()
+  const match = useRouteMatch()
   const classes = useStyles()
   const theme = useTheme()
-  const { open = false } = drawer
+  const isDesktop = useMediaQuery('(min-width:600px)')
+
+  const {
+    isDesktopOpen,
+    isMobileOpen,
+    isMini,
+    setDesktopOpen,
+    setMobileOpen,
+  } = useContext(MenuContext)
+
+  const { appConfig } = useContext(ConfigContext)
 
   const menuItems = appConfig
     .getMenuItems({
       intl,
       auth: appConfig.auth,
-      //locale,
-      //updateLocale,
     })
     .filter((item) => {
       return item.visible !== false
     })
- 
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true)
-  }
 
   const handleDrawerClose = () => {
-    setDrawerOpen(false)
+    if (isDesktop) {
+      setDesktopOpen(false)
+    } else {
+      setMobileOpen(false)
+    }
   }
 
   const index = match ? match.path : '/'
 
   const onIndexChange = (event, index) => {
-   
     if (index !== undefined) {
-      setDrawerMobileOpen(false)
+      setMobileOpen(false)
     }
 
     if (index !== undefined && index !== Object(index)) {
@@ -121,7 +130,6 @@ const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, mat
     }
   }
 
-  const useMinified = drawer.useMinified && !drawer.open
   const getItem = (item, i) => {
     //delete item.visible
     if (item !== undefined) {
@@ -139,14 +147,14 @@ const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, mat
             button
             selected={index && index === item.value}
             key={i}
-            onClick={e => {
+            onClick={(e) => {
               onIndexChange(e, item.value)
               // this.handleNestedItemsClick(item)
               if (item.onClick) {
                 item.onClick()
               }
             }}
-            onMouseDown={e => {
+            onMouseDown={(e) => {
               if (e.button === 1) {
                 var win = window.open(`${item.value}`, '_blank')
                 win.focus()
@@ -155,7 +163,7 @@ const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, mat
           >
             {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
 
-            {!useMinified && <ListItemText primary={item.primaryText} />}
+            {!isMini && <ListItemText primary={item.primaryText} />}
 
             {/* {item.nestedItems && !useMinified && (
               <ListItemSecondaryAction
@@ -177,13 +185,22 @@ const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, mat
   }
 
   return (
-    <Drawer
+    <SwipeableDrawer
       className={classes.drawer}
-      variant="persistent"
+      variant={isDesktop ? 'persistent' : 'temporary'}
       anchor="left"
-      open={open}
+      open={isDesktop ? isDesktopOpen : isMobileOpen}
+      onClose={() => {
+        setMobileOpen(false)
+      }}
+      onOpen={() => {
+        setMobileOpen(true)
+      }}
       classes={{
         paper: classes.drawerPaper,
+      }}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile.
       }}
     >
       <div className={classes.drawerHeader}>
@@ -191,27 +208,22 @@ const Menu = ({ drawer, setDrawerOpen, setDrawerMobileOpen, appConfig, intl, mat
           {theme.direction === 'ltr' ? (
             <ChevronLeftIcon />
           ) : (
-              <ChevronRightIcon />
-            )}
+            <ChevronRightIcon />
+          )}
         </IconButton>
       </div>
       <Divider />
       <List value={index} onChange={onIndexChange}>
         {menuItems
-          .filter(item => {
+          .filter((item) => {
             return item.visible !== false
           })
           .map((item, i) => {
             return getItem(item, i)
           })}
       </List>
-    </Drawer>
+    </SwipeableDrawer>
   )
 }
 
-const mapStateToProps = (state) => {
-  const { drawer } = state
-  return { drawer }
-}
-
-export default compose(connect(mapStateToProps, { ...drawerActions }), injectIntl, withRouter, withAppConfigs)(Menu)
+export default Menu

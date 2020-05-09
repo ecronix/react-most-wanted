@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -17,11 +17,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import InboxIcon from '@material-ui/icons/MoveToInbox'
 import MailIcon from '@material-ui/icons/Mail'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { injectIntl } from 'react-intl'
-import drawerActions from '../../store/drawer/actions'
-import withOnline from 'base-shell/lib/providers/OnlineProvider/withOnline'
+import { useIntl } from 'react-intl'
+import OnlineContext from 'base-shell/lib/providers/Online/Context'
+import MenuContext from '../../providers/Menu/Context'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const drawerWidth = 240
 const offlineIndicatorHeight = 12
@@ -95,7 +94,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) => {
+const Page = ({ children, pageTitle }) => {
+  const isOnline = useContext(OnlineContext)
+  const isDesktop = useMediaQuery('(min-width:600px)')
+
+  const { isDesktopOpen, setDesktopOpen, setMobileOpen } = useContext(
+    MenuContext
+  )
+  const intl = useIntl()
   let headerTitle = ''
 
   if (typeof pageTitle === 'string' || pageTitle instanceof String) {
@@ -104,14 +110,13 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) =>
 
   const classes = useStyles()
   const theme = useTheme()
-  const { open = false } = drawer
 
   const handleDrawerOpen = () => {
-    setDrawerOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setDrawerOpen(false)
+    if (isDesktop) {
+      setDesktopOpen(true)
+    } else {
+      setMobileOpen(true)
+    }
   }
 
   return (
@@ -119,7 +124,7 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) =>
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: isDesktop && isDesktopOpen,
         })}
       >
         <Toolbar>
@@ -128,7 +133,10 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) =>
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(
+              classes.menuButton,
+              isDesktop && isDesktopOpen && classes.hide
+            )}
           >
             <MenuIcon />
           </IconButton>
@@ -142,7 +150,7 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) =>
 
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: open,
+          [classes.contentShift]: isDesktopOpen,
         })}
       >
         {!isOnline && (
@@ -164,13 +172,4 @@ const Page = ({ children, setDrawerOpen, drawer, isOnline, intl, pageTitle }) =>
   )
 }
 
-const mapStateToProps = (state) => {
-  const { drawer } = state
-  return { drawer }
-}
-
-export default compose(
-  connect(mapStateToProps, { ...drawerActions }),
-  withOnline,
-  injectIntl
-)(Page)
+export default Page
