@@ -28,7 +28,6 @@ const Provider = ({ children, persistKey = 'menu' }) => {
         isDesktopOpen,
         isMobileOpen,
         setDesktopOpen,
-        setDesktopOpen,
         setMobileOpen,
         isMini,
         setMini,
