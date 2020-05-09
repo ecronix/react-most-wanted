@@ -12,7 +12,7 @@ const Provider = ({ children, persistKey = 'menu' }) => {
     if (persistDesktopOpen) {
       setDesktopOpen(persistDesktopOpen === 'true')
     }
-  }, [])
+  }, [persistKey])
 
   useEffect(() => {
     try {
@@ -20,14 +20,13 @@ const Provider = ({ children, persistKey = 'menu' }) => {
     } catch (error) {
       console.warn(error)
     }
-  }, [isDesktopOpen])
+  }, [isDesktopOpen,persistKey])
 
   return (
     <Context.Provider
       value={{
         isDesktopOpen,
         isMobileOpen,
-        setDesktopOpen,
         setDesktopOpen,
         setMobileOpen,
         isMini,

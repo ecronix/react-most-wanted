@@ -14,7 +14,7 @@ const Provider = ({
     if (persistLocale) {
       setLocale(persistLocale)
     }
-  }, [])
+  }, [persistKey])
 
   useEffect(() => {
     try {
@@ -22,7 +22,7 @@ const Provider = ({
     } catch (error) {
       console.warn(error)
     }
-  }, [locale])
+  }, [locale,persistKey])
 
   return (
     <Context.Provider value={{ locale, setLocale }}>
