@@ -7,17 +7,30 @@
 
 I like `short` README's so here we go :sunglasses:
 
-## Coming soon...
+## Idea and concept
+
+With [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) (CRA) we can start easy with a new react project but we still need to do some tricky parts to make it work. For developers who are starting with react it's not clear what to do next and for the experienced it's anoing to repeat for every project the basic setup and configuration like the routing, intl, auth and other main parts of most applications. The latest CRA versions give us the opportunity to create our own custom templates. Templates are nice but not the solution that solves our problems. We need a tool from witch we can start out very easy and get updates during time for bugfixes and API changes of the dependencies. Sounds like a framework? I don't think that there is a need for a react framework. Everyone can make his project up and running in short time. 
+
+This project want's to provide templates for new projects that can be updated during usage but won't update so frequently like frameworks. We can start with each of them using a simple CLI command. They can be configured over configs and most parts can be replaced with custom ones. To cover most use cases this project has multiple templates:
 
 ### [base-shell](./packages/base-shell/)
-The basic react setup (routing, intl, async load)
+The basic react setup (routing, intl, async load). It has an optimised `routing` where the initial load page is completely separated from rest of the routing to ensure best performance for applications that need to scale. Simple and easy `intl` based on `react-intl` and async load using the new react `suspense` API. The resulting template is very basic and has not more than basic `html`inside. To start a new project with this template just run this command:
+
+```js
+npx create-react-app my-app --template base
+cd my-app
+npm start
+```
 
 ### [material-ui-shell](./packages/material-ui-shell/)
-[base-shell](./packages/base-shell/) +
-- [Material-UI](https://material-ui.com) frontend framework
-- Responsive menu
-- PWA features
-- Demo examples
+Includes all features from `base-shell` expanded with [Material-UI](https://material-ui.com). It has some basic pages like `Page not found`, a responsive `menu` and other configurations for `Material-UI`. To start a new project with this template just run this command:
+
+```js
+npx create-react-app my-app --template material-ui
+cd my-app
+npm start
+```
+
 
 ### [rmw-shell](./packages/rmw-shell)
 [base-shell](./packages/base-shell/) + [material-ui-shell](https://material-ui.com) +
