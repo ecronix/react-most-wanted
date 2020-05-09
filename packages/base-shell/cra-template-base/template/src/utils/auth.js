@@ -17,6 +17,7 @@ export function logout() {
         try {
             const auth = JSON.parse(localStorage.getItem(localStorageAuthKey))
             auth.isAuthorised = false;
+            auth.displayName = '';
             localStorage.setItem(localStorageAuthKey, JSON.stringify(auth))
         } catch (ex) {
             console.log(ex)
