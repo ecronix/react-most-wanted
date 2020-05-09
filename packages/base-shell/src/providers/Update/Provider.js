@@ -15,9 +15,7 @@ const Provider = ({ children, checkInterval }) => {
     }
   }
 
-  useEffect(() => {
-    checkUpdate()
-  }, [checkUpdate])
+  useEffect(checkUpdate, [checkUpdate])
 
   return (
     <Context.Provider value={{ updateAvailable, handleUpdate }}>
