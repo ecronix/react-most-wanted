@@ -69,14 +69,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({ children, pageTitle, width, onBackClick,isLoading }) => {
+const Page = ({ children, pageTitle, width, onBackClick, isLoading }) => {
   const isOnline = useContext(OnlineContext)
-  const theme = useTheme();
+  const theme = useTheme()
 
-  const { isDesktopOpen, setDesktopOpen, isMobileOpen, setMobileOpen,  isMini,
-    setMini } = useContext(
-    MenuContext
-  )
+  const {
+    isDesktop,
+    isDesktopOpen,
+    setDesktopOpen,
+    isMobileOpen,
+    setMobileOpen,
+    isMini,
+    setMini,
+  } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''
 
@@ -85,20 +90,17 @@ const Page = ({ children, pageTitle, width, onBackClick,isLoading }) => {
   }
 
   const classes = useStyles()
-  const smDown = isWidthDown('sm', width)
   const handleDrawerMenuClick = () => {
-    const _smDown = isWidthDown('sm', width)
     if (!isDesktopOpen) {
-      setMini(false);
-      setDesktopOpen(true);
-      if (_smDown) {
+      setMini(false)
+      setDesktopOpen(true)
+      if (!isDesktop) {
         setMobileOpen(!isMobileOpen)
       }
     } else {
       setMobileOpen(!isMobileOpen)
     }
   }
-
 
   return (
     <div className={classes.root}>
@@ -118,7 +120,7 @@ const Page = ({ children, pageTitle, width, onBackClick,isLoading }) => {
             edge="start"
             className={clsx(
               classes.menuButton,
-              isDesktopOpen && !smDown && classes.hide,
+              isDesktopOpen && isDesktop && classes.hide,
               onBackClick && classes.hide
             )}
           >
@@ -128,10 +130,7 @@ const Page = ({ children, pageTitle, width, onBackClick,isLoading }) => {
             color="inherit"
             aria-label="open drawer"
             onClick={onBackClick}
-            className={clsx(
-              classes.menuButton,
-              !onBackClick && classes.hide
-            )}
+            className={clsx(classes.menuButton, !onBackClick && classes.hide)}
           >
             <ChevronLeft />
           </IconButton>
@@ -172,16 +171,16 @@ const Page = ({ children, pageTitle, width, onBackClick,isLoading }) => {
           }}
         >
           <Typography variant="caption" color="textSecondary" noWrap>
-          {intl.formatMessage({
-                  id: 'offline',
-                  defaultMessage: 'Offline',
-                })}
+            {intl.formatMessage({
+              id: 'offline',
+              defaultMessage: 'Offline',
+            })}
           </Typography>
         </div>
       )}
-            <main className={classes.content}>{children}</main>
+      <main className={classes.content}>{children}</main>
     </div>
   )
 }
 
-export default withWidth()(Page);
+export default withWidth()(Page)
