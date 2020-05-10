@@ -27,6 +27,20 @@ export function logout() {
     }
 }
 
+export function getAuth() {
+    try {
+        if (typeof Storage !== 'undefined') {
+            const auth = JSON.parse(localStorage.getItem(localStorageAuthKey))
+            if (auth === null) { auth = {}; auth.isAuthorised = false }
+            return auth;
+        } else {
+            return false
+        }
+    } catch (ex) {
+        return false
+    }
+}
+
 export function isAuthorised() {
     try {
         if (typeof Storage !== 'undefined') {
