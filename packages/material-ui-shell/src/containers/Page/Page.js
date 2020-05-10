@@ -9,7 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { useIntl } from 'react-intl'
 import OnlineContext from 'base-shell/lib/providers/Online/Context'
 import MenuContext from '../../providers/Menu/Context'
-import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 
@@ -69,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({ children, pageTitle, width, onBackClick, isLoading }) => {
+const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
   const isOnline = useContext(OnlineContext)
   const theme = useTheme()
 
@@ -105,9 +104,9 @@ const Page = ({ children, pageTitle, width, onBackClick, isLoading }) => {
   return (
     <div className={classes.root}>
       <AppBar
-        position={width !== 'sm' && width !== 'xs' ? 'absolute' : undefined}
+        position={isDesktop ? 'absolute' : undefined}
         className={
-          width !== 'sm' && width !== 'xs'
+          isDesktop
             ? clsx(classes.appBar, isDesktopOpen && classes.appBarShift)
             : classes.appBar
         }
@@ -183,4 +182,4 @@ const Page = ({ children, pageTitle, width, onBackClick, isLoading }) => {
   )
 }
 
-export default withWidth()(Page)
+export default Page
