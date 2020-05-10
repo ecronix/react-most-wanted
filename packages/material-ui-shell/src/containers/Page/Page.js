@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import clsx from 'clsx'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -9,7 +9,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { useIntl } from 'react-intl'
 import OnlineContext from 'base-shell/lib/providers/Online/Context'
 import MenuContext from '../../providers/Menu/Context'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
 
 const drawerWidth = 240
 const offlineIndicatorHeight = 12
@@ -21,39 +23,32 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    maxHeight: 64,
   },
   appBarShift: {
+    //marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginLeft: -12,
+    //marginRight: 12
   },
   hide: {
     display: 'none',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
+  toolbar: {
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+    ...theme.mixins.toolbar,
   },
   offlineIndicator: {
     position: 'absolute',
@@ -66,28 +61,20 @@ const useStyles = makeStyles((theme) => ({
     height: offlineIndicatorHeight,
   },
   content: {
-    flexGrow: 1,
-    //padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
+    flex: 1,
+    backgroundColor: theme.palette.background.default,
   },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
+  grow: {
+    flex: '1 1 auto',
   },
 }))
 
-const Page = ({ children, pageTitle }) => {
+const Page = ({ children, pageTitle, width, onBackClick,isLoading }) => {
   const isOnline = useContext(OnlineContext)
-  const isDesktop = useMediaQuery('(min-width:600px)')
+  const theme = useTheme();
 
-  const { isDesktopOpen, setDesktopOpen, setMobileOpen } = useContext(
+  const { isDesktopOpen, setDesktopOpen, isMobileOpen, setMobileOpen,  isMini,
+    setMini } = useContext(
     MenuContext
   )
   const intl = useIntl()
@@ -98,50 +85,70 @@ const Page = ({ children, pageTitle }) => {
   }
 
   const classes = useStyles()
-
-  const handleDrawerOpen = () => {
-    if (isDesktop) {
-      setDesktopOpen(true)
+  const smDown = isWidthDown('sm', width)
+  const handleDrawerMenuClick = () => {
+    const _smDown = isWidthDown('sm', width)
+    if (!isDesktopOpen) {
+      setMini(false);
+      setDesktopOpen(true);
+      if (_smDown) {
+        setMobileOpen(!isMobileOpen)
+      }
     } else {
-      setMobileOpen(true)
+      setMobileOpen(!isMobileOpen)
     }
   }
+
 
   return (
     <div className={classes.root}>
       <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: isDesktop && isDesktopOpen,
-        })}
+        position={width !== 'sm' && width !== 'xs' ? 'absolute' : undefined}
+        className={
+          width !== 'sm' && width !== 'xs'
+            ? clsx(classes.appBar, isDesktopOpen && classes.appBarShift)
+            : classes.appBar
+        }
       >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={handleDrawerMenuClick}
             edge="start"
             className={clsx(
               classes.menuButton,
-              isDesktop && isDesktopOpen && classes.hide
+              isDesktopOpen && !smDown && classes.hide,
+              onBackClick && classes.hide
             )}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={onBackClick}
+            className={clsx(
+              classes.menuButton,
+              !onBackClick && classes.hide
+            )}
+          >
+            <ChevronLeft />
+          </IconButton>
+          {!onBackClick && isDesktopOpen && false && (
+            <div style={{ marginRight: 32 }} />
+          )}
+
+          <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
           </Typography>
+          <div className={classes.grow} />
         </Toolbar>
       </AppBar>
 
-      <div className={classes.drawerHeader} />
-
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: isDesktopOpen,
-        })}
-      >
-        {!isOnline && (
+      <div className={classes.toolbar} />
+      {isLoading && <LinearProgress />}
+      {/* {!isOnline && (
           <React.Fragment>
             <div className={classes.offlineIndicator}>
               <Typography variant="caption" noWrap>
@@ -153,11 +160,28 @@ const Page = ({ children, pageTitle }) => {
             </div>
             <div style={{ height: offlineIndicatorHeight }}></div>
           </React.Fragment>
-        )}
-        {children}
-      </main>
+        )} */}
+      {!isOnline && (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            height: 15,
+            backgroundColor: theme.palette.secondary.main,
+          }}
+        >
+          <Typography variant="caption" color="textSecondary" noWrap>
+          {intl.formatMessage({
+                  id: 'offline',
+                  defaultMessage: 'Offline',
+                })}
+          </Typography>
+        </div>
+      )}
+            <main className={classes.content}>{children}</main>
     </div>
   )
 }
 
-export default Page
+export default withWidth()(Page);
