@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl'
 
 const messages = defineMessages({
+  app_name: 'React Meist Gesucht',
   sign_in: 'Anmelden',
   sign_out: 'Abmelden',
   username: 'Nutzername',
@@ -8,6 +9,7 @@ const messages = defineMessages({
   about: 'Über',
   home: 'Startseite',
   page_not_found: 'Seite nicht gefunden',
+  settings: 'Einstellungen',
   language: 'Sprache',
   en: 'Englisch',
   de: 'Deutsch',

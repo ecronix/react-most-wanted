@@ -1,4 +1,4 @@
-// import allLocales from './locales'
+ import allLocales from './locales'
 // import allThemes from './themes'
 import React from 'react'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
@@ -6,12 +6,28 @@ import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LockIcon from '@material-ui/icons/Lock'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { logout } from '../utils/auth'
-
+import LanguageIcon from '@material-ui/icons/Language'
+import SettingsIcon from '@material-ui/icons/SettingsApplications'
 const getMenuItems = props => {
   const {
     auth,
-    intl
+    intl,
+    updateLocale,
+    locale,
   } = props
+
+  
+  const localeItems = allLocales.map(l => {
+    return {
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: l.locale }),
+      onClick: () => {
+        updateLocale(l.locale)
+      },
+      leftIcon: <LanguageIcon />
+    }
+  })
 
   const isAuthorised = auth.isAuthenticated();
 
@@ -34,6 +50,20 @@ const getMenuItems = props => {
       visible: true,
       primaryText: intl.formatMessage({ id: 'about' }),
       leftIcon: <InfoOutlined />,
+    },
+    {
+      primaryText: intl.formatMessage({ id: 'settings' }),
+      primaryTogglesNestedList: true,
+      leftIcon: <SettingsIcon />,
+      nestedItems: [
+        {
+          primaryText: intl.formatMessage({ id: 'language' }),
+          secondaryText: intl.formatMessage({ id: locale }),
+          primaryTogglesNestedList: true,
+          leftIcon: <LanguageIcon />,
+          nestedItems: localeItems
+        }
+      ]
     },
   ]
 }
