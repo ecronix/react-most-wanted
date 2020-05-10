@@ -5,13 +5,12 @@ import MenuProvider from '../../providers/Menu/Provider'
 export default function ({ children }) {
   return (
     <MenuProvider>
-      <CssBaseline />
       <div
         style={{
-          display: 'flex',
-          flexGrow: 1,
+          display: 'flex'
         }}
       >
+        <CssBaseline />
         {children}
       </div>
     </MenuProvider>
