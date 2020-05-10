@@ -119,8 +119,7 @@ const MenuHeader = ({ width }) => {
                 !authData.photoURL && (
                   <ListItemAvatar>
                     <Avatar style={{ marginLeft: -7, marginTop: 3 }}>
-                      {' '}
-                      <PersonIcon />{' '}
+                      {' '}   {authData.displayName ? authData.displayName[0].toUpperCase() : <PersonIcon />}  {' '}
                     </Avatar>
                   </ListItemAvatar>
                 )}
