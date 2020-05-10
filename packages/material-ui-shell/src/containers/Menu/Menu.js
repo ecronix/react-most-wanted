@@ -13,12 +13,9 @@ const Menu = () => {
   const history = useHistory()
   const match = useRouteMatch()
 
-  const {
-    isDesktopOpen,
-    isMini,
-    setDesktopOpen,
-    setMobileOpen,
-  } = useContext(MenuContext)
+  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen } = useContext(
+    MenuContext
+  )
 
   const { appConfig } = useContext(ConfigContext)
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
@@ -33,7 +30,6 @@ const Menu = () => {
     .filter((item) => {
       return item.visible !== false
     })
-
 
   const index = match ? match.path : '/'
 
@@ -63,15 +59,15 @@ const Menu = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100%'
+          height: '100%',
         }}
       >
         <SelectableMenuList
-            items={menuItems}
-            onIndexChange={handleChange}
-            index={index}
-            useMinified={isMini && !isDesktopOpen}
-          />
+          items={menuItems}
+          onIndexChange={handleChange}
+          index={index}
+          useMinified={isMini && !isDesktopOpen}
+        />
       </div>
     </ResponsiveMenu>
   )

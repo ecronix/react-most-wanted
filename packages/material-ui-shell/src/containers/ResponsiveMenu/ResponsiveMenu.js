@@ -3,7 +3,6 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import MenuContext from '../../providers/Menu/Context'
 import clsx from 'clsx'
-import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 import PropTypes from 'prop-types'
 
 const drawerWidth = 240
@@ -49,19 +48,17 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(1) * 9,
     },
   },
-
   hide: {
     display: 'none',
   },
 }))
 
-
 const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
   const theme = useTheme()
-  const smDown = isWidthDown('sm', width)
 
   const {
+    isDesktop,
     isDesktopOpen,
     isMobileOpen,
     setDesktopOpen,
@@ -73,35 +70,27 @@ const ResponsiveMenu = ({ children, width }) => {
     setMobileOpen(!isMobileOpen)
   }
 
-  const isWidthDesktop = width !== 'sm' && width !== 'xs';
- 
-  useEffect(() => {
-   if(isWidthDesktop){
-    setDesktopOpen(true);
-   }
-  }, [isWidthDesktop])
-
-
   return (
     <div style={{ boxSizing: 'content-box' }}>
       <SwipeableDrawer
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
-        variant={smDown ? 'temporary' : 'permanent'}
+        variant={isDesktop ? 'permanent' : 'temporary'}
         // className={classes.drawer}
         onClose={handleDrawerToggle}
         anchor={
-          smDown ? undefined : theme.direction === 'rtl' ? 'right' : 'left'
+          !isDesktop ? undefined : theme.direction === 'rtl' ? 'right' : 'left'
         }
         classes={{
-          paper: smDown
-            ? classes.drawerPaper
-            : clsx(classes.drawerPaperOpen,
-              !isDesktopOpen && classes.drawerPaperClose
-              , !isMini && !isDesktopOpen && classes.hide
-            ),
+          paper: isDesktop
+            ? clsx(
+                classes.drawerPaperOpen,
+                !isDesktopOpen && classes.drawerPaperClose,
+                !isMini && !isDesktopOpen && classes.hide
+              )
+            : classes.drawerPaper,
         }}
-        open={smDown ? isMobileOpen : isDesktopOpen}
+        open={isDesktop ? isDesktopOpen : isMobileOpen}
         onOpen={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
@@ -109,11 +98,11 @@ const ResponsiveMenu = ({ children, width }) => {
       >
         {children}
       </SwipeableDrawer>
-    </div >
+    </div>
   )
 }
 ResponsiveMenu.propTypes = {
   children: PropTypes.any,
 }
 
-export default withWidth()(ResponsiveMenu);
+export default ResponsiveMenu
