@@ -1,13 +1,15 @@
-import React, { Suspense, useContext } from 'react'
+import React, { Suspense, useContext, useEffect, useState } from 'react'
 import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
 import LocaleContext from '../../providers/Locale/Context'
 import ConfigContext from '../../providers/Config/Context'
 import LocaleProvider from '../../providers/Locale/Provider'
 import { IntlProvider } from 'react-intl'
 import { Switch } from 'react-router-dom'
-import { getLocaleMessages } from '../../utils/locale'
+import { getLocaleMessages, loadLocalePolyfill } from '../../utils/locale'
+import '@formatjs/intl-relativetimeformat/polyfill'
 
 export const LayoutContent = () => {
+  const [messages, setMessages] = useState([])
   const { appConfig } = useContext(ConfigContext)
   const { components, routes = [], containers, locale: confLocale } =
     appConfig || {}
@@ -17,12 +19,22 @@ export const LayoutContent = () => {
   const defaultRoutes = getDefaultRoutes(appConfig)
   const { locale } = useContext(LocaleContext)
 
+  useEffect(() => {
+    import(`@formatjs/intl-relativetimeformat/dist/locale-data/${locale}`)
+    loadLocalePolyfill(locale)
+  }, [locale])
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { default: messages } = await getLocaleMessages(locale, locales)
+      setMessages(messages)
+    }
+
+    fetchMessages()
+  }, [locales, locale])
+
   return (
-    <IntlProvider
-      locale={locale}
-      key={locale}
-      messages={getLocaleMessages(locale, locales)}
-    >
+    <IntlProvider locale={locale} key={locale} messages={messages}>
       <LayoutContainer>
         {Menu && <Menu />}
         <Suspense fallback={<Loading />}>

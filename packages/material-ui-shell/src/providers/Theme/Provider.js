@@ -3,10 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
-const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
-  console.log('appConfig', appConfig)
-  const { menu } = appConfig || {}
-  const { useMini } = menu || {}
+const Provider = ({ children, persistKey = 'menu' }) => {
   const [isDesktopOpen, setDesktopOpen] = useState(true)
   const [isMobileOpen, setMobileOpen] = useState(false)
   const [useMiniMode, setMiniMode] = useState(true)
@@ -30,7 +27,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     if (persistMiniMode) {
       setMiniMode(persistMiniMode === 'true')
     }
-  }, [isDesktopKey, isMiniKey, isUseMiniModeKey])
+  }, [isDesktopKey, isMiniKey,isUseMiniModeKey])
 
   useEffect(() => {
     try {
@@ -51,7 +48,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   useEffect(() => {
     try {
       localStorage.setItem(isUseMiniModeKey, JSON.stringify(useMiniMode))
-      if (!useMiniMode) {
+      if(!useMiniMode){
         setMini(useMiniMode)
       }
     } catch (error) {
@@ -72,7 +69,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
         isMini,
         setMini,
         useMiniMode,
-        setMiniMode,
+        setMiniMode
       }}
     >
       {children}

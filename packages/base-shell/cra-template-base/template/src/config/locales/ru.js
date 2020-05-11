@@ -1,6 +1,4 @@
-import { defineMessages } from 'react-intl'
-
-const messages = defineMessages({
+const messages = {
   sign_in: 'Вход',
   sign_out: 'Выход',
   username: 'Имя пользователя',
@@ -12,7 +10,7 @@ const messages = defineMessages({
   language: 'Язык',
   en: 'English',
   de: 'Deutsch',
-  ru: 'Русский'
-})
+  ru: 'Русский',
+}
 
 export default messages
