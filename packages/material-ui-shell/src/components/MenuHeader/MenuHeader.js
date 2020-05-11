@@ -28,6 +28,14 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     color: theme.palette.primary.contrastText,
   },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    //justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
 }))
 
 const MenuHeader = () => {
@@ -46,6 +54,9 @@ const MenuHeader = () => {
 
   return (
     <Paper square={true} className={classes.paper}>
+      {(isMini || !authData.isAuthorised) && (
+        <div className={classes.toolbar}></div>
+      )}
       {authData.isAuthorised && (
         <List>
           <ListItem>
@@ -55,18 +66,14 @@ const MenuHeader = () => {
               </ListItemAvatar>
             )}
             {!authData.photoURL && (
-              // <ListItemAvatar>
-              //   <Avatar>
-              //     {' '}
-              //     <PersonIcon />{' '}
-              //   </Avatar>
-              // </ListItemAvatar>
-              <ListItemText
-                classes={{ primary: classes.listItem }}
-                primary={intl.formatMessage({ id: 'app_name' })}
-              />
+              <ListItemAvatar>
+                <Avatar>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
             )}
-            {isDesktop && (
+
+            {isDesktop && !isMini && (
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
@@ -77,7 +84,7 @@ const MenuHeader = () => {
                   <ChromeReaderMode classes={{ root: classes.icon }} />
                 </IconButton>
                 <IconButton
-                  className={classes.button}
+                  color="inherit"
                   onClick={() => {
                     setDesktopOpen(false)
                   }}
@@ -108,34 +115,23 @@ const MenuHeader = () => {
               </ListItemAvatar>
             )}
 
-            {!isDesktopOpen && isDesktop && !authData.photoURL && (
-              <ListItemAvatar>
-                <Avatar style={{ marginLeft: -7, marginTop: 3 }}>
-                  {' '}
-                  {authData.displayName ? (
-                    authData.displayName[0].toUpperCase()
-                  ) : (
-                    <PersonIcon />
-                  )}{' '}
-                </Avatar>
-              </ListItemAvatar>
+            {!isMini && (
+              <ListItemText
+                classes={{
+                  primary: classes.listItem,
+                  secondary: classes.listItem,
+                }}
+                style={{
+                  marginLeft:
+                    !isDesktopOpen && isDesktop && authData.photoURL
+                      ? 7
+                      : undefined,
+                }}
+                primary={authData.displayName}
+                // secondary={authData.email}
+              />
             )}
-
-            <ListItemText
-              classes={{
-                primary: classes.listItem,
-                secondary: classes.listItem,
-              }}
-              style={{
-                marginLeft:
-                  !isDesktopOpen && isDesktop && authData.photoURL
-                    ? 7
-                    : undefined,
-              }}
-              primary={authData.displayName}
-              // secondary={authData.email}
-            />
-            {isDesktopOpen && (
+            {isDesktopOpen && false && (
               <ListItemSecondaryAction
               // onClick={() => {
               //   setDialogIsOpen('auth_menu', !dialogs.auth_menu)
@@ -148,34 +144,6 @@ const MenuHeader = () => {
                     {!dialogs.auth_menu && (
                       <ArroWDropDownIcon classes={{ root: classes.icon }} />
                     )} */}
-                </IconButton>
-              </ListItemSecondaryAction>
-            )}
-          </ListItem>
-        </List>
-      )}
-
-      {!authData.isAuthorised && (
-        <List>
-          <ListItem>
-            <ListItemText
-              classes={{ primary: classes.listItem }}
-              primary={intl.formatMessage({ id: 'app_name' })}
-            />
-            {isDesktop && (
-              <ListItemSecondaryAction>
-                <IconButton
-                  className={classes.button}
-                  onClick={() => {
-                    setDesktopOpen(false)
-                  }}
-                >
-                  {theme.direction === 'rtl' && (
-                    <ChevronRight classes={{ root: classes.icon }} />
-                  )}
-                  {theme.direction !== 'rtl' && (
-                    <ChevronLeft classes={{ root: classes.icon }} />
-                  )}
                 </IconButton>
               </ListItemSecondaryAction>
             )}
