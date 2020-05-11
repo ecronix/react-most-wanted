@@ -14,7 +14,7 @@ const Menu = () => {
   const history = useHistory()
   const match = useRouteMatch()
   const menuContext = useContext(MenuContext)
-  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen } = menuContext
+  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode } = menuContext
   const { appConfig } = useContext(ConfigContext)
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
   const { menu } = appConfig || {}
@@ -56,6 +56,7 @@ const Menu = () => {
             items={menuItems}
             onIndexChange={handleChange}
             index={index}
+            key={useMiniMode}
             useMinified={isMini && !isDesktopOpen}
           />
         </Scrollbar>

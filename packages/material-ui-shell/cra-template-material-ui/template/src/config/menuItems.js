@@ -8,11 +8,14 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { logout } from '../utils/auth'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
+
 
 const getMenuItems = (props) => {
   const { appConfig, intl, updateLocale, locale, menuContext } = props
   const { auth } = appConfig || {}
-  const { isAuthMenuOpen } = menuContext
+  const { isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -27,8 +30,8 @@ const getMenuItems = (props) => {
   })
 
   const isAuthorised = auth.isAuthenticated()
-
-  if (isAuthMenuOpen) {
+  
+  if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
         value: '/signin',
@@ -66,9 +69,17 @@ const getMenuItems = (props) => {
           leftIcon: <LanguageIcon />,
           nestedItems: localeItems,
         },
+        {
+          onClick: () => {
+            setMiniMode(!useMiniMode)
+          },
+          primaryText: intl.formatMessage({
+            id: 'menu_mini_mode',
+          }),
+          leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+        },
       ],
     },
   ]
 }
-
 export default getMenuItems
