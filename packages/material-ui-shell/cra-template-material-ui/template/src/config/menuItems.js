@@ -1,23 +1,20 @@
- import allLocales from './locales'
+import allLocales from './locales'
 // import allThemes from './themes'
 import React from 'react'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
 import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LockIcon from '@material-ui/icons/Lock'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { logout } from '../utils/auth'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
-const getMenuItems = props => {
-  const {
-    auth,
-    intl,
-    updateLocale,
-    locale,
-  } = props
 
-  
-  const localeItems = allLocales.map(l => {
+const getMenuItems = (props) => {
+  const { appConfig, intl, updateLocale, locale, menuContext } = props
+  const { auth } = appConfig || {}
+  const { isAuthMenuOpen } = menuContext
+
+  const localeItems = allLocales.map((l) => {
     return {
       value: undefined,
       visible: true,
@@ -25,20 +22,26 @@ const getMenuItems = props => {
       onClick: () => {
         updateLocale(l.locale)
       },
-      leftIcon: <LanguageIcon />
+      leftIcon: <LanguageIcon />,
     }
   })
 
-  const isAuthorised = auth.isAuthenticated();
+  const isAuthorised = auth.isAuthenticated()
 
+  if (isAuthMenuOpen) {
+    return [
+      {
+        value: '/signin',
+        onClick: isAuthorised ? logout : () => {},
+        visible: true,
+        primaryText: isAuthorised
+          ? intl.formatMessage({ id: 'sign_out' })
+          : intl.formatMessage({ id: 'sign_in' }),
+        leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
+      },
+    ]
+  }
   return [
-    {
-      value: '/signin',
-      onClick: isAuthorised ? logout : () => { },
-      visible: true,
-      primaryText: isAuthorised ? intl.formatMessage({ id: 'sign_out' }) : intl.formatMessage({ id: 'sign_in' }),
-      leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
-    },
     {
       value: '/home',
       visible: isAuthorised,
@@ -61,9 +64,9 @@ const getMenuItems = props => {
           secondaryText: intl.formatMessage({ id: locale }),
           primaryTogglesNestedList: true,
           leftIcon: <LanguageIcon />,
-          nestedItems: localeItems
-        }
-      ]
+          nestedItems: localeItems,
+        },
+      ],
     },
   ]
 }

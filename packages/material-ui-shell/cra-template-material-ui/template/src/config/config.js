@@ -9,7 +9,9 @@ import parseLanguages from 'base-shell/lib/utils/locale'
 const config = {
   auth: {
     isAuthenticated: isAuthorised,
-    getData: () => { return getAuth()},
+    getData: () => {
+      return getAuth()
+    },
     signInURL: '/signin',
   },
   routes,
@@ -17,7 +19,9 @@ const config = {
     locales,
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
   },
-  getMenuItems,
+  menu: {
+    getMenuItems,
+  },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
     PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
