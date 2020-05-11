@@ -14,6 +14,8 @@ const messages = defineMessages({
   en: 'English',
   de: 'German',
   ru: 'Russian',
+  menu: 'Menu',
+  menu_mini_mode: 'Mini menu',
   offline: 'Offline',
 })
 
