@@ -1,4 +1,4 @@
- import allLocales from './locales'
+import allLocales from './locales'
 // import allThemes from './themes'
 import React from 'react'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
@@ -8,15 +8,20 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { logout } from '../utils/auth'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
+import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
+
 const getMenuItems = props => {
   const {
     auth,
     intl,
     updateLocale,
     locale,
+    switchMenuMiniMode,
+    useMenuMiniMode
   } = props
 
-  
+
   const localeItems = allLocales.map(l => {
     return {
       value: undefined,
@@ -62,7 +67,16 @@ const getMenuItems = props => {
           primaryTogglesNestedList: true,
           leftIcon: <LanguageIcon />,
           nestedItems: localeItems
-        }
+        },
+        {
+          onClick: () => {
+            switchMenuMiniMode(!useMenuMiniMode)
+          },
+          primaryText: intl.formatMessage({
+            id: 'menu_mini_mode',
+          }),
+          leftIcon: useMenuMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+        },
       ]
     },
   ]

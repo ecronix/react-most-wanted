@@ -13,9 +13,10 @@ const Menu = () => {
   const history = useHistory()
   const match = useRouteMatch()
 
-  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen } = useContext(
-    MenuContext
-  )
+  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode,
+    setMiniMode } = useContext(
+      MenuContext
+    )
 
   const { appConfig } = useContext(ConfigContext)
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
@@ -26,6 +27,8 @@ const Menu = () => {
       auth: appConfig.auth,
       locale,
       updateLocale: setLocale,
+      useMenuMiniMode: useMiniMode,
+      switchMenuMiniMode: setMiniMode
     })
     .filter((item) => {
       return item.visible !== false
@@ -63,6 +66,7 @@ const Menu = () => {
         }}
       >
         <SelectableMenuList
+          key={useMiniMode}
           items={menuItems}
           onIndexChange={handleChange}
           index={index}
