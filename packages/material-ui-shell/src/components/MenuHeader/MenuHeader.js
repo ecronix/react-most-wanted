@@ -46,7 +46,6 @@ const MenuHeader = () => {
   const theme = useTheme()
   const { appConfig } = useContext(ConfigContext)
   const { menu } = appConfig || {}
-  const { useMini } = menu || {}
   const authData = appConfig.auth.getData()
   const classes = useStyles()
   const {
@@ -57,7 +56,7 @@ const MenuHeader = () => {
     setMini,
     isAuthMenuOpen,
     setAuthMenuOpen,
-    useMiniMode
+    useMiniMode,
   } = useContext(MenuContext)
 
   return (
@@ -97,7 +96,7 @@ const MenuHeader = () => {
           )}
           {isDesktop && !isMini && (
             <ListItemSecondaryAction>
-              {useMiniMode && useMini && (
+              {useMiniMode && (
                 <IconButton
                   onClick={() => {
                     setMini(true)

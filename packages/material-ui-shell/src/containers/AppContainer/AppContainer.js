@@ -4,10 +4,9 @@ import MenuProvider from '../../providers/Menu/Provider'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 
 export default function ({ children }) {
-  const config = useContext(ConfigContext)
-  console.log('config', config)
+  const { appConfig } = useContext(ConfigContext)
   return (
-    <MenuProvider>
+    <MenuProvider appConfig={appConfig}>
       <div
         style={{
           display: 'flex',

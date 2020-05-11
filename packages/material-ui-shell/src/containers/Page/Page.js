@@ -11,9 +11,7 @@ import OnlineContext from 'base-shell/lib/providers/Online/Context'
 import MenuContext from '../../providers/Menu/Context'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
-
-const drawerWidth = 240
-const offlineIndicatorHeight = 12
+import ConfigContext from 'base-shell/lib/providers/Config/Context'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 64,
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    width: (props) => `calc(100% - ${props.width}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -55,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     right: 0,
     left: 0,
-    height: offlineIndicatorHeight,
+    height: (props) => props.offlineIndicatorHeight,
   },
   content: {
     flex: 1,
@@ -69,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
 const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
   const isOnline = useContext(OnlineContext)
   const theme = useTheme()
+  const { appConfig } = useContext(ConfigContext)
+  const { menu } = appConfig || {}
+  const { width = 240, offlineIndicatorHeight = 12 } = menu || {}
 
   const {
     isDesktop,
@@ -86,7 +87,7 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
     headerTitle = pageTitle
   }
 
-  const classes = useStyles()
+  const classes = useStyles({ width, offlineIndicatorHeight })
   const handleDrawerMenuClick = () => {
     if (!isDesktopOpen) {
       setMini(false)
