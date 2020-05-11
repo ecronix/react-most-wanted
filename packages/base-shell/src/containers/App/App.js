@@ -18,10 +18,10 @@ const App = ({ config: appConfig }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <AppContainer>
-        <Router>
-          <ConfigProvider appConfig={config}>
-            <UpdateProvider checkInterval={checkInterval}>
+      <ConfigProvider appConfig={config}>
+        <UpdateProvider checkInterval={checkInterval}>
+          <AppContainer>
+            <Router>
               <OnlineProvider>
                 <A2HSProvider>
                   <Switch>
@@ -32,10 +32,10 @@ const App = ({ config: appConfig }) => {
                   </Switch>
                 </A2HSProvider>
               </OnlineProvider>
-            </UpdateProvider>
-          </ConfigProvider>
-        </Router>
-      </AppContainer>
+            </Router>
+          </AppContainer>
+        </UpdateProvider>
+      </ConfigProvider>
     </Suspense>
   )
 }

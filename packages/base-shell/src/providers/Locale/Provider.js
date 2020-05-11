@@ -22,7 +22,7 @@ const Provider = ({
     } catch (error) {
       console.warn(error)
     }
-  }, [locale,persistKey])
+  }, [locale, persistKey])
 
   return (
     <Context.Provider value={{ locale, setLocale }}>
