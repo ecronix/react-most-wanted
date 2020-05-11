@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 64,
   },
   appBarShift: {
-    //marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginLeft: -12,
-    //marginRight: 12
   },
   hide: {
     display: 'none',
