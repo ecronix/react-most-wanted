@@ -4,12 +4,11 @@ import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
-  console.log('appConfig', appConfig)
   const { menu } = appConfig || {}
-  const { useMini } = menu || {}
+  const { useMini = true } = menu || {}
   const [isDesktopOpen, setDesktopOpen] = useState(true)
   const [isMobileOpen, setMobileOpen] = useState(false)
-  const [useMiniMode, setMiniMode] = useState(true)
+  const [useMiniMode, setMiniMode] = useState(useMini)
   const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const [isMini, setMini] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')

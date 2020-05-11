@@ -11,7 +11,8 @@ const config = {
   },
   menu: {
     width: 240,
-    useMini: true,
+    offlineIndicatorHeight: 12,
+    useMini: false,
     MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
   },
   pages: {

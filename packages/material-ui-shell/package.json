@@ -25,10 +25,10 @@
   },
   "devDependencies": {
     "@formatjs/intl-relativetimeformat": "^4.5.15",
-    "@material-ui/core": "^4.9.13",
+    "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
     "a2hs": "^1.1.4",
-    "base-shell": "^1.1.13",
+    "base-shell": "^1.1.14",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.8",
     "nwb": "0.24.x",
@@ -36,7 +36,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-intl": "^4.5.3",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.2.0"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
