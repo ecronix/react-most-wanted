@@ -6,21 +6,27 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 const Provider = ({ children, persistKey = 'menu' }) => {
   const [isDesktopOpen, setDesktopOpen] = useState(true)
   const [isMobileOpen, setMobileOpen] = useState(false)
+  const [useMiniMode, setMiniMode] = useState(true)
   const [isMini, setMini] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
   const isDesktopKey = `${persistKey}:isDesktopOpen`
   const isMiniKey = `${persistKey}:isMini`
+  const isUseMiniModeKey = `${persistKey}:isUseMiniModeKey`
 
   useEffect(() => {
     const persistDesktopOpen = localStorage.getItem(isDesktopKey)
     const persistMini = localStorage.getItem(isMiniKey)
+    const persistMiniMode = localStorage.getItem(isUseMiniModeKey)
     if (persistDesktopOpen) {
       setDesktopOpen(persistDesktopOpen === 'true')
     }
     if (persistMini) {
       setMini(persistMini === 'true')
     }
-  }, [isDesktopKey, isMiniKey])
+    if (persistMiniMode) {
+      setMiniMode(persistMiniMode === 'true')
+    }
+  }, [isDesktopKey, isMiniKey,isUseMiniModeKey])
 
   useEffect(() => {
     try {
@@ -38,6 +44,17 @@ const Provider = ({ children, persistKey = 'menu' }) => {
     }
   }, [isMini, isMiniKey])
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(isUseMiniModeKey, JSON.stringify(useMiniMode))
+      if(!useMiniMode){
+        setMini(useMiniMode)
+      }
+    } catch (error) {
+      console.warn(error)
+    }
+  }, [useMiniMode, isUseMiniModeKey])
+
   return (
     <Context.Provider
       value={{
@@ -48,6 +65,8 @@ const Provider = ({ children, persistKey = 'menu' }) => {
         setMobileOpen,
         isMini,
         setMini,
+        useMiniMode,
+        setMiniMode
       }}
     >
       {children}

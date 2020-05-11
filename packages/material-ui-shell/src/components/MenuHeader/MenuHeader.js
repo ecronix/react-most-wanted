@@ -48,6 +48,7 @@ const MenuHeader = () => {
     setDesktopOpen,
     isMini,
     setMini,
+    useMiniMode
   } = useContext(MenuContext)
 
   return (
@@ -73,7 +74,7 @@ const MenuHeader = () => {
           }
           {isDesktop && !isMini && (
             <ListItemSecondaryAction>
-              <IconButton
+              {useMiniMode && (<IconButton
                 onClick={() => {
                   setMini(true)
                   setDesktopOpen(false)
@@ -81,6 +82,7 @@ const MenuHeader = () => {
               >
                 <ChromeReaderMode classes={{ root: classes.icon }} />
               </IconButton>
+              )}
               <IconButton
                 color="inherit"
                 onClick={() => {
