@@ -7,6 +7,7 @@ const Provider = ({ children, persistKey = 'menu' }) => {
   const [isDesktopOpen, setDesktopOpen] = useState(true)
   const [isMobileOpen, setMobileOpen] = useState(false)
   const [useMiniMode, setMiniMode] = useState(true)
+  const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const [isMini, setMini] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
   const isDesktopKey = `${persistKey}:isDesktopOpen`
@@ -63,6 +64,8 @@ const Provider = ({ children, persistKey = 'menu' }) => {
         isMobileOpen,
         setDesktopOpen,
         setMobileOpen,
+        isAuthMenuOpen,
+        setAuthMenuOpen,
         isMini,
         setMini,
         useMiniMode,

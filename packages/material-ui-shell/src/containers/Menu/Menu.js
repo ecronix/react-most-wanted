@@ -4,35 +4,31 @@ import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import MenuContext from '../../providers/Menu/Context'
 import { useIntl } from 'react-intl'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
-import MenuHeader from '../../components/MenuHeader/MenuHeader'
+//import MenuHeader from '../../components/MenuHeader/MenuHeader'
 import SelectableMenuList from '../../containers/SelectableMenuList'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
+import Scrollbar from '../../components/Scrollbar/Scrollbar'
 
 const Menu = () => {
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
-
-  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode,
-    setMiniMode } = useContext(
-      MenuContext
-    )
-
+  const menuContext = useContext(MenuContext)
+  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode } = menuContext
   const { appConfig } = useContext(ConfigContext)
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
+  const { menu } = appConfig || {}
+  const { MenuHeader, getMenuItems } = menu || {}
 
-  const menuItems = appConfig
-    .getMenuItems({
-      intl,
-      auth: appConfig.auth,
-      locale,
-      updateLocale: setLocale,
-      useMenuMiniMode: useMiniMode,
-      switchMenuMiniMode: setMiniMode
-    })
-    .filter((item) => {
-      return item.visible !== false
-    })
+  const menuItems = getMenuItems({
+    intl,
+    locale,
+    updateLocale: setLocale,
+    menuContext,
+    appConfig,
+  }).filter((item) => {
+    return item.visible !== false
+  })
 
   const index = match ? match.path : '/'
 
@@ -47,17 +43,7 @@ const Menu = () => {
 
   return (
     <ResponsiveMenu>
-      {/* <div className={classes.drawerHeader}>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === 'ltr' ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
-      </div>
-      <Divider /> */}
-      <MenuHeader />
+      {MenuHeader && <MenuHeader />}
       <div
         style={{
           display: 'flex',
@@ -65,13 +51,15 @@ const Menu = () => {
           height: '100%',
         }}
       >
-        <SelectableMenuList
-          key={useMiniMode}
-          items={menuItems}
-          onIndexChange={handleChange}
-          index={index}
-          useMinified={isMini && !isDesktopOpen}
-        />
+        <Scrollbar>
+          <SelectableMenuList
+            items={menuItems}
+            onIndexChange={handleChange}
+            index={index}
+            key={useMiniMode}
+            useMinified={isMini && !isDesktopOpen}
+          />
+        </Scrollbar>
       </div>
     </ResponsiveMenu>
   )
