@@ -17,10 +17,7 @@ const getMenuItems = (props) => {
   const { appConfig, intl, updateLocale, locale, menuContext, themeContext } = props
   const { auth } = appConfig || {}
   const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
-  const { themeID,
-    type,
-    setThemeID,
-    setType } = themeContext
+  const { themeID, setThemeID } = themeContext
 
   const localeItems = allLocales.map((l) => {
     return {
