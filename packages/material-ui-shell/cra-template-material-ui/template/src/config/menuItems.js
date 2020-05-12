@@ -10,12 +10,17 @@ import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen';
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-
+import StyleIcon from '@material-ui/icons/Style'
+import allThemes from './themes'
 
 const getMenuItems = (props) => {
-  const { appConfig, intl, updateLocale, locale, menuContext } = props
+  const { appConfig, intl, updateLocale, locale, menuContext, themeContext } = props
   const { auth } = appConfig || {}
-  const {isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
+  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
+  const { themeID,
+    type,
+    setThemeID,
+    setType } = themeContext
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -30,12 +35,24 @@ const getMenuItems = (props) => {
   })
 
   const isAuthorised = auth.isAuthenticated()
-  
+
+  const themeItems = allThemes.map(t => {
+    return {
+      value: undefined,
+      visible: true,
+      primaryText: intl.formatMessage({ id: t.id }),
+      onClick: () => {
+        setThemeID(t.id)
+      },
+      leftIcon: <StyleIcon style={{ color: t.color }} />,
+    }
+  })
+
   if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
         value: '/signin',
-        onClick: isAuthorised ? logout : () => {},
+        onClick: isAuthorised ? logout : () => { },
         visible: true,
         primaryText: isAuthorised
           ? intl.formatMessage({ id: 'sign_out' })
@@ -63,6 +80,13 @@ const getMenuItems = (props) => {
       leftIcon: <SettingsIcon />,
       nestedItems: [
         {
+          primaryText: intl.formatMessage({ id: 'theme' }),
+          secondaryText: intl.formatMessage({ id: themeID }),
+          primaryTogglesNestedList: true,
+          leftIcon: <StyleIcon />,
+          nestedItems: themeItems,
+        },
+        {
           primaryText: intl.formatMessage({ id: 'language' }),
           secondaryText: intl.formatMessage({ id: locale }),
           primaryTogglesNestedList: true,
@@ -70,7 +94,7 @@ const getMenuItems = (props) => {
           nestedItems: localeItems,
         },
         {
-          visible: isDesktop?  true : false,
+          visible: isDesktop ? true : false,
           onClick: () => {
             setMiniMode(!useMiniMode)
           },
