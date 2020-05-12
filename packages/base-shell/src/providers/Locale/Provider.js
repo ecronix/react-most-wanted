@@ -7,14 +7,8 @@ const Provider = ({
   defaultLocale = 'en',
   persistKey = 'locale',
 }) => {
-  const [locale, setLocale] = useState(defaultLocale)
-
-  useEffect(() => {
-    const persistLocale = localStorage.getItem(persistKey)
-    if (persistLocale) {
-      setLocale(persistLocale)
-    }
-  }, [persistKey])
+  const persistLocale = localStorage.getItem(persistKey)
+  const [locale, setLocale] = useState(persistLocale || defaultLocale)
 
   useEffect(() => {
     try {

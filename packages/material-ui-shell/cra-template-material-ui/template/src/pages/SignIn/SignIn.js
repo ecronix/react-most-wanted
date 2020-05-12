@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    backgroundColor: theme.palette.background.default,
     margin: 0,
     height: `calc(100vh - 64px)`,
   },

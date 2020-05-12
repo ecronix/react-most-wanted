@@ -4,7 +4,6 @@ import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import MenuContext from '../../providers/Menu/Context'
 import { useIntl } from 'react-intl'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
-//import MenuHeader from '../../components/MenuHeader/MenuHeader'
 import SelectableMenuList from '../../containers/SelectableMenuList'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
 import Scrollbar from '../../components/Scrollbar/Scrollbar'
@@ -15,7 +14,13 @@ const Menu = () => {
   const history = useHistory()
   const match = useRouteMatch()
   const menuContext = useContext(MenuContext)
-  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode } = menuContext
+  const {
+    isDesktopOpen,
+    isMini,
+    setDesktopOpen,
+    setMobileOpen,
+    useMiniMode,
+  } = menuContext
   const { appConfig } = useContext(ConfigContext)
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
   const { menu } = appConfig || {}

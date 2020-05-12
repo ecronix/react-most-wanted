@@ -20,7 +20,14 @@ export const LayoutContent = () => {
   const { locale } = useContext(LocaleContext)
 
   useEffect(() => {
-    require(`@formatjs/intl-relativetimeformat/dist/locale-data/${locale}`);
+    const loadPolyfills = async () => {
+      await import(
+        `@formatjs/intl-relativetimeformat/dist/locale-data/${locale}`
+      )
+
+      loadLocalePolyfill(locale)
+    }
+
     loadLocalePolyfill(locale)
   }, [locale])
 
