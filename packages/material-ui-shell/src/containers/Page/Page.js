@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flex: 1,
     backgroundColor: theme.palette.background.default,
+    color: theme.palette.text.primary,
   },
   grow: {
     flex: '1 1 auto',
