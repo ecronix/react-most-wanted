@@ -112,17 +112,18 @@ const MenuHeader = () => {
                   <BrightnessHighIcon classes={{ root: classes.icon }} />
                 )}
               </IconButton>
-              {isDesktop && useMiniMode && (
+              {isDesktop && (
                 <>
-                  <IconButton
-                    onClick={() => {
-                      setMini(true)
-                      setDesktopOpen(false)
-                    }}
-                  >
-                    <ChromeReaderMode classes={{ root: classes.icon }} />
-                  </IconButton>
-
+                  {useMiniMode && (
+                    <IconButton
+                      onClick={() => {
+                        setMini(true)
+                        setDesktopOpen(false)
+                      }}
+                    >
+                      <ChromeReaderMode classes={{ root: classes.icon }} />
+                    </IconButton>
+                  )}
 
                   <IconButton
                     color="inherit"
