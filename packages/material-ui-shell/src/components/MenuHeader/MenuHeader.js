@@ -91,14 +91,14 @@ const MenuHeader = () => {
                     {authData.displayName ? (
                       authData.displayName[0].toUpperCase()
                     ) : (
-                      <PersonIcon />
-                    )}
+                        <PersonIcon />
+                      )}
                   </Avatar>
                 </ListItemAvatar>
               )}
             </React.Fragment>
           )}
-          {isDesktop && !isMini && (
+          {!isMini && (
             <ListItemSecondaryAction>
               <IconButton
                 onClick={() => {
@@ -112,30 +112,32 @@ const MenuHeader = () => {
                   <BrightnessHighIcon classes={{ root: classes.icon }} />
                 )}
               </IconButton>
-              {useMiniMode && (
-                <IconButton
-                  onClick={() => {
-                    setMini(true)
-                    setDesktopOpen(false)
-                  }}
-                >
-                  <ChromeReaderMode classes={{ root: classes.icon }} />
-                </IconButton>
-              )}
+              {isDesktop && useMiniMode && (
+                <>
+                  <IconButton
+                    onClick={() => {
+                      setMini(true)
+                      setDesktopOpen(false)
+                    }}
+                  >
+                    <ChromeReaderMode classes={{ root: classes.icon }} />
+                  </IconButton>
 
-              <IconButton
-                color="inherit"
-                onClick={() => {
-                  setDesktopOpen(false)
-                }}
-              >
-                {theme.direction === 'rtl' && (
-                  <ChevronRight classes={{ root: classes.icon }} />
-                )}
-                {theme.direction !== 'rtl' && (
-                  <ChevronLeft classes={{ root: classes.icon }} />
-                )}
-              </IconButton>
+
+                  <IconButton
+                    color="inherit"
+                    onClick={() => {
+                      setDesktopOpen(false)
+                    }}
+                  >
+                    {theme.direction === 'rtl' && (
+                      <ChevronRight classes={{ root: classes.icon }} />
+                    )}
+                    {theme.direction !== 'rtl' && (
+                      <ChevronLeft classes={{ root: classes.icon }} />
+                    )}
+                  </IconButton>  </>
+              )}
             </ListItemSecondaryAction>
           )}
         </ListItem>
