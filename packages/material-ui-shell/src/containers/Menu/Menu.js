@@ -8,6 +8,7 @@ import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
 import SelectableMenuList from '../../containers/SelectableMenuList'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
 import Scrollbar from '../../components/Scrollbar/Scrollbar'
+import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 
 const Menu = () => {
   const intl = useIntl()
@@ -19,12 +20,13 @@ const Menu = () => {
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
   const { menu } = appConfig || {}
   const { MenuHeader, getMenuItems } = menu || {}
-
+  const themeContext = useContext(ThemeContext)
   const menuItems = getMenuItems({
     intl,
     locale,
     updateLocale: setLocale,
     menuContext,
+    themeContext,
     appConfig,
   }).filter((item) => {
     return item.visible !== false
