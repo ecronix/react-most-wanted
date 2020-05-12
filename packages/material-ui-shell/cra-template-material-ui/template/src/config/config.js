@@ -4,6 +4,7 @@ import routes from './routes'
 import { isAuthorised } from '../utils/auth'
 import { getAuth } from '../utils/auth'
 import getMenuItems from './menuItems'
+import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 
 const config = {
@@ -21,6 +22,11 @@ const config = {
   },
   menu: {
     getMenuItems,
+  },
+  theme: {
+    themes,
+    defaultThemeID: 'default',
+    defaultType: 'light',
   },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),

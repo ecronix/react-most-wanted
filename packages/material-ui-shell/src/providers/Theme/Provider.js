@@ -3,73 +3,49 @@ import React, { useState, useEffect } from 'react'
 import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 
-const Provider = ({ children, persistKey = 'menu' }) => {
-  const [isDesktopOpen, setDesktopOpen] = useState(true)
-  const [isMobileOpen, setMobileOpen] = useState(false)
-  const [useMiniMode, setMiniMode] = useState(true)
-  const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
-  const [isMini, setMini] = useState(false)
-  const isDesktop = useMediaQuery('(min-width:600px)')
-  const isDesktopKey = `${persistKey}:isDesktopOpen`
-  const isMiniKey = `${persistKey}:isMini`
-  const isUseMiniModeKey = `${persistKey}:isUseMiniModeKey`
+const Provider = ({ children, persistKey = 'theme', appConfig }) => {
+  const { theme: themeConfig } = appConfig || {}
+  const { defaultThemeID, defaultType } = themeConfig || {}
+  const [themeID, setThemeID] = useState(defaultThemeID)
+  const [type, setType] = useState(defaultType)
+  const themeIDKey = `${persistKey}:themeID`
+  const typeKey = `${persistKey}:type`
 
   useEffect(() => {
-    const persistDesktopOpen = localStorage.getItem(isDesktopKey)
-    const persistMini = localStorage.getItem(isMiniKey)
-    const persistMiniMode = localStorage.getItem(isUseMiniModeKey)
-    if (persistDesktopOpen) {
-      setDesktopOpen(persistDesktopOpen === 'true')
+    const persistThemeID = localStorage.getItem(themeIDKey)
+    const persistType = localStorage.getItem(typeKey)
+
+    if (persistThemeID) {
+      setThemeID(persistThemeID)
     }
-    if (persistMini) {
-      setMini(persistMini === 'true')
+    if (persistType) {
+      setType(persistType)
     }
-    if (persistMiniMode) {
-      setMiniMode(persistMiniMode === 'true')
-    }
-  }, [isDesktopKey, isMiniKey,isUseMiniModeKey])
+  }, [])
 
   useEffect(() => {
     try {
-      localStorage.setItem(isDesktopKey, JSON.stringify(isDesktopOpen))
+      localStorage.setItem(themeIDKey, themeID)
     } catch (error) {
       console.warn(error)
     }
-  }, [isDesktopOpen, isDesktopKey])
+  }, [themeID])
 
   useEffect(() => {
     try {
-      localStorage.setItem(isMiniKey, JSON.stringify(isMini))
+      localStorage.setItem(typeKey, type)
     } catch (error) {
       console.warn(error)
     }
-  }, [isMini, isMiniKey])
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(isUseMiniModeKey, JSON.stringify(useMiniMode))
-      if(!useMiniMode){
-        setMini(useMiniMode)
-      }
-    } catch (error) {
-      console.warn(error)
-    }
-  }, [useMiniMode, isUseMiniModeKey])
+  }, [type])
 
   return (
     <Context.Provider
       value={{
-        isDesktop,
-        isDesktopOpen,
-        isMobileOpen,
-        setDesktopOpen,
-        setMobileOpen,
-        isAuthMenuOpen,
-        setAuthMenuOpen,
-        isMini,
-        setMini,
-        useMiniMode,
-        setMiniMode
+        themeID,
+        type,
+        setThemeID,
+        setType,
       }}
     >
       {children}

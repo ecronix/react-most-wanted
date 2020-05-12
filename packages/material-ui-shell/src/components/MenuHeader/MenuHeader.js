@@ -13,10 +13,13 @@ import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import MenuContext from '../../providers/Menu/Context'
+import ThemeContext from '../../providers/Theme/Context'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArroWDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
+import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -45,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuHeader = () => {
   const theme = useTheme()
   const { appConfig } = useContext(ConfigContext)
+  const { type, setType } = useContext(ThemeContext)
   const { menu } = appConfig || {}
   const authData = appConfig.auth.getData()
   const classes = useStyles()
@@ -96,6 +100,18 @@ const MenuHeader = () => {
           )}
           {isDesktop && !isMini && (
             <ListItemSecondaryAction>
+              <IconButton
+                onClick={() => {
+                  setType(type === 'light' ? 'dark' : 'light')
+                }}
+              >
+                {type === 'light' && (
+                  <Brightness4Icon classes={{ root: classes.icon }} />
+                )}
+                {type === 'dark' && (
+                  <BrightnessHighIcon classes={{ root: classes.icon }} />
+                )}
+              </IconButton>
               {useMiniMode && (
                 <IconButton
                   onClick={() => {
@@ -106,6 +122,7 @@ const MenuHeader = () => {
                   <ChromeReaderMode classes={{ root: classes.icon }} />
                 </IconButton>
               )}
+
               <IconButton
                 color="inherit"
                 onClick={() => {

@@ -4,6 +4,9 @@ import Loading from '../components/Loading/Loading'
 const config = {
   containers: {
     AppContainer: lazy(() => import('../containers/AppContainer/AppContainer')),
+    LayoutContainer: lazy(() =>
+      import('../containers/LayoutContainer/LayoutContainer')
+    ),
   },
   components: {
     Loading,
@@ -12,7 +15,7 @@ const config = {
   menu: {
     width: 240,
     offlineIndicatorHeight: 12,
-    useMini: false,
+    useMini: true,
     MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
   },
   pages: {
