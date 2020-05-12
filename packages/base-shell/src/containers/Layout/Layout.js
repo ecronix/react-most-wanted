@@ -20,7 +20,7 @@ export const LayoutContent = () => {
   const { locale } = useContext(LocaleContext)
 
   useEffect(() => {
-    import(`@formatjs/intl-relativetimeformat/dist/locale-data/${locale}`)
+    require(`@formatjs/intl-relativetimeformat/dist/locale-data/${locale}`);
     loadLocalePolyfill(locale)
   }, [locale])
 
