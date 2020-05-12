@@ -15,7 +15,7 @@ import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 const getMenuItems = (props) => {
   const { appConfig, intl, updateLocale, locale, menuContext } = props
   const { auth } = appConfig || {}
-  const { isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
+  const {isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -70,6 +70,7 @@ const getMenuItems = (props) => {
           nestedItems: localeItems,
         },
         {
+          visible: isDesktop?  true : false,
           onClick: () => {
             setMiniMode(!useMiniMode)
           },
