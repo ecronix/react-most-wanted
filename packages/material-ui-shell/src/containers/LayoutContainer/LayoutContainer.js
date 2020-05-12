@@ -3,6 +3,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import getThemeSource from '../../utils/theme'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import ThemeContext from '../../providers/Theme/Context'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 export default function ({ children }) {
   const { appConfig } = useContext(ConfigContext)
@@ -11,5 +12,10 @@ export default function ({ children }) {
   const { themes = [] } = themeConfig || {}
   const theme = getThemeSource(themeID, themes, type)
 
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  )
 }
