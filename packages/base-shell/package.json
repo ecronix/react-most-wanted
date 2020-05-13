@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "1.1.14",
+  "version": "1.1.22",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -21,7 +21,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "intl": "1.2x",
+    "intl": "1.x",
     "intl-locales-supported": "1.x",
     "@formatjs/intl-relativetimeformat": "4.x",
     "a2hs": "1.x",
