@@ -1,7 +1,8 @@
-import areIntlLocalesSupported from 'intl-locales-supported'
-import intl from 'intl'
+//import areIntlLocalesSupported from 'intl-locales-supported'
+//import intl from 'intl'
 import { defineMessages } from 'react-intl'
 
+/*
 const loadLocalePolyfill = (locale) => {
   // START: Intl polyfill
   // Required for working on Safari
@@ -23,6 +24,7 @@ const loadLocalePolyfill = (locale) => {
   }
   // END: Intl polyfill
 }
+*/
 
 const getUsersPreferredLanguages = () => {
   if (navigator.languages !== undefined) {
@@ -52,8 +54,9 @@ const getLocaleMessages = async (l, ls) => {
   if (ls) {
     for (let i = 0; i < ls.length; i++) {
       if (ls[i]['locale'] === l) {
-        const messages = await ls[i]['messages']
-        return defineMessages(messages)
+        const { default: messages } = await defineMessages(ls[i].messages)
+
+        return messages
       }
     }
   }
@@ -65,5 +68,9 @@ const formatMessage = (messages = [], id) => {
   return messages[id] || id
 }
 
-export { formatMessage, getLocaleMessages, loadLocalePolyfill }
+export {
+  formatMessage,
+  getLocaleMessages,
+  //loadLocalePolyfill
+}
 export default parseLanguages
