@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
+    overflow: 'hidden',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -58,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: 1,
+    overflow: 'auto',
   },
   grow: {
     flex: '1 1 auto',
