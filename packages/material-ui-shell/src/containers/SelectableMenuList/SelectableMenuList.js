@@ -8,10 +8,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const [state, setState] = useState({})
+
+  //Clears nested state if the root items change
+  //Used to open auth menu if we are in a nested menu
+  useEffect(() => {
+    setState({})
+  }, [items])
 
   const handleNestedItemsClick = (item) => {
     if (item.nestedItems) {
