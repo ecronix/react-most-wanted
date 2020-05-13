@@ -51,7 +51,7 @@ export const LayoutContent = () => {
         const l = locales[i]
         if (l.locale === locale) {
           if (l.loadData) {
-            await loadData
+            await l.loadData
           }
         }
       }
