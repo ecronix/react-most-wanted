@@ -9,12 +9,12 @@ I like `short` README's so here we go :sunglasses:
 
 ## Idea and concept
 
-With [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) (CRA) we can start easy with a new react project but we still need to do some tricky parts to make it work. For developers who are starting with react it's not clear what to do next and for the experienced it's anoing to repeat for every project the basic setup and configuration like the routing, intl, auth and other main parts of most applications. The latest CRA versions give us the opportunity to create our own custom templates. Templates are nice but not the solution that solves our problems. We need a tool from witch we can start out very easy and get updates during time for bugfixes and API changes of the dependencies. Sounds like a framework? I don't think that there is a need for a react framework. Everyone can make his project up and running in short time. 
+With [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) (CRA) we can start easy with a new React project but we still need to do some tricky parts to make it work. For developers who are starting with React it's not clear what to do next and for the experienced it's annoying to repeat for every project the basic setup and configuration like the routing, intl, auth and other main parts of most applications. The latest CRA versions give us the opportunity to create our own custom templates. Templates are nice but not the solution for these identified problems. We need a tool that starts out easily and gets updates over time for bugfixes and API changes of the dependencies. Sounds like a framework? I don't think that there is a need for a React framework. Everyone can make their own project and be running in short time. 
 
-This project want's to provide templates for new projects that can be updated during usage but won't update so frequently like frameworks. We can start with each of them using a simple CLI command. They can be configured over configs and most parts can be replaced with custom ones. To cover most use cases this project has multiple templates:
+This project will provide templates for new projects that can be updated during usage but won't update as frequently as most frameworks. We can start with each project using a simple CLI command. They can be configured with configs and most parts can be replaced with custom ones. To cover most use cases this project has multiple templates:
 
 ### [base-shell](./packages/base-shell/)
-The basic react setup (routing, intl, async load). It has an optimised `routing` where the initial load page is completely separated from rest of the routing to ensure best performance for applications that need to scale. Simple and easy `intl` based on `react-intl` and async load using the new react `suspense` API. The resulting template is very basic and has not more than basic `html`inside. To start a new project with this template just run this command:
+The basic React setup (routing, intl, async load). It has an optimised `routing` where the initial load page is completely separated from rest of the routing to ensure best performance for applications that need to scale. Simple and easy `intl` based on `react-intl` and async load using the new React `suspense` API. The resulting project is basic and has only `html` to start. To start a new project with this template just run this command:
 
 ```js
 npx create-react-app my-app --template base
@@ -34,8 +34,8 @@ npm start
 
 ### [rmw-shell](./packages/rmw-shell)
 [base-shell](./packages/base-shell/) + [material-ui-shell](https://material-ui.com) +
-- [Firebase](https://firebase.google.com/) Take your app to the cloud, enabling the possibility to:
-  - Real time database updates
+- [Firebase](https://firebase.google.com/) Take your app to the cloud, enabling the possibility of:
+  - Realtime database updates
   - OAuth with the major platforms
   - Monitoring, metrics, reports...
   - CDN as a storage layer for static assets, for Ultra Quick Delivery Anywhere in the World
@@ -71,14 +71,14 @@ React Most Wanted is a React Starter Kit based on [Create React App](https://git
 
 Check this out:
 
-- It is built with CRA and even if you use this Starter Kit your CRA scripts will work properly. You will be able to make every CRA update as if you have started with it. We don't eject anyone from CRA :smile:.
-- It is based on our [rmw-shell](packages/rmw-shell) library which keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where the hard work is already done for you.
+- It is built with CRA.  Our Starter Kit is a CRA template and your CRA scripts will work as expected, such as taking all CRA updates. We don't eject anyone from CRA :smile:.
+- It is based on our [rmw-shell](packages/rmw-shell) library that keeps your project up to date when we make bugfixes or add new features. It is like a `shell` for your project where the hard work is already done for you.
 - There is a simple script to start a fresh project without forking anything `npx create-react-app test-app --scripts-version rmw-react-scripts`.
-- It has all "MOST WANTED" features built in. That is where the name comes from :wink: We will come to the features bit a little bit later.
+- It has all "MOST WANTED" features built in (see below). That is where the name comes from! :wink:
 - It is customizable.
-- It uses Firebase :smile:.
-- It is a Best Practice Project PWA (Progressive Web Application).
-- You will love it once you start using it :smile:.
+- It uses Firebase. :smile:
+- It is a Best Practice Project for creating a PWA (Progressive Web Application).
+- You will love it once you start using it. :smile:
 
 ## What are those "Most Wanted" features?
 
