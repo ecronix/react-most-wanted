@@ -16,15 +16,18 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const handleNestedItemsClick = (item) => {
     if (item.nestedItems) {
       let previousItems = state.previousItems || []
+      let previousTitles = state.previousTitles || []
       const items = item.nestedItems
       const title = item.primaryText
 
       previousItems.unshift(state.items || items)
+      previousTitles.unshift(state.title || title)
 
       setState({
         ...state,
         items,
         previousItems,
+        previousTitles,
         title,
         index: item.value,
       })
@@ -37,11 +40,14 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
 
   const handleBackClick = () => {
     let previousItems = state.previousItems || []
+    let previousTitles = state.previousTitles || []
     const items = previousItems[0] || undefined
+    const title = previousTitles[0] || undefined
 
     previousItems.shift()
+    previousTitles.shift()
 
-    setState({ ...state, items, previousItems })
+    setState({ ...state, items, previousItems, previousTitles, title })
   }
 
   const getNestedItems = (hostItem, hostIndex) => {
