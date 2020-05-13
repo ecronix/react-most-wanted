@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 
 const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const { theme: themeConfig } = appConfig || {}
@@ -21,7 +20,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     if (persistType) {
       setType(persistType)
     }
-  }, [])
+  }, [themeIDKey,typeKey])
 
   useEffect(() => {
     try {
@@ -29,7 +28,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     } catch (error) {
       console.warn(error)
     }
-  }, [themeID])
+  }, [themeID,themeIDKey])
 
   useEffect(() => {
     try {
@@ -37,7 +36,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     } catch (error) {
       console.warn(error)
     }
-  }, [type])
+  }, [type,typeKey])
 
   return (
     <Context.Provider

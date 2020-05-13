@@ -79,7 +79,6 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
     setDesktopOpen,
     isMobileOpen,
     setMobileOpen,
-    isMini,
     setMini,
   } = useContext(MenuContext)
   const intl = useIntl()
