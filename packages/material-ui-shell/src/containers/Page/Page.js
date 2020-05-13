@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    height: '100vh',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -144,19 +145,6 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
 
       <div className={classes.toolbar} />
       {isLoading && <LinearProgress />}
-      {/* {!isOnline && (
-          <React.Fragment>
-            <div className={classes.offlineIndicator}>
-              <Typography variant="caption" noWrap>
-                {intl.formatMessage({
-                  id: 'offline',
-                  defaultMessage: 'Offline',
-                })}
-              </Typography>
-            </div>
-            <div style={{ height: offlineIndicatorHeight }}></div>
-          </React.Fragment>
-        )} */}
       {!isOnline && (
         <div
           style={{
