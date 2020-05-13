@@ -28,7 +28,7 @@
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
     "a2hs": "^1.1.4",
-    "base-shell": "^1.1.22",
+    "base-shell": "^1.1.24",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.8",
     "nwb": "^0.24.6",
