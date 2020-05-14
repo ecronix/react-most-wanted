@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import MenuContext from '../../providers/Menu/Context'
@@ -61,7 +61,6 @@ const ResponsiveMenu = ({ children, width }) => {
     isDesktop,
     isDesktopOpen,
     isMobileOpen,
-    setDesktopOpen,
     isMini,
     setMobileOpen,
   } = useContext(MenuContext)
