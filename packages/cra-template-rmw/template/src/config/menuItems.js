@@ -15,6 +15,9 @@ import Security from '@material-ui/icons/Security'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import StyleIcon from '@material-ui/icons/Style'
 import VerticalAlignBottomIcon from '@material-ui/icons/VerticalAlignBottom'
+import DescriptionIcon from '@material-ui/icons/Description'
+import LockOpenIcon from '@material-ui/icons/LockOpen'
+
 import allLocales from './locales'
 import allThemes from './themes'
 
@@ -79,6 +82,12 @@ const getMenuItems = props => {
 
   return [
     {
+      value: '/signin',
+      visible: !isAuthorised,
+      primaryText: intl.formatMessage({ id: 'signin' }),
+      leftIcon: <LockOpenIcon />,
+    },
+    {
       value: '/dashboard',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'dashboard' }),
@@ -123,6 +132,12 @@ const getMenuItems = props => {
       leftIcon: <InfoOutlined />,
     },
     {
+      value: '/docs',
+      visible: true,
+      primaryText: intl.formatMessage({ id: 'docs' }),
+      leftIcon: <DescriptionIcon />,
+    },
+    {
       visible: isAuthorised, // In prod: isGranted('administration'),
       primaryTogglesNestedList: true,
       primaryText: intl.formatMessage({ id: 'administration' }),
@@ -144,7 +159,7 @@ const getMenuItems = props => {
     },
     {
       divider: true,
-      visible: isAuthorised,
+      visible: true,
     },
     {
       primaryText: intl.formatMessage({ id: 'settings' }),
