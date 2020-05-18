@@ -24,14 +24,12 @@ const App = ({ config: appConfig }) => {
             <AppContainer>
               <Router>
                 <OnlineProvider>
-                  <A2HSProvider>
-                    <Switch>
-                      {LandingPage && (
-                        <Route path="/" exact component={LandingPage} />
-                      )}
-                      <Route component={Layout} />
-                    </Switch>
-                  </A2HSProvider>
+                  <Switch>
+                    {LandingPage && (
+                      <Route path="/" exact component={LandingPage} />
+                    )}
+                    <Route component={Layout} />
+                  </Switch>
                 </OnlineProvider>
               </Router>
             </AppContainer>
