@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "1.1.24",
+  "version": "1.1.26",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,10 +32,9 @@
   },
   "devDependencies": {
     "@formatjs/intl-relativetimeformat": "^4.5.12",
-    "a2hs": "^1.1.4",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.5",
-    "nwb": "0.24.x",
+    "nwb": "^0.24.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-intl": "^4.4.0",

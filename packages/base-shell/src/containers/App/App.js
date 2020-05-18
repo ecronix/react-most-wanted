@@ -1,8 +1,8 @@
-import A2HSProvider from 'a2hs'
 import ConfigProvider from '../../providers/Config/Provider'
 import OnlineProvider from '../../providers/Online/Provider'
 import React, { Suspense, lazy } from 'react'
 import UpdateProvider from '../../providers/Update/Provider'
+import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
 import defaultConfig from '../../config'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -19,22 +19,24 @@ const App = ({ config: appConfig }) => {
   return (
     <Suspense fallback={<Loading />}>
       <ConfigProvider appConfig={config}>
-        <UpdateProvider checkInterval={checkInterval}>
-          <AppContainer>
-            <Router>
-              <OnlineProvider>
-                <A2HSProvider>
-                  <Switch>
-                    {LandingPage && (
-                      <Route path="/" exact component={LandingPage} />
-                    )}
-                    <Route component={Layout} />
-                  </Switch>
-                </A2HSProvider>
-              </OnlineProvider>
-            </Router>
-          </AppContainer>
-        </UpdateProvider>
+        <AddToHomeScreenProvider>
+          <UpdateProvider checkInterval={checkInterval}>
+            <AppContainer>
+              <Router>
+                <OnlineProvider>
+                  <A2HSProvider>
+                    <Switch>
+                      {LandingPage && (
+                        <Route path="/" exact component={LandingPage} />
+                      )}
+                      <Route component={Layout} />
+                    </Switch>
+                  </A2HSProvider>
+                </OnlineProvider>
+              </Router>
+            </AppContainer>
+          </UpdateProvider>
+        </AddToHomeScreenProvider>
       </ConfigProvider>
     </Suspense>
   )
