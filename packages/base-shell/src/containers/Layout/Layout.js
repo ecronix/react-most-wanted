@@ -51,12 +51,12 @@ export const LayoutContent = () => {
         const l = locales[i]
         if (l.locale === locale) {
           if (l.loadData) {
-            await loadData
+            await l.loadData
           }
         }
       }
     }
-  }, [locale])
+  }, [locale,locales])
 
   useEffect(() => {
     const loadMessages = async () => {
@@ -64,7 +64,7 @@ export const LayoutContent = () => {
       setMessages(messages)
     }
     loadMessages()
-  }, [locale])
+  }, [locale,locales])
 
   return (
     <IntlProvider locale={locale} key={locale} messages={messages}>
