@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    height: '100vh',
+    overflow: 'hidden',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flex: 1,
+    overflow: 'auto',
   },
   grow: {
     flex: '1 1 auto',
@@ -76,7 +79,6 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
     setDesktopOpen,
     isMobileOpen,
     setMobileOpen,
-    isMini,
     setMini,
   } = useContext(MenuContext)
   const intl = useIntl()
@@ -144,19 +146,6 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
 
       <div className={classes.toolbar} />
       {isLoading && <LinearProgress />}
-      {/* {!isOnline && (
-          <React.Fragment>
-            <div className={classes.offlineIndicator}>
-              <Typography variant="caption" noWrap>
-                {intl.formatMessage({
-                  id: 'offline',
-                  defaultMessage: 'Offline',
-                })}
-              </Typography>
-            </div>
-            <div style={{ height: offlineIndicatorHeight }}></div>
-          </React.Fragment>
-        )} */}
       {!isOnline && (
         <div
           style={{

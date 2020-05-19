@@ -1,13 +1,13 @@
 {
   "name": "cra-template-rmw",
-  "version": "1.0.20",
+  "version": "1.0.24",
   "keywords": [
     "react",
     "create-react-app",
     "template",
     "react-most-wanted"
   ],
-  "description": "The base template for React Most Wanted.",
+  "description": "The rmw template for React Most Wanted.",
   "main": "template.json",
   "repository": {
     "type": "git",

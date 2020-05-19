@@ -58,7 +58,7 @@ const Menu = () => {
           height: '100%',
         }}
       >
-        <Scrollbar>
+        <Scrollbar style={{ flex: 1 }}>
           <SelectableMenuList
             items={menuItems}
             onIndexChange={handleChange}
