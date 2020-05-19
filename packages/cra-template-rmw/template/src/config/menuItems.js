@@ -84,7 +84,7 @@ const getMenuItems = props => {
     {
       value: '/signin',
       visible: !isAuthorised,
-      primaryText: intl.formatMessage({ id: 'signin' }),
+      primaryText: intl.formatMessage({ id: 'sign_in' }),
       leftIcon: <LockOpenIcon />,
     },
     {
