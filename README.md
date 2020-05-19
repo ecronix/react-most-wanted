@@ -1,5 +1,5 @@
 # [![LOGO][logo-image]][logo-url]  **React Most Wanted** 
-[![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![License][license-image]][license-url] [![Code Style][code-style-image]][code-style-url]
+[![Build Status][travis-image]][travis-url] [![License][license-image]][license-url] [![Code Style][code-style-image]][code-style-url]
 
 RMW is a set of features and best practices **that you can choose from** and use around your React projects, built on [Create React App](https://github.com/facebookincubator/create-react-app). You can checkout the demo at [react-most-wanted.com](https://react-most-wanted.com).
 
@@ -49,8 +49,6 @@ This project uses [MIT license](https://github.com/TarikHuber/react-most-wanted/
 [logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md
 [travis-image]: https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master
 [travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted
-[daviddm-image]: https://img.shields.io/david/TarikHuber/react-most-wanted.svg?style=flat-square
-[daviddm-url]: https://david-dm.org/TarikHuber/react-most-wanted
 [license-image]: https://img.shields.io/npm/l/express.svg
 [license-url]: https://github.com/TarikHuber/react-most-wanted/master/LICENSE
 [code-style-image]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
