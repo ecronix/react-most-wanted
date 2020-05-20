@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import { injectIntl } from 'react-intl'
 import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
