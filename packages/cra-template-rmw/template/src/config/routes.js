@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React from 'react'
+import {Route} from 'react-router-dom'
 import RestrictedRoute from 'rmw-shell/lib/containers/RestrictedRoute'
 import makeLoadable from 'rmw-shell/lib/containers/MyLoadable'
 
@@ -36,7 +37,7 @@ const routes = [
     component={AsyncDashboard}
   />,
   <RestrictedRoute type="private" path="/about" exact component={AsyncAbout} />,
-  <RestrictedRoute type="public" path="/docs" exact component={AsyncDocs}/>,
+  <Route path="/docs" exact component={AsyncDocs}/>,
   <RestrictedRoute
     type="private"
     path="/companies"
