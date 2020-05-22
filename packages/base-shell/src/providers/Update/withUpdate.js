@@ -2,7 +2,7 @@ import Context from './Context'
 import React from 'react'
 import config from '../../config'
 
-const withAppConfigs = Component => {
+const withUpdate = Component => {
   const ChildComponent = props => {
     return (
       <Context.Consumer>
@@ -17,4 +17,4 @@ const withAppConfigs = Component => {
   return ChildComponent
 }
 
-export default withAppConfigs
+export default withUpdate
