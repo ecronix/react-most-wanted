@@ -13,13 +13,20 @@ const config = {
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
     locales,
     persistKey: 'base-shell:locale',
+    onError: (e) => {
+      //Uncomment this to show react-intl missing translation warnings
+      //console.warn(e)
+      return
+    },
   },
   auth: {
     isAuthenticated: isAuthorised,
     signInURL: '/signin',
   },
   routes,
-  getMenuItems,
+  menu: {
+    getMenuItems,
+  },
   pages: {
     LandingPage: LandingPage,
     PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),

@@ -8,16 +8,26 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { logout } from '../utils/auth'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import MenuOpenIcon from '@material-ui/icons/MenuOpen'
+import GetApp from '@material-ui/icons/GetApp'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import StyleIcon from '@material-ui/icons/Style'
 import allThemes from './themes'
 
 const getMenuItems = (props) => {
-  const { appConfig, intl, updateLocale, locale, menuContext, themeContext } = props
+  const {
+    appConfig,
+    intl,
+    updateLocale,
+    locale,
+    menuContext,
+    themeContext,
+    a2HSContext,
+  } = props
   const { auth } = appConfig || {}
   const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
   const { themeID, setThemeID } = themeContext
+  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -33,7 +43,7 @@ const getMenuItems = (props) => {
 
   const isAuthorised = auth.isAuthenticated()
 
-  const themeItems = allThemes.map(t => {
+  const themeItems = allThemes.map((t) => {
     return {
       value: undefined,
       visible: true,
@@ -49,7 +59,7 @@ const getMenuItems = (props) => {
     return [
       {
         value: '/signin',
-        onClick: isAuthorised ? logout : () => { },
+        onClick: isAuthorised ? logout : () => {},
         visible: true,
         primaryText: isAuthorised
           ? intl.formatMessage({ id: 'sign_out' })
@@ -71,6 +81,7 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'about' }),
       leftIcon: <InfoOutlined />,
     },
+    { divider: true },
     {
       primaryText: intl.formatMessage({ id: 'settings' }),
       primaryTogglesNestedList: true,
@@ -101,6 +112,18 @@ const getMenuItems = (props) => {
           leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
         },
       ],
+    },
+    {
+      value: null,
+      visible: isAppInstallable && !isAppInstalled,
+      onClick: () => {
+        deferredPrompt.prompt()
+      },
+      primaryText: intl.formatMessage({
+        id: 'install',
+        defaultMessage: 'Install',
+      }),
+      leftIcon: <GetApp />,
     },
   ]
 }

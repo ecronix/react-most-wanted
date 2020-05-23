@@ -33,7 +33,7 @@ const SignIn = () => {
 
   return (
     <div>
-      {intl.formatMessage({ id: 'sign_in' })}
+      {intl.formatMessage({ id: 'sign_in2' })}
       <form onSubmit={handleSubmit}>
         <label>
           {intl.formatMessage({ id: 'username' })}

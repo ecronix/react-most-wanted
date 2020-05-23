@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -24,18 +24,19 @@
     "react": "16.x"
   },
   "devDependencies": {
-    "@formatjs/intl-relativetimeformat": "^4.5.15",
+    "@formatjs/intl-relativetimeformat": "^4.5.16",
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
     "a2hs": "^1.1.4",
-    "base-shell": "^1.1.24",
+    "base-shell": "^1.1.30",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.8",
-    "nwb": "^0.24.6",
+    "nwb": "^0.25.2",
     "react": "^16.13.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
-    "react-intl": "^4.5.3",
+    "react-intl": "^4.5.9",
+    "react-ios-pwa-prompt": "^1.7.0",
     "react-router-dom": "^5.2.0"
   },
   "author": "Tarik Huber",

@@ -10,6 +10,7 @@
     "react-dom": "16.x",
     "react-intl": "4.x",
     "react-redux": "7.x",
+    "react-ios-pwa-prompt": "1.x",
     "react-router-dom": "5.x",
     "base-shell": "1.x",
     "material-ui-shell": "1.x"
