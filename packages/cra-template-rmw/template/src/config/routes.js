@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React from 'react'
+import {Route} from 'react-router-dom'
 import RestrictedRoute from 'rmw-shell/lib/containers/RestrictedRoute'
 import makeLoadable from 'rmw-shell/lib/containers/MyLoadable'
 
@@ -25,6 +26,7 @@ const AsyncTasks = MyLoadable(
   { loader: () => import('../pages/Tasks/Tasks') },
   [AsyncTask]
 )
+const AsyncDocs = MyLoadable({ loader: () => import('../pages/Docs') })
 
 const routes = [
   <RestrictedRoute type="private" path="/" exact component={AsyncDashboard} />,
@@ -35,6 +37,7 @@ const routes = [
     component={AsyncDashboard}
   />,
   <RestrictedRoute type="private" path="/about" exact component={AsyncAbout} />,
+  <Route path="/docs" exact component={AsyncDocs}/>,
   <RestrictedRoute
     type="private"
     path="/companies"

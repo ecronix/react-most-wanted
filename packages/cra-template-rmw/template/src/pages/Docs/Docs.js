@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import { injectIntl } from 'react-intl'
 import { GitHubIcon } from 'rmw-shell/lib/components/Icons'
 import { Activity } from 'rmw-shell'
 import ReactMarkdown from 'react-markdown'
 import Scrollbar from 'rmw-shell/lib/components/Scrollbar/Scrollbar'
-import README from './README.md'
+import DOCS from './DOCS.md'
 
 require('github-markdown-css')
 
-const About=({intl}) =>{
+const Docs=({intl}) =>{
     const [text, setText] = useState('')
 
     useEffect(() => {
-      fetch(README)
+      fetch(DOCS)
             .then(response => response.text())
             .then(txt => {
            setText(txt)
@@ -31,7 +31,7 @@ const About=({intl}) =>{
             <GitHubIcon />
           </IconButton>
         }
-        title={intl.formatMessage({ id: 'about' })}
+        title={intl.formatMessage({ id: 'Docs' })}
       >
         <Scrollbar>
           <div style={{ backgroundColor: 'white', padding: 12 }}>
@@ -41,4 +41,4 @@ const About=({intl}) =>{
       </Activity>
     )
 }
-export default injectIntl(About)
+export default injectIntl(Docs)
