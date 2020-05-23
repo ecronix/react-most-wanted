@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
 import SelectableMenuList from '../../containers/SelectableMenuList'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
+import A2HSContext from 'base-shell/lib/providers/AddToHomeScreen/Context'
 import Scrollbar from '../../components/Scrollbar/Scrollbar'
 import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 
@@ -14,6 +15,7 @@ const Menu = () => {
   const history = useHistory()
   const match = useRouteMatch()
   const menuContext = useContext(MenuContext)
+  const a2HSContext = useContext(A2HSContext)
   const {
     isDesktopOpen,
     isMini,
@@ -33,6 +35,7 @@ const Menu = () => {
     menuContext,
     themeContext,
     appConfig,
+    a2HSContext,
   }).filter((item) => {
     return item.visible !== false
   })

@@ -38,7 +38,7 @@ export const LayoutContent = () => {
   const { components, routes = [], containers, locale: confLocale } =
     appConfig || {}
   const { Menu, Loading } = components || {}
-  const { locales } = confLocale || {}
+  const { locales, onError } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
   const defaultRoutes = getDefaultRoutes(appConfig)
   const { locale } = useContext(LocaleContext)
@@ -56,7 +56,7 @@ export const LayoutContent = () => {
         }
       }
     }
-  }, [locale,locales])
+  }, [locale, locales])
 
   useEffect(() => {
     const loadMessages = async () => {
@@ -64,10 +64,15 @@ export const LayoutContent = () => {
       setMessages(messages)
     }
     loadMessages()
-  }, [locale,locales])
+  }, [locale, locales])
 
   return (
-    <IntlProvider locale={locale} key={locale} messages={messages}>
+    <IntlProvider
+      locale={locale}
+      key={locale}
+      messages={messages}
+      onError={onError}
+    >
       <LayoutContainer>
         {Menu && <Menu />}
         <Suspense fallback={<Loading />}>

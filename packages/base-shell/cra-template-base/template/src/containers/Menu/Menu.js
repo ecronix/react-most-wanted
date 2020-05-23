@@ -15,18 +15,20 @@ const Menu = () => {
 
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
   const { appConfig } = useContext(ConfigContext)
+  const { menu } = appConfig || {}
+  const { getMenuItems } = menu || {}
 
-  const itemsMenu = appConfig
-    .getMenuItems({
-      intl,
-      auth: appConfig.auth,
-      locale,
-      updateLocale: setLocale,
-      handleSignOut,
-    })
-    .filter((item) => {
-      return item.visible !== false
-    })
+  const itemsMenu = getMenuItems
+    ? getMenuItems({
+        intl,
+        auth: appConfig.auth,
+        locale,
+        updateLocale: setLocale,
+        handleSignOut,
+      }).filter((item) => {
+        return item.visible !== false
+      })
+    : []
 
   const getNestedItems = function (hostItem, hostIndex) {
     if (hostItem.nestedItems !== undefined) {

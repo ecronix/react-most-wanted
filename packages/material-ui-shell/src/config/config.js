@@ -11,6 +11,12 @@ const config = {
   components: {
     Loading,
     Menu: lazy(() => import('../containers/Menu/Menu')),
+    UpdateDialog: lazy(() => import('../components/UpdateDialog/UpdateDialog')),
+  },
+  pwa: {
+    useiOSPWAPrompt: true,
+    iOSPWAPromptProps: {},
+    useUpdateDialog: true,
   },
   menu: {
     width: 240,

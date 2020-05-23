@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
-import isUpdateAwailable, { handleUpdate } from '../../utils/updates'
+
+const runUpdate = () => {
+  window.update && window.update()
+}
 
 const Provider = ({ children, checkInterval }) => {
-  const [updateAvailable, setUpdaeAvailable] = useState(false)
+  const [isUpdateAvailable, setUpdateAvailable] = useState(false)
 
   const checkUpdate = () => {
-    if (isUpdateAwailable()) {
-      setUpdaeAvailable(true)
+    if (window.update) {
+      setUpdateAvailable(true)
     } else {
-      setUpdaeAvailable(false)
+      setUpdateAvailable(false)
       setTimeout(checkUpdate, checkInterval)
     }
   }
@@ -18,7 +21,7 @@ const Provider = ({ children, checkInterval }) => {
   useEffect(checkUpdate, [checkUpdate])
 
   return (
-    <Context.Provider value={{ updateAvailable, handleUpdate }}>
+    <Context.Provider value={{ isUpdateAvailable, runUpdate }}>
       {children}
     </Context.Provider>
   )
