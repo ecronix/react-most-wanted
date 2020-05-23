@@ -9,7 +9,6 @@ const HomePage = ({ intl }) => {
       <Scrollbar
         style={{ height: '100%', width: '100%', display: 'flex', flex: 1 }}
       >
-        <div style={{ width: 500, height: 500, backgroundColor: 'red' }}></div>
         {intl.formatMessage({ id: 'home' })}
       </Scrollbar>
     </Page>
