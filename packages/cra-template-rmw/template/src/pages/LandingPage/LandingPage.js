@@ -113,7 +113,7 @@ class LandingPage extends Component {
         isDivider: true,
       },
       {
-        name: 'Anmelden',
+        name: formatMessage('signin'),
         onClick: () => history.push('/signin'),
         icon: <LockIcon />,
       },
@@ -222,7 +222,7 @@ class LandingPage extends Component {
                   style={{ margin: 30, borderRadius: '40px' }}
                   variant="contained"
                   color="secondary"
-                  name="signin"
+                  name={formatMessage('signin')}
                   onClick={() => {
                     history.push('/signin')
                   }}
