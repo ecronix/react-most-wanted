@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SignIn = () => {
+const SignUp = () => {
   const classes = useStyles()
   const intl = useIntl()
   const history = useHistory()
@@ -83,11 +82,19 @@ const SignIn = () => {
   }
 
   return (
-    <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
+    <Page
+      pageTitle={intl.formatMessage({
+        id: 'sign_up',
+        defaultMessage: ' Sign up',
+      })}
+      onBackClick={() => {
+        history.goBack()
+      }}
+    >
       <Paper className={classes.paper} elevation={6}>
         <div className={classes.container}>
           <Typography component="h1" variant="h5">
-            {intl.formatMessage({ id: 'sign_in' })}
+            {intl.formatMessage({ id: 'sign_up', defaultMessage: 'Sign up' })}
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
@@ -98,10 +105,28 @@ const SignIn = () => {
               required
               fullWidth
               id="username"
-              label={intl.formatMessage({ id: 'username' })}
+              label={intl.formatMessage({
+                id: 'username',
+                defaultMessage: 'Username',
+              })}
               name="username"
               autoComplete="username"
               autoFocus
+            />
+            <TextField
+              value={username}
+              onInput={(e) => setUsername(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label={intl.formatMessage({
+                id: 'email',
+                defaultMessage: 'E-Mail',
+              })}
+              name="email"
+              autoComplete="email"
             />
             <TextField
               value={password}
@@ -111,9 +136,28 @@ const SignIn = () => {
               required
               fullWidth
               name="password"
-              label={intl.formatMessage({ id: 'password' })}
+              label={intl.formatMessage({
+                id: 'password',
+                defaultMessage: 'Password',
+              })}
               type="password"
               id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              value={password}
+              onInput={(e) => setPassword(e.target.value)}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password_confirm"
+              label={intl.formatMessage({
+                id: 'password_confirm',
+                defaultMessage: 'Confirm Password',
+              })}
+              type="password"
+              id="password_confirm"
               autoComplete="current-password"
             />
             <Button
@@ -123,25 +167,13 @@ const SignIn = () => {
               color="primary"
               className={classes.submit}
             >
-              {intl.formatMessage({ id: 'sign_in' })}
+              {intl.formatMessage({ id: 'sign_up', defaultMessage: 'Sign up' })}
             </Button>
           </form>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              width: '100%',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Link to="/password_reset">Forgot Password?</Link>
-            <Link to="/signup">Register</Link>
-          </div>
         </div>
       </Paper>
     </Page>
   )
 }
 
-export default SignIn
+export default SignUp
