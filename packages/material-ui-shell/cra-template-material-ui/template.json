@@ -13,6 +13,8 @@
     "react-ios-pwa-prompt": "1.x",
     "react-router-dom": "5.x",
     "base-shell": "1.x",
-    "material-ui-shell": "1.x"
+    "material-ui-shell": "1.x",
+    "github-markdown-css": "4.x",
+    "react-markdown": "4.x"
   }
 }
