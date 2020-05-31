@@ -25,7 +25,7 @@ const config = {
     MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
   },
   pages: {
-    LandingPage: () => <div>Landing Page MUI</div>,
+    LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
     PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
   },
 }

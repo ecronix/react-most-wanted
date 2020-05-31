@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import MenuContext from '../../providers/Menu/Context'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
 import { useIntl } from 'react-intl'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
-import SelectableMenuList from '../../containers/SelectableMenuList'
+import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
 import A2HSContext from 'base-shell/lib/providers/AddToHomeScreen/Context'
-import Scrollbar from '../../components/Scrollbar/Scrollbar'
+import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 
 const Menu = () => {
