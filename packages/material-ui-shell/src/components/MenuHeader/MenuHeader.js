@@ -12,8 +12,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import MenuContext from '../../providers/Menu/Context'
-import ThemeContext from '../../providers/Theme/Context'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
+import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
@@ -91,8 +91,8 @@ const MenuHeader = () => {
                     {authData.displayName ? (
                       authData.displayName[0].toUpperCase()
                     ) : (
-                        <PersonIcon />
-                      )}
+                      <PersonIcon />
+                    )}
                   </Avatar>
                 </ListItemAvatar>
               )}
@@ -124,7 +124,6 @@ const MenuHeader = () => {
                       <ChromeReaderMode classes={{ root: classes.icon }} />
                     </IconButton>
                   )}
-
                   <IconButton
                     color="inherit"
                     onClick={() => {
@@ -137,7 +136,8 @@ const MenuHeader = () => {
                     {theme.direction !== 'rtl' && (
                       <ChevronLeft classes={{ root: classes.icon }} />
                     )}
-                  </IconButton>  </>
+                  </IconButton>{' '}
+                </>
               )}
             </ListItemSecondaryAction>
           )}

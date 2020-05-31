@@ -6,7 +6,6 @@ import App from 'rmw-shell/lib'
 import config from './config'
 import A2HSProvider from 'a2hs'
 
-
 class Demo extends Component {
   render() {
     return (

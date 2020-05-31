@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import MenuContext from '../../providers/Menu/Context'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
 

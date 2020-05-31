@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import MenuProvider from '../../providers/Menu/Provider'
-import ThemeProvider from '../../providers/Theme/Provider'
+import MenuProvider from 'material-ui-shell/lib/providers/Menu/Provider'
+import ThemeProvider from 'material-ui-shell/lib/providers/Theme/Provider'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 
 export default function ({ children }) {
