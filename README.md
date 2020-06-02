@@ -39,7 +39,7 @@ See [Contributing](https://github.com/TarikHuber/react-most-wanted/blob/master/C
 Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
 
 
-## Contributing
+## License
 
 This project uses [MIT license](https://github.com/TarikHuber/react-most-wanted/blob/master/LICENSE).
 
