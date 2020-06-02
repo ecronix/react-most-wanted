@@ -38,7 +38,6 @@ See [Contributing](https://github.com/TarikHuber/react-most-wanted/blob/master/C
 
 Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
 
-Thanks to @SiradDev for creating the logo for this project :smile:.
 
 ## Contributing
 
