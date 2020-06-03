@@ -30,7 +30,7 @@ Base shell + Material UI shell + [Firebase](https://firebase.google.com/)
 
 We appreciate **any** contribution! 
 
-See [Contributing](https://github.com/TarikHuber/react-most-wanted/blob/master/CONTRIBUTING.md) for details.
+See [Contributing](./CONTRIBUTING.md) for details.
 
 ## Thanks
 
