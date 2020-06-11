@@ -31,7 +31,7 @@ const theme = createMuiTheme({
 
 const isAuthorised = () => {
   try {
-    const key = Object.keys(localStorage).find(e => e.match(/persist:root/))
+    const key = Object.keys(localStorage).find((e) => e.match(/persist:root/))
     const data = JSON.parse(localStorage.getItem(key))
     const auth = JSON.parse(data.auth)
 
@@ -66,7 +66,7 @@ class LandingPage extends Component {
       })
   }
 
-  handleScroll = e => {
+  handleScroll = (e) => {
     const { transparent } = this.state
     const scrollTop =
       window.pageYOffset ||
@@ -100,7 +100,7 @@ class LandingPage extends Component {
     const sections = [
       {
         name: formatMessage('companies'),
-        onClick: handleClose => {
+        onClick: (handleClose) => {
           this.scroll('companies')
           //handleClose()
         },
@@ -222,7 +222,7 @@ class LandingPage extends Component {
                   style={{ margin: 30, borderRadius: '40px' }}
                   variant="contained"
                   color="secondary"
-                  name={formatMessage('signin')}
+                  name={'signin'}
                   onClick={() => {
                     history.push('/signin')
                   }}
