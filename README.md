@@ -19,12 +19,18 @@ To accomodate major use-cases, we have created three different shells that you c
 **[Base shell](./packages/base-shell/)**:
 the basic react setup: routing, internationalization and async load.
 
+```npx create-react-app my-app --template base```
+
 **[Material UI shell](./packages/material-ui-shell/)**:
 includes all features from the base shell expanded with [Material-UI](https://material-ui.com).
+
+```npx create-react-app my-app --template material-ui```
 
 
 **[React Most Wanted shell](./packages/rmw-shell)**:
 Base shell + Material UI shell + [Firebase](https://firebase.google.com/)
+
+```npx create-react-app my-app --template rmw```
 
 ## Contributing
 
