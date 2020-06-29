@@ -11,6 +11,7 @@ import '@formatjs/intl-relativetimeformat/dist/locale-data/ru'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/bs'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/es'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/fr'
+import '@formatjs/intl-relativetimeformat/dist/locale-data/pt'
 
 const locales = [
   {
@@ -36,8 +37,11 @@ const locales = [
   {
     locale: 'fr',
     messages: fr_messages,
+  },
+  {
+    locale: 'pt',
+    messages: pt_messages,
   }
-
 ]
 
 export default locales
