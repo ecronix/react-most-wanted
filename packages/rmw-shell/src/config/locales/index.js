@@ -1,6 +1,7 @@
 import en_messages from './en'
 import de_messages from './de'
 import fr_messages from './fr'
+import pt_messages from './pt'
 import '@formatjs/intl-relativetimeformat/polyfill'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/de'
 import '@formatjs/intl-relativetimeformat/dist/locale-data/en'
@@ -42,6 +43,10 @@ const locales = [
   {
     locale: 'fr',
     messages: fr_messages,
+  },
+  {
+    locale: 'pt',
+    messages: pt_messages,
   },
 ]
 
