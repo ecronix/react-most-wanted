@@ -33,12 +33,12 @@
   "devDependencies": {
     "@formatjs/intl-relativetimeformat": "^4.5.12",
     "intl": "^1.2.5",
-    "intl-locales-supported": "^1.8.5",
-    "nwb": "^0.24.6",
+    "intl-locales-supported": "^1.8.12",
+    "nwb": "^0.25.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-intl": "^4.4.0",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.2.0"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
