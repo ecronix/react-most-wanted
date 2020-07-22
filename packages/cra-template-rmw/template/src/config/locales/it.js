@@ -20,6 +20,7 @@ const messages = defineMessages({
   es: 'Español',
   it: 'Italiano',
   fr: 'Francese',
+  pt: 'Português',
   dark: 'Scuro',
   light: 'Chiaro',
   ics: 'ICS',

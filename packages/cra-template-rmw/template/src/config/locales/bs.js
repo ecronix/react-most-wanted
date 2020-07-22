@@ -18,6 +18,7 @@ const messages = defineMessages({
   ru: 'Русский',
   es: 'Español',
   fr: 'Francuski',
+  pt: 'Português',
   dark: 'Tamna',
   light: 'Svijetla',
   ics: 'ICS',
