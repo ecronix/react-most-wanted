@@ -1,5 +1,5 @@
 import React, { Suspense, useContext, useEffect, useState, lazy } from 'react'
-import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
+//import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
 import LocaleContext from '../../providers/Locale/Context'
 import ConfigContext from '../../providers/Config/Context'
 import LocaleProvider from '../../providers/Locale/Provider'
@@ -35,12 +35,17 @@ const loadLocalePolyfill = (locale) => {
 export const LayoutContent = () => {
   const [messages, setMessages] = useState([])
   const { appConfig } = useContext(ConfigContext)
-  const { components, routes = [], containers, locale: confLocale } =
-    appConfig || {}
+  const {
+    components,
+    routes = [],
+    containers,
+    locale: confLocale,
+    getDefaultRoutes,
+  } = appConfig || {}
   const { Menu, Loading } = components || {}
   const { locales, onError } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
-  const defaultRoutes = getDefaultRoutes(appConfig)
+  const defaultRoutes = getDefaultRoutes ? getDefaultRoutes(appConfig) : []
   const { locale } = useContext(LocaleContext)
 
   useEffect(() => {
