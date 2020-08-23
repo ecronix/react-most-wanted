@@ -10,7 +10,7 @@ import A2HSContext from 'base-shell/lib/providers/AddToHomeScreen/Context'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 
-const Menu = () => {
+const Menu = (props) => {
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
@@ -36,6 +36,7 @@ const Menu = () => {
     themeContext,
     appConfig,
     a2HSContext,
+    ...props,
   }).filter((item) => {
     return item.visible !== false
   })
