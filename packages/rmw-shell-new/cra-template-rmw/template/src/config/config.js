@@ -1,7 +1,6 @@
 import React, { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
-import { isAuthorised } from '../utils/auth'
 import { getAuth } from '../utils/auth'
 import getMenuItems from './menuItems'
 import themes from './themes'
@@ -25,21 +24,16 @@ const config = {
       storageBucket: 'react-most-wanted-dev.appspot.com',
       messagingSenderId: '70650394824',
     },
-    providers: [
-      'google.com',
-      'facebook.com',
-      'twitter.com',
-      'github.com',
-      'password',
-      'phone',
-    ],
-  },
-  auth: {
-    isAuthenticated: isAuthorised,
-    getData: () => {
-      return getAuth()
+    firebaseuiProps: {
+      signInOptions: [
+        'google.com',
+        'facebook.com',
+        'twitter.com',
+        'github.com',
+        'password',
+        'phone',
+      ],
     },
-    signInURL: '/signin',
   },
   routes,
   locale: {

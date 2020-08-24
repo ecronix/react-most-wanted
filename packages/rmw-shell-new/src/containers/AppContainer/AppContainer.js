@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import AppContainer from 'material-ui-shell/lib/containers/AppContainer/AppContainer'
-//import FirebaseProvider from 'firekit-provider'
 import FirebaseProvider from 'rmw-shell/lib/providers/Firebase/Provider'
+import FirebaseContainer from 'rmw-shell/lib/containers/FirebaseContainer/FirebaseContainer'
 import { Provider } from 'react-redux'
-import configureStore from '../../store'
+import configureStore from 'rmw-shell/lib/store'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -32,7 +32,7 @@ export default function ({ children }) {
     <AppContainer>
       <Provider store={store}>
         <FirebaseProvider firebaseApp={firebaseApp}>
-          {children}
+          <FirebaseContainer>{children}</FirebaseContainer>
         </FirebaseProvider>
       </Provider>
     </AppContainer>

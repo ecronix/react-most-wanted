@@ -5,7 +5,6 @@ import DaschboardIcon from '@material-ui/icons/Dashboard'
 import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LockIcon from '@material-ui/icons/Lock'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import { logout } from '../utils/auth'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen'
@@ -23,9 +22,16 @@ const getMenuItems = (props) => {
     menuContext,
     themeContext,
     a2HSContext,
+    firebaseApp,
+    auth,
   } = props
-  const { auth } = appConfig || {}
-  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
+  const {
+    isDesktop,
+    isAuthMenuOpen,
+    useMiniMode,
+    setMiniMode,
+    setAuthMenuOpen,
+  } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
 
@@ -41,7 +47,7 @@ const getMenuItems = (props) => {
     }
   })
 
-  const isAuthorised = auth.isAuthenticated()
+  const isAuthorised = auth.isAuthorised
 
   const themeItems = allThemes.map((t) => {
     return {
@@ -55,11 +61,15 @@ const getMenuItems = (props) => {
     }
   })
 
+  const handleSignOut = () => {
+    firebaseApp.auth().signOut()
+  }
+
   if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
         value: '/signin',
-        onClick: isAuthorised ? logout : () => {},
+        onClick: isAuthorised ? () => handleSignOut() : () => {},
         visible: true,
         primaryText: isAuthorised
           ? intl.formatMessage({ id: 'sign_out' })
