@@ -10,6 +10,7 @@ import { injectIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { withFirebase } from 'firekit-provider'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
 
 const SignIn = () => {
   let history = useHistory()
@@ -18,15 +19,16 @@ const SignIn = () => {
   const { firebaseApp } = useContext(FirebaseContext)
   const { firebase = {} } = appConfig || {}
   const { firebaseuiProps = {} } = firebase
+  const { setAuthMenuOpen } = useContext(MenuContext)
 
   const uiConfig = {
     signInSuccessUrl: '/',
     signInFlow: 'popup',
     callbacks: {
       signInSuccessWithAuthResult: () => {
-        console.log('test')
-        history.push('/home')
+        //history.push('/home')
 
+        setAuthMenuOpen(false)
         // To avoid page reload on single page applications
         return false
       },

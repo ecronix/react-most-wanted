@@ -23,7 +23,7 @@ const getMenuItems = (props) => {
     themeContext,
     a2HSContext,
     firebaseApp,
-    auth,
+    auth: authData,
   } = props
   const {
     isDesktop,
@@ -34,6 +34,7 @@ const getMenuItems = (props) => {
   } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
+  const { auth } = authData
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -47,7 +48,7 @@ const getMenuItems = (props) => {
     }
   })
 
-  const isAuthorised = auth.isAuthorised
+  const isAuthorised = auth.isAuthenticated
 
   const themeItems = allThemes.map((t) => {
     return {

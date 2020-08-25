@@ -1,6 +1,6 @@
 import React, { lazy } from 'react'
 import { Route } from 'react-router-dom'
-import PublicRoute from 'rmw-shell/lib/components/PublicRoute/PublicRoute'
+import PublicRoute from 'base-shell/lib/components/PublicRoute/PublicRoute'
 
 const SignIn = lazy(() => import('../pages/SignIn/SignIn'))
 
