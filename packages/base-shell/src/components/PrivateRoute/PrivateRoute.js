@@ -5,15 +5,15 @@ import AuthContext from '../../providers/Auth/Context'
 
 function PrivateRoute({ component: Component, ...rest }) {
   const { appConfig } = useContext(ConfigContext)
-  const { isAuthenticated } = useContext(AuthContext)
-  const { auth } = appConfig || {}
-  const { signInURL = '/signin' } = auth || {}
+  const { auth } = useContext(AuthContext)
+  const { auth: authConfig } = appConfig || {}
+  const { signInURL = '/signin' } = authConfig || {}
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated ? (
+        auth.isAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect
