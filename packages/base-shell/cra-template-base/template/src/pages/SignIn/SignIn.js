@@ -4,9 +4,7 @@ import { useIntl } from 'react-intl'
 import AuthContext from 'base-shell/lib/providers/Auth/Context'
 
 const SignIn = () => {
-  const { setAuth, setIsAuthenticated, isAuthenticated } = useContext(
-    AuthContext
-  )
+  const { setAuth, auth } = useContext(AuthContext)
   let history = useHistory()
   const intl = useIntl()
   const [username, setUsername] = useState('')
@@ -20,17 +18,14 @@ const SignIn = () => {
   }
 
   const authenticate = (user) => {
-    setAuth(user)
-    setIsAuthenticated(true)
+    setAuth({ isAuthenticated: true, ...user })
     let _location = history.location
-    if (isAuthenticated) {
-      let _route = '/home'
-      if (_location.state && _location.state.from) {
-        _route = _location.state.from.pathname
-        history.push(_route)
-      } else {
-        history.push(_route)
-      }
+    let _route = '/home'
+    if (_location.state && _location.state.from) {
+      _route = _location.state.from.pathname
+      history.push(_route)
+    } else {
+      history.push(_route)
     }
   }
 

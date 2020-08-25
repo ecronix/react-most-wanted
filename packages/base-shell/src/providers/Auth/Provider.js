@@ -3,37 +3,20 @@ import React, { useState, useEffect } from 'react'
 import Context from './Context'
 
 const Provider = ({ persistKey = 'auth', children }) => {
-  const persistIsAuthenticated = localStorage.getItem(
-    `${persistKey}_isAuthenticated`
-  )
-  const persistAuth = JSON.parse(localStorage.getItem(`${persistKey}_auth`))
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    persistIsAuthenticated || false
-  )
+  const persistAuth = JSON.parse(localStorage.getItem(persistKey))
+
   const [auth, setAuth] = useState(persistAuth || {})
 
   useEffect(() => {
     try {
-      localStorage.setItem(persistIsAuthenticated, isAuthenticated)
+      localStorage.setItem(persistKey, JSON.stringify(auth))
     } catch (error) {
       console.warn(error)
     }
-  }, [isAuthenticated, persistIsAuthenticated])
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(persistAuth, JSON.stringify(auth))
-    } catch (error) {
-      console.warn(error)
-    }
-  }, [auth, persistIsAuthenticated])
+  }, [auth, persistKey])
 
   return (
-    <Context.Provider
-      value={{ isAuthenticated, setIsAuthenticated, auth, setAuth }}
-    >
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ auth, setAuth }}>{children}</Context.Provider>
   )
 }
 

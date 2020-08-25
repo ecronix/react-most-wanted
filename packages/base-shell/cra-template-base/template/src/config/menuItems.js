@@ -2,8 +2,8 @@ import allLocales from './locales'
 // import allThemes from './themes'
 
 const getMenuItems = (props) => {
-  const { auth, locale, updateLocale, intl } = props
-  const { isAuthenticated, setAuth, setIsAuthenticated } = auth
+  const { auth: authData, locale, updateLocale, intl } = props
+  const { setAuth, auth } = authData
 
   const localeItems = allLocales.map((l) => {
     const result = {
@@ -19,22 +19,21 @@ const getMenuItems = (props) => {
   })
 
   const handleSignOut = () => {
-    setIsAuthenticated(false)
-    setAuth(null)
+    setAuth({ isAuthenticated: false })
   }
 
   return [
     {
       value: '/signin',
-      onClick: isAuthenticated ? handleSignOut : () => {},
+      onClick: auth.isAuthenticated ? handleSignOut : () => {},
       visible: true,
-      primaryText: isAuthenticated
+      primaryText: auth.isAuthenticated
         ? intl.formatMessage({ id: 'sign_out' })
         : intl.formatMessage({ id: 'sign_in' }),
     },
     {
       value: '/home',
-      visible: isAuthenticated,
+      visible: auth.isAuthenticated,
       primaryText: intl.formatMessage({ id: 'home' }),
     },
     {

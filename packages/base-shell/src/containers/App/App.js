@@ -11,7 +11,8 @@ const Layout = lazy(() => import('../../containers/Layout/Layout'))
 
 const App = ({ config: appConfig }) => {
   const config = { ...defaultConfig, ...appConfig }
-  const { pages, components, containers, update } = config
+  const { pages, components, containers, update, auth } = config
+  const { persistKey } = auth || {}
   const { LandingPage = false } = pages || {}
   const { checkInterval = 5000 } = update || {}
   const { Loading } = components || {}
@@ -19,7 +20,7 @@ const App = ({ config: appConfig }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <AuthProvider>
+      <AuthProvider persistKey={persistKey}>
         <ConfigProvider appConfig={config}>
           <AddToHomeScreenProvider>
             <UpdateProvider checkInterval={checkInterval}>
