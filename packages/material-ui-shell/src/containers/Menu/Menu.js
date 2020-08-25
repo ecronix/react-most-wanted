@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
 import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
+import AuthContext from 'base-shell/lib/providers/Auth/Context'
 import A2HSContext from 'base-shell/lib/providers/AddToHomeScreen/Context'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
@@ -14,6 +15,7 @@ const Menu = (props) => {
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
+  const auth = useContext(AuthContext)
   const menuContext = useContext(MenuContext)
   const a2HSContext = useContext(A2HSContext)
   const {
@@ -36,6 +38,7 @@ const Menu = (props) => {
     themeContext,
     appConfig,
     a2HSContext,
+    auth,
     ...props,
   }).filter((item) => {
     return item.visible !== false

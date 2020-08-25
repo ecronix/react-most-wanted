@@ -11,6 +11,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
+import AuthContext from 'base-shell/lib/providers/Auth/Context'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
 import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
@@ -47,10 +48,11 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuHeader = () => {
   const theme = useTheme()
+  const { auth } = useContext(AuthContext)
   const { appConfig } = useContext(ConfigContext)
   const { type, setType } = useContext(ThemeContext)
   const { menu } = appConfig || {}
-  const authData = appConfig.auth.getData()
+  const authData = auth
   const classes = useStyles()
   const {
     isDesktop,
@@ -63,14 +65,14 @@ const MenuHeader = () => {
     useMiniMode,
   } = useContext(MenuContext)
 
+  const isAuthenticated = auth.isAuthenticated
+
   return (
     <Paper square={true} className={classes.paper}>
-      {isMini && authData.isAuthorised && (
-        <div className={classes.toolbar}></div>
-      )}
-      <List className={clsx(!authData.isAuthorised && classes.toolbar)}>
+      {isMini && isAuthenticated && <div className={classes.toolbar}></div>}
+      <List className={clsx(!isAuthenticated && classes.toolbar)}>
         <ListItem className={classes.listItem}>
-          {authData.isAuthorised && (
+          {isAuthenticated && (
             <React.Fragment>
               {authData.photoURL && (
                 <ListItemAvatar
@@ -142,7 +144,7 @@ const MenuHeader = () => {
             </ListItemSecondaryAction>
           )}
         </ListItem>
-        {authData.isAuthorised && (
+        {isAuthenticated && (
           <ListItem
             onClick={() => {
               setAuthMenuOpen(!isAuthMenuOpen)
