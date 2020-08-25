@@ -2,7 +2,6 @@ import React, { lazy } from 'react'
 import MUIConfig from 'material-ui-shell'
 import getDefaultRoutes from './routes'
 import merge from 'base-shell/lib/utils/config'
-import { isAuthorised, getAuth } from '../utils/auth'
 
 const config = {
   getDefaultRoutes,
@@ -10,19 +9,12 @@ const config = {
     AppContainer: lazy(() => import('../containers/AppContainer/AppContainer')),
   },
   components: {
-    Menu: lazy(() => import('../containers/Menu/Menu')),
+    Menu: lazy(() => import('../containers/FirebaseMenu/FirebaseMenu')),
   },
   auth: {
-    localStorageAuthKey: 'rmw-shell:auth',
-    isAuthenticated: isAuthorised,
+    persistKey: 'rmw-shell:auth',
     signInURL: '/signin',
     redirectTo: '/home',
-    getData: () => {
-      return getAuth()
-    },
-  },
-  menu: {
-    MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
   },
   redux: {},
 }
