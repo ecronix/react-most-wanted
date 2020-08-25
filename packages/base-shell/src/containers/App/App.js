@@ -1,5 +1,6 @@
 import ConfigProvider from '../../providers/Config/Provider'
 import OnlineProvider from '../../providers/Online/Provider'
+import AuthProvider from '../../providers/Auth/Provider'
 import React, { Suspense, lazy } from 'react'
 import UpdateProvider from '../../providers/Update/Provider'
 import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
@@ -18,24 +19,26 @@ const App = ({ config: appConfig }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <ConfigProvider appConfig={config}>
-        <AddToHomeScreenProvider>
-          <UpdateProvider checkInterval={checkInterval}>
-            <AppContainer>
-              <Router>
-                <OnlineProvider>
-                  <Switch>
-                    {LandingPage && (
-                      <Route path="/" exact component={LandingPage} />
-                    )}
-                    <Route component={Layout} />
-                  </Switch>
-                </OnlineProvider>
-              </Router>
-            </AppContainer>
-          </UpdateProvider>
-        </AddToHomeScreenProvider>
-      </ConfigProvider>
+      <AuthProvider>
+        <ConfigProvider appConfig={config}>
+          <AddToHomeScreenProvider>
+            <UpdateProvider checkInterval={checkInterval}>
+              <AppContainer>
+                <Router>
+                  <OnlineProvider>
+                    <Switch>
+                      {LandingPage && (
+                        <Route path="/" exact component={LandingPage} />
+                      )}
+                      <Route component={Layout} />
+                    </Switch>
+                  </OnlineProvider>
+                </Router>
+              </AppContainer>
+            </UpdateProvider>
+          </AddToHomeScreenProvider>
+        </ConfigProvider>
+      </AuthProvider>
     </Suspense>
   )
 }

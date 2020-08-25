@@ -1,30 +1,26 @@
 import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
-import { logout } from '../../utils/auth'
 import { useHistory, NavLink } from 'react-router-dom'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
+import AuthContext from 'base-shell/lib/providers/Auth/Context'
 
 const Menu = () => {
   let history = useHistory()
   const intl = useIntl()
-  const handleSignOut = (user) => {
-    logout()
-    history.push('/signin')
-  }
 
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
   const { appConfig } = useContext(ConfigContext)
+  const auth = useContext(AuthContext)
   const { menu } = appConfig || {}
   const { getMenuItems } = menu || {}
 
   const itemsMenu = getMenuItems
     ? getMenuItems({
         intl,
-        auth: appConfig.auth,
+        auth,
         locale,
         updateLocale: setLocale,
-        handleSignOut,
       }).filter((item) => {
         return item.visible !== false
       })
