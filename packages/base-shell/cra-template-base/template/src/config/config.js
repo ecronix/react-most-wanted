@@ -19,7 +19,7 @@ const config = {
     },
   },
   auth: {
-    persistKey: 'base-shell-auth',
+    persistKey: 'base-shell:auth',
     signInURL: '/signin',
   },
   routes,
