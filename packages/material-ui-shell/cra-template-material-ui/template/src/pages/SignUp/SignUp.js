@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom'
-import { saveAuthorisation, isAuthorised } from '../../utils/auth'
 import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React, { useState, useContext } from 'react'
@@ -9,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
+import AuthContext from 'base-shell/lib/providers/Auth/Context'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,6 +56,7 @@ const SignUp = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const { setAuthMenuOpen } = useContext(MenuContext)
+  const { auth, setAuth } = useContext(AuthContext)
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -66,18 +67,17 @@ const SignUp = () => {
   }
 
   const authenticate = (user) => {
-    saveAuthorisation(user)
-    let _location = history.location
-    let isAuth = isAuthorised()
+    setAuth({ isAuthenticated: true, ...user })
+
     setAuthMenuOpen(false)
-    if (isAuth) {
-      let _route = '/home'
-      if (_location.state && _location.state.from) {
-        _route = _location.state.from.pathname
-        history.push(_route)
-      } else {
-        history.push(_route)
-      }
+    let _location = history.location
+
+    let _route = '/home'
+    if (_location.state && _location.state.from) {
+      _route = _location.state.from.pathname
+      history.push(_route)
+    } else {
+      history.push(_route)
     }
   }
 

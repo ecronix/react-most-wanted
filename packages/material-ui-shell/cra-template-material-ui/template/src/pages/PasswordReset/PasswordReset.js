@@ -1,5 +1,4 @@
 import { useHistory } from 'react-router-dom'
-import { saveAuthorisation, isAuthorised } from '../../utils/auth'
 import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React, { useState, useContext } from 'react'
