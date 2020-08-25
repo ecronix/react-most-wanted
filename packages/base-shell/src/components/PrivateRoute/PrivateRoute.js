@@ -1,17 +1,19 @@
 import React, { useContext } from 'react'
 import ConfigContext from '../../providers/Config/Context'
 import { Route, Redirect } from 'react-router-dom'
+import AuthContext from '../../providers/Auth/Context'
 
 function PrivateRoute({ component: Component, ...rest }) {
   const { appConfig } = useContext(ConfigContext)
+  const { isAuthenticated } = useContext(AuthContext)
   const { auth } = appConfig || {}
-  const { isAuthenticated = () => false, signInURL = '/signin' } = auth || {}
+  const { signInURL = '/signin' } = auth || {}
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isAuthenticated(appConfig) ? (
+        isAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect
