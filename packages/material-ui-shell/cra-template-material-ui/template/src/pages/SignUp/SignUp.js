@@ -55,6 +55,8 @@ const SignUp = () => {
   const history = useHistory()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [userEmail, setUserEmail] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const { setAuthMenuOpen } = useContext(MenuContext)
   const { auth, setAuth } = useContext(AuthContext)
 
@@ -114,8 +116,8 @@ const SignUp = () => {
               autoFocus
             />
             <TextField
-              value={username}
-              onInput={(e) => setUsername(e.target.value)}
+              value={userEmail}
+              onInput={(e) => setUserEmail(e.target.value)}
               variant="outlined"
               margin="normal"
               required
@@ -145,8 +147,8 @@ const SignUp = () => {
               autoComplete="current-password"
             />
             <TextField
-              value={password}
-              onInput={(e) => setPassword(e.target.value)}
+              value={confirmPassword}
+              onInput={(e) => setConfirmPassword(e.target.value)}
               variant="outlined"
               margin="normal"
               required
