@@ -31,13 +31,13 @@
     "react-intl": "4.x"
   },
   "devDependencies": {
-    "@formatjs/intl-relativetimeformat": "^7.2.4",
+    "@formatjs/intl-relativetimeformat": "^7.2.5",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.12",
     "nwb": "^0.25.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-intl": "^5.7.1",
+    "react-intl": "^5.8.0",
     "react-router-dom": "^5.2.0"
   },
   "author": "Tarik Huber",

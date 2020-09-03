@@ -6,6 +6,7 @@ import UpdateProvider from '../../providers/Update/Provider'
 import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
 import defaultConfig from '../../config'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
 
 const Layout = lazy(() => import('../../containers/Layout/Layout'))
 
@@ -20,26 +21,28 @@ const App = ({ config: appConfig }) => {
 
   return (
     <Suspense fallback={<Loading />}>
-      <AuthProvider persistKey={persistKey}>
-        <ConfigProvider appConfig={config}>
-          <AddToHomeScreenProvider>
-            <UpdateProvider checkInterval={checkInterval}>
-              <AppContainer>
-                <Router>
-                  <OnlineProvider>
-                    <Switch>
-                      {LandingPage && (
-                        <Route path="/" exact component={LandingPage} />
-                      )}
-                      <Route component={Layout} />
-                    </Switch>
-                  </OnlineProvider>
-                </Router>
-              </AppContainer>
-            </UpdateProvider>
-          </AddToHomeScreenProvider>
-        </ConfigProvider>
-      </AuthProvider>
+      <SimpleValuesProvider>
+        <AuthProvider persistKey={persistKey}>
+          <ConfigProvider appConfig={config}>
+            <AddToHomeScreenProvider>
+              <UpdateProvider checkInterval={checkInterval}>
+                <AppContainer>
+                  <Router>
+                    <OnlineProvider>
+                      <Switch>
+                        {LandingPage && (
+                          <Route path="/" exact component={LandingPage} />
+                        )}
+                        <Route component={Layout} />
+                      </Switch>
+                    </OnlineProvider>
+                  </Router>
+                </AppContainer>
+              </UpdateProvider>
+            </AddToHomeScreenProvider>
+          </ConfigProvider>
+        </AuthProvider>
+      </SimpleValuesProvider>
     </Suspense>
   )
 }

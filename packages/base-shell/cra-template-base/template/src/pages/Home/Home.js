@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
+import SimpleValuesContext from 'base-shell/lib/providers/SimpleValues/Context'
 
 const HomePage = () => {
   const intl = useIntl()
-  return <div>{intl.formatMessage({ id: 'home' })}</div>
+  const { setValue, getValue } = useContext(SimpleValuesContext)
+
+  console.log(getValue('test', 0))
+
+  return (
+    <div>
+      <button
+        onClick={(e) => {
+          setValue('test', 3, true)
+        }}
+      >
+        OK
+      </button>
+
+      {intl.formatMessage({ id: 'home' })}
+    </div>
+  )
 }
 export default HomePage
