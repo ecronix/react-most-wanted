@@ -8,6 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen'
+import ChatBubble from '@material-ui/icons/ChatBubble'
 import GetApp from '@material-ui/icons/GetApp'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import StyleIcon from '@material-ui/icons/Style'
@@ -78,6 +79,15 @@ const getMenuItems = (props) => {
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'home' }),
       leftIcon: <DaschboardIcon />,
+    },
+    {
+      value: '/dialog_demo',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({
+        id: 'dialog_demo',
+        defaultMessage: 'Dialog demo',
+      }),
+      leftIcon: <ChatBubble />,
     },
     {
       value: '/about',
