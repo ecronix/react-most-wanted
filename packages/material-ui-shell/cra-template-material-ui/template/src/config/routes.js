@@ -9,6 +9,7 @@ const SignUp = lazy(() => import('../pages/SignUp/SignUp'))
 const PasswordReset = lazy(() => import('../pages/PasswordReset/PasswordReset'))
 const About = lazy(() => import('../pages/About/About'))
 const Home = lazy(() => import('../pages/Home/Home'))
+const DialogDemo = lazy(() => import('../pages/DialogDemo/DialogDemo'))
 
 const routes = [
   <PublicRoute path="/signin" redirectTo="/" exact component={SignIn} />,
@@ -21,6 +22,7 @@ const routes = [
   />,
   <Route path="/about" exact component={About} />,
   <PrivateRoute path="/home" exact component={Home} />,
+  <PrivateRoute path="/dialog_demo" exact component={DialogDemo} />,
 ]
 
 export default routes
