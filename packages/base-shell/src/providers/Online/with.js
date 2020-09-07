@@ -1,7 +1,7 @@
 import Context from './Context'
 import React from 'react'
 
-const withOnline = (Component) => {
+const withContainer = (Component) => {
   const ChildComponent = (props) => {
     return (
       <Context.Consumer>
@@ -15,4 +15,4 @@ const withOnline = (Component) => {
   return ChildComponent
 }
 
-export default withOnline
+export default withContainer
