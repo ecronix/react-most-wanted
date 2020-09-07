@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
-import SimpleValuesContext from 'base-shell/lib/providers/SimpleValues/Context'
+import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 
 const HomePage = () => {
   const intl = useIntl()
-  const { setValue, getValue } = useContext(SimpleValuesContext)
+  const { setValue, getValue } = useSimpleValues()
 
   console.log(getValue('test', 0))
 

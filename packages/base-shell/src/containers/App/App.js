@@ -1,12 +1,12 @@
+import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
+import AuthProvider from '../../providers/Auth/Provider'
 import ConfigProvider from '../../providers/Config/Provider'
 import OnlineProvider from '../../providers/Online/Provider'
-import AuthProvider from '../../providers/Auth/Provider'
 import React, { Suspense, lazy } from 'react'
+import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
 import UpdateProvider from '../../providers/Update/Provider'
-import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
 import defaultConfig from '../../config'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
 
 const Layout = lazy(() => import('../../containers/Layout/Layout'))
 

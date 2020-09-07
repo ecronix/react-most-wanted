@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import OnlineContext from 'base-shell/lib/providers/Online/Context'
+import { useOnline } from 'base-shell/lib/providers/Online'
 import { Link } from 'react-router-dom'
 
 const LandingPage = () => {
-  const isOnline = useContext(OnlineContext)
+  const isOnline = useOnline()
   return (
     <div>
       Landing Page
