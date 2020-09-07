@@ -1,15 +1,15 @@
-import { useHistory } from 'react-router-dom'
-import { useIntl } from 'react-intl'
+import Button from '@material-ui/core/Button'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
+import Paper from '@material-ui/core/Paper'
 import React, { useState, useContext } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import AuthContext from 'base-shell/lib/providers/Auth/Context'
 import { Link } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
+import { useAuth } from 'base-shell/lib/providers/Auth'
+import { useHistory } from 'react-router-dom'
+import { useIntl } from 'react-intl'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,8 +56,8 @@ const SignIn = () => {
   const history = useHistory()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setAuthMenuOpen } = useContext(MenuContext)
-  const { auth, setAuth } = useContext(AuthContext)
+  const { setAuthMenuOpen } = useMenu()
+  const { auth, setAuth } = useAuth()
 
   function handleSubmit(event) {
     event.preventDefault()

@@ -5,10 +5,10 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import React, { useContext } from 'react'
-import SimpleValuesContext from 'base-shell/lib/providers/SimpleValues/Context'
 import Slide from '@material-ui/core/Slide'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useIntl } from 'react-intl'
+import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 import { useTheme } from '@material-ui/core/styles'
 
 const Transition = React.forwardRef((props, ref) => (
@@ -24,7 +24,7 @@ const QuestionDialog = ({
 }) => {
   const intl = useIntl()
   const theme = useTheme()
-  const { getValue, setValue } = useContext(SimpleValuesContext)
+  const { getValue, setValue } = useSimpleValues()
   const handleClose = () => {
     setValue(id, false)
   }
@@ -48,7 +48,7 @@ const QuestionDialog = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          {intl.formatMessage({ id: 'cancel' })}
+          {intl.formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
         </Button>
         <Button
           onClick={() => {

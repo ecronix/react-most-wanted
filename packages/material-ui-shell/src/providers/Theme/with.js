@@ -1,7 +1,7 @@
 import Context from './Context'
 import React from 'react'
 
-const withMenu = (Component) => {
+const withContainer = (Component) => {
   const ChildComponent = (props) => {
     return (
       <Context.Consumer>
@@ -15,4 +15,4 @@ const withMenu = (Component) => {
   return ChildComponent
 }
 
-export default withMenu
+export default withContainer

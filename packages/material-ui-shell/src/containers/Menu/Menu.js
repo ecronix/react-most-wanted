@@ -1,35 +1,30 @@
 import React, { useContext } from 'react'
-import { useHistory, useRouteMatch } from 'react-router-dom'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import { useIntl } from 'react-intl'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
-import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
-import LocaleContext from 'base-shell/lib/providers/Locale/Context'
-import AuthContext from 'base-shell/lib/providers/Auth/Context'
-import A2HSContext from 'base-shell/lib/providers/AddToHomeScreen/Context'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
-import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
+import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
+import { useAddToHomeScreen } from 'base-shell/lib/providers/AddToHomeScreen'
+import { useAuth } from 'base-shell/lib/providers/Auth'
+import { useConfig } from 'base-shell/lib/providers/Config'
+import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useIntl } from 'react-intl'
+import { useLocale } from 'base-shell/lib/providers/Locale'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import { useTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const Menu = (props) => {
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
-  const auth = useContext(AuthContext)
-  const menuContext = useContext(MenuContext)
-  const a2HSContext = useContext(A2HSContext)
-  const {
-    isDesktopOpen,
-    isMini,
-    setDesktopOpen,
-    setMobileOpen,
-    useMiniMode,
-  } = menuContext
-  const { appConfig } = useContext(ConfigContext)
-  const { setLocale, locale = 'en' } = useContext(LocaleContext)
+  const auth = useAuth()
+  const menuContext = useMenu()
+  const a2HSContext = useAddToHomeScreen()
+  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode } =
+    menuContext || {}
+  const { appConfig } = useConfig()
+  const { setLocale, locale = 'en' } = useLocale()
   const { menu } = appConfig || {}
   const { MenuHeader, getMenuItems } = menu || {}
-  const themeContext = useContext(ThemeContext)
+  const themeContext = useTheme()
   const menuItems = getMenuItems({
     intl,
     locale,

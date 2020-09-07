@@ -6,14 +6,14 @@ import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import { useIntl } from 'react-intl'
-import UpdateContext from 'base-shell/lib/providers/Update/Context'
+import { useUpdate } from 'base-shell/lib/providers/Update'
 
 export default function ({ children }) {
   const intl = useIntl()
   const { appConfig } = useContext(ConfigContext)
   const { components } = appConfig || {}
   const { UpdateDialog = null } = components || {}
-  const { isUpdateAvailable, runUpdate } = useContext(UpdateContext)
+  const { isUpdateAvailable, runUpdate } = useUpdate()
   const { themeID, type } = useContext(ThemeContext)
   const { theme: themeConfig, pwa } = appConfig || {}
   const { useiOSPWAPrompt, iOSPWAPromptProps, useUpdateDialog } = pwa || {}
