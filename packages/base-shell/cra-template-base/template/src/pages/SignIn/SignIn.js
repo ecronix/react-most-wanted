@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import AuthContext from 'base-shell/lib/providers/Auth/Context'
+import { useAuth } from 'base-shell/lib/providers/Auth'
 
 const SignIn = () => {
-  const { setAuth, auth } = useContext(AuthContext)
+  const { setAuth, auth } = useAuth()
   let history = useHistory()
   const intl = useIntl()
   const [username, setUsername] = useState('')

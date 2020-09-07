@@ -1,15 +1,13 @@
-import React, { Suspense, useContext, useEffect, useState, lazy } from 'react'
-//import getDefaultRoutes from '../../components/DefaultRoutes/DefaultRoutes'
-import LocaleContext from '../../providers/Locale/Context'
-import ConfigContext from '../../providers/Config/Context'
+import '@formatjs/intl-relativetimeformat/polyfill'
 import LocaleProvider from '../../providers/Locale/Provider'
-//import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
+import React, { Suspense, useContext, useEffect, useState, lazy } from 'react'
+import areIntlLocalesSupported from 'intl-locales-supported'
+import intl from 'intl'
 import { IntlProvider } from 'react-intl'
 import { Switch } from 'react-router-dom'
 import { getLocaleMessages } from '../../utils/locale'
-import '@formatjs/intl-relativetimeformat/polyfill'
-import areIntlLocalesSupported from 'intl-locales-supported'
-import intl from 'intl'
+import { useConfig } from '../../providers/Config'
+import { useLocale } from '../../providers/Locale'
 
 const loadLocalePolyfill = (locale) => {
   // START: Intl polyfill
@@ -35,7 +33,7 @@ const loadLocalePolyfill = (locale) => {
 
 export const LayoutContent = () => {
   const [messages, setMessages] = useState([])
-  const { appConfig } = useContext(ConfigContext)
+  const { appConfig } = useConfig()
   const {
     components,
     routes = [],
@@ -47,7 +45,7 @@ export const LayoutContent = () => {
   const { locales, onError } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
   const defaultRoutes = getDefaultRoutes ? getDefaultRoutes(appConfig) : []
-  const { locale } = useContext(LocaleContext)
+  const { locale } = useLocale()
 
   useEffect(() => {
     const loadPolyfills = async () => {

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import AuthContext from '../../providers/Auth/Context'
+import { useAuth } from '../../providers/Auth'
 
 function PublicRoute({ component: Component, redirectTo = '/', ...rest }) {
-  const { auth } = useContext(AuthContext)
+  const { auth } = useAuth()
 
   return (
     <Route
