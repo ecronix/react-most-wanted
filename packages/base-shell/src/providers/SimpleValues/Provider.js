@@ -42,8 +42,14 @@ const Provider = ({ children, persistKey = 'simple_values' }) => {
     }
   }
 
+  const clearValue = (key) => {
+    const { [key]: valueToRemove, ...rest } = values
+
+    setValues(rest)
+  }
+
   return (
-    <Context.Provider value={{ setValue, getValue }}>
+    <Context.Provider value={{ setValue, getValue, clearValue }}>
       {children}
     </Context.Provider>
   )

@@ -4,7 +4,7 @@ import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 
 const HomePage = () => {
   const intl = useIntl()
-  const { setValue, getValue } = useSimpleValues()
+  const { setValue, getValue, clearValue } = useSimpleValues()
 
   console.log(getValue('test', 0))
 
@@ -15,10 +15,20 @@ const HomePage = () => {
           setValue('test', 3, true)
         }}
       >
-        OK
+        SET
       </button>
-
+      <br />
+      <br />
+      <button
+        onClick={(e) => {
+          clearValue('test')
+        }}
+      >
+        CLEAR
+      </button>
+      <br />
       {intl.formatMessage({ id: 'home' })}
+      <br />
     </div>
   )
 }
