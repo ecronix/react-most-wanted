@@ -24,12 +24,12 @@ const QuestionDialog = ({
 }) => {
   const intl = useIntl()
   const theme = useTheme()
-  const { getValue, setValue } = useSimpleValues()
+  const { getValue, clearValue } = useSimpleValues()
   const handleClose = () => {
-    setValue(id, false)
+    clearValue(id, false)
   }
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  const isDialogOpen = getValue(id)
+  const isDialogOpen = getValue(id, false)
 
   return (
     <Dialog
