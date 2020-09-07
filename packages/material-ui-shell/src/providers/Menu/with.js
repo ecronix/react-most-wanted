@@ -1,7 +1,7 @@
 import Context from './Context'
 import React from 'react'
 
-const withTheme = (Component) => {
+const withContainer = (Component) => {
   const ChildComponent = (props) => {
     return (
       <Context.Consumer>
@@ -15,4 +15,4 @@ const withTheme = (Component) => {
   return ChildComponent
 }
 
-export default withTheme
+export default withContainer

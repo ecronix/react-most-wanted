@@ -1,17 +1,17 @@
-import React, { useContext } from 'react'
-import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import IconButton from '@material-ui/core/IconButton'
+import LinearProgress from '@material-ui/core/LinearProgress'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
+import MenuIcon from '@material-ui/icons/Menu'
+import React, { useContext } from 'react'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+import clsx from 'clsx'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { useConfig } from 'base-shell/lib/providers/Config'
 import { useIntl } from 'react-intl'
-import OnlineContext from 'base-shell/lib/providers/Online/Context'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
+import { useOnline } from 'base-shell/lib/providers/Online'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
-  const isOnline = useContext(OnlineContext)
+  const isOnline = useOnline()
   const theme = useTheme()
-  const { appConfig } = useContext(ConfigContext)
+  const { appConfig } = useConfig()
   const { menu } = appConfig || {}
   const { width = 240, offlineIndicatorHeight = 12 } = menu || {}
 

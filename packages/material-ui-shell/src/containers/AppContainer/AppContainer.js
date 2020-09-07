@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import MenuProvider from 'material-ui-shell/lib/providers/Menu/Provider'
 import ThemeProvider from 'material-ui-shell/lib/providers/Theme/Provider'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
+import { useConfig } from 'base-shell/lib/providers/Config'
 
 export default function ({ children }) {
-  const { appConfig } = useContext(ConfigContext)
+  const { appConfig } = useConfig()
 
   return (
     <React.Fragment>

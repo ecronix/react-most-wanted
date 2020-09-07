@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import clsx from 'clsx'
 import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import clsx from 'clsx'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const drawerWidth = 240
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -63,7 +63,7 @@ const ResponsiveMenu = ({ children, width }) => {
     isMobileOpen,
     isMini,
     setMobileOpen,
-  } = useContext(MenuContext)
+  } = useMenu()
 
   const handleDrawerToggle = () => {
     setMobileOpen(!isMobileOpen)

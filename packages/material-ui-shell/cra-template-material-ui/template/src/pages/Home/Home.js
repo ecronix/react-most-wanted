@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
-import QuestionDialog from 'material-ui-shell/lib/containers/QuestionDialog/QuestionDialog'
-import SimpleValuesContext from 'base-shell/lib/providers/SimpleValues/Context'
-import { useIntl } from 'react-intl'
 import Button from '@material-ui/core/Button'
+import Page from 'material-ui-shell/lib/containers/Page/Page'
+import QuestionDialog from 'material-ui-shell/lib/containers/QuestionDialog/QuestionDialog'
+import React, { useContext } from 'react'
+import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
+import { useIntl } from 'react-intl'
+import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 
 const DIALOG_ID = 'demo_dialog'
 
 const HomePage = () => {
   const intl = useIntl()
-  const { setValue } = useContext(SimpleValuesContext)
+  const { setValue } = useSimpleValues()
 
   return (
     <Page pageTitle={intl.formatMessage({ id: 'home' })}>

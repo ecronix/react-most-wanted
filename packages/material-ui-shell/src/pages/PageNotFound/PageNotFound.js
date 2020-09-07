@@ -1,13 +1,13 @@
-import React from 'react'
-import { injectIntl } from 'react-intl'
-import Page from '../../containers/Page/Page'
 import Button from '@material-ui/core/Button'
 import Home from '@material-ui/icons/Home'
+import Page from '../../containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
+import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
+import { useIntl } from 'react-intl'
 
-const styles = theme => ({
+const useStyles = makeStyles((theme) => ({
   icon: {
     width: 192,
     height: 192,
@@ -28,18 +28,19 @@ const styles = theme => ({
   button: {
     marginTop: 20,
   },
-})
+}))
 
-const PageNotFound = ({ intl, classes }) => {
+const PageNotFound = () => {
+  const intl = useIntl()
+  const classes = useStyles()
+
   return (
     <Page pageTitle={intl.formatMessage({ id: 'page_not_found' }) + ' MUI'}>
       <Paper className={classes.paper}>
         <div className={classes.container}>
-          <Typography variant="h4">
-            404
-          </Typography>
+          <Typography variant="h4">404</Typography>
           <Typography variant="subtitle1">
-            {intl.formatMessage({ id: 'page_not_found' })+ ' MUI'}
+            {intl.formatMessage({ id: 'page_not_found' }) + ' MUI'}
           </Typography>
           <Button
             color="secondary"
@@ -55,7 +56,4 @@ const PageNotFound = ({ intl, classes }) => {
   )
 }
 
-
-export default injectIntl(
-  withStyles(styles, { withTheme: true })(PageNotFound)
-)
+export default PageNotFound

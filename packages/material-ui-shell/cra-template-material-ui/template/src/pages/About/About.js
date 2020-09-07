@@ -1,12 +1,10 @@
-import React from 'react'
-import { injectIntl } from 'react-intl'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
-import ReactMarkdown from 'react-markdown'
-import README from './README.md'
 import 'github-markdown-css'
-
-//require('github-markdown-css')
+import Page from 'material-ui-shell/lib/containers/Page/Page'
+import README from './README.md'
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
+import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
+import { injectIntl } from 'react-intl'
 
 const AboutPage = ({ intl }) => {
   return (
