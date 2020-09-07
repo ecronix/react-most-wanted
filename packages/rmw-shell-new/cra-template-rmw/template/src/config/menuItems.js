@@ -12,6 +12,7 @@ import GetApp from '@material-ui/icons/GetApp'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import StyleIcon from '@material-ui/icons/Style'
 import allThemes from './themes'
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 const getMenuItems = (props) => {
   const {
@@ -69,6 +70,14 @@ const getMenuItems = (props) => {
   if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
+        value: '/my_account',
+        primaryText: intl.formatMessage({
+          id: 'my_account',
+          defaultMessage: 'My Account',
+        }),
+        leftIcon: <AccountBoxIcon />,
+      },
+      {
         value: '/signin',
         onClick: isAuthorised ? () => handleSignOut() : () => {},
         visible: true,
@@ -90,6 +99,12 @@ const getMenuItems = (props) => {
       value: '/about',
       visible: true,
       primaryText: intl.formatMessage({ id: 'about' }),
+      leftIcon: <InfoOutlined />,
+    },
+    {
+      value: '/users',
+      visible: true,
+      primaryText: intl.formatMessage({ id: 'users' }),
       leftIcon: <InfoOutlined />,
     },
     { divider: true },

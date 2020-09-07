@@ -7,15 +7,21 @@ import { useSelector } from 'react-redux'
 import { getPath } from 'firekit'
 import { destroyList } from 'firekit/lib/store/lists/actions'
 
-const HomePage = ({ watchList: watchList2 }) => {
+const Users = ({ watchList: watchList2 }) => {
   const intl = useIntl()
   const { watchPath, destroyPath } = useFirebase()
+  const path = 'users_count'
   const users_count = useSelector((state) => getPath(state, 'users_count', 0))
 
   useEffect(() => {
-    watchPath('users_count')
-    return () => destroyPath('users_count')
+    watchPath(path)
+
+    return () => {
+      destroyPath(path)
+    }
   }, [])
+
+  console.log('test_count', users_count)
 
   return (
     <Page
@@ -36,4 +42,4 @@ const HomePage = ({ watchList: watchList2 }) => {
     </Page>
   )
 }
-export default HomePage
+export default Users

@@ -1,9 +1,14 @@
 import React, { useContext, useEffect } from 'react'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import AuthContext from 'base-shell/lib/providers/Auth/Context'
+import { useConfig } from 'base-shell/lib/providers/Config'
+import { useAuth } from 'base-shell/lib/providers/Auth'
 import FirebaseProvider from 'rmw-shell/lib/providers/Firebase/Provider'
-import { withFirebase } from 'firekit-provider'
-import FirebaseContext from 'rmw-shell/lib/providers/Firebase/Context'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
+import 'firebase/firestore'
+import 'firebase/messaging'
+
+let firebaseApp = null
 
 const defaultUserData = (user) => {
   if (user != null) {
@@ -25,9 +30,19 @@ const defaultUserData = (user) => {
 }
 
 export default function ({ children }) {
-  const { appConfig } = useContext(ConfigContext)
-  const { auth, setAuth } = useContext(AuthContext)
-  const { firebaseApp } = useContext(FirebaseContext)
+  const { appConfig } = useConfig()
+  const { auth, setAuth } = useAuth()
+  const { firebase: firebaseConfig } = appConfig || {}
+  const { config_dev, config_prod } = firebaseConfig || {}
+
+  //Firebase app should be initialized only once
+  if (firebase.apps.length === 0) {
+    firebaseApp = firebase.initializeApp(
+      process.env.NODE_ENV !== 'production' ? config_dev : config_prod
+    )
+  } else {
+    firebaseApp = firebase.apps[0]
+  }
 
   useEffect(() => {
     firebaseApp.auth().onAuthStateChanged((user) => {

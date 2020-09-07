@@ -1,7 +1,5 @@
 import * as firebaseui from 'firebaseui'
 import AuthUI from 'rmw-shell/lib/containers/AuthUI/AuthUI'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import FirebaseContext from 'rmw-shell/lib/providers/Firebase/Context'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
@@ -10,16 +8,18 @@ import { injectIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { withFirebase } from 'firekit-provider'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
+import { useConfig } from 'base-shell/lib/providers/Config'
+import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const SignIn = () => {
   let history = useHistory()
   const intl = useIntl()
-  const { appConfig } = useContext(ConfigContext)
-  const { firebaseApp } = useContext(FirebaseContext)
+  const { appConfig } = useConfig()
+  const { firebaseApp } = useFirebase()
   const { firebase = {} } = appConfig || {}
   const { firebaseuiProps = {} } = firebase
-  const { setAuthMenuOpen } = useContext(MenuContext)
+  const { setAuthMenuOpen } = useMenu()
 
   const uiConfig = {
     signInSuccessUrl: '/',
