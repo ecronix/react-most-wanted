@@ -95,7 +95,7 @@ export const LayoutContent = () => {
 }
 
 export const Layout = () => {
-  const { appConfig } = useContext(ConfigContext)
+  const { appConfig } = useConfig()
   const { locale } = appConfig || {}
   const { defaultLocale, persistKey } = locale || {}
   return (

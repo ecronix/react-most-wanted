@@ -3,7 +3,7 @@ import React from 'react'
 import config from '../../config'
 import merge from '../../utils/config'
 
-const withAppConfigs = (Component) => {
+const withContainer = (Component) => {
   const ChildComponent = (props) => {
     return (
       <Context.Consumer>
@@ -18,4 +18,4 @@ const withAppConfigs = (Component) => {
   return ChildComponent
 }
 
-export default withAppConfigs
+export default withContainer

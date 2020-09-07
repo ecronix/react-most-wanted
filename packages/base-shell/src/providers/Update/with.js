@@ -2,13 +2,15 @@ import Context from './Context'
 import React from 'react'
 import config from '../../config'
 
-const withAppConfigs = Component => {
-  const ChildComponent = props => {
+const withContainer = (Component) => {
+  const ChildComponent = (props) => {
     return (
       <Context.Consumer>
-        {value => {
+        {(value) => {
           const { appConfig } = value || {}
-          return <Component appConfig={{ ...config, ...appConfig }} {...props} />
+          return (
+            <Component appConfig={{ ...config, ...appConfig }} {...props} />
+          )
         }}
       </Context.Consumer>
     )
@@ -17,4 +19,4 @@ const withAppConfigs = Component => {
   return ChildComponent
 }
 
-export default withAppConfigs
+export default withContainer

@@ -4,7 +4,7 @@ import { useAuth } from '../../providers/Auth'
 import { useConfig } from '../../providers/Config'
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const { appConfig } = useContext()
+  const { appConfig } = useConfig()
   const { auth } = useAuth()
   const { auth: authConfig } = appConfig || {}
   const { signInURL = '/signin' } = authConfig || {}
