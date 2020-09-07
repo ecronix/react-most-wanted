@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 
-const styles = theme => ({
+const styles = (theme) => ({
   icon: {
     width: 192,
     height: 192,
@@ -35,10 +35,8 @@ const PageNotFound = ({ intl, classes }) => {
     <Page pageTitle={intl.formatMessage({ id: 'page_not_found' })}>
       <Paper className={classes.paper}>
         <div className={classes.container}>
+          <Typography variant="h2">404</Typography>
           <Typography variant="h4">
-            404
-          </Typography>
-          <Typography variant="subtitle1">
             {intl.formatMessage({ id: 'page_not_found' })}
           </Typography>
           <Button
@@ -55,6 +53,4 @@ const PageNotFound = ({ intl, classes }) => {
   )
 }
 
-export default injectIntl(
-  withStyles(styles, { withTheme: true })(PageNotFound)
-)
+export default injectIntl(withStyles(styles, { withTheme: true })(PageNotFound))
