@@ -1,24 +1,42 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import Context from './Context'
 
-const Provider = ({ children, persistKey = 'simple_values' }) => {
+function reducer(state, action) {
+  const { type, key, value, persist } = action
+  switch (action.type) {
+    case 'add':
+      return { ...state, [key]: { value, persist } }
+    case 'clear':
+      const { [key]: clearedKey, ...rest } = state
+      return { ...rest }
+    case 'clear_all':
+      return {}
+    default:
+      throw new Error()
+  }
+}
+
+function getInitState(persistKey) {
   let persistedValues = {}
   try {
-    persistedValues = JSON.parse(localStorage.getItem(persistKey))
+    persistedValues = JSON.parse(localStorage.getItem(persistKey)) || {}
   } catch (error) {
     console.warn(error)
   }
+  return persistedValues
+}
 
-  const [values, setValues] = useState(persistedValues || {})
+const Provider = ({ children, persistKey = 'simple_values' }) => {
+  const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
 
   useEffect(() => {
     try {
       const persistValues = {}
 
-      Object.keys(values).map((k) => {
-        if (values[k].persist) {
-          persistValues[k] = { value: values[k].value, persist: true }
+      Object.keys(state).map((k) => {
+        if (state[k].persist) {
+          persistValues[k] = { value: state[k].value, persist: true }
         }
 
         return k
@@ -28,28 +46,30 @@ const Provider = ({ children, persistKey = 'simple_values' }) => {
     } catch (error) {
       console.warn(error)
     }
-  }, [values, persistKey])
+  }, [state, persistKey])
 
   const setValue = (key, value, persist = false) => {
-    setValues({ ...values, [key]: { value, persist } })
+    dispatch({ type: 'add', key, value, persist })
   }
 
   const getValue = (key, defaultValue) => {
-    if (values[key] !== undefined) {
-      return values[key].value
+    if (state[key] !== undefined) {
+      return state[key].value
     } else {
       return defaultValue
     }
   }
 
   const clearValue = (key) => {
-    const { [key]: valueToRemove, ...rest } = values
+    dispatch({ type: 'clear', key })
+  }
 
-    setValues(rest)
+  const clearAll = () => {
+    dispatch({ type: 'clear_all' })
   }
 
   return (
-    <Context.Provider value={{ setValue, getValue, clearValue }}>
+    <Context.Provider value={{ setValue, getValue, clearValue, clearAll }}>
       {children}
     </Context.Provider>
   )

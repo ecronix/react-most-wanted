@@ -26,8 +26,6 @@ const Menu = () => {
       })
     : []
 
-  console.log('menu rednered')
-
   const getNestedItems = function (hostItem, hostIndex) {
     if (hostItem.nestedItems !== undefined) {
       let nestedItems = hostItem.nestedItems.filter(function (item) {
