@@ -4,24 +4,43 @@ import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 
 const HomePage = () => {
   const intl = useIntl()
-  const { setValue, getValue, clearValue } = useSimpleValues()
+  const { setValue, getValue, clearValue, clearAll } = useSimpleValues()
 
-  console.log(getValue('test', 0))
+  const simpleNValueKey = 'nkey'
+  const simplePValueKey = 'pKey'
 
   return (
     <div>
+      Non persistent: {getValue(simpleNValueKey, 'empty')}
+      <br />
+      <br />
+      Persistent: {getValue(simplePValueKey, 'empty')}
+      <br />
+      <br />
       <button
         onClick={(e) => {
-          setValue('test', 3, true)
+          setValue(simpleNValueKey, 'non persistent value')
         }}
       >
-        SET
+        SET NON PERSISTENT
       </button>
       <br />
       <br />
       <button
         onClick={(e) => {
-          clearValue('test')
+          setValue(simplePValueKey, 'persistent value', true)
+        }}
+      >
+        SET PERSISTENT
+      </button>
+      <br />
+      <br />
+      <button
+        onClick={(e) => {
+          //clearValue(simpleNValueKey)
+          //clearValue(simplePValueKey)
+          //or
+          clearAll()
         }}
       >
         CLEAR
