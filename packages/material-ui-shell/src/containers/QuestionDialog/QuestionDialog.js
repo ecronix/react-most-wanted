@@ -26,7 +26,7 @@ const QuestionDialog = ({
   const theme = useTheme()
   const { getValue, clearValue } = useSimpleValues()
   const handleClose = () => {
-    clearValue(id, false)
+    clearValue(id)
   }
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
   const isDialogOpen = getValue(id, false)
