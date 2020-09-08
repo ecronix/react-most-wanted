@@ -65,6 +65,7 @@ const getMenuItems = (props) => {
 
   const handleSignOut = () => {
     firebaseApp.auth().signOut()
+    localStorage.clear()
   }
 
   if (isAuthMenuOpen || !isAuthorised) {
