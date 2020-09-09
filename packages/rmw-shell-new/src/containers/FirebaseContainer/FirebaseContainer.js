@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import FirebaseProvider from 'rmw-shell/lib/providers/Firebase/Provider'
-import FirebasePathsProvider from 'rmw-shell/lib/providers/FirebasePaths/Provider'
+import PathsProvider from 'rmw-shell/lib/providers/Firebase/Paths/Provider'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -53,9 +53,7 @@ export default function ({ children }) {
 
   return (
     <FirebaseProvider firebaseApp={firebaseApp}>
-      <FirebasePathsProvider firebaseApp={firebaseApp}>
-        {children}
-      </FirebasePathsProvider>
+      <PathsProvider firebaseApp={firebaseApp}>{children}</PathsProvider>
     </FirebaseProvider>
   )
 }
