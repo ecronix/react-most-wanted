@@ -3,14 +3,27 @@ import React, { useState, useEffect, useReducer } from 'react'
 import Context from './Context'
 
 function reducer(state, action) {
-  const { type, path, value, isLoading = false, error = false } = action
+  const {
+    type,
+    path,
+    value,
+    isLoading = false,
+    error = false,
+    hasError = false,
+  } = action
   switch (action.type) {
     case 'loading_changed':
       return { ...state, [path]: { ...state[path], isLoading } }
     case 'error_changed':
-      return { ...state, [path]: { ...state[path], error } }
+      return {
+        ...state,
+        [path]: { ...state[path], error, hasError, isLoading },
+      }
     case 'value_changed':
-      return { ...state, [path]: { ...state[path], value, isLoading, error } }
+      return {
+        ...state,
+        [path]: { ...state[path], value, isLoading, error, hasError },
+      }
     case 'clear':
       const { [path]: clearedKey, ...rest } = state
       return { ...rest }
@@ -47,6 +60,9 @@ const Provider = ({
   }, [state, persistKey])
 
   const watchPath = (path) => {
+    if (path.length < 1) {
+      return
+    }
     dispatch({
       type: 'loading_changed',
       path,
@@ -64,7 +80,6 @@ const Provider = ({
             path,
             value: snapshot.val(),
             isLoading: false,
-            error: false,
           })
         },
         (error) => {
@@ -73,12 +88,16 @@ const Provider = ({
             path,
             isLoading: false,
             error,
+            hasError: true,
           })
         }
       )
   }
 
   const unwatchPath = (path) => {
+    if (path.length < 1) {
+      return
+    }
     firebaseApp.database().ref(path).off()
   }
 
@@ -106,24 +125,35 @@ const Provider = ({
     }
   }
 
+  const hasPathError = (path) => {
+    if (state[path] !== undefined) {
+      return state[path].hasError
+    } else {
+      return false
+    }
+  }
+
   const clearPath = (path) => {
     unwatchPath(path)
     dispatch({ type: 'clear', path })
   }
 
-  const clearAll = () => {
+  const clearAllPaths = () => {
+    firebaseApp.database().ref().off()
     dispatch({ type: 'clear_all' })
   }
 
   return (
     <Context.Provider
       value={{
+        firebaseApp,
         watchPath,
         unwatchPath,
         getPath,
         clearPath,
-        clearAll,
+        clearAllPaths,
         isPathLoading,
+        hasPathError,
         getPathError,
       }}
     >

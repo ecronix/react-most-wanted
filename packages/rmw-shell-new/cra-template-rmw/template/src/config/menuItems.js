@@ -103,6 +103,26 @@ const getMenuItems = (props) => {
       leftIcon: <InfoOutlined />,
     },
     {
+      primaryText: intl.formatMessage({
+        id: 'firebase',
+        defaultMessage: 'Firebase',
+      }),
+      visible: isAuthorised,
+      primaryTogglesNestedList: true,
+      leftIcon: <SettingsIcon />,
+      nestedItems: [
+        {
+          value: '/firebase_paths',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'firebase_paths',
+            defaultMessage: 'Paths',
+          }),
+          leftIcon: <DaschboardIcon />,
+        },
+      ],
+    },
+    {
       value: '/users',
       visible: true,
       primaryText: intl.formatMessage({ id: 'users' }),

@@ -8,11 +8,13 @@ const SignIn = lazy(() => import('../pages/SignIn/SignIn'))
 const About = lazy(() => import('../pages/About/About'))
 const Home = lazy(() => import('../pages/Home/Home'))
 const Users = lazy(() => import('../pages/Users/Users'))
+const FirebasePaths = lazy(() => import('../pages/Firebase/Paths'))
 
 const routes = [
   <Route path="/about" exact component={About} />,
   <PrivateRoute path="/home" exact component={Home} />,
   <PrivateRoute path="/users" exact component={Users} />,
+  <PrivateRoute path="/firebase_paths" exact component={FirebasePaths} />,
 ]
 
 export default routes

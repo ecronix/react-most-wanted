@@ -9,19 +9,6 @@ import { destroyList } from 'firekit/lib/store/lists/actions'
 
 const Users = ({ watchList: watchList2 }) => {
   const intl = useIntl()
-  const { watchPath, destroyPath } = useFirebase()
-  const path = 'users_count'
-  const users_count = useSelector((state) => getPath(state, 'users_count', 0))
-
-  useEffect(() => {
-    watchPath(path)
-
-    return () => {
-      destroyPath(path)
-    }
-  }, [])
-
-  console.log('test_count', users_count)
 
   return (
     <Page
@@ -30,14 +17,7 @@ const Users = ({ watchList: watchList2 }) => {
       <Scrollbar
         style={{ height: '100%', width: '100%', display: 'flex', flex: 1 }}
       >
-        {intl.formatMessage({ id: 'home', defaultMessage: 'Home' })}
-        <br />
-        {intl.formatMessage({
-          id: 'users_count',
-          defaultMessage: 'Users count',
-        })}
-        <br />
-        {users_count}
+        {intl.formatMessage({ id: 'users', defaultMessage: 'Users' })}
       </Scrollbar>
     </Page>
   )
