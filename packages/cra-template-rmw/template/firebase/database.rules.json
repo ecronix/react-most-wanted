@@ -48,6 +48,10 @@
         ".write": "auth != null && $uid===auth.uid"
       }
     },
+    "test_path": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "users_count": {
       ".read": true,
       ".write": false
