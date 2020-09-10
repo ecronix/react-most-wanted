@@ -120,6 +120,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <DaschboardIcon />,
         },
+        {
+          value: '/firebase_lists',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'firebase_lists',
+            defaultMessage: 'Lists',
+          }),
+          leftIcon: <DaschboardIcon />,
+        },
       ],
     },
     {

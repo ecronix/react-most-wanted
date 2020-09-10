@@ -3,6 +3,7 @@ import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import FirebaseProvider from 'rmw-shell/lib/providers/Firebase/Provider'
 import PathsProvider from 'rmw-shell/lib/providers/Firebase/Paths/Provider'
+import ListsProvider from 'rmw-shell/lib/providers/Firebase/Lists/Provider'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -53,7 +54,9 @@ export default function ({ children }) {
 
   return (
     <FirebaseProvider firebaseApp={firebaseApp}>
-      <PathsProvider firebaseApp={firebaseApp}>{children}</PathsProvider>
+      <PathsProvider firebaseApp={firebaseApp}>
+        <ListsProvider firebaseApp={firebaseApp}>{children}</ListsProvider>
+      </PathsProvider>
     </FirebaseProvider>
   )
 }
