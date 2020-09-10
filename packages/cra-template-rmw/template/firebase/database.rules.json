@@ -52,6 +52,10 @@
       ".read": "auth != null",
       ".write": "auth != null"
     },
+    "test_list": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
     "users_count": {
       ".read": true,
       ".write": false
