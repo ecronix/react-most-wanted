@@ -10,10 +10,9 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useIntl } from 'react-intl'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
-import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { useCols } from 'rmw-shell/lib/providers/Firebase/Cols'
 
-const defaultPath = 'test_list'
+const defaultPath = 'test'
 
 export default function () {
   const intl = useIntl()
@@ -21,25 +20,25 @@ export default function () {
   const [value, setValue] = useState('')
   const {
     firebaseApp,
-    watchList,
-    getList,
-    clearList,
-    getListError,
-    isListLoading,
-    clearAllLists,
-    hasListError,
-    unwatchList,
-  } = useLists()
+    watchCol,
+    getCol,
+    clearCol,
+    getColError,
+    isColLoading,
+    clearAllCols,
+    hasColError,
+    unwatchCol,
+  } = useCols()
 
-  const list = getList(path)
-  const error = JSON.stringify(getListError(path))
-  const isLoading = isListLoading(path)
+  const list = getCol(path)
+  const error = JSON.stringify(getColError(path))
+  const isLoading = isColLoading(path)
 
   return (
     <Page
       pageTitle={intl.formatMessage({
         id: 'firebase_lists_demo',
-        defaultMessage: 'Firebase Lists Demo',
+        defaultMessage: 'Firebase Cols Demo',
       })}
     >
       <Scrollbar
@@ -67,7 +66,7 @@ export default function () {
             }}
           >
             <TextField
-              label="List path"
+              label="Col path"
               value={path}
               onChange={(e) => setPath(e.target.value)}
               variant="outlined"
@@ -87,11 +86,15 @@ export default function () {
             >
               {list.map((i) => {
                 return (
-                  <div key={i.key}>
-                    {JSON.stringify(i.val)}
+                  <div key={i.id}>
+                    {JSON.stringify(i.data)}
                     <IconButton
                       onClick={() => {
-                        firebaseApp.database().ref(`${path}/${i.key}`).set(null)
+                        firebaseApp
+                          .firestore()
+                          .collection(path)
+                          .doc(i.id)
+                          .delete()
                       }}
                     >
                       <Delete color="error" />
@@ -102,7 +105,7 @@ export default function () {
             </div>
             <br />
             <br />
-            {hasListError(path) && (
+            {hasColError(path) && (
               <Typography variant="subtitle1" color="error">
                 Error: {error}
               </Typography>
@@ -115,13 +118,13 @@ export default function () {
                 variant="contained"
                 color="primary"
                 onClick={
-                  () => watchList(firebaseApp.database().ref(path))
+                  () => watchCol('test')
                   // OR
-                  // watchList(path)
+                  // watchCol('test_list')
                   // OR using an alias
-                  // watchList(path,'your_alias)
+                  // watchCol('test_list','your_alias)
                   // OR combination
-                  // watchList('firebaseApp.database().ref(path),'your_alias)
+                  // watchCol('firebaseApp.database().ref('test_list'),'your_alias)
                 }
               >
                 Watch
@@ -130,7 +133,7 @@ export default function () {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={() => unwatchList(path)}
+                onClick={() => unwatchCol(path)}
               >
                 unWatch
               </Button>
@@ -138,7 +141,7 @@ export default function () {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={() => clearList(path)}
+                onClick={() => clearCol(path)}
               >
                 clear
               </Button>
@@ -157,7 +160,11 @@ export default function () {
                 variant="contained"
                 color="primary"
                 onClick={async () => {
-                  await firebaseApp.database().ref(path).push(value)
+                  await firebaseApp
+                    .firestore()
+                    .collection(path)
+                    .doc()
+                    .set({ val: value })
                   setValue('')
                 }}
               >

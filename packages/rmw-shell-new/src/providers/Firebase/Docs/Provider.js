@@ -132,13 +132,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
   }
 
   const unwatchDoc = (reference) => {
-    const ref = getRef(reference)
     const path = getLocation(reference)
-
-    if (path.length < 1) {
-      return
-    }
-
     initializations[path] && initializations[path]()
     removeInit(path)
   }

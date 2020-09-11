@@ -15,15 +15,15 @@ function list(list = [], action) {
   const { payload } = action
   switch (action.type) {
     case CHILD_ADDED:
-      return list.findIndex((d) => d.key === payload.key) === -1
+      return list.findIndex((d) => d.id === payload.id) === -1
         ? [...list, payload]
         : [...list]
 
     case CHILD_CHANGED:
-      return list.map((child) => (payload.key === child.key ? payload : child))
+      return list.map((child) => (payload.id === child.id ? payload : child))
 
     case CHILD_REMOVED:
-      return list.filter((child) => payload.key !== child.key)
+      return list.filter((child) => payload.id !== child.id)
   }
 }
 
@@ -57,7 +57,11 @@ function reducer(state, action) {
     case CHILD_REMOVED:
       return {
         ...state,
-        [path]: { ...state[path], value: list(state[path].value, action) },
+        [path]: {
+          ...state[path],
+
+          value: list(state[path].value, action),
+        },
       }
     case CLEAR_ALL:
       return {}
@@ -76,12 +80,12 @@ function getInitState(persistKey) {
   return persistedValues
 }
 
-const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
+const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
-  const [initializations, setInitialized] = useState({})
+  const [initializations, setInitialized] = useState([])
 
-  const setInit = (path) => {
-    setInitialized({ ...initializations, [path]: true })
+  const setInit = (path, unsub) => {
+    setInitialized({ ...initializations, [path]: unsub })
   }
 
   const isInit = (path) => {
@@ -101,9 +105,13 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     }
   }, [state, persistKey])
 
+  const getPath = (ref) => {
+    return ref.path
+  }
+
   const getRef = (path) => {
     if (typeof path === 'string' || path instanceof String) {
-      return firebaseApp.database().ref(path)
+      return firebaseApp.firestore().collection(path)
     } else {
       return path
     }
@@ -113,13 +121,11 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     if (typeof path === 'string' || path instanceof String) {
       return path
     } else {
-      return path
-        .toString()
-        .substring(firebaseApp.database().ref().root.toString().length)
+      return getPath(path)
     }
   }
 
-  const watchList = async (reference, alias) => {
+  const watchCol = async (reference, alias) => {
     const ref = getRef(reference)
     const path = alias || getLocation(reference)
 
@@ -133,11 +139,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       return
     }
 
-    let listenForChanges = false
-    // We can't awaid that the single child listeners get calld for every chils
-    // but we can use this to not change the state after the inital call
-    // because we already have all data we got trough the once call
-
     const handleError = (error) => {
       dispatch({
         type: ERROR,
@@ -149,17 +150,13 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       removeInit(path)
     }
 
-    const handleChange = (s, type) => {
-      if (listenForChanges) {
-        dispatch({
-          type,
-          path,
-          payload: { key: s.key, val: s.val() },
-        })
-      }
+    const handleChange = (doc, type) => {
+      dispatch({
+        type,
+        path,
+        payload: { id: doc.id, data: doc.data() },
+      })
     }
-
-    setInit(path)
 
     dispatch({
       type: LOADING_CHANGED,
@@ -167,65 +164,63 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       isLoading: true,
     })
 
-    ref.on('child_added', (s) => handleChange(s, CHILD_ADDED), handleError)
-    ref.on('child_changed', (s) => handleChange(s, CHILD_CHANGED), handleError)
-    ref.on('child_removed', (s) => handleChange(s, CHILD_REMOVED), handleError)
-
     try {
-      const snapshot = await ref.once('value')
-      listenForChanges = true
-      const list = []
-      snapshot.forEach((snap) => {
-        list.push({ key: snap.key, val: snap.val() })
-      })
+      const unsub = ref.onSnapshot((snapshot) => {
+        setInit(path, unsub)
+        dispatch({
+          type: LOADING_CHANGED,
+          path,
+          isLoading: false,
+        })
 
-      dispatch({
-        type: VALUE_CHANGE,
-        path,
-        value: list,
-        isLoading: false,
-      })
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            handleChange(change.doc, CHILD_ADDED)
+          }
+          if (change.type === 'modified') {
+            handleChange(change.doc, CHILD_CHANGED)
+          }
+          if (change.type === 'removed') {
+            handleChange(change.doc, CHILD_REMOVED)
+          }
+        })
+      }, handleError)
     } catch (error) {
       handleError(error)
     }
   }
 
-  const unwatchList = (reference) => {
-    const ref = getRef(reference)
+  const unwatchCol = (reference) => {
     const path = getLocation(reference)
-
-    if (path.length < 1) {
-      return
-    }
-    ref.off()
+    initializations[path] && initializations[path]()
     removeInit(path)
   }
 
-  const getList = (path) => {
+  const getCol = (path) => {
     return state[path] && state[path].value ? state[path].value : []
   }
 
-  const isListLoading = (path) => {
+  const isColLoading = (path) => {
     return state[path] ? state[path].isLoading : false
   }
 
-  const getListError = (path) => {
+  const getColError = (path) => {
     return state[path] ? state[path].error : false
   }
 
-  const hasListError = (path) => {
+  const hasColError = (path) => {
     return state[path] ? state[path].hasError : false
   }
 
-  const clearList = (reference) => {
+  const clearCol = (reference) => {
     const ref = getRef(reference)
     const path = getLocation(reference)
 
-    unwatchList(ref)
+    unwatchCol(ref)
     dispatch({ type: CLEAR, path })
   }
 
-  const clearAllLists = () => {
+  const clearAllCols = () => {
     firebaseApp.database().ref().off()
     dispatch({ type: CLEAR_ALL })
   }
@@ -234,14 +229,14 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     <Context.Provider
       value={{
         firebaseApp,
-        watchList,
-        unwatchList,
-        getList,
-        clearList,
-        clearAllLists,
-        isListLoading,
-        hasListError,
-        getListError,
+        watchCol,
+        unwatchCol,
+        getCol,
+        clearCol,
+        clearAllCols,
+        isColLoading,
+        hasColError,
+        getColError,
       }}
     >
       {children}
