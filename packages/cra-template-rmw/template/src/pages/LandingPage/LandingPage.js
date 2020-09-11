@@ -367,7 +367,7 @@ class LandingPage extends Component {
             <AppBar
               position="relative"
               style={{
-                withd: '100%',
+                width: '100%',
                 padding: 18,
                 display: 'flex',
                 justifyContent: 'center',
