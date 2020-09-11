@@ -1,13 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
+import React, { useContext, useEffect } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
-import { useSelector } from 'react-redux'
-import { getPath } from 'firekit'
-import { destroyList } from 'firekit/lib/store/lists/actions'
+import { useIntl } from 'react-intl'
 
-const Users = ({ watchList: watchList2 }) => {
+export default function () {
   const intl = useIntl()
 
   return (
@@ -22,4 +19,3 @@ const Users = ({ watchList: watchList2 }) => {
     </Page>
   )
 }
-export default Users

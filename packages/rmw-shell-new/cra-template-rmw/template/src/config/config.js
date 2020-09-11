@@ -1,7 +1,6 @@
 import React, { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
-import { getAuth } from '../utils/auth'
 import getMenuItems from './menuItems'
 import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'

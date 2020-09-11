@@ -16,7 +16,6 @@ const config = {
     signInURL: '/signin',
     redirectTo: '/home',
   },
-  redux: {},
 }
 
 export default merge(MUIConfig, config)

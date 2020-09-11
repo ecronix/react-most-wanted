@@ -47,9 +47,11 @@ export default function ({ children }) {
   }
 
   useEffect(() => {
-    firebaseApp.auth().onAuthStateChanged((user) => {
+    const unsubscribe = firebaseApp.auth().onAuthStateChanged((user) => {
       setAuth(defaultUserData(user))
     })
+
+    return unsubscribe()
   }, [])
 
   return (

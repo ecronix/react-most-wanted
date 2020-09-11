@@ -1,26 +1,42 @@
-import React from 'react'
-import { injectIntl } from 'react-intl'
+import React, { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ReactMarkdown from 'react-markdown'
 import README from './README.md'
 import 'github-markdown-css'
 
-//require('github-markdown-css')
+export default function () {
+  const [source, setSource] = useState(null)
+  const intl = useIntl()
 
-const AboutPage = ({ intl }) => {
+  const loadData = async () => {
+    const data = await fetch(
+      'https://raw.githubusercontent.com/TarikHuber/react-most-wanted/master/README.md'
+    )
+    const text = await data.text()
+    setSource(text)
+  }
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
   return (
-    <Page pageTitle={intl.formatMessage({ id: 'about' })}>
+    <Page
+      pageTitle={intl.formatMessage({ id: 'about', defaultMessage: 'About' })}
+    >
       <Scrollbar>
         <div style={{ backgroundColor: 'white', padding: 12 }}>
-          <ReactMarkdown
-            className="markdown-body"
-            source={README}
-            escapeHtml={true}
-          />
+          {source && (
+            <ReactMarkdown
+              className="markdown-body"
+              source={source}
+              escapeHtml
+            />
+          )}
         </div>
       </Scrollbar>
     </Page>
   )
 }
-export default injectIntl(AboutPage)
