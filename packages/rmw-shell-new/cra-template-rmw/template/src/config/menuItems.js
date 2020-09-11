@@ -138,6 +138,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <DaschboardIcon />,
         },
+        {
+          value: '/firebase_cols',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'firebase_cols',
+            defaultMessage: 'Cols',
+          }),
+          leftIcon: <DaschboardIcon />,
+        },
       ],
     },
     {
