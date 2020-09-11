@@ -98,35 +98,19 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
   }
 
   const getPath = (path, defaultValue) => {
-    if (state[path] !== undefined) {
-      return state[path].value
-    } else {
-      return defaultValue
-    }
+    return state[path] ? state[path].value : defaultValue
   }
 
   const isPathLoading = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].isLoading
-    } else {
-      return false
-    }
+    return state[path] ? state[path].isLoading : false
   }
 
   const getPathError = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].error
-    } else {
-      return false
-    }
+    return state[path] ? state[path].error : false
   }
 
   const hasPathError = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].hasError
-    } else {
-      return false
-    }
+    return state[path] ? state[path].hasError : false
   }
 
   const clearPath = (path) => {
@@ -160,6 +144,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
+  firebaseApp: PropTypes.any,
 }
 
 export default Provider

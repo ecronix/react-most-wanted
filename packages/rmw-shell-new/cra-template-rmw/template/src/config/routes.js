@@ -9,6 +9,7 @@ const Home = lazy(() => import('../pages/Home/Home'))
 const Users = lazy(() => import('../pages/Users/Users'))
 const FirebasePaths = lazy(() => import('../pages/Firebase/Paths'))
 const FirebaseLists = lazy(() => import('../pages/Firebase/Lists'))
+const FirebaseDocs = lazy(() => import('../pages/Firebase/Docs'))
 
 const routes = [
   <Route path="/about" exact component={About} />,
@@ -16,6 +17,7 @@ const routes = [
   <PrivateRoute path="/users" exact component={Users} />,
   <PrivateRoute path="/firebase_paths" exact component={FirebasePaths} />,
   <PrivateRoute path="/firebase_lists" exact component={FirebaseLists} />,
+  <PrivateRoute path="/firebase_docs" exact component={FirebaseDocs} />,
 ]
 
 export default routes

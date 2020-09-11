@@ -129,6 +129,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <DaschboardIcon />,
         },
+        {
+          value: '/firebase_docs',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'firebase_docs',
+            defaultMessage: 'Docs',
+          }),
+          leftIcon: <DaschboardIcon />,
+        },
       ],
     },
     {

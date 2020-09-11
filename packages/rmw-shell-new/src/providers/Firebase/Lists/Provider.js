@@ -201,35 +201,19 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   }
 
   const getList = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].value ? state[path].value : []
-    } else {
-      return []
-    }
+    return state[path] && state[path].value ? state[path].value : []
   }
 
   const isListLoading = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].isLoading
-    } else {
-      return false
-    }
+    return state[path] ? state[path].isLoading : false
   }
 
   const getListError = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].error
-    } else {
-      return false
-    }
+    return state[path] ? state[path].error : false
   }
 
   const hasListError = (path) => {
-    if (state[path] !== undefined) {
-      return state[path].hasError
-    } else {
-      return false
-    }
+    return state[path] ? state[path].hasError : false
   }
 
   const clearList = (reference) => {
