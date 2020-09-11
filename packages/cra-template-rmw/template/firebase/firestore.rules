@@ -43,6 +43,14 @@ service cloud.firestore {
       }
     }
 
+    match /test {
+      allow read, write: if isSignedIn();
+      match /{document=**}{
+        allow read,write: if isSignedIn();
+
+      }
+    }
+
     /// RULES END ///
   }
 }
