@@ -80,9 +80,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
   const [initializations, setInitialized] = useState([])
 
-  console.log('state', state)
-  console.log('initializations', initializations)
-
   const setInit = (path) => {
     setInitialized([...initializations, path])
   }
@@ -103,16 +100,42 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     }
   }, [state, persistKey])
 
-  const watchList = async (path) => {
+  const getRef = (path) => {
+    if (typeof path === 'string' || path instanceof String) {
+      return firebaseApp.database().ref(path)
+    } else {
+      return path
+    }
+  }
+
+  const getLocation = (path) => {
+    if (typeof path === 'string' || path instanceof String) {
+      return path
+    } else {
+      return path
+        .toString()
+        .substring(firebaseApp.database().ref().root.toString().length)
+    }
+  }
+
+  const watchList = async (reference, alias) => {
+    const ref = getRef(reference)
+    const path = alias || getLocation(reference)
+
     if (path.length < 1) {
       return
     }
 
     if (isInit(path)) {
-      // we skipp multiple listeners
+      // we skip multiple listeners
       // only one should be active
       return
     }
+
+    let listenForChanges = false
+    // We can't awaid that the single child listeners get calld for every chils
+    // but we can use this to not change the state after the inital call
+    // because we already have all data we got trough the once call
 
     const handleError = (error) => {
       dispatch({
@@ -126,12 +149,13 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     }
 
     const handleChange = (s, type) => {
-      console.log('child change', type)
-      dispatch({
-        type,
-        path,
-        payload: { key: s.key, val: s.val() },
-      })
+      if (listenForChanges) {
+        dispatch({
+          type,
+          path,
+          payload: { key: s.key, val: s.val() },
+        })
+      }
     }
 
     setInit(path)
@@ -142,15 +166,18 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       isLoading: true,
     })
 
-    const ref = firebaseApp.database().ref(path)
+    ref.on('child_added', (s) => handleChange(s, CHILD_ADDED), handleError)
+    ref.on('child_changed', (s) => handleChange(s, CHILD_CHANGED), handleError)
+    ref.on('child_removed', (s) => handleChange(s, CHILD_REMOVED), handleError)
 
     try {
       const snapshot = await ref.once('value')
+      listenForChanges = true
       const list = []
       snapshot.forEach((snap) => {
-        console.log('snap', snap)
         list.push({ key: snap.key, val: snap.val() })
       })
+
       dispatch({
         type: VALUE_CHANGE,
         path,
@@ -160,18 +187,16 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     } catch (error) {
       handleError(error)
     }
-
-    // TO DO: fix initial adding of items even we have all of them with the once call
-    ref.on('child_added', (s) => handleChange(s, CHILD_ADDED), handleError)
-    ref.on('child_changed', (s) => handleChange(s, CHILD_CHANGED), handleError)
-    ref.on('child_removed', (s) => handleChange(s, CHILD_REMOVED), handleError)
   }
 
-  const unwatchList = (path) => {
+  const unwatchList = (reference) => {
+    const ref = getRef(reference)
+    const path = getLocation(reference)
+
     if (path.length < 1) {
       return
     }
-    firebaseApp.database().ref(path).off()
+    ref.off()
     removeInit(path)
   }
 
@@ -207,8 +232,11 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     }
   }
 
-  const clearList = (path) => {
-    unwatchList(path)
+  const clearList = (reference) => {
+    const ref = getRef(reference)
+    const path = getLocation(reference)
+
+    unwatchList(ref)
     dispatch({ type: CLEAR, path })
   }
 
@@ -238,6 +266,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
+  firebaseApp: PropTypes.any,
 }
 
 export default Provider

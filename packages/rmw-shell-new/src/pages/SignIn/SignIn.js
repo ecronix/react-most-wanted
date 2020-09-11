@@ -5,11 +5,10 @@ import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { injectIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
-import { useIntl } from 'react-intl'
-import { withFirebase } from 'firekit-provider'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
+import { useHistory } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const SignIn = () => {

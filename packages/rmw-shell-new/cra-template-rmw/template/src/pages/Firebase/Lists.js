@@ -1,20 +1,17 @@
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Delete from '@material-ui/icons/Delete'
+import IconButton from '@material-ui/core/IconButton'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
 import React, { useContext, useEffect, useState } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import IconButton from '@material-ui/core/IconButton'
-import Delete from '@material-ui/icons/Delete'
-import { destroyList } from 'firekit/lib/store/lists/actions'
-import { getPath } from 'firekit'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useIntl } from 'react-intl'
-import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
-import { useSelector } from 'react-redux'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 
 const defaultPath = 'test_list'
 
@@ -90,8 +87,8 @@ export default function () {
             >
               {list.map((i) => {
                 return (
-                  <div>
-                    {i.val}{' '}
+                  <div key={i.key}>
+                    {JSON.stringify(i.val)}
                     <IconButton
                       onClick={() => {
                         firebaseApp.database().ref(`${path}/${i.key}`).set(null)
@@ -117,7 +114,15 @@ export default function () {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={() => watchList(path)}
+                onClick={
+                  () => watchList(firebaseApp.database().ref('test_list'))
+                  // OR
+                  // watchList('test_list')
+                  // OR using an alias
+                  // watchList('test_list','your_alias)
+                  // OR combination
+                  // watchList('firebaseApp.database().ref('test_list'),'your_alias)
+                }
               >
                 Watch
               </Button>

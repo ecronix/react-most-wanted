@@ -6,12 +6,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import TextField from '@material-ui/core/TextField'
 import { Typography } from '@material-ui/core'
-import { destroyList } from 'firekit/lib/store/lists/actions'
-import { getPath } from 'firekit'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useIntl } from 'react-intl'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
-import { useSelector } from 'react-redux'
 
 const defaultPath = 'test_path'
 
