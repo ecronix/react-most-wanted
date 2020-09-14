@@ -147,6 +147,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <DaschboardIcon />,
         },
+        {
+          value: '/firebase_messaging',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'firebase_messaging',
+            defaultMessage: 'Messaging',
+          }),
+          leftIcon: <DaschboardIcon />,
+        },
       ],
     },
     {
