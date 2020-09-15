@@ -1,1 +1,0 @@
-- Update TypeScript dependency to v.3.8 to fix build issues (Issue #667)
