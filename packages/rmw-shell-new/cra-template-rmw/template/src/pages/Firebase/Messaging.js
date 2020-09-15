@@ -19,9 +19,8 @@ export default function () {
   const { messaging: messagingConfig } = firebase || {}
   const { publicVapidKey } = messagingConfig || {}
 
-  const messaging = firebaseApp.messaging()
-
   useEffect(() => {
+    const messaging = firebaseApp.messaging()
     console.log('starting listener')
     messaging.onTokenRefresh(() => {
       console.log('token refresh')
@@ -39,6 +38,7 @@ export default function () {
   }, [])
 
   const enableMessaing = async () => {
+    const messaging = firebaseApp.messaging()
     if (publicVapidKey) {
       messaging.usePublicVapidKey(publicVapidKey)
     }
@@ -50,12 +50,43 @@ export default function () {
 
     const token = await messaging.getToken()
 
+    setValue(token)
+
     messaging.onMessage((payload) => {
       console.log('Message received. ', payload)
-      // ...
     })
 
     console.log('token', token)
+  }
+
+  const sendMessage = async () => {
+    const messaging = firebaseApp.messaging()
+    //await enableMessaing()
+
+    const httpsMessagesOnCall = firebaseApp
+      .functions()
+      .httpsCallable('httpsMessagesOnCall')
+
+    const payload = {
+      token: value,
+      notification: {
+        title: 'Title',
+        body: 'Body',
+      },
+      data: {
+        test: 'test',
+      },
+    }
+
+    console.log('payload send ', payload)
+
+    await httpsMessagesOnCall({
+      payload,
+    })
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((error) => console.log('error', error))
   }
 
   return (
@@ -86,7 +117,7 @@ export default function () {
           >
             <div>
               <TextField
-                label="Value"
+                label="Token"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 variant="outlined"
@@ -100,6 +131,16 @@ export default function () {
                 onClick={enableMessaing}
               >
                 ENABLE MESSAGING
+              </Button>
+              <br />
+              <br />
+              <Button
+                style={{ margin: 5 }}
+                variant="contained"
+                color="primary"
+                onClick={sendMessage}
+              >
+                SEND
               </Button>
             </div>
           </Paper>

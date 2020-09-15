@@ -1,0 +1,1 @@
+{"version":3,"file":"apiCaller.js","sourceRoot":"","sources":["../../src/apiCaller.ts"],"names":[],"mappings":";AAAA;;;;;;;;;;;;;;GAcG;;AAaH,mEAA8D;AAgC9D,SAAgB,eAAe,CAC7B,QAAsB,EACtB,UAAkC;IAElC,IAAI,CAAC,UAAU,EAAE;QACf,OAAO,IAAI,iCAAe,EAAE,CAAC;KAC9B;IACD,OAAO,UAAU,CAAC,YAAY,CAAC,QAAQ,CAAC,CAAC;AAC3C,CAAC;AARD,0CAQC"}
