@@ -16,18 +16,45 @@ export default function () {
   const { firebaseApp } = useFirebase()
   const { appConfig } = useConfig()
   const { firebase } = appConfig || {}
-  const { messaging } = firebase || {}
-  const { publicVapidKey } = messaging || {}
+  const { messaging: messagingConfig } = firebase || {}
+  const { publicVapidKey } = messagingConfig || {}
 
-  console.log('publicVapidKey', publicVapidKey)
+  const messaging = firebaseApp.messaging()
+
+  useEffect(() => {
+    console.log('starting listener')
+    messaging.onTokenRefresh(() => {
+      console.log('token refresh')
+      messaging
+        .getToken()
+        .then((refreshedToken) => {
+          console.log('Token refreshed.', refreshedToken)
+
+          // ...
+        })
+        .catch((err) => {
+          console.log('Unable to retrieve refreshed token ', err)
+        })
+    })
+  }, [])
 
   const enableMessaing = async () => {
-    const messaging = firebaseApp.messaging()
     if (publicVapidKey) {
       messaging.usePublicVapidKey(publicVapidKey)
     }
-    await messaging.requestPermission()
+
+    const permission = await Notification.requestPermission()
+
+    console.log('permission', permission)
+    //await messaging.requestPermission()
+
     const token = await messaging.getToken()
+
+    messaging.onMessage((payload) => {
+      console.log('Message received. ', payload)
+      // ...
+    })
+
     console.log('token', token)
   }
 
