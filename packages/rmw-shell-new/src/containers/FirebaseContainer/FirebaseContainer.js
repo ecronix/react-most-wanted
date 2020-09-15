@@ -6,11 +6,13 @@ import PathsProvider from 'rmw-shell/lib/providers/Firebase/Paths/Provider'
 import ListsProvider from 'rmw-shell/lib/providers/Firebase/Lists/Provider'
 import DocsProvider from 'rmw-shell/lib/providers/Firebase/Docs/Provider'
 import ColsProvider from 'rmw-shell/lib/providers/Firebase/Cols/Provider'
+import MessagingProvider from 'rmw-shell/lib/providers/Firebase/Messaging/Provider'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/firestore'
 import 'firebase/messaging'
+import 'firebase/functions'
 
 let firebaseApp = null
 
@@ -37,12 +39,12 @@ export default function ({ children }) {
   const { appConfig } = useConfig()
   const { auth, setAuth } = useAuth()
   const { firebase: firebaseConfig } = appConfig || {}
-  const { config_dev, config_prod } = firebaseConfig || {}
+  const { prod = {}, dev = {} } = firebaseConfig || {}
 
   //Firebase app should be initialized only once
   if (firebase.apps.length === 0) {
     firebaseApp = firebase.initializeApp(
-      process.env.NODE_ENV !== 'production' ? config_dev : config_prod
+      process.env.NODE_ENV !== 'production' ? dev.initConfig : prod.initConfig
     )
   } else {
     firebaseApp = firebase.apps[0]
@@ -61,7 +63,11 @@ export default function ({ children }) {
       <PathsProvider firebaseApp={firebaseApp}>
         <ListsProvider firebaseApp={firebaseApp}>
           <DocsProvider firebaseApp={firebaseApp}>
-            <ColsProvider firebaseApp={firebaseApp}>{children}</ColsProvider>
+            <ColsProvider firebaseApp={firebaseApp}>
+              <MessagingProvider firebaseApp={firebaseApp}>
+                {children}
+              </MessagingProvider>
+            </ColsProvider>
           </DocsProvider>
         </ListsProvider>
       </PathsProvider>

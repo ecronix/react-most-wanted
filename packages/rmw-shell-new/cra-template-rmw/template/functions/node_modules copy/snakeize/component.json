@@ -1,0 +1,17 @@
+{
+  "name": "snakeize",
+  "repo": "nathan7/snakeize",
+  "description": "recursively transform key strings from camel-case to underscore-style",
+  "version": "0.1.0",
+  "keywords": [
+    "snake-case",
+    "json",
+    "transform"
+  ],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ]
+}
