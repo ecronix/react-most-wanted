@@ -11,12 +11,10 @@ const config = {
   components: {
     Loading,
     Menu: lazy(() => import('../containers/Menu/Menu')),
-    UpdateDialog: lazy(() => import('../components/UpdateDialog/UpdateDialog')),
   },
   pwa: {
     useiOSPWAPrompt: true,
     iOSPWAPromptProps: {},
-    useUpdateDialog: true,
   },
   menu: {
     width: 240,
@@ -27,6 +25,10 @@ const config = {
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
     PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
+  },
+  update: {
+    checkInterval: 3000,
+    repeatInterval: 300000,
   },
 }
 
