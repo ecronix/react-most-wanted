@@ -2,83 +2,48 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import TextField from '@material-ui/core/TextField'
 import { Typography } from '@material-ui/core'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
-import { useConfig } from 'base-shell/lib/providers/Config'
+import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
+import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 
 export default function () {
   const intl = useIntl()
-  const [value, setValue] = useState('')
-  const { firebaseApp } = useFirebase()
-  const { appConfig } = useConfig()
-  const { firebase } = appConfig || {}
-  const { messaging: messagingConfig } = firebase || {}
-  const { publicVapidKey } = messagingConfig || {}
-
-  useEffect(() => {
-    const messaging = firebaseApp.messaging()
-    console.log('starting listener')
-    messaging.onTokenRefresh(() => {
-      console.log('token refresh')
-      messaging
-        .getToken()
-        .then((refreshedToken) => {
-          console.log('Token refreshed.', refreshedToken)
-
-          // ...
-        })
-        .catch((err) => {
-          console.log('Unable to retrieve refreshed token ', err)
-        })
-    })
-  }, [])
-
-  const enableMessaing = async () => {
-    const messaging = firebaseApp.messaging()
-    if (publicVapidKey) {
-      messaging.usePublicVapidKey(publicVapidKey)
-    }
-
-    const permission = await Notification.requestPermission()
-
-    console.log('permission', permission)
-    //await messaging.requestPermission()
-
-    const token = await messaging.getToken()
-
-    setValue(token)
-
-    messaging.onMessage((payload) => {
-      console.log('Message received. ', payload)
-    })
-
-    console.log('token', token)
-  }
+  const [title, setTitle] = useState('Title')
+  const [body, setBody] = useState('Your message')
+  const [aktion, setAktion] = useState('/home')
+  const { auth } = useAuth()
+  const { firebaseApp, token, requestPermission } = useMessaging()
 
   const sendMessage = async () => {
     const messaging = firebaseApp.messaging()
-    //await enableMessaing()
 
     const httpsMessagesOnCall = firebaseApp
       .functions()
       .httpsCallable('httpsMessagesOnCall')
 
     const payload = {
-      token: value,
+      token,
       notification: {
-        title: 'Title',
-        body: 'Body',
+        title,
+        body,
+      },
+      webpush: {
+        notification: {
+          title,
+          body,
+          icon: auth.photoURL,
+          image: auth.photoURL,
+          click_action: '/home',
+        },
       },
       data: {
         test: 'test',
       },
     }
-
-    console.log('payload send ', payload)
 
     await httpsMessagesOnCall({
       payload,
@@ -116,10 +81,40 @@ export default function () {
             }}
           >
             <div>
+              <TextField label="Token" value={token} variant="outlined" />
+              <br />
+              <br />
+              <Button
+                style={{ margin: 5 }}
+                variant="contained"
+                color="primary"
+                onClick={requestPermission}
+              >
+                Request Permission
+              </Button>
+
+              <br />
+              <br />
               <TextField
-                label="Token"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                label="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                variant="outlined"
+              />
+              <br />
+              <br />
+              <TextField
+                label="Body"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                variant="outlined"
+              />
+              <br />
+              <br />
+              <TextField
+                label="Aktion"
+                value={aktion}
+                onChange={(e) => setAktion(e.target.value)}
                 variant="outlined"
               />
               <br />
@@ -128,9 +123,14 @@ export default function () {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={enableMessaing}
+                onClick={sendMessage}
+                disabled={
+                  Notification.permission !== 'granted' ||
+                  title === '' ||
+                  body === ''
+                }
               >
-                ENABLE MESSAGING
+                SEND
               </Button>
               <br />
               <br />
@@ -138,9 +138,16 @@ export default function () {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={sendMessage}
+                onClick={() => {
+                  setTimeout(sendMessage, 5000)
+                }}
+                disabled={
+                  Notification.permission !== 'granted' ||
+                  title === '' ||
+                  body === ''
+                }
               >
-                SEND
+                SEND in 5 sec
               </Button>
             </div>
           </Paper>

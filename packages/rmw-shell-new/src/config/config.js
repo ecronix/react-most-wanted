@@ -6,7 +6,9 @@ import merge from 'base-shell/lib/utils/config'
 const config = {
   getDefaultRoutes,
   containers: {
-    AppContainer: lazy(() => import('../containers/AppContainer/AppContainer')),
+    LayoutContainer: lazy(() =>
+      import('../containers/LayoutContainer/LayoutContainer')
+    ),
   },
   components: {
     Menu: lazy(() => import('../containers/FirebaseMenu/FirebaseMenu')),
