@@ -1,23 +1,20 @@
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
+import { useConfig } from 'base-shell/lib/providers/Config'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import PWAPrompt from 'react-ios-pwa-prompt'
-import React, { useContext } from 'react'
-import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
+import React from 'react'
+import { useTheme } from 'material-ui-shell/lib/providers/Theme'
+import UpdateContainer from 'material-ui-shell/lib/containers/UpdateContainer/UpdateContainer'
 import getThemeSource from 'material-ui-shell/lib/utils/theme'
 import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
-import { useUpdate } from 'base-shell/lib/providers/Update'
 
 export default function ({ children }) {
   const intl = useIntl()
-  const { appConfig } = useContext(ConfigContext)
-  const { components } = appConfig || {}
-  const { UpdateDialog = null } = components || {}
-  const { isUpdateAvailable, runUpdate } = useUpdate()
-  const { themeID, type } = useContext(ThemeContext)
+  const { appConfig } = useConfig()
+  const { themeID, type } = useTheme()
   const { theme: themeConfig, pwa, notistack } = appConfig || {}
-  const { useiOSPWAPrompt, iOSPWAPromptProps, useUpdateDialog } = pwa || {}
+  const { useiOSPWAPrompt, iOSPWAPromptProps } = pwa || {}
   const { themes = [] } = themeConfig || {}
   const theme = getThemeSource(themeID, themes, type)
 
@@ -25,14 +22,8 @@ export default function ({ children }) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <SnackbarProvider maxSnack={3} {...notistack}>
-        {children}
+        <UpdateContainer>{children}</UpdateContainer>
       </SnackbarProvider>
-      {useUpdateDialog && (
-        <UpdateDialog
-          isUpdateAvailable={isUpdateAvailable}
-          runUpdate={runUpdate}
-        />
-      )}
       {useiOSPWAPrompt && (
         <PWAPrompt
           //debug={true}
