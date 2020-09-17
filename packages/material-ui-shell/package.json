@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -21,7 +21,22 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": "16.x"
+    "@formatjs/intl-relativetimeformat": "4.x",
+    "@material-ui/core": "4.x",
+    "react-custom-scrollbars": "4.x",
+    "@material-ui/icons": "4.x",
+    "intl": "1.x",
+    "intl-locales-supported": "1.x",
+    "react": "16.x",
+    "react-dom": "16.x",
+    "react-intl": "4.x",
+    "react-redux": "7.x",
+    "react-ios-pwa-prompt": "1.x",
+    "react-router-dom": "5.x",
+    "base-shell": "1.x",
+    "github-markdown-css": "4.x",
+    "react-markdown": "4.x",
+    "notistack": "1.x"
   },
   "devDependencies": {
     "@formatjs/intl-relativetimeformat": "^7.2.5",
@@ -40,7 +55,8 @@
     "react-intl": "^5.8.0",
     "react-ios-pwa-prompt": "^1.8.0",
     "react-markdown": "^4.3.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "notistack": "^1.0.0"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",

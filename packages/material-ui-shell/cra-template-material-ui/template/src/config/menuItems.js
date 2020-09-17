@@ -90,6 +90,15 @@ const getMenuItems = (props) => {
       leftIcon: <ChatBubble />,
     },
     {
+      value: '/toast_demo',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({
+        id: 'toast_demo',
+        defaultMessage: 'Toast demo',
+      }),
+      leftIcon: <ChatBubble />,
+    },
+    {
       value: '/about',
       visible: true,
       primaryText: intl.formatMessage({ id: 'about' }),

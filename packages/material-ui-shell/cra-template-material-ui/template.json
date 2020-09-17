@@ -15,6 +15,7 @@
     "base-shell": "1.x",
     "material-ui-shell": "1.x",
     "github-markdown-css": "4.x",
-    "react-markdown": "4.x"
+    "react-markdown": "4.x",
+    "notistack": "1.x"
   }
 }
