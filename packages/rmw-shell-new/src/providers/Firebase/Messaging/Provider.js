@@ -11,7 +11,7 @@ import { Typography } from '@material-ui/core'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
-import { useSnackbar, SnackbarContent } from 'notistack'
+import { useSnackbar } from 'notistack'
 import { useTheme } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import SnackMessage from 'rmw-shell/lib/components/SnackMessage/SnackMessage'
@@ -35,10 +35,14 @@ const Provider = ({ children, firebaseApp }) => {
 
   const syncToken = (token) => {
     setToken(token)
-    firebaseApp
-      .database()
-      .ref(`notification_tokens/${auth.uid}/${token}`)
-      .set(true)
+    try {
+      firebaseApp
+        .database()
+        .ref(`notification_tokens/${auth.uid}/${token}`)
+        .set(true)
+    } catch (error) {
+      console.warn(error)
+    }
   }
 
   const initializeMessaging = async () => {
