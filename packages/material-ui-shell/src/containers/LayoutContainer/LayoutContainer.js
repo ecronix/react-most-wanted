@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
-import { ThemeProvider } from '@material-ui/core/styles'
-import getThemeSource from 'material-ui-shell/lib/utils/theme'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import PWAPrompt from 'react-ios-pwa-prompt'
+import React, { useContext } from 'react'
+import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
+import getThemeSource from 'material-ui-shell/lib/utils/theme'
+import { SnackbarProvider } from 'notistack'
+import { ThemeProvider } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
 import { useUpdate } from 'base-shell/lib/providers/Update'
 
@@ -15,7 +16,7 @@ export default function ({ children }) {
   const { UpdateDialog = null } = components || {}
   const { isUpdateAvailable, runUpdate } = useUpdate()
   const { themeID, type } = useContext(ThemeContext)
-  const { theme: themeConfig, pwa } = appConfig || {}
+  const { theme: themeConfig, pwa, notistack } = appConfig || {}
   const { useiOSPWAPrompt, iOSPWAPromptProps, useUpdateDialog } = pwa || {}
   const { themes = [] } = themeConfig || {}
   const theme = getThemeSource(themeID, themes, type)
@@ -23,7 +24,9 @@ export default function ({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {children}
+      <SnackbarProvider maxSnack={3} {...notistack}>
+        {children}
+      </SnackbarProvider>
       {useUpdateDialog && (
         <UpdateDialog
           isUpdateAvailable={isUpdateAvailable}
