@@ -31,7 +31,7 @@
     "@material-ui/icons": "^4.9.1",
     "a2hs": "^1.1.4",
     "base-shell": "^1.2.8",
-    "firebase": "^7.20.0",
+    "firebase": "^7.21.0",
     "firebaseui": "^4.6.1",
     "github-markdown-css": "^4.0.0",
     "intl": "^1.2.5",

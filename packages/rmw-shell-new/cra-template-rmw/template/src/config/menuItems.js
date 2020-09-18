@@ -156,6 +156,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <DaschboardIcon />,
         },
+        {
+          value: '/firebase_storage',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'firebase_storage',
+            defaultMessage: 'Storage',
+          }),
+          leftIcon: <DaschboardIcon />,
+        },
       ],
     },
     {
