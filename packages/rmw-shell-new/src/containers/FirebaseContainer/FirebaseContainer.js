@@ -7,12 +7,14 @@ import ListsProvider from 'rmw-shell/lib/providers/Firebase/Lists/Provider'
 import DocsProvider from 'rmw-shell/lib/providers/Firebase/Docs/Provider'
 import ColsProvider from 'rmw-shell/lib/providers/Firebase/Cols/Provider'
 import MessagingProvider from 'rmw-shell/lib/providers/Firebase/Messaging/Provider'
+import StorageProvider from 'rmw-shell/lib/providers/Firebase/Storage/Provider'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/firestore'
 import 'firebase/messaging'
 import 'firebase/functions'
+import 'firebase/storage'
 
 let firebaseApp = null
 
@@ -64,9 +66,11 @@ export default function ({ children }) {
         <ListsProvider firebaseApp={firebaseApp}>
           <DocsProvider firebaseApp={firebaseApp}>
             <ColsProvider firebaseApp={firebaseApp}>
-              <MessagingProvider firebaseApp={firebaseApp}>
-                {children}
-              </MessagingProvider>
+              <StorageProvider firebaseApp={firebaseApp}>
+                <MessagingProvider firebaseApp={firebaseApp}>
+                  {children}
+                </MessagingProvider>
+              </StorageProvider>
             </ColsProvider>
           </DocsProvider>
         </ListsProvider>
