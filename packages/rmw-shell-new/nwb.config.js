@@ -9,7 +9,7 @@ module.exports = {
   webpack: {
     html: {
       //mountId: 'root',
-      template: 'demo/public/index.html',
+      //template: 'demo/public/index.html',
     },
 
     aliases: {

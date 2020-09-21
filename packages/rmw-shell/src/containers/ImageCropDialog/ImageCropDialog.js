@@ -28,7 +28,7 @@ export class ImageCropDialog extends Component {
     this.state = {
       src: undefined,
       isUploading: false,
-      uploadProgress: 0
+      uploadProgress: 0,
     }
   }
 
@@ -52,9 +52,12 @@ export class ImageCropDialog extends Component {
         console.log(error)
       },
       () => {
-        this.setState({ isUploading: false, uploadProgress: 100, src: undefined }, () => {
-          onUploadSuccess(uploadTask.snapshot)
-        })
+        this.setState(
+          { isUploading: false, uploadProgress: 100, src: undefined },
+          () => {
+            onUploadSuccess(uploadTask.snapshot)
+          }
+        )
       }
     )
   }
@@ -87,10 +90,18 @@ export class ImageCropDialog extends Component {
       >
         <AppBar style={{ position: 'relative' }}>
           <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={this.handleClose} aria-label="close">
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={this.handleClose}
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
-            <Typography style={{ marginLeft: theme.spacing(2), flex: 1 }} variant="h6">
+            <Typography
+              style={{ marginLeft: theme.spacing(2), flex: 1 }}
+              variant="h6"
+            >
               {title}
             </Typography>
             <Button
@@ -105,7 +116,14 @@ export class ImageCropDialog extends Component {
           </Toolbar>
         </AppBar>
 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+          }}
+        >
           {!src && !isUploading && (
             <Dropzone onDrop={this.handlePhotoULRChange}>
               {({ getRootProps, getInputProps }) => {
@@ -116,18 +134,24 @@ export class ImageCropDialog extends Component {
                       src
                         ? undefined
                         : {
-                          height: '50vh',
-                          width: '50vw',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          borderStyle: 'dashed',
-                          borderColor: theme.palette.secondary.main
-                        }
+                            height: '50vh',
+                            width: '50vw',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            borderStyle: 'dashed',
+                            borderColor: theme.palette.secondary.main,
+                          }
                     }
                   >
                     <input {...getInputProps()} />
-                    <Typography>{src ? file.name : intl.formatMessage({ id: 'drop_or_select_file_label' })}</Typography>
+                    <Typography>
+                      {src
+                        ? file.name
+                        : intl.formatMessage({
+                            id: 'drop_or_select_file_label',
+                          })}
+                    </Typography>
                   </div>
                 )
               }}
@@ -164,8 +188,4 @@ export class ImageCropDialog extends Component {
   }
 }
 
-export default compose(
-  withFirebase,
-  withTheme,
-  injectIntl
-)(ImageCropDialog)
+export default compose(withFirebase, withTheme, injectIntl)(ImageCropDialog)

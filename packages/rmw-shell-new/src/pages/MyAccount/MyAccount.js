@@ -7,7 +7,6 @@ import Notifications from '@material-ui/icons/Notifications'
 import NotificationsOff from '@material-ui/icons/NotificationsOff'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
-import QuestionDialog from 'material-ui-shell/lib/containers/QuestionDialog/QuestionDialog'
 import React, { useContext, useState } from 'react'
 import Save from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
@@ -17,7 +16,8 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useIntl } from 'react-intl'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
-import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
+import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
+import ImgageUploadDialog from 'rmw-shell/lib/containers/ImageUploadDialog'
 import {
   GoogleIcon,
   FacebookIcon,
@@ -25,24 +25,38 @@ import {
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
 
-const DELETE_DIALOG_ID = 'delete_account_dialog'
-const REAUTHENTICATE_DIALOG_ID = 'reauthenticate_account_dialog'
+const uuid = () => {
+  const url = URL.createObjectURL(new Blob())
+  const [id] = url.toString().split('/').reverse()
+  URL.revokeObjectURL(url)
+  return id
+}
 
 const MyAccount = () => {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { firebaseApp } = useFirebase()
-  const { setValue } = useSimpleValues()
   const { firebase } = appConfig || {}
   const { firebaseuiProps } = firebase || {}
   const { signInOptions = [] } = firebaseuiProps || {}
+  const { openDialog } = useQuestions()
 
   const { auth, setAuth } = useAuth()
-  const { photoURL = '', displayName: currentDisplayName = '', email = '' } =
-    auth || {}
+  const {
+    photoURL: currentPhoroURL = '',
+    displayName: currentDisplayName = '',
+    email = '',
+  } = auth || {}
   const [displayName, setDisplayName] = useState(currentDisplayName)
+  const [photoURL, setPhotoURL] = useState(currentPhoroURL)
+  const [isImageDialogOpen, setImageDialogOpen] = useState(false)
 
-  const hasChange = displayName !== currentDisplayName
+  const hasChange =
+    displayName !== currentDisplayName || photoURL !== currentPhoroURL
+
+  const handleImageChange = (image) => {
+    setPhotoURL(image)
+  }
 
   const getProviderIcon = (id) => {
     if (id === 'google.com') {
@@ -83,16 +97,53 @@ const MyAccount = () => {
     }
   }
 
+  const openDeleteDialog = () => {
+    openDialog({
+      title: intl.formatMessage({
+        id: 'delete_account_dialog_title',
+        defaultMessage: 'Delete Account?',
+      }),
+      message: intl.formatMessage({
+        id: 'delete_account_dialog_message',
+        defaultMessage:
+          'This Account and all related data to it will be deleted permanently. Do you want to proceed with the deletion?',
+      }),
+      action: intl.formatMessage({
+        id: 'delete_account_dialog_action',
+        defaultMessage: 'DELETE ACCOUNT',
+      }),
+      handleAction: handleDelete,
+    })
+  }
+
+  const openReauthenticateDialog = () => {
+    openDialog({
+      title: intl.formatMessage({
+        id: 'reauthenticate_account_dialog_title',
+        defaultMessage: 'Reauthentication required',
+      }),
+      message: intl.formatMessage({
+        id: 'reauthenticate_account_dialog_message',
+        defaultMessage:
+          'To ensure that you are the real owner of this account a reauthentication is required. For that you need to logout and login into the application. By pressing the REAUTHENTICATION button you will be logged out automaticaly. After you login afain you can delete your account!',
+      }),
+      action: intl.formatMessage({
+        id: 'reauthenticate_account_dialog_action',
+        defaultMessage: 'REAUTHENTICATE',
+      }),
+      handleAction: (hc) => {
+        firebaseApp.auth().signOut()
+        hc()
+      },
+    })
+  }
+
   const handleDelete = async (handleClose) => {
-    setValue(DELETE_DIALOG_ID, false)
-    setValue(REAUTHENTICATE_DIALOG_ID, true)
-    return
     try {
       await firebaseApp.auth().currentUser.delete()
     } catch ({ code }) {
       if (code === 'auth/requires-recent-login') {
-        setValue(DELETE_DIALOG_ID, false)
-        setValue(REAUTHENTICATE_DIALOG_ID, true)
+        openReauthenticateDialog()
       }
     }
 
@@ -143,7 +194,7 @@ const MyAccount = () => {
           <Fab
             size="medium"
             style={{ position: 'absolute', bottom: 40, right: -16 }}
-            onClick={() => setValue(DELETE_DIALOG_ID, true)}
+            onClick={openDeleteDialog}
             color="secondary"
             aria-label="delete"
           >
@@ -151,7 +202,7 @@ const MyAccount = () => {
           </Fab>
 
           <Fab
-            //onClick={handleSave}
+            onClick={() => setImageDialogOpen(true)}
             style={{
               position: 'absolute',
               zIndex: 99,
@@ -218,42 +269,11 @@ const MyAccount = () => {
           </Zoom>
         </Paper>
 
-        <QuestionDialog
-          id={DELETE_DIALOG_ID}
-          title={intl.formatMessage({
-            id: 'delete_account_dialog_title',
-            defaultMessage: 'Delete Account?',
-          })}
-          message={intl.formatMessage({
-            id: 'delete_account_dialog_message',
-            defaultMessage:
-              'This Account and all related data to it will be deleted permanently. Do you want to proceed with the deletion?',
-          })}
-          action={intl.formatMessage({
-            id: 'delete_account_dialog_action',
-            defaultMessage: 'DELETE ACCOUNT',
-          })}
-          handleAction={handleDelete}
-        />
-        <QuestionDialog
-          id={REAUTHENTICATE_DIALOG_ID}
-          title={intl.formatMessage({
-            id: 'reauthenticate_account_dialog_title',
-            defaultMessage: 'Reauthentication required',
-          })}
-          message={intl.formatMessage({
-            id: 'reauthenticate_account_dialog_message',
-            defaultMessage:
-              'To ensure that you are the real owner of this account a reauthentication is required. For that you need to logout and login into the application. By pressing the REAUTHENTICATION button you will be logged out automaticaly. After you login afain you can delete your account!',
-          })}
-          action={intl.formatMessage({
-            id: 'reauthenticate_account_dialog_action',
-            defaultMessage: 'REAUTHENTICATE',
-          })}
-          handleAction={(hc) => {
-            firebaseApp.auth().signOut()
-            hc()
-          }}
+        <ImgageUploadDialog
+          isOpen={isImageDialogOpen}
+          handleClose={() => setImageDialogOpen(false)}
+          handleCropSubmit={handleImageChange}
+          path={`users/${auth.uid}/${uuid()}.jpeg`}
         />
       </div>
     </Page>

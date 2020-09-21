@@ -8,7 +8,6 @@ import React, { useContext } from 'react'
 import Slide from '@material-ui/core/Slide'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useIntl } from 'react-intl'
-import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 import { useTheme } from '@material-ui/core/styles'
 
 const Transition = React.forwardRef((props, ref) => (
@@ -24,12 +23,11 @@ const QuestionDialog = ({
   action = '',
   handleAction = () => {},
   handleClose = () => {},
+  ...rest
 }) => {
   const intl = useIntl()
   const theme = useTheme()
-  const { getValue, clearValue } = useSimpleValues()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  const isDialogOpen = getValue(id, false)
 
   return (
     <Dialog
@@ -39,6 +37,7 @@ const QuestionDialog = ({
       TransitionComponent={Transition}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
+      {...rest}
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
