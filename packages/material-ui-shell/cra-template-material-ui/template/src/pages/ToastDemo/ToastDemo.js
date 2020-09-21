@@ -1,6 +1,5 @@
 import Button from '@material-ui/core/Button'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
-import QuestionDialog from 'material-ui-shell/lib/containers/QuestionDialog/QuestionDialog'
 import React, { useContext } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import { useIntl } from 'react-intl'

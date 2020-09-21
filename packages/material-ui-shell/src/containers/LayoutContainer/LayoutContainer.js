@@ -4,6 +4,7 @@ import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'
 import { useTheme } from 'material-ui-shell/lib/providers/Theme'
 import UpdateContainer from 'material-ui-shell/lib/containers/UpdateContainer/UpdateContainer'
+import QuestionDialogsProvider from 'material-ui-shell/lib/providers/Dialogs/Question/Provider'
 import getThemeSource from 'material-ui-shell/lib/utils/theme'
 import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@material-ui/core/styles'
@@ -22,7 +23,9 @@ export default function ({ children }) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <SnackbarProvider maxSnack={3} {...notistack}>
-        <UpdateContainer>{children}</UpdateContainer>
+        <UpdateContainer>
+          <QuestionDialogsProvider>{children}</QuestionDialogsProvider>
+        </UpdateContainer>
       </SnackbarProvider>
       {useiOSPWAPrompt && (
         <PWAPrompt
