@@ -16,25 +16,25 @@ const Transition = React.forwardRef((props, ref) => (
 ))
 
 const QuestionDialog = ({
+  isProcessing = false,
+  isOpen = false,
   id = '',
   message = '',
   title = '',
   action = '',
   handleAction = () => {},
+  handleClose = () => {},
 }) => {
   const intl = useIntl()
   const theme = useTheme()
   const { getValue, clearValue } = useSimpleValues()
-  const handleClose = () => {
-    clearValue(id)
-  }
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
   const isDialogOpen = getValue(id, false)
 
   return (
     <Dialog
       fullScreen={fullScreen}
-      open={isDialogOpen}
+      open={isOpen}
       onClose={handleClose}
       TransitionComponent={Transition}
       aria-labelledby="alert-dialog-title"
@@ -51,6 +51,7 @@ const QuestionDialog = ({
           {intl.formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
         </Button>
         <Button
+          disabled={isProcessing}
           onClick={() => {
             handleAction(handleClose)
           }}
