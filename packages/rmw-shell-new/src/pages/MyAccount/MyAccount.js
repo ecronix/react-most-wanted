@@ -24,6 +24,7 @@ import {
   GitHubIcon,
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
+import firebase from 'firebase/app'
 
 const uuid = () => {
   const url = URL.createObjectURL(new Blob())
@@ -36,8 +37,8 @@ const MyAccount = () => {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { firebaseApp } = useFirebase()
-  const { firebase } = appConfig || {}
-  const { firebaseuiProps } = firebase || {}
+  const { firebase: firebaseConfig } = appConfig || {}
+  const { firebaseuiProps } = firebaseConfig || {}
   const { signInOptions = [] } = firebaseuiProps || {}
   const { openDialog } = useQuestions()
 
@@ -75,6 +76,26 @@ const MyAccount = () => {
     return null
   }
 
+  const getProvider = (provider) => {
+    if (provider.indexOf('facebook') > -1) {
+      return new firebase.auth.FacebookAuthProvider()
+    }
+    if (provider.indexOf('github') > -1) {
+      return new firebase.auth.GithubAuthProvider()
+    }
+    if (provider.indexOf('google') > -1) {
+      return new firebase.auth.GoogleAuthProvider()
+    }
+    if (provider.indexOf('twitter') > -1) {
+      return new firebase.auth.TwitterAuthProvider()
+    }
+    if (provider.indexOf('phone') > -1) {
+      return new firebase.auth.PhoneAuthProvider()
+    }
+
+    throw new Error('Provider is not supported!')
+  }
+
   const handleSave = async () => {
     await firebaseApp
       .auth()
@@ -95,6 +116,22 @@ const MyAccount = () => {
     } catch (e) {
       return false
     }
+  }
+
+  const linkUserWithPopup = (p) => {
+    const provider = getProvider(p)
+
+    firebaseApp
+      .auth()
+      .currentUser.linkWithPopup(provider)
+      .then(
+        () => {
+          authStateChanged(firebaseApp.auth().currentUser)
+        },
+        (e) => {
+          console.warn(e)
+        }
+      )
   }
 
   const openDeleteDialog = () => {
@@ -250,6 +287,7 @@ const MyAccount = () => {
                     disabled={isLinkedWithProvider(so)}
                     color="primary"
                     key={so}
+                    onClick={() => linkUserWithPopup(so)}
                   >
                     {getProviderIcon(so)}
                   </IconButton>

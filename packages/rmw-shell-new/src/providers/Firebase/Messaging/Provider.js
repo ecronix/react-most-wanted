@@ -31,15 +31,17 @@ const Provider = ({ children, firebaseApp }) => {
     if (Notification.permission === 'granted') {
       initializeMessaging()
     }
-  }, [])
+  }, [auth.uid])
 
   const syncToken = (token) => {
     setToken(token)
     try {
-      firebaseApp
-        .database()
-        .ref(`notification_tokens/${auth.uid}/${token}`)
-        .set(true)
+      if (auth.uid) {
+        firebaseApp
+          .database()
+          .ref(`notification_tokens/${auth.uid}/${token}`)
+          .set(true)
+      }
     } catch (error) {
       console.warn(error)
     }
