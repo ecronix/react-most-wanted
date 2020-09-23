@@ -9,6 +9,7 @@ import getThemeSource from 'material-ui-shell/lib/utils/theme'
 import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
+import FilterProvider from 'material-ui-shell/lib/providers/Filter/Provider'
 
 export default function ({ children }) {
   const intl = useIntl()
@@ -24,7 +25,9 @@ export default function ({ children }) {
       <CssBaseline />
       <SnackbarProvider maxSnack={3} {...notistack}>
         <UpdateContainer>
-          <QuestionDialogsProvider>{children}</QuestionDialogsProvider>
+          <QuestionDialogsProvider>
+            <FilterProvider>{children}</FilterProvider>
+          </QuestionDialogsProvider>
         </UpdateContainer>
       </SnackbarProvider>
       {useiOSPWAPrompt && (

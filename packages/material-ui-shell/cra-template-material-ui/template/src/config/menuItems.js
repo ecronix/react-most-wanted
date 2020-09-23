@@ -8,9 +8,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen'
+import QuestionAnswer from '@material-ui/icons/QuestionAnswer'
+import Web from '@material-ui/icons/Web'
 import ChatBubble from '@material-ui/icons/ChatBubble'
 import GetApp from '@material-ui/icons/GetApp'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
+import FilterList from '@material-ui/icons/FilterList'
 import StyleIcon from '@material-ui/icons/Style'
 import allThemes from './themes'
 
@@ -80,23 +83,40 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'home' }),
       leftIcon: <DaschboardIcon />,
     },
+
     {
-      value: '/dialog_demo',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({
-        id: 'dialog_demo',
-        defaultMessage: 'Dialog demo',
-      }),
-      leftIcon: <ChatBubble />,
-    },
-    {
-      value: '/toast_demo',
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({
-        id: 'toast_demo',
-        defaultMessage: 'Toast demo',
-      }),
-      leftIcon: <ChatBubble />,
+      primaryText: intl.formatMessage({ id: 'demos', defaultMessage: 'Demos' }),
+      primaryTogglesNestedList: true,
+      leftIcon: <Web />,
+      nestedItems: [
+        {
+          value: '/dialog_demo',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'dialog_demo',
+            defaultMessage: 'Dialog',
+          }),
+          leftIcon: <ChatBubble />,
+        },
+        {
+          value: '/toast_demo',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'toast_demo',
+            defaultMessage: 'Toast',
+          }),
+          leftIcon: <QuestionAnswer />,
+        },
+        {
+          value: '/filter_demo',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'filter_demo',
+            defaultMessage: 'Filter',
+          }),
+          leftIcon: <FilterList />,
+        },
+      ],
     },
     {
       value: '/about',
