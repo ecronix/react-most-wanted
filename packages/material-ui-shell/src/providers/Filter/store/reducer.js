@@ -55,6 +55,7 @@ function filter(filter = {}, action) {
     case types.ON_FILTER_OPEN_CHANGED:
     case types.ON_FILTER_SORT_FIELD_CHANGED:
     case types.ON_FILTER_SORT_ORIENTATION_CHANGED:
+    case types.ON_SET_FIELDS:
       return { ...filter, ...payload }
 
     case types.ON_ADD_FILTER_QUERY:
@@ -80,6 +81,7 @@ export default function filters(state = {}, action) {
     case types.ON_EDIT_FILTER_QUERY:
     case types.ON_REMOVE_FILTER_QUERY:
     case types.ON_SET_SEARCH:
+    case types.ON_SET_FIELDS:
       return { ...state, [name]: filter(state[name], action) }
     case types.ON_CLEAR:
       const { [name]: removed, ...rest } = state

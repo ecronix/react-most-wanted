@@ -15,6 +15,14 @@ export function clearFilter(name, isOpen) {
   }
 }
 
+export function setFields(name, fields) {
+  return {
+    type: types.ON_SET_FIELDS,
+    name,
+    payload: { fields },
+  }
+}
+
 export function setFilterSortField(name, sortField) {
   return {
     type: types.ON_FILTER_SORT_FIELD_CHANGED,

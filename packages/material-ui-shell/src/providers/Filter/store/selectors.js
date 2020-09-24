@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 export const STRING_TYPE = 'string'
 export const NUMBER_TYPE = 'number'
 export const DATE_TYPE = 'date'
@@ -10,7 +8,7 @@ export const SELECT_FIELD_TYPE = 'select_field'
 function getValue(
   source,
   fieldName,
-  getSourceValue = fieldValue => fieldValue,
+  getSourceValue = (fieldValue) => fieldValue,
   isCaseSensitive,
   type
 ) {
@@ -315,6 +313,19 @@ export function getFilteredList(filterName, filters, list, getSourceValue) {
 
   if (result !== undefined && sortField !== null) {
     result.sort(dynamicSort(sortField.value, sortOrientation, getSourceValue))
+  }
+
+  return result
+}
+
+export function getList(filter = {}, list) {
+  let result = [...list]
+  const { queries = [], fields = [] } = filter
+
+  console.log('queries', queries)
+
+  if (list == null || list.length < 1) {
+    return []
   }
 
   return result
