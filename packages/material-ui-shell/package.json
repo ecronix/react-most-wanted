@@ -21,7 +21,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "@formatjs/intl-relativetimeformat": "4.x",
+    "@formatjs/intl-relativetimeformat": "7.x",
     "@material-ui/core": "4.x",
     "react-custom-scrollbars": "4.x",
     "@material-ui/icons": "4.x",
@@ -29,11 +29,12 @@
     "intl-locales-supported": "1.x",
     "react": "16.x",
     "react-dom": "16.x",
-    "react-intl": "4.x",
+    "react-intl": "5.x",
     "react-redux": "7.x",
     "react-ios-pwa-prompt": "1.x",
     "react-router-dom": "5.x",
     "base-shell": "1.x",
+    "material-ui-shell": "1.x",
     "github-markdown-css": "4.x",
     "react-markdown": "4.x",
     "notistack": "1.x"
