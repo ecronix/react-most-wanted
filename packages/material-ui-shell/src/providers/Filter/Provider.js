@@ -2,7 +2,13 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useReducer } from 'react'
 import Context from './Context'
 import reducer from './store/reducer'
-import { setFilterIsOpen, clearFilter } from './store/actions'
+import {
+  setFilterIsOpen,
+  clearFilter,
+  setFields,
+  addFilterQuery,
+} from './store/actions'
+import { getList } from './store/selectors'
 
 function getInitState(persistKey) {
   let persistedValues = {}
@@ -20,7 +26,14 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
 
   useEffect(() => {
     try {
-      localStorage.setItem(persistKey, JSON.stringify(state))
+      let stateToSave = {}
+
+      Object.keys(state).map((k) => {
+        const { fields, ...rest } = state[k]
+        stateToSave[k] = rest
+      })
+
+      localStorage.setItem(persistKey, JSON.stringify(stateToSave))
     } catch (error) {
       console.warn(error)
     }
@@ -34,6 +47,9 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
         openFilter: (name) => dispatch(setFilterIsOpen(name, true)),
         closeFilter: (name) => dispatch(setFilterIsOpen(name, false)),
         clearFilter: (name) => dispatch(clearFilter(name)),
+        setFields: (name, fields) => dispatch(setFields(name, fields)),
+        addFilterQuery: (name, query) => dispatch(addFilterQuery(name, query)),
+        getList: (name, list) => getList(state[name], list),
       }}
     >
       {children}
