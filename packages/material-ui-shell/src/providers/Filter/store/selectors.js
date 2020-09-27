@@ -318,15 +318,37 @@ export function getFilteredList(filterName, filters, list, getSourceValue) {
   return result
 }
 
-export function getList(filter = {}, list) {
+export function getList(filter = {}, list = [], fields = []) {
   let result = [...list]
-  const { queries = [], fields = [] } = filter
+  const { queries = [] } = filter
 
-  console.log('queries', queries)
-
-  if (list == null || list.length < 1) {
+  if (list == null || list.length < 1 || fields.length < 1) {
     return []
   }
+
+  result = result.filter((row, i) => {
+    let result = true
+
+    queries.map((q) => {
+      const { field: fieldName, operator = '=', value } = q
+      let field = false
+
+      fields.map((f) => {
+        if (f.name === fieldName) {
+          field = f
+        }
+        return f
+      })
+
+      if (field) {
+        result = field.filter(operator, row[fieldName], value)
+      }
+
+      return q
+    })
+
+    return result
+  })
 
   return result
 }

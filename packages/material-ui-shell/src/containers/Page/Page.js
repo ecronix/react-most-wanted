@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
+    //zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -66,7 +66,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
+const Page = ({
+  children,
+  pageTitle,
+  onBackClick,
+  isLoading,
+  appBarContent = null,
+}) => {
   const isOnline = useOnline()
   const theme = useTheme()
   const { appConfig } = useConfig()
@@ -102,7 +108,7 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ zIndex: theme.zIndex.modal + 10 }}>
       <AppBar
         position={isDesktop ? 'absolute' : undefined}
         className={
@@ -141,6 +147,7 @@ const Page = ({ children, pageTitle, onBackClick, isLoading }) => {
             {headerTitle}
           </Typography>
           <div className={classes.grow} />
+          {appBarContent}
         </Toolbar>
       </AppBar>
 

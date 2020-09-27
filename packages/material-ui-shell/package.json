@@ -54,7 +54,7 @@
     "react": "^16.13.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
-    "react-intl": "^5.8.2",
+    "react-intl": "^5.8.3",
     "react-ios-pwa-prompt": "^1.8.0",
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0"

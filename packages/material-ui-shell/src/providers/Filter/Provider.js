@@ -3,10 +3,12 @@ import React, { useEffect, useReducer } from 'react'
 import Context from './Context'
 import reducer from './store/reducer'
 import {
-  setFilterIsOpen,
+  openFilter,
+  closeFilter,
   clearFilter,
-  setFields,
   addFilterQuery,
+  removeFilterQuery,
+  editFilterQuery,
 } from './store/actions'
 import { getList } from './store/selectors'
 
@@ -26,30 +28,31 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
 
   useEffect(() => {
     try {
-      let stateToSave = {}
-
-      Object.keys(state).map((k) => {
-        const { fields, ...rest } = state[k]
-        stateToSave[k] = rest
-      })
-
-      localStorage.setItem(persistKey, JSON.stringify(stateToSave))
+      localStorage.setItem(persistKey, JSON.stringify(state))
     } catch (error) {
       console.warn(error)
     }
   }, [state, persistKey])
 
+  const props = {
+    openFilter: (name) => dispatch(openFilter(name)),
+    closeFilter: (name) => dispatch(closeFilter(name)),
+    clearFilter: (name) => dispatch(clearFilter(name)),
+    addFilterQuery: (name, query) => dispatch(addFilterQuery(name, query)),
+    removeFilterQuery: (name, index) =>
+      dispatch(removeFilterQuery(name, index)),
+    editFilterQuery: (name, index, query) =>
+      dispatch(editFilterQuery(name, index, query)),
+    getList: (name, list, fields) => getList(state[name], list, fields),
+    isFilterOpen: (name) => (state[name] ? !!state[name].isOpen : false),
+    getFilterQueries: (name) =>
+      state[name] && state[name].queries ? state[name].queries : [],
+  }
+
   return (
     <Context.Provider
       value={{
-        setFilterIsOpen: (name, isOpen) =>
-          dispatch(setFilterIsOpen(name, isOpen)),
-        openFilter: (name) => dispatch(setFilterIsOpen(name, true)),
-        closeFilter: (name) => dispatch(setFilterIsOpen(name, false)),
-        clearFilter: (name) => dispatch(clearFilter(name)),
-        setFields: (name, fields) => dispatch(setFields(name, fields)),
-        addFilterQuery: (name, query) => dispatch(addFilterQuery(name, query)),
-        getList: (name, list) => getList(state[name], list),
+        ...props,
       }}
     >
       {children}
