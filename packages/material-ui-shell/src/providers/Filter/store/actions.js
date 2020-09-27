@@ -1,10 +1,17 @@
 import * as types from './types'
 
-export function setFilterIsOpen(name, isOpen) {
+export function openFilter(name) {
   return {
-    type: types.ON_FILTER_OPEN_CHANGED,
+    type: types.ON_FILTER_IS_OPEN,
     name,
-    payload: { isOpen },
+    payload: { isOpen: true },
+  }
+}
+export function closeFilter(name) {
+  return {
+    type: types.ON_FILTER_IS_CLOSE,
+    name,
+    payload: { isOpen: false },
   }
 }
 
@@ -12,14 +19,6 @@ export function clearFilter(name, isOpen) {
   return {
     type: types.ON_CLEAR,
     name,
-  }
-}
-
-export function setFields(name, fields) {
-  return {
-    type: types.ON_SET_FIELDS,
-    name,
-    payload: { fields },
   }
 }
 
