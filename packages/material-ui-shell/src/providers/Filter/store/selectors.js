@@ -318,9 +318,21 @@ export function getFilteredList(filterName, filters, list, getSourceValue) {
   return result
 }
 
+export function getField(name, fields) {
+  let field = false
+  fields.map((f) => {
+    if (f.name === name) {
+      field = f
+    }
+    return f
+  })
+
+  return field
+}
+
 export function getList(filter = {}, list = [], fields = []) {
   let result = [...list]
-  const { queries = [] } = filter
+  const { queries = [], sortField: sortFieldName, sortOrientation = 1 } = filter
 
   if (list == null || list.length < 1 || fields.length < 1) {
     return []
@@ -331,14 +343,7 @@ export function getList(filter = {}, list = [], fields = []) {
 
     queries.map((q) => {
       const { field: fieldName, operator = '=', value } = q
-      let field = false
-
-      fields.map((f) => {
-        if (f.name === fieldName) {
-          field = f
-        }
-        return f
-      })
+      const field = getField(fieldName, fields)
 
       if (field) {
         result = field.filter(operator, row[fieldName], value)
@@ -349,6 +354,18 @@ export function getList(filter = {}, list = [], fields = []) {
 
     return result
   })
+
+  console.log('sortFieldName', sortFieldName)
+
+  if (sortFieldName && sortFieldName !== '') {
+    const sortField = getField(sortFieldName, fields)
+
+    if (result !== undefined && sortField.sort !== undefined) {
+      result.sort((a, b) =>
+        sortField.sort(sortOrientation, a[sortFieldName], b[sortFieldName])
+      )
+    }
+  }
 
   return result
 }

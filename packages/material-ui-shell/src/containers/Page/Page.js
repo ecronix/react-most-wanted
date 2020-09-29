@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   appBar: {
-    //zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -108,7 +108,7 @@ const Page = ({
   }
 
   return (
-    <div className={classes.root} style={{ zIndex: theme.zIndex.modal + 10 }}>
+    <div className={classes.root}>
       <AppBar
         position={isDesktop ? 'absolute' : undefined}
         className={
