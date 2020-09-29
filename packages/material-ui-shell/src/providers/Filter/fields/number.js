@@ -7,7 +7,7 @@ const field = {
     { value: '>', label: '>' },
     { value: '<', label: '<' },
     { value: '!=', label: '!=' },
-    { value: '>=', label: '<=' },
+    { value: '<=', label: '<=' },
     { value: '>=', label: '>=' },
     { value: 'like', label: 'like' },
     { value: '!like', label: '!like' },
@@ -43,12 +43,15 @@ const field = {
   sort: (orientation, a, b) => {
     return (a - b) * orientation
   },
-  render: (value, onChange) => {
+  render: ({ value = '' }, onChange) => {
     return (
       <TextField
+        variant="outlined"
+        style={{ padding: 1 }}
         type="number"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        fullWidth
+        onChange={(e) => onChange({ value: e.target.value })}
       />
     )
   },

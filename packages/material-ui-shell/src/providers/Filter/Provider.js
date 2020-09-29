@@ -9,8 +9,10 @@ import {
   addFilterQuery,
   removeFilterQuery,
   editFilterQuery,
+  setFilterSortField,
+  setFilterSortOrientation,
 } from './store/actions'
-import { getList } from './store/selectors'
+import { getList, getField } from './store/selectors'
 
 function getInitState(persistKey) {
   let persistedValues = {}
@@ -38,6 +40,11 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
     openFilter: (name) => dispatch(openFilter(name)),
     closeFilter: (name) => dispatch(closeFilter(name)),
     clearFilter: (name) => dispatch(clearFilter(name)),
+
+    setFilterSortField: (name, sortField) =>
+      dispatch(setFilterSortField(name, sortField)),
+    setFilterSortOrientation: (name, sortOrientation) =>
+      dispatch(setFilterSortOrientation(name, sortOrientation)),
     addFilterQuery: (name, query) => dispatch(addFilterQuery(name, query)),
     removeFilterQuery: (name, index) =>
       dispatch(removeFilterQuery(name, index)),
@@ -47,6 +54,8 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
     isFilterOpen: (name) => (state[name] ? !!state[name].isOpen : false),
     getFilterQueries: (name) =>
       state[name] && state[name].queries ? state[name].queries : [],
+    getFilter: (name) => (state[name] ? state[name] : {}),
+    getField: (fieldName, fields) => getField(fieldName, fields),
   }
 
   return (

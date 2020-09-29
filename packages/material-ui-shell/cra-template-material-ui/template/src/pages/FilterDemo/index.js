@@ -3,15 +3,17 @@ import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
-import { numberField } from 'material-ui-shell/lib/providers/Filter/fields'
+import {
+  numberField,
+  textField,
+} from 'material-ui-shell/lib/providers/Filter/fields'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import FilterList from '@material-ui/icons/FilterList'
 import FilterDrawer from 'material-ui-shell/lib/components/FilterDrawer'
+import source from './data.json'
 
 const filterName = 'test_filter'
-
-const source = [{ number1: 1 }, { number1: 4 }, { number1: 3 }, { number1: 2 }]
 
 export default function () {
   const intl = useIntl()
@@ -19,14 +21,19 @@ export default function () {
 
   const fields = [
     {
-      name: 'number1',
-      label: 'Test Field 1',
-      ...numberField,
+      ...textField,
+      name: 'name',
+      label: 'Name',
     },
     {
-      name: 'number2',
-      label: 'Test Field 2',
+      ...textField,
+      name: 'email',
+      label: 'E-Mail',
+    },
+    {
       ...numberField,
+      name: 'amount',
+      label: 'Amount',
     },
   ]
 
@@ -46,9 +53,9 @@ export default function () {
         </Toolbar>
       }
     >
-      <div>
-        {list.map((row) => {
-          return <p>{row.number1}</p>
+      <div style={{ margin: 8 }}>
+        {list.map((row, i) => {
+          return <p key={i}>{row.name}</p>
         })}
       </div>
       <FilterDrawer fields={fields} name={filterName} />
