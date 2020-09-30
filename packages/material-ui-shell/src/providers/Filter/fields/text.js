@@ -17,9 +17,11 @@ const field = {
     { value: '!like', label: '!like' },
   ],
   defaultOperator: 'like',
-  filter: (operator, value, qv) => {
+  filter: (rawValue, q) => {
+    const { operator, value: qv, isCaseSensitive = false } = q
     if (qv !== '') {
-      const queryValue = qv
+      const queryValue = isCaseSensitive ? qv : qv.toUpperCase()
+      const value = isCaseSensitive ? rawValue : rawValue.toUpperCase()
       switch (operator) {
         case '=':
           return value === queryValue

@@ -13,7 +13,8 @@ const field = {
     { value: '!like', label: '!like' },
   ],
   defaultOperator: '=',
-  filter: (operator, value, qv) => {
+  filter: (value, q) => {
+    const { operator, value: qv } = q
     if (qv !== '') {
       const queryValue = parseFloat(qv)
       switch (operator) {

@@ -346,7 +346,7 @@ export function getList(filter = {}, list = [], fields = []) {
       const field = getField(fieldName, fields)
 
       if (field) {
-        result = field.filter(operator, row[fieldName], value)
+        result = field.filter(row[fieldName], q)
       }
 
       return q
@@ -354,8 +354,6 @@ export function getList(filter = {}, list = [], fields = []) {
 
     return result
   })
-
-  console.log('sortFieldName', sortFieldName)
 
   if (sortFieldName && sortFieldName !== '') {
     const sortField = getField(sortFieldName, fields)
