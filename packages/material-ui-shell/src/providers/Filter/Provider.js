@@ -3,14 +3,15 @@ import React, { useEffect, useReducer } from 'react'
 import Context from './Context'
 import reducer from './store/reducer'
 import {
-  openFilter,
-  closeFilter,
-  clearFilter,
   addFilterQuery,
-  removeFilterQuery,
+  clearFilter,
+  closeFilter,
   editFilterQuery,
+  openFilter,
+  removeFilterQuery,
   setFilterSortField,
   setFilterSortOrientation,
+  setSearch,
 } from './store/actions'
 import { getList, getField } from './store/selectors'
 
@@ -40,6 +41,7 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
     openFilter: (name) => dispatch(openFilter(name)),
     closeFilter: (name) => dispatch(closeFilter(name)),
     clearFilter: (name) => dispatch(clearFilter(name)),
+    setSearch: (name, search) => dispatch(setSearch(name, search)),
 
     setFilterSortField: (name, sortField) =>
       dispatch(setFilterSortField(name, sortField)),

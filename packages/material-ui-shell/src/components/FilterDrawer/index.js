@@ -133,7 +133,7 @@ export default function ({ name, width = 250, fields = [] }) {
                 const field = getField(q.field, fields)
 
                 return (
-                  <div style={{ padding: 8 }}>
+                  <div key={`${q.field}_${i}`} style={{ padding: 8 }}>
                     <FormControl
                       variant="outlined"
                       fullWidth
