@@ -27,7 +27,6 @@ function getInitState(persistKey) {
 
 const Provider = ({ children, persistKey = 'mui_filter' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
-  console.log('state', state)
 
   useEffect(() => {
     try {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import Search from '@material-ui/icons/Search'
@@ -22,18 +22,18 @@ const useStyles = makeStyles((theme) => ({
       transition: theme.transitions.create('width'),
       width: 0,
       '&:focus': {
-        width: 200,
+        width: 240,
       },
     },
   },
   rootOpen: {
     fontFamily: theme.typography.fontFamily,
     position: 'relative',
-    minHeight: 48,
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(1),
     flex: 1,
     borderRadius: 4,
+    minHeight: 48,
     display: 'block',
     background: fade(theme.palette.common.white, 0.25),
     width: 240,
@@ -84,9 +84,14 @@ export default function ({
   deferTime = 1000,
 }) {
   const classes = useStyles()
-  const [value, setValue] = useState(initialValue)
+  const [value, setValue] = useState('')
 
-  const isOpen = (initialValue && initialValue !== '') || alwaysOpen
+  useEffect(() => {
+    setValue(initialValue)
+  }, [])
+
+  const hasValue = value && value !== ''
+  const isOpen = hasValue || alwaysOpen
 
   const handleChange = (v) => {
     if (timeout) {
@@ -109,7 +114,7 @@ export default function ({
       </div>
       <input
         autoComplete="off"
-        id="docsearch-input"
+        id="search-input"
         value={value}
         ref={(node) => {
           if (node && initialValue && initialValue !== '') {

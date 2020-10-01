@@ -72,6 +72,7 @@ const Page = ({
   onBackClick,
   isLoading,
   appBarContent = null,
+  contentStyle,
 }) => {
   const isOnline = useOnline()
   const theme = useTheme()
@@ -171,7 +172,9 @@ const Page = ({
           </Typography>
         </div>
       )}
-      <main className={classes.content}>{children}</main>
+      <div className={classes.content} style={contentStyle}>
+        {children}
+      </div>
     </div>
   )
 }
