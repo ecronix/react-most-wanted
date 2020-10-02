@@ -1,5 +1,5 @@
 import Button from '@material-ui/core/Button'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
+import Page from 'material-ui-shell/lib/containers/Page'
 import Paper from '@material-ui/core/Paper'
 import React, { useState, useContext } from 'react'
 import TextField from '@material-ui/core/TextField'

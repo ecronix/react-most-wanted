@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button'
 import Home from '@material-ui/icons/Home'
-import Page from '../../containers/Page/Page'
+import Page from '../../containers/Page'
 import Paper from '@material-ui/core/Paper'
 import React from 'react'
 import Typography from '@material-ui/core/Typography'

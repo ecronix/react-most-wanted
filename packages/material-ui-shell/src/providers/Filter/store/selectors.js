@@ -1,8 +1,23 @@
+import {
+  numberField,
+  textField,
+  boolField,
+} from 'material-ui-shell/lib/providers/Filter/fields'
+
 export function getField(name, fields) {
   let field = false
   fields.map((f) => {
+    const { type = 'text' } = f
     if (f.name === name) {
-      field = f
+      let defaultProps = {}
+      if (type === 'number') {
+        defaultProps = { ...numberField }
+      } else if (type === 'text') {
+        defaultProps = { ...textField }
+      } else if (type === 'bool') {
+        defaultProps = { ...boolField }
+      }
+      field = { ...defaultProps, ...f }
     }
     return f
   })

@@ -66,14 +66,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Page = ({
+export default function ({
   children,
   pageTitle,
   onBackClick,
   isLoading,
   appBarContent = null,
   contentStyle,
-}) => {
+}) {
   const isOnline = useOnline()
   const theme = useTheme()
   const { appConfig } = useConfig()
@@ -178,5 +178,3 @@ const Page = ({
     </div>
   )
 }
-
-export default Page
