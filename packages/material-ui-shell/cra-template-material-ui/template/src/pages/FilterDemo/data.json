@@ -11,7 +11,8 @@
     "email": "angeliamitchell@apextri.com",
     "registered": "1994-10-17",
     "isActive": false,
-    "amount": 20
+    "amount": 20,
+    "registrationTime": "17:00"
   },
   {
     "name": "Douglas Ramsey",
