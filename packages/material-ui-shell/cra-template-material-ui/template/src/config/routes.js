@@ -12,6 +12,7 @@ const Home = lazy(() => import('../pages/Home/Home'))
 const DialogDemo = lazy(() => import('../pages/DialogDemo/DialogDemo'))
 const ToastDemo = lazy(() => import('../pages/ToastDemo/ToastDemo'))
 const FilterDemo = lazy(() => import('../pages/FilterDemo'))
+const ListPageDemo = lazy(() => import('../pages/ListPageDemo'))
 
 const routes = [
   <PublicRoute path="/signin" redirectTo="/" exact component={SignIn} />,
@@ -27,6 +28,7 @@ const routes = [
   <PrivateRoute path="/dialog_demo" exact component={DialogDemo} />,
   <PrivateRoute path="/toast_demo" exact component={ToastDemo} />,
   <PrivateRoute path="/filter_demo" exact component={FilterDemo} />,
+  <PrivateRoute path="/list_page_demo" exact component={ListPageDemo} />,
 ]
 
 export default routes

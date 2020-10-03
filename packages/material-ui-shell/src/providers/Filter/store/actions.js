@@ -7,6 +7,7 @@ export function openFilter(name) {
     payload: { isOpen: true },
   }
 }
+
 export function closeFilter(name) {
   return {
     type: types.ON_FILTER_IS_CLOSE,
@@ -27,6 +28,14 @@ export function setFilterSortField(name, sortField) {
     type: types.ON_FILTER_SORT_FIELD_CHANGED,
     name,
     payload: { sortField },
+  }
+}
+
+export function setScrollOffset(name, scrollOffset) {
+  return {
+    type: types.ON_SET_SCROLL_OFFSET,
+    name,
+    payload: { scrollOffset },
   }
 }
 

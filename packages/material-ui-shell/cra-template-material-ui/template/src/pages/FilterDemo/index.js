@@ -22,6 +22,30 @@ import { useIntl } from 'react-intl'
 
 const filterName = 'test_filter'
 
+const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
+  const refSetter = useCallback((scrollbarsRef) => {
+    if (scrollbarsRef) {
+      forwardedRef(scrollbarsRef.view)
+    } else {
+      forwardedRef(null)
+    }
+  }, [])
+
+  return (
+    <Scrollbars
+      ref={refSetter}
+      style={{ ...style, overflow: 'hidden' }}
+      onScroll={onScroll}
+    >
+      {children}
+    </Scrollbars>
+  )
+}
+
+const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => (
+  <CustomScrollbars {...props} forwardedRef={ref} />
+))
+
 export default function () {
   const intl = useIntl()
   const { openFilter, getList, getFilter, setSearch } = useFilter()
@@ -66,7 +90,6 @@ export default function () {
 
   useEffect(() => {
     if (listRef.current) {
-      console.log('listRef', listRef)
       listRef.current.scrollToItem(1500, 'center')
     }
   }, [listRef.current])
@@ -105,17 +128,6 @@ export default function () {
     )
   }
 
-  const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
-    const { style, ...rest } = props
-    return (
-      <Scrollbar
-        {...rest}
-        forwardedRef={ref}
-        style={{ ...style, overflow: 'hidden' }}
-      />
-    )
-  })
-
   return (
     <Page
       pageTitle={intl.formatMessage(
@@ -145,12 +157,8 @@ export default function () {
           return (
             <List>
               <FixedSizeList
-                ref={(r) => {
-                  if (r) {
-                    listRef.current = r
-                    //r.scrollToItem(1500)
-                  }
-                }}
+                className="List"
+                ref={listRef}
                 height={height}
                 itemCount={list.length}
                 itemSize={91}

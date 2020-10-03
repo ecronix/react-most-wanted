@@ -116,6 +116,15 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <FilterList />,
         },
+        {
+          value: '/list_page_demo',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'list_page_demo',
+            defaultMessage: 'List Page Demo',
+          }),
+          leftIcon: <FilterList />,
+        },
       ],
     },
     {

@@ -37,7 +37,9 @@
     "material-ui-shell": "1.x",
     "github-markdown-css": "4.x",
     "react-markdown": "4.x",
-    "notistack": "1.x"
+    "notistack": "1.x",
+    "react-virtualized-auto-sizer": "1.x",
+    "react-window": "1.x"
   },
   "devDependencies": {
     "@formatjs/intl-relativetimeformat": "^7.2.8",
