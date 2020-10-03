@@ -18,10 +18,9 @@ const field = {
   filter: (rawValue, q) => {
     const { operator, value: qv } = q
     if (qv !== '') {
-      const queryValue = new Date(qv).getTime()
-      const value = new Date(rawValue).getTime()
+      const queryValue = qv ? parseInt(qv.split(':').join('')) : 0
+      const value = rawValue ? parseInt(rawValue.split(':').join('')) : 0
 
-      console.log('times', { qv, rawValue })
       switch (operator) {
         case '=':
           return value === queryValue
