@@ -8,7 +8,13 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Page from 'material-ui-shell/lib/containers/Page'
-import React, { useEffect, createRef, forwardRef, useCallback } from 'react'
+import React, {
+  useEffect,
+  createRef,
+  forwardRef,
+  useCallback,
+  useReducer,
+} from 'react'
 import ReactList from 'react-list'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
@@ -18,63 +24,64 @@ import { FixedSizeList } from 'react-window'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
+import { useState } from 'react'
+import { setScrollOffset } from '../../providers/Filter/store/actions'
 
-const filterName = 'test_filter'
-const source = []
+const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
+  const { style, ...rest } = props
+  return (
+    <Scrollbar
+      {...rest}
+      forwardedRef={ref}
+      style={{ ...style, overflow: 'hidden' }}
+    />
+  )
+})
 
 export default function (props) {
-  const { fields = [], pageProps } = props
+  const {
+    fields = [],
+    list: source = [],
+    getPageProps = () => {},
+    listProps,
+    Row,
+    name,
+    setListRef = () => {},
+    initialIndex = 0,
+    preserveScroll = true,
+  } = props
   const intl = useIntl()
-  const { openFilter, getList, getFilter, setSearch } = useFilter()
-  const { queries = [], search = {} } = getFilter(filterName)
-  const { value: searchvalue = '' } = search
-  const list = getList(filterName, source, fields)
   const listRef = React.createRef()
+  const [ref, setRef] = useState(false)
+  const {
+    openFilter,
+    getList,
+    getFilter,
+    setSearch,
+    setScrollOffset,
+  } = useFilter()
+  const { queries = [], search = {}, scrollOffset = 0 } = getFilter(name)
+  const { value: searchvalue = '' } = search
+  const list = getList(name, source, fields)
 
-  const Row = ({ index, style }) => {
-    const { name, amount = '', registered, email } = list[index]
+  useEffect(() => {
+    if (preserveScroll && ref && scrollOffset) {
+      listRef.current.scrollTo(scrollOffset)
+    }
+  }, [ref])
 
-    return (
-      <div key={`${name}_${index}`} style={style}>
-        <ListItem alignItems="flex-start">
-          <ListItemText
-            primary={`${name} ${index}`}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  {email}
-                </Typography>
-                <br />
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  {`${amount} ${registered}`}
-                </Typography>
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider />
-      </div>
-    )
-  }
-
-  const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
-    const { style, ...rest } = props
-    return (
-      <Scrollbar
-        {...rest}
-        forwardedRef={ref}
-        style={{ ...style, overflow: 'hidden' }}
-      />
-    )
-  })
+  useEffect(() => {
+    return () => {
+      try {
+        if (preserveScroll) {
+          const offset = listRef.current.state.scrollOffset
+          setScrollOffset(name, offset)
+        }
+      } catch (error) {
+        console.warn('Could not save scrollOffset')
+      }
+    }
+  }, [])
 
   return (
     <Page
@@ -84,15 +91,15 @@ export default function (props) {
           <SearchField
             initialValue={searchvalue}
             onChange={(v) => {
-              setSearch(filterName, v)
+              setSearch(name, v)
             }}
           />
-          <IconButton color="inherit" onClick={() => openFilter(filterName)}>
+          <IconButton color="inherit" onClick={() => openFilter(name)}>
             <FilterList color={queries.length > 0 ? 'secondary' : undefined} />
           </IconButton>
         </Toolbar>
       }
-      {...pageProps}
+      {...getPageProps(list)}
     >
       <AutoSizer style={{ height: '100%', width: '100%' }}>
         {({ height, width }) => {
@@ -102,14 +109,14 @@ export default function (props) {
                 ref={(r) => {
                   if (r) {
                     listRef.current = r
-                    //r.scrollToItem(1500)
+                    setRef(true)
                   }
                 }}
                 height={height}
                 itemCount={list.length}
-                itemSize={91}
                 width={width}
                 outerElementType={CustomScrollbarsVirtualList}
+                {...listProps}
               >
                 {Row}
               </FixedSizeList>
@@ -117,7 +124,7 @@ export default function (props) {
           )
         }}
       </AutoSizer>
-      <FilterDrawer fields={fields} name={filterName} />
+      <FilterDrawer fields={fields} name={name} />
     </Page>
   )
 }

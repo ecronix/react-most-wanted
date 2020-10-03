@@ -186,7 +186,9 @@ export default function ({ name, width = 250, fields = [] }) {
                             displayEmpty
                           >
                             {field.operators.map((o) => (
-                              <MenuItem value={o.value}>{o.label}</MenuItem>
+                              <MenuItem key={o.value} value={o.value}>
+                                {o.label}
+                              </MenuItem>
                             ))}
                           </Select>
                         </FormControl>
