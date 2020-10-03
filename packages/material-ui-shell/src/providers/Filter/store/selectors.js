@@ -2,6 +2,8 @@ import {
   numberField,
   textField,
   boolField,
+  dateField,
+  timeField,
 } from 'material-ui-shell/lib/providers/Filter/fields'
 
 export function getField(name, fields) {
@@ -16,6 +18,10 @@ export function getField(name, fields) {
         defaultProps = { ...textField }
       } else if (type === 'bool') {
         defaultProps = { ...boolField }
+      } else if (type === 'time') {
+        defaultProps = { ...timeField }
+      } else if (type === 'date') {
+        defaultProps = { ...dateField }
       }
       field = { ...defaultProps, ...f }
     }
@@ -40,20 +46,23 @@ export function getList(filter = {}, list = [], fields = []) {
   }
 
   result = result.filter((row, i) => {
-    let result = true
+    let show = true
 
-    queries.map((q) => {
+    for (let i = 0; i < queries.length; i++) {
+      const q = queries[i]
       const { field: fieldName, operator = '=', value } = q
       const field = getField(fieldName, fields)
 
       if (field) {
-        result = field.filter(row[fieldName], q)
+        show = field.filter(row[fieldName], q)
       }
 
-      return q
-    })
+      if (!show) {
+        return show
+      }
+    }
 
-    return result
+    return show
   })
 
   if (searchValue != null && searchValue !== '') {

@@ -48,6 +48,16 @@ export default function () {
       label: 'Aktive',
       type: 'bool',
     },
+    {
+      name: 'registered',
+      label: 'Registered',
+      type: 'date',
+    },
+    {
+      name: 'registrationTime',
+      label: 'Registration time',
+      type: 'time',
+    },
   ]
 
   const list = getList(filterName, source, fields)
