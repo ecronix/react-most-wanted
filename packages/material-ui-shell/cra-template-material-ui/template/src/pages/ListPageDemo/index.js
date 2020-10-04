@@ -41,42 +41,42 @@ const fields = [
   },
 ]
 
+const Row = ({ index, style }) => {
+  const { name, amount = '', registered, email } = list[index]
+
+  return (
+    <div key={`${name}_${index}`} style={style}>
+      <ListItem alignItems="flex-start">
+        <ListItemText
+          primary={`${name} ${index}`}
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                color="textSecondary"
+              >
+                {email}
+              </Typography>
+              <br />
+              <Typography
+                component="span"
+                variant="body2"
+                color="textSecondary"
+              >
+                {`${amount} ${registered}`}
+              </Typography>
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider />
+    </div>
+  )
+}
+
 export default function () {
   const intl = useIntl()
-
-  const Row = ({ index, style }) => {
-    const { name, amount = '', registered, email } = list[index]
-
-    return (
-      <div key={`${name}_${index}`} style={style}>
-        <ListItem alignItems="flex-start">
-          <ListItemText
-            primary={`${name} ${index}`}
-            secondary={
-              <React.Fragment>
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  {email}
-                </Typography>
-                <br />
-                <Typography
-                  component="span"
-                  variant="body2"
-                  color="textSecondary"
-                >
-                  {`${amount} ${registered}`}
-                </Typography>
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider />
-      </div>
-    )
-  }
 
   return (
     <ListPage

@@ -65,7 +65,7 @@ export function getList(filter = {}, list = [], fields = []) {
     return show
   })
 
-  if (searchValue != null && searchValue !== '') {
+  if (searchValue != null && searchValue !== '' && searchValue !== undefined) {
     result = result.filter((row) => {
       return (
         JSON.stringify(row)

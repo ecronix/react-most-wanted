@@ -14,8 +14,8 @@ import React, {
   forwardRef,
   useCallback,
   useReducer,
+  useMemo,
 } from 'react'
-import ReactList from 'react-list'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -25,7 +25,6 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
 import { useState } from 'react'
-import { setScrollOffset } from '../../providers/Filter/store/actions'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props
@@ -62,6 +61,7 @@ export default function (props) {
   } = useFilter()
   const { queries = [], search = {}, scrollOffset = 0 } = getFilter(name)
   const { value: searchvalue = '' } = search
+
   const list = getList(name, source, fields)
 
   useEffect(() => {
@@ -118,7 +118,7 @@ export default function (props) {
                 outerElementType={CustomScrollbarsVirtualList}
                 {...listProps}
               >
-                {Row}
+                {(p) => <Row {...p} data={list[p.index]} />}
               </FixedSizeList>
             </List>
           )
