@@ -170,7 +170,7 @@ const getMenuItems = (props) => {
     {
       value: '/users',
       visible: true,
-      primaryText: intl.formatMessage({ id: 'users' }),
+      primaryText: intl.formatMessage({ id: 'users', defaultMessage: 'Users' }),
       leftIcon: <InfoOutlined />,
     },
     { divider: true },

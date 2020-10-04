@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "1.1.9",
+  "version": "1.1.13",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -58,7 +58,6 @@
     "react-dom": "^16.13.1",
     "react-intl": "^5.8.4",
     "react-ios-pwa-prompt": "^1.8.0",
-    "react-list": "^0.8.15",
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-virtualized-auto-sizer": "^1.0.2",
