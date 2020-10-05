@@ -71,91 +71,94 @@ const MenuHeader = () => {
     <Paper square={true} className={classes.paper}>
       {isMini && isAuthenticated && <div className={classes.toolbar}></div>}
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
-        <ListItem className={classes.listItem}>
-          {isAuthenticated && (
-            <React.Fragment>
-              {authData.photoURL && (
-                <ListItemAvatar
+        {!isMini && (
+          <ListItem className={classes.listItem}>
+            {isAuthenticated && !isMini && (
+              <React.Fragment>
+                {authData.photoURL && (
+                  <ListItemAvatar
+                    onClick={() => {
+                      setAuthMenuOpen(!isAuthMenuOpen)
+                    }}
+                  >
+                    <Avatar src={authData.photoURL} alt="user" />
+                  </ListItemAvatar>
+                )}
+                {!authData.photoURL && (
+                  <ListItemAvatar
+                    onClick={() => {
+                      setAuthMenuOpen(!isAuthMenuOpen)
+                    }}
+                  >
+                    <Avatar>
+                      {authData.displayName ? (
+                        authData.displayName[0].toUpperCase()
+                      ) : (
+                        <PersonIcon />
+                      )}
+                    </Avatar>
+                  </ListItemAvatar>
+                )}
+              </React.Fragment>
+            )}
+            {!isMini && (
+              <ListItemSecondaryAction>
+                <IconButton
                   onClick={() => {
-                    setAuthMenuOpen(!isAuthMenuOpen)
+                    setType(type === 'light' ? 'dark' : 'light')
                   }}
                 >
-                  <Avatar src={authData.photoURL} alt="user" />
-                </ListItemAvatar>
-              )}
-              {!authData.photoURL && (
-                <ListItemAvatar
-                  onClick={() => {
-                    setAuthMenuOpen(!isAuthMenuOpen)
-                  }}
-                >
-                  <Avatar>
-                    {authData.displayName ? (
-                      authData.displayName[0].toUpperCase()
-                    ) : (
-                      <PersonIcon />
+                  {type === 'light' && (
+                    <Brightness4Icon classes={{ root: classes.icon }} />
+                  )}
+                  {type === 'dark' && (
+                    <BrightnessHighIcon classes={{ root: classes.icon }} />
+                  )}
+                </IconButton>
+                {isDesktop && (
+                  <>
+                    {useMiniMode && (
+                      <IconButton
+                        onClick={() => {
+                          setMini(true)
+                          setDesktopOpen(false)
+                        }}
+                      >
+                        <ChromeReaderMode classes={{ root: classes.icon }} />
+                      </IconButton>
                     )}
-                  </Avatar>
-                </ListItemAvatar>
-              )}
-            </React.Fragment>
-          )}
-          {!isMini && (
-            <ListItemSecondaryAction>
-              <IconButton
-                onClick={() => {
-                  setType(type === 'light' ? 'dark' : 'light')
-                }}
-              >
-                {type === 'light' && (
-                  <Brightness4Icon classes={{ root: classes.icon }} />
-                )}
-                {type === 'dark' && (
-                  <BrightnessHighIcon classes={{ root: classes.icon }} />
-                )}
-              </IconButton>
-              {isDesktop && (
-                <>
-                  {useMiniMode && (
                     <IconButton
+                      color="inherit"
                       onClick={() => {
-                        setMini(true)
                         setDesktopOpen(false)
                       }}
                     >
-                      <ChromeReaderMode classes={{ root: classes.icon }} />
-                    </IconButton>
-                  )}
-                  <IconButton
-                    color="inherit"
-                    onClick={() => {
-                      setDesktopOpen(false)
-                    }}
-                  >
-                    {theme.direction === 'rtl' && (
-                      <ChevronRight classes={{ root: classes.icon }} />
-                    )}
-                    {theme.direction !== 'rtl' && (
-                      <ChevronLeft classes={{ root: classes.icon }} />
-                    )}
-                  </IconButton>{' '}
-                </>
-              )}
-            </ListItemSecondaryAction>
-          )}
-        </ListItem>
+                      {theme.direction === 'rtl' && (
+                        <ChevronRight classes={{ root: classes.icon }} />
+                      )}
+                      {theme.direction !== 'rtl' && (
+                        <ChevronLeft classes={{ root: classes.icon }} />
+                      )}
+                    </IconButton>{' '}
+                  </>
+                )}
+              </ListItemSecondaryAction>
+            )}
+          </ListItem>
+        )}
+
         {isAuthenticated && (
           <ListItem
             onClick={() => {
               setAuthMenuOpen(!isAuthMenuOpen)
             }}
           >
-            {!isDesktopOpen && isDesktop && authData.photoURL && (
+            {!isDesktopOpen && isDesktop && (
               <ListItemAvatar>
                 <Avatar
                   src={authData.photoURL}
                   alt="person"
-                  style={{ marginLeft: -7, marginTop: 3 }}
+                  //style={{ marginLeft: 0, marginTop: 0 }}
                 />
               </ListItemAvatar>
             )}
