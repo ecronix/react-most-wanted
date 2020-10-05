@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import Avatar from '@material-ui/core/Avatar'
 import Mail from '@material-ui/icons/Mail'
+import Star from '@material-ui/icons/Star'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import {
   GoogleIcon,
@@ -14,6 +15,7 @@ import {
   GitHubIcon,
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
+import Badge from '@material-ui/core/Badge'
 
 const fields = [
   {
@@ -23,20 +25,28 @@ const fields = [
 ]
 
 const getProviderIcon = (id) => {
-  if (id === 'google.com') {
-    return <GoogleIcon color="primary" />
-  }
-  if (id === 'facebook.com') {
-    return <FacebookIcon color="primary" />
-  }
-  if (id === 'github.com') {
-    return <GitHubIcon color="primary" />
-  }
-  if (id === 'twitter.com') {
-    return <TwitterIcon color="primary" />
+  const iconProps = {
+    color: 'primary',
+    style: {
+      height: 20,
+      width: 20,
+    },
   }
 
-  return <Mail color="primary" />
+  if (id === 'google.com') {
+    return <GoogleIcon {...iconProps} />
+  }
+  if (id === 'facebook.com') {
+    return <FacebookIcon {...iconProps} />
+  }
+  if (id === 'github.com') {
+    return <GitHubIcon {...iconProps} />
+  }
+  if (id === 'twitter.com') {
+    return <TwitterIcon {...iconProps} />
+  }
+
+  return <Mail {...iconProps} />
 }
 
 export default function () {
@@ -54,28 +64,48 @@ export default function () {
     return { key, ...val }
   })
 
-  console.log('admins', admins)
-
   const Row = ({ data, index, style }) => {
     const { displayName = '', key, photoURL, providerData = [] } = data
-    console.log('Data', data)
+
+    let isAdmin = false
+
+    admins.map((a) => {
+      if (a.key === key) {
+        isAdmin = true
+      }
+    })
 
     return (
       <div key={key} style={style}>
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
-            <Avatar src={photoURL} />
+            <Badge
+              invisible={!isAdmin}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              badgeContent={
+                <Star
+                  style={{
+                    width: 15,
+                    padding: 0,
+                  }}
+                />
+              }
+              color="secondary"
+            >
+              <Avatar src={photoURL} style={{ height: 45, width: 45 }} />
+            </Badge>
           </ListItemAvatar>
 
           <ListItemText
             primary={`${displayName}`}
             secondary={
               <React.Fragment>
-                <div>
-                  {providerData.map((p) => {
-                    return getProviderIcon(p.providerId)
-                  })}
-                </div>
+                {providerData.map((p) => {
+                  return getProviderIcon(p.providerId)
+                })}
               </React.Fragment>
             }
           />

@@ -7,7 +7,10 @@ import LockIcon from '@material-ui/icons/Lock'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import LanguageIcon from '@material-ui/icons/Language'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
+import Whatshot from '@material-ui/icons/Whatshot'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen'
+import Security from '@material-ui/icons/Security'
+import People from '@material-ui/icons/People'
 import GetApp from '@material-ui/icons/GetApp'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import StyleIcon from '@material-ui/icons/Style'
@@ -109,7 +112,7 @@ const getMenuItems = (props) => {
       }),
       visible: isAuthorised,
       primaryTogglesNestedList: true,
-      leftIcon: <SettingsIcon />,
+      leftIcon: <Whatshot />,
       nestedItems: [
         {
           value: '/firebase_paths',
@@ -167,11 +170,25 @@ const getMenuItems = (props) => {
         },
       ],
     },
+
     {
-      value: '/users',
-      visible: true,
-      primaryText: intl.formatMessage({ id: 'users', defaultMessage: 'Users' }),
-      leftIcon: <InfoOutlined />,
+      primaryText: intl.formatMessage({
+        id: 'administration',
+        defaultMessage: 'Administration',
+      }),
+      primaryTogglesNestedList: true,
+      leftIcon: <Security />,
+      nestedItems: [
+        {
+          value: '/users',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'users',
+            defaultMessage: 'Users',
+          }),
+          leftIcon: <People />,
+        },
+      ],
     },
     { divider: true },
     {
