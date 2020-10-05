@@ -78,7 +78,7 @@ export default function (props) {
           setScrollOffset(name, offset)
         }
       } catch (error) {
-        console.warn('Could not save scrollOffset')
+        console.warn('Could not save scrollOffset', error)
       }
     }
   }, [])
