@@ -18,6 +18,9 @@ const config = {
     signInURL: '/signin',
     redirectTo: '/home',
   },
+  menu: {
+    //MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
+  },
 }
 
 export default merge(MUIConfig, config)
