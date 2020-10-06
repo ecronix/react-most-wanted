@@ -77,7 +77,10 @@ export default function () {
 
     return (
       <div key={key} style={style}>
-        <ListItem alignItems="flex-start">
+        <ListItem
+          alignItems="flex-start"
+          style={{ height: 82, cursor: 'pointer' }}
+        >
           <ListItemAvatar>
             <Badge
               invisible={!isAdmin}
@@ -110,7 +113,7 @@ export default function () {
             }
           />
         </ListItem>
-        <Divider />
+        <Divider variant="inset" />
       </div>
     )
   }

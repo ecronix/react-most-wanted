@@ -272,14 +272,14 @@ const MyAccount = () => {
               inputProps={{
                 'aria-label': 'naked',
                 style: {
-                  fontSize: 25,
-                  fontWeight: 400,
+                  fontSize: 26,
+                  fontWeight: 'bold',
                   textAlign: 'center',
                 },
               }}
             />
 
-            <Typography variant="subtitle1">{email}</Typography>
+            <Typography variant="h6">{email}</Typography>
             <div style={{ margin: 18, display: 'flex', alignItems: 'center' }}>
               {signInOptions.map((so) => {
                 return getProviderIcon(so) ? (

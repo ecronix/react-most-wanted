@@ -121,7 +121,7 @@ const getMenuItems = (props) => {
             id: 'firebase_paths',
             defaultMessage: 'Paths',
           }),
-          leftIcon: <DaschboardIcon />,
+          leftIcon: <Whatshot />,
         },
         {
           value: '/firebase_lists',
@@ -130,7 +130,7 @@ const getMenuItems = (props) => {
             id: 'firebase_lists',
             defaultMessage: 'Lists',
           }),
-          leftIcon: <DaschboardIcon />,
+          leftIcon: <Whatshot />,
         },
         {
           value: '/firebase_docs',
@@ -139,7 +139,7 @@ const getMenuItems = (props) => {
             id: 'firebase_docs',
             defaultMessage: 'Docs',
           }),
-          leftIcon: <DaschboardIcon />,
+          leftIcon: <Whatshot />,
         },
         {
           value: '/firebase_cols',
@@ -148,7 +148,7 @@ const getMenuItems = (props) => {
             id: 'firebase_cols',
             defaultMessage: 'Cols',
           }),
-          leftIcon: <DaschboardIcon />,
+          leftIcon: <Whatshot />,
         },
         {
           value: '/firebase_messaging',
@@ -157,7 +157,7 @@ const getMenuItems = (props) => {
             id: 'firebase_messaging',
             defaultMessage: 'Messaging',
           }),
-          leftIcon: <DaschboardIcon />,
+          leftIcon: <Whatshot />,
         },
         {
           value: '/firebase_storage',
@@ -166,7 +166,7 @@ const getMenuItems = (props) => {
             id: 'firebase_storage',
             defaultMessage: 'Storage',
           }),
-          leftIcon: <DaschboardIcon />,
+          leftIcon: <Whatshot />,
         },
       ],
     },
@@ -187,6 +187,15 @@ const getMenuItems = (props) => {
             defaultMessage: 'Users',
           }),
           leftIcon: <People />,
+        },
+        {
+          value: '/roles',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'roles',
+            defaultMessage: 'Roles',
+          }),
+          leftIcon: <AccountBoxIcon />,
         },
       ],
     },
