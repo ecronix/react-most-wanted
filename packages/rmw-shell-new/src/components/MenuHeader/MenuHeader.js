@@ -11,10 +11,10 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
-import AuthContext from 'base-shell/lib/providers/Auth/Context'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
+import { useConfig } from 'base-shell/lib/providers/Config'
+import { useAuth } from 'base-shell/lib/providers/Auth'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
@@ -48,9 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuHeader = () => {
   const theme = useTheme()
-  const { auth } = useContext(AuthContext)
-  const { appConfig } = useContext(ConfigContext)
-  const { type, setType } = useContext(ThemeContext)
+  const { auth } = useAuth()
+  const { appConfig } = useConfig()
+  const { type, setType } = useAppTheme()
   const { menu } = appConfig || {}
   const authData = auth
   const classes = useStyles()

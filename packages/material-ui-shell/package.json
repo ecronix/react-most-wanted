@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "1.1.14",
+  "version": "1.1.15",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -46,7 +46,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "a2hs": "^1.1.4",
-    "base-shell": "^1.2.8",
+    "base-shell": "^1.2.9",
     "github-markdown-css": "^4.0.0",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.12",

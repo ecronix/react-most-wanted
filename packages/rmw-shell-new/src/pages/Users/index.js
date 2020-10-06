@@ -34,19 +34,19 @@ const getProviderIcon = (id) => {
   }
 
   if (id === 'google.com') {
-    return <GoogleIcon {...iconProps} />
+    return <GoogleIcon key={id} {...iconProps} />
   }
   if (id === 'facebook.com') {
-    return <FacebookIcon {...iconProps} />
+    return <FacebookIcon key={id} {...iconProps} />
   }
   if (id === 'github.com') {
-    return <GitHubIcon {...iconProps} />
+    return <GitHubIcon key={id} {...iconProps} />
   }
   if (id === 'twitter.com') {
-    return <TwitterIcon {...iconProps} />
+    return <TwitterIcon key={id} {...iconProps} />
   }
 
-  return <Mail {...iconProps} />
+  return <Mail key={id} {...iconProps} />
 }
 
 export default function () {
