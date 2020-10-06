@@ -16,6 +16,7 @@ const getDefaultRoutes = (appConfig) => {
   return [
     <AuthorizedRoute path="/roles" exact component={Roles} />,
     <AuthorizedRoute path="/roles/:uid" exact component={Role} />,
+    <AuthorizedRoute path="/roles/:uid/:tab" exact component={Role} />,
     <UnauthorizedRoute
       path="/signin"
       redirectTo="/home"

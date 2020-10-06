@@ -55,7 +55,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
     }
   }, [state, persistKey])
 
-  const watchPath = (path) => {
+  const watchPath = (path, onChange) => {
     if (path.length < 1) {
       return
     }
@@ -77,6 +77,10 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
             value: snapshot.val(),
             isLoading: false,
           })
+
+          if (onChange) {
+            onChange(snapshot.val())
+          }
         },
         (error) => {
           dispatch({
