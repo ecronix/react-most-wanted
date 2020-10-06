@@ -1,7 +1,7 @@
 import React, { lazy } from 'react'
 import { Route } from 'react-router-dom'
-import PublicRoute from 'base-shell/lib/components/PublicRoute/PublicRoute'
-import PrivateRoute from 'base-shell/lib/components/PrivateRoute/PrivateRoute'
+import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute/UnauthorizedRoute'
+import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/AuthorizedRoute'
 
 const SignIn = lazy(() => import('../pages/SignIn/SignIn'))
 const MyAccount = lazy(() => import('../pages/MyAccount/MyAccount'))
@@ -12,9 +12,9 @@ const getDefaultRoutes = (appConfig) => {
   const { PageNotFound = () => <div>Page not found</div> } = pages || {}
 
   return [
-    <PublicRoute path="/signin" redirectTo="/home" exact component={SignIn} />,
-    <PrivateRoute path="/my_account" exact component={MyAccount} />,
-    <PrivateRoute path="/users" exact component={Users} />,
+    <UnauthorizedRoute path="/signin" redirectTo="/home" exact component={SignIn} />,
+    <AuthorizedRoute path="/my_account" exact component={MyAccount} />,
+    <AuthorizedRoute path="/users" exact component={Users} />,
     <Route component={PageNotFound} />,
   ]
 }
