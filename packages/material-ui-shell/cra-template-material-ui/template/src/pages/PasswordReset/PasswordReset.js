@@ -105,7 +105,7 @@ const SignUp = () => {
               className={classes.submit}
             >
               {intl.formatMessage({
-                id: 'reset_password',
+                id: 'password_reset',
                 defaultMessage: 'Reset Password',
               })}
             </Button>

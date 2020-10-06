@@ -135,8 +135,8 @@ const SignIn = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Link to="/password_reset">Forgot Password?</Link>
-            <Link to="/signup">Register</Link>
+            <Link to="/password_reset">{intl.formatMessage({ id: 'forgot_password' })}?</Link>
+            <Link to="/signup">{intl.formatMessage({ id: 'registration' })}</Link>
           </div>
         </div>
       </Paper>
