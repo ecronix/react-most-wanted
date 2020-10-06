@@ -1,0 +1,56 @@
+{
+  "name": "firebase-function-tools",
+  "version": "1.1.4",
+  "description": "firebase-function-tools ",
+  "main": "lib/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build-react-component --no-demo",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "prepublishOnly": "npm run build",
+    "start": "nwb serve-react-demo",
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "esm": "^3.2.25"
+  },
+  "peerDependencies": {
+    "babel-runtime": "6.x"
+  },
+  "devDependencies": {
+    "axios": "^0.19.0",
+    "camelcase": "^5.3.1",
+    "child-process-promise": "^2.2.1",
+    "firebase-admin": "^8.8.0",
+    "firebase-functions": "^3.3.0",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.6",
+    "mkdirp-promise": "^5.0.1",
+    "moment": "^2.24.0",
+    "nodemailer": "^6.4.2",
+    "nwb": "0.23.x",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
+  },
+  "author": "Tarik Huber",
+  "homepage": "https://www.react-most-wanted.com/",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarikHuber/react-most-wanted.git",
+    "directory": "packages/firebase-function-tools"
+  },
+  "keywords": [
+    "react-component"
+  ]
+}

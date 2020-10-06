@@ -1,0 +1,28 @@
+{
+  "name": "cra-template-rmw",
+  "version": "2.0.0",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "material-ui"
+  ],
+  "description": "The material-ui template for Create React App.",
+  "main": "template.json",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TarikHuber/react-most-wanted",
+    "directory": "packages/base-shell/cra-template-material-ui"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8"
+  },
+  "bugs": {
+    "url": "https://github.com/TarikHuber/react-most-wanted/issues"
+  },
+  "files": [
+    "template",
+    "template.json"
+  ]
+}

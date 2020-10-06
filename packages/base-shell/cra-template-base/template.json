@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@formatjs/intl-relativetimeformat": "4.x",
+    "intl": "1.x",
+    "intl-locales-supported": "1.x",
+    "react": "16.x",
+    "react-dom": "16.x",
+    "react-intl": "4.x",
+    "react-router-dom": "5.x",
+    "base-shell": "1.x"
+  }
+}

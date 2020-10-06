@@ -1,0 +1,10 @@
+{
+  "src": "e2e_tests",
+  "screenshots": {
+    "path": "./e2e_tests/reports/screenshots/",
+    "takeOnFails": true
+  },
+  "browsers": [
+    "chrome"
+  ]
+}
