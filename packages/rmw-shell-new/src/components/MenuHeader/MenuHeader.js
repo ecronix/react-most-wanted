@@ -63,7 +63,7 @@ const MenuHeader = () => {
     isAuthMenuOpen,
     setAuthMenuOpen,
     useMiniMode,
-  } = useMenu()
+  } = useContext(MenuContext)
 
   const isAuthenticated = auth.isAuthenticated
 

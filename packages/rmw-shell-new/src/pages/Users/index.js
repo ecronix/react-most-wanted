@@ -34,19 +34,19 @@ const getProviderIcon = (id) => {
   }
 
   if (id === 'google.com') {
-    return <GoogleIcon {...iconProps} />
+    return <GoogleIcon key={id} {...iconProps} />
   }
   if (id === 'facebook.com') {
-    return <FacebookIcon {...iconProps} />
+    return <FacebookIcon key={id} {...iconProps} />
   }
   if (id === 'github.com') {
-    return <GitHubIcon {...iconProps} />
+    return <GitHubIcon key={id} {...iconProps} />
   }
   if (id === 'twitter.com') {
-    return <TwitterIcon {...iconProps} />
+    return <TwitterIcon key={id} {...iconProps} />
   }
 
-  return <Mail {...iconProps} />
+  return <Mail key={id} {...iconProps} />
 }
 
 export default function () {
@@ -77,7 +77,10 @@ export default function () {
 
     return (
       <div key={key} style={style}>
-        <ListItem alignItems="flex-start">
+        <ListItem
+          alignItems="flex-start"
+          style={{ height: 82, cursor: 'pointer' }}
+        >
           <ListItemAvatar>
             <Badge
               invisible={!isAdmin}
@@ -110,7 +113,7 @@ export default function () {
             }
           />
         </ListItem>
-        <Divider />
+        <Divider variant="inset" />
       </div>
     )
   }
