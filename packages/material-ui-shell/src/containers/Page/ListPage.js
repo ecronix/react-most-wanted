@@ -73,7 +73,7 @@ export default function (props) {
   useEffect(() => {
     return () => {
       try {
-        if (preserveScroll) {
+        if (preserveScroll && listRef.current) {
           const offset = listRef.current.state.scrollOffset
           setScrollOffset(name, offset)
         }
