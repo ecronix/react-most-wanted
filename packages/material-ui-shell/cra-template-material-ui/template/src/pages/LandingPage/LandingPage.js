@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 
 export default function () {
+  const intl = useIntl()
   return (
     <div
       style={{
@@ -19,7 +21,7 @@ export default function () {
       <h2>Landing Page</h2>
 
       <div>
-        <Link to="/home">Home</Link>
+        <Link to="/home">{intl.formatMessage({ id: 'home' })}</Link>
       </div>
     </div>
   )
