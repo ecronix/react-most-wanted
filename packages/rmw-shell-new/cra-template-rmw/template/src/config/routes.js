@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React, { lazy } from 'react'
-import PrivateRoute from 'base-shell/lib/components/PrivateRoute/PrivateRoute'
-import PublicRoute from 'base-shell/lib/components/PublicRoute/PublicRoute'
+import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/AuthorizedRoute'
+import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute/UnauthorizedRoute'
 import { Route } from 'react-router-dom'
 
 const About = lazy(() => import('../pages/About/About'))
@@ -15,17 +15,17 @@ const FirebaseStorage = lazy(() => import('../pages/Firebase/Storage'))
 
 const routes = [
   <Route path="/about" exact component={About} />,
-  <PrivateRoute path="/home" exact component={Home} />,
-  <PrivateRoute path="/firebase_paths" exact component={FirebasePaths} />,
-  <PrivateRoute path="/firebase_lists" exact component={FirebaseLists} />,
-  <PrivateRoute path="/firebase_docs" exact component={FirebaseDocs} />,
-  <PrivateRoute path="/firebase_cols" exact component={FirebaseCols} />,
-  <PrivateRoute
+  <AuthorizedRoute path="/home" exact component={Home} />,
+  <AuthorizedRoute path="/firebase_paths" exact component={FirebasePaths} />,
+  <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,
+  <AuthorizedRoute path="/firebase_docs" exact component={FirebaseDocs} />,
+  <AuthorizedRoute path="/firebase_cols" exact component={FirebaseCols} />,
+  <AuthorizedRoute
     path="/firebase_messaging"
     exact
     component={FirebaseMessaging}
   />,
-  <PrivateRoute path="/firebase_storage" exact component={FirebaseStorage} />,
+  <AuthorizedRoute path="/firebase_storage" exact component={FirebaseStorage} />,
 ]
 
 export default routes
