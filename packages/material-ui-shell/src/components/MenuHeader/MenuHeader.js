@@ -11,10 +11,9 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
-import AuthContext from 'base-shell/lib/providers/Auth/Context'
-import ConfigContext from 'base-shell/lib/providers/Config/Context'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import ThemeContext from 'material-ui-shell/lib/providers/Theme/Context'
+import {useAuth} from 'base-shell/lib/providers/Auth'
+import {useMenu} from 'material-ui-shell/lib/providers/Menu'
+import { useTheme as useThemeProvider } from 'material-ui-shell/lib/providers/Theme'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
@@ -48,11 +47,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuHeader = () => {
   const theme = useTheme()
-  const { auth } = useContext(AuthContext)
-  const { appConfig } = useContext(ConfigContext)
-  const { type, setType } = useContext(ThemeContext)
-  const { menu } = appConfig || {}
-  const authData = auth
+  const { auth } = useAuth()
+  const { type, setType } = useThemeProvider()
   const classes = useStyles()
   const {
     isDesktop,
@@ -63,9 +59,9 @@ const MenuHeader = () => {
     isAuthMenuOpen,
     setAuthMenuOpen,
     useMiniMode,
-  } = useContext(MenuContext)
+  } = useMenu()
 
-  const isAuthenticated = auth.isAuthenticated
+  const isAuthenticated =auth.isAuthenticated 
 
   return (
     <Paper square={true} className={classes.paper}>
@@ -75,24 +71,24 @@ const MenuHeader = () => {
           <ListItem className={classes.listItem}>
             {isAuthenticated && !isMini && (
               <React.Fragment>
-                {authData.photoURL && (
+                {auth.photoURL && (
                   <ListItemAvatar
                     onClick={() => {
                       setAuthMenuOpen(!isAuthMenuOpen)
                     }}
                   >
-                    <Avatar src={authData.photoURL} alt="user" />
+                    <Avatar src={auth.photoURL} alt="user" />
                   </ListItemAvatar>
                 )}
-                {!authData.photoURL && (
+                {!auth.photoURL && (
                   <ListItemAvatar
                     onClick={() => {
                       setAuthMenuOpen(!isAuthMenuOpen)
                     }}
                   >
                     <Avatar>
-                      {authData.displayName ? (
-                        authData.displayName[0].toUpperCase()
+                      {auth.displayName ? (
+                        auth.displayName[0].toUpperCase()
                       ) : (
                         <PersonIcon />
                       )}
@@ -156,7 +152,7 @@ const MenuHeader = () => {
             {!isDesktopOpen && isDesktop && (
               <ListItemAvatar>
                 <Avatar
-                  src={authData.photoURL}
+                  src={auth.photoURL}
                   alt="person"
                   //style={{ marginLeft: 0, marginTop: 0 }}
                 />
@@ -171,12 +167,12 @@ const MenuHeader = () => {
                 }}
                 style={{
                   marginLeft:
-                    !isDesktopOpen && isDesktop && authData.photoURL
+                    !isDesktopOpen && isDesktop && auth.photoURL
                       ? 7
                       : undefined,
                 }}
-                primary={authData.displayName}
-                secondary={authData.email}
+                primary={auth.displayName}
+                secondary={auth.email}
               />
             )}
             {isDesktopOpen && (
