@@ -19,7 +19,7 @@ const config = {
     redirectTo: '/home',
   },
   menu: {
-    MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
+    //MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
   },
 }
 
