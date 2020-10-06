@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import React, { lazy } from 'react'
-import PrivateRoute from 'base-shell/lib/components/PrivateRoute/PrivateRoute'
-import PublicRoute from 'base-shell/lib/components/PublicRoute/PublicRoute'
+import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/AuthorizedRoute'
+import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute/UnauthorizedRoute'
 import { Route } from 'react-router-dom'
 
 const SignIn = lazy(() => import('../pages/SignIn/SignIn'))
@@ -15,20 +15,20 @@ const FilterDemo = lazy(() => import('../pages/FilterDemo'))
 const ListPageDemo = lazy(() => import('../pages/ListPageDemo'))
 
 const routes = [
-  <PublicRoute path="/signin" redirectTo="/" exact component={SignIn} />,
-  <PublicRoute path="/signup" redirectTo="/" exact component={SignUp} />,
-  <PublicRoute
+  <UnauthorizedRoute path="/signin" redirectTo="/" exact component={SignIn} />,
+  <UnauthorizedRoute path="/signup" redirectTo="/" exact component={SignUp} />,
+  <UnauthorizedRoute
     path="/password_reset"
     redirectTo="/"
     exact
     component={PasswordReset}
   />,
   <Route path="/about" exact component={About} />,
-  <PrivateRoute path="/home" exact component={Home} />,
-  <PrivateRoute path="/dialog_demo" exact component={DialogDemo} />,
-  <PrivateRoute path="/toast_demo" exact component={ToastDemo} />,
-  <PrivateRoute path="/filter_demo" exact component={FilterDemo} />,
-  <PrivateRoute path="/list_page_demo" exact component={ListPageDemo} />,
+  <AuthorizedRoute path="/home" exact component={Home} />,
+  <AuthorizedRoute path="/dialog_demo" exact component={DialogDemo} />,
+  <AuthorizedRoute path="/toast_demo" exact component={ToastDemo} />,
+  <AuthorizedRoute path="/filter_demo" exact component={FilterDemo} />,
+  <AuthorizedRoute path="/list_page_demo" exact component={ListPageDemo} />,
 ]
 
 export default routes

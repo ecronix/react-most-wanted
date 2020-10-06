@@ -1,20 +1,23 @@
 import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { useAuth } from '../../providers/Auth'
+import { useConfig } from '../../providers/Config'
 
-function PublicRoute({ component: Component, redirectTo = '/', ...rest }) {
+function AuthorizedRoute({ component: Component, ...rest }) {
+  const { appConfig } = useConfig()
+  const { auth: authConfig } = appConfig || {}
+  const { signInURL = '/signin' } = authConfig || {}
   const { auth } = useAuth()
-
   return (
     <Route
       {...rest}
       render={(props) =>
-        !auth.isAuthenticated ? (
+        auth.isAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: redirectTo,
+              pathname: signInURL,
               search: `from=${props.location.pathname}`,
               state: { from: props.location },
             }}
@@ -25,4 +28,4 @@ function PublicRoute({ component: Component, redirectTo = '/', ...rest }) {
   )
 }
 
-export default PublicRoute
+export default AuthorizedRoute
