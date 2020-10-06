@@ -3,22 +3,21 @@ import { Route, Redirect } from 'react-router-dom'
 import { useAuth } from '../../providers/Auth'
 import { useConfig } from '../../providers/Config'
 
-function PrivateRoute({ component: Component, ...rest }) {
+function UnauthorizedRoute({ component: Component, redirectTo = '/', ...rest }) {
   const { appConfig } = useConfig()
-  const { auth } = useAuth()
   const { auth: authConfig } = appConfig || {}
-  const { signInURL = '/signin' } = authConfig || {}
-
+  const { redirectTo:_redirectTo = redirectTo } = authConfig || {}
+  const { auth } = useAuth()
   return (
     <Route
       {...rest}
       render={(props) =>
-        auth.isAuthenticated ? (
+        !auth.isAuthenticated ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: signInURL,
+              pathname: _redirectTo,
               search: `from=${props.location.pathname}`,
               state: { from: props.location },
             }}
@@ -29,4 +28,4 @@ function PrivateRoute({ component: Component, ...rest }) {
   )
 }
 
-export default PrivateRoute
+export default UnauthorizedRoute
