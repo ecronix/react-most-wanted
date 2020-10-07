@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
-import Page from 'material-ui-shell/lib/containers/Page'
-import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
-import { useParams, useHistory } from 'react-router-dom'
-import { Form, Field } from 'react-final-form'
-import { TextField } from 'mui-rff'
-import IconButton from '@material-ui/core/IconButton'
-import AppBar from '@material-ui/core/AppBar'
-import Save from '@material-ui/icons/Save'
-import Delete from '@material-ui/icons/Delete'
-import Lock from '@material-ui/icons/Lock'
 import AccountBox from '@material-ui/icons/AccountBox'
-import Tabs from '@material-ui/core/Tabs'
+import AppBar from '@material-ui/core/AppBar'
+import Delete from '@material-ui/icons/Delete'
+import IconButton from '@material-ui/core/IconButton'
+import Lock from '@material-ui/icons/Lock'
+import Page from 'material-ui-shell/lib/containers/Page'
+import React, { useEffect } from 'react'
+import RoleForm from 'rmw-shell/lib/components/Forms/Role'
+import Save from '@material-ui/icons/Save'
 import Tab from '@material-ui/core/Tab'
-import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
+import Tabs from '@material-ui/core/Tabs'
+import { Form } from 'react-final-form'
 import { useIntl } from 'react-intl'
+import { useParams, useHistory } from 'react-router-dom'
+import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 
 export default function () {
   const history = useHistory()
@@ -59,7 +59,7 @@ export default function () {
       }}
       pageTitle={'Role'}
       appBarContent={
-        <div>
+        <div style={{ display: tab === 'main' ? undefined : 'none' }}>
           <IconButton
             color="inherit"
             onClick={() => {
@@ -107,34 +107,7 @@ export default function () {
                 history.push('/roles')
               }}
               initialValues={data}
-              render={({ handleSubmit }) => (
-                <form
-                  id="role"
-                  onSubmit={handleSubmit}
-                  style={{ display: 'flex', justifyContent: 'center' }}
-                >
-                  <button type="submit" style={{ display: 'none' }} />
-                  <div>
-                    <TextField
-                      label="Name"
-                      name="name"
-                      variant="outlined"
-                      margin="normal"
-                      required={true}
-                      fullWidth={false}
-                    />
-                    <br />
-                    <TextField
-                      label="Description"
-                      variant="outlined"
-                      name="description"
-                      margin="normal"
-                      fullWidth={true}
-                      multiline
-                    />
-                  </div>
-                </form>
-              )}
+              render={RoleForm}
             />
           </div>
         )}
