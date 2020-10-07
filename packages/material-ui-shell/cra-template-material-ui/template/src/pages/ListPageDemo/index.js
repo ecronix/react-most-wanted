@@ -39,8 +39,8 @@ const fields = [
   },
 ]
 
-const Row = ({ index, style }) => {
-  const { name, amount = '', registered, email } = list[index]
+const Row = ({ index, style, data }) => {
+  const { name, amount = '', registered, email } = data
 
   return (
     <div key={`${name}_${index}`} style={style}>
