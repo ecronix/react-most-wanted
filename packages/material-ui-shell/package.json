@@ -47,11 +47,15 @@
     "@material-ui/icons": "^4.9.1",
     "a2hs": "^1.1.4",
     "base-shell": "^1.2.9",
+    "eslint": "^7.10.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-react": "^7.21.3",
     "github-markdown-css": "^4.0.0",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.12",
-    "notistack": "^1.0.0",
+    "notistack": "^1.0.1",
     "nwb": "^0.25.2",
+    "prettier": "2.1.2",
     "raw-loader": "^4.0.1",
     "react": "^16.13.1",
     "react-custom-scrollbars": "^4.2.1",
@@ -61,11 +65,18 @@
     "react-markdown": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-virtualized-auto-sizer": "^1.0.2",
-    "react-window": "^1.8.5"
+    "react-window": "^1.8.5",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
   "license": "MIT",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,

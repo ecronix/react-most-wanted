@@ -20,7 +20,7 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "notistack": "^1.0.0",
+    "notistack": "^1.0.1",
     "react-easy-crop": "^3.2.0"
   },
   "peerDependencies": {

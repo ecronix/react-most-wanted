@@ -1,5 +1,7 @@
 import * as types from './types'
 
+/* eslint-disable */
+
 function query(query, action) {
   const { payload } = action
 
@@ -93,3 +95,5 @@ export default function filters(state = {}, action) {
       return state
   }
 }
+
+/* eslint-enable */

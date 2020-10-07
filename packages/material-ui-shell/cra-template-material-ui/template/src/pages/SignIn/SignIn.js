@@ -1,7 +1,7 @@
 import Button from '@material-ui/core/Button'
 import Page from 'material-ui-shell/lib/containers/Page'
 import Paper from '@material-ui/core/Paper'
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { Link } from 'react-router-dom'
@@ -57,7 +57,7 @@ const SignIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const { setAuthMenuOpen } = useMenu()
-  const { auth, setAuth } = useAuth()
+  const { setAuth } = useAuth()
 
   function handleSubmit(event) {
     event.preventDefault()
@@ -135,8 +135,12 @@ const SignIn = () => {
               justifyContent: 'space-between',
             }}
           >
-            <Link to="/password_reset">{intl.formatMessage({ id: 'forgot_password' })}?</Link>
-            <Link to="/signup">{intl.formatMessage({ id: 'registration' })}</Link>
+            <Link to="/password_reset">
+              {intl.formatMessage({ id: 'forgot_password' })}?
+            </Link>
+            <Link to="/signup">
+              {intl.formatMessage({ id: 'registration' })}
+            </Link>
           </div>
         </div>
       </Paper>

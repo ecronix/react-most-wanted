@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
@@ -18,7 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode } =
+  const { isDesktopOpen, isMini, setMobileOpen, useMiniMode } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()

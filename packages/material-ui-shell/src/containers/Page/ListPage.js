@@ -1,29 +1,15 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
-import Button from '@material-ui/core/Button'
-import Divider from '@material-ui/core/Divider'
 import FilterDrawer from 'material-ui-shell/lib/components/FilterDrawer'
 import FilterList from '@material-ui/icons/FilterList'
 import IconButton from '@material-ui/core/IconButton'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import Page from 'material-ui-shell/lib/containers/Page'
-import React, {
-  useEffect,
-  createRef,
-  forwardRef,
-  useCallback,
-  useReducer,
-  useMemo,
-} from 'react'
+import React, { useEffect } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import { FixedSizeList } from 'react-window'
-import { Scrollbars } from 'react-custom-scrollbars'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
-import { useIntl } from 'react-intl'
 import { useState } from 'react'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
@@ -45,11 +31,8 @@ export default function (props) {
     listProps,
     Row,
     name,
-    setListRef = () => {},
-    initialIndex = 0,
     preserveScroll = true,
   } = props
-  const intl = useIntl()
   const listRef = React.createRef()
   const [ref, setRef] = useState(false)
   const {
@@ -68,6 +51,7 @@ export default function (props) {
     if (preserveScroll && ref && scrollOffset) {
       listRef.current.scrollTo(scrollOffset)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref])
 
   useEffect(() => {
@@ -81,6 +65,7 @@ export default function (props) {
         console.warn('Could not save scrollOffset', error)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

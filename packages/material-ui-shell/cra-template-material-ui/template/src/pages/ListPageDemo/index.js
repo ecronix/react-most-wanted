@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ListPage } from 'material-ui-shell/lib/containers/Page'
-import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import { useIntl } from 'react-intl'
-import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 
 import list from './data.json'
 
