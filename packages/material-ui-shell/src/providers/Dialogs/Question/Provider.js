@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 import Context from './Context'
 import QuestionDialog from 'material-ui-shell/lib/components/QuestionDialog/QuestionDialog'
 

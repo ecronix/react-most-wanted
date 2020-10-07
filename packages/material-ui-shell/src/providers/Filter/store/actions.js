@@ -16,7 +16,7 @@ export function closeFilter(name) {
   }
 }
 
-export function clearFilter(name, isOpen) {
+export function clearFilter(name) {
   return {
     type: types.ON_CLEAR,
     name,

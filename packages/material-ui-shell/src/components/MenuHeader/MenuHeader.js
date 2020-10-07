@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
@@ -11,7 +11,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
-import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
@@ -49,9 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuHeader = () => {
   const theme = useTheme()
   const { auth } = useAuth()
-  const { appConfig } = useConfig()
   const { type, setType } = useAppTheme()
-  const { menu } = appConfig || {}
   const authData = auth
   const classes = useStyles()
   const {

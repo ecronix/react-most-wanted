@@ -8,7 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const [state, setState] = useState({})
@@ -55,22 +55,6 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
     previousTitles.shift()
 
     setState({ ...state, items, previousItems, previousTitles, title })
-  }
-
-  const getNestedItems = (hostItem, hostIndex) => {
-    if (hostItem.nestedItems !== undefined) {
-      let items = hostItem.nestedItems.filter(function (item) {
-        return item.visible !== false
-      })
-
-      if (items.length > 0) {
-        return items.map((item, i) => {
-          return getItem(item, hostIndex.toString() + i.toString())
-        })
-      }
-    }
-
-    return null
   }
 
   const getItem = (item, i) => {

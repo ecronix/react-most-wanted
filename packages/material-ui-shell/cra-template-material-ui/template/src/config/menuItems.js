@@ -19,7 +19,6 @@ import allThemes from './themes'
 
 const getMenuItems = (props) => {
   const {
-    appConfig,
     intl,
     updateLocale,
     locale,
@@ -120,7 +119,7 @@ const getMenuItems = (props) => {
           value: '/list_page_demo',
           visible: isAuthorised,
           primaryText: intl.formatMessage({
-            id: 'list_page_demo',
+            id: 'list_page_demo_menu',
             defaultMessage: 'List Page Demo',
           }),
           leftIcon: <FilterList />,

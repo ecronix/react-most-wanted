@@ -14,14 +14,11 @@ import React from 'react'
 import Select from '@material-ui/core/Select'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import { Button, TextField } from '@material-ui/core'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
-import { useTheme } from '@material-ui/core/styles'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 
 export default function ({ name, width = 250, fields = [] }) {
-  const theme = useTheme()
   const intl = useIntl()
   const {
     isFilterOpen,

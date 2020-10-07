@@ -1,5 +1,4 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
-import Button from '@material-ui/core/Button'
 import Divider from '@material-ui/core/Divider'
 import FilterDrawer from 'material-ui-shell/lib/components/FilterDrawer'
 import FilterList from '@material-ui/icons/FilterList'
@@ -8,8 +7,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Page from 'material-ui-shell/lib/containers/Page'
-import React, { useEffect, createRef, forwardRef, useCallback } from 'react'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
+import React, { useEffect, useCallback } from 'react'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
@@ -28,6 +26,7 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
     } else {
       forwardedRef(null)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -91,7 +90,7 @@ export default function () {
     if (listRef.current) {
       listRef.current.scrollToItem(1500, 'center')
     }
-  }, [listRef.current])
+  }, [listRef])
 
   const Row = ({ index, style }) => {
     const { name, amount = '', registered, email } = list[index]

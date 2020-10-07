@@ -19,9 +19,14 @@ module.exports = {
       // Adding an extra rule which isn't managed by nwb
       module: {
         rules: [
-          { test: /\.md$/, loader: 'raw-loader' }
-        ]
+          {
+            test: /\.js$/,
+            enforce: 'pre',
+            loader: 'eslint-loader',
+            exclude: /node_modules/,
+          },
+        ],
       },
-    }
-  }
+    },
+  },
 }

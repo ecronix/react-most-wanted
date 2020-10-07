@@ -45,12 +45,12 @@ export function getList(filter = {}, list = [], fields = []) {
     return []
   }
 
-  result = result.filter((row, i) => {
+  result = result.filter((row) => {
     let show = true
 
     for (let i = 0; i < queries.length; i++) {
       const q = queries[i]
-      const { field: fieldName, operator = '=', value } = q
+      const { field: fieldName } = q
       const field = getField(fieldName, fields)
 
       if (field) {
