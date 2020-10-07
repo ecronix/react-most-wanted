@@ -42,7 +42,7 @@ See [Contributing](./CONTRIBUTING.md) for details.
 
 If you want to contribute and don't know where to start. Here are some places you can start:
 - Cool  [Landing Page](https://github.com/TarikHuber/react-most-wanted/blob/master/packages/rmw-shell-new/cra-template-rmw/template/src/pages/LandingPage/LandingPage.js) for new ```rmw-shell``` package. It is completely separated from the rest of the Application so you can make it as you want. Just make sure to have at least 95 speed points with [Lighthouse](https://developers.google.com/web/tools/lighthouse)
-- Unit tests. Do I need to say anything about this...
+- Unit tests. Do I need to say anything about this?
 
 ## Thanks
 
