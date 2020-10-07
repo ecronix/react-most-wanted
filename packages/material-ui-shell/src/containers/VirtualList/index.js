@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import { FixedSizeList } from 'react-window'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
-import { useIntl } from 'react-intl'
 import { useState } from 'react'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
@@ -19,36 +18,17 @@ const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
 })
 
 export default function (props) {
-  const {
-    fields = [],
-    list: source = [],
-    getPageProps = () => {},
-    listProps,
-    Row,
-    name,
-    setListRef = () => {},
-    initialIndex = 0,
-    preserveScroll = true,
-  } = props
-  const intl = useIntl()
+  const { list = [], listProps, Row, name, preserveScroll = true } = props
   const listRef = React.createRef()
   const [ref, setRef] = useState(false)
-  const {
-    openFilter,
-    getList,
-    getFilter,
-    setSearch,
-    setScrollOffset,
-  } = useFilter()
-  const { queries = [], search = {}, scrollOffset = 0 } = getFilter(name)
-  const { value: searchvalue = '' } = search
-
-  const list = getList(name, source, fields)
+  const { getFilter, setScrollOffset } = useFilter()
+  const { scrollOffset = 0 } = getFilter(name)
 
   useEffect(() => {
     if (preserveScroll && ref && scrollOffset) {
       listRef.current.scrollTo(scrollOffset)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref])
 
   useEffect(() => {
@@ -62,6 +42,7 @@ export default function (props) {
         console.warn('Could not save scrollOffset', error)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
