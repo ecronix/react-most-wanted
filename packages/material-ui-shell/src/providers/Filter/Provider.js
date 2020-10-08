@@ -12,7 +12,6 @@ import {
   setFilterSortField,
   setFilterSortOrientation,
   setSearch,
-  setScrollOffset,
 } from './store/actions'
 import { getList, getField } from './store/selectors'
 
@@ -41,8 +40,6 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
     openFilter: (name) => dispatch(openFilter(name)),
     closeFilter: (name) => dispatch(closeFilter(name)),
     clearFilter: (name) => dispatch(clearFilter(name)),
-    setScrollOffset: (name, scrollOffset) =>
-      dispatch(setScrollOffset(name, scrollOffset)),
     setSearch: (name, search) => dispatch(setSearch(name, search)),
 
     setFilterSortField: (name, sortField) =>
