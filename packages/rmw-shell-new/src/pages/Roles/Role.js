@@ -1,12 +1,7 @@
 import AccountBox from '@material-ui/icons/AccountBox'
 import AppBar from '@material-ui/core/AppBar'
-import Checkbox from '@material-ui/core/Checkbox'
 import Delete from '@material-ui/icons/Delete'
-import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import Lock from '@material-ui/icons/Lock'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React, { useEffect } from 'react'
@@ -15,53 +10,33 @@ import Save from '@material-ui/icons/Save'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
-import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import Zoom from '@material-ui/core/Zoom'
 import { Form } from 'react-final-form'
-import { useConfig } from 'base-shell/lib/providers/Config'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
 import { useParams, useHistory } from 'react-router-dom'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
-
-const Row = ({ index, style, data }) => {
-  const { name } = data
-
-  return (
-    <div key={`${name}_${index}`} style={style}>
-      <ListItem
-        button
-        alignItems="flex-start"
-        onClick={() => {
-          console.log('click')
-        }}
-      >
-        <ListItemIcon>
-          <Checkbox edge="start" checked={false} tabIndex={-1} disableRipple />
-        </ListItemIcon>
-        <ListItemText primary={name} secondary={name} />
-      </ListItem>
-      <Divider />
-    </div>
-  )
-}
+import RoleGrants from 'rmw-shell/lib/containers/RoleGrants'
 
 export default function () {
   const history = useHistory()
   const intl = useIntl()
-  const { appConfig } = useConfig()
-  const { auth: authConfig } = appConfig || {}
-  const { grants = [] } = authConfig || {}
   const { uid, tab = 'main' } = useParams()
   const { openDialog } = useQuestions()
   const { watchPath, clearPath, getPath, firebaseApp } = usePaths()
+  const { getFilter, setSearch } = useFilter()
+  const { search = {} } = getFilter('grants')
+  const { value: searchvalue = '' } = search
 
   const path = `roles/${uid}`
+  const grantsPath = `role_grants/${uid}`
   const data = getPath(path)
 
   useEffect(() => {
-    watchPath(path)
+    if (uid) {
+      watchPath(path)
+    }
     return () => clearPath(path)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path])
@@ -88,18 +63,6 @@ export default function () {
     })
   }
 
-  const { getList, getFilter, setSearch } = useFilter()
-  const { search = {} } = getFilter('grants')
-  const { value: searchvalue = '' } = search
-
-  const list = getList(
-    'grants',
-    grants.map((g) => {
-      return { name: g }
-    }),
-    [{ name: 'name' }]
-  )
-
   return (
     <Page
       onBackClick={() => {
@@ -120,7 +83,9 @@ export default function () {
               >
                 <Save />
               </IconButton>
+
               <IconButton
+                disabled={!uid}
                 color="inherit"
                 onClick={() => {
                   openDeleteDialog()
@@ -131,7 +96,7 @@ export default function () {
             </div>
           </Zoom>
           {tab === 'grants' && (
-            <Zoom key="form" in={tab === 'grants'}>
+            <Zoom key="grants" in={tab === 'grants'}>
               <div>
                 <SearchField
                   initialValue={searchvalue}
@@ -163,7 +128,9 @@ export default function () {
               value="main"
               icon={<AccountBox className="material-icons" />}
             />
-            <Tab value="grants" icon={<Lock className="material-icons" />} />
+            {uid && (
+              <Tab value="grants" icon={<Lock className="material-icons" />} />
+            )}
           </Tabs>
         </AppBar>
 
@@ -172,7 +139,15 @@ export default function () {
             <Form
               keepDirtyOnReinitialize
               onSubmit={async (values) => {
-                await firebaseApp.database().ref(`roles/${uid}`).update(values)
+                if (uid) {
+                  await firebaseApp
+                    .database()
+                    .ref(`roles/${uid}`)
+                    .update(values)
+                } else {
+                  await firebaseApp.database().ref(`roles`).push(values)
+                }
+
                 history.push('/roles')
               }}
               initialValues={data}
@@ -180,14 +155,7 @@ export default function () {
             />
           </div>
         )}
-        {tab === 'grants' && (
-          <VirtualList
-            list={list}
-            name="grants"
-            listProps={{ itemSize: 72 }}
-            Row={Row}
-          />
-        )}
+        {tab === 'grants' && <RoleGrants grantsPath={grantsPath} />}
       </div>
     </Page>
   )
