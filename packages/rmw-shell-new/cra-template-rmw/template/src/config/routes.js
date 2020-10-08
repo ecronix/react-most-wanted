@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-key */
 import React, { lazy } from 'react'
 import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/AuthorizedRoute'
-import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute/UnauthorizedRoute'
 import { Route } from 'react-router-dom'
 
 const About = lazy(() => import('../pages/About/About'))
@@ -25,7 +24,11 @@ const routes = [
     exact
     component={FirebaseMessaging}
   />,
-  <AuthorizedRoute path="/firebase_storage" exact component={FirebaseStorage} />,
+  <AuthorizedRoute
+    path="/firebase_storage"
+    exact
+    component={FirebaseStorage}
+  />,
 ]
 
 export default routes
