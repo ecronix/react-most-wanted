@@ -1,7 +1,8 @@
-import React, { lazy } from 'react'
 import MUIConfig from 'material-ui-shell'
 import getDefaultRoutes from './routes'
+import grants from './grants'
 import merge from 'base-shell/lib/utils/config'
+import { lazy } from 'react'
 
 const config = {
   getDefaultRoutes,
@@ -17,9 +18,7 @@ const config = {
     persistKey: 'rmw-shell:auth',
     signInURL: '/signin',
     redirectTo: '/home',
-  },
-  menu: {
-    //MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
+    grants,
   },
 }
 

@@ -1,16 +1,13 @@
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import Avatar from '@material-ui/core/Avatar'
-import Badge from '@material-ui/core/Badge'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
-import Mail from '@material-ui/icons/Mail'
 import React, { useEffect } from 'react'
-import Star from '@material-ui/icons/Star'
-import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
+import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 
 const fields = [
@@ -38,19 +35,14 @@ export default function () {
   })
 
   const Row = ({ data, index, style }) => {
-    const {
-      name = '',
-      description = '',
-      key,
-      photoURL,
-      providerData = [],
-    } = data
+    const { name = '', description = '', key } = data
 
     return (
       <div key={key} style={style}>
         <ListItem
+          button
           alignItems="flex-start"
-          style={{ height: 72, cursor: 'pointer' }}
+          style={{ height: 72 }}
           onClick={() => {
             history.push(`/roles/${key}`)
           }}

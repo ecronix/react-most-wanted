@@ -77,10 +77,7 @@ export default function () {
 
     return (
       <div key={key} style={style}>
-        <ListItem
-          alignItems="flex-start"
-          style={{ height: 82, cursor: 'pointer' }}
-        >
+        <ListItem button alignItems="flex-start" style={{ height: 82 }}>
           <ListItemAvatar>
             <Badge
               invisible={!isAdmin}
