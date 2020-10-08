@@ -9,6 +9,8 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import Add from '@material-ui/icons/Add'
+import Fab from '@material-ui/core/Fab'
 
 const fields = [
   {
@@ -60,23 +62,38 @@ export default function () {
   }
 
   return (
-    <ListPage
-      name="roles"
-      list={list}
-      fields={fields}
-      Row={Row}
-      listProps={{ itemSize: 72 }}
-      getPageProps={(list) => {
-        return {
-          pageTitle: intl.formatMessage(
-            {
-              id: 'roles',
-              defaultMessage: 'Roles',
-            },
-            { count: list.length }
-          ),
-        }
-      }}
-    />
+    <React.Fragment>
+      <ListPage
+        name="roles"
+        list={list}
+        fields={fields}
+        Row={Row}
+        listProps={{ itemSize: 72 }}
+        getPageProps={(list) => {
+          return {
+            pageTitle: intl.formatMessage(
+              {
+                id: 'roles',
+                defaultMessage: 'Roles',
+              },
+              { count: list.length }
+            ),
+          }
+        }}
+      />
+      <Fab
+        color="secondary"
+        style={{
+          position: 'absolute',
+          bottom: 18,
+          right: 18,
+        }}
+        onClick={() => {
+          history.push('/create_role')
+        }}
+      >
+        <Add />
+      </Fab>
+    </React.Fragment>
   )
 }

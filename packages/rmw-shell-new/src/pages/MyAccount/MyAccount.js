@@ -3,11 +3,10 @@ import Camera from '@material-ui/icons/CameraAlt'
 import Delete from '@material-ui/icons/Delete'
 import Fab from '@material-ui/core/Fab'
 import InputBase from '@material-ui/core/InputBase'
-import Notifications from '@material-ui/icons/Notifications'
 import NotificationsOff from '@material-ui/icons/NotificationsOff'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import Save from '@material-ui/icons/Save'
 import Typography from '@material-ui/core/Typography'
 import Zoom from '@material-ui/core/Zoom'
@@ -126,7 +125,7 @@ const MyAccount = () => {
       .currentUser.linkWithPopup(provider)
       .then(
         () => {
-          authStateChanged(firebaseApp.auth().currentUser)
+          setAuth({ ...auth, ...firebaseApp.auth().currentUser })
         },
         (e) => {
           console.warn(e)
