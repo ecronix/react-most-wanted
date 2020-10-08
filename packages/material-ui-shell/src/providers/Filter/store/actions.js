@@ -31,14 +31,6 @@ export function setFilterSortField(name, sortField) {
   }
 }
 
-export function setScrollOffset(name, scrollOffset) {
-  return {
-    type: types.ON_SET_SCROLL_OFFSET,
-    name,
-    payload: { scrollOffset },
-  }
-}
-
 export function setFilterSortOrientation(name, sortOrientation) {
   return {
     type: types.ON_FILTER_SORT_FIELD_CHANGED,
