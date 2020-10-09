@@ -1,7 +1,7 @@
 {
-  "name": "rmw-shell",
-  "version": "1.0.7",
-  "description": "rmw-shell React component",
+  "name": "my-component",
+  "version": "1.0.0",
+  "description": "my-component React component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -19,34 +19,16 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {
-    "notistack": "^1.0.1",
-    "react-easy-crop": "^3.2.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
-    "@formatjs/intl-relativetimeformat": "4.x",
-    "@material-ui/core": "4.x",
-    "react-custom-scrollbars": "4.x",
-    "@material-ui/icons": "4.x",
-    "intl": "1.x",
-    "intl-locales-supported": "1.x",
-    "react": "16.x",
-    "react-dom": "16.x",
-    "react-intl": "4.x",
-    "react-ios-pwa-prompt": "1.x",
-    "react-router-dom": "5.x",
-    "base-shell": "1.x",
-    "material-ui-shell": "1.x",
-    "github-markdown-css": "4.x",
-    "react-markdown": "4.x",
-    "react-virtualized-auto-sizer": "1.x",
-    "react-window": "1.x"
+    "react": "16.x"
   },
   "devDependencies": {
     "@formatjs/intl-relativetimeformat": "^7.2.9",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "base-shell": "^1.2.9",
+    "eslint-loader": "^4.0.2",
     "final-form": "^4.20.1",
     "firebase": "^7.23.0",
     "firebaseui": "^4.6.1",
@@ -55,11 +37,13 @@
     "intl-locales-supported": "^1.8.12",
     "material-ui-shell": "^1.1.16",
     "mui-rff": "^2.5.5",
+    "notistack": "^1.0.1",
     "nwb": "^0.25.2",
-    "raw-loader": "^4.0.1",
+    "raw-loader": "^4.0.2",
     "react": "^16.13.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
+    "react-easy-crop": "^3.2.0",
     "react-final-form": "^6.5.1",
     "react-helmet": "^6.1.0",
     "react-intl": "^5.8.5",
@@ -69,20 +53,10 @@
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5"
   },
-  "author": "Tarik Huber",
-  "homepage": "https://www.react-most-wanted.com/",
+  "author": "",
+  "homepage": "",
   "license": "MIT",
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TarikHuber/react-most-wanted.git",
-    "directory": "packages/rmw-shell"
-  },
+  "repository": "",
   "keywords": [
     "react-component"
   ]
