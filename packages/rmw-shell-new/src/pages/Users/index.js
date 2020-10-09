@@ -16,6 +16,7 @@ import {
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
 import Badge from '@material-ui/core/Badge'
+import { useHistory } from 'react-router-dom'
 
 const fields = [
   {
@@ -52,6 +53,7 @@ const getProviderIcon = (id) => {
 export default function () {
   const { watchList, getList } = useLists()
   const intl = useIntl()
+  const history = useHistory()
 
   useEffect(() => {
     watchList('users')
@@ -77,7 +79,14 @@ export default function () {
 
     return (
       <div key={key} style={style}>
-        <ListItem button alignItems="flex-start" style={{ height: 82 }}>
+        <ListItem
+          button
+          alignItems="flex-start"
+          style={{ height: 82 }}
+          onClick={() => {
+            history.push(`/users/${key}`)
+          }}
+        >
           <ListItemAvatar>
             <Badge
               invisible={!isAdmin}
