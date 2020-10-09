@@ -24,7 +24,7 @@ the basic react setup: routing, internationalization and async load.
 **[Material UI shell](./packages/material-ui-shell/)**:
 includes all features from the base shell expanded with [Material-UI](https://material-ui.com).
 
-```npx create-react-app my-app --template material-ui```
+```npx create-your-own-react-app my-app --template material-ui```
 
 
 **[React Most Wanted shell](./packages/rmw-shell)**:
