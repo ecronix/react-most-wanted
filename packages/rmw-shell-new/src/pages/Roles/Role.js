@@ -17,7 +17,7 @@ import { useIntl } from 'react-intl'
 import { useParams, useHistory } from 'react-router-dom'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
-import RoleGrants from 'rmw-shell/lib/containers/RoleGrants'
+import GrantsList from 'rmw-shell/lib/containers/GrantsList'
 
 export default function () {
   const history = useHistory()
@@ -159,7 +159,7 @@ export default function () {
             />
           </div>
         )}
-        {tab === 'grants' && <RoleGrants grantsPath={grantsPath} />}
+        {tab === 'grants' && <GrantsList grantsPath={grantsPath} />}
       </div>
     </Page>
   )
