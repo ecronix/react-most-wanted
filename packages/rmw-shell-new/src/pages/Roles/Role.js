@@ -144,11 +144,15 @@ export default function () {
                     .database()
                     .ref(`roles/${uid}`)
                     .update(values)
-                } else {
-                  await firebaseApp.database().ref(`roles`).push(values)
-                }
 
-                history.push('/roles')
+                  history.push('/roles')
+                } else {
+                  const newRoleSnap = await firebaseApp
+                    .database()
+                    .ref(`roles`)
+                    .push(values)
+                  history.replace(`/roles/${newRoleSnap.key}`)
+                }
               }}
               initialValues={data}
               render={RoleForm}
