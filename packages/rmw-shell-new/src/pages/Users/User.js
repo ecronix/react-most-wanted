@@ -12,6 +12,7 @@ import {
 } from 'rmw-shell/lib/components/Icons'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useParams, useHistory } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
@@ -20,12 +21,23 @@ import AccountBox from '@material-ui/icons/AccountBox'
 import Lock from '@material-ui/icons/Lock'
 import Person from '@material-ui/icons/Person'
 import Email from '@material-ui/icons/Email'
+import GrantsList from 'rmw-shell/lib/containers/GrantsList'
+import RolesList from 'rmw-shell/lib/containers/RolesList'
+import Zoom from '@material-ui/core/Zoom'
+import SearchField from 'material-ui-shell/lib/components/SearchField'
+import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 
 export default function () {
   const intl = useIntl()
   const history = useHistory()
   const { watchPath, getPath } = usePaths()
   const { uid, tab = 'main' } = useParams()
+  const { getFilter, setSearch } = useFilter()
+  const { search = {} } = getFilter('grants')
+  const { value: searchvalue = '' } = search
+
+  const grantsPath = `user_grants/${uid}`
+  const rolesPath = `user_roles/${uid}`
 
   const getProviderIcon = (id) => {
     if (id === 'password') {
@@ -51,14 +63,13 @@ export default function () {
 
   useEffect(() => {
     watchPath(path)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path])
 
   const user = getPath(path, {})
 
   const { photoURL = '', displayName = '', email = '', providerData = [] } =
     user || {}
-
-  console.log('providerData', providerData)
 
   return (
     <Page
@@ -69,6 +80,22 @@ export default function () {
         id: 'user',
         defaultMessage: 'User',
       })}
+      appBarContent={
+        <div>
+          {tab !== 'main' && (
+            <Zoom key={tab} in={tab !== 'main'}>
+              <div>
+                <SearchField
+                  initialValue={searchvalue}
+                  onChange={(v) => {
+                    setSearch(tab, v)
+                  }}
+                />
+              </div>
+            </Zoom>
+          )}
+        </div>
+      }
     >
       <div style={{ height: '100%', overflow: 'hidden' }}>
         <AppBar position="static">
@@ -110,6 +137,7 @@ export default function () {
                   flexDirection: 'column',
                   alignItems: 'center',
                   padding: 18,
+                  minWidth: 250,
                 }}
               >
                 <Avatar
@@ -147,6 +175,8 @@ export default function () {
               </Paper>
             </div>
           )}
+          {tab === 'roles' && <RolesList path={rolesPath} />}
+          {tab === 'grants' && <GrantsList grantsPath={grantsPath} />}
         </div>
       </div>
     </Page>
