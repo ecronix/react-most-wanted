@@ -26,14 +26,17 @@ import RolesList from 'rmw-shell/lib/containers/RolesList'
 import Zoom from '@material-ui/core/Zoom'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
 
 export default function () {
   const intl = useIntl()
   const history = useHistory()
-  const { watchPath, getPath } = usePaths()
+  const { watchPath, getPath, firebaseApp } = usePaths()
+  const { watchList, getList } = useLists()
   const { uid, tab = 'main' } = useParams()
   const { getFilter, setSearch } = useFilter()
-  const { search = {} } = getFilter('grants')
+  const { search = {} } = getFilter(tab)
   const { value: searchvalue = '' } = search
 
   const grantsPath = `user_grants/${uid}`
@@ -63,13 +66,24 @@ export default function () {
 
   useEffect(() => {
     watchPath(path)
+    watchList('admins')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path])
 
   const user = getPath(path, {})
+  const admins = getList('admins')
 
   const { photoURL = '', displayName = '', email = '', providerData = [] } =
     user || {}
+
+  let isAdmin = false
+
+  admins.map((a) => {
+    if (a.key === uid) {
+      isAdmin = true
+    }
+    return a
+  })
 
   return (
     <Page
@@ -171,6 +185,31 @@ export default function () {
                       ) : null
                     })}
                   </div>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isAdmin}
+                        onChange={() => {
+                          if (isAdmin) {
+                            firebaseApp
+                              .database()
+                              .ref(`admins/${uid}`)
+                              .set(null)
+                          } else {
+                            firebaseApp
+                              .database()
+                              .ref(`admins/${uid}`)
+                              .set(true)
+                          }
+                        }}
+                        name="checkedA"
+                      />
+                    }
+                    label={intl.formatMessage({
+                      id: 'administrator',
+                      defaultMessage: 'Administrator',
+                    })}
+                  />
                 </div>
               </Paper>
             </div>
