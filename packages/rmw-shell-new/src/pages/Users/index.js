@@ -51,7 +51,7 @@ const getProviderIcon = (id) => {
 }
 
 export default function () {
-  const { watchList, getList } = useLists()
+  const { watchList, getList, isListLoading } = useLists()
   const intl = useIntl()
   const history = useHistory()
 
@@ -140,6 +140,7 @@ export default function () {
             },
             { count: list.length }
           ),
+          isLoading: isListLoading('users'),
         }
       }}
     />
