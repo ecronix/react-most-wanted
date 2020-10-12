@@ -18,30 +18,12 @@ import 'firebase/storage'
 
 let firebaseApp = null
 
-const defaultUserData = (user) => {
-  if (user != null) {
-    return {
-      displayName: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      isAnonymous: user.isAnonymous,
-      uid: user.uid,
-      providerData: user.providerData,
-      isAuthenticated: true,
-    }
-  } else {
-    return {
-      isAuthenticated: false,
-    }
-  }
-}
-
 export default function ({ children }) {
   const { appConfig } = useConfig()
-  const { auth, setAuth } = useAuth()
-  const { firebase: firebaseConfig } = appConfig || {}
+  const auth = useAuth()
+  const { firebase: firebaseConfig, auth: authConfig = {} } = appConfig || {}
   const { prod = {}, dev = {} } = firebaseConfig || {}
+  const { onAuthStateChanged } = authConfig || {}
 
   //Firebase app should be initialized only once
   if (firebase.apps.length === 0) {
@@ -54,10 +36,12 @@ export default function ({ children }) {
 
   useEffect(() => {
     const unsubscribe = firebaseApp.auth().onAuthStateChanged((user) => {
-      setAuth(defaultUserData(user))
+      if (onAuthStateChanged) {
+        onAuthStateChanged(user, auth, firebaseApp)
+      }
     })
 
-    //return unsubscribe()
+    return () => unsubscribe()
   }, [])
 
   return (

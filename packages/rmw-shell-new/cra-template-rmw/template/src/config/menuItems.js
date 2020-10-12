@@ -1,6 +1,6 @@
 import allLocales from './locales'
 // import allThemes from './themes'
-import React from 'react'
+import React, { useEffect } from 'react'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
 import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LockIcon from '@material-ui/icons/Lock'
@@ -13,13 +13,14 @@ import Security from '@material-ui/icons/Security'
 import People from '@material-ui/icons/People'
 import GetApp from '@material-ui/icons/GetApp'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
+import Business from '@material-ui/icons/Business'
+import Slideshow from '@material-ui/icons/Slideshow'
 import StyleIcon from '@material-ui/icons/Style'
 import allThemes from './themes'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 const getMenuItems = (props) => {
   const {
-    appConfig,
     intl,
     updateLocale,
     locale,
@@ -29,16 +30,13 @@ const getMenuItems = (props) => {
     firebaseApp,
     auth: authData,
   } = props
-  const {
-    isDesktop,
-    isAuthMenuOpen,
-    useMiniMode,
-    setMiniMode,
-    setAuthMenuOpen,
-  } = menuContext
+  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
   const { auth } = authData
+  const { grants = [] } = auth || {}
+
+  console.log('auth', auth)
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -65,6 +63,8 @@ const getMenuItems = (props) => {
       leftIcon: <StyleIcon style={{ color: t.color }} />,
     }
   })
+
+  console.log('rants[read_companies]', grants['read_companies'])
 
   const handleSignOut = () => {
     firebaseApp.auth().signOut()
@@ -105,6 +105,36 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'about' }),
       leftIcon: <InfoOutlined />,
     },
+    {
+      primaryText: intl.formatMessage({
+        id: 'demos',
+        defaultMessage: 'Demos',
+      }),
+      visible: !!grants['read_companies'],
+      primaryTogglesNestedList: true,
+      leftIcon: <Slideshow />,
+      nestedItems: [
+        {
+          value: '/companies',
+          visible: grants['read_companies'],
+          primaryText: intl.formatMessage({
+            id: 'companies',
+            defaultMessage: 'Companies',
+          }),
+          leftIcon: <Business />,
+        },
+        {
+          value: '/tasks',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'tasks',
+            defaultMessage: 'Tasks',
+          }),
+          leftIcon: <Business />,
+        },
+      ],
+    },
+
     {
       primaryText: intl.formatMessage({
         id: 'firebase',
