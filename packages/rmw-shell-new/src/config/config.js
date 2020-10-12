@@ -23,6 +23,16 @@ const defaultUserData = (user) => {
   }
 }
 
+const isGranted = (auth, grant) => {
+  const { grants = [], isAdmin = false } = auth || {}
+
+  if (isAdmin) {
+    return true
+  }
+
+  return !!grants[grant]
+}
+
 const config = {
   getDefaultRoutes,
   containers: {
@@ -67,6 +77,7 @@ const config = {
           ...defaultUserData(user),
           grants: grantsSnap.val(),
           isAdmin: !!isAdminSnap.val(),
+          isGranted,
         })
       } else {
         firebaseApp.database().ref().off()
