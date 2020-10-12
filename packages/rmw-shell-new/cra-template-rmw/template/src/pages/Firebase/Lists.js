@@ -2,16 +2,15 @@ import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Delete from '@material-ui/icons/Delete'
 import IconButton from '@material-ui/core/IconButton'
+import Code from '@material-ui/icons/Code'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
-import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 
 const defaultPath = 'test_list'
 
@@ -26,7 +25,6 @@ export default function () {
     clearList,
     getListError,
     isListLoading,
-    clearAllLists,
     hasListError,
     unwatchList,
   } = useLists()
@@ -41,6 +39,15 @@ export default function () {
         id: 'firebase_lists_demo',
         defaultMessage: 'Firebase Lists Demo',
       })}
+      appBarContent={
+        <IconButton
+          color="inherit"
+          href="https://github.com/TarikHuber/react-most-wanted/blob/master/packages/rmw-shell-new/cra-template-rmw/template/src/pages/Firebase/Lists.js"
+          target="_blank"
+        >
+          <Code />
+        </IconButton>
+      }
     >
       <Scrollbar
         style={{

@@ -1,18 +1,14 @@
 import * as firebaseui from 'firebaseui'
 import AuthUI from 'rmw-shell/lib/containers/AuthUI/AuthUI'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
-import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
-import { injectIntl } from 'react-intl'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
-import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const SignIn = () => {
-  let history = useHistory()
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { firebaseApp } = useFirebase()
@@ -25,8 +21,6 @@ const SignIn = () => {
     signInFlow: 'popup',
     callbacks: {
       signInSuccessWithAuthResult: () => {
-        //history.push('/home')
-
         setAuthMenuOpen(false)
         // To avoid page reload on single page applications
         return false

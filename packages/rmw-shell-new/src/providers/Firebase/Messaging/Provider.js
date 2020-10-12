@@ -1,37 +1,29 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import Context from './Context'
 import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import Paper from '@material-ui/core/Paper'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
-import TextField from '@material-ui/core/TextField'
-import { Typography } from '@material-ui/core'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'
-import { useTheme } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
 import SnackMessage from 'rmw-shell/lib/components/SnackMessage/SnackMessage'
 
 const Provider = ({ children, firebaseApp }) => {
   const [token, setToken] = useState(false)
   const intl = useIntl()
   const { appConfig } = useConfig()
-  const { auth } = useAuth()
+  const { auth = {} } = useAuth()
+  const { uid } = auth || {}
   const { firebase } = appConfig || {}
   const { messaging: messagingConfig } = firebase || {}
   const { publicVapidKey } = messagingConfig || {}
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
-  const [messaging, setMessaging] = useState(null)
 
   useEffect(() => {
     if (Notification.permission === 'granted') {
       initializeMessaging()
     }
-  }, [auth.uid])
+  }, [])
 
   const syncToken = (token) => {
     setToken(token)
