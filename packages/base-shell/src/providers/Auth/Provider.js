@@ -17,7 +17,7 @@ function reducer(state, action) {
 const Provider = ({ persistKey = 'auth', children }) => {
   const persistAuth = JSON.parse(localStorage.getItem(persistKey))
 
-  const [auth, dispatch] = useReducer(reducer, persistAuth)
+  const [auth, dispatch] = useReducer(reducer, persistAuth || {})
 
   useEffect(() => {
     try {
