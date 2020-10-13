@@ -109,13 +109,7 @@ export default function () {
           )}
         </React.Fragment>
       }
-    >
-      <div
-        style={{
-          height: '100%',
-          overflow: 'hidden',
-        }}
-      >
+      tabs={
         <AppBar position="static">
           <Tabs
             value={tab}
@@ -133,7 +127,14 @@ export default function () {
             )}
           </Tabs>
         </AppBar>
-
+      }
+    >
+      <div
+        style={{
+          height: '100%',
+          overflow: 'hidden',
+        }}
+      >
         {tab === 'main' && (
           <div style={{ padding: 18 }}>
             <Form

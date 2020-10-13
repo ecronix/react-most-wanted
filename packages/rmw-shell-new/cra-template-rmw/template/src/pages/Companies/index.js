@@ -31,7 +31,7 @@ const Row = ({ data, index, style }) => {
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
-          history.push(`/roles/${key}`)
+          history.push(`/companies/${key}`)
         }}
       >
         <ListItemAvatar>
@@ -53,20 +53,20 @@ export default function () {
   return (
     <ListPage
       fields={fields}
-      path="roles"
-      createGrant="create_role"
+      path="companies"
+      createGrant="create_company"
       Row={Row}
       listProps={{ itemSize: 72 }}
       getPageProps={() => {
         return {
           pageTitle: intl.formatMessage({
-            id: 'roles',
-            defaultMessage: 'Roles',
+            id: 'companies',
+            defaultMessage: 'Companies',
           }),
         }
       }}
       onCreateClick={() => {
-        history.push('/create_role')
+        history.push('/create_company')
       }}
     />
   )

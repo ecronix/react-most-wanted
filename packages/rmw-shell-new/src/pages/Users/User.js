@@ -110,8 +110,7 @@ export default function () {
           )}
         </div>
       }
-    >
-      <div style={{ height: '100%', overflow: 'hidden' }}>
+      tabs={
         <AppBar position="static">
           <Tabs
             value={tab}
@@ -129,6 +128,9 @@ export default function () {
             <Tab value="grants" icon={<Lock className="material-icons" />} />
           </Tabs>
         </AppBar>
+      }
+    >
+      <div style={{ height: '100%', overflow: 'hidden' }}>
         <div style={{ height: '100%' }}>
           {tab === 'main' && (
             <div
