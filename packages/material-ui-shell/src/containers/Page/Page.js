@@ -73,6 +73,7 @@ export default function ({
   isLoading,
   appBarContent = null,
   contentStyle,
+  tabs = null,
 }) {
   const isOnline = useOnline()
   const theme = useTheme()
@@ -151,8 +152,8 @@ export default function ({
           {appBarContent}
         </Toolbar>
       </AppBar>
-
       <div className={classes.toolbar} />
+
       {isLoading && <LinearProgress />}
       {!isOnline && (
         <div
@@ -173,6 +174,7 @@ export default function ({
         </div>
       )}
       <div className={classes.content} style={contentStyle}>
+        {tabs}
         {children}
       </div>
     </div>
