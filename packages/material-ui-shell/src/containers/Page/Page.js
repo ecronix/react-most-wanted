@@ -173,8 +173,8 @@ export default function ({
           </Typography>
         </div>
       )}
+      {tabs}
       <div className={classes.content} style={contentStyle}>
-        {tabs}
         {children}
       </div>
     </div>

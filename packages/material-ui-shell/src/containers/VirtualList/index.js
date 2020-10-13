@@ -49,7 +49,7 @@ export default function (props) {
     <AutoSizer style={{ height: '100%', width: '100%' }}>
       {({ height, width }) => {
         return (
-          <List>
+          <List style={{ padding: 0 }}>
             <FixedSizeList
               ref={(r) => {
                 if (r) {
