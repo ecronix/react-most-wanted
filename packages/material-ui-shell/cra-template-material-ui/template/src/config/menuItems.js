@@ -1,20 +1,21 @@
-import allLocales from './locales'
-// import allThemes from './themes'
-import React from 'react'
+import ChatBubble from '@material-ui/icons/ChatBubble'
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
-import InfoOutlined from '@material-ui/icons/InfoOutlined'
-import LockIcon from '@material-ui/icons/Lock'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import FilterList from '@material-ui/icons/FilterList'
+import GetApp from '@material-ui/icons/GetApp'
+import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LanguageIcon from '@material-ui/icons/Language'
-import SettingsIcon from '@material-ui/icons/SettingsApplications'
+import LockIcon from '@material-ui/icons/Lock'
 import MenuOpenIcon from '@material-ui/icons/MenuOpen'
 import QuestionAnswer from '@material-ui/icons/QuestionAnswer'
-import Web from '@material-ui/icons/Web'
-import ChatBubble from '@material-ui/icons/ChatBubble'
-import GetApp from '@material-ui/icons/GetApp'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import FilterList from '@material-ui/icons/FilterList'
+import React from 'react'
+import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import StyleIcon from '@material-ui/icons/Style'
+import Tab from '@material-ui/icons/Tab'
+import ViewList from '@material-ui/icons/ViewList'
+import Web from '@material-ui/icons/Web'
+import allLocales from './locales'
 import allThemes from './themes'
 
 const getMenuItems = (props) => {
@@ -120,9 +121,18 @@ const getMenuItems = (props) => {
           visible: isAuthorised,
           primaryText: intl.formatMessage({
             id: 'list_page_demo_menu',
-            defaultMessage: 'List Page Demo',
+            defaultMessage: 'List Page',
           }),
-          leftIcon: <FilterList />,
+          leftIcon: <ViewList />,
+        },
+        {
+          value: '/tabs_demo',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'tabs_demo',
+            defaultMessage: 'Tabs Page',
+          }),
+          leftIcon: <Tab />,
         },
       ],
     },
