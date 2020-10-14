@@ -2,22 +2,35 @@ import Delete from '@material-ui/icons/Delete'
 import IconButton from '@material-ui/core/IconButton'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React, { useEffect } from 'react'
-import RoleForm from 'rmw-shell/lib/components/Forms/Role'
 import Save from '@material-ui/icons/Save'
-import { Form } from 'react-final-form'
+import { Form as FinalForm } from 'react-final-form'
 import { useHistory } from 'react-router-dom'
-import { useIntl } from 'react-intl'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
+import { useAuth } from 'base-shell/lib/providers/Auth'
 
-export default function ({ uid, path = 'none', getPageProps = () => {} }) {
+export default function ({
+  uid,
+  path = 'none',
+  getPageProps = () => {},
+  handleSubmit = () => {},
+  handleDelete = () => {},
+  Form,
+  deleteDialogProps = {},
+  grants = {},
+  formProps = {},
+  initialValues = {},
+}) {
   const history = useHistory()
-  const intl = useIntl()
   const { openDialog } = useQuestions()
   const { watchPath, clearPath, getPath, firebaseApp } = usePaths()
+  const { auth } = useAuth()
+  const { isGranted = () => false } = auth || {}
 
   const databasePath = `${path}/${uid}`
-  const data = getPath(databasePath)
+  const data = getPath(databasePath) || initialValues
+
+  console.log('data', data)
 
   useEffect(() => {
     if (uid) {
@@ -29,23 +42,12 @@ export default function ({ uid, path = 'none', getPageProps = () => {} }) {
 
   const openDeleteDialog = () => {
     openDialog({
-      title: intl.formatMessage({
-        id: 'delete_role_dialog_title',
-        defaultMessage: 'Delete Role?',
-      }),
-      message: intl.formatMessage({
-        id: 'delete_role_dialog_message',
-        defaultMessage: 'Role will be deleted permanently?',
-      }),
-      action: intl.formatMessage({
-        id: 'delete_role_dialog_action',
-        defaultMessage: 'DELETE ROLE',
-      }),
       handleAction: async (handleClose) => {
-        await firebaseApp.database().ref(`roles/${uid}`).set(null)
+        await firebaseApp.database().ref(`${path}/${uid}`).set(null)
         handleClose()
-        history.replace('/roles')
+        handleDelete()
       },
+      ...deleteDialogProps,
     })
   }
 
@@ -57,10 +59,11 @@ export default function ({ uid, path = 'none', getPageProps = () => {} }) {
       appBarContent={
         <div>
           <IconButton
+            disabled={!isGranted(auth, grants.create)}
             color="inherit"
             onClick={() => {
               document
-                .getElementById('role')
+                .getElementById(path)
                 .dispatchEvent(new Event('submit', { cancelable: true }))
             }}
           >
@@ -68,7 +71,7 @@ export default function ({ uid, path = 'none', getPageProps = () => {} }) {
           </IconButton>
 
           <IconButton
-            disabled={!uid}
+            disabled={!uid || !isGranted(auth, grants.delete)}
             color="inherit"
             onClick={() => {
               openDeleteDialog()
@@ -80,26 +83,27 @@ export default function ({ uid, path = 'none', getPageProps = () => {} }) {
       }
       {...getPageProps(data)}
     >
-      <div style={{ padding: 18 }}>
-        <Form
-          keepDirtyOnReinitialize
-          onSubmit={async (values) => {
-            if (uid) {
-              await firebaseApp.database().ref(`roles/${uid}`).update(values)
+      <FinalForm
+        keepDirtyOnReinitialize
+        onSubmit={async (values) => {
+          let newUid = false
 
-              history.push('/roles')
+          if (uid) {
+            await firebaseApp.database().ref(`${path}/${uid}`).update(values)
+          } else {
+            if (isGranted(auth, grants.create)) {
+              const snap = await firebaseApp.database().ref(path).push(values)
+              newUid = snap.key
             } else {
-              const newRoleSnap = await firebaseApp
-                .database()
-                .ref(`roles`)
-                .push(values)
-              history.replace(`/roles/${newRoleSnap.key}`)
+              return
             }
-          }}
-          initialValues={data}
-          render={RoleForm}
-        />
-      </div>
+          }
+
+          handleSubmit(values, newUid)
+        }}
+        initialValues={data}
+        render={(props) => <Form id={path} {...props} {...formProps} />}
+      />
     </Page>
   )
 }

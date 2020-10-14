@@ -9,6 +9,8 @@ import { ListPage } from 'rmw-shell/lib/containers/Page'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 
+const path = 'tasks'
+
 const fields = [
   {
     name: 'name',
@@ -21,7 +23,7 @@ const fields = [
 ]
 
 const Row = ({ data, index, style }) => {
-  const { name = '', description = '', key } = data
+  const { title = '', description = '', key } = data
   const history = useHistory()
 
   return (
@@ -31,7 +33,7 @@ const Row = ({ data, index, style }) => {
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
-          history.push(`/companies/${key}`)
+          history.push(`${path}/${key}`)
         }}
       >
         <ListItemAvatar>
@@ -39,7 +41,7 @@ const Row = ({ data, index, style }) => {
             <Business />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={name} secondary={description} />
+        <ListItemText primary={title} secondary={description} />
       </ListItem>
       <Divider variant="inset" />
     </div>
@@ -53,20 +55,20 @@ export default function () {
   return (
     <ListPage
       fields={fields}
-      path="companies"
-      createGrant="create_company"
+      path={'public_tasks'}
+      createGrant="create_task"
       Row={Row}
       listProps={{ itemSize: 72 }}
       getPageProps={() => {
         return {
           pageTitle: intl.formatMessage({
-            id: 'companies',
-            defaultMessage: 'Companies',
+            id: path,
+            defaultMessage: 'Tasks',
           }),
         }
       }}
       onCreateClick={() => {
-        history.push('/create_company')
+        history.push('/create_task')
       }}
     />
   )

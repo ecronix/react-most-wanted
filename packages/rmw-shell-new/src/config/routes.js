@@ -29,6 +29,7 @@ const getDefaultRoutes = (appConfig) => {
     <AuthorizedRoute path="/users" exact component={Users} />,
     <AuthorizedRoute path="/users/:uid" exact component={User} />,
     <AuthorizedRoute path="/users/:uid/:tab" exact component={User} />,
+
     <Route component={PageNotFound} />,
   ]
 }
