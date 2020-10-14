@@ -1,22 +1,23 @@
-import allLocales from './locales'
-import React from 'react'
-import DaschboardIcon from '@material-ui/icons/Dashboard'
-import InfoOutlined from '@material-ui/icons/InfoOutlined'
-import LockIcon from '@material-ui/icons/Lock'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import LanguageIcon from '@material-ui/icons/Language'
-import SettingsIcon from '@material-ui/icons/SettingsApplications'
-import Whatshot from '@material-ui/icons/Whatshot'
-import MenuOpenIcon from '@material-ui/icons/MenuOpen'
-import Security from '@material-ui/icons/Security'
-import People from '@material-ui/icons/People'
-import GetApp from '@material-ui/icons/GetApp'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
+import Assignment from '@material-ui/icons/Assignment'
 import Business from '@material-ui/icons/Business'
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
+import DaschboardIcon from '@material-ui/icons/Dashboard'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import GetApp from '@material-ui/icons/GetApp'
+import InfoOutlined from '@material-ui/icons/InfoOutlined'
+import LanguageIcon from '@material-ui/icons/Language'
+import LockIcon from '@material-ui/icons/Lock'
+import MenuOpenIcon from '@material-ui/icons/MenuOpen'
+import People from '@material-ui/icons/People'
+import React from 'react'
+import Security from '@material-ui/icons/Security'
+import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import Slideshow from '@material-ui/icons/Slideshow'
 import StyleIcon from '@material-ui/icons/Style'
+import Whatshot from '@material-ui/icons/Whatshot'
+import allLocales from './locales'
 import allThemes from './themes'
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
 
 const getMenuItems = (props) => {
   const {
@@ -125,7 +126,7 @@ const getMenuItems = (props) => {
             id: 'tasks',
             defaultMessage: 'Tasks',
           }),
-          leftIcon: <Business />,
+          leftIcon: <Assignment />,
         },
       ],
     },

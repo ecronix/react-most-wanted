@@ -6,6 +6,8 @@ import { Route } from 'react-router-dom'
 const About = lazy(() => import('../pages/About/About'))
 const Companies = lazy(() => import('../pages/Companies'))
 const Company = lazy(() => import('../pages/Companies/Company'))
+const Tasks = lazy(() => import('../pages/Tasks'))
+const Task = lazy(() => import('../pages/Tasks/Task'))
 const FirebaseCols = lazy(() => import('../pages/Firebase/Cols'))
 const FirebaseDocs = lazy(() => import('../pages/Firebase/Docs'))
 const FirebaseLists = lazy(() => import('../pages/Firebase/Lists'))
@@ -23,6 +25,10 @@ const routes = [
   <AuthorizedRoute path="/firebase_cols" exact component={FirebaseCols} />,
   <AuthorizedRoute path="/companies" exact component={Companies} />,
   <AuthorizedRoute path="/companies/:uid" exact component={Company} />,
+  <AuthorizedRoute path="/create_company" exact component={Company} />,
+  <AuthorizedRoute path="/tasks" exact component={Tasks} />,
+  <AuthorizedRoute path="/tasks/:uid" exact component={Task} />,
+  <AuthorizedRoute path="/create_task" exact component={Task} />,
   <AuthorizedRoute
     path="/firebase_messaging"
     exact
