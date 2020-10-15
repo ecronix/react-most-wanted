@@ -30,8 +30,6 @@ export default function ({
   const databasePath = `${path}/${uid}`
   const data = getPath(databasePath) || initialValues
 
-  console.log('data', data)
-
   useEffect(() => {
     if (uid) {
       watchPath(databasePath)

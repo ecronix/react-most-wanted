@@ -1,5 +1,5 @@
 import Avatar from '@material-ui/core/Avatar'
-import Business from '@material-ui/icons/Business'
+import Assignment from '@material-ui/icons/Assignment'
 import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
@@ -23,7 +23,7 @@ const fields = [
 ]
 
 const Row = ({ data, index, style }) => {
-  const { title = '', description = '', key } = data
+  const { title = '', helper = {}, key } = data
   const history = useHistory()
 
   return (
@@ -38,10 +38,10 @@ const Row = ({ data, index, style }) => {
       >
         <ListItemAvatar>
           <Avatar>
-            <Business />
+            <Assignment />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={title} secondary={description} />
+        <ListItemText primary={title} secondary={helper?.label} />
       </ListItem>
       <Divider variant="inset" />
     </div>
