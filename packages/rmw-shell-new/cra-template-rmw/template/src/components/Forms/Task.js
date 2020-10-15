@@ -1,13 +1,23 @@
 import React from 'react'
-import { TextField, Autocomplete } from 'mui-rff'
+import { TextField } from 'mui-rff'
+import MUITextField from '@material-ui/core/TextField'
+import { Autocomplete } from 'rmw-shell/lib/components/FormFields/Autocomplete'
+import MUIAutocomplete from '@material-ui/lab/Autocomplete'
+import { ListItem, ListItemText } from '@material-ui/core'
 
-export default function ({ id, handleSubmit, values, users = [] }) {
-  const autocompleteData = users.map((u) => {
+export default function ({ id, handleSubmit, users = [] }) {
+  const helpers = users.map((u) => {
     const { key, val } = u
     const { displayName } = val
 
     return { label: displayName, value: key }
   })
+
+  const [value, setValue] = React.useState(helpers[0])
+  const [inputValue, setInputValue] = React.useState('')
+
+  //console.log('value', value)
+  //console.log('inputValue', inputValue)
 
   return (
     <form
@@ -26,30 +36,16 @@ export default function ({ id, handleSubmit, values, users = [] }) {
           fullWidth={false}
         />
         <br />
+
         <Autocomplete
-          label="Choose one planet"
+          openOnFocus
+          label="Select Helper"
           name="helper"
-          multiple={false}
-          //required={required.planet}
-          options={autocompleteData}
-          getOptionValue={(option) => option.value}
-          getOptionLabel={(option) => option.label}
-          renderOption={(option) => option.label}
-          disableCloseOnSelect={false}
-          helperText={'test'}
-          freeSolo={true}
-          onChange={(_event, newValue, reason, details) => {
-            if (
-              newValue &&
-              reason === 'select-option' &&
-              details?.option.inputValue
-            ) {
-              // Create a new value from the user input
-              autocompleteData.push({
-                value: details?.option.inputValue,
-                label: details?.option.inputValue,
-              })
-            }
+          options={helpers}
+          getOptionValue={(option) => option}
+          getOptionLabel={(option) => option.label || ''}
+          getOptionSelected={(o, v) => {
+            return o.value === v.value
           }}
           filterOptions={(options, params) => {
             const filtered = options.filter((v) => {
@@ -62,9 +58,6 @@ export default function ({ id, handleSubmit, values, users = [] }) {
 
             return filtered
           }}
-          selectOnFocus
-          clearOnBlur
-          handleHomeEndKeys
         />
       </div>
     </form>
