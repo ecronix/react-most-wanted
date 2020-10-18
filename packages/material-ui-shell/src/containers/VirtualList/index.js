@@ -28,10 +28,7 @@ export default function (props) {
     if (preserveScroll && ref && scrollOffset) {
       listRef.current.scrollTo(scrollOffset)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref])
 
-  useEffect(() => {
     return () => {
       try {
         if (preserveScroll && listRef.current) {
@@ -43,7 +40,7 @@ export default function (props) {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [ref])
 
   return (
     <AutoSizer style={{ height: '100%', width: '100%' }}>
