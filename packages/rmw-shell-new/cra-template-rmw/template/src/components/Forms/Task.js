@@ -1,9 +1,6 @@
 import React from 'react'
 import { TextField } from 'mui-rff'
-import MUITextField from '@material-ui/core/TextField'
 import { Autocomplete } from 'rmw-shell/lib/components/FormFields/Autocomplete'
-import MUIAutocomplete from '@material-ui/lab/Autocomplete'
-import { ListItem, ListItemText } from '@material-ui/core'
 
 export default function ({ id, handleSubmit, users = [] }) {
   const helpers = users.map((u) => {
@@ -12,12 +9,6 @@ export default function ({ id, handleSubmit, users = [] }) {
 
     return { label: displayName, value: key }
   })
-
-  const [value, setValue] = React.useState(helpers[0])
-  const [inputValue, setInputValue] = React.useState('')
-
-  //console.log('value', value)
-  //console.log('inputValue', inputValue)
 
   return (
     <form
