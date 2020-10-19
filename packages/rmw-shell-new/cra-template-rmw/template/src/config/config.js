@@ -51,6 +51,7 @@ const config = {
   },
   auth: {
     grants,
+    redirectTo: '/dashboard',
   },
   routes,
   locale: {

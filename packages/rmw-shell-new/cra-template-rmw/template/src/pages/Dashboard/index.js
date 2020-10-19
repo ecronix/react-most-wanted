@@ -19,6 +19,7 @@ const ReportContainer = ({ children }) => {
         margin: 8,
         flex: 0.45,
         height: '100%',
+        backgroundColor: 'green',
       }}
     >
       <Card>
@@ -60,29 +61,47 @@ export default function () {
             flexDirection: 'row',
             flexWrap: 'wrap',
             justifyContent: 'center',
+            alignContent: 'stretch',
           }}
         >
-          <ReportContainer>
-            <div>
-              <Typography color="textSecondary" gutterBottom>
-                {intl.formatMessage({
-                  id: 'registered_usres',
-                  defaultMessage: 'Registered Users:',
-                })}
-              </Typography>
-              <Typography color="primary" variant="h1">
-                <CountUp
-                  style={
-                    {
-                      //fontSize: 120,
+          <Card
+            style={{
+              minWidth: 300,
+              margin: 8,
+              flex: 0.45,
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                width: '100%',
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <CardContent>
+                <Typography color="textSecondary" gutterBottom>
+                  {intl.formatMessage({
+                    id: 'registered_usres',
+                    defaultMessage: 'Registered Users:',
+                  })}
+                </Typography>
+                <Typography color="primary" variant="h1">
+                  <CountUp
+                    style={
+                      {
+                        //fontSize: 120,
+                      }
                     }
-                  }
-                  start={0}
-                  end={users_count}
-                />
-              </Typography>
+                    start={0}
+                    end={users_count}
+                  />
+                </Typography>
+              </CardContent>
             </div>
-          </ReportContainer>
+          </Card>
+
           <ReportContainer>
             <Months />
           </ReportContainer>
