@@ -19,7 +19,6 @@ const ReportContainer = ({ children }) => {
         margin: 8,
         flex: 0.45,
         height: '100%',
-        backgroundColor: 'green',
       }}
     >
       <Card>
@@ -71,32 +70,26 @@ export default function () {
               flex: 0.45,
             }}
           >
+            <CardContent>
+              <Typography color="textSecondary" variant="h5" gutterBottom>
+                {intl.formatMessage({
+                  id: 'registered_usres',
+                  defaultMessage: 'Registered Users',
+                })}
+              </Typography>
+            </CardContent>
             <div
               style={{
                 display: 'flex',
                 width: '100%',
-                height: '100%',
+                height: '70%',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
               <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                  {intl.formatMessage({
-                    id: 'registered_usres',
-                    defaultMessage: 'Registered Users:',
-                  })}
-                </Typography>
                 <Typography color="primary" variant="h1">
-                  <CountUp
-                    style={
-                      {
-                        //fontSize: 120,
-                      }
-                    }
-                    start={0}
-                    end={users_count}
-                  />
+                  <CountUp start={0} end={users_count} />
                 </Typography>
               </CardContent>
             </div>
