@@ -7,8 +7,6 @@ import { Doughnut } from 'react-chartjs-2'
 const providerPath = '/provider_count'
 
 const getProviderColor = (provider, defaultColor) => {
-  console.log('key', provider)
-
   switch (provider) {
     case 'google':
       return '#EA4335'

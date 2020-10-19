@@ -14,11 +14,11 @@ const FirebaseLists = lazy(() => import('../pages/Firebase/Lists'))
 const FirebaseMessaging = lazy(() => import('../pages/Firebase/Messaging'))
 const FirebasePaths = lazy(() => import('../pages/Firebase/Paths'))
 const FirebaseStorage = lazy(() => import('../pages/Firebase/Storage'))
-const Home = lazy(() => import('../pages/Home'))
+const Dashboard = lazy(() => import('../pages/Dashboard'))
 
 const routes = [
   <Route path="/about" exact component={About} />,
-  <AuthorizedRoute path="/home" exact component={Home} />,
+  <AuthorizedRoute path="/dashboard" exact component={Dashboard} />,
   <AuthorizedRoute path="/firebase_paths" exact component={FirebasePaths} />,
   <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,
   <AuthorizedRoute path="/firebase_docs" exact component={FirebaseDocs} />,

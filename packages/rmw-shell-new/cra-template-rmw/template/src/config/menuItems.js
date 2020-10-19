@@ -90,7 +90,7 @@ const getMenuItems = (props) => {
   }
   return [
     {
-      value: '/home',
+      value: '/dashboard',
       visible: isAuthorised,
       primaryText: intl.formatMessage({
         id: 'dashboard',
