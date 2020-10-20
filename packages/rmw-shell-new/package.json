@@ -1,7 +1,7 @@
 {
-  "name": "my-component",
+  "name": "rmw-shell-new",
   "version": "1.0.0",
-  "description": "my-component React component",
+  "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -53,15 +53,15 @@
     "react-helmet": "^6.1.0",
     "react-intl": "^5.8.6",
     "react-ios-pwa-prompt": "^1.8.0",
-    "react-markdown": "^4.3.1",
+    "react-markdown": "^5.0.0",
     "react-router-dom": "^5.2.0",
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5"
   },
-  "author": "",
-  "homepage": "",
+  "author": "Tarik Huber",
+  "homepage": "https://www.react-most-wanted.com/",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/TarikHuber/react-most-wanted",
   "keywords": [
     "react-component"
   ]

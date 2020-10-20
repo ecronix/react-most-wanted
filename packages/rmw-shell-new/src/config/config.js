@@ -46,7 +46,7 @@ const config = {
   auth: {
     persistKey: 'rmw-shell:auth',
     signInURL: '/signin',
-    redirectTo: '/home',
+    redirectTo: '/dashboard',
     grants,
     onAuthStateChanged: async (user, auth, firebaseApp) => {
       if (user != null) {

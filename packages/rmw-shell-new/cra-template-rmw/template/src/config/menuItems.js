@@ -16,6 +16,7 @@ import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import Slideshow from '@material-ui/icons/Slideshow'
 import StyleIcon from '@material-ui/icons/Style'
 import Whatshot from '@material-ui/icons/Whatshot'
+import Chat from '@material-ui/icons/Chat'
 import allLocales from './locales'
 import allThemes from './themes'
 
@@ -101,8 +102,14 @@ const getMenuItems = (props) => {
     {
       value: '/about',
       visible: true,
-      primaryText: intl.formatMessage({ id: 'about' }),
+      primaryText: intl.formatMessage({ id: 'about', defaultMessage: 'About' }),
       leftIcon: <InfoOutlined />,
+    },
+    {
+      value: '/chats',
+      visible: true,
+      primaryText: intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' }),
+      leftIcon: <Chat />,
     },
     {
       primaryText: intl.formatMessage({
