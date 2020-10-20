@@ -16,13 +16,15 @@ export default function ({ message: data }) {
       style={{
         margin: 2,
         padding: 8,
-        maxWidth: 450,
+        maxWidth: 320,
         alignSelf: isMe ? 'flex-end' : 'flex-start',
         borderRadius: isMe ? '6px 0px 6px 6px' : '0px 6px 6px 6px',
         backgroundColor: isMe
           ? theme.palette.grey[500]
           : theme.palette.grey[300],
         color: isMe ? 'white' : 'black',
+        whiteSpace: 'pre-wrap',
+        overflowWrap: 'break-word',
       }}
     >
       <div>{message}</div>

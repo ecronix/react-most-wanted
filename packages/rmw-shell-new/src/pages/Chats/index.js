@@ -1,6 +1,8 @@
 import Avatar from '@material-ui/core/Avatar'
 import Chat from 'rmw-shell/lib/containers/Chat'
 import ChatIcon from '@material-ui/icons/Chat'
+import Group from '@material-ui/icons/Group'
+import Person from '@material-ui/icons/Person'
 import Divider from '@material-ui/core/Divider'
 import Fab from '@material-ui/core/Fab'
 import ListItem from '@material-ui/core/ListItem'
@@ -15,10 +17,11 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
 
 const Row = ({ data, index, style }) => {
   const history = useHistory()
-  const { displayName = '', message = '', key, photoURL } = data
+  const { displayName = '', lastMessage = '', key, photoURL, path = '' } = data
 
   return (
     <div key={key} style={style}>
@@ -31,9 +34,12 @@ const Row = ({ data, index, style }) => {
         }}
       >
         <ListItemAvatar>
-          <Avatar src={photoURL} />
+          <Avatar src={photoURL}>
+            {path !== '' && <Group />}
+            {path === '' && <Person />}
+          </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={displayName} secondary={message} />
+        <ListItemText primary={displayName} secondary={lastMessage} />
       </ListItem>
       <Divider variant="inset" />
     </div>
@@ -42,8 +48,8 @@ const Row = ({ data, index, style }) => {
 
 export default function () {
   const intl = useIntl()
-
-  const { uid } = useParams()
+  const history = useHistory()
+  const { uid = '' } = useParams()
   const { auth } = useAuth()
   const { watchList, getList, unwatchList } = useLists()
   const theme = useTheme()
@@ -60,32 +66,68 @@ export default function () {
     return { key: c.key, ...c.val }
   })
 
+  const showChats = matches || !uid
+  const showMessages = matches || uid
+
+  const currentChat = chats.find((c) => {
+    return c.key === uid
+  })
+
+  const path = currentChat?.path || `user_chat_messages/${auth.uid}/${uid}`
+  let title = intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' })
+
+  if (currentChat) {
+    title = currentChat?.displayName
+    /*
+    title = (
+      <div>
+        <Avatar>
+          <Avatar src={currentChat?.photoURL}>
+            {currentChat?.path !== '' && <Group />}
+            {currentChat?.path === '' && <Person />}
+          </Avatar>
+        </Avatar>
+        <Typography>{currentChat?.displayName}</Typography>
+      </div>
+    )
+    */
+  }
+
   return (
     <Page
-      pageTitle={intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' })}
+      onBackClick={
+        !matches && uid
+          ? () => {
+              history.replace('/chats')
+            }
+          : undefined
+      }
+      pageTitle={title}
     >
       <div style={{ height: '100%', display: 'flex' }}>
-        <div
-          style={{
-            width: matches ? 300 : '100%',
-            height: '100%',
-          }}
-        >
-          <VirtualList
-            list={chats}
-            name={'user_chats'}
-            listProps={{ itemSize: 72 }}
-            Row={Row}
-          />
-          <div style={{ position: 'absolute', bottom: 15, right: 15 }}>
-            <Fab color="secondary">
-              <ChatIcon />
-            </Fab>
+        {showChats && (
+          <div
+            style={{
+              width: matches ? 300 : '100%',
+              height: '100%',
+            }}
+          >
+            <VirtualList
+              list={chats}
+              name={'user_chats'}
+              listProps={{ itemSize: 72 }}
+              Row={Row}
+            />
+            <div style={{ position: 'absolute', bottom: 15, right: 15 }}>
+              <Fab color="secondary">
+                <ChatIcon />
+              </Fab>
+            </div>
           </div>
-        </div>
-        {matches && (
-          <div style={{ width: '100%' }}>
-            <Chat uid={uid} />
+        )}
+        {showMessages && (
+          <div style={{ flex: 1 }}>
+            <Chat path={path} />
           </div>
         )}
       </div>
