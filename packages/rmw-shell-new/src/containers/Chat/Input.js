@@ -1,68 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '@material-ui/core/Input'
 import { useTheme } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import Mic from '@material-ui/icons/Mic'
-import Attachment from '@material-ui/icons/Attachment'
+import MyLocation from '@material-ui/icons/MyLocation'
+import CameraAlt from '@material-ui/icons/CameraAlt'
+import Send from '@material-ui/icons/Send'
 import { useIntl } from 'react-intl'
+import IconButton from '@material-ui/core/IconButton'
 
 export default function () {
   const theme = useTheme()
   const intl = useIntl()
+  const [value, setValue] = useState('')
+
+  const sendMessage = () => {}
 
   return (
     <div style={{ display: 'flex', padding: 8, alignItems: 'center' }}>
       <div
         style={{
           margin: 0,
-          marginLeft: 18,
-          marginRight: 18,
+          marginLeft: 8,
+          marginRight: 8,
+          paddingRight: 8,
           backgroundColor: theme.palette.grey[300],
-          borderRadius: 18,
+          borderRadius: 22,
           height: '100%',
           flex: 1,
+          display: 'flex',
         }}
       >
         <Input
-          id="message"
           style={{
-            //position: 'absolute',
             height: 50,
-            //width: 'calc(100% - 72px)',
-            //lineHeight: undefined,
-            //top: -6,
             left: 15,
-            right: 15,
           }}
           multiline
           rowsMax="2"
           disableUnderline={true}
-          onChange={(e) => {
-            //this.setState({ value: e.target.value })
-          }}
           fullWidth={true}
           autoFocus
-          //value={this.state.value}
+          value={value}
           autoComplete="off"
           placeholder={intl.formatMessage({
             id: 'write_message_hint',
             defaultMessage: 'Write message',
           })}
+          onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => {
-            /*
-          this.handleKeyDown(e, () =>
-            this.handleAddMessage('text', this.state.value)
-          )
-          */
+            if (e.keyCode === 13) {
+              e.preventDefault()
+              sendMessage()
+            }
           }}
           type="Text"
         />
+        <IconButton color="primary" size="small" edge={false}>
+          <CameraAlt />
+        </IconButton>
+        <IconButton color="primary" size="small">
+          <MyLocation />
+        </IconButton>
       </div>
-      <Fab style={{ marginRight: 4 }} color="secondary" size="medium">
-        <Attachment />
-      </Fab>
+
       <Fab color="secondary" size="medium">
-        <Mic />
+        {value === '' && <Mic />}
+        {value !== '' && <Send />}
       </Fab>
     </div>
   )

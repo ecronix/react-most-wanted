@@ -19,7 +19,7 @@ export default function () {
       <h2>Landing Page</h2>
 
       <div>
-        <Link to="/home">Home</Link>
+        <Link to="/dashboard">Home</Link>
       </div>
     </div>
   )

@@ -1,23 +1,19 @@
 import React, { useEffect } from 'react'
-import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ChatMessage from 'rmw-shell/lib/components/ChatMessage'
 import Input from './Input'
 
-export default function ({ uid }) {
-  const { auth } = useAuth()
+export default function ({ path }) {
   const { watchList, getList, unwatchList } = useLists()
 
-  const chatPath = `user_chat_messages/${auth.uid}/${uid}`
-
   useEffect(() => {
-    watchList(chatPath)
+    watchList(path)
 
-    return () => unwatchList(chatPath)
-  }, [uid])
+    return () => unwatchList(path)
+  }, [path])
 
-  const messages = getList(chatPath)
+  const messages = getList(path)
 
   return (
     <div
@@ -29,8 +25,23 @@ export default function ({ uid }) {
     >
       <div style={{ flexGrow: 1 }}>
         <Scrollbar>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              paddingLeft: 8,
+              paddingRight: 8,
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                maxWidth: 500,
+                //maxWidth: 600,
+              }}
+            >
               {messages.map((m) => {
                 return <ChatMessage key={m.key} message={m} />
               })}
