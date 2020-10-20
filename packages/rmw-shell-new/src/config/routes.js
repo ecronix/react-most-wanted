@@ -9,6 +9,7 @@ const Users = lazy(() => import('../pages/Users'))
 const User = lazy(() => import('../pages/Users/User'))
 const Roles = lazy(() => import('../pages/Roles'))
 const Role = lazy(() => import('../pages/Roles/Role'))
+const Chats = lazy(() => import('../pages/Chats'))
 
 const getDefaultRoutes = (appConfig) => {
   return [
@@ -18,6 +19,8 @@ const getDefaultRoutes = (appConfig) => {
       exact
       component={SignIn}
     />,
+    <AuthorizedRoute path="/chats" exact component={Chats} />,
+    <AuthorizedRoute path="/chats/:uid" exact component={Chats} />,
     <AuthorizedRoute path="/roles" exact component={Roles} />,
     <AuthorizedRoute path="/create_role" exact component={Role} />,
     <AuthorizedRoute path="/roles/:uid" exact component={Role} />,
