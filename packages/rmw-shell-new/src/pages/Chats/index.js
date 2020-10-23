@@ -17,11 +17,53 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
+import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
+import MoreHoriz from '@material-ui/icons/MoreHoriz'
+import Delete from '@material-ui/icons/Delete'
+import History from '@material-ui/icons/History'
+import {
+  ListItemSecondaryAction,
+  Menu,
+  MenuItem,
+  IconButton,
+  Typography,
+} from '@material-ui/core'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import moment from 'moment'
 
 const Row = ({ data, index, style }) => {
   const history = useHistory()
-  const { displayName = '', lastMessage = '', key, photoURL, path = '' } = data
+  const intl = useIntl()
+  const { auth } = useAuth()
+
+  const {
+    displayName = '',
+    lastMessage = '',
+    key,
+    photoURL,
+    path = '',
+    lastCreated = '',
+  } = data
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const { firebaseApp } = useLists()
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleDeleteChat = () => {
+    firebaseApp.database().ref(`user_chats/${auth.uid}/${key}`).remove()
+    handleClose()
+  }
+
+  const handleMarkAsUnread = () => {
+    firebaseApp.database().ref(`user_chats/${auth.uid}/${key}/unread`).set(1)
+    handleClose()
+  }
 
   return (
     <div key={key} style={style}>
@@ -40,6 +82,48 @@ const Row = ({ data, index, style }) => {
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary={displayName} secondary={lastMessage} />
+        <ListItemSecondaryAction>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <IconButton
+              size="small"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreHoriz />
+            </IconButton>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleDeleteChat}>
+                <ListItemIcon>
+                  <Delete />
+                </ListItemIcon>
+                {intl.formatMessage({
+                  id: 'delete_chat',
+                  defaultMessage: 'Delete chat',
+                })}
+              </MenuItem>
+              <MenuItem onClick={handleMarkAsUnread}>
+                <ListItemIcon>
+                  <History />
+                </ListItemIcon>
+                {intl.formatMessage({
+                  id: 'martk_as_unread',
+                  defaultMessage: 'Mark as unread',
+                })}
+              </MenuItem>
+            </Menu>
+            <Typography variant="caption">
+              {moment(lastCreated || moment()).format('HH:mm')}
+            </Typography>
+            <div style={{ height: 5 }}></div>
+          </div>
+        </ListItemSecondaryAction>
       </ListItem>
       <Divider variant="inset" />
     </div>
@@ -52,12 +136,15 @@ export default function () {
   const { uid = '' } = useParams()
   const { auth } = useAuth()
   const { watchList, getList, unwatchList } = useLists()
+  const { requestPermission } = useMessaging()
+
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
   const chatsPath = `user_chats/${auth.uid}`
 
   useEffect(() => {
     watchList(chatsPath)
+    requestPermission()
 
     return () => unwatchList(chatsPath)
   }, [])

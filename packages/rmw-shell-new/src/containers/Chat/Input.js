@@ -17,7 +17,14 @@ export default function () {
   const sendMessage = () => {}
 
   return (
-    <div style={{ display: 'flex', padding: 8, alignItems: 'center' }}>
+    <div
+      style={{
+        display: 'flex',
+        padding: 4,
+        paddingBottom: 8,
+        alignItems: 'center',
+      }}
+    >
       <div
         style={{
           margin: 0,
