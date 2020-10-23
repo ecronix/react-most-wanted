@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import Menu from 'material-ui-shell/lib/containers/Menu/Menu'
 
