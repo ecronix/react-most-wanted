@@ -110,7 +110,7 @@ export default function ({ path }) {
         </Scrollbar>
       </div>
       <div>
-        <Input />
+        <Input path={path} />
       </div>
     </div>
   )

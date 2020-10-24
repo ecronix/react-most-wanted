@@ -8,13 +8,34 @@ import CameraAlt from '@material-ui/icons/CameraAlt'
 import Send from '@material-ui/icons/Send'
 import { useIntl } from 'react-intl'
 import IconButton from '@material-ui/core/IconButton'
+import * as firebase from 'firebase'
+import { useAuth } from 'base-shell/lib/providers/Auth'
+import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 
-export default function () {
+export default function ({ path }) {
   const theme = useTheme()
   const intl = useIntl()
+  const { auth } = useAuth()
   const [value, setValue] = useState('')
+  const { firebaseApp } = useLists()
 
-  const sendMessage = () => {}
+  const sendMessage = async (type = 'text') => {
+    let newMessage = {
+      created: firebase.database.ServerValue.TIMESTAMP,
+      authorName: auth.displayName,
+      authorUid: auth.uid,
+      authorPhotoUrl: auth.photoURL,
+      languageCode: intl.formatMessage({
+        id: 'current_locale',
+        defaultMessage: 'en-US',
+      }),
+      type,
+      message: value,
+    }
+
+    await firebaseApp.database().ref(`${path}`).push(newMessage)
+    setValue('')
+  }
 
   return (
     <div
@@ -71,7 +92,11 @@ export default function () {
         </IconButton>
       </div>
 
-      <Fab color="secondary" size="medium">
+      <Fab
+        onClick={value !== '' ? () => sendMessage() : undefined}
+        color="secondary"
+        size="medium"
+      >
         {value === '' && <Mic />}
         {value !== '' && <Send />}
       </Fab>

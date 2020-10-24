@@ -12,7 +12,7 @@ export default function ({ message: data }) {
 
   return (
     <Paper
-      elevation={3}
+      elevation={1}
       style={{
         margin: 2,
         padding: 8,
