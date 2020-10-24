@@ -21,7 +21,7 @@ export default function ({
   useEffect(() => {
     watchList(path)
     return () => unwatchList(path)
-  }, [path])
+  }, [path, watchList, unwatchList])
 
   const list = getList(path).map(({ key, val }) => {
     return { key, ...val }

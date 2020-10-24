@@ -1,6 +1,6 @@
 import Context from './Context'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useCallback } from 'react'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
 const ERROR = 'ERROR'
@@ -10,6 +10,8 @@ const CLEAR_ALL = 'CLEAR_ALL'
 const CHILD_ADDED = 'CHILD_ADDED'
 const CHILD_CHANGED = 'CHILD_CHANGED'
 const CHILD_REMOVED = 'CHILD_REMOVED'
+
+const inits = {}
 
 function list(list = [], action) {
   const { payload } = action
@@ -36,7 +38,7 @@ function reducer(state, action) {
     error = false,
     hasError = false,
   } = action
-  switch (action.type) {
+  switch (type) {
     case LOADING_CHANGED:
       return { ...state, [path]: { ...state[path], isLoading } }
     case ERROR:
@@ -78,20 +80,14 @@ function getInitState(persistKey) {
 
 const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
-  const [initializations, setInitialized] = useState({})
 
-  const setInit = (path) => {
-    setInitialized({ ...initializations, [path]: true })
-  }
+  const setInit = useCallback((path) => {
+    inits[path] = true
+  }, [])
 
-  const isInit = (path) => {
-    return initializations[path] !== undefined
-  }
-
-  const removeInit = (path) => {
-    const { [path]: initToRemove, ...rest } = initializations
-    setInitialized(rest)
-  }
+  const removeInit = useCallback((path) => {
+    inits[path] = false
+  }, [])
 
   useEffect(() => {
     try {
@@ -101,134 +97,169 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
     }
   }, [state, persistKey])
 
-  const getRef = (path) => {
-    if (typeof path === 'string' || path instanceof String) {
-      return firebaseApp.database().ref(path)
-    } else {
-      return path
-    }
-  }
-
-  const getLocation = (path) => {
-    if (typeof path === 'string' || path instanceof String) {
-      return path
-    } else {
-      return path
-        .toString()
-        .substring(firebaseApp.database().ref().root.toString().length)
-    }
-  }
-
-  const watchList = async (reference, alias) => {
-    const ref = getRef(reference)
-    const path = alias || getLocation(reference)
-
-    if (path.length < 1) {
-      return
-    }
-
-    if (isInit(path)) {
-      // we skip multiple listeners
-      // only one should be active
-      return
-    }
-
-    let listenForChanges = false
-    // We can't awaid that the single child listeners get calld for every chils
-    // but we can use this to not change the state after the inital call
-    // because we already have all data we got trough the once call
-
-    const handleError = (error) => {
-      dispatch({
-        type: ERROR,
-        path,
-        isLoading: false,
-        error,
-        hasError: true,
-      })
-      removeInit(path)
-    }
-
-    const handleChange = (s, type) => {
-      if (listenForChanges) {
-        dispatch({
-          type,
-          path,
-          payload: { key: s.key, val: s.val() },
-        })
+  const getRef = useCallback(
+    (path) => {
+      if (typeof path === 'string' || path instanceof String) {
+        return firebaseApp.database().ref(path)
+      } else {
+        return path
       }
-    }
+    },
+    [firebaseApp]
+  )
 
-    setInit(path)
+  const getLocation = useCallback(
+    (path) => {
+      if (typeof path === 'string' || path instanceof String) {
+        return path
+      } else {
+        return path
+          .toString()
+          .substring(firebaseApp.database().ref().root.toString().length)
+      }
+    },
+    [firebaseApp]
+  )
 
-    dispatch({
-      type: LOADING_CHANGED,
-      path,
-      isLoading: true,
-    })
+  const watchList = useCallback(
+    async (reference, alias) => {
+      const ref = getRef(reference)
+      const path = alias || getLocation(reference)
 
-    ref.on('child_added', (s) => handleChange(s, CHILD_ADDED), handleError)
-    ref.on('child_changed', (s) => handleChange(s, CHILD_CHANGED), handleError)
-    ref.on('child_removed', (s) => handleChange(s, CHILD_REMOVED), handleError)
+      if (path.length < 1) {
+        return
+      }
 
-    try {
-      const snapshot = await ref.once('value')
-      listenForChanges = true
-      const list = []
-      snapshot.forEach((snap) => {
-        list.push({ key: snap.key, val: snap.val() })
-      })
+      if (inits[path]) {
+        // we skip multiple listeners
+        // only one should be active
+        return
+      }
+
+      let listenForChanges = false
+      // We can't awaid that the single child listeners get calld for every chils
+      // but we can use this to not change the state after the inital call
+      // because we already have all data we got trough the once call
+
+      const handleError = (error) => {
+        dispatch({
+          type: ERROR,
+          path,
+          isLoading: false,
+          error,
+          hasError: true,
+        })
+        removeInit(path)
+      }
+
+      const handleChange = (s, type) => {
+        if (listenForChanges) {
+          dispatch({
+            type,
+            path,
+            payload: { key: s.key, val: s.val() },
+          })
+        }
+      }
+
+      setInit(path)
 
       dispatch({
-        type: VALUE_CHANGE,
+        type: LOADING_CHANGED,
         path,
-        value: list,
-        isLoading: false,
+        isLoading: true,
       })
-    } catch (error) {
-      handleError(error)
-    }
-  }
 
-  const unwatchList = (reference) => {
-    const ref = getRef(reference)
-    const path = getLocation(reference)
+      ref.on('child_added', (s) => handleChange(s, CHILD_ADDED), handleError)
+      ref.on(
+        'child_changed',
+        (s) => handleChange(s, CHILD_CHANGED),
+        handleError
+      )
+      ref.on(
+        'child_removed',
+        (s) => handleChange(s, CHILD_REMOVED),
+        handleError
+      )
 
-    if (path.length < 1) {
-      return
-    }
-    ref.off()
-    removeInit(path)
-  }
+      try {
+        const snapshot = await ref.once('value')
+        listenForChanges = true
+        const list = []
+        snapshot.forEach((snap) => {
+          list.push({ key: snap.key, val: snap.val() })
+        })
 
-  const getList = (path) => {
-    return state[path] && state[path].value ? state[path].value : []
-  }
+        dispatch({
+          type: VALUE_CHANGE,
+          path,
+          value: list,
+          isLoading: false,
+        })
+      } catch (error) {
+        handleError(error)
+      }
+    },
+    [setInit, getLocation, getRef, removeInit]
+  )
 
-  const isListLoading = (path) => {
-    return state[path] ? state[path].isLoading : false
-  }
+  const unwatchList = useCallback(
+    (reference) => {
+      const ref = getRef(reference)
+      const path = getLocation(reference)
 
-  const getListError = (path) => {
-    return state[path] ? state[path].error : false
-  }
+      if (path.length < 1) {
+        return
+      }
+      ref.off()
+      removeInit(path)
+    },
+    [getRef, getLocation, removeInit]
+  )
 
-  const hasListError = (path) => {
-    return state[path] ? state[path].hasError : false
-  }
+  const getList = useCallback(
+    (path) => {
+      return state[path] && state[path].value ? state[path].value : []
+    },
+    [state]
+  )
 
-  const clearList = (reference) => {
-    const ref = getRef(reference)
-    const path = getLocation(reference)
+  const isListLoading = useCallback(
+    (path) => {
+      return state[path] ? state[path].isLoading : false
+    },
+    [state]
+  )
 
-    unwatchList(ref)
-    dispatch({ type: CLEAR, path })
-  }
+  const getListError = useCallback(
+    (path) => {
+      return state[path] ? state[path].error : false
+    },
+    [state]
+  )
 
-  const clearAllLists = () => {
+  const hasListError = useCallback(
+    (path) => {
+      return state[path] ? state[path].hasError : false
+    },
+    [state]
+  )
+
+  const clearList = useCallback(
+    (reference) => {
+      const ref = getRef(reference)
+      const path = getLocation(reference)
+
+      unwatchList(ref)
+      dispatch({ type: CLEAR, path })
+    },
+    [getRef, getLocation, unwatchList]
+  )
+
+  const clearAllLists = useCallback(() => {
     firebaseApp.database().ref().off()
     dispatch({ type: CLEAR_ALL })
-  }
+  }, [firebaseApp])
 
   return (
     <Context.Provider
