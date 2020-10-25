@@ -34,7 +34,7 @@ export default function ({ path }) {
         clearList(alias)
       }
     }
-  }, [path, size])
+  }, [path, size, watchList, clearList, alias, firebaseApp, unwatchList])
 
   useEffect(() => {
     const node = listEnd

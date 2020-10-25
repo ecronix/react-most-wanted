@@ -49,6 +49,9 @@ const config = {
       ],
     },
   },
+  googleMaps: {
+    apiKey: 'AIzaSyByMSTTLt1Mf_4K1J9necAbw2NPDu2WD7g',
+  },
   auth: {
     grants,
     redirectTo: '/dashboard',

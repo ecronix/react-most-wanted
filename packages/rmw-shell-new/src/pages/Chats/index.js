@@ -46,6 +46,7 @@ const Row = ({ data, index, style }) => {
   } = data
   const [anchorEl, setAnchorEl] = React.useState(null)
   const { firebaseApp } = useLists()
+  const { uid = '' } = useParams()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -69,6 +70,7 @@ const Row = ({ data, index, style }) => {
     <div key={key} style={style}>
       <ListItem
         button
+        selected={key === uid}
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
