@@ -11,15 +11,64 @@ import IconButton from '@material-ui/core/IconButton'
 import * as firebase from 'firebase'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { getLocation } from 'rmw-shell/lib/utils/location'
+import { CircularProgress } from '@material-ui/core'
 
 export default function ({ path }) {
   const theme = useTheme()
   const intl = useIntl()
   const { auth } = useAuth()
   const [value, setValue] = useState('')
+  const [isUploading, setUploading] = useState(false)
   const { firebaseApp } = useLists()
 
-  const sendMessage = async (type = 'text') => {
+  const uploadSelectedFile = (file) => {
+    if (file === null) {
+      return
+    }
+
+    if ((file.size / 1024 / 1024).toFixed(4) > 20) {
+      //file larger than 10mb
+      alert(intl.formatMessage({ id: 'max_file_size' }))
+      return
+    }
+
+    setUploading(true)
+
+    let reader = new FileReader()
+
+    const key = firebaseApp.database().ref('/user_chat_messages/').push().key
+
+    reader.onload = (fileData) => {
+      let uploadTask = firebaseApp
+        .storage()
+        .ref(`/user_chats/${auth.uid}/${key}.jpg`)
+        .putString(fileData.target.result, 'data_url')
+
+      uploadTask.on(
+        'state_changed',
+        () => {},
+        (error) => {
+          console.log(error)
+        },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            sendMessage({
+              type: 'image',
+              message: '',
+              image: downloadURL,
+              key,
+            })
+            setUploading(false)
+          })
+        }
+      )
+    }
+
+    reader.readAsDataURL(file)
+  }
+
+  const sendMessage = async (props) => {
     let newMessage = {
       created: firebase.database.ServerValue.TIMESTAMP,
       authorName: auth.displayName,
@@ -29,8 +78,7 @@ export default function ({ path }) {
         id: 'current_locale',
         defaultMessage: 'en-US',
       }),
-      type,
-      message: value,
+      ...props,
     }
 
     await firebaseApp.database().ref(`${path}`).push(newMessage)
@@ -79,15 +127,70 @@ export default function ({ path }) {
           onKeyDown={(e) => {
             if (e.keyCode === 13) {
               e.preventDefault()
-              sendMessage()
+              sendMessage({ type: 'text', message: value })
             }
           }}
           type="Text"
         />
-        <IconButton color="primary" size="small" edge={false}>
-          <CameraAlt />
-        </IconButton>
-        <IconButton color="primary" size="small">
+
+        <input
+          style={{ display: 'none' }}
+          accept="image/*"
+          id="icon-button-file"
+          type="file"
+          onChange={(e) => {
+            uploadSelectedFile(e.target.files[0])
+          }}
+        />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div>
+            <label htmlFor="icon-button-file">
+              <IconButton
+                disabled={isUploading}
+                color="primary"
+                aria-label="upload picture"
+                component="span"
+                size="small"
+                edge={false}
+              >
+                {isUploading && (
+                  <CircularProgress
+                    color="secondary"
+                    style={{
+                      width: 20,
+                      height: 20,
+                    }}
+                  />
+                )}
+                {!isUploading && <CameraAlt />}
+              </IconButton>
+            </label>
+          </div>
+        </div>
+        <IconButton
+          color="primary"
+          size="small"
+          onClick={async () => {
+            try {
+              const { coords } = await getLocation()
+              const lat = coords?.latitude
+              const long = coords?.longitude
+              sendMessage({
+                type: 'location',
+                message: '',
+                location: `https://www.google.com/maps/place/${lat}+${long}/@${lat},${long}`,
+                location_lat: lat,
+                location_lng: long,
+              })
+            } catch (error) {}
+          }}
+        >
           <MyLocation />
         </IconButton>
       </div>
