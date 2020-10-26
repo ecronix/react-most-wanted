@@ -30,7 +30,7 @@ const isGranted = (auth, grant) => {
     return true
   }
 
-  return !!grants[grant]
+  return grants && !!grants[grant]
 }
 
 const config = {
@@ -78,6 +78,15 @@ const config = {
           grants: grantsSnap.val(),
           isAdmin: !!isAdminSnap.val(),
           isGranted,
+        })
+
+        firebaseApp.database().ref(`users/${user.uid}`).update({
+          displayName: user.displayName,
+          uid: user.uid,
+          photoURL: user.photoURL,
+          providers: user.providerData,
+          emailVerified: user.emailVerified,
+          isAnonymous: user.isAnonymous,
         })
       } else {
         firebaseApp.database().ref().off()

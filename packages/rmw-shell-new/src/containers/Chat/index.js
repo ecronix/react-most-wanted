@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import ChatMessage from 'rmw-shell/lib/components/ChatMessage'
 import Input from './Input'
 import Chip from '@material-ui/core/Chip'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import { useTheme } from '@material-ui/core/styles'
+import ChatIcon from '@material-ui/icons/Chat'
 import { useIntl } from 'react-intl'
 
-const step = 100
+const step = 20
+let currentUser = null
+let currentDate = null
 
 export default function ({ path }) {
   const intl = useIntl()
@@ -18,30 +21,57 @@ export default function ({ path }) {
   const alias = `${path}_${size}`
   const messages = getList(alias)
 
+  const scrollToBottom = useCallback(() => {
+    if (size === step) {
+      const node = listEnd
+      if (node) {
+        node.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+  }, [listEnd, size])
+
   useEffect(() => {
-    let messagesRef = firebaseApp
-      .database()
-      .ref(path)
-      .orderByKey()
-      .limitToLast(size)
+    if (path) {
+      let messagesRef = firebaseApp
+        .database()
+        .ref(path)
+        .orderByKey()
+        .limitToLast(size)
 
-    watchList(messagesRef, alias)
+      watchList(messagesRef, alias)
 
-    return () => {
-      if (size === step) {
-        unwatchList(alias)
-      } else {
-        clearList(alias)
+      return () => {
+        if (size === step) {
+          unwatchList(alias)
+        } else {
+          clearList(alias)
+        }
       }
     }
   }, [path, size, watchList, clearList, alias, firebaseApp, unwatchList])
 
   useEffect(() => {
-    const node = listEnd
-    if (node) {
-      node.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [path, listEnd, messages])
+    scrollToBottom()
+    setTimeout(() => {
+      scrollToBottom()
+    }, 1000)
+  }, [path, listEnd, messages, scrollToBottom])
+
+  if (!path) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <ChatIcon color="disabled" style={{ height: 150, width: 150 }} />
+      </div>
+    )
+  }
 
   return (
     <div
@@ -75,7 +105,6 @@ export default function ({ path }) {
                 flexDirection: 'column',
                 width: '100%',
                 maxWidth: 500,
-                //maxWidth: 600,
               }}
             >
               <div style={{ height: 15 }} />
@@ -96,17 +125,44 @@ export default function ({ path }) {
                 }}
               />
               {messages.map((m) => {
-                return <ChatMessage key={m.key} message={m} />
+                const { authorUid = '', created = '' } = m?.val || {}
+
+                const stringDate = created
+                  ? new Date(created).toISOString().slice(0, 10)
+                  : ''
+
+                let userChanged = authorUid !== currentUser
+                let dateChanged = currentDate !== stringDate
+
+                if (userChanged) {
+                  currentUser = authorUid
+                }
+
+                if (dateChanged) {
+                  currentDate = stringDate
+                }
+
+                return (
+                  <ChatMessage
+                    key={m.key}
+                    uid={m.key}
+                    message={m}
+                    path={path}
+                    userChanged={userChanged}
+                    dateChanged={dateChanged}
+                  />
+                )
               })}
             </div>
           </div>
-          <div style={{ height: 8 }} />
+
           <div
             style={{ float: 'left', clear: 'both' }}
             ref={(el) => {
               setlistEnd(el)
             }}
           />
+          <div style={{ height: 8 }} />
         </Scrollbar>
       </div>
       <div>

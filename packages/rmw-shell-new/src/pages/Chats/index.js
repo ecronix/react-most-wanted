@@ -162,7 +162,8 @@ export default function () {
     return c.key === uid
   })
 
-  const path = currentChat?.path || `user_chat_messages/${auth.uid}/${uid}`
+  const path =
+    currentChat?.path || (uid ? `user_chat_messages/${auth.uid}/${uid}` : false)
   let title = intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' })
 
   if (currentChat) {
@@ -208,7 +209,12 @@ export default function () {
               Row={Row}
             />
             <div style={{ position: 'absolute', bottom: 15, right: 15 }}>
-              <Fab color="secondary">
+              <Fab
+                color="secondary"
+                onClick={() => {
+                  history.push('/create_chat')
+                }}
+              >
                 <ChatIcon />
               </Fab>
             </div>
