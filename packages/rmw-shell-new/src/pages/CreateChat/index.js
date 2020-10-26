@@ -17,6 +17,7 @@ import {
 } from 'rmw-shell/lib/components/Icons'
 import Badge from '@material-ui/core/Badge'
 import { useHistory } from 'react-router-dom'
+import { useAuth } from 'base-shell/lib/providers/Auth'
 
 const fields = [
   {
@@ -51,7 +52,8 @@ const getProviderIcon = (id) => {
 }
 
 export default function () {
-  const { watchList, getList, isListLoading } = useLists()
+  const { firebaseApp, watchList, getList, isListLoading } = useLists()
+  const { auth } = useAuth()
   const intl = useIntl()
   const history = useHistory()
 
@@ -65,6 +67,24 @@ export default function () {
   const list = getList('users').map(({ key, val }) => {
     return { key, ...val }
   })
+
+  const handleRowClick = (user) => {
+    const key = user.key
+    const userValues = user
+    const userChatsRef = firebaseApp
+      .database()
+      .ref(`/user_chats/${auth.uid}/${key}`)
+
+    const chatData = {
+      displayName: userValues.displayName,
+      photoURL: userValues.photoURL ? userValues.photoURL : '',
+      lastMessage: '',
+    }
+
+    userChatsRef.update({ ...chatData })
+
+    history.push(`/chats/${key}`)
+  }
 
   const Row = ({ data, index, style }) => {
     const { displayName = '', key, photoURL, providerData = [] } = data
@@ -83,9 +103,7 @@ export default function () {
           button
           alignItems="flex-start"
           style={{ height: 82 }}
-          onClick={() => {
-            history.push(`/users/${key}`)
-          }}
+          onClick={() => handleRowClick(data)}
         >
           <ListItemAvatar>
             <Badge
@@ -133,14 +151,14 @@ export default function () {
       listProps={{ itemSize: 82 }}
       getPageProps={(list) => {
         return {
-          pageTitle: intl.formatMessage(
-            {
-              id: 'users_page',
-              defaultMessage: 'Users {count}',
-            },
-            { count: list.length }
-          ),
+          pageTitle: intl.formatMessage({
+            id: 'chat_with',
+            defaultMessage: 'Chat with',
+          }),
           isLoading: isListLoading('users'),
+          onBackClick: () => {
+            history.goBack()
+          },
         }
       }}
     />

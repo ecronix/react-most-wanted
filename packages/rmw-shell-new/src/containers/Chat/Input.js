@@ -111,6 +111,7 @@ export default function ({ path }) {
           style={{
             height: 50,
             left: 15,
+            color: 'black',
           }}
           multiline
           rowsMax="2"
