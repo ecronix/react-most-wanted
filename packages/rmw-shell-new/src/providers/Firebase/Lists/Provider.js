@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import Context from './Context'
 import PropTypes from 'prop-types'
 import React, { useEffect, useReducer, useCallback } from 'react'
@@ -12,6 +13,14 @@ const CHILD_CHANGED = 'CHILD_CHANGED'
 const CHILD_REMOVED = 'CHILD_REMOVED'
 
 const inits = {}
+
+const setInit = (path) => {
+  inits[path] = true
+}
+
+const removeInit = (path) => {
+  inits[path] = false
+}
 
 function list(list = [], action) {
   const { payload } = action
@@ -80,14 +89,6 @@ function getInitState(persistKey) {
 
 const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
-
-  const setInit = useCallback((path) => {
-    inits[path] = true
-  }, [])
-
-  const removeInit = useCallback((path) => {
-    inits[path] = false
-  }, [])
 
   useEffect(() => {
     try {
@@ -200,7 +201,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
         handleError(error)
       }
     },
-    [setInit, getLocation, getRef, removeInit]
+    [getLocation, getRef]
   )
 
   const unwatchList = useCallback(
@@ -214,7 +215,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       ref.off()
       removeInit(path)
     },
-    [getRef, getLocation, removeInit]
+    [getRef, getLocation]
   )
 
   const getList = useCallback(
