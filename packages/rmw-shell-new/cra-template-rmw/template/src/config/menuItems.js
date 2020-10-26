@@ -33,7 +33,7 @@ const getMenuItems = (props) => {
   } = props
   const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
-  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
+  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
   const { auth } = authData
   const { isGranted = () => false } = auth || {}
 
@@ -269,10 +269,9 @@ const getMenuItems = (props) => {
       ],
     },
     {
-      value: null,
       visible: isAppInstallable && !isAppInstalled,
       onClick: () => {
-        deferredPrompt.prompt()
+        deferredPrompt.prompt && deferredPrompt.prompt()
       },
       primaryText: intl.formatMessage({
         id: 'install',
