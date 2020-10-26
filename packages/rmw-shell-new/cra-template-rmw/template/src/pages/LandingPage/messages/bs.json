@@ -1,0 +1,14 @@
+{
+  "signin": "Register",
+  "intro": "React Starter-Kit with all Most Wanted features ",
+  "title": " REACT MOST WANTED ",
+  "start": "GET STARTED",
+  "instal": "Installation",
+  "run": "Just run this script to start:",
+  "more": "Learn More",
+  "usage": "Usage",
+  "set": "Set your configuration to the App component:",
+  "what": "What is this?",
+  "this": "This is a OPEN SOURCE demo application that demonstartes the usage of the rmw-shell library with react, Material-UI and firebase.",
+  "demo": "This demo has no purpose to do something as an app. It is here just to show how everthing works together."
+}

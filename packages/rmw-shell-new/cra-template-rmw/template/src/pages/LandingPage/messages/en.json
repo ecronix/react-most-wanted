@@ -1,0 +1,20 @@
+{
+  "intro": "React Starter-Kit with all Most Wanted features ",
+  "title": " REACT MOST WANTED ",
+  "start": "GET STARTED",
+  "instal": "Installation",
+  "run": "Just run this script to start:",
+  "more": "Learn More",
+  "usage": "Usage",
+  "set": "Set your configuration to the App component:",
+  "what": "What is this?",
+  "this": "This is a OPEN SOURCE demo application that demonstartes the usage of the rmw-shell library with react, Material-UI and firebase.",
+  "demo": "This demo has no purpose to do something as an app. It is here just to show how everthing works together.",
+  "signin": "Signin",
+  "new_users": "New users",
+  "companies": "Companies",
+  "try_it_out": "Try it out",
+  "about": "About",
+  "team": "Team",
+  "about_text": "React Most Wanted is just a DEMO applications. Don't try to find something usefull to do with this DEMO. The focus here is only on the code and how to build react applications using Material-UI and Firebase."
+}
