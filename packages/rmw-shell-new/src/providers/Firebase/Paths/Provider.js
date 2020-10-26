@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useCallback } from 'react'
 import Context from './Context'
 
 function reducer(state, action) {
@@ -11,7 +11,7 @@ function reducer(state, action) {
     error = false,
     hasError = false,
   } = action
-  switch (action.type) {
+  switch (type) {
     case 'loading_changed':
       return { ...state, [path]: { ...state[path], isLoading } }
     case 'error_changed':
@@ -55,77 +55,98 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
     }
   }, [state, persistKey])
 
-  const watchPath = (path, onChange) => {
-    if (path.length < 1) {
-      return
-    }
-    dispatch({
-      type: 'loading_changed',
-      path,
-      isLoading: true,
-    })
+  const watchPath = useCallback(
+    (path, onChange) => {
+      if (path.length < 1) {
+        return
+      }
+      dispatch({
+        type: 'loading_changed',
+        path,
+        isLoading: true,
+      })
 
-    firebaseApp
-      .database()
-      .ref(path)
-      .on(
-        'value',
-        (snapshot) => {
-          dispatch({
-            type: 'value_changed',
-            path,
-            value: snapshot.val(),
-            isLoading: false,
-          })
+      firebaseApp
+        .database()
+        .ref(path)
+        .on(
+          'value',
+          (snapshot) => {
+            dispatch({
+              type: 'value_changed',
+              path,
+              value: snapshot.val(),
+              isLoading: false,
+            })
 
-          if (onChange) {
-            onChange(snapshot.val())
+            if (onChange) {
+              onChange(snapshot.val())
+            }
+          },
+          (error) => {
+            dispatch({
+              type: 'error_changed',
+              path,
+              isLoading: false,
+              error,
+              hasError: true,
+            })
           }
-        },
-        (error) => {
-          dispatch({
-            type: 'error_changed',
-            path,
-            isLoading: false,
-            error,
-            hasError: true,
-          })
-        }
-      )
-  }
+        )
+    },
+    [firebaseApp]
+  )
 
-  const unwatchPath = (path) => {
-    if (path.length < 1) {
-      return
-    }
-    firebaseApp.database().ref(path).off()
-  }
+  const unwatchPath = useCallback(
+    (path) => {
+      if (path.length < 1) {
+        return
+      }
+      firebaseApp.database().ref(path).off()
+    },
+    [firebaseApp]
+  )
 
-  const getPath = (path, defaultValue) => {
-    return state[path] ? state[path].value : defaultValue
-  }
+  const getPath = useCallback(
+    (path, defaultValue) => {
+      return state[path] ? state[path].value : defaultValue
+    },
+    [state]
+  )
 
-  const isPathLoading = (path) => {
-    return state[path] ? state[path].isLoading : false
-  }
+  const isPathLoading = useCallback(
+    (path) => {
+      return state[path] ? state[path].isLoading : false
+    },
+    [state]
+  )
 
-  const getPathError = (path) => {
-    return state[path] ? state[path].error : false
-  }
+  const getPathError = useCallback(
+    (path) => {
+      return state[path] ? state[path].error : false
+    },
+    [state]
+  )
 
-  const hasPathError = (path) => {
-    return state[path] ? state[path].hasError : false
-  }
+  const hasPathError = useCallback(
+    (path) => {
+      return state[path] ? state[path].hasError : false
+    },
+    [state]
+  )
 
-  const clearPath = (path) => {
-    unwatchPath(path)
-    dispatch({ type: 'clear', path })
-  }
+  const clearPath = useCallback(
+    (path) => {
+      unwatchPath(path)
+      dispatch({ type: 'clear', path })
+    },
+    [unwatchPath]
+  )
 
-  const clearAllPaths = () => {
+  const clearAllPaths = useCallback(() => {
     firebaseApp.database().ref().off()
     dispatch({ type: 'clear_all' })
-  }
+  }, [firebaseApp])
 
   return (
     <Context.Provider
