@@ -1,6 +1,7 @@
+/* eslint-disable default-case */
 import Context from './Context'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
 const ERROR = 'ERROR'
@@ -12,8 +13,8 @@ const CHILD_CHANGED = 'CHILD_CHANGED'
 const CHILD_REMOVED = 'CHILD_REMOVED'
 
 function list(list = [], action) {
-  const { payload } = action
-  switch (action.type) {
+  const { payload, type } = action
+  switch (type) {
     case CHILD_ADDED:
       return list.findIndex((d) => d.id === payload.id) === -1
         ? [...list, payload]
@@ -36,7 +37,7 @@ function reducer(state, action) {
     error = false,
     hasError = false,
   } = action
-  switch (action.type) {
+  switch (type) {
     case LOADING_CHANGED:
       return { ...state, [path]: { ...state[path], isLoading } }
     case ERROR:
@@ -80,22 +81,36 @@ function getInitState(persistKey) {
   return persistedValues
 }
 
+const inits = {}
+
+const setInit = (path, unsub) => {
+  inits[path] = unsub
+}
+
+const removeInit = (path) => {
+  inits[path] = false
+}
+
+const getPath = (ref) => {
+  return ref.path
+}
+
+const getLocation = (path) => {
+  if (typeof path === 'string' || path instanceof String) {
+    return path
+  } else {
+    return getPath(path)
+  }
+}
+
+const unwatchCol = (reference) => {
+  const path = getLocation(reference)
+  inits[path] && inits[path]()
+  removeInit(path)
+}
+
 const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
-  const [initializations, setInitialized] = useState([])
-
-  const setInit = (path, unsub) => {
-    setInitialized({ ...initializations, [path]: unsub })
-  }
-
-  const isInit = (path) => {
-    return initializations[path] !== undefined
-  }
-
-  const removeInit = (path) => {
-    const { [path]: initToRemove, ...rest } = initializations
-    setInitialized(rest)
-  }
 
   useEffect(() => {
     try {
@@ -105,125 +120,128 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
     }
   }, [state, persistKey])
 
-  const getPath = (ref) => {
-    return ref.path
-  }
+  const getRef = useCallback(
+    (path) => {
+      if (typeof path === 'string' || path instanceof String) {
+        return firebaseApp.firestore().collection(path)
+      } else {
+        return path
+      }
+    },
+    [firebaseApp]
+  )
 
-  const getRef = (path) => {
-    if (typeof path === 'string' || path instanceof String) {
-      return firebaseApp.firestore().collection(path)
-    } else {
-      return path
-    }
-  }
+  const watchCol = useCallback(
+    async (reference, alias) => {
+      const ref = getRef(reference)
+      const path = alias || getLocation(reference)
 
-  const getLocation = (path) => {
-    if (typeof path === 'string' || path instanceof String) {
-      return path
-    } else {
-      return getPath(path)
-    }
-  }
+      if (path.length < 1) {
+        return
+      }
 
-  const watchCol = async (reference, alias) => {
-    const ref = getRef(reference)
-    const path = alias || getLocation(reference)
+      if (inits[path]) {
+        // we skip multiple listeners
+        // only one should be active
+        return
+      }
 
-    if (path.length < 1) {
-      return
-    }
-
-    if (isInit(path)) {
-      // we skip multiple listeners
-      // only one should be active
-      return
-    }
-
-    const handleError = (error) => {
-      dispatch({
-        type: ERROR,
-        path,
-        isLoading: false,
-        error,
-        hasError: true,
-      })
-      removeInit(path)
-    }
-
-    const handleChange = (doc, type) => {
-      dispatch({
-        type,
-        path,
-        payload: { id: doc.id, data: doc.data() },
-      })
-    }
-
-    dispatch({
-      type: LOADING_CHANGED,
-      path,
-      isLoading: true,
-    })
-
-    try {
-      const unsub = ref.onSnapshot((snapshot) => {
-        setInit(path, unsub)
+      const handleError = (error) => {
         dispatch({
-          type: LOADING_CHANGED,
+          type: ERROR,
           path,
           isLoading: false,
+          error,
+          hasError: true,
         })
+        removeInit(path)
+      }
 
-        snapshot.docChanges().forEach((change) => {
-          if (change.type === 'added') {
-            handleChange(change.doc, CHILD_ADDED)
-          }
-          if (change.type === 'modified') {
-            handleChange(change.doc, CHILD_CHANGED)
-          }
-          if (change.type === 'removed') {
-            handleChange(change.doc, CHILD_REMOVED)
-          }
+      const handleChange = (doc, type) => {
+        dispatch({
+          type,
+          path,
+          payload: { id: doc.id, data: doc.data() },
         })
-      }, handleError)
-    } catch (error) {
-      handleError(error)
-    }
-  }
+      }
 
-  const unwatchCol = (reference) => {
-    const path = getLocation(reference)
-    initializations[path] && initializations[path]()
-    removeInit(path)
-  }
+      dispatch({
+        type: LOADING_CHANGED,
+        path,
+        isLoading: true,
+      })
 
-  const getCol = (path) => {
-    return state[path] && state[path].value ? state[path].value : []
-  }
+      try {
+        const unsub = ref.onSnapshot((snapshot) => {
+          setInit(path, unsub)
+          dispatch({
+            type: LOADING_CHANGED,
+            path,
+            isLoading: false,
+          })
 
-  const isColLoading = (path) => {
-    return state[path] ? state[path].isLoading : false
-  }
+          snapshot.docChanges().forEach((change) => {
+            if (change.type === 'added') {
+              handleChange(change.doc, CHILD_ADDED)
+            }
+            if (change.type === 'modified') {
+              handleChange(change.doc, CHILD_CHANGED)
+            }
+            if (change.type === 'removed') {
+              handleChange(change.doc, CHILD_REMOVED)
+            }
+          })
+        }, handleError)
+      } catch (error) {
+        handleError(error)
+      }
+    },
+    [getRef]
+  )
 
-  const getColError = (path) => {
-    return state[path] ? state[path].error : false
-  }
+  const getCol = useCallback(
+    (path) => {
+      return state[path] && state[path].value ? state[path].value : []
+    },
+    [state]
+  )
 
-  const hasColError = (path) => {
-    return state[path] ? state[path].hasError : false
-  }
+  const isColLoading = useCallback(
+    (path) => {
+      return state[path] ? state[path].isLoading : false
+    },
+    [state]
+  )
 
-  const clearCol = (reference) => {
-    const ref = getRef(reference)
-    const path = getLocation(reference)
+  const getColError = useCallback(
+    (path) => {
+      return state[path] ? state[path].error : false
+    },
+    [state]
+  )
 
-    unwatchCol(ref)
-    dispatch({ type: CLEAR, path })
-  }
+  const hasColError = useCallback(
+    (path) => {
+      return state[path] ? state[path].hasError : false
+    },
+    [state]
+  )
 
-  const clearAllCols = () => {
+  const clearCol = useCallback(
+    (reference) => {
+      const ref = getRef(reference)
+      const path = getLocation(reference)
+
+      unwatchCol(ref)
+      dispatch({ type: CLEAR, path })
+    },
+    [getRef]
+  )
+
+  const clearAllCols = useCallback(() => {
     firebaseApp.database().ref().off()
     dispatch({ type: CLEAR_ALL })
-  }
+  }, [firebaseApp])
 
   return (
     <Context.Provider
