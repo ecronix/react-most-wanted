@@ -13,7 +13,7 @@ The features include:
 To find out more about the features it includes, visit the [documentation page](https://react-most-wanted.com/docs).
 
 ## How to start?
-
+Readme is Updated for Reader
 To accomodate major use-cases, we have created three different shells that you can choose depending on your needs:  
 
 **[Base shell](./packages/base-shell/)**:
