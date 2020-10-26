@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useCallback, useReducer } from 'react'
 import Context from './Context'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
@@ -54,7 +54,7 @@ function reducer(state, action) {
 const Provider = ({ children, firebaseApp }) => {
   const [state, dispatch] = useReducer(reducer, {})
 
-  const upload = (path, uploadTask, onUploaded) => {
+  const upload = useCallback((path, uploadTask, onUploaded) => {
     dispatch({
       type: LOADING_CHANGED,
       path,
@@ -97,48 +97,72 @@ const Provider = ({ children, firebaseApp }) => {
         }
       }
     )
-  }
+  }, [])
 
-  const uploadFile = (alias, path, file, metadata, onUploaded) => {
-    const uploadTask = firebaseApp.storage().ref(path).put(file, metadata)
-    upload(alias, uploadTask, onUploaded)
-  }
+  const uploadFile = useCallback(
+    (alias, path, file, metadata, onUploaded) => {
+      const uploadTask = firebaseApp.storage().ref(path).put(file, metadata)
+      upload(alias, uploadTask, onUploaded)
+    },
+    [firebaseApp, upload]
+  )
 
-  const uploadString = (alias, path, string, type, metadata, onUploaded) => {
-    const uploadTask = firebaseApp.storage().ref(path).putString(string, type)
-    upload(alias, uploadTask, onUploaded)
-  }
+  const uploadString = useCallback(
+    (alias, path, string, type, metadata, onUploaded) => {
+      const uploadTask = firebaseApp.storage().ref(path).putString(string, type)
+      upload(alias, uploadTask, onUploaded)
+    },
+    [firebaseApp, upload]
+  )
 
-  const uploadTask = (alias, uploadTask, onUploaded) => {
-    upload(alias, uploadTask, onUploaded)
-  }
+  const uploadTask = useCallback(
+    (alias, uploadTask, onUploaded) => {
+      upload(alias, uploadTask, onUploaded)
+    },
+    [upload]
+  )
 
-  const getDownloadURL = (path) => {
-    return state[path] ? state[path].downloadURL : false
-  }
+  const getDownloadURL = useCallback(
+    (path) => {
+      return state[path] ? state[path].downloadURL : false
+    },
+    [state]
+  )
 
-  const isUploading = (path) => {
-    return state[path] ? state[path].isUploading : false
-  }
+  const isUploading = useCallback(
+    (path) => {
+      return state[path] ? state[path].isUploading : false
+    },
+    [state]
+  )
 
-  const getUploadError = (path) => {
-    return state[path] ? state[path].error : false
-  }
+  const getUploadError = useCallback(
+    (path) => {
+      return state[path] ? state[path].error : false
+    },
+    [state]
+  )
 
-  const hasUploadError = (path) => {
-    return state[path] ? state[path].hasError : false
-  }
-  const getUploadProgress = (path) => {
-    return state[path] ? state[path].progress : 0
-  }
+  const hasUploadError =
+    ((path) => {
+      return state[path] ? state[path].hasError : false
+    },
+    [state])
 
-  const clearUpload = (path) => {
+  const getUploadProgress = useCallback(
+    (path) => {
+      return state[path] ? state[path].progress : 0
+    },
+    [state]
+  )
+
+  const clearUpload = useCallback((path) => {
     dispatch({ type: CLEAR, path })
-  }
+  }, [])
 
-  const clearAllUploads = () => {
+  const clearAllUploads = useCallback(() => {
     dispatch({ type: CLEAR_ALL })
-  }
+  }, [])
 
   return (
     <Context.Provider

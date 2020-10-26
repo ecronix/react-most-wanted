@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useCallback } from 'react'
 import Context from './Context'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
@@ -17,7 +17,7 @@ function reducer(state, action) {
     error = false,
     hasError = false,
   } = action
-  switch (action.type) {
+  switch (type) {
     case LOADING_CHANGED:
       return { ...state, [path]: { ...state[path], isLoading } }
     case ERROR:
@@ -50,22 +50,18 @@ function getInitState(persistKey) {
   return persistedValues
 }
 
+const inits = {}
+
+const setInit = (path, unsub) => {
+  inits[path] = unsub
+}
+
+const removeInit = (path) => {
+  inits[path] = false
+}
+
 const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
-  const [initializations, setInitialized] = useState({})
-
-  const setInit = (path, unsub) => {
-    setInitialized({ ...initializations, [path]: unsub })
-  }
-
-  const isInit = (path) => {
-    return initializations[path] !== undefined
-  }
-
-  const removeInit = (path) => {
-    const { [path]: initToRemove, ...rest } = initializations
-    setInitialized(rest)
-  }
 
   useEffect(() => {
     try {
@@ -75,97 +71,121 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
     }
   }, [state, persistKey])
 
-  const getRef = (path) => {
-    if (typeof path === 'string' || path instanceof String) {
-      return firebaseApp.firestore().doc(path)
-    } else {
-      return path
-    }
-  }
+  const getRef = useCallback(
+    (path) => {
+      if (typeof path === 'string' || path instanceof String) {
+        return firebaseApp.firestore().doc(path)
+      } else {
+        return path
+      }
+    },
+    [firebaseApp]
+  )
 
-  const getLocation = (path) => {
+  const getLocation = useCallback((path) => {
     if (typeof path === 'string' || path instanceof String) {
       return path
     } else {
       return firebaseApp.firestore().doc(path).path
     }
-  }
+  }, [])
 
-  const watchDoc = (reference, alias) => {
-    const ref = getRef(reference)
-    const path = alias || getLocation(reference)
+  const watchDoc = useCallback(
+    (reference, alias) => {
+      const ref = getRef(reference)
+      const path = alias || getLocation(reference)
 
-    if (path.length < 1) {
-      return
-    }
-
-    if (isInit(path)) {
-      return
-    }
-
-    dispatch({
-      type: LOADING_CHANGED,
-      path,
-      isLoading: true,
-    })
-
-    let unsub = ref.onSnapshot(
-      (snapshot) => {
-        dispatch({
-          type: VALUE_CHANGE,
-          path,
-          value: snapshot.data(),
-          isLoading: false,
-        })
-      },
-      (error) => {
-        dispatch({
-          type: ERROR,
-          path,
-          isLoading: false,
-          error,
-          hasError: true,
-        })
+      if (path.length < 1) {
+        return
       }
-    )
-    setInit(path, unsub)
-  }
 
-  const unwatchDoc = (reference) => {
-    const path = getLocation(reference)
-    initializations[path] && initializations[path]()
-    removeInit(path)
-  }
+      if (inits[path]) {
+        return
+      }
 
-  const getDoc = (path, defaultValue) => {
-    return state[path] ? state[path].value : defaultValue
-  }
+      dispatch({
+        type: LOADING_CHANGED,
+        path,
+        isLoading: true,
+      })
 
-  const isDocLoading = (path) => {
-    return state[path] ? state[path].isLoading : false
-  }
+      let unsub = ref.onSnapshot(
+        (snapshot) => {
+          dispatch({
+            type: VALUE_CHANGE,
+            path,
+            value: snapshot.data(),
+            isLoading: false,
+          })
+        },
+        (error) => {
+          dispatch({
+            type: ERROR,
+            path,
+            isLoading: false,
+            error,
+            hasError: true,
+          })
+        }
+      )
+      setInit(path, unsub)
+    },
+    [getLocation, getRef]
+  )
 
-  const getDocError = (path) => {
-    return state[path] ? state[path].error : false
-  }
+  const unwatchDoc = useCallback(
+    (reference) => {
+      const path = getLocation(reference)
+      inits[path] && inits[path]()
+      removeInit(path)
+    },
+    [getLocation]
+  )
 
-  const hasDocError = (path) => {
-    return state[path] ? state[path].hasError : false
-  }
+  const getDoc = useCallback(
+    (path, defaultValue) => {
+      return state[path] ? state[path].value : defaultValue
+    },
+    [state]
+  )
 
-  const clearDoc = (reference) => {
-    const path = getLocation(reference)
-    unwatchDoc(path)
-    dispatch({ type: CLEAR, path })
-  }
+  const isDocLoading = useCallback(
+    (path) => {
+      return state[path] ? state[path].isLoading : false
+    },
+    [state]
+  )
 
-  const clearAllDocs = () => {
-    Object.keys(initializations).map((k) => {
-      initializations[key].unsub && initializations[key].unsub()
+  const getDocError = useCallback(
+    (path) => {
+      return state[path] ? state[path].error : false
+    },
+    [state]
+  )
+
+  const hasDocError = useCallback(
+    (path) => {
+      return state[path] ? state[path].hasError : false
+    },
+    [state]
+  )
+
+  const clearDoc = useCallback(
+    (reference) => {
+      const path = getLocation(reference)
+      unwatchDoc(path)
+      dispatch({ type: CLEAR, path })
+    },
+    [getLocation, unwatchDoc]
+  )
+
+  const clearAllDocs = useCallback(() => {
+    Object.keys(inits).map((k) => {
+      inits[k].unsub && inits[k].unsub()
       return k
     })
     dispatch({ type: CLEAR_ALL })
-  }
+  }, [])
 
   return (
     <Context.Provider
