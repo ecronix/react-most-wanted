@@ -15,7 +15,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
 
   //Clears nested state if the root items change
   //Used to open auth menu if we are in a nested menu
-  //We use just the length bevause the auth menu has always less items
+  //We use just the length because the auth menu has always less items
   useEffect(() => {
     setState({})
   }, [items.length])
