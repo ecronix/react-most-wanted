@@ -143,11 +143,12 @@ const Provider = ({ children, firebaseApp }) => {
     [state]
   )
 
-  const hasUploadError =
-    ((path) => {
+  const hasUploadError = useCallback(
+    (path) => {
       return state[path] ? state[path].hasError : false
     },
-    [state])
+    [state]
+  )
 
   const getUploadProgress = useCallback(
     (path) => {
