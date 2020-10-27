@@ -18,7 +18,7 @@ export default function () {
     watchList('users')
 
     return () => unwatchList('users')
-  }, [])
+  }, [watchList, unwatchList])
 
   const users = getList('users')
 

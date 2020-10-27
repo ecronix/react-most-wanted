@@ -7,10 +7,6 @@ module.exports = {
     umd: false,
   },
   webpack: {
-    html: {
-      mountId: 'root',
-      template: 'demo/public/index.html',
-    },
     aliases: {
       'rmw-shell/lib': path.resolve('src'),
     },

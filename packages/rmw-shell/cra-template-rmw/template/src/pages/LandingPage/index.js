@@ -79,7 +79,6 @@ export default function () {
   const [scrollbar, setScrollbar] = useState(null)
   const [transparent, setTransparent] = useState(true)
 
-  console.log('scrollbar', scrollbar)
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
