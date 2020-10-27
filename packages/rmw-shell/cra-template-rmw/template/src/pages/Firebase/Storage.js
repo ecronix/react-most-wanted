@@ -19,7 +19,7 @@ export default function () {
     getUploadError,
     isUploading,
     getDownloadURL,
-    hasUploadError,
+    hasUploadError = () => {},
     uploadFile,
     clearUpload,
     getUploadProgress,
