@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ReactMarkdown from 'react-markdown'
-import README from './README.md'
 import 'github-markdown-css'
 
 export default function () {

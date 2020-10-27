@@ -4,11 +4,10 @@ import Delete from '@material-ui/icons/Delete'
 import IconButton from '@material-ui/core/IconButton'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useIntl } from 'react-intl'
 import { useCols } from 'rmw-shell/lib/providers/Firebase/Cols'
 
@@ -25,7 +24,6 @@ export default function () {
     clearCol,
     getColError,
     isColLoading,
-    clearAllCols,
     hasColError,
     unwatchCol,
   } = useCols()
