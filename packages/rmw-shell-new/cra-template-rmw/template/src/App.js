@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import App from 'base-shell/lib'
-import MUIConfig from '../../../src/config'
+import MUIConfig from 'rmw-shell/lib/config'
 import merge from 'base-shell/lib/utils/config'
 import _config from './config'
 

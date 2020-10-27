@@ -12,7 +12,9 @@ import CardContent from '@material-ui/core/CardContent'
 import { Scrollbars } from 'react-custom-scrollbars'
 import Toolbar from '@material-ui/core/Toolbar'
 import TrackChanges from '@material-ui/icons/TrackChanges'
+import FileCopy from '@material-ui/icons/FileCopy'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import IconButton from '@material-ui/core/IconButton'
 
 const theme = createMuiTheme({
   palette: {
@@ -23,21 +25,46 @@ const theme = createMuiTheme({
   },
 })
 
-const PackageCard = ({ title, command, description }) => {
+const PackageCard = ({ title, command, description, icons }) => {
   return (
-    <Card style={{ margin: 18, maxWidth: 350 }}>
+    <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
       <CardContent>
         <Typography gutterBottom variant="h4" component="h2">
           {title}
         </Typography>
-        <Typography
-          gutterBottom
-          variant="body1"
-          color="textSecondary"
-          component="h2"
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            backgroundColor: '#F3F4F4',
+            padding: 8,
+          }}
         >
-          {command}
-        </Typography>
+          <Typography
+            gutterBottom
+            variant="body1"
+            color="textSecondary"
+            component="h2"
+          >
+            {command}
+          </Typography>
+          <IconButton
+            onClick={() => {
+              if (window.clipboardData) {
+                // Internet Explorer
+                window.clipboardData.setData('Text', command)
+              } else {
+                try {
+                  navigator.clipboard.writeText(command)
+                } catch (error) {}
+              }
+            }}
+          >
+            <FileCopy />
+          </IconButton>
+        </div>
+        <br />
+        {icons}
         <br />
         <Typography variant="body2" component="div">
           {description}
@@ -176,7 +203,7 @@ export default function () {
             >
               <Paper
                 elevation={3}
-                style={{ maxWidth: '90%', borderRadius: 15 }}
+                style={{ width: '100%', maxWidth: '90%', borderRadius: 15 }}
               >
                 <div
                   style={{
@@ -220,6 +247,7 @@ export default function () {
                   full featured application.
                 </Typography>
                 <div style={{ height: 30 }} />
+
                 <div
                   style={{
                     width: '100%',
@@ -235,6 +263,21 @@ export default function () {
                     description={
                       'The basic react setup: routing, internationalization and async load.'
                     }
+                    icons={
+                      <div
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          justifyContent: 'space-around',
+                        }}
+                      >
+                        <img
+                          src="react.png"
+                          alt="react"
+                          style={{ width: 50 }}
+                        />
+                      </div>
+                    }
                   />
                   <PackageCard
                     title={'material-ui-shell'}
@@ -244,17 +287,62 @@ export default function () {
                     description={
                       'Includes all features from the base shell expanded with Material-UI.'
                     }
+                    icons={
+                      <div
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          justifyContent: 'space-around',
+                        }}
+                      >
+                        <img
+                          src="react.png"
+                          alt="react"
+                          style={{ width: 50 }}
+                        />
+                        <img
+                          src="material-ui.png"
+                          alt="react"
+                          style={{ width: 50 }}
+                        />
+                      </div>
+                    }
                   />
                   <PackageCard
                     title={'rmw-shell'}
                     command={'npx create-react-app my-app --template rmw'}
                     description={'Base shell + Material UI shell + Firebase'}
+                    icons={
+                      <div
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          justifyContent: 'space-around',
+                        }}
+                      >
+                        <img
+                          src="react.png"
+                          alt="react"
+                          style={{ width: 50 }}
+                        />
+                        <img
+                          src="material-ui.png"
+                          alt="react"
+                          style={{ width: 50 }}
+                        />
+                        <img
+                          src="firebase.png"
+                          alt="react"
+                          style={{ width: 50 }}
+                        />
+                      </div>
+                    }
                   />
                 </div>
                 <div style={{ height: 30 }} />
                 <div
                   style={{
-                    height: 400,
+                    //height: 400,
                     backgroundColor: '#2D2D2D',
                     backgroundImage: 'radial-gradient( #4F4F4F,#242424)',
                   }}
@@ -280,13 +368,58 @@ export default function () {
                       justifyContent: 'center',
                     }}
                   >
-                    <TrackChanges style={{ fontSize: 70, color: 'white' }} />
+                    <TrackChanges style={{ fontSize: 150, color: 'white' }} />
                   </div>
+                  <Typography
+                    variant="h5"
+                    style={{ margin: 16, textAlign: 'center', color: 'grey' }}
+                  >
+                    You start easy like with every other template but you can
+                    also update the template parts over the time. And with the
+                    updates you don't only update the components but also get
+                    new features and get bugfixes.
+                  </Typography>
+                  <div style={{ height: 50 }} />
                 </div>
+
                 <div style={{ height: 30 }} />
+                <Typography
+                  variant="h3"
+                  //color="textSecondary"
+                  style={{ margin: 16, textAlign: 'center' }}
+                >
+                  Only the best
+                </Typography>
+                <Typography
+                  variant="h5"
+                  color="textSecondary"
+                  style={{ margin: 16, textAlign: 'center' }}
+                >
+                  Every template is a collection of very carefully picked
+                  packages and projects. Only the creme de la creme of the react
+                  ecosystem
+                </Typography>
+                <div style={{ height: 30 }} />
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <img src="react.png" alt="react" style={{ width: 150 }} />
+                  <img
+                    src="material-ui.png"
+                    alt="react"
+                    style={{ width: 150 }}
+                  />
+                  <img src="firebase.png" alt="react" style={{ width: 150 }} />
+                </div>
+                <div style={{ height: 50 }} />
               </Paper>
             </div>
-            <div style={{ height: 800 }}></div>
+            <div style={{ height: 200 }}></div>
 
             <div
               style={{

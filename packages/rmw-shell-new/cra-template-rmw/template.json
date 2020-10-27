@@ -1,6 +1,6 @@
 {
   "dependencies": {
-   "@formatjs/intl-relativetimeformat": "7.x",
+    "@formatjs/intl-relativetimeformat": "7.x",
     "@material-ui/core": "4.x",
     "@material-ui/icons": "4.x",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -30,6 +30,7 @@
     "react-markdown": "5.x",
     "react-router-dom": "5.x",
     "react-virtualized-auto-sizer": "1.x",
-    "react-window": "1.x"
+    "react-window": "1.x",
+    "rmw-shell":"8.x"
   }
 }
