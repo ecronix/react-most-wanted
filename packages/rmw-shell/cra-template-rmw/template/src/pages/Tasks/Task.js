@@ -8,6 +8,7 @@ import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 const path = 'tasks'
 const singular = 'task'
 
+// eslint-disable-next-lin
 export default function () {
   const history = useHistory()
   const intl = useIntl()

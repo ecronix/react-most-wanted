@@ -11,6 +11,7 @@ import { useDocs } from 'rmw-shell/lib/providers/Firebase/Docs'
 
 const defaultPath = 'test/doc'
 
+// eslint-disable-next-lin
 export default function () {
   const intl = useIntl()
   const [path, setPath] = useState(defaultPath)

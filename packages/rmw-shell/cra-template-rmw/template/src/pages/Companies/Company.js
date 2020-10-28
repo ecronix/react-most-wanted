@@ -7,6 +7,7 @@ import { useParams, useHistory } from 'react-router-dom'
 const path = 'companies'
 const singular = 'company'
 
+// eslint-disable-next-lin
 export default function () {
   const history = useHistory()
   const intl = useIntl()

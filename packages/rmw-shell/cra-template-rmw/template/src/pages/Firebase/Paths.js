@@ -11,6 +11,7 @@ import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 
 const defaultPath = 'test_path'
 
+// eslint-disable-next-lin
 export default function () {
   const intl = useIntl()
   const [path, setPath] = useState(defaultPath)
