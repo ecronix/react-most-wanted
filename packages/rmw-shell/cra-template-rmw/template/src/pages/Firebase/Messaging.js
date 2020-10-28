@@ -8,8 +8,7 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 
-// eslint-disable-next-lin
-export default function () {
+const Messaging = () => {
   const intl = useIntl()
   const [title, setTitle] = useState('Title')
   const [body, setBody] = useState('Your message')
@@ -153,3 +152,5 @@ export default function () {
     </Page>
   )
 }
+
+export default Messaging
