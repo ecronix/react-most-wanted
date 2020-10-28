@@ -13,6 +13,7 @@ export function AuthUI(props) {
       const { default: defaultImport } = await import(`./npm__${intl.locale}`)
       firebaseui = defaultImport
     } catch (error) {
+      // eslint-disable-next-line
       firebaseui = await import('firebaseui')
     }
 

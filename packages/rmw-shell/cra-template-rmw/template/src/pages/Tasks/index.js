@@ -48,8 +48,7 @@ const Row = ({ data, index, style }) => {
   )
 }
 
-// eslint-disable-next-lin
-export default function () {
+const Tasks = () => {
   const intl = useIntl()
   const history = useHistory()
 
@@ -74,3 +73,5 @@ export default function () {
     />
   )
 }
+
+export default Tasks

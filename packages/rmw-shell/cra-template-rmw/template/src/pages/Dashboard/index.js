@@ -28,8 +28,7 @@ const ReportContainer = ({ children }) => {
   )
 }
 
-// eslint-disable-next-lin
-export default function () {
+const Dashboard = () => {
   const intl = useIntl()
   const { watchPath, getPath, unwatchPath } = usePaths()
   const users_count = getPath('users_count', 0)
@@ -119,3 +118,5 @@ export default function () {
     </Page>
   )
 }
+
+export default Dashboard

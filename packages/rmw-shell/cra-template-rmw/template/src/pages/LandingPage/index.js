@@ -74,8 +74,7 @@ const PackageCard = ({ title, command, description, icons }) => {
   )
 }
 
-// eslint-disable-next-lin
-export default function () {
+const LandingPage = () => {
   const history = useHistory()
   const [scrollbar, setScrollbar] = useState(null)
   const [transparent, setTransparent] = useState(true)
@@ -460,3 +459,5 @@ export default function () {
     </ThemeProvider>
   )
 }
+
+export default LandingPage

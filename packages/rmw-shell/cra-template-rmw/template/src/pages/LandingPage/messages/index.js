@@ -26,6 +26,8 @@ const match = parseLanguages(
 
 const messages = messageSources[match]
 
-export default function (uid) {
+const format = (uid) => {
   return formatMessage(messages, uid)
 }
+
+export default format

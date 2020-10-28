@@ -13,8 +13,7 @@ import { useCols } from 'rmw-shell/lib/providers/Firebase/Cols'
 
 const defaultPath = 'test'
 
-// eslint-disable-next-lin
-export default function () {
+const Cols = () => {
   const intl = useIntl()
   const [path, setPath] = useState(defaultPath)
   const [value, setValue] = useState('')
@@ -176,3 +175,5 @@ export default function () {
     </Page>
   )
 }
+
+export default Cols
