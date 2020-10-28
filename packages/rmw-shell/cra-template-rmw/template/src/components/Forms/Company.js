@@ -1,10 +1,9 @@
 import React from 'react'
 import { TextField } from 'mui-rff'
 
-export default function ({ id, handleSubmit }) {
+export default function ({ handleSubmit }) {
   return (
     <form
-      id={id}
       onSubmit={handleSubmit}
       style={{ display: 'flex', justifyContent: 'center' }}
     >

@@ -3,75 +3,55 @@ import admin from 'firebase-admin'
 import moment from 'moment'
 import nodemailer from 'nodemailer'
 
-const gmailEmail = encodeURIComponent(
-  functions.config().gmail ? functions.config().gmail.email : ''
-)
-const gmailPassword = encodeURIComponent(
-  functions.config().gmail ? functions.config().gmail.password : ''
-)
+const gmail = functions.config().gmail
+
 const mailTransport = nodemailer.createTransport(
-  `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`
+  `smtps://${gmail.email}:${gmail.password}@smtp.gmail.com`
 )
 
-export default functions.auth.user().onDelete((userMetadata, context) => {
-  const uid = userMetadata.uid
-  const email = userMetadata.email
-  const displayName = userMetadata.displayName
-
-  console.log(userMetadata.providerData)
-  console.log(userMetadata)
-  console.log(context)
-
-  const provider = userMetadata.providerData.length
-    ? userMetadata.providerData[0]
-    : { providerId: email ? 'password' : 'phone' }
-  const providerId = provider.providerId
-    ? provider.providerId.replace('.com', '')
-    : provider.providerId
-
-  let promises = []
-
-  const mailOptions = {
-    from: `"Tarik Huber" <${gmailEmail}>`,
-    to: email,
-    subject: `Bye!`,
-    text: `Hey ${displayName ||
-      ''}!, We confirm that we have deleted your React Most Wanted account.`,
+export default functions.auth.user().onDelete(async (user, context) => {
+  const { email, displayName, uid, providerData = [] } = user || {}
+  const { providerId: id } = providerData[0] || {
+    providerId: email ? 'password' : 'phone',
   }
+  const providerId = id.replace('.com', '')
 
-  const sendEmail = mailTransport.sendMail(mailOptions).then(() => {
-    console.log('Account deletion confirmation email sent to:', email)
-    return null
-  })
-
-  const deleteUser = admin
-    .database()
-    .ref(`/users/${uid}`)
-    .set(null)
-  const deleteTokens = admin
-    .database()
-    .ref(`/notification_tokens/${uid}`)
-    .set(null)
-  const deleteChats = admin
-    .database()
-    .ref(`/users_chats/${uid}`)
-    .set(null)
-
-  const usersCount = admin
+  await admin.database().ref(`/users/${uid}`).set(null)
+  await admin.database().ref(`/notification_tokens/${uid}`).set(null)
+  await admin.database().ref(`/users_chats/${uid}`).set(null)
+  await admin
     .database()
     .ref(`/users_count`)
-    .transaction(current => (current || 0) - 1)
+    .transaction((current) => (current || 0) - 1)
 
   if (providerId) {
-    promises.push(
-      admin
-        .database()
-        .ref(`/provider_count/${providerId}`)
-        .transaction(current => (current || 0) - 1)
-    )
+    await admin
+      .database()
+      .ref(`/provider_count/${providerId}`)
+      .transaction((current) => (current || 0) - 1)
   }
 
-  promises.push(sendEmail, deleteUser, usersCount, deleteTokens, deleteChats)
+  const mailOptions = {
+    from: `"Tarik Huber" <${gmail.email}>`,
+    to: email,
+    subject: `Bye!`,
+    text: `
+Hi ${displayName}!,
 
-  return Promise.all(promises)
+We confirm that your React Most Wanted account is deleted.
+All data related to it is also deleted!
+
+Thanks again for checking out the demo :)
+If you have any suggestion to improve it feel free to response to this E-Mail.
+
+Cheers,
+Tarik
+
+This is an automated E-Mail.
+`,
+  }
+
+  await mailTransport.sendMail(mailOptions)
+
+  return
 })
