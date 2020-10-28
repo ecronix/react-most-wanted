@@ -9,7 +9,6 @@ module.exports = {
   webpack: {
     aliases: {
       'rmw-shell/lib': path.resolve('src'),
-      react: path.resolve('./node_modules/react'),
     },
     extra: {
       // Adding an extra rule which isn't managed by nwb
