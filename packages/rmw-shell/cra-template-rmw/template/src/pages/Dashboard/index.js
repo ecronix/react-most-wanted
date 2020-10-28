@@ -28,6 +28,7 @@ const ReportContainer = ({ children }) => {
   )
 }
 
+// eslint-disable-next-lin
 export default function () {
   const intl = useIntl()
   const { watchPath, getPath, unwatchPath } = usePaths()

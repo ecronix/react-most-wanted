@@ -14,6 +14,7 @@ import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 
 const defaultPath = 'test_list'
 
+// eslint-disable-next-lin
 export default function () {
   const intl = useIntl()
   const [path, setPath] = useState(defaultPath)

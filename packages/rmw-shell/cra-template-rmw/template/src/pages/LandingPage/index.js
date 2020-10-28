@@ -74,6 +74,7 @@ const PackageCard = ({ title, command, description, icons }) => {
   )
 }
 
+// eslint-disable-next-lin
 export default function () {
   const history = useHistory()
   const [scrollbar, setScrollbar] = useState(null)

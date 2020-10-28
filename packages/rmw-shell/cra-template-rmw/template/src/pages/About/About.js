@@ -5,6 +5,7 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ReactMarkdown from 'react-markdown'
 import 'github-markdown-css'
 
+// eslint-disable-next-lin
 export default function () {
   const [source, setSource] = useState(null)
   const intl = useIntl()
