@@ -12,7 +12,6 @@ export default function ({ id, handleSubmit, users = [] }) {
 
   return (
     <form
-      id={id}
       onSubmit={handleSubmit}
       style={{ display: 'flex', justifyContent: 'center' }}
     >

@@ -3,84 +3,77 @@ import admin from 'firebase-admin'
 import moment from 'moment'
 import nodemailer from 'nodemailer'
 
-const gmailEmail = encodeURIComponent(
-  functions.config().gmail ? functions.config().gmail.email : ''
-)
-const gmailPassword = encodeURIComponent(
-  functions.config().gmail ? functions.config().gmail.password : ''
-)
+const gmail = functions.config().gmail
 
 const mailTransport = nodemailer.createTransport(
-  `smtps://${gmailEmail}:${gmailPassword}@smtp.gmail.com`
+  `smtps://${gmail.email}:${gmail.password}@smtp.gmail.com`
 )
 
-export default functions.auth.user().onCreate((uRecord, context) => {
-  const userRecord = uRecord || {}
-  const email = userRecord.email // The email of the user.
-  const displayName = userRecord.displayName // The display name of the user.
-  const creationTime = moment(userRecord.creationTime)
+export default functions.auth.user().onCreate(async (userRecord, context) => {
+  const { email, uid, creationTime: created } = userRecord || {}
+  const creationTime = moment(created)
   const year = creationTime.format('YYYY')
   const month = creationTime.format('MM')
   const day = creationTime.format('DD')
 
-  return admin
-    .auth()
-    .getUser(userRecord.uid)
-    .then(user => {
-      // User  without provider data
-      console.log('Event user data', userRecord)
+  const user = await admin.auth().getUser(uid)
+  const { providerData = [], displayName } = user
+  const { providerId: id } = providerData[0] || {
+    providerId: email ? 'password' : 'phone',
+  }
+  const providerId = id.replace('.com', '')
 
-      // User with provider data
-      console.log('Auth user data', user)
+  if (providerId) {
+    await admin
+      .database()
+      .ref(`/provider_count/${providerId}`)
+      .transaction((current) => (current || 0) + 1)
+  }
 
-      const provider =
-        user.providerData !== []
-          ? user.providerData[0]
-          : { providerId: email ? 'password' : 'phone' }
-      const providerId = provider.providerId
-        ? provider.providerId.replace('.com', '')
-        : provider.providerId
+  await admin
+    .database()
+    .ref(`/user_registrations_per_day/${year}/${month}/${day}`)
+    .transaction((current) => (current || 0) + 1)
 
-      let promises = []
+  await admin
+    .database()
+    .ref(`/user_registrations_per_month/${year}/${month}`)
+    .transaction((current) => (current || 0) + 1)
 
-      if (providerId) {
-        promises.push(
-          admin
-            .database()
-            .ref(`/provider_count/${providerId}`)
-            .transaction(current => (current || 0) + 1)
-        )
-      }
+  await admin
+    .database()
+    .ref(`/users_count`)
+    .transaction((current) => (current || 0) + 1)
 
-      const dayCount = admin
-        .database()
-        .ref(`/user_registrations_per_day/${year}/${month}/${day}`)
-        .transaction(current => (current || 0) + 1)
+  await admin.database().ref(`user_chats/${uid}/public_chats`).update({
+    displayName: 'Public Chat',
+    path: 'public_chats',
+    lastMessage: 'Group chat demo',
+  })
 
-      const monthCount = admin
-        .database()
-        .ref(`/user_registrations_per_month/${year}/${month}`)
-        .transaction(current => (current || 0) + 1)
+  if (email) {
+    const mailOptions = {
+      from: `"Tarik Huber" <${gmail.email}>`,
+      to: email,
+      subject: `Welcome to React Most Wanted!`,
+      text: `
+Hi ${displayName}!, 
 
-      const usersCount = admin
-        .database()
-        .ref(`/users_count`)
-        .transaction(current => (current || 0) + 1)
+Welcome to React Most Wanted. I hope you will enjoy the demo application. 
 
-      promises.push(dayCount, monthCount, usersCount)
+Thank you for checking out the demo application :)
+If you have any questions or need help feel free to reply to this E-Mail.
 
-      if (email) {
-        const mailOptions = {
-          from: `"Tarik Huber" <${gmailEmail}>`,
-          to: email,
-          subject: `Welcome to React Most Wanted!`,
-          text: `Hey ${displayName ||
-            ''}!, Welcome to React Most Wanted. I hope you will enjoy the demo application.`,
-        }
 
-        promises.push(mailTransport.sendMail(mailOptions))
-      }
+Cheers, 
+Tarik
 
-      return Promise.all(promises)
-    })
+This is an automated E-Mail. 
+`,
+    }
+
+    await mailTransport.sendMail(mailOptions)
+  }
+
+  return
 })

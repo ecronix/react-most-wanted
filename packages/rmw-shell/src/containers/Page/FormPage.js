@@ -29,6 +29,7 @@ export default function ({
 
   const databasePath = `${path}/${uid}`
   const data = getPath(databasePath) || initialValues
+  let submit
 
   useEffect(() => {
     if (uid) {
@@ -59,10 +60,8 @@ export default function ({
           <IconButton
             disabled={!isGranted(auth, grants.create)}
             color="inherit"
-            onClick={() => {
-              document
-                .getElementById(path)
-                .dispatchEvent(new Event('submit', { cancelable: true }))
+            onClick={(e) => {
+              submit(e)
             }}
           >
             <Save />
@@ -100,7 +99,10 @@ export default function ({
           handleSubmit(values, newUid)
         }}
         initialValues={data}
-        render={(props) => <Form id={path} {...props} {...formProps} />}
+        render={({ handleSubmit, ...rest }) => {
+          submit = handleSubmit
+          return <Form handleSubmit={handleSubmit} {...rest} {...formProps} />
+        }}
       />
     </Page>
   )

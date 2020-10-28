@@ -64,9 +64,11 @@ export default function () {
 
   const admins = getList('admins')
 
-  const list = getList('users').map(({ key, val }) => {
-    return { key, ...val }
-  })
+  const list = getList('users')
+    .map(({ key, val }) => {
+      return { key, ...val }
+    })
+    .filter((u) => u.key !== auth.uid)
 
   const handleRowClick = (user) => {
     const key = user.key
