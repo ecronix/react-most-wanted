@@ -24,6 +24,7 @@ const getProviderColor = (provider, defaultColor) => {
   }
 }
 
+// eslint-disable-next-line
 export default function () {
   const intl = useIntl()
   const theme = useTheme()

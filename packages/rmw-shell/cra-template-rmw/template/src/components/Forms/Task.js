@@ -2,6 +2,7 @@ import React from 'react'
 import { TextField } from 'mui-rff'
 import { Autocomplete } from 'rmw-shell/lib/components/FormFields/Autocomplete'
 
+// eslint-disable-next-line
 export default function ({ id, handleSubmit, users = [] }) {
   const helpers = users.map((u) => {
     const { key, val } = u

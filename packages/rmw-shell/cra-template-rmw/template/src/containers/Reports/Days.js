@@ -10,6 +10,7 @@ const daysPath = `/user_registrations_per_day/${currentYear}/${new Date()
   .toISOString()
   .slice(5, 7)}`
 
+// eslint-disable-next-line
 export default function () {
   const intl = useIntl()
   const theme = useTheme()

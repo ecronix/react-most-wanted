@@ -9,6 +9,7 @@ const currentYear = currentDate.getFullYear()
 const currentMonth = currentDate.getMonth() + 1
 const monthsPath = `/user_registrations_per_month/${currentYear}`
 
+// eslint-disable-next-line
 export default function () {
   const intl = useIntl()
   const theme = useTheme()
