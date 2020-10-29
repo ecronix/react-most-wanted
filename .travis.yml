@@ -4,11 +4,12 @@ node_js:
 
 cache:
   directories:
-    - packages/rmw-shell/cra-template-rmw/template/node_modules
-    - packages/rmw-shell/cra-template-rmw/template/functions/node_modules
+    - packages/cra-template-rmw/template/node_modules
+    - packages/cra-template-rmw/template/functions/node_modules
 
 before_install:
-  - cd packages/rmw-shell/cra-template-rmw/template
+  - cd -R packages/rmw-shell/cra-template-rmw packages/cra-template-rmw
+  - cd packages/cra-template-rmw/template
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
 
