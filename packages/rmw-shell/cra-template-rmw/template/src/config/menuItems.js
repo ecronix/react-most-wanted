@@ -31,7 +31,13 @@ const getMenuItems = (props) => {
     firebaseApp,
     auth: authData,
   } = props
-  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
+  const {
+    isDesktop,
+    isAuthMenuOpen,
+    useMiniMode,
+    setMiniMode,
+    setAuthMenuOpen,
+  } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
   const { auth } = authData
@@ -44,6 +50,9 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: l.locale }),
       onClick: () => {
         updateLocale(l.locale)
+        if (!isAuthorised) {
+          window.location = window.location
+        }
       },
       leftIcon: <LanguageIcon />,
     }
@@ -64,11 +73,12 @@ const getMenuItems = (props) => {
   })
 
   const handleSignOut = () => {
+    setAuthMenuOpen(false)
     firebaseApp.auth().signOut()
     localStorage.clear()
   }
 
-  if (isAuthMenuOpen || !isAuthorised) {
+  if (isAuthMenuOpen) {
     return [
       {
         value: '/my_account',
@@ -91,6 +101,15 @@ const getMenuItems = (props) => {
   }
   return [
     {
+      value: '/signin',
+      onClick: isAuthorised ? () => handleSignOut() : () => {},
+      visible: !isAuthorised,
+      primaryText: isAuthorised
+        ? intl.formatMessage({ id: 'sign_out' })
+        : intl.formatMessage({ id: 'sign_in' }),
+      leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
+    },
+    {
       value: '/dashboard',
       visible: isAuthorised,
       primaryText: intl.formatMessage({
@@ -107,7 +126,7 @@ const getMenuItems = (props) => {
     },
     {
       value: '/chats',
-      visible: true,
+      visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'chats', defaultMessage: 'Chats' }),
       leftIcon: <Chat />,
     },
@@ -238,11 +257,13 @@ const getMenuItems = (props) => {
     },
     { divider: true },
     {
+      visible: true,
       primaryText: intl.formatMessage({ id: 'settings' }),
       primaryTogglesNestedList: true,
       leftIcon: <SettingsIcon />,
       nestedItems: [
         {
+          visible: true,
           primaryText: intl.formatMessage({ id: 'theme' }),
           secondaryText: intl.formatMessage({ id: themeID }),
           primaryTogglesNestedList: true,
@@ -250,6 +271,7 @@ const getMenuItems = (props) => {
           nestedItems: themeItems,
         },
         {
+          visible: true,
           primaryText: intl.formatMessage({ id: 'language' }),
           secondaryText: intl.formatMessage({ id: locale }),
           primaryTogglesNestedList: true,

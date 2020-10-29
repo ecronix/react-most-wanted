@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
+import { useIntl } from 'react-intl'
+import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 
-export function AuthUI(props) {
-  let authUi = null
+let authUi = null
 
-  const initAuth = async () => {
-    const { firebaseApp, uiConfig, intl } = props
+/*eslint-disable */
+const AuthUI = ({ uiConfig }) => {
+  const intl = useIntl()
+  const { firebaseApp } = useFirebase()
+  const locale = intl.locale
 
+  const initAuth = useCallback(async () => {
     let firebaseui = null
 
     try {
       // eslint-disable-next-line
-      const { default: defaultImport } = await import(`./npm__${intl.locale}`)
+      const { default: defaultImport } = await import(`./npm__${locale}`)
       firebaseui = defaultImport
     } catch (error) {
+      console.log('error', error)
       // eslint-disable-next-line
       firebaseui = await import('firebaseui')
     }
@@ -30,9 +36,9 @@ export function AuthUI(props) {
     try {
       authUi.start('#firebaseui-auth', uiConfig)
     } catch (error) {
-      //console.warn(error)
+      console.warn(error)
     }
-  }
+  }, [locale, firebaseApp])
 
   useEffect(() => {
     initAuth()
@@ -46,13 +52,15 @@ export function AuthUI(props) {
         console.warn(err)
       }
     }
-  }, [])
+  }, [initAuth, firebaseApp, authUi])
 
   return (
     <div style={{ paddingTop: 35 }}>
-      <div id="firebaseui-auth" />
+      <div key={`${intl.locale}`} id="firebaseui-auth" />
     </div>
   )
 }
 
 export default AuthUI
+
+/*eslint-enable */
