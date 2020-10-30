@@ -8,8 +8,8 @@ cache:
     - packages/cra-template-rmw/template/functions/node_modules
 
 before_install:
-  - cp -R packages/rmw-shell/cra-template-rmw/packages/cra-template-rmw
-  - cd packages/cra-template-rmw/template
+  - cp -R packages/rmw-shell/cra-template-rmw/template demo
+  - cd demo
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
 
