@@ -34,16 +34,20 @@ export default function (props) {
               setSearch(name, v)
             }}
           />
-          <IconButton color="inherit" onClick={() => openFilter(name)}>
-            <FilterList color={queries.length > 0 ? 'secondary' : undefined} />
-          </IconButton>
+          {fields.length > 0 && (
+            <IconButton color="inherit" onClick={() => openFilter(name)}>
+              <FilterList
+                color={queries.length > 0 ? 'secondary' : undefined}
+              />
+            </IconButton>
+          )}
         </Toolbar>
       }
       {...getPageProps(list)}
     >
       <VirtualList list={list} name={name} listProps={listProps} Row={Row} />
 
-      <FilterDrawer fields={fields} name={name} />
+      {fields.length > 0 && <FilterDrawer fields={fields} name={name} />}
     </Page>
   )
 }

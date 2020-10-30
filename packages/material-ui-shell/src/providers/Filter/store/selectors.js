@@ -6,7 +6,7 @@ import {
   timeField,
 } from 'material-ui-shell/lib/providers/Filter/fields'
 
-export function getField(name, fields) {
+export function getField(name, fields = []) {
   let field = false
   fields.map((f) => {
     const { type = 'text' } = f
@@ -41,29 +41,31 @@ export function getList(filter = {}, list = [], fields = []) {
   } = filter
   const { value: searchValue = '' } = search
 
-  if (list == null || list.length < 1 || fields.length < 1) {
+  if (list == null || list.length < 1) {
     return []
   }
 
-  result = result.filter((row) => {
-    let show = true
+  if (fields.length > 0) {
+    result = result.filter((row) => {
+      let show = true
 
-    for (let i = 0; i < queries.length; i++) {
-      const q = queries[i]
-      const { field: fieldName } = q
-      const field = getField(fieldName, fields)
+      for (let i = 0; i < queries.length; i++) {
+        const q = queries[i]
+        const { field: fieldName } = q
+        const field = getField(fieldName, fields)
 
-      if (field) {
-        show = field.filter(row[fieldName], q)
+        if (field) {
+          show = field.filter(row[fieldName], q)
+        }
+
+        if (!show) {
+          return show
+        }
       }
 
-      if (!show) {
-        return show
-      }
-    }
-
-    return show
-  })
+      return show
+    })
+  }
 
   if (searchValue != null && searchValue !== '' && searchValue !== undefined) {
     result = result.filter((row) => {
