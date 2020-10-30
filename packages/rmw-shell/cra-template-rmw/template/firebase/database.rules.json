@@ -36,6 +36,26 @@
         ".write": "auth != null && $uid===auth.uid"
       }
     },
+    "group_chats": {
+      "$uid": {
+        ".read": "auth != null && data.child('members/'+auth.uid).exists()",
+    
+        "admins":{
+          ".write":"data.parent().child('admins/'+auth.uid).exists() || !data.parent().exists()"
+        },
+        "members":{
+          ".write":"data.parent().child('admins/'+auth.uid).exists()"
+        },
+        "name":{
+          ".write":"data.parent().child('admins/'+auth.uid).exists()"
+        },
+        "messages":{
+          ".write":"data.parent().child('members/'+auth.uid).exists()"
+        }
+       
+
+      }    
+    },
     "user_chat_messages": {
       "$uid": {
         ".read": "auth != null && $uid===auth.uid",
