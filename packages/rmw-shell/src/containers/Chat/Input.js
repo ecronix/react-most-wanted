@@ -197,7 +197,11 @@ export default function ({ path }) {
       </div>
 
       <Fab
-        onClick={value !== '' ? () => sendMessage() : undefined}
+        onClick={
+          value !== ''
+            ? () => sendMessage({ type: 'text', message: value })
+            : undefined
+        }
         color="secondary"
         size="medium"
       >
