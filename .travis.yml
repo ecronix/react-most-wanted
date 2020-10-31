@@ -8,7 +8,6 @@ cache:
     - $TRAVIS_BUILD_DIR/demo/functions/node_modules
 
 before_install:
-  - mkdir -p $TRAVIS_BUILD_DIR/demo
   - cp -R $TRAVIS_BUILD_DIR/packages/rmw-shell/cra-template-rmw/template $TRAVIS_BUILD_DIR/demo
   - cd $TRAVIS_BUILD_DIR/demo
   - chmod +x $TRAVIS_BUILD_DIR/demo/continuous_deployment/before_install.sh
