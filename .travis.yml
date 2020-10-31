@@ -11,8 +11,8 @@ before_install:
   - mkdir -p $TRAVIS_BUILD_DIR/demo
   - cp -R packages/rmw-shell/cra-template-rmw/template $TRAVIS_BUILD_DIR/demo
   - cd $TRAVIS_BUILD_DIR/demo
-  - chmod +x ./continuous_deployment/before_install.sh
-  - ./continuous_deployment/before_install.sh
+  - chmod +x $TRAVIS_BUILD_DIR/demo/continuous_deployment/before_install.sh
+  - $TRAVIS_BUILD_DIR/demo/continuous_deployment/before_install.sh
 
 before_script:
   - npm test
