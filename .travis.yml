@@ -8,6 +8,7 @@ cache:
     - packages/demo/functions/node_modules
 
 before_install:
+  - mkdir -p packages/demo
   - cp -R packages/rmw-shell/cra-template-rmw/template packages/demo
   - cd packages/demo
   - chmod +x ./continuous_deployment/before_install.sh
