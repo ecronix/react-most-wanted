@@ -10,7 +10,7 @@ cache:
 before_install:
   - mkdir -p demo/
   - cp -R packages/rmw-shell/cra-template-rmw/template demo/
-  - cd demo/continuous_deployment
+  - cd demo/template/continuous_deployment
   - chmod +x before_install.sh
   - ./before_install.sh
 
