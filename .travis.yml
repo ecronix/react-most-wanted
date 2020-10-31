@@ -4,13 +4,13 @@ node_js:
 
 cache:
   directories:
-    - packages/demo/node_modules
-    - packages/demo/functions/node_modules
+    - $TRAVIS_BUILD_DIR/demo/node_modules
+    - $TRAVIS_BUILD_DIR/demo/functions/node_modules
 
 before_install:
-  - mkdir -p packages/demo
-  - cp -R packages/rmw-shell/cra-template-rmw/template packages/demo
-  - cd packages/demo
+  - mkdir -p $TRAVIS_BUILD_DIR/demo
+  - cp -R packages/rmw-shell/cra-template-rmw/template $TRAVIS_BUILD_DIR/demo
+  - cd $TRAVIS_BUILD_DIR/demo
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
 
