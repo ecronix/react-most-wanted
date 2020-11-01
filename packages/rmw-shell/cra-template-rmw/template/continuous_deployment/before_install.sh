@@ -4,8 +4,7 @@ set -ev
 if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
    npm install -g firebase-tools
    npm install -g selenium-webdriver
-   npm install codecov.io coveralls
-   ls -l
+   npm install
    cd functions
    npm install
    cd ..
