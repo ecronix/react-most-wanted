@@ -4,8 +4,8 @@ node_js:
 
 cache:
   directories:
-    - $TRAVIS_BUILD_DIR/demo/node_modules
-    - $TRAVIS_BUILD_DIR/demo/functions/node_modules
+    - demo/template/node_modules
+    - demo/template/functions/node_modules
 
 before_install:
   - mkdir -p demo/
