@@ -52,7 +52,7 @@ const getMenuItems = (props) => {
         updateLocale(l.locale)
         if (!isAuthorised) {
           try {
-            location.reload()
+            window.location.reload()
           } catch (error) {}
         }
       },
