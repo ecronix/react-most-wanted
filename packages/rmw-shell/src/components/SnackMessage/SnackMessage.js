@@ -55,7 +55,8 @@ const SnackMessage = React.forwardRef((props, ref) => {
   }
 
   const handleClick = () => {
-    history.push(click_action)
+    const url = new URL(click_action)
+    history.push(url.pathname)
     handleDismiss()
   }
 

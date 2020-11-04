@@ -39,21 +39,13 @@
     "group_chats": {
       "$uid": {
         ".read": "auth != null && data.child('members/'+auth.uid).exists()",
-    
-        "admins":{
-          ".write":"data.parent().child('admins/'+auth.uid).exists() || !data.parent().exists()"
-        },
-        "members":{
-          ".write":"data.parent().child('admins/'+auth.uid).exists()"
-        },
-        "name":{
-          ".write":"data.parent().child('admins/'+auth.uid).exists()"
-        },
-        "messages":{
-          ".write":"data.parent().child('members/'+auth.uid).exists()"
-        }
-       
-
+        ".write":"data.child('admins/'+auth.uid).exists() || !data.exists()"
+      }    
+    },
+    "group_chat_messages": {
+      "$groupUid": {
+        ".read": "auth != null && root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists()",
+        ".write": "auth != null && root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists()"
       }    
     },
     "user_chat_messages": {
