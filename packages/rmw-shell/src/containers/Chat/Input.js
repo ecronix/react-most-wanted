@@ -126,7 +126,7 @@ export default function ({ path }) {
           })}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => {
-            if (e.keyCode === 13) {
+            if (e.keyCode === 13 && value.trim() != '') {
               e.preventDefault()
               sendMessage({ type: 'text', message: value })
             }

@@ -13,12 +13,14 @@ export default database
 
     const { name = 'Grooup chat' } = chatSnap.val() || {}
 
-    admin
+    await admin
       .database()
       .ref(`user_chats/${uid}/${groupUid}`)
       .update({
         displayName: name,
-        path: `group_chats/${groupUid}/messages`,
+        path: `group_chat_messages/${groupUid}`,
         lastMessage: 'Group chat',
       })
+
+    return
   })

@@ -46,6 +46,7 @@ const Provider = ({ children, firebaseApp }) => {
     }
 
     messaging.onMessage((payload) => {
+      console.log('payload', payload)
       enqueueSnackbar('', {
         content: (key) => {
           return <SnackMessage payload={payload} id={key} />

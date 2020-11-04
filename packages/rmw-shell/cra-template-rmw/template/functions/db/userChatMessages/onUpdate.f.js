@@ -3,38 +3,32 @@ import admin from 'firebase-admin'
 
 export default database
   .ref('/user_chat_messages/{senderUid}/{receiverUid}/{messageUid}')
-  .onUpdate((data, context) => {
-    if (context.authType === 'ADMIN') {
-      return null
-    }
+  .onUpdate(async (data, context) => {
+    const { authType, params, timestamp } = context
+    const { senderUid, receiverUid, messageUid } = params
 
-    const senderUid = context.params.senderUid
-    const receiverUid = context.params.receiverUid
-    const messageUid = context.params.messageUid
-    const senderChatRef = admin
-      .database()
-      .ref(`/user_chats/${senderUid}/${receiverUid}`)
-    const receiverChatRef = admin
-      .database()
-      .ref(`/user_chats/${receiverUid}/${senderUid}`)
-    const receiverChatMessageRef = admin
-      .database()
-      .ref(`/user_chat_messages/${receiverUid}/${senderUid}/${messageUid}`)
-    const setSenderMessageRead = () =>
-      senderChatRef.update({ isRead: context.timestamp })
-    const setReceiverChatRead = () =>
-      receiverChatRef.update({ isRead: context.timestamp })
-    console.log(`Marking value`, data.after.child('isRead').val())
+    if (authType === 'ADMIN') {
+      return
+    }
 
     if (data.after.child('isRead').val() === true) {
-      console.log(`Marking message ${messageUid} as read`)
-      return receiverChatMessageRef
+      await admin
+        .database()
+        .ref(`/user_chat_messages/${receiverUid}/${senderUid}/${messageUid}`)
         .update({
-          isRead: context.timestamp,
+          isRead: timestamp,
         })
-        .then(setSenderMessageRead)
-        .then(setReceiverChatRead)
-    } else {
-      return null
+
+      await admin
+        .database()
+        .ref(`/user_chats/${senderUid}/${receiverUid}`)
+        .update({ isRead: timestamp })
+
+      await admin
+        .database()
+        .ref(`/user_chats/${receiverUid}/${senderUid}`)
+        .update({ isRead: timestamp })
     }
+
+    return
   })
