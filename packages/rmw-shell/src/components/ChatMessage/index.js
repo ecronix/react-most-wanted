@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
-import Paper from '@material-ui/core/Paper'
-import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useTheme } from '@material-ui/core/styles'
-import { useConfig } from 'base-shell/lib/providers/Config'
-import { Typography } from '@material-ui/core'
+import Chip from '@material-ui/core/Chip'
 import Done from '@material-ui/icons/Done'
 import DoneAll from '@material-ui/icons/DoneAll'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
-import Chip from '@material-ui/core/Chip'
-import { useIntl } from 'react-intl'
+import Paper from '@material-ui/core/Paper'
+import React, { useEffect } from 'react'
 import moment from 'moment'
+import { Typography } from '@material-ui/core'
+import { useAuth } from 'base-shell/lib/providers/Auth'
+import { useConfig } from 'base-shell/lib/providers/Config'
+import { useHistory } from 'react-router-dom'
+import { useIntl } from 'react-intl'
+import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { useTheme } from '@material-ui/core/styles'
 
 const getMapLoc = (loc) => {
   let lat = 0
@@ -33,12 +34,14 @@ export default function ({
   userChanged = false,
   dateChanged = false,
 }) {
+  const history = useHistory()
   const theme = useTheme()
   const { auth } = useAuth()
   const { appConfig } = useConfig()
   const { firebaseApp } = useLists()
   const {
     authorUid,
+    authorPhotoUrl = null,
     authorName = '',
     message = '',
     type,
@@ -126,6 +129,17 @@ export default function ({
               justifyContent: 'flex-start',
               paddingRight: 4,
               paddingLeft: 4,
+              cursor: 'pointer',
+            }}
+            onClick={async () => {
+              await firebaseApp
+                .database()
+                .ref(`user_chats/${auth.uid}/${authorUid}`)
+                .update({
+                  displayName: authorName,
+                  photoURL: authorPhotoUrl,
+                })
+              history.push(`/chats/${authorUid}`)
             }}
           >
             <Typography
