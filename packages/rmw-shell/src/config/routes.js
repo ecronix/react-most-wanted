@@ -12,6 +12,8 @@ const Role = lazy(() => import('../pages/Roles/Role'))
 const Chats = lazy(() => import('../pages/Chats'))
 const CreateChat = lazy(() => import('../pages/CreateChat'))
 const CreateGroup = lazy(() => import('../pages/CreateGroup'))
+const EditMembers = lazy(() => import('../pages/EditMembers'))
+const EditAdmins = lazy(() => import('../pages/EditAdmins'))
 
 const getDefaultRoutes = (appConfig) => {
   return [
@@ -24,6 +26,8 @@ const getDefaultRoutes = (appConfig) => {
     <AuthorizedRoute path="/chats" exact component={Chats} />,
     <AuthorizedRoute path="/chats/:uid" exact component={Chats} />,
     <AuthorizedRoute path="/create_chat" exact component={CreateChat} />,
+    <AuthorizedRoute path="/edit_members/:uid" exact component={EditMembers} />,
+    <AuthorizedRoute path="/edit_admins/:uid" exact component={EditAdmins} />,
     <AuthorizedRoute path="/create_group_chat" exact component={CreateGroup} />,
     <AuthorizedRoute path="/roles" exact component={Roles} />,
     <AuthorizedRoute path="/create_role" exact component={Role} />,

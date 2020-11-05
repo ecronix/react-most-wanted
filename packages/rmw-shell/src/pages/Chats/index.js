@@ -2,6 +2,8 @@ import Avatar from '@material-ui/core/Avatar'
 import Chat from 'rmw-shell/lib/containers/Chat'
 import ChatIcon from '@material-ui/icons/Chat'
 import Group from '@material-ui/icons/Group'
+import Security from '@material-ui/icons/Security'
+import People from '@material-ui/icons/People'
 import Person from '@material-ui/icons/Person'
 import Divider from '@material-ui/core/Divider'
 import Fab from '@material-ui/core/Fab'
@@ -101,14 +103,52 @@ const Row = ({ data, index, style }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              {path !== '' && (
+                <MenuItem
+                  onClick={() => {
+                    history.push(`/edit_members/${key}`)
+                  }}
+                >
+                  <ListItemIcon>
+                    <People />
+                  </ListItemIcon>
+
+                  {intl.formatMessage({
+                    id: 'members',
+                    defaultMessage: 'Members',
+                  })}
+                </MenuItem>
+              )}
+              {path !== '' && (
+                <MenuItem
+                  onClick={() => {
+                    history.push(`/edit_admins/${key}`)
+                  }}
+                >
+                  <ListItemIcon>
+                    <Security />
+                  </ListItemIcon>
+
+                  {intl.formatMessage({
+                    id: 'admins',
+                    defaultMessage: 'Admins',
+                  })}
+                </MenuItem>
+              )}
               <MenuItem onClick={handleDeleteChat}>
                 <ListItemIcon>
                   <Delete />
                 </ListItemIcon>
-                {intl.formatMessage({
-                  id: 'delete_chat',
-                  defaultMessage: 'Delete chat',
-                })}
+                {path === '' &&
+                  intl.formatMessage({
+                    id: 'delete_chat',
+                    defaultMessage: 'Delete chat',
+                  })}
+                {path !== '' &&
+                  intl.formatMessage({
+                    id: 'delete_group_chat',
+                    defaultMessage: 'Delete group chat',
+                  })}
               </MenuItem>
               <MenuItem onClick={handleMarkAsUnread}>
                 <ListItemIcon>
