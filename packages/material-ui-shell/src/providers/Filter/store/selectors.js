@@ -68,9 +68,9 @@ export function getList(filter = {}, list = [], fields = []) {
   }
 
   if (searchValue != null && searchValue !== '' && searchValue !== undefined) {
-    result = result.filter((row) => {
+    result = result.filter((row = {}) => {
       return (
-        JSON.stringify(row)
+        JSON.stringify({ ...row })
           .toUpperCase()
           .indexOf(String(searchValue).toUpperCase()) !== -1
       )
