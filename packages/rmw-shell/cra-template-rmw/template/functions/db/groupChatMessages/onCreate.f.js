@@ -51,7 +51,7 @@ export default functions
 
     const membersSnap = await admin
       .database()
-      .ref(`group_chats/${groupUid}`)
+      .ref(`group_chats/${groupUid}/members`)
       .once('value')
 
     if (membersSnap.exists()) {
@@ -84,6 +84,8 @@ export default functions
         },
       }
 
+      console.log('key', key)
+
       const tokensSnap = await admin
         .database()
         .ref(`notification_tokens/${key}`)
@@ -91,11 +93,14 @@ export default functions
 
       if (tokensSnap.exists()) {
         tokensSnap.forEach((t) => {
+          console.log('token', t.key)
           messages.push({ token: t.key, ...payload })
         })
+        console.log('messages', messages)
+        await admin.messaging().sendAll(messages)
+      } else {
+        console.log('No tokens found for user', key)
       }
-
-      await admin.messaging().sendAll(messages)
     }
 
     return
