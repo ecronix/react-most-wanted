@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useOnline } from 'base-shell/lib/providers/Online'
 import { Link } from 'react-router-dom'
 
