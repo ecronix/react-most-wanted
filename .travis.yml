@@ -4,8 +4,6 @@ node_js:
 
 cache:
   directories:
-    - demo/node_modules
-    - demo/functions/node_modules
 
 before_install:
   - npx create-react-app demo --template rmw

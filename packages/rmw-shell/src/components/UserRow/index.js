@@ -115,7 +115,7 @@ const Row = ({
         />
         {hasCheckbox && (
           <ListItemSecondaryAction>
-            <Checkbox edge="end" checked={isChecked} />
+            <Checkbox edge="end" checked={!!isChecked} />
           </ListItemSecondaryAction>
         )}
       </ListItem>
