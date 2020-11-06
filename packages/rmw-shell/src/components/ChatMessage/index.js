@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
+import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
 
 const getMapLoc = (loc) => {
   let lat = 0
@@ -180,7 +181,7 @@ export default function ({
             </div>
           )}
           {type === 'location' && (
-            <img
+            <ImageViewer
               alt="location"
               onClick={() => {
                 window.open(location, 'blank')
