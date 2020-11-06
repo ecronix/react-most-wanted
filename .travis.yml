@@ -6,7 +6,7 @@ cache:
   directories:
 
 before_install:
-  - npx create-react-app demo --template rmw
+  - npx create-react-app demo --template rmw --use-npm
   - cd demo
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
