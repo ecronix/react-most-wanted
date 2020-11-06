@@ -4,13 +4,12 @@ node_js:
 
 cache:
   directories:
-    - demo/template/node_modules
-    - demo/template/functions/node_modules
+    - demo/node_modules
+    - demo/functions/node_modules
 
 before_install:
-  - mkdir -p demo/
-  - cp -R packages/rmw-shell/cra-template-rmw/template demo/
-  - cd demo/template
+  - npx create-react-app demo --template rmw
+  - cd demo
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
 
