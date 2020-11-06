@@ -150,6 +150,7 @@ export default function ({ path }) {
                     path={path}
                     userChanged={userChanged}
                     dateChanged={dateChanged}
+                    scrollToBottom={scrollToBottom}
                   />
                 )
               })}

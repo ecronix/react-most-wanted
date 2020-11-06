@@ -51,6 +51,7 @@ export default function ({
     isSend,
     isReceived,
     isRead,
+    scrollToBottom,
     created = '',
   } = data?.val || {}
   const intl = useIntl()
@@ -70,6 +71,10 @@ export default function ({
         .remove()
     }
   }, [firebaseApp, path, uid, authorUid, auth, isRead])
+
+  const backgroundColor = isMe
+    ? theme.palette.grey[500]
+    : theme.palette.grey[300]
 
   return (
     <React.Fragment>
@@ -114,9 +119,7 @@ export default function ({
               ? '6px 0px 6px 6px'
               : '0px 6px 6px 6px'
             : '6px 6px 6px 6px',
-          backgroundColor: isMe
-            ? theme.palette.grey[500]
-            : theme.palette.grey[300],
+          backgroundColor,
           color: isMe ? 'white' : 'black',
           whiteSpace: 'pre-wrap',
           overflowWrap: 'break-word',
@@ -167,7 +170,7 @@ export default function ({
           )}
           {type === 'image' && (
             <div>
-              <img
+              <ImageViewer
                 style={{
                   height: 'auto',
                   maxWidth: 300,
@@ -175,13 +178,21 @@ export default function ({
                   cursor: 'pointer',
                   borderRadius: 5,
                 }}
+                imageStyle={{
+                  maxWidth: '100%',
+                  padding: 0,
+                  position: 'relative',
+                  borderRadius: 5,
+                }}
+                onLoad={scrollToBottom}
                 src={image}
+                color={backgroundColor}
                 alt="chat_image"
               />
             </div>
           )}
           {type === 'location' && (
-            <ImageViewer
+            <img
               alt="location"
               onClick={() => {
                 window.open(location, 'blank')

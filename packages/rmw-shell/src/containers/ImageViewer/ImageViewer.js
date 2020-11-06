@@ -31,9 +31,13 @@ const ImageViewer = ({ src, ...rest }) => {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500
+          timeout: 500,
         }}
-        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
       >
         <Fade in={open}>
           <div
@@ -42,7 +46,7 @@ const ImageViewer = ({ src, ...rest }) => {
               maxWidth: '90%',
               display: 'flex',
               justifyContent: 'center',
-              alignItems: 'cemnter'
+              alignItems: 'center',
             }}
           >
             <div
@@ -53,7 +57,8 @@ const ImageViewer = ({ src, ...rest }) => {
                 right: 0,
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                zIndex: 9999999,
               }}
             >
               <Slide direction="down" in={open} mountOnEnter unmountOnExit>
@@ -62,21 +67,31 @@ const ImageViewer = ({ src, ...rest }) => {
                 </Fab>
               </Slide>
             </div>
-            <Image
-              animationDuration={0}
-              style={{ height: 'auto', width: 'auto', paddingTop: 0 }}
-              imageStyle={{
-                maxWidth: '100%',
-                maxHeight: '100%',
-                minHeight: '80%',
-                width: 'auto',
-                height: 'auto',
-                padding: 0,
-                position: 'relative',
-                borderRadius: 5
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                width: '100%',
               }}
-              src={src}
-            />
+            >
+              <Image
+                color="transparent"
+                iconContainerStyle={{ border: 'none' }}
+                animationDuration={0}
+                style={{ height: 'auto', width: 'auto', paddingTop: 0 }}
+                imageStyle={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  minHeight: '80%',
+                  width: 'auto',
+                  height: 'auto',
+                  padding: 0,
+                  position: 'relative',
+                  borderRadius: 5,
+                }}
+                src={src}
+              />
+            </div>
           </div>
         </Fade>
       </Modal>

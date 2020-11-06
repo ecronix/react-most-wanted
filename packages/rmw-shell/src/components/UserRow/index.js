@@ -15,6 +15,7 @@ import {
 import Badge from '@material-ui/core/Badge'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import Checkbox from '@material-ui/core/Checkbox'
+import Image from 'material-ui-image'
 
 const getProviderIcon = (id) => {
   const iconProps = {
