@@ -1,6 +1,6 @@
 import '@formatjs/intl-relativetimeformat/polyfill'
 import LocaleProvider from '../../providers/Locale/Provider'
-import React, { Suspense, useContext, useEffect, useState, lazy } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import areIntlLocalesSupported from 'intl-locales-supported'
 import intl from 'intl'
 import { IntlProvider } from 'react-intl'
@@ -60,6 +60,7 @@ export const LayoutContent = () => {
         }
       }
     }
+    loadPolyfills()
   }, [locale, locales])
 
   useEffect(() => {

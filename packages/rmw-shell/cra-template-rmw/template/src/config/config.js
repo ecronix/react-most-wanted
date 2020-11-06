@@ -5,6 +5,9 @@ import getMenuItems from './menuItems'
 import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import grants from './grants'
+import Loading from 'material-ui-shell/lib/components/Loading/Loading'
+import getDefaultRoutes from './getDefaultRoutes'
+import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
 
 const config = {
   firebase: {
@@ -55,10 +58,59 @@ const config = {
   auth: {
     grants,
     redirectTo: '/dashboard',
+    persistKey: 'base-shell:auth',
+    signInURL: '/signin',
+    onAuthStateChanged: async (user, auth, firebaseApp) => {
+      if (user != null) {
+        const grantsSnap = await firebaseApp
+          .database()
+          .ref(`user_grants/${user.uid}`)
+          .once('value')
+        const isAdminSnap = await firebaseApp
+          .database()
+          .ref(`admins/${user.uid}`)
+          .once('value')
+
+        firebaseApp
+          .database()
+          .ref(`user_grants/${user.uid}`)
+          .on('value', (snap) => {
+            auth.updateAuth({ grants: snap.val() })
+          })
+
+        firebaseApp
+          .database()
+          .ref(`admins/${user.uid}`)
+          .on('value', (snap) => {
+            auth.updateAuth({ isAdmin: !!snap.val() })
+          })
+
+        auth.updateAuth({
+          ...defaultUserData(user),
+          grants: grantsSnap.val(),
+          isAdmin: !!isAdminSnap.val(),
+          isGranted,
+        })
+
+        firebaseApp.database().ref(`users/${user.uid}`).update({
+          displayName: user.displayName,
+          uid: user.uid,
+          photoURL: user.photoURL,
+          providers: user.providerData,
+          emailVerified: user.emailVerified,
+          isAnonymous: user.isAnonymous,
+        })
+      } else {
+        firebaseApp.database().ref().off()
+        auth.setAuth(defaultUserData(user))
+      }
+    },
   },
+  getDefaultRoutes,
   routes,
   locale: {
     locales,
+    persistKey: 'base-shell:locale',
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
     onError: (e) => {
       //console.warn(e)
@@ -68,6 +120,9 @@ const config = {
   },
   menu: {
     getMenuItems,
+    MenuHeader: lazy(() =>
+      import('material-ui-shell/lib/components/MenuHeader/MenuHeader')
+    ),
   },
   theme: {
     themes,
@@ -77,6 +132,21 @@ const config = {
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage')),
     PageNotFound: lazy(() => import('../pages/PageNotFound')),
+  },
+  components: {
+    Menu: lazy(() =>
+      import('rmw-shell/lib/containers/FirebaseMenu/FirebaseMenu')
+    ),
+    Loading,
+  },
+
+  containers: {
+    AppContainer: lazy(() =>
+      import('material-ui-shell/lib/containers/AppContainer/AppContainer')
+    ),
+    LayoutContainer: lazy(() =>
+      import('rmw-shell/lib/containers/LayoutContainer/LayoutContainer')
+    ),
   },
 }
 
