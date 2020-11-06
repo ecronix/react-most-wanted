@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "8.1.0",
+  "version": "8.1.1",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,7 +33,7 @@
     "firebaseui": "4.x",
     "github-markdown-css": "4.x",
     "intl": "1.x",
-    "intl-locales-supported": "1.x",    
+    "intl-locales-supported": "1.x",
     "material-ui-image": "3.x",
     "material-ui-shell": "1.x",
     "moment": "2.x",
