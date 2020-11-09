@@ -9,7 +9,6 @@ cache:
 
 before_install:
   - npx create-react-app demo-app --template rmw --use-npm
-  - cd demo
   - mkdir -p demo/
   - cp -R packages/rmw-shell/cra-template-rmw/template demo/
   - cp -R demo-app/package.json demo/template/package.json
