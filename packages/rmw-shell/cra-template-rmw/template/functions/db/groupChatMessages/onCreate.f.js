@@ -1,12 +1,18 @@
 import * as functions from 'firebase-functions'
 import admin from 'firebase-admin'
 
+const runtimeOpts = {
+  timeoutSeconds: 540,
+  memory: '2GB',
+}
+
 export default functions
   .region('europe-west1')
+  .runWith(runtimeOpts)
   .database.ref('/group_chat_messages/{groupUid}/{messageUid}')
   .onCreate(async (eventSnapshot, context) => {
-    const { timestamp, params } = context
-    const { groupUid, messageUid } = params
+    const { params } = context
+    const { groupUid } = params
 
     if (context.authType === 'ADMIN') {
       return null
@@ -19,7 +25,6 @@ export default functions
       image,
       location,
       audio,
-      authorUid,
       created,
       authorPhotoUrl,
       authorName,
@@ -88,12 +93,14 @@ export default functions
           })
         })
 
-        await admin.messaging().sendAll(messages)
+        try {
+          await admin.messaging().sendAll(messages)
+        } catch (error) {
+          console.warn(error)
+        }
       } else {
         console.log('No tokens found')
       }
-
-      await admin.messaging().sendAll(messages)
     } else {
       const members = []
 
