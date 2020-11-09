@@ -47,59 +47,88 @@ export default functions
       lastCreated: created,
     })
 
-    const members = []
-
-    const membersSnap = await admin
-      .database()
-      .ref(`group_chats/${groupUid}/members`)
-      .once('value')
-
-    if (membersSnap.exists()) {
-      membersSnap.forEach((ms) => {
-        members.push({ key: ms.key, val: ms.val() })
-      })
-    }
-
-    for (let i = 0; i < members.length; i++) {
-      const { key, val } = members[i]
-
-      const messages = []
-
-      const payload = {
+    const payload = {
+      notification: {
+        title: `${authorName}`,
+        body: lastMessage,
+      },
+      webpush: {
         notification: {
           title: `${authorName}`,
           body: lastMessage,
+          icon: authorPhotoUrl ? authorPhotoUrl : '/apple-touch-icon.png',
+          image,
+          click_action: `https://www.react-most-wanted.com/chats/${groupUid}`,
         },
-        webpush: {
-          notification: {
-            title: `${authorName}`,
-            body: lastMessage,
-            icon: authorPhotoUrl ? authorPhotoUrl : '/apple-touch-icon.png',
-            image,
-            click_action: `https://www.react-most-wanted.com/chats/${groupUid}`,
-          },
-        },
-        data: {
-          test: 'test',
-        },
-      }
+      },
+      data: {
+        test: 'test',
+      },
+    }
 
-      console.log('key', key)
+    const isAllSnap = await admin
+      .database()
+      .ref(`group_chats/${groupUid}/members/all`)
+      .once('value')
 
+    if (isAllSnap.exists() && isAllSnap.val()) {
       const tokensSnap = await admin
         .database()
-        .ref(`notification_tokens/${key}`)
+        .ref('notification_tokens')
         .once('value')
+
+      const messages = []
 
       if (tokensSnap.exists()) {
         tokensSnap.forEach((t) => {
-          console.log('token', t.key)
-          messages.push({ token: t.key, ...payload })
+          const tokens = t.val()
+          Object.keys(tokens).map((k) => {
+            messages.push({ token: k, ...payload })
+            return k
+          })
         })
-        console.log('messages', messages)
+
         await admin.messaging().sendAll(messages)
       } else {
-        console.log('No tokens found for user', key)
+        console.log('No tokens found')
+      }
+
+      const message = { topic: 'public_chat', ...payload }
+
+      await admin.messaging().sendAll(message)
+    } else {
+      const members = []
+
+      const membersSnap = await admin
+        .database()
+        .ref(`group_chats/${groupUid}/members`)
+        .once('value')
+
+      if (membersSnap.exists()) {
+        membersSnap.forEach((ms) => {
+          members.push({ key: ms.key, val: ms.val() })
+        })
+      }
+
+      for (let i = 0; i < members.length; i++) {
+        const { key } = members[i]
+
+        const messages = []
+
+        const tokensSnap = await admin
+          .database()
+          .ref(`notification_tokens/${key}`)
+          .once('value')
+
+        if (tokensSnap.exists()) {
+          tokensSnap.forEach((t) => {
+            messages.push({ token: t.key, ...payload })
+          })
+
+          await admin.messaging().sendAll(messages)
+        } else {
+          console.log('No tokens found for user', key)
+        }
       }
     }
 
