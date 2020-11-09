@@ -93,9 +93,7 @@ export default functions
         console.log('No tokens found')
       }
 
-      const message = { topic: 'public_chat', ...payload }
-
-      await admin.messaging().sendAll(message)
+      await admin.messaging().sendAll(messages)
     } else {
       const members = []
 
