@@ -4,18 +4,24 @@ node_js:
 
 cache:
   directories:
+    - demo/template/node_modules
+    - demo/template/functions/node_modules
 
 before_install:
-  - npx create-react-app demo --template rmw --use-npm
+  - npx create-react-app demo-app --template rmw --use-npm
   - cd demo
+  - mkdir -p demo/
+  - cp -R packages/rmw-shell/cra-template-rmw/template demo/
+  - cp -R demo-app/package.json demo/template/package.json
+  - cd demo/template
   - chmod +x ./continuous_deployment/before_install.sh
-  - bash ./continuous_deployment/before_install.sh
+  - ./continuous_deployment/before_install.sh
 
 before_script:
   - npm test
   - chmod +x ./continuous_deployment/build.sh
-  - travis_wait 40 bash ./continuous_deployment/build.sh
+  - travis_wait 40 ./continuous_deployment/build.sh
 
 script:
   - chmod +x ./continuous_deployment/deploy.sh
-  - travis_wait 40 bash ./continuous_deployment/deploy.sh
+  - travis_wait 40 ./continuous_deployment/deploy.sh
