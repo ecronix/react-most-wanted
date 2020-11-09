@@ -9,13 +9,13 @@ before_install:
   - npx create-react-app demo --template rmw --use-npm
   - cd demo
   - chmod +x ./continuous_deployment/before_install.sh
-  - ./continuous_deployment/before_install.sh
+  - bash ./continuous_deployment/before_install.sh
 
 before_script:
   - npm test
   - chmod +x ./continuous_deployment/build.sh
-  - travis_wait 40 ./continuous_deployment/build.sh
+  - travis_wait 40 bash ./continuous_deployment/build.sh
 
 script:
   - chmod +x ./continuous_deployment/deploy.sh
-  - travis_wait 40 ./continuous_deployment/deploy.sh
+  - travis_wait 40 bash ./continuous_deployment/deploy.sh
