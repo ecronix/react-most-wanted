@@ -1,7 +1,8 @@
 #!/bin/bash
 set -ev
 #run only on master
-if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; then
+if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]] ; 
+then
    ls -l
    npm install -g firebase-tools
    npm install -g selenium-webdriver
@@ -10,3 +11,4 @@ if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master" ]]; th
    npm install
    cd ..
 fi
+exit 0

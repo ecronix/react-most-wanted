@@ -45,10 +45,10 @@ export default functions.auth.user().onCreate(async (userRecord, context) => {
     .ref(`/users_count`)
     .transaction((current) => (current || 0) + 1)
 
-  await admin.database().ref(`user_chats/${uid}/public_chats`).update({
+  await admin.database().ref(`user_chats/${uid}/public_chat`).update({
     displayName: 'Public Chat',
-    path: 'public_chats',
-    lastMessage: 'Group chat demo',
+    lastMessage: 'Group chat',
+    path: `group_chat_messages/public_chat`,
   })
 
   if (email) {

@@ -44,8 +44,8 @@
     },
     "group_chat_messages": {
       "$groupUid": {
-        ".read": "auth != null && root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists()",
-        ".write": "auth != null && root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists()"
+        ".read": "auth != null && (root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists() || root.child('group_chats/'+$groupUid+'/members/all').exists())",
+        ".write": "auth != null && (root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists() || root.child('group_chats/'+$groupUid+'/members/all').exists())"
       }    
     },
     "user_chat_messages": {

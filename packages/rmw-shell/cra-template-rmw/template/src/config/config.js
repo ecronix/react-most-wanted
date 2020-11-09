@@ -66,6 +66,7 @@ const config = {
           .database()
           .ref(`user_grants/${user.uid}`)
           .once('value')
+
         const isAdminSnap = await firebaseApp
           .database()
           .ref(`admins/${user.uid}`)
@@ -100,6 +101,15 @@ const config = {
           emailVerified: user.emailVerified,
           isAnonymous: user.isAnonymous,
         })
+
+        await firebaseApp
+          .database()
+          .ref(`user_chats/${user.uid}/public_chat`)
+          .update({
+            displayName: 'Public Chat',
+            lastMessage: 'Group chat',
+            path: `group_chat_messages/public_chat`,
+          })
       } else {
         firebaseApp.database().ref().off()
         auth.setAuth(defaultUserData(user))
