@@ -142,6 +142,15 @@ const getMenuItems = (props) => {
       leftIcon: <Slideshow />,
       nestedItems: [
         {
+          value: '/admin',
+          visible: auth,
+          primaryText: intl.formatMessage({
+            id: 'admin',
+            defaultMessage: 'Admin',
+          }),
+          leftIcon: <Security />,
+        },
+        {
           value: '/companies',
           visible: isGranted(auth, 'read_companies'),
           primaryText: intl.formatMessage({
