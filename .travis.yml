@@ -17,7 +17,7 @@ before_install:
   - ./continuous_deployment/before_install.sh
 
 before_script:
-  - npm test
+  - npm test --passWithNoTests
   - chmod +x ./continuous_deployment/build.sh
   - travis_wait 40 ./continuous_deployment/build.sh
 
