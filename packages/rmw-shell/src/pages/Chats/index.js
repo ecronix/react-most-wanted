@@ -3,6 +3,7 @@ import Chat from 'rmw-shell/lib/containers/Chat'
 import ChatIcon from '@material-ui/icons/Chat'
 import Group from '@material-ui/icons/Group'
 import Security from '@material-ui/icons/Security'
+import Info from '@material-ui/icons/Info'
 import People from '@material-ui/icons/People'
 import Person from '@material-ui/icons/Person'
 import Divider from '@material-ui/core/Divider'
@@ -103,6 +104,22 @@ const Row = ({ data, index, style }) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              {path !== '' && (
+                <MenuItem
+                  onClick={() => {
+                    history.push(`/group_chat/${key}`)
+                  }}
+                >
+                  <ListItemIcon>
+                    <Info />
+                  </ListItemIcon>
+
+                  {intl.formatMessage({
+                    id: 'info',
+                    defaultMessage: 'Info',
+                  })}
+                </MenuItem>
+              )}
               {path !== '' && (
                 <MenuItem
                   onClick={() => {
