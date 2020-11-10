@@ -143,7 +143,7 @@ const getMenuItems = (props) => {
       nestedItems: [
         {
           value: '/admin',
-          visible: auth,
+          visible: !isGranted(auth, 'administration'),
           primaryText: intl.formatMessage({
             id: 'admin',
             defaultMessage: 'Admin',
