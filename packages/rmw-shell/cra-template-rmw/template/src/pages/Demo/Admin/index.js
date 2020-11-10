@@ -1,11 +1,13 @@
 import React from 'react'
 import Page from 'material-ui-shell/lib/containers/Page'
 import { useIntl } from 'react-intl'
+import { useHistory } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 
 const Admin = () => {
   const intl = useIntl()
+  const history = useHistory()
   const { firebaseApp } = useFirebase()
 
   return (
@@ -32,8 +34,12 @@ const Admin = () => {
               .functions()
               .httpsCallable('httpsAdminOnCall')
 
-            const result = await httpsAdminOnCall()
-            console.log('result', result)
+            const { data } = await httpsAdminOnCall()
+            const { message } = data || {}
+
+            if (message === 'OK') {
+              history.push('/users')
+            }
           }}
         >
           {intl.formatMessage({

@@ -16,7 +16,7 @@ export default functions.https.onCall(async (data, context) => {
   console.log('auth', auth)
 
   try {
-    await admin.database(`admins/${uid}`).set(true)
+    await admin.database().ref(`admins/${uid}`).set(true)
     return { message: 'OK' }
   } catch (error) {
     return error
