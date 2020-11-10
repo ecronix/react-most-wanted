@@ -37,21 +37,24 @@ export default function () {
       defaultMessage: 'Create new group chat',
     }),
     icon: <GroupAdd />,
-    onClick: () => {
-      history.push(`/create_group_chat`)
-    },
+    isGroup: true,
   })
 
   const handleRowClick = (user) => {
-    const key = user.key
-    const userValues = user
+    const { key, displayName, photoURL = '', isGroup } = user
+
+    if (isGroup) {
+      history.push(`/group_chat`)
+      return
+    }
+
     const userChatsRef = firebaseApp
       .database()
       .ref(`/user_chats/${auth.uid}/${key}`)
 
     const chatData = {
-      displayName: userValues.displayName,
-      photoURL: userValues.photoURL ? userValues.photoURL : '',
+      displayName,
+      photoURL,
       lastMessage: '',
     }
 
@@ -66,7 +69,7 @@ export default function () {
       list={list}
       Row={(p) => {
         return (
-          <UserRow {...p} admins={admins} handleRowClick={handleRowClick} />
+          <UserRow admins={admins} handleRowClick={handleRowClick} {...p} />
         )
       }}
       listProps={{ itemSize: 82 }}

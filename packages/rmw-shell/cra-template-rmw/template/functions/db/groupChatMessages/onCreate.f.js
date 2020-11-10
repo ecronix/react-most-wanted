@@ -82,22 +82,23 @@ export default functions
         .ref('notification_tokens')
         .once('value')
 
-      const messages = []
-
       if (tokensSnap.exists()) {
-        tokensSnap.forEach((t) => {
+        tokensSnap.forEach(async (t) => {
           const tokens = t.val()
+
+          const messages = []
+
           Object.keys(tokens).map((k) => {
             messages.push({ token: k, ...payload })
             return k
           })
-        })
 
-        try {
-          await admin.messaging().sendAll(messages)
-        } catch (error) {
-          console.warn(error)
-        }
+          try {
+            await admin.messaging().sendAll(messages)
+          } catch (error) {
+            console.warn(error)
+          }
+        })
       } else {
         console.log('No tokens found')
       }

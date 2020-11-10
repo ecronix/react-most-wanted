@@ -10,17 +10,11 @@ export default functions
     const uid = context.params.uid
 
     if (value) {
-      await admin
-        .firestore()
-        .doc(`/admins/${uid}/`)
-        .set({ isAdmin: value })
-      await customClaims.setClaim(uid, 'admin')
+      await admin.firestore().doc(`/admins/${uid}/`).set({ isAdmin: value })
+      await setClaim(uid, 'admin')
     } else {
-      await admin
-        .firestore()
-        .doc(`/admins/${uid}/`)
-        .delete()
-      await customClaims.removeClaim(uid, 'admin')
+      await admin.firestore().doc(`/admins/${uid}/`).delete()
+      await removeClaim(uid, 'admin')
     }
 
     return
