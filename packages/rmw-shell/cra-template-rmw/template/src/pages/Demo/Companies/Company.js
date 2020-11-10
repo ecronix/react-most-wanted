@@ -1,39 +1,26 @@
-import Form from '../../components/Forms/Task'
-import React, { useEffect } from 'react'
+import Form from '../../../components/Forms/Company'
+import React from 'react'
 import { FormPage } from 'rmw-shell/lib/containers/Page'
 import { useIntl } from 'react-intl'
 import { useParams, useHistory } from 'react-router-dom'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 
-const path = 'tasks'
-const singular = 'task'
+const path = 'companies'
+const singular = 'company'
 
-const Task = () => {
+const Company = () => {
   const history = useHistory()
   const intl = useIntl()
   const { uid } = useParams()
-  const { watchList, unwatchList, getList } = useLists()
-
-  useEffect(() => {
-    watchList('users')
-
-    return () => unwatchList('users')
-  }, [watchList, unwatchList])
-
-  const users = getList('users')
-
-  const initialValues = { helper: '', title: '' }
 
   return (
     <FormPage
-      path={'public_tasks'}
+      path={`${path}`}
       uid={uid}
-      initialValues={initialValues}
       getPageProps={(values) => {
         return {
           pageTitle: intl.formatMessage({
             id: path,
-            defaultMessage: 'Tasks',
+            defaultMessage: 'Companies',
           }),
         }
       }}
@@ -47,7 +34,6 @@ const Task = () => {
       handleDelete={() => {
         history.push(`/${path}`)
       }}
-      formProps={{ users }}
       Form={Form}
       grants={{
         create: `create_${singular}`,
@@ -56,19 +42,19 @@ const Task = () => {
       deleteDialogProps={{
         title: intl.formatMessage({
           id: `delete_${singular}_dialog_title`,
-          defaultMessage: 'Delete Task?',
+          defaultMessage: 'Delete Company?',
         }),
         message: intl.formatMessage({
           id: `delete_${singular}_dialog_message`,
-          defaultMessage: 'Task will be deleted permanently?',
+          defaultMessage: 'Company will be deleted permanently?',
         }),
         action: intl.formatMessage({
           id: `delete_${singular}_dialog_action`,
-          defaultMessage: 'DELETE TASK',
+          defaultMessage: 'DELETE COMPANY',
         }),
       }}
     />
   )
 }
 
-export default Task
+export default Company

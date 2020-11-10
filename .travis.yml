@@ -9,9 +9,9 @@ cache:
 
 before_install:
   - npx create-react-app demo-app --template rmw --use-npm
-  - mkdir -p demo/
-  - cp -R packages/rmw-shell/cra-template-rmw/template demo/
-  - cp -R demo-app/package.json demo/template/package.json
+  - rm -rf demo-app/continuous_deployment
+  - mkdir -p demo-app/continuous_deployment
+  - cp -R packages/rmw-shell/cra-template-rmw/template/continuous_deployment demo-app/continuous_deployment
   - cd demo/template
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
@@ -22,5 +22,6 @@ before_script:
   - travis_wait 40 ./continuous_deployment/build.sh
 
 script:
+  - cd demo/template
   - chmod +x ./continuous_deployment/deploy.sh
   - travis_wait 40 ./continuous_deployment/deploy.sh

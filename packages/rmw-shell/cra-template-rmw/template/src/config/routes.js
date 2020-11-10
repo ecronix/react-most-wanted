@@ -4,10 +4,11 @@ import React, { lazy } from 'react'
 import { Route } from 'react-router-dom'
 
 const About = lazy(() => import('../pages/About/About'))
-const Companies = lazy(() => import('../pages/Companies'))
-const Company = lazy(() => import('../pages/Companies/Company'))
-const Tasks = lazy(() => import('../pages/Tasks'))
-const Task = lazy(() => import('../pages/Tasks/Task'))
+const Admin = lazy(() => import('../pages/Demo/Admin'))
+const Companies = lazy(() => import('../pages/Demo/Companies'))
+const Company = lazy(() => import('../pages/Demo/Companies/Company'))
+const Tasks = lazy(() => import('../pages/Demo/Tasks'))
+const Task = lazy(() => import('../pages/Demo/Tasks/Task'))
 const FirebaseCols = lazy(() => import('../pages/Firebase/Cols'))
 const FirebaseDocs = lazy(() => import('../pages/Firebase/Docs'))
 const FirebaseLists = lazy(() => import('../pages/Firebase/Lists'))
@@ -23,6 +24,7 @@ const routes = [
   <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,
   <AuthorizedRoute path="/firebase_docs" exact component={FirebaseDocs} />,
   <AuthorizedRoute path="/firebase_cols" exact component={FirebaseCols} />,
+  <AuthorizedRoute path="/admin" exact component={Admin} />,
   <AuthorizedRoute path="/companies" exact component={Companies} />,
   <AuthorizedRoute path="/companies/:uid" exact component={Company} />,
   <AuthorizedRoute path="/create_company" exact component={Company} />,
