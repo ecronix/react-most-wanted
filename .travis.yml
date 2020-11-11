@@ -22,6 +22,5 @@ before_script:
   - travis_wait 40 ./continuous_deployment/build.sh
 
 script:
-  - cd demo/template
   - chmod +x ./continuous_deployment/deploy.sh
   - travis_wait 40 ./continuous_deployment/deploy.sh
