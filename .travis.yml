@@ -22,5 +22,6 @@ before_script:
   - travis_wait 40 ./continuous_deployment/build.sh
 
 script:
+  - npm install -g selenium-webdriver
   - chmod +x ./continuous_deployment/deploy.sh
   - travis_wait 40 ./continuous_deployment/deploy.sh
