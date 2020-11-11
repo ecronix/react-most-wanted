@@ -12,7 +12,7 @@ before_install:
   - rm -rf demo-app/continuous_deployment
   - mkdir -p demo-app/continuous_deployment
   - cp -R packages/rmw-shell/cra-template-rmw/template/continuous_deployment demo-app/continuous_deployment
-  - cd demo/template
+  - cd demo-app
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
 
