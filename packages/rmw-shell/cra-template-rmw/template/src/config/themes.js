@@ -5,6 +5,14 @@ import green from '@material-ui/core/colors/green'
 const themes = [
   {
     id: 'default',
+    source: {
+      palette: {
+        primary: { main: '#343434' },
+        secondary: {
+          main: '#c62828',
+        },
+      },
+    },
   },
   {
     id: 'red',
@@ -27,6 +35,9 @@ const themes = [
         error: red,
       },
     },
+  },
+  {
+    id: 'standard',
   },
 ]
 

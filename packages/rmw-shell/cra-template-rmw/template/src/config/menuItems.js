@@ -4,6 +4,7 @@ import Business from '@material-ui/icons/Business'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import Web from '@material-ui/icons/Web'
 import GetApp from '@material-ui/icons/GetApp'
 import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LanguageIcon from '@material-ui/icons/Language'
@@ -110,6 +111,15 @@ const getMenuItems = (props) => {
         ? intl.formatMessage({ id: 'sign_out' })
         : intl.formatMessage({ id: 'sign_in' }),
       leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
+    },
+    {
+      value: '/',
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({
+        id: 'landing_page',
+        defaultMessage: 'Landing Page',
+      }),
+      leftIcon: <Web />,
     },
     {
       value: '/dashboard',

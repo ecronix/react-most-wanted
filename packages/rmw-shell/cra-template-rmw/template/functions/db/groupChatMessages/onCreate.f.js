@@ -22,7 +22,7 @@ export default functions
     const {
       message = '',
       link,
-      image,
+      image = '',
       location,
       audio,
       created,
@@ -63,7 +63,7 @@ export default functions
           body: lastMessage,
           icon: authorPhotoUrl ? authorPhotoUrl : '/apple-touch-icon.png',
           image,
-          click_action: `https://www.react-most-wanted.com/chats/${groupUid}`,
+          click_action: `/chats/${groupUid}`,
         },
       },
       data: {
@@ -77,6 +77,27 @@ export default functions
       .once('value')
 
     if (isAllSnap.exists() && isAllSnap.val()) {
+      const notificationTokensSnap = await admin
+        .database()
+        .ref(`/notification_tokens`)
+        .once('value')
+      let registrationTokens = []
+
+      notificationTokensSnap.forEach((user) => {
+        user.forEach((token) => {
+          registrationTokens.push(token.key)
+        })
+      })
+
+      if (registrationTokens.length) {
+        return admin
+          .messaging()
+          .sendToDevice(registrationTokens, payload.webpush)
+      } else {
+        console.log('Not tokens registered')
+      }
+
+      /*
       const tokensSnap = await admin
         .database()
         .ref('notification_tokens')
@@ -102,6 +123,8 @@ export default functions
       } else {
         console.log('No tokens found')
       }
+
+      */
     } else {
       const members = []
 
