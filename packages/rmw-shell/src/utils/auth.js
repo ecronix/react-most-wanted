@@ -24,7 +24,11 @@ const isGranted = (auth, grant) => {
     return true
   }
 
-  return grants && !!grants[grant]
+  if (!grants) {
+    return false
+  }
+
+  return !!grants[grant]
 }
 
 export { defaultUserData, isGranted }
