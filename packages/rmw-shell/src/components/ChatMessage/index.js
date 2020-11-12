@@ -12,6 +12,7 @@ import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
 import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
+import Linkify from 'react-linkify'
 
 const getMapLoc = (loc) => {
   let lat = 0
@@ -56,7 +57,6 @@ export default function ({
   } = data?.val || {}
   const intl = useIntl()
   const isMe = auth.uid === authorUid
-  const isLink = message.indexOf('https://') !== -1
 
   const days = moment(created).diff(moment(), 'days')
 
@@ -160,13 +160,14 @@ export default function ({
           </div>
         )}
         <div style={{ padding: 4, paddingBottom: 0 }}>
-          {type === 'text' && !isLink && (
-            <Typography variant="body2">{message}</Typography>
-          )}
-          {type === 'text' && isLink && (
-            <a target="_blank" rel="noopener noreferrer" href={message}>
+          {type === 'text' && (
+            <Linkify
+              properties={{
+                target: '_blank',
+              }}
+            >
               <Typography variant="body2">{message}</Typography>
-            </a>
+            </Linkify>
           )}
           {type === 'image' && (
             <div>

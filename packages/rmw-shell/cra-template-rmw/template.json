@@ -30,6 +30,7 @@
       "react-helmet": "6.x",
       "react-intl": "5.x",
       "react-ios-pwa-prompt": "1.x",
+      "react-linkify": "^1.0.0-alpha",
       "react-markdown": "5.x",
       "react-router-dom": "5.x",
       "react-virtualized-auto-sizer": "1.x",
