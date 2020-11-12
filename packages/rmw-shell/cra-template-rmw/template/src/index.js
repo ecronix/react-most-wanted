@@ -16,6 +16,6 @@ render(
 serviceWorkerRegistration.register({
   onUpdate: (reg) => {
     console.log('Update', reg)
-    window.update = reg.waiting.postMessage({ type: 'SKIP_WAITING' })
+    window.update = () => reg.waiting.postMessage({ type: 'SKIP_WAITING' })
   },
 })
