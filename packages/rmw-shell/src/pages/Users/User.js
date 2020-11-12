@@ -192,16 +192,13 @@ export default function () {
                       <Switch
                         checked={isAdmin}
                         onChange={() => {
-                          if (isAdmin) {
+                          try {
                             firebaseApp
                               .database()
                               .ref(`admins/${uid}`)
-                              .set(null)
-                          } else {
-                            firebaseApp
-                              .database()
-                              .ref(`admins/${uid}`)
-                              .set(true)
+                              .set(isAdmin ? null : true)
+                          } catch (error) {
+                            console.warn(error)
                           }
                         }}
                         name="checkedA"
