@@ -147,7 +147,7 @@ const getMenuItems = (props) => {
         id: 'demos',
         defaultMessage: 'Demos',
       }),
-      visible: isGranted(auth, 'read_companies'),
+      visible: isAuthorised,
       primaryTogglesNestedList: true,
       leftIcon: <Slideshow />,
       nestedItems: [
