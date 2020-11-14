@@ -33,6 +33,7 @@ const PackageCard = ({ title, command, description, icons }) => {
             {command}
           </Typography>
           <IconButton
+            aria-label="Icon button"
             onClick={() => {
               if (window.clipboardData) {
                 // Internet Explorer
@@ -77,6 +78,7 @@ const PageContent = () => {
             borderRadius: '40px',
             fontSize: 'bold',
           }}
+          aria-label="Start button"
           variant="contained"
           color="secondary"
           name={'signin'}
@@ -129,7 +131,11 @@ const PageContent = () => {
                 justifyContent: 'space-around',
               }}
             >
-              <img src="react.png" alt="react" style={{ width: 50 }} />
+              <img
+                src="react.png"
+                alt="react"
+                style={{ width: 50, aspectRatio: 1.11 }}
+              />
             </div>
           }
         />
@@ -147,7 +153,11 @@ const PageContent = () => {
                 justifyContent: 'space-around',
               }}
             >
-              <img src="react.png" alt="react" style={{ width: 50 }} />
+              <img
+                src="react.png"
+                alt="react"
+                style={{ width: 50, aspectRatio: 1.11 }}
+              />
               <img src="material-ui.png" alt="react" style={{ width: 50 }} />
             </div>
           }
@@ -164,7 +174,11 @@ const PageContent = () => {
                 justifyContent: 'space-around',
               }}
             >
-              <img src="react.png" alt="react" style={{ width: 50 }} />
+              <img
+                src="react.png"
+                alt="react"
+                style={{ width: 50, aspectRatio: 1.11 }}
+              />
               <img src="material-ui.png" alt="react" style={{ width: 50 }} />
               <img src="firebase.png" alt="react" style={{ width: 50 }} />
             </div>
@@ -189,6 +203,7 @@ const PageContent = () => {
         </Typography>
         <Typography
           variant="h5"
+          component="div"
           style={{ margin: 16, textAlign: 'center', color: 'grey' }}
         >
           But also not a framework.
@@ -204,6 +219,7 @@ const PageContent = () => {
         </div>
         <Typography
           variant="h5"
+          component="div"
           style={{ margin: 16, textAlign: 'center', color: 'grey' }}
         >
           You start easy like with every other template but you can also update
@@ -223,6 +239,7 @@ const PageContent = () => {
       </Typography>
       <Typography
         variant="h5"
+        component="div"
         color="textSecondary"
         style={{ margin: 16, textAlign: 'center' }}
       >
