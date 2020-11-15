@@ -8,7 +8,7 @@ const SignIn = () => {
   let history = useHistory()
   const intl = useIntl()
   const [username, setUsername] = useState('')
-  const [setPassword] = useState('')
+  const [, setPassword] = useState('')
 
   function handleSubmit(event) {
     event.preventDefault()

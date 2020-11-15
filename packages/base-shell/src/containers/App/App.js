@@ -16,7 +16,7 @@ const App = ({ config: appConfig }) => {
   const { persistKey } = auth || {}
   const { LandingPage = false } = pages || {}
   const { checkInterval = 5000 } = update || {}
-  const { Loading } = components || {}
+  const { Loading = () => <div /> } = components || {}
   const { AppContainer = React.Fragment } = containers || {}
 
   return (
