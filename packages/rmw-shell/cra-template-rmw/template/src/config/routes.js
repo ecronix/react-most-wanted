@@ -3,7 +3,7 @@ import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/Authorize
 import React, { lazy } from 'react'
 import { Route } from 'react-router-dom'
 
-const About = lazy(() => import('../pages/About/About'))
+const About = lazy(() => import('../pages/About'))
 const Admin = lazy(() => import('../pages/Demo/Admin'))
 const Companies = lazy(() => import('../pages/Demo/Companies'))
 const Company = lazy(() => import('../pages/Demo/Companies/Company'))
