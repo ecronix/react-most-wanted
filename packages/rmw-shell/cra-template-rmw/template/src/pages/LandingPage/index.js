@@ -1,13 +1,15 @@
-import React, { useState, lazy, Suspense } from 'react'
+import React, { useState, lazy, Suspense, useEffect } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
-import formatMessage from './messages'
 import { Helmet } from 'react-helmet'
 import Paper from '@material-ui/core/Paper'
 import { Scrollbars } from 'react-custom-scrollbars'
 import Toolbar from '@material-ui/core/Toolbar'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button'
+import { useHistory } from 'react-router-dom'
 
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
@@ -24,147 +26,189 @@ const theme = createMuiTheme({
 const LandingPage = () => {
   const [scrollbar, setScrollbar] = useState(null)
   const [transparent, setTransparent] = useState(true)
+  const [scrolled, setScrolled] = useState(false)
+  const history = useHistory()
+
+  const checkUpdate = () => {
+    if (window.update) {
+      window.update()
+    } else {
+      setTimeout(checkUpdate, 5000)
+    }
+  }
+
+  useEffect(checkUpdate, [checkUpdate])
 
   return (
-    <Suspense
-      fallback={() => {
-        return <div>Loading...</div>
-      }}
-    >
-      <ThemeProvider theme={theme}>
-        <React.Fragment>
-          <CssBaseline />
-          <Helmet>
-            <meta charset="utf-8" />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui"
-            />
-            <link rel="shortcut icon" href="/favicon.ico" />
-            <meta
-              name="keywords"
-              content={
-                'react,pwa,material-ui,redux,boilerplate,lighthouse,gdg,react.js'
-              }
-            />
-            <meta
-              name="description"
-              content={
-                'React PWA boilerplate that is using create-react-app and firebase '
-              }
-            />
+    <ThemeProvider theme={theme}>
+      <React.Fragment>
+        <CssBaseline />
+        <Helmet>
+          <meta charset="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, minimum-scale=1, minimal-ui"
+          />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="canonical" href="https://www.react-most-wanted.com" />
+          <meta
+            name="keywords"
+            content={
+              'react,pwa,material-ui,redux,boilerplate,lighthouse,gdg,react.js'
+            }
+          />
+          <meta
+            name="description"
+            content={
+              'React PWA boilerplate that is using create-react-app and firebase '
+            }
+          />
 
-            <title>React Most Wanted</title>
-          </Helmet>
-          <Scrollbars
-            ref={(e) => {
-              if (e !== null) {
-                setScrollbar(e)
-              }
+          <title>React Most Wanted</title>
+        </Helmet>
+        <Scrollbars
+          ref={(e) => {
+            if (e !== null) {
+              setScrollbar(e)
+            }
+          }}
+          onScroll={(e) => {
+            setTransparent(scrollbar.viewScrollTop < 100)
+            setScrolled(true)
+          }}
+          autoHide
+          style={{ width: '100%', height: '100vh' }}
+        >
+          <AppBar
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              backgroundColor: transparent ? 'transparent' : undefined,
+              boxShadow: transparent ? 'none' : undefined,
+              transition: 'background 1s',
             }}
-            onScroll={(e) => {
-              setTransparent(scrollbar.viewScrollTop < 100)
-            }}
-            autoHide
-            style={{ width: '100%', height: '100vh' }}
+            position="static"
           >
-            <AppBar
+            <Toolbar>
+              <Typography style={{}}>React Most Wanted</Typography>
+            </Toolbar>
+          </AppBar>
+          <div style={{ width: '100%', height: '100%' }}>
+            <div
               style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                backgroundColor: transparent ? 'transparent' : undefined,
-                boxShadow: transparent ? 'none' : undefined,
-                transition: 'background 1s',
+                height: '100vh',
+                width: '100%',
+                backgroundImage: 'url(background.webp)',
+                backgroundRepeat: 'no-repeat',
+                backgroundAttachment: 'fixed',
+                backgroundSize: 'cover',
+                display: 'flex',
+                justifyContent: 'center',
+                minHeight: 600,
               }}
-              position="static"
             >
-              <Toolbar>
-                <Typography style={{ fontFamily: 'fantasy' }}>
-                  React Most Wanted
-                </Typography>
-              </Toolbar>
-            </AppBar>
-            <div style={{ width: '100%', height: '100%' }}>
               <div
                 style={{
-                  height: '100vh',
-                  width: '100%',
-                  backgroundImage: 'url(background.webp)',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundAttachment: 'fixed',
-                  backgroundSize: 'cover',
                   display: 'flex',
                   justifyContent: 'center',
-                  minHeight: 600,
+                  alignItems: 'center',
+                  flexDirection: 'column',
+                }}
+              >
+                <img
+                  src={'/rmw.svg'}
+                  alt="logo"
+                  style={{ height: 150, maxWidth: 280, justifySelf: 'center' }}
+                />
+
+                <div style={{ padding: 8 }}>
+                  <h3
+                    style={{
+                      color: 'red',
+                      textAlign: 'center',
+                      fontWeight: 'bold',
+                      fontSize: 50,
+                    }}
+                  >
+                    REACT MOST WANTED
+                  </h3>
+
+                  <h4
+                    style={{
+                      color: 'white',
+                      textAlign: 'center',
+                      fontSize: 25,
+                      marginTop: -40,
+                    }}
+                  >
+                    React Starter-Kit with all Most Wanted features
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: -80,
+              }}
+            >
+              <Paper
+                elevation={3}
+                style={{
+                  width: '100%',
+                  maxWidth: '90%',
+                  borderRadius: 15,
+                  minHeight: 400,
                 }}
               >
                 <div
                   style={{
+                    width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
+                    marginTop: -50,
                   }}
                 >
-                  <img
-                    src={'/rmw.svg'}
-                    alt="logo"
-                    style={{ height: 150, maxWidth: 280 }}
-                  />
-
-                  <Typography
-                    variant="h2"
-                    align="center"
-                    component="div"
-                    color="inherit"
-                    gutterBottom
+                  <Button
+                    size="large"
                     style={{
-                      color: 'white',
-                      marginTop: 18,
-                      textAlign: 'center',
+                      margin: 30,
+                      borderRadius: '40px',
                       fontSize: 'bold',
-                      fontFamily: 'fantasy',
+                    }}
+                    aria-label="Start button"
+                    variant="contained"
+                    color="secondary"
+                    name={'signin'}
+                    onClick={() => {
+                      history.push('/dashboard')
                     }}
                   >
-                    REACT MOST WANTED
-                  </Typography>
-
-                  <Typography
-                    variant="h5"
-                    component="div"
-                    color="inherit"
-                    gutterBottom
-                    style={{ color: 'white', textAlign: 'center' }}
-                  >
-                    {formatMessage('intro')}
-                  </Typography>
+                    Start
+                  </Button>
                 </div>
-              </div>
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop: -80,
-                }}
-              >
-                <Paper
-                  elevation={3}
-                  style={{ width: '100%', maxWidth: '90%', borderRadius: 15 }}
-                >
-                  <PageContent />
-                </Paper>
-              </div>
-              <div style={{ height: 200 }}></div>
-              <Footer />
+                {scrolled && (
+                  <Suspense fallback={<CircularProgress />}>
+                    <PageContent />
+                  </Suspense>
+                )}
+              </Paper>
             </div>
-          </Scrollbars>
-        </React.Fragment>
-      </ThemeProvider>
-    </Suspense>
+            <div style={{ height: 200 }}></div>
+            {scrolled && (
+              <Suspense fallback={<CircularProgress />}>
+                <Footer />
+              </Suspense>
+            )}
+          </div>
+        </Scrollbars>
+      </React.Fragment>
+    </ThemeProvider>
   )
 }
 

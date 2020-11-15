@@ -1,13 +1,10 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import formatMessage from './messages'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import TrackChanges from '@material-ui/icons/TrackChanges'
 import FileCopy from '@material-ui/icons/FileCopy'
 import IconButton from '@material-ui/core/IconButton'
-import { useHistory } from 'react-router-dom'
 
 const PackageCard = ({ title, command, description, icons }) => {
   return (
@@ -60,35 +57,8 @@ const PackageCard = ({ title, command, description, icons }) => {
 }
 
 const PageContent = () => {
-  const history = useHistory()
   return (
     <React.Fragment>
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: -50,
-        }}
-      >
-        <Button
-          size="large"
-          style={{
-            margin: 30,
-            borderRadius: '40px',
-            fontSize: 'bold',
-          }}
-          aria-label="Start button"
-          variant="contained"
-          color="secondary"
-          name={'signin'}
-          onClick={() => {
-            history.push('/dashboard')
-          }}
-        >
-          {formatMessage('start')}
-        </Button>
-      </div>
       <div style={{ height: 20 }} />
       <Typography
         variant="h3"
