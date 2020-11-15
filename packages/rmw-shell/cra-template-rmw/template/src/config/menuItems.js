@@ -180,6 +180,26 @@ const getMenuItems = (props) => {
         },
       ],
     },
+    {
+      primaryText: intl.formatMessage({
+        id: 'documentation',
+        defaultMessage: 'Doumentation',
+      }),
+      visible: isAuthorised,
+      primaryTogglesNestedList: true,
+      leftIcon: <Assignment />,
+      nestedItems: [
+        {
+          value: '/docu/getting_started',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'getting_started',
+            defaultMessage: 'Getting started',
+          }),
+          leftIcon: <Assignment />,
+        },
+      ],
+    },
 
     {
       primaryText: intl.formatMessage({

@@ -10,7 +10,7 @@ const Page = () => {
         pageTitle: intl.formatMessage({ id: 'about', defaultMessage: 'About' }),
       }}
       path={
-        'https://raw.githubusercontent.com/TarikHuber/react-most-wanted/master/README.md'
+        'https://raw.githubusercontent.com/TarikHuber/react-most-wanted/master/documentation/getting_started.md'
       }
     />
   )
