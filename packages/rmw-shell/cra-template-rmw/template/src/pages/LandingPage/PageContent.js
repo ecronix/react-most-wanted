@@ -56,7 +56,7 @@ const PackageCard = ({ title, command, description, icons }) => {
   )
 }
 
-const PageContent = () => {
+const PageContent = ({ setComponents }) => {
   return (
     <React.Fragment>
       <div style={{ height: 20 }} />
@@ -157,6 +157,11 @@ const PageContent = () => {
       </div>
       <div style={{ height: 30 }} />
       <div
+        ref={(r) => {
+          if (r) {
+            setComponents(r)
+          }
+        }}
         style={{
           //height: 400,
           backgroundColor: '#2D2D2D',

@@ -1,7 +1,6 @@
-import React, { useState, lazy, Suspense, useEffect } from 'react'
+import React, { useState, lazy, Suspense } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Typography from '@material-ui/core/Typography'
 import { Helmet } from 'react-helmet'
 import Paper from '@material-ui/core/Paper'
 import { Scrollbars } from 'react-custom-scrollbars'
@@ -10,6 +9,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
+import ResponsiveMenu from 'rmw-shell/lib/containers/ResponsiveMenu'
 
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
@@ -27,7 +27,33 @@ const LandingPage = () => {
   const [scrollbar, setScrollbar] = useState(null)
   const [transparent, setTransparent] = useState(true)
   const [scrolled, setScrolled] = useState(false)
+  const [components, setComponents] = useState(null)
+  const [top, setTop] = useState(null)
   const history = useHistory()
+
+  const scrollTo = (e) => {
+    e &&
+      e.scrollIntoView({
+        behavior: 'smooth',
+        alignToTop: true,
+      })
+  }
+
+  const sections = [
+    {
+      name: 'start',
+      onClick: () => history.push('/dashboard'),
+    },
+    {
+      name: 'components',
+      onClick: () => {
+        setScrolled(true)
+        setTimeout(() => {
+          scrollTo(components)
+        }, 500)
+      },
+    },
+  ]
 
   return (
     <ThemeProvider theme={theme}>
@@ -81,12 +107,32 @@ const LandingPage = () => {
             }}
             position="static"
           >
-            <Toolbar>
-              <Typography style={{}}>React Most Wanted</Typography>
+            <Toolbar disableGutters>
+              <div
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  scrollTo(top)
+                }}
+              >
+                <img
+                  src={'/rmw.svg'}
+                  alt="logo"
+                  style={{
+                    height: 35,
+                    justifySelf: 'center',
+                    color: 'white',
+                    marginLeft: 12,
+                    display: transparent ? 'none' : undefined,
+                  }}
+                />
+              </div>
+              <div style={{ flex: 1 }} />
+              <ResponsiveMenu sections={sections} />
             </Toolbar>
           </AppBar>
           <div style={{ width: '100%', height: '100%' }}>
             <div
+              ref={(r) => r && setTop(r)}
               style={{
                 height: '100vh',
                 width: '100%',
@@ -182,19 +228,17 @@ const LandingPage = () => {
                     Start
                   </Button>
                 </div>
-                {scrolled && (
+                <div style={{ display: scrolled ? undefined : 'none' }}>
                   <Suspense fallback={<CircularProgress />}>
-                    <PageContent />
+                    <PageContent setComponents={setComponents} />
                   </Suspense>
-                )}
+                </div>
               </Paper>
             </div>
             <div style={{ height: 200 }}></div>
-            {scrolled && (
-              <Suspense fallback={<CircularProgress />}>
-                <Footer />
-              </Suspense>
-            )}
+            <Suspense fallback={<CircularProgress />}>
+              <Footer />
+            </Suspense>
           </div>
         </Scrollbars>
       </React.Fragment>
