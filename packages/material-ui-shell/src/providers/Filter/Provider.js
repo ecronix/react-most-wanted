@@ -72,7 +72,6 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider
