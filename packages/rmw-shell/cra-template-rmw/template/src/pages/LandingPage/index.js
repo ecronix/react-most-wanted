@@ -29,16 +29,6 @@ const LandingPage = () => {
   const [scrolled, setScrolled] = useState(false)
   const history = useHistory()
 
-  const checkUpdate = () => {
-    if (window.update) {
-      window.update()
-    } else {
-      setTimeout(checkUpdate, 5000)
-    }
-  }
-
-  useEffect(checkUpdate, [checkUpdate])
-
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
