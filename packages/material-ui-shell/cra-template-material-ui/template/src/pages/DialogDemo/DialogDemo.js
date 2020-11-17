@@ -4,7 +4,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 
-const HomePage = () => {
+export default function () {
   const intl = useIntl()
   const { openDialog, setProcessing } = useQuestions()
 
@@ -50,4 +50,3 @@ const HomePage = () => {
     </Page>
   )
 }
-export default HomePage
