@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SignUp = () => {
+const PasswordReset = () => {
   const classes = useStyles()
   const intl = useIntl()
   const history = useHistory()
@@ -112,4 +112,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default PasswordReset

@@ -5,7 +5,7 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ReactMarkdown from 'react-markdown'
 import 'github-markdown-css'
 
-export default function () {
+const About = () => {
   const [source, setSource] = useState(null)
   const intl = useIntl()
 
@@ -39,3 +39,4 @@ export default function () {
     </Page>
   )
 }
+export default About
