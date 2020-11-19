@@ -10,7 +10,7 @@ The features include:
 - **[Firebase](https://firebase.google.com)**: use Firebase's platform as backend and database
 - **And many more**: Firebase and Redux sync, authentication, authorization (roles and permissions), push notifications UI integration, theming, internationalization, built-in CI/CD, real-time forms...
 
-To find out more about the features it includes, visit the [documentation page](https://react-most-wanted.com/docs).
+To find out more about the features it includes, visit the [documentation page](https://www.react-most-wanted.com/docu/getting_started).
 
 ## How to start?
 
