@@ -5,7 +5,7 @@ import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import { useIntl } from 'react-intl'
 
-export default function () {
+const TabsDemo = () => {
   const [tab, setTab] = useState('one')
   const intl = useIntl()
 
@@ -38,3 +38,4 @@ export default function () {
     </Page>
   )
 }
+export default TabsDemo
