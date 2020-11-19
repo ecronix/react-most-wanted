@@ -73,7 +73,7 @@ const Row = ({ index, style, data }) => {
   )
 }
 
-export default function () {
+const ListPageDemo = () => {
   const intl = useIntl()
 
   return (
@@ -97,3 +97,4 @@ export default function () {
     />
   )
 }
+export default ListPageDemo
