@@ -8,6 +8,8 @@ import DocsProvider from 'rmw-shell/lib/providers/Firebase/Docs/Provider'
 import ColsProvider from 'rmw-shell/lib/providers/Firebase/Cols/Provider'
 import MessagingProvider from 'rmw-shell/lib/providers/Firebase/Messaging/Provider'
 import StorageProvider from 'rmw-shell/lib/providers/Firebase/Storage/Provider'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
+import MomentUtils from '@date-io/moment'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
@@ -52,7 +54,9 @@ export default function ({ children }) {
             <ColsProvider firebaseApp={firebaseApp}>
               <StorageProvider firebaseApp={firebaseApp}>
                 <MessagingProvider firebaseApp={firebaseApp}>
-                  {children}
+                  <MuiPickersUtilsProvider utils={MomentUtils}>
+                    {children}
+                  </MuiPickersUtilsProvider>
                 </MessagingProvider>
               </StorageProvider>
             </ColsProvider>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Form as FinalForm } from 'react-final-form'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useAuth } from 'base-shell/lib/providers/Auth'
+import arrayMutators from 'final-form-arrays'
 
 const FirebaseForm = ({
   uid,
@@ -25,11 +26,11 @@ const FirebaseForm = ({
       watchPath(databasePath)
     }
     return () => clearPath(databasePath)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path])
+  }, [path, watchPath, clearPath, databasePath, uid])
 
   return (
     <FinalForm
+      mutators={{ ...arrayMutators }}
       keepDirtyOnReinitialize
       onSubmit={async (values) => {
         let newUid = false

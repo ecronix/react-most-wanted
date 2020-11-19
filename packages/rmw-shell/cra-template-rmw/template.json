@@ -3,6 +3,7 @@
     "dependencies": {
       "rmw-shell":"8.x",
       "@formatjs/intl-relativetimeformat": "7.x",
+      "@date-io/moment": "2.x",
       "@material-ui/core": "4.x",
       "@material-ui/icons": "4.x",
       "@material-ui/lab": "^4.0.0-alpha.56",
@@ -10,6 +11,7 @@
       "base-shell": "1.x",
       "chart.js": "2.x",
       "final-form": "4.x",
+      "final-form-arrays": "3.x",
       "firebase": "7.x",
       "firebaseui": "4.x",
       "github-markdown-css": "4.x",
@@ -27,6 +29,7 @@
       "react-dom": "17.x",
       "react-easy-crop": "3.x",
       "react-final-form": "6.x",
+      "react-final-form-arrays": "3.x",
       "react-helmet": "6.x",
       "react-intl": "5.x",
       "react-ios-pwa-prompt": "1.x",
