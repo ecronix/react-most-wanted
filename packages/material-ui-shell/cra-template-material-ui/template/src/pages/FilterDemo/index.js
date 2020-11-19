@@ -44,7 +44,7 @@ const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => (
   <CustomScrollbars {...props} forwardedRef={ref} />
 ))
 
-export default function () {
+const FilterDemo = () => {
   const intl = useIntl()
   const { openFilter, getList, getFilter, setSearch } = useFilter()
 
@@ -173,3 +173,5 @@ export default function () {
     </Page>
   )
 }
+
+export default FilterDemo
