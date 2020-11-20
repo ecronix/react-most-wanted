@@ -25,6 +25,7 @@ export default function ({ handleSubmit }) {
           margin="normal"
           fullWidth={true}
           multiline
+          rows={2}
         />
       </div>
     </form>
