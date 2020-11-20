@@ -9,10 +9,10 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
-import ResponsiveMenu from 'rmw-shell/lib/containers/ResponsiveMenu'
 
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
+const ResponsiveMenu = lazy(() => import('containers/ResponsiveMenu'))
 
 const theme = createMuiTheme({
   palette: {
@@ -127,7 +127,10 @@ const LandingPage = () => {
                 />
               </div>
               <div style={{ flex: 1 }} />
-              <ResponsiveMenu sections={sections} />
+
+              <Suspense fallback={<CircularProgress />}>
+                <ResponsiveMenu sections={sections} />
+              </Suspense>
             </Toolbar>
           </AppBar>
           <div style={{ width: '100%', height: '100%' }}>
@@ -136,7 +139,7 @@ const LandingPage = () => {
               style={{
                 height: '100vh',
                 width: '100%',
-                backgroundImage: 'url(background.webp)',
+                backgroundColor: 'black',
                 backgroundRepeat: 'no-repeat',
                 backgroundAttachment: 'fixed',
                 backgroundSize: 'cover',
@@ -228,17 +231,19 @@ const LandingPage = () => {
                     Start
                   </Button>
                 </div>
-                <div style={{ display: scrolled ? undefined : 'none' }}>
+                {scrolled && (
                   <Suspense fallback={<CircularProgress />}>
                     <PageContent setComponents={setComponents} />
                   </Suspense>
-                </div>
+                )}
               </Paper>
             </div>
             <div style={{ height: 200 }}></div>
-            <Suspense fallback={<CircularProgress />}>
-              <Footer />
-            </Suspense>
+            {scrolled && (
+              <Suspense fallback={<CircularProgress />}>
+                <Footer />
+              </Suspense>
+            )}
           </div>
         </Scrollbars>
       </React.Fragment>
