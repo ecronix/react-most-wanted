@@ -31,7 +31,7 @@ const Row = ({ data, index, style }) => {
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
-          history.push(`/roles/${key}`)
+          history.push(`/roles/${key}/main`)
         }}
       >
         <ListItemAvatar>

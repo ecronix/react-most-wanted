@@ -28,8 +28,7 @@ export default function ({ grantsPath }) {
 
   useEffect(() => {
     watchList(grantsPath)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [grantsPath])
+  }, [grantsPath, watchList])
 
   const Row = ({ index, style, data }) => {
     const { name } = data
