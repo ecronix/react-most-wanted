@@ -30,8 +30,6 @@ const useStyles = makeStyles((theme) =>
   })
 )
 
-const mobileMenuId = 'primary-search-account-menu-mobile'
-
 const ResponsiveMenu = ({
   scroll,
   sections = [],
@@ -76,7 +74,6 @@ const ResponsiveMenu = ({
             <Button
               key={`button_${name}`}
               style={{ margin: 8 }}
-              //variant="contained"
               onClick={onClick}
               aria-label={name}
               color="inherit"
@@ -89,7 +86,6 @@ const ResponsiveMenu = ({
       <div className={classes.sectionMobile}>
         <IconButton
           aria-label="show more"
-          aria-controls={mobileMenuId}
           aria-haspopup="true"
           onClick={handleOpen}
           color="inherit"

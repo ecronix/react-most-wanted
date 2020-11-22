@@ -12,7 +12,9 @@ import { useHistory } from 'react-router-dom'
 
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
-const ResponsiveMenu = lazy(() => import('containers/ResponsiveMenu'))
+const ResponsiveMenu = lazy(() =>
+  import('rmw-shell/lib/containers/ResponsiveMenu')
+)
 
 const theme = createMuiTheme({
   palette: {
