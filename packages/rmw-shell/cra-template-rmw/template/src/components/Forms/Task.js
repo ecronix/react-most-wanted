@@ -1,9 +1,10 @@
 import React from 'react'
 import { TextField } from 'mui-rff'
 import { Autocomplete } from 'rmw-shell/lib/components/FormFields/Autocomplete'
+import { KeyboardDatePicker } from 'rmw-shell/lib/components/FormFields/KeyboardDatePicker'
 
 // eslint-disable-next-line
-export default function ({ id, handleSubmit, users = [] }) {
+export default function ({ id, handleSubmit, values, users = [] }) {
   const helpers = users.map((u) => {
     const { key, val } = u
     const { displayName } = val
@@ -25,6 +26,15 @@ export default function ({ id, handleSubmit, users = [] }) {
           margin="normal"
           required={true}
           fullWidth={false}
+        />
+        <br />
+
+        <KeyboardDatePicker
+          label={'Due to'}
+          name="due_to"
+          inputVariant="outlined"
+          margin="normal"
+          format="DD.MM.YYYY"
         />
         <br />
 

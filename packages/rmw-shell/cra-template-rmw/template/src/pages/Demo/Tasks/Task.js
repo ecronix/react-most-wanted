@@ -38,6 +38,7 @@ const Task = () => {
         }
       }}
       handleSubmit={(values, newUid) => {
+        console.log('values', values)
         if (newUid) {
           history.replace(`/${path}/${newUid}`)
         } else {

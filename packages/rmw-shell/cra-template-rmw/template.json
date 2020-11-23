@@ -3,7 +3,7 @@
     "dependencies": {
       "rmw-shell":"8.x",
       "@formatjs/intl-relativetimeformat": "7.x",
-      "@date-io/moment": "2.x",
+      "@date-io/moment": "1.x",
       "@material-ui/core": "4.x",
       "@material-ui/icons": "4.x",
       "@material-ui/lab": "^4.0.0-alpha.56",

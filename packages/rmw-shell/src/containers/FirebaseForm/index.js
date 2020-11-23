@@ -35,6 +35,8 @@ const FirebaseForm = ({
       onSubmit={async (values) => {
         let newUid = false
 
+        console.log('values', values)
+
         if (uid) {
           await firebaseApp.database().ref(`${path}/${uid}`).update(values)
         } else {
