@@ -13,6 +13,7 @@ const FirebaseForm = ({
   formProps = {},
   initialValues = {},
   setSubmit,
+  ...rest
 }) => {
   const { watchPath, clearPath, getPath, firebaseApp } = usePaths()
   const { auth } = useAuth()
@@ -35,8 +36,6 @@ const FirebaseForm = ({
       onSubmit={async (values) => {
         let newUid = false
 
-        console.log('values', values)
-
         if (uid) {
           await firebaseApp.database().ref(`${path}/${uid}`).update(values)
         } else {
@@ -51,12 +50,13 @@ const FirebaseForm = ({
         handleSubmit(values, newUid)
       }}
       initialValues={data}
-      render={({ handleSubmit, ...rest }) => {
+      render={({ handleSubmit, ...r }) => {
         if (setSubmit) {
           setSubmit(handleSubmit)
         }
-        return <Form handleSubmit={handleSubmit} {...rest} {...formProps} />
+        return <Form handleSubmit={handleSubmit} {...r} {...formProps} />
       }}
+      {...rest}
     />
   )
 }
