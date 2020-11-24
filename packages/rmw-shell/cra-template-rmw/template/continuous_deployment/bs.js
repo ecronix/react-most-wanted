@@ -53,18 +53,15 @@ var desktopIE = {
   'browserstack.key': process.argv[3],
 }
 
-/*
 var iPhoneDriver = new webdriver.Builder()
   .usingServer('http://hub-cloud.browserstack.com/wd/hub')
   .withCapabilities(iPhone)
   .build()
 
- 
 var androidDriver = new webdriver.Builder()
   .usingServer('http://hub-cloud.browserstack.com/wd/hub')
   .withCapabilities(android)
   .build()
-   */
 
 var desktopFFDriver = new webdriver.Builder()
   .usingServer('http://hub-cloud.browserstack.com/wd/hub')
@@ -81,8 +78,8 @@ var desktopIEDriver = new webdriver.Builder()
   .withCapabilities(desktopIE)
   .build()
 
-//test.runTest(iPhoneDriver)
-//test.runTest(androidDriver)
+test.runTest(iPhoneDriver)
+test.runTest(androidDriver)
 test.runTest(desktopFFDriver)
 test.runTest(desktopEdgeDriver)
 test.runTest(desktopIEDriver)
