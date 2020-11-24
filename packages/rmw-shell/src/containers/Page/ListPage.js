@@ -5,23 +5,35 @@ import React, { useEffect } from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 
-export default function ({
+const Page = ({
   fields = [],
   path = 'none',
+  getRef = false,
   Row,
   listProps = {},
   getPageProps = () => {},
   onCreateClick = () => {},
   createGrant,
-}) {
-  const { watchList, getList, isListLoading, unwatchList } = useLists()
+}) => {
+  const {
+    watchList,
+    getList,
+    isListLoading,
+    unwatchList,
+    firebaseApp,
+  } = useLists()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth || {}
 
   useEffect(() => {
-    watchList(path)
+    let ref = path
+
+    if (getRef) {
+      ref = getRef(firebaseApp)
+    }
+    watchList(ref, path)
     return () => unwatchList(path)
-  }, [path, watchList, unwatchList])
+  }, [getRef, path, watchList, unwatchList, firebaseApp])
 
   const list = getList(path).map(({ key, val }) => {
     return { key, ...val }
@@ -58,3 +70,5 @@ export default function ({
     </React.Fragment>
   )
 }
+
+export default Page
