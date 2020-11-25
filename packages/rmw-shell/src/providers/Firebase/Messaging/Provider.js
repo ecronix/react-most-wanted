@@ -8,6 +8,11 @@ import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'
 import SnackMessage from 'rmw-shell/lib/components/SnackMessage/SnackMessage'
 
+const isSupported = () =>
+  'Notification' in window &&
+  'serviceWorker' in navigator &&
+  'PushManager' in window
+
 const Provider = ({ children, firebaseApp }) => {
   const [token, setToken] = useState(false)
   const intl = useIntl()
@@ -20,7 +25,7 @@ const Provider = ({ children, firebaseApp }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
   useEffect(() => {
-    if (Notification.permission === 'granted') {
+    if (isSupported() && Notification.permission === 'granted') {
       initializeMessaging()
     }
   }, [])
@@ -75,10 +80,12 @@ const Provider = ({ children, firebaseApp }) => {
     <Fragment>
       <Button
         onClick={async () => {
-          closeSnackbar(key)
-          const permission = await Notification.requestPermission()
-          if (permission === 'granted') {
-            initializeMessaging()
+          if (isSupported()) {
+            closeSnackbar(key)
+            const permission = await Notification.requestPermission()
+            if (permission === 'granted') {
+              initializeMessaging()
+            }
           }
         }}
         style={{ margin: 8 }}
@@ -103,6 +110,7 @@ const Provider = ({ children, firebaseApp }) => {
   const requestPermission = () => {
     if (!('Notification' in window)) {
       console.log('This browser does not support desktop notification')
+      return
     }
 
     if (Notification.permission === 'default') {

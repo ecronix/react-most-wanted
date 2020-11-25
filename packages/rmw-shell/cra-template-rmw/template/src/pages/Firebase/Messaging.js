@@ -8,6 +8,11 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 
+const isSupported = () =>
+  'Notification' in window &&
+  'serviceWorker' in navigator &&
+  'PushManager' in window
+
 const Messaging = () => {
   const intl = useIntl()
   const [title, setTitle] = useState('Title')
@@ -15,6 +20,13 @@ const Messaging = () => {
   const [aktion, setAktion] = useState('/home')
   const { auth } = useAuth()
   const { firebaseApp, token, requestPermission } = useMessaging()
+
+  let disabled = true
+
+  if (isSupported()) {
+    disabled =
+      Notification.permission !== 'granted' || title === '' || body === ''
+  }
 
   const sendMessage = async () => {
     const httpsMessagesOnCall = firebaseApp
@@ -120,11 +132,7 @@ const Messaging = () => {
                 variant="contained"
                 color="primary"
                 onClick={sendMessage}
-                disabled={
-                  Notification.permission !== 'granted' ||
-                  title === '' ||
-                  body === ''
-                }
+                disabled={disabled}
               >
                 SEND
               </Button>
@@ -137,11 +145,7 @@ const Messaging = () => {
                 onClick={() => {
                   setTimeout(sendMessage, 5000)
                 }}
-                disabled={
-                  Notification.permission !== 'granted' ||
-                  title === '' ||
-                  body === ''
-                }
+                disabled={disabled}
               >
                 SEND in 5 sec
               </Button>
