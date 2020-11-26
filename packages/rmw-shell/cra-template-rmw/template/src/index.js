@@ -16,8 +16,12 @@ render(
 serviceWorkerRegistration.register({
   onUpdate: (reg) => {
     window.update = () => {
-      reg.waiting.postMessage({ type: 'SKIP_WAITING' })
-      window.location.reload()
+      try {
+        reg.waiting.postMessage({ type: 'SKIP_WAITING' })
+        window.location.reload()
+      } catch (error) {
+        console.warn('error', error)
+      }
     }
   },
 })
