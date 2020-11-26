@@ -16,6 +16,8 @@ export default function (props) {
     listProps,
     Row,
     name,
+    trailing = null,
+    leading = null,
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
@@ -28,6 +30,7 @@ export default function (props) {
       contentStyle={{ overflow: 'hidden' }}
       appBarContent={
         <Toolbar disableGutters>
+          {leading}
           <SearchField
             initialValue={searchvalue}
             onChange={(v) => {
@@ -41,6 +44,7 @@ export default function (props) {
               />
             </IconButton>
           )}
+          {trailing}
         </Toolbar>
       }
       {...getPageProps(list)}
