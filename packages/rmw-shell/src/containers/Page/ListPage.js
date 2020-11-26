@@ -14,6 +14,7 @@ const Page = ({
   getPageProps = () => {},
   onCreateClick = () => {},
   createGrant,
+  listPageProps,
 }) => {
   const {
     watchList,
@@ -53,6 +54,7 @@ const Page = ({
             ...getPageProps(list),
           }
         }}
+        {...listPageProps}
       />
       {isGranted(auth, createGrant) && (
         <Fab
