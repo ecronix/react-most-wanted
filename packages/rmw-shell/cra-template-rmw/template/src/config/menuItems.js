@@ -42,7 +42,7 @@ const getMenuItems = (props) => {
   const { themeID = 'en', setThemeID } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
   const { auth } = authData
-  const { isGranted = () => false } = auth || {}
+  const { isGranted = () => false, isAdmin = false } = auth || {}
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -153,7 +153,7 @@ const getMenuItems = (props) => {
       nestedItems: [
         {
           value: '/admin',
-          visible: !isGranted(auth, 'administration'),
+          visible: !isAdmin,
           primaryText: intl.formatMessage({
             id: 'admin',
             defaultMessage: 'Admin',
@@ -273,7 +273,7 @@ const getMenuItems = (props) => {
         defaultMessage: 'Administration',
       }),
       primaryTogglesNestedList: true,
-      visible: isGranted(auth, 'administration'),
+      visible: isAdmin,
       leftIcon: <Security />,
       nestedItems: [
         {
