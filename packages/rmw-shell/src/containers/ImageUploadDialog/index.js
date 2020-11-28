@@ -7,14 +7,11 @@ import Dialog from '@material-ui/core/Dialog'
 import CloudUpload from '@material-ui/icons/CloudUpload'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import React, { useContext, useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import Slide from '@material-ui/core/Slide'
 import getCroppedImg from './getCropImage'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useIntl } from 'react-intl'
-import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
 import { useStorage } from 'rmw-shell/lib/providers/Firebase/Storage'
 import { useTheme } from '@material-ui/core/styles'
 
@@ -47,6 +44,7 @@ export default function ({
   handleClose,
   handleCropSubmit,
   path,
+  cropperProps,
 }) {
   const intl = useIntl()
   const theme = useTheme()
@@ -58,10 +56,8 @@ export default function ({
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
   const {
-    firebaseApp,
     getUploadError,
     isUploading,
-    getDownloadURL,
     hasUploadError,
     uploadString,
     clearUpload,
@@ -222,6 +218,7 @@ export default function ({
                 onCropChange={setCrop}
                 onCropComplete={onCropComplete}
                 onZoomChange={setZoom}
+                {...cropperProps}
               />
             </div>
           )}
@@ -250,6 +247,7 @@ export default function ({
                 <img
                   style={{ height: 250, borderRadius: '50%' }}
                   src={croppedImage}
+                  alt="img"
                 />
               </Box>
             </Box>
