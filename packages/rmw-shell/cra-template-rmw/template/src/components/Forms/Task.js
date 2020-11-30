@@ -1,10 +1,16 @@
 import React from 'react'
-import { TextField } from 'mui-rff'
-import { Autocomplete } from 'rmw-shell/lib/components/FormFields/Autocomplete'
-import { KeyboardDatePicker } from 'rmw-shell/lib/components/FormFields/KeyboardDatePicker'
+//import { TextField } from 'mui-rff'
+import {
+  Autocomplete,
+  KeyboardDatePicker,
+  TextField,
+} from 'rmw-shell/lib/components/FormFields'
+import { Field } from 'react-final-form'
+
+const identity = (value) => value
 
 // eslint-disable-next-line
-export default function ({ id, handleSubmit, values, users = [] }) {
+const Form = ({ id, handleSubmit, values, users = [] }) => {
   const helpers = users.map((u) => {
     const { key, val } = u
     const { displayName } = val
@@ -20,12 +26,33 @@ export default function ({ id, handleSubmit, values, users = [] }) {
       <button type="submit" style={{ display: 'none' }} />
       <div>
         <TextField
+          //fieldProps={{ parse: identity }}
           label="Title"
           name="title"
           variant="outlined"
           margin="normal"
           required={true}
-          fullWidth={false}
+          fullWidth={true}
+        />
+        <div>
+          <label>First Name</label>
+          <Field
+            parse={identity}
+            name="firstName"
+            component="input"
+            type="text"
+            placeholder="First Name"
+          />
+        </div>
+        <br />
+        <TextField
+          label="Description"
+          name="description"
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          multiline
+          minRows={2}
         />
         <br />
 
@@ -64,3 +91,5 @@ export default function ({ id, handleSubmit, values, users = [] }) {
     </form>
   )
 }
+
+export default Form

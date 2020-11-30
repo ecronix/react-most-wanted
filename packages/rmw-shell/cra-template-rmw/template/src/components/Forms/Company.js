@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField } from 'mui-rff'
+import { TextField } from 'rmw-shell/lib/components/FormFields'
 
 // eslint-disable-next-line
 export default function ({ handleSubmit }) {

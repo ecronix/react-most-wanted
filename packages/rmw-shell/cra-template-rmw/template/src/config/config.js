@@ -28,6 +28,21 @@ const config = {
     },
     dev: {
       initConfig: {
+        apiKey: 'AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY',
+        authDomain: 'react-most-wanted-3b1b2.firebaseapp.com',
+        databaseURL: 'https://react-most-wanted-3b1b2.firebaseio.com',
+        projectId: 'react-most-wanted-3b1b2',
+        storageBucket: 'react-most-wanted-3b1b2.appspot.com',
+        messagingSenderId: '258373383650',
+        appId: '1:258373383650:web:b49ad5dd28da999a',
+      },
+      messaging: {
+        publicVapidKey:
+          'BEthk1-Qmoh9opZbi1AUZpxANTu6djVRDph4MLpyO2Qk6Dglm1Sa8Yt_pYi4EhYi3Tj-xgLqUktlbNuP_RP6gto',
+      },
+    },
+    devd: {
+      initConfig: {
         apiKey: 'AIzaSyB31cMH9nJnERC1WCWA7lQHnY08voLs-Z0',
         authDomain: 'react-most-wanted-dev.firebaseapp.com',
         databaseURL: 'https://react-most-wanted-dev.firebaseio.com',

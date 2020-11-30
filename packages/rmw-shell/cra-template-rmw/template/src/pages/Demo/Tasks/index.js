@@ -4,10 +4,11 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemText from '@material-ui/core/ListItemText'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { ListPage } from 'rmw-shell/lib/containers/Page'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
+import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 
 const path = 'tasks'
 
@@ -51,11 +52,18 @@ const Row = ({ data, index, style }) => {
 const Tasks = () => {
   const intl = useIntl()
   const history = useHistory()
+  const { firebaseApp } = useFirebase()
+
+  const getRef = useCallback(() => {
+    return firebaseApp.database().ref(`public_tasks`).limitToLast(50)
+  }, [firebaseApp])
 
   return (
     <ListPage
+      reverse
       fields={fields}
       path={'public_tasks'}
+      getRef={getRef}
       createGrant="create_task"
       Row={Row}
       listProps={{ itemSize: 72 }}
