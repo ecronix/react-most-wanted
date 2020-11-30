@@ -15,6 +15,7 @@ const Page = ({
   onCreateClick = () => {},
   createGrant,
   listPageProps,
+  reverse = false,
 }) => {
   const {
     watchList,
@@ -36,9 +37,11 @@ const Page = ({
     return () => unwatchList(path)
   }, [getRef, path, watchList, unwatchList, firebaseApp])
 
-  const list = getList(path).map(({ key, val }) => {
+  const source = getList(path).map(({ key, val }) => {
     return { key, ...val }
   })
+
+  const list = reverse ? [...source].reverse() : source
 
   return (
     <React.Fragment>
