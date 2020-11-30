@@ -81,6 +81,10 @@ const config = {
           .database()
           .ref(`user_grants/${user.uid}`)
           .once('value')
+        const notifcationsDisabledSnap = await firebaseApp
+          .database()
+          .ref(`disable_notifications/${user.uid}`)
+          .once('value')
 
         const isAdminSnap = await firebaseApp
           .database()
@@ -96,6 +100,13 @@ const config = {
 
         firebaseApp
           .database()
+          .ref(`disable_notifications/${user.uid}`)
+          .on('value', (snap) => {
+            auth.updateAuth({ notificationsDisabled: !!snap.val() })
+          })
+
+        firebaseApp
+          .database()
           .ref(`admins/${user.uid}`)
           .on('value', (snap) => {
             auth.updateAuth({ isAdmin: !!snap.val() })
@@ -104,6 +115,7 @@ const config = {
         auth.updateAuth({
           ...defaultUserData(user),
           grants: grantsSnap.val(),
+          notificationsDisabled: notifcationsDisabledSnap.val(),
           isAdmin: !!isAdminSnap.val(),
           isGranted,
         })
@@ -115,6 +127,7 @@ const config = {
           providers: user.providerData,
           emailVerified: user.emailVerified,
           isAnonymous: user.isAnonymous,
+          notificationsDisabled: notifcationsDisabledSnap.val(),
         })
 
         await firebaseApp

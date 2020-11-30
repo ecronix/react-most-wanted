@@ -4,6 +4,7 @@ import Delete from '@material-ui/icons/Delete'
 import Fab from '@material-ui/core/Fab'
 import InputBase from '@material-ui/core/InputBase'
 import NotificationsOff from '@material-ui/icons/NotificationsOff'
+import Notifications from '@material-ui/icons/Notifications'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Paper from '@material-ui/core/Paper'
 import React, { useState } from 'react'
@@ -24,6 +25,7 @@ import {
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
 import firebase from 'firebase/app'
+import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 
 const uuid = () => {
   const url = URL.createObjectURL(new Blob())
@@ -41,15 +43,17 @@ const MyAccount = () => {
   const { signInOptions = [] } = firebaseuiProps || {}
   const { openDialog } = useQuestions()
 
-  const { auth, setAuth } = useAuth()
+  const { auth, updateAuth } = useAuth()
   const {
     photoURL: currentPhoroURL = '',
     displayName: currentDisplayName = '',
     email = '',
+    notificationsDisabled = false,
   } = auth || {}
   const [displayName, setDisplayName] = useState(currentDisplayName)
   const [photoURL, setPhotoURL] = useState(currentPhoroURL)
   const [isImageDialogOpen, setImageDialogOpen] = useState(false)
+  const { requestPermission } = useMessaging()
 
   const hasChange =
     displayName !== currentDisplayName || photoURL !== currentPhoroURL
@@ -100,7 +104,7 @@ const MyAccount = () => {
       .auth()
       .currentUser.updateProfile({ displayName, photoURL })
 
-    setAuth({ ...auth, displayName, photoURL })
+    updateAuth({ ...auth, displayName, photoURL })
   }
 
   const isLinkedWithProvider = (provider) => {
@@ -125,7 +129,7 @@ const MyAccount = () => {
       .currentUser.linkWithPopup(provider)
       .then(
         () => {
-          setAuth({ ...auth, ...firebaseApp.auth().currentUser })
+          updateAuth({ ...auth, ...firebaseApp.auth().currentUser })
         },
         (e) => {
           console.warn(e)
@@ -186,6 +190,27 @@ const MyAccount = () => {
     handleClose()
   }
 
+  const handleDisableNotifications = async () => {
+    await firebaseApp
+      .database()
+      .ref(`disable_notifications/${auth.uid}`)
+      .set(true)
+
+    await firebaseApp.database().ref(`notification_tokens/${auth.uid}`).remove()
+  }
+
+  const handleEnableNotifications = async () => {
+    await firebaseApp
+      .database()
+      .ref(`disable_notifications/${auth.uid}`)
+      .set(null)
+
+    updateAuth({ ...auth, notificationsDisabled: false })
+
+    requestPermission()
+    window.location.reload()
+  }
+
   return (
     <Page
       pageTitle={intl.formatMessage({
@@ -221,11 +246,16 @@ const MyAccount = () => {
               top: 30,
               right: -16,
             }}
-            onClick={handleSave}
+            onClick={
+              notificationsDisabled
+                ? handleEnableNotifications
+                : handleDisableNotifications
+            }
             color="primary"
             aria-label="notifications"
           >
-            <NotificationsOff />
+            {!notificationsDisabled && <NotificationsOff />}
+            {notificationsDisabled && <Notifications />}
           </Fab>
           <Fab
             size="medium"

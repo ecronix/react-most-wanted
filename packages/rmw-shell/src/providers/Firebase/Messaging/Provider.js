@@ -18,25 +18,33 @@ const Provider = ({ children, firebaseApp }) => {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { auth = {} } = useAuth()
-  const { uid } = auth || {}
+  const { uid, notificationsDisabled = false } = auth || {}
   const { firebase } = appConfig || {}
   const { messaging: messagingConfig } = firebase || {}
   const { publicVapidKey } = messagingConfig || {}
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
   useEffect(() => {
-    if (isSupported() && Notification.permission === 'granted') {
+    if (
+      isSupported() &&
+      Notification.permission === 'granted' &&
+      !notificationsDisabled
+    ) {
       initializeMessaging()
     }
   }, [])
 
-  const syncToken = (token) => {
+  const syncToken = async (token) => {
+    if (notificationsDisabled) {
+      return
+    }
+
     setToken(token)
     try {
-      if (auth.uid) {
-        firebaseApp
+      if (uid) {
+        await firebaseApp
           .database()
-          .ref(`notification_tokens/${auth.uid}/${token}`)
+          .ref(`notification_tokens/${uid}/${token}`)
           .set(true)
       }
     } catch (error) {
@@ -51,7 +59,6 @@ const Provider = ({ children, firebaseApp }) => {
     }
 
     messaging.onMessage((payload) => {
-      console.log('payload', payload)
       enqueueSnackbar('', {
         content: (key) => {
           return <SnackMessage payload={payload} id={key} />
