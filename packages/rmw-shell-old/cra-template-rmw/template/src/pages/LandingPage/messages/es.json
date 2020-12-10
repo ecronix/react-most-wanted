@@ -9,6 +9,6 @@
   "usage": "Usage",
   "set": "Set your configuration to the App component:",
   "what": "What is this?",
-  "this": "This is a OPEN SOURCE demo application that demonstartes the usage of the rmw-shell library with react, Material-UI and firebase.",
-  "demo": "This demo has no purpose to do something as an app. It is here just to show how everthing works together."
+  "this": "This is a OPEN SOURCE demo application that demonstrates the usage of the rmw-shell library with react, Material-UI and firebase.",
+  "demo": "This demo has no purpose to do something as an app. It is here just to show how everything works together."
 }
