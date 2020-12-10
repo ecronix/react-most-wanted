@@ -39,7 +39,7 @@ const messages=defineMessages({
   password: 'Contraseña',
   new_password: 'Nueva Contraseña',
   confirm_password: 'Confirmar Contraseña',
-  forgort_password: '¿Olvido la Contraseña?',
+  forgot_password: '¿Olvido la Contraseña?',
   reset_password: 'Restablecer Contraseña',
   change_password: 'Cambiar Contraseña',
   change_photo: 'Cambiar Foto',
