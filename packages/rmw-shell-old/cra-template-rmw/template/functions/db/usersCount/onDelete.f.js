@@ -59,6 +59,8 @@ export default database.ref('/users_count').onDelete((data, context) => {
       userUids.push(userUid)
     })
 
+    console.log(userUids)
+
     // Remove unsynced users
     dbUsers.forEach(userSnap => {
       if (userUids.indexOf(userSnap.key) > -1) {
