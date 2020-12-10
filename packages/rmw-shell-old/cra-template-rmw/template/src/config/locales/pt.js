@@ -41,7 +41,7 @@ const messages = defineMessages({
   password: 'Senha',
   new_password: 'Nova Senha',
   confirm_password: 'Confirmar Senha',
-  forgort_password: 'Esqueceu a senha?',
+  forgot_password: 'Esqueceu a senha?',
   reset_password: 'Recriar senha',
   change_password: 'Alterar senha',
   change_photo: 'Alterar foto',

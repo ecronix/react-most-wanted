@@ -40,7 +40,7 @@ const messages = defineMessages({
   password: 'Passwort',
   new_password: 'Neues Passwort',
   confirm_password: 'Passwort bestätigen',
-  forgort_password: 'Passwort vergessen?',
+  forgot_password: 'Passwort vergessen?',
   reset_password: 'Passwort zurücksetzten',
   change_password: 'Passwort ändern',
   change_email: 'E-Mail ändern',
