@@ -116,14 +116,14 @@ class Dashboard extends Component {
 
     let providersData = []
     let providersLabels = []
-    let providersBackgrounColors = []
+    let providersBackgroundColors = []
 
     if (providers) {
       Object.keys(providers)
         .sort()
         .map((key) => {
           providersLabels.push(intl.formatMessage({ id: key }))
-          providersBackgrounColors.push(
+          providersBackgroundColors.push(
             intl.formatMessage({ id: `${key}_color` })
           )
           providersData.push(providers[key])
@@ -136,8 +136,8 @@ class Dashboard extends Component {
       datasets: [
         {
           data: providersData,
-          backgroundColor: providersBackgrounColors,
-          hoverBackgroundColor: providersBackgrounColors,
+          backgroundColor: providersBackgroundColors,
+          hoverBackgroundColor: providersBackgroundColors,
         },
       ],
     }

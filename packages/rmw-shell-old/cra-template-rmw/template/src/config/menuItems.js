@@ -3,7 +3,7 @@ import Brightness2 from '@material-ui/icons/Brightness2'
 import Brightness7 from '@material-ui/icons/Brightness7'
 import Business from '@material-ui/icons/Business'
 import ChatIcon from '@material-ui/icons/Chat'
-import DaschboardIcon from '@material-ui/icons/Dashboard'
+import DashboardIcon from '@material-ui/icons/Dashboard'
 import GroupIcon from '@material-ui/icons/Group'
 import InfoOutlined from '@material-ui/icons/InfoOutlined'
 import LanguageIcon from '@material-ui/icons/Language'
@@ -91,7 +91,7 @@ const getMenuItems = props => {
       value: '/dashboard',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'dashboard' }),
-      leftIcon: <DaschboardIcon />,
+      leftIcon: <DashboardIcon />,
     },
     {
       visible: isAuthorised,
