@@ -16,7 +16,7 @@ const Docs=({intl}) =>{
       fetch(DOCS)
             .then(response => response.text())
             .then(txt => {
-           setText(txt)
+          setText(txt)
             })
   }, []);
 

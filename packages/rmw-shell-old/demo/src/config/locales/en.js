@@ -39,7 +39,7 @@ const messages = defineMessages({
   password: 'Password',
   new_password: 'New Password',
   confirm_password: 'Confirm Password',
-  forgort_password: 'Forgot Password?',
+  forgot_password: 'Forgot Password?',
   reset_password: 'Reset Password',
   change_password: 'Change Password',
   change_photo: 'Change Photo',

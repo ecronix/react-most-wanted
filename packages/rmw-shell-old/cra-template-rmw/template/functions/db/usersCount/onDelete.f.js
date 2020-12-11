@@ -10,9 +10,9 @@ export default database.ref('/users_count').onDelete((data, context) => {
     .once('value')
   const getAuthUsers = usersUtil.listAllUsers()
 
-  return Promise.all([getDBUsers, getAuthUsers]).then(resulsts => {
-    const dbUsers = resulsts[0]
-    const authUsers = resulsts[1]
+  return Promise.all([getDBUsers, getAuthUsers]).then(results => {
+    const dbUsers = results[0]
+    const authUsers = results[1]
     let promises = []
 
     let userUids = []
@@ -25,7 +25,7 @@ export default database.ref('/users_count').onDelete((data, context) => {
       let userPublicProviderData = {}
 
       const creationTime = moment(user.metadata.creationTime)
-      const creationTimeFormated = creationTime.toISOString()
+      const creationTimeFormatted = creationTime.toISOString()
 
       // Collecting data for provider
       if (user.providerData) {
@@ -51,7 +51,7 @@ export default database.ref('/users_count').onDelete((data, context) => {
         displayName: user.displayName ? user.displayName : null,
         photoURL: user.photoURL ? user.photoURL : null,
         providerData: userPublicProviderData,
-        creationTime: creationTimeFormated,
+        creationTime: creationTimeFormatted,
       }
 
       usersPublicData[userUid] = userPublicData

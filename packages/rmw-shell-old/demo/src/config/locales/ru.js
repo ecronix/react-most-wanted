@@ -38,7 +38,7 @@ const messages=defineMessages({
   password: 'Пароль',
   new_password: 'Новый пароль',
   confirm_password: 'Повторите пароль',
-  forgort_password: 'Забыли пароль?',
+  forgot_password: 'Забыли пароль?',
   reset_password: 'Сброс пароля',
   change_password: 'Изменить пароль',
   change_photo: 'Сменить фото',
