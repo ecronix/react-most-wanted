@@ -25,7 +25,7 @@ export default function ({ children }) {
           runUpdate()
         }}
       >
-        {intl.formatMessage({ id: 'udpate', defaultMessage: 'Update' })}
+        {intl.formatMessage({ id: 'update', defaultMessage: 'Update' })}
       </Button>
       <Button
         color="secondary"

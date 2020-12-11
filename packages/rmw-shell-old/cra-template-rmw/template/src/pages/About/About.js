@@ -16,7 +16,7 @@ const About=({intl}) =>{
       fetch(README)
             .then(response => response.text())
             .then(txt => {
-           setText(txt)
+            setText(txt)
             })
   }, []);
 

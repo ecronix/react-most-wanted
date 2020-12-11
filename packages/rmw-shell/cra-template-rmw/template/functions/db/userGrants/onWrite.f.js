@@ -3,8 +3,8 @@ import admin from 'firebase-admin'
 import { setClaim, removeClaim } from '../../utils/customClaims'
 
 const wait = t => {
-  return new Promise((reseolve, reject) => {
-    setTimeout(() => reseolve(), t)
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(), t)
   })
 }
 

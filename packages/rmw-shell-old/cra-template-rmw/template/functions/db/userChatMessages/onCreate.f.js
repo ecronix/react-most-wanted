@@ -66,7 +66,7 @@ export default functions
           lastMessage = 'Link'
         }
         if (snapValues.image) {
-          lastMessage = 'Foto'
+          lastMessage = 'Photo'
         }
         if (snapValues.location) {
           lastMessage = 'Position'

@@ -50,7 +50,7 @@ export default functions
         lastMessage = 'Link'
       }
       if (image) {
-        lastMessage = 'Foto'
+        lastMessage = 'Photo'
       }
       if (location) {
         lastMessage = 'Position'
@@ -102,7 +102,7 @@ export default functions
         isRead: null,
       })
 
-    // update unred
+    // update unread
     await admin
       .database()
       .ref(`/user_chats/${receiverUid}/${senderUid}/unread`)
