@@ -49,7 +49,7 @@ const FilterDemo = () => {
   const { openFilter, getList, getFilter, setSearch } = useFilter()
 
   const { queries = [], search = {} } = getFilter(filterName)
-  const { value: searchvalue = '' } = search
+  const { value: searchValue = '' } = search
 
   const fields = [
     {
@@ -139,7 +139,7 @@ const FilterDemo = () => {
       appBarContent={
         <Toolbar disableGutters>
           <SearchField
-            initialValue={searchvalue}
+            initialValue={searchValue}
             onChange={(v) => {
               setSearch(filterName, v)
             }}

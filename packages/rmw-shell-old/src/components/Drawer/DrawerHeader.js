@@ -4,8 +4,8 @@ import { injectIntl } from 'react-intl'
 import { withAppConfigs } from '../../contexts/AppConfigProvider'
 import withWidth from '@material-ui/core/withWidth'
 import { withStyles } from '@material-ui/core/styles'
-import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import ArroWDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import Avatar from '@material-ui/core/Avatar'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
@@ -148,10 +148,10 @@ export const DrawerHeader = props => {
                 >
                   <IconButton>
                     {dialogs.auth_menu && (
-                      <ArroWDropUpIcon classes={{ root: classes.icon }} />
+                      <ArrowDropUpIcon classes={{ root: classes.icon }} />
                     )}
                     {!dialogs.auth_menu && (
-                      <ArroWDropDownIcon classes={{ root: classes.icon }} />
+                      <ArrowDropDownIcon classes={{ root: classes.icon }} />
                     )}
                   </IconButton>
                 </ListItemSecondaryAction>

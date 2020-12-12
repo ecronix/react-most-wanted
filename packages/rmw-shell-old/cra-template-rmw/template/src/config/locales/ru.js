@@ -91,7 +91,7 @@ const messages = defineMessages({
   delete_message_title: 'Удалить сообщение?',
   delete_message_message: 'Сообщение будет удалено!',
   users_count_title: '{количество} Пользователей',
-  user_registrationg_graph_label: 'Регистрация пользователей',
+  user_registration_graph_label: 'Регистрация пользователей',
   required: 'Обязательно',
   facebook: 'Фейсбук',
   github: 'Гитхаб',

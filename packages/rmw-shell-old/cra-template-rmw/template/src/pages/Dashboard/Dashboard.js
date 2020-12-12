@@ -90,7 +90,7 @@ class Dashboard extends Component {
       labels: monthsLabels,
       datasets: [
         {
-          label: intl.formatMessage({ id: 'user_registrationg_graph_label' }),
+          label: intl.formatMessage({ id: 'user_registration_graph_label' }),
           fill: false,
           maintainAspectRatio: true,
           lineTension: 0.1,

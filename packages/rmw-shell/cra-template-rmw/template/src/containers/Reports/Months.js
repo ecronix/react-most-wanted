@@ -47,7 +47,7 @@ export default function () {
     datasets: [
       {
         label: intl.formatMessage({
-          id: 'user_registrationg_graph_label',
+          id: 'user_registration_graph_label',
           defaultMessage: 'Registered users',
         }),
         fill: false,
