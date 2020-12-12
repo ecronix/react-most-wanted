@@ -33,7 +33,7 @@ export default function () {
   const { firebaseApp } = useFirebase()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth
-  const { value: searchvalue = '' } = search
+  const { value: searchValue = '' } = search
   let submit
 
   const setSubmit = (s) => {
@@ -104,7 +104,7 @@ export default function () {
             <Zoom key={tab} in={tab !== 'main'}>
               <div>
                 <SearchField
-                  initialValue={searchvalue}
+                  initialValue={searchValue}
                   onChange={(v) => {
                     setSearch(tab, v)
                   }}

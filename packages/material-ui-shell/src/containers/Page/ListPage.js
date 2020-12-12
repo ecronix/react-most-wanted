@@ -21,7 +21,7 @@ export default function (props) {
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
-  const { value: searchvalue = '' } = search
+  const { value: searchValue = '' } = search
 
   const list = getList(name, source, fields)
 
@@ -32,7 +32,7 @@ export default function (props) {
         <Toolbar disableGutters>
           {leading}
           <SearchField
-            initialValue={searchvalue}
+            initialValue={searchValue}
             onChange={(v) => {
               setSearch(name, v)
             }}

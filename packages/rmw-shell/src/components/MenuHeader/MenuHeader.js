@@ -17,8 +17,8 @@ import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import ArroWDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import ArroWDropUpIcon from '@material-ui/icons/ArrowDropUp'
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 
@@ -187,10 +187,10 @@ const MenuHeader = () => {
               >
                 <IconButton>
                   {isAuthMenuOpen && (
-                    <ArroWDropUpIcon classes={{ root: classes.icon }} />
+                    <ArrowDropUpIcon classes={{ root: classes.icon }} />
                   )}
                   {!isAuthMenuOpen && (
-                    <ArroWDropDownIcon classes={{ root: classes.icon }} />
+                    <ArrowDropDownIcon classes={{ root: classes.icon }} />
                   )}
                 </IconButton>
               </ListItemSecondaryAction>
