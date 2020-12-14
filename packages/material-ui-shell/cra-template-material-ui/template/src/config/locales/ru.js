@@ -38,6 +38,10 @@ const messages = defineMessages({
   password_reset:'Сброс пароля',
   password_confirm:'Подтвердить пароль',
   registration:'Регистрация',
+  my_account: 'Мой аккаунт',
+  delete_account_dialog_title: 'Удалить Ваш аккаунт?',
+  delete_account_dialog_message: 'Ваш аккаунт будет удален и вы потеряете все ваши данные!',
+  delete_account_dialog_action:'Удалить аккаунт'
 })
 
 export default messages
