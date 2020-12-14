@@ -231,7 +231,7 @@ export default function ({
               <CircularProgress
                 size={280}
                 color={hasUploadError(path) ? 'secondary' : 'primary'}
-                variant="static"
+                variant="determinate"
                 value={getUploadProgress(path)}
               />
               <Box
@@ -266,7 +266,7 @@ export default function ({
         <Button
           disabled={isUploading(path) || hasUploadError(path) || !file}
           onClick={showCroppedImage}
-          color="primaryy"
+          color="primary"
         >
           {intl.formatMessage({ id: 'save', defaultMessage: 'Save' })}
         </Button>
