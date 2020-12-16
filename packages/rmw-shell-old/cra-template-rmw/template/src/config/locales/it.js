@@ -101,7 +101,7 @@ const messages = defineMessages({
   delete_message_title: 'Elimina messaggio?',
   delete_message_message: 'Il messaggio verrà aliminato!',
   users_count_title: '{number} Utenti',
-  user_registrationg_graph_label: 'Registrazione utenti',
+  user_registration_graph_label: 'Registrazione utenti',
   required: 'Richieto',
   facebook: 'Facebook',
   github: 'Github',
