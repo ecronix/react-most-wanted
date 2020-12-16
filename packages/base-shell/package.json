@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "1.2.19",
+  "version": "1.2.20",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -23,20 +23,20 @@
   "peerDependencies": {
     "intl": "1.x",
     "intl-locales-supported": "1.x",
-    "@formatjs/intl-relativetimeformat": "7.x",
+    "@formatjs/intl-relativetimeformat": "8.x",
     "react": "17.x",
     "react-dom": "17.x",
     "react-router-dom": "5.x",
     "react-intl": "5.x"
   },
   "devDependencies": {
-    "@formatjs/intl-relativetimeformat": "^7.3.6",
+    "@formatjs/intl-relativetimeformat": "^8.0.1",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.12",
     "nwb": "^0.25.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-intl": "^5.10.2",
+    "react-intl": "^5.10.7",
     "react-router-dom": "^5.2.0"
   },
   "author": "Tarik Huber",
