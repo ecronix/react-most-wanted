@@ -76,7 +76,7 @@ export default functions
         }
       }
 
-      const udateReceiverChatMessage = receiverChatMessageRef
+      const updateReceiverChatMessage = receiverChatMessageRef
         .update(snapValues)
         .then(() => {
           return senderChatMessageRef.update({
@@ -102,7 +102,7 @@ export default functions
         lastCreated: snapValues.created,
         isRead: null,
       })
-      const updateReceiverUnred = receiverChatUnreadRef.transaction(number => {
+      const updateReceiverUnread = receiverChatUnreadRef.transaction(number => {
         return (number || 0) + 1
       })
 
@@ -135,10 +135,10 @@ export default functions
       }
 
       return Promise.all([
-        udateReceiverChatMessage,
+        updateReceiverChatMessage,
         udateSenderChat,
         udateReceiverChat,
-        updateReceiverUnred,
+        updateReceiverUnread,
         notifyUser,
       ])
     })

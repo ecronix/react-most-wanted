@@ -37,7 +37,7 @@ export default function () {
   const { uid, tab = 'main' } = useParams()
   const { getFilter, setSearch } = useFilter()
   const { search = {} } = getFilter(tab)
-  const { value: searchvalue = '' } = search
+  const { value: searchValue = '' } = search
 
   const grantsPath = `user_grants/${uid}`
   const rolesPath = `user_roles/${uid}`
@@ -100,7 +100,7 @@ export default function () {
             <Zoom key={tab} in={tab !== 'main'}>
               <div>
                 <SearchField
-                  initialValue={searchvalue}
+                  initialValue={searchValue}
                   onChange={(v) => {
                     setSearch(tab, v)
                   }}
