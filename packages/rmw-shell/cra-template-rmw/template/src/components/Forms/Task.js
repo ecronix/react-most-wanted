@@ -5,9 +5,6 @@ import {
   KeyboardDatePicker,
   TextField,
 } from 'rmw-shell/lib/components/FormFields'
-import { Field } from 'react-final-form'
-
-const identity = (value) => value
 
 // eslint-disable-next-line
 const Form = ({ id, handleSubmit, values, users = [] }) => {
@@ -26,7 +23,6 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
       <button type="submit" style={{ display: 'none' }} />
       <div>
         <TextField
-          //fieldProps={{ parse: identity }}
           label="Title"
           name="title"
           variant="outlined"
@@ -34,16 +30,6 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
           required={true}
           fullWidth={true}
         />
-        <div>
-          <label>First Name</label>
-          <Field
-            parse={identity}
-            name="firstName"
-            component="input"
-            type="text"
-            placeholder="First Name"
-          />
-        </div>
         <br />
         <TextField
           label="Description"
