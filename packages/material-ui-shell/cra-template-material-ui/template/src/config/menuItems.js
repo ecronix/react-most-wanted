@@ -1,3 +1,4 @@
+import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import ChatBubble from '@material-ui/icons/ChatBubble'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
 import DaschboardIcon from '@material-ui/icons/Dashboard'
@@ -62,6 +63,14 @@ const getMenuItems = (props) => {
   if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
+        value: '/my_account',
+        primaryText: intl.formatMessage({
+          id: 'my_account',
+          defaultMessage: 'My Account',
+        }),
+        leftIcon: <AccountBoxIcon />,
+      },
+      {
         value: '/signin',
         onClick: isAuthorised
           ? () => {
@@ -83,7 +92,6 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'home' }),
       leftIcon: <DaschboardIcon />,
     },
-
     {
       primaryText: intl.formatMessage({ id: 'demos', defaultMessage: 'Demos' }),
       primaryTogglesNestedList: true,
