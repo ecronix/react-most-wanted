@@ -12,8 +12,8 @@ import Slide from '@material-ui/core/Slide'
 import getCroppedImg from './getCropImage'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useIntl } from 'react-intl'
-import { useStorage } from 'rmw-shell/lib/providers/Firebase/Storage'
 import { useTheme } from '@material-ui/core/styles'
+import { useAuth } from 'base-shell/lib/providers/Auth'
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
@@ -55,21 +55,21 @@ export default function ({
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+
+  const { auth, updateAuth } = useAuth()
+
   const {
-    getUploadError,
-    isUploading,
-    hasUploadError,
-    uploadString,
-    clearUpload,
-    getUploadProgress,
-  } = useStorage()
+    photoURL: currentPhoroURL = '',
+    displayName: currentDisplayName = '',
+  } = auth || {}
+
+  const [photoURL, setPhotoURL] = useState(currentPhoroURL)
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }, [])
 
   const clear = () => {
-    clearUpload()
     setCroppedImage(false)
     setFile(false)
     setCroppedAreaPixels(null)
@@ -86,21 +86,11 @@ export default function ({
       const croppedImage = await getCroppedImg(file, croppedAreaPixels, 0)
 
       setCroppedImage(croppedImage)
-      uploadString(
-        path,
-        path,
-        croppedImage,
-        'data_url',
-        {
-          contentType: 'image/jpeg',
-        },
-        (downloadURL) => {
-          if (handleCropSubmit) {
-            handleClose()
-            handleCropSubmit(downloadURL)
-          }
-        }
-      )
+
+      if (handleCropSubmit) {
+               handleClose()
+               handleCropSubmit(croppedImage)
+             }
     } catch (e) {
       console.error(e)
     }
@@ -230,9 +220,7 @@ export default function ({
             >
               <CircularProgress
                 size={280}
-                color={hasUploadError(path) ? 'secondary' : 'primary'}
                 variant="determinate"
-                value={getUploadProgress(path)}
               />
               <Box
                 top={0}
@@ -252,11 +240,6 @@ export default function ({
               </Box>
             </Box>
           )}
-          {getUploadError(path) && (
-            <Typography color="error" variant="subtitle1">
-              {JSON.stringify(getUploadError(path))}
-            </Typography>
-          )}
         </div>
       </DialogContent>
       <DialogActions>
@@ -264,7 +247,7 @@ export default function ({
           {intl.formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
         </Button>
         <Button
-          disabled={isUploading(path) || hasUploadError(path) || !file}
+          disabled={!file}
           onClick={showCroppedImage}
           color="primary"
         >
