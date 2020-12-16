@@ -2,7 +2,7 @@ import Chip from '@material-ui/core/Chip'
 import Done from '@material-ui/icons/Done'
 import DoneAll from '@material-ui/icons/DoneAll'
 import Paper from '@material-ui/core/Paper'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { Typography } from '@material-ui/core'
 import { useAuth } from 'base-shell/lib/providers/Auth'
@@ -13,6 +13,10 @@ import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
 import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
 import Linkify from 'react-linkify'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
 
 const getMapLoc = (loc) => {
   let lat = 0
@@ -57,6 +61,17 @@ export default function ({
   } = data?.val || {}
   const intl = useIntl()
   const isMe = auth.uid === authorUid
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [showMenu, setShowMenu] = useState(false)
+  const open = Boolean(anchorEl)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
 
   const days = moment(created).diff(moment(), 'days')
 
@@ -109,6 +124,15 @@ export default function ({
 
       <Paper
         elevation={1}
+        onMouseEnter={() => {
+          setShowMenu(true)
+        }}
+        onMouseLeave={() => {
+          setShowMenu(false)
+        }}
+        onDoubleClick={() => {
+          console.log('test')
+        }}
         style={{
           marginTop: userChanged ? 6 : 2,
           padding: 0,
@@ -125,6 +149,43 @@ export default function ({
           overflowWrap: 'break-word',
         }}
       >
+        {showMenu && (authorUid === auth.uid || auth.isAdmin) && (
+          <div style={{ display: 'flex', width: '100%' }}>
+            <div style={{ flex: 1 }}></div>
+            <div>
+              <IconButton
+                style={{ margin: 0, padding: 0 }}
+                size="small"
+                aria-label="more"
+                aria-controls="long-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <KeyboardArrowDown />
+              </IconButton>
+              <Menu
+                id="long-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  key={'delete'}
+                  onClick={async () => {
+                    handleClose()
+                    await firebaseApp.database().ref(`${path}/${uid}`).set(null)
+                  }}
+                >
+                  {intl.formatMessage({
+                    id: 'delete',
+                    defaultMessage: 'Delete',
+                  })}
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
+        )}
         {!isMe && (
           <div
             style={{
