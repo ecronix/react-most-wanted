@@ -86,7 +86,21 @@ const Row = ({ data, index, style }) => {
             {path === '' && <Person />}
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={displayName} secondary={lastMessage} />
+        <ListItemText
+          primary={displayName}
+          secondary={
+            <div
+              style={{
+                textOverflow: 'ellipsis',
+                overflow: 'hidden',
+                maxWidth: 170,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {lastMessage}
+            </div>
+          }
+        />
         <ListItemSecondaryAction>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <IconButton
