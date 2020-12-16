@@ -2,7 +2,7 @@
   "package": {
     "dependencies": {
       "rmw-shell":"8.x",
-      "@formatjs/intl-relativetimeformat": "7.x",
+      "@formatjs/intl-relativetimeformat": "8.x",
       "@date-io/moment": "1.x",
       "@material-ui/core": "4.x",
       "@material-ui/icons": "4.x",
@@ -12,7 +12,7 @@
       "chart.js": "2.x",
       "final-form": "4.x",
       "final-form-arrays": "3.x",
-      "firebase": "7.x",
+      "firebase": "8.x",
       "firebaseui": "4.x",
       "github-markdown-css": "4.x",
       "intl": "1.x",
@@ -20,7 +20,7 @@
       "material-ui-image": "3.x",
       "material-ui-shell": "1.x",
       "moment": "2.x",
-      "mui-rff": "2.x",
+      "mui-rff": "3.x",
       "notistack": "1.x",
       "react": "17.x",
       "react-chartjs-2": "^2.x",
