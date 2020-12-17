@@ -18,7 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { isDesktopOpen, isMini, setMobileOpen, useMiniMode } =
+  const { isDesktopOpen, isMini, toggleMenuState, useMiniMode } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()
@@ -43,7 +43,7 @@ const Menu = (props) => {
 
   const handleChange = (event, index) => {
     if (index !== undefined) {
-      setMobileOpen(false)
+      toggleMenuState(false)
     }
     if (index !== undefined && index !== Object(index)) {
       history.push(index)
