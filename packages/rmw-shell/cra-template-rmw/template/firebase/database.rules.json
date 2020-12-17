@@ -18,6 +18,22 @@
         ".write": "auth != null && $uid === auth.uid "
       }
     },
+    "posts": {
+      ".read": "true",
+      ".indexOn": ["order"],
+      "$uid": {
+        ".indexOn": ["order"],
+        ".write": "auth != null",
+        "likes": {
+          "$authUid": {
+            ".write": "auth != null && $authUid===auth.uid"
+          }
+        },
+        "$other": {
+          ".write": "(data.child('author').child('uid').val() === auth.uid || newData.child('author').child('uid').val() === auth.uid) || (root.child('admins/'+auth.uid).exists())"
+        }
+      }
+    },
     "disable_notifications": {
       "$uid": {
         ".read": "auth != null && $uid === auth.uid ",

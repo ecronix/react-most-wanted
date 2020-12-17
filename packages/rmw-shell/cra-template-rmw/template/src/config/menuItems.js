@@ -16,6 +16,7 @@ import Security from '@material-ui/icons/Security'
 import SettingsIcon from '@material-ui/icons/SettingsApplications'
 import Slideshow from '@material-ui/icons/Slideshow'
 import StyleIcon from '@material-ui/icons/Style'
+import CallToAction from '@material-ui/icons/CallToAction'
 import Whatshot from '@material-ui/icons/Whatshot'
 import Chat from '@material-ui/icons/Chat'
 import allLocales from './locales'
@@ -177,6 +178,15 @@ const getMenuItems = (props) => {
             defaultMessage: 'Tasks',
           }),
           leftIcon: <Assignment />,
+        },
+        {
+          value: '/posts',
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: 'posts',
+            defaultMessage: 'Posts',
+          }),
+          leftIcon: <CallToAction />,
         },
       ],
     },
