@@ -16,7 +16,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const isMiniKey = `${persistKey}:isMini`
   const isUseMiniModeKey = `${persistKey}:isUseMiniModeKey`
 
-  const toggleClosedMenu = (setTo) => {
+  const toggleMenuState = (setTo) => {
     setDesktopOpen((typeof setTo === "boolean") ? setTo : !isDesktopOpen)
     setMobileOpen((typeof setTo === "boolean") ? setTo : !isMobileOpen)
   }
@@ -33,7 +33,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   useEffect(() => {
     const debouncedHandleResize = debounce(() => {
       if(!isDesktop) {
-        toggleClosedMenu(false)
+        toggleMenuState(false)
         setMini(false)
       }
     }, 1000)
@@ -99,7 +99,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
         setMini,
         useMiniMode,
         setMiniMode,
-        toggleClosedMenu,
+        toggleMenuState,
       }}
     >
       {children}
