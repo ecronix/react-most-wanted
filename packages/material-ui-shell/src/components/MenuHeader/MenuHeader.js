@@ -54,7 +54,7 @@ const MenuHeader = () => {
   const {
     isDesktop,
     isDesktopOpen,
-    setDesktopOpen,
+    toggleMenuState,
     isMini,
     setMini,
     isAuthMenuOpen,
@@ -118,7 +118,7 @@ const MenuHeader = () => {
                       <IconButton
                         onClick={() => {
                           setMini(true)
-                          setDesktopOpen(false)
+                          toggleMenuState(false)
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -127,7 +127,7 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setDesktopOpen(false)
+                        toggleMenuState(false)
                       }}
                     >
                       {theme.direction === 'rtl' && (
