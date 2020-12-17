@@ -6,15 +6,42 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const { menu } = appConfig || {}
   const { useMini = true } = menu || {}
-  const [isDesktopOpen, setDesktopOpen] = useState(true)
+  const [isDesktopOpen, setDesktopOpen] = useState(false)
   const [isMobileOpen, setMobileOpen] = useState(false)
   const [useMiniMode, setMiniMode] = useState(useMini)
   const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
-  const [isMini, setMini] = useState(false)
+  const [isMini, setMini] = useState(true)
   const isDesktop = useMediaQuery('(min-width:600px)')
   const isDesktopKey = `${persistKey}:isDesktopOpen`
   const isMiniKey = `${persistKey}:isMini`
   const isUseMiniModeKey = `${persistKey}:isUseMiniModeKey`
+
+  const toggleClosedMenu = (setTo) => {
+    setDesktopOpen((typeof setTo === "boolean") ? setTo : !isDesktopOpen)
+    setMobileOpen((typeof setTo === "boolean") ? setTo : !isMobileOpen)
+  }
+  function debounce(callback, ms) {
+    let timer
+    return () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        timer = null
+        callback.apply(this, arguments)
+      }, ms)
+    }
+  }
+  useEffect(() => {
+    const debouncedHandleResize = debounce(() => {
+      if(!isDesktop) {
+        toggleClosedMenu(false)
+        setMini(false)
+      }
+    }, 1000)
+    window.addEventListener('resize', debouncedHandleResize)
+    return () => {
+      window.removeEventListener('resize', debouncedHandleResize)
+    }
+  })
 
   useEffect(() => {
     const persistDesktopOpen = localStorage.getItem(isDesktopKey)
@@ -72,6 +99,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
         setMini,
         useMiniMode,
         setMiniMode,
+        toggleClosedMenu,
       }}
     >
       {children}
