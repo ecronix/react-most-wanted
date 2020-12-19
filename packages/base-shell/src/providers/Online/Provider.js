@@ -6,8 +6,8 @@ import config from '../../config/config'
 const Provider = ({ children }) => {
   const [isOnline, setOnline] = useState(navigator.onLine)
 
-  const { useCustomHooks } = config
-  const { useEventListener } = useCustomHooks
+  const { customHooks } = config
+  const { useEventListener } = customHooks
 
   useEventListener('online', () => setOnline(true))
   useEventListener('offline', () => setOnline(false))
