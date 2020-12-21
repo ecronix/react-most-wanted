@@ -18,7 +18,7 @@ import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 
-export default function ({ name, width = 250, fields = [] }) {
+const FilterDrawer = ({ name, width = 250, fields = [] }) => {
   const intl = useIntl()
   const {
     isFilterOpen,
@@ -154,7 +154,7 @@ export default function ({ name, width = 250, fields = [] }) {
                       >
                         {fields.map((f) => (
                           <MenuItem key={f.name} value={f.name}>
-                            {intl.formatMessage({ id: f.label, defaultMessage: f.label })}
+                            {intl.formatMessage({ id: f.label, defaultMessage:  f.label })}
                           </MenuItem>
                         ))}
                       </Select>
@@ -184,7 +184,7 @@ export default function ({ name, width = 250, fields = [] }) {
                           >
                             {field.operators.map((o) => (
                               <MenuItem key={o.value} value={o.value}>
-                                {intl.formatMessage({ id: o.label, defaultMessage: o.label })}
+                                {intl.formatMessage({ id: o.label, defaultMessage: o.label  })}
                               </MenuItem>
                             ))}
                           </Select>
@@ -210,3 +210,4 @@ export default function ({ name, width = 250, fields = [] }) {
     </div>
   )
 }
+export default FilterDrawer

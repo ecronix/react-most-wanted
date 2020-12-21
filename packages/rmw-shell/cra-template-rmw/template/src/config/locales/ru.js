@@ -21,6 +21,10 @@ const messages = defineMessages({
   menu: 'Меню',
   menu_mini_mode: 'Мини меню',
   offline: 'Офлайн',
+  filter:'Фильтр',
+  none:'Не задано',
+  like:'Содержит',
+  '!like':'Не содержит',
 })
 
 export default messages
