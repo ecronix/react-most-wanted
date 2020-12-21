@@ -78,7 +78,7 @@ export default function ({ name, width = 250, fields = [] }) {
                 </MenuItem>
                 {fields.map((f) => (
                   <MenuItem key={f.name} value={f.name}>
-                    {f.label}
+                    {intl.formatMessage({ id: f.label, defaultMessage: f.label })}
                   </MenuItem>
                 ))}
               </Select>
@@ -154,7 +154,7 @@ export default function ({ name, width = 250, fields = [] }) {
                       >
                         {fields.map((f) => (
                           <MenuItem key={f.name} value={f.name}>
-                            {f.label}
+                            {intl.formatMessage({ id: f.label, defaultMessage: f.label })}
                           </MenuItem>
                         ))}
                       </Select>
@@ -184,7 +184,7 @@ export default function ({ name, width = 250, fields = [] }) {
                           >
                             {field.operators.map((o) => (
                               <MenuItem key={o.value} value={o.value}>
-                                {o.label}
+                                {intl.formatMessage({ id: o.label, defaultMessage: o.label })}
                               </MenuItem>
                             ))}
                           </Select>

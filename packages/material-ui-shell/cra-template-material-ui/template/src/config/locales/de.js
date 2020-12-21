@@ -42,7 +42,10 @@ const messages = defineMessages({
   delete_account_dialog_title: 'Konto löschen?',
   delete_account_dialog_message:
     'Dein Konto wird gelöscht und mit ihm alle Daten!',
-  delete_account_dialog_action:'Konto löschen'
+  delete_account_dialog_action:'Konto löschen',
+  filter:'Фильтр',
+  none:'Keiner',
+  '!like':'!like',
 })
 
 export default messages
