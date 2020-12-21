@@ -8,8 +8,8 @@ const initialState = {
 }
 
 const Provider = ({ children }) => {
-  const { useCustomHooks } = config
-  const { useEventListener } = useCustomHooks
+  const { customHooks } = config
+  const { useEventListener } = customHooks
   const [state, setA2HPState] = useState(initialState)
 
   // Event handler utilizing useCallback ...

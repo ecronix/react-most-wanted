@@ -3,7 +3,7 @@ import useEventListener from '../utils/useEventListener'
 
 const config = {
   getDefaultRoutes: routes,
-  useCustomHooks:{
+  customHooks:{
     useEventListener
   },
   auth: {
