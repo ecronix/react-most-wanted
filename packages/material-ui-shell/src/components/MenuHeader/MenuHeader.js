@@ -53,24 +53,28 @@ const MenuHeader = () => {
   const classes = useStyles()
   const {
     isDesktop,
-    isDesktopOpen,
-    setDesktopOpen,
-    isMini,
-    setMini,
+    // isDesktopOpen,
+    dispatch,
+    menuStore,
+    setMenuOpen,
+    setMiniMode,
+    // setDesktopOpen,
+    // isMini,
+    // setMini,
     isAuthMenuOpen,
     setAuthMenuOpen,
-    useMiniMode,
+    // useMiniMode,
   } = useMenu()
 
   const isAuthenticated = auth.isAuthenticated
 
   return (
     <Paper square={true} className={classes.paper}>
-      {isMini && isAuthenticated && <div className={classes.toolbar}></div>}
+      {menuStore.miniMode && isAuthenticated && <div className={classes.toolbar}></div>}
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
-        {!isMini && (
+        {!menuStore.miniMode && (
           <ListItem className={classes.listItem}>
-            {isAuthenticated && !isMini && (
+            {isAuthenticated && !menuStore.miniMode && (
               <React.Fragment>
                 {authData.photoURL && (
                   <ListItemAvatar
@@ -98,7 +102,7 @@ const MenuHeader = () => {
                 )}
               </React.Fragment>
             )}
-            {!isMini && (
+            {!menuStore.miniMode && (
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
@@ -114,11 +118,11 @@ const MenuHeader = () => {
                 </IconButton>
                 {isDesktop && (
                   <>
-                    {useMiniMode && (
+                    {menuStore.miniSwitchVisibility && (
                       <IconButton
                         onClick={() => {
-                          setMini(true)
-                          setDesktopOpen(false)
+                          setMiniMode(dispatch, true)
+                          setMenuOpen(dispatch, false)
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -127,7 +131,7 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setDesktopOpen(false)
+                        setMenuOpen(dispatch, false)
                       }}
                     >
                       {theme.direction === 'rtl' && (
@@ -150,7 +154,7 @@ const MenuHeader = () => {
               setAuthMenuOpen(!isAuthMenuOpen)
             }}
           >
-            {!isDesktopOpen && isDesktop && authData.photoURL && (
+            {!menuStore.menuOpen && isDesktop && authData.photoURL && (
               <ListItemAvatar>
                 <Avatar
                   src={authData.photoURL}
@@ -160,7 +164,7 @@ const MenuHeader = () => {
               </ListItemAvatar>
             )}
 
-            {!isMini && (
+            {!menuStore.miniMode && (
               <ListItemText
                 classes={{
                   primary: classes.listItem,
@@ -168,7 +172,7 @@ const MenuHeader = () => {
                 }}
                 style={{
                   marginLeft:
-                    !isDesktopOpen && isDesktop && authData.photoURL
+                    !menuStore.menuOpen && isDesktop && authData.photoURL
                       ? 7
                       : undefined,
                 }}
@@ -176,7 +180,7 @@ const MenuHeader = () => {
                 secondary={authData.email}
               />
             )}
-            {isDesktopOpen && (
+            {menuStore.menuOpen && (
               <ListItemSecondaryAction
                 onClick={() => {
                   setAuthMenuOpen(!isAuthMenuOpen)

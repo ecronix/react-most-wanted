@@ -83,11 +83,16 @@ export default function ({
 
   const {
     isDesktop,
+    dispatch,
+    menuStore,
+    setMiniMode,
+    setMenuOpen
+  /*   
     isDesktopOpen,
     setDesktopOpen,
     isMobileOpen,
     setMobileOpen,
-    setMini,
+    setMini, */
   } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''
@@ -98,15 +103,8 @@ export default function ({
 
   const classes = useStyles({ width, offlineIndicatorHeight })
   const handleDrawerMenuClick = () => {
-    if (!isDesktopOpen) {
-      setMini(false)
-      setDesktopOpen(true)
-      if (!isDesktop) {
-        setMobileOpen(!isMobileOpen)
-      }
-    } else {
-      setMobileOpen(!isMobileOpen)
-    }
+    setMiniMode(dispatch, false)
+    setMenuOpen(dispatch, true)
   }
 
   return (
@@ -115,7 +113,7 @@ export default function ({
         position={isDesktop ? 'absolute' : undefined}
         className={
           isDesktop
-            ? clsx(classes.appBar, isDesktopOpen && classes.appBarShift)
+            ? clsx(classes.appBar, menuStore.menuOpen && classes.appBarShift)
             : classes.appBar
         }
       >
@@ -127,7 +125,7 @@ export default function ({
             edge="start"
             className={clsx(
               classes.menuButton,
-              isDesktopOpen && isDesktop && classes.hide,
+              menuStore.menuOpen && isDesktop && classes.hide,
               onBackClick && classes.hide
             )}
           >
@@ -141,7 +139,7 @@ export default function ({
           >
             <ChevronLeft />
           </IconButton>
-          {!onBackClick && isDesktopOpen && false && (
+          {!onBackClick && menuStore.menuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
 
