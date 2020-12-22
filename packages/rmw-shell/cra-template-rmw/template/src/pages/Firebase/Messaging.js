@@ -31,7 +31,7 @@ const Messaging = () => {
   const sendMessage = async () => {
     const httpsMessagesOnCall = firebaseApp
       .functions()
-      .httpsCallable('httpsMessagesOnCall')
+      .httpsCallable('https-messagesOnCall')
 
     const payload = {
       token,

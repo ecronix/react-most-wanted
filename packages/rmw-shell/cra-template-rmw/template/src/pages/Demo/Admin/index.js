@@ -37,7 +37,7 @@ const Admin = () => {
               setLoading(true)
               const httpsAdminOnCall = firebaseApp
                 .functions()
-                .httpsCallable('httpsAdminOnCall')
+                .httpsCallable('https-adminOnCall')
 
               const { data } = await httpsAdminOnCall()
               const { message } = data || {}
