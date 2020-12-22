@@ -1,1 +1,0 @@
-export const ON_SIMPLE_VALUE_CHANGED = 'dialogs@ON_SIMPLE_VALUE_CHANGED'
