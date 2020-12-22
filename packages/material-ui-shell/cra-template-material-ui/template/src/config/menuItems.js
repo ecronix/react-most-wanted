@@ -29,7 +29,7 @@ const getMenuItems = (props) => {
     a2HSContext,
     auth: authData,
   } = props
-  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
+  const { isDesktop, isAuthMenuOpen, dispatch, menuStore, setMiniSwitchVisibility /* useMiniMode, setMiniMode */ } = menuContext
   const { themeID, setThemeID } = themeContext
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
@@ -173,12 +173,12 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            setMiniMode(!useMiniMode)
+            setMiniSwitchVisibility(dispatch, !menuStore.miniSwitchVisibility)
           },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: menuStore.miniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
         },
       ],
     },
