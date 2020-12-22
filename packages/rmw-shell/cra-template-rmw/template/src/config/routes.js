@@ -17,6 +17,7 @@ const FirebasePaths = lazy(() => import('../pages/Firebase/Paths'))
 const FirebaseStorage = lazy(() => import('../pages/Firebase/Storage'))
 const Dashboard = lazy(() => import('../pages/Dashboard'))
 const Posts = lazy(() => import('../pages/Demo/Posts/Posts'))
+const Post = lazy(() => import('../pages/Demo/Posts/Post'))
 const GettingStarted = lazy(() =>
   import('../pages/Documentation/GettingStarted')
 )
@@ -37,6 +38,7 @@ const routes = [
   <AuthorizedRoute path="/tasks/:uid" exact component={Task} />,
   <AuthorizedRoute path="/create_task" exact component={Task} />,
   <AuthorizedRoute path="/posts" exact component={Posts} />,
+  <AuthorizedRoute path="/create_post" exact component={Post} />,
   <AuthorizedRoute
     path="/firebase_messaging"
     exact
