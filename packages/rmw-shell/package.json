@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "8.1.20",
+  "version": "8.1.21",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
