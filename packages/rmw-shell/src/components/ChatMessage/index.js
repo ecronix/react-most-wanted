@@ -124,6 +124,9 @@ export default function ({
 
       <Paper
         elevation={1}
+        onClick={() => {
+          setShowMenu(!showMenu)
+        }}
         onMouseEnter={() => {
           setShowMenu(true)
         }}
