@@ -36,8 +36,10 @@ const getMenuItems = (props) => {
   const {
     isDesktop,
     isAuthMenuOpen,
-    useMiniMode,
-    setMiniMode,
+    dispatch,
+    menuStore,
+    // useMiniMode,
+    // setMiniMode,
     setAuthMenuOpen,
   } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
@@ -332,12 +334,13 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            setMiniMode(!useMiniMode)
+            setMiniSwitchVisibility(dispatch, !menuStore.miniSwitchVisibility)
+            console.log('this is somewhere else')
           },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: menuStore.miniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
         },
       ],
     },

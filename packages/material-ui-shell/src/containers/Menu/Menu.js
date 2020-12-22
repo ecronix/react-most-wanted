@@ -18,7 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { dispatch, menuStore, menuOpen, miniMode, miniSwitchVisibility, setMiniSwitchVisibility } =
+  const { menuStore } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()

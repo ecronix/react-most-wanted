@@ -84,7 +84,7 @@ const Activity = ({
     { ...drawerActions },
     useDispatch()
   )
-
+    
   const handleDrawerMenuClick = () => {
     const smDown = isWidthDown('sm', width)
 
