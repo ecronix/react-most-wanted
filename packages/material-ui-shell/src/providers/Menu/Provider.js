@@ -56,9 +56,9 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   useEffect(() => {
     try {
       localStorage.setItem(isMiniSwitchVisibilityKey, JSON.stringify(menuStore.miniSwitchVisibility))
-      // if (!menuStore.miniSwitchVisibility) {
-      //   setMiniSwitchVisibility(dispatch, !menuStore.miniSwitchVisibility)
-      // }
+      if (!menuStore.miniSwitchVisibility) {
+        setMiniSwitchVisibility(dispatch, !menuStore.miniSwitchVisibility)
+      }
     } catch (error) {
       console.warn(error)
     }
