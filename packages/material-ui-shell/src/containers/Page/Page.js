@@ -87,12 +87,6 @@ export default function ({
     menuStore,
     setMiniMode,
     setMenuOpen
-  /*   
-    isDesktopOpen,
-    setDesktopOpen,
-    isMobileOpen,
-    setMobileOpen,
-    setMini, */
   } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''

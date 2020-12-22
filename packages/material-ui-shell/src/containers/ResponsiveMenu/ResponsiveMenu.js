@@ -62,10 +62,6 @@ const ResponsiveMenu = ({ children, width }) => {
     menuStore,
     isDesktop,
     setMenuOpen
-/*     isDesktopOpen,
-    isMobileOpen,
-    isMini,
-    setMobileOpen, */
   } = useMenu()
 
   const handleDrawerToggle = () => {
