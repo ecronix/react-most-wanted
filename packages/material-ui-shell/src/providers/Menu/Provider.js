@@ -15,7 +15,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const [menuStore, dispatch] = useReducer(reducer, {
     miniMode: false,
     menuOpen: true,
-    miniSwitchVisibility: useMini
+    miniSwitchVisibility: true
   })
   const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
@@ -47,7 +47,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
 
   useEffect(() => {
     try {
-      localStorage.setItem(isMiniModeKey, JSON.stringify(menuStore.isMini))
+      localStorage.setItem(isMiniModeKey, JSON.stringify(menuStore.miniMode))
     } catch (error) {
       console.warn(error)
     }
@@ -56,9 +56,9 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   useEffect(() => {
     try {
       localStorage.setItem(isMiniSwitchVisibilityKey, JSON.stringify(menuStore.miniSwitchVisibility))
-      if (!menuStore.miniSwitchVisibility) {
-        setMini(dispatch, menuStore.miniSwitchVisibility)
-      }
+/*       if (!menuStore.miniSwitchVisibility) {
+        setMiniSwitchVisibility(dispatch, !menuStore.miniSwitchVisibility)
+      } */
     } catch (error) {
       console.warn(error)
     }
@@ -68,10 +68,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     <Context.Provider
       value={{
         isDesktop,
-/*      isDesktopOpen,
-        isMobileOpen,
-        setDesktopOpen,
-        setMobileOpen, */
         isAuthMenuOpen,
         setAuthMenuOpen,
         menuStore,
@@ -79,10 +75,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
         setMiniMode,
         setMenuOpen,
         setMiniSwitchVisibility,
-/*      isMini,
-        setMini,
-        useMiniMode,
-        setMiniMode, */
       }}
     >
       {children}

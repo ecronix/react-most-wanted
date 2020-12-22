@@ -18,8 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { dispatch, menuStore, menuOpen, miniMode, miniSwitchVisibility, setMiniSwitchVisibility
-    /*  isDesktopOpen, isMini, setMobileOpen, useMiniMode  */} =
+  const { dispatch, menuStore, menuOpen, miniMode, miniSwitchVisibility, setMiniSwitchVisibility } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()
@@ -68,7 +67,7 @@ const Menu = (props) => {
             onIndexChange={handleChange}
             index={index}
             key={menuStore.miniMode}
-            useMinified={menuStore.miniMode && !menuStore.menuOpen}
+            useMinified={menuStore.miniMode}
           />
         </Scrollbar>
       </div>
