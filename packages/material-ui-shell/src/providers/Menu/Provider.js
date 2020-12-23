@@ -13,12 +13,18 @@ import reducer from './store/reducer'
 
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const { menu } = appConfig || {}
-  const { useMini = true } = menu || {}
+  const { 
+    initialMiniMode,
+    initialMenuOpen,
+    initialMobileMenuOpen,
+    initialMiniSwitchVisibility,
+  } = menu 
+  console.log(menu)
   const [menuStore, dispatch] = useReducer(reducer, {
-    miniMode: false,
-    menuOpen: true,
-    mobileMenuOpen: useMini,
-    miniSwitchVisibility: true
+    miniMode: initialMiniMode,
+    menuOpen: initialMenuOpen,
+    mobileMenuOpen: initialMobileMenuOpen,
+    miniSwitchVisibility: initialMiniSwitchVisibility
   })
   
   const props = {
