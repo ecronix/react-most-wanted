@@ -18,6 +18,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     initialMenuOpen,
     initialMobileMenuOpen,
     initialMiniSwitchVisibility,
+    useWindowWatcher
   } = menu 
   console.log(menu)
   const [menuStore, dispatch] = useReducer(reducer, {
@@ -100,6 +101,32 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
       console.warn(error)
     }
   }, [menuStore, isMiniSwitchVisibilityKey])
+
+ 
+  const debounce = (callback, ms) => {
+    let timer
+    return () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        timer = null
+        callback.apply(this, arguments)
+      }, ms)
+    }
+  }
+  if (useWindowWatcher){
+    useEffect(() => {
+      const debouncedHandleResize = debounce(() => {
+        if(!isDesktop) {
+          props.setMenuOpen(false)
+          props.setMiniMode(false)
+        }
+      }, 50)
+      window.addEventListener('resize', debouncedHandleResize)
+      return () => {
+        window.removeEventListener('resize', debouncedHandleResize)
+      }
+    })
+  }
 
   return (
     <Context.Provider
