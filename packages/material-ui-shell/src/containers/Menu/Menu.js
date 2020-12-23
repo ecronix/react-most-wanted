@@ -18,7 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { isDesktopOpen, isMini, setMobileOpen, useMiniMode } =
+  const { setMobileMenuOpen, isMiniMode, isMiniSwitchVisibility } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()
@@ -43,7 +43,7 @@ const Menu = (props) => {
 
   const handleChange = (event, index) => {
     if (index !== undefined) {
-      setMobileOpen(false)
+      setMobileMenuOpen(false)
     }
     if (index !== undefined && index !== Object(index)) {
       history.push(index)
@@ -65,8 +65,8 @@ const Menu = (props) => {
             items={menuItems}
             onIndexChange={handleChange}
             index={index}
-            key={useMiniMode}
-            useMinified={isMini && !isDesktopOpen}
+            key={isMiniSwitchVisibility}
+            useMinified={isMiniMode}
           />
         </Scrollbar>
       </div>
