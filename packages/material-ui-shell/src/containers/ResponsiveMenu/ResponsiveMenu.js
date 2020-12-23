@@ -59,14 +59,14 @@ const ResponsiveMenu = ({ children, width }) => {
 
   const {
     isDesktop,
-    isDesktopOpen,
-    isMobileOpen,
-    isMini,
-    setMobileOpen,
+    isMiniMode,
+    isMenuOpen,
+    isMobileMenuOpen,
+    setMobileMenuOpen,
   } = useMenu()
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!isMobileOpen)
+    setMobileMenuOpen(!isMobileMenuOpen)
   }
 
   return (
@@ -84,12 +84,12 @@ const ResponsiveMenu = ({ children, width }) => {
           paper: isDesktop
             ? clsx(
                 classes.drawerPaperOpen,
-                !isDesktopOpen && classes.drawerPaperClose,
-                !isMini && !isDesktopOpen && classes.hide
+                !isMenuOpen && classes.drawerPaperClose,
+                !isMiniMode && !isMenuOpen && classes.hide
               )
             : classes.drawerPaper,
         }}
-        open={isDesktop ? isDesktopOpen : isMobileOpen}
+        open={isDesktop ? isMenuOpen : isMobileMenuOpen}
         onOpen={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
