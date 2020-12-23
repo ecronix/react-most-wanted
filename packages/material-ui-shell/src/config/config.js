@@ -24,6 +24,7 @@ const config = {
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
     MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
+    useWindowWatcher: false
   },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
