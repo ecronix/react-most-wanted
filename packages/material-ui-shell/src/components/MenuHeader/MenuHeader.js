@@ -150,16 +150,25 @@ const MenuHeader = () => {
               setAuthMenuOpen(!isAuthMenuOpen)
             }}
           >
-            {!isMenuOpen && isDesktop && authData.photoURL && (
+          {!isMenuOpen && isMiniMode && isDesktop && (
+            authData.photoURL ? (
               <ListItemAvatar>
                 <Avatar
                   src={authData.photoURL}
                   alt="person"
                   //style={{ marginLeft: 0, marginTop: 0 }}
                 />
+              </ListItemAvatar>) : (
+              <ListItemAvatar>
+                <Avatar>
+                  {authData.displayName ? (
+                    authData.displayName[0].toUpperCase()
+                  ) : (
+                    <PersonIcon />
+                  )}
+                </Avatar>
               </ListItemAvatar>
-            )}
-
+            ))}
             {!isMiniMode && (
               <ListItemText
                 classes={{
