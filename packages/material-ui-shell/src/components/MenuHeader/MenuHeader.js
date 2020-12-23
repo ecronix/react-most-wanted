@@ -53,24 +53,24 @@ const MenuHeader = () => {
   const classes = useStyles()
   const {
     isDesktop,
-    isDesktopOpen,
-    setDesktopOpen,
-    isMini,
-    setMini,
+    setMenuOpen,
+    setMiniMode,
+    isMiniMode,
+    isMenuOpen,
+    isMiniSwitchVisibility,
     isAuthMenuOpen,
     setAuthMenuOpen,
-    useMiniMode,
   } = useMenu()
 
   const isAuthenticated = auth.isAuthenticated
 
   return (
     <Paper square={true} className={classes.paper}>
-      {isMini && isAuthenticated && <div className={classes.toolbar}></div>}
+      {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
-        {!isMini && (
+        {!isMiniMode && (
           <ListItem className={classes.listItem}>
-            {isAuthenticated && !isMini && (
+            {isAuthenticated && !isMiniMode && (
               <React.Fragment>
                 {authData.photoURL && (
                   <ListItemAvatar
@@ -98,7 +98,7 @@ const MenuHeader = () => {
                 )}
               </React.Fragment>
             )}
-            {!isMini && (
+            {!isMiniMode && (
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
@@ -114,11 +114,11 @@ const MenuHeader = () => {
                 </IconButton>
                 {isDesktop && (
                   <>
-                    {useMiniMode && (
+                    {isMiniSwitchVisibility && (
                       <IconButton
                         onClick={() => {
-                          setMini(true)
-                          setDesktopOpen(false)
+                          setMiniMode(true)
+                          setMenuOpen(false)
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -127,7 +127,7 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setDesktopOpen(false)
+                        setMenuOpen(false)
                       }}
                     >
                       {theme.direction === 'rtl' && (
@@ -150,7 +150,7 @@ const MenuHeader = () => {
               setAuthMenuOpen(!isAuthMenuOpen)
             }}
           >
-            {!isDesktopOpen && isDesktop && authData.photoURL && (
+            {!isMenuOpen && isDesktop && authData.photoURL && (
               <ListItemAvatar>
                 <Avatar
                   src={authData.photoURL}
@@ -160,7 +160,7 @@ const MenuHeader = () => {
               </ListItemAvatar>
             )}
 
-            {!isMini && (
+            {!isMiniMode && (
               <ListItemText
                 classes={{
                   primary: classes.listItem,
@@ -168,7 +168,7 @@ const MenuHeader = () => {
                 }}
                 style={{
                   marginLeft:
-                    !isDesktopOpen && isDesktop && authData.photoURL
+                    !isMenuOpen && isDesktop && authData.photoURL
                       ? 7
                       : undefined,
                 }}
@@ -176,7 +176,7 @@ const MenuHeader = () => {
                 secondary={authData.email}
               />
             )}
-            {isDesktopOpen && (
+            {isMenuOpen && (
               <ListItemSecondaryAction
                 onClick={() => {
                   setAuthMenuOpen(!isAuthMenuOpen)
