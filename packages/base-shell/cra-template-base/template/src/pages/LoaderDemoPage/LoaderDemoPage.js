@@ -18,7 +18,7 @@ const LoaderDemoPage = () => {
   const loader2 = getLoader(loaderName2)
   return <div>
     <br />
-    number of active loading: {getLoadingPool()}
+    number of active loading: {getLoadingPool()} {loader2.type}
     <br />
     <br />
    Loader name: {loaderName}, is loading:
