@@ -6,44 +6,43 @@ import {
   setMiniMode,
   setMenuOpen,
   setMobileMenuOpen,
-  setMiniSwitchVisibility
+  setMiniSwitchVisibility,
 } from './store/actions'
 import reducer from './store/reducer'
 
-
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const { menu } = appConfig || {}
-  const { 
+  const {
     initialMiniMode,
     initialMenuOpen,
     initialMobileMenuOpen,
     initialMiniSwitchVisibility,
-    useWindowWatcher
-  } = menu 
-  console.log(menu)
+    useWindowWatcher,
+  } = menu
   const [menuStore, dispatch] = useReducer(reducer, {
     miniMode: initialMiniMode,
     menuOpen: initialMenuOpen,
     mobileMenuOpen: initialMobileMenuOpen,
-    miniSwitchVisibility: initialMiniSwitchVisibility
+    miniSwitchVisibility: initialMiniSwitchVisibility,
   })
-  
+
   const props = {
     //setters
     setMiniMode: (payload) => dispatch(setMiniMode(payload)),
     setMenuOpen: (payload) => dispatch(setMenuOpen(payload)),
     setMobileMenuOpen: (payload) => dispatch(setMobileMenuOpen(payload)),
-    setMiniSwitchVisibility: (payload) => dispatch(setMiniSwitchVisibility(payload)),
+    setMiniSwitchVisibility: (payload) =>
+      dispatch(setMiniSwitchVisibility(payload)),
     //getters
     isMiniMode: menuStore.miniMode,
     isMenuOpen: menuStore.menuOpen,
     isMobileMenuOpen: menuStore.mobileMenuOpen,
-    isMiniSwitchVisibility: menuStore.miniSwitchVisibility
+    isMiniSwitchVisibility: menuStore.miniSwitchVisibility,
   }
   const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
   const isMenuOpenKey = `${persistKey}:menuOpen`
-  const isMobileMenuOpenKey= `${persistKey}:mobileMenuOpen`
+  const isMobileMenuOpenKey = `${persistKey}:mobileMenuOpen`
   const isMiniModeKey = `${persistKey}:miniMode`
   const isMiniSwitchVisibilityKey = `${persistKey}:miniSwitchVisibility`
 
@@ -51,7 +50,9 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     const persistIsMenuOpen = localStorage.getItem(isMenuOpenKey)
     const persistIsMobileMenuOpen = localStorage.getItem(isMobileMenuOpenKey)
     const persistMiniMode = localStorage.getItem(isMiniModeKey)
-    const persistMiniSwitchVisibility = localStorage.getItem(isMiniSwitchVisibilityKey)
+    const persistMiniSwitchVisibility = localStorage.getItem(
+      isMiniSwitchVisibilityKey
+    )
 
     if (persistIsMenuOpen) {
       setMenuOpen(persistIsMenuOpen === 'true')
@@ -65,7 +66,12 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     if (persistMiniSwitchVisibility) {
       setMiniSwitchVisibility(persistMiniSwitchVisibility === 'true')
     }
-  }, [isMenuOpenKey, isMobileMenuOpenKey, isMiniModeKey, isMiniSwitchVisibilityKey])
+  }, [
+    isMenuOpenKey,
+    isMobileMenuOpenKey,
+    isMiniModeKey,
+    isMiniSwitchVisibilityKey,
+  ])
 
   useEffect(() => {
     try {
@@ -73,15 +79,18 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     } catch (error) {
       console.warn(error)
     }
-  }, [menuStore, isMenuOpenKey])
+  }, [menuStore, props.isMenuOpen, isMenuOpenKey])
 
   useEffect(() => {
     try {
-      localStorage.setItem(isMobileMenuOpenKey, JSON.stringify(props.isMobileMenuOpen))
+      localStorage.setItem(
+        isMobileMenuOpenKey,
+        JSON.stringify(props.isMobileMenuOpen)
+      )
     } catch (error) {
       console.warn(error)
     }
-  }, [menuStore, isMobileMenuOpenKey])
+  }, [menuStore, isMobileMenuOpenKey, props.isMobileMenuOpen])
 
   useEffect(() => {
     try {
@@ -89,34 +98,42 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     } catch (error) {
       console.warn(error)
     }
-  }, [menuStore, isMiniModeKey])
+  }, [menuStore, isMiniModeKey, props.isMiniMode])
 
   useEffect(() => {
     try {
-      localStorage.setItem(isMiniSwitchVisibilityKey, JSON.stringify(props.isMiniSwitchVisibility))
+      localStorage.setItem(
+        isMiniSwitchVisibilityKey,
+        JSON.stringify(props.isMiniSwitchVisibility)
+      )
       if (!menuStore.miniSwitchVisibility) {
         setMiniSwitchVisibility(dispatch, menuStore.miniSwitchVisibility)
       }
     } catch (error) {
       console.warn(error)
     }
-  }, [menuStore, isMiniSwitchVisibilityKey])
+  }, [
+    menuStore,
+    isMiniSwitchVisibilityKey,
+    menuStore.miniSwitchVisibility,
+    props.isMiniSwitchVisibility,
+  ])
 
- 
   const debounce = (callback, ms) => {
     let timer
     return () => {
       clearTimeout(timer)
       timer = setTimeout(() => {
         timer = null
-        callback.apply(this, arguments)
+        callback.apply(this)
       }, ms)
     }
   }
-  if (useWindowWatcher){
-    useEffect(() => {
+
+  useEffect(() => {
+    if (useWindowWatcher) {
       const debouncedHandleResize = debounce(() => {
-        if(!isDesktop) {
+        if (!isDesktop) {
           props.setMenuOpen(false)
           props.setMiniMode(false)
         }
@@ -125,8 +142,8 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
       return () => {
         window.removeEventListener('resize', debouncedHandleResize)
       }
-    })
-  }
+    }
+  })
 
   return (
     <Context.Provider
@@ -134,7 +151,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
         isDesktop,
         isAuthMenuOpen,
         setAuthMenuOpen,
-        ...props
+        ...props,
       }}
     >
       {children}
