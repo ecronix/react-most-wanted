@@ -68,7 +68,7 @@ const ResponsiveMenu = ({ children, width }) => {
   const handleDrawerToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen)
   }
-
+console.log(isDesktop, isMenuOpen, isMobileMenuOpen);
   return (
     <div style={{ boxSizing: 'content-box' }}>
       <SwipeableDrawer
