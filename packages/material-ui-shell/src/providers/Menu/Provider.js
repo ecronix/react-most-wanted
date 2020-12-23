@@ -25,13 +25,11 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     //setters
     setMiniMode: (payload) => dispatch(setMiniMode(payload)),
     setMenuOpen: (payload) => dispatch(setMenuOpen(payload)),
-
     setMobileMenuOpen: (payload) => dispatch(setMobileMenuOpen(payload)),
     setMiniSwitchVisibility: (payload) => dispatch(setMiniSwitchVisibility(payload)),
     //getters
     isMiniMode: menuStore.miniMode,
     isMenuOpen: menuStore.menuOpen,
-
     isMobileMenuOpen: menuStore.mobileMenuOpen,
     isMiniSwitchVisibility: menuStore.miniSwitchVisibility
   }
