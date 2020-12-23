@@ -56,8 +56,8 @@ Thank you to [BrowserStack](https://www.browserstack.com/) for providing the inf
 This project uses [MIT license](https://github.com/TarikHuber/react-most-wanted/blob/master/LICENSE).
 
 
-[logo-image]: https://www.react-most-wanted.com/favicon-32x32.png
-[logo-url]: https://github.com/TarikHuber/react-most-wanted/blob/master/README.md
+[logo-image]: https://www.react-most-wanted.com/favicon.ico
+[logo-url]: https://www.react-most-wanted.com/favicon.ico
 [travis-image]: https://travis-ci.org/TarikHuber/react-most-wanted.svg?branch=master
 [travis-url]: https://travis-ci.org/TarikHuber/react-most-wanted
 [license-image]: https://img.shields.io/npm/l/express.svg

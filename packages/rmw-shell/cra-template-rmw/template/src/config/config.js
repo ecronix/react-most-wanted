@@ -76,71 +76,75 @@ const config = {
     persistKey: 'base-shell:auth',
     signInURL: '/signin',
     onAuthStateChanged: async (user, auth, firebaseApp) => {
-      if (user != null) {
-        const grantsSnap = await firebaseApp
-          .database()
-          .ref(`user_grants/${user.uid}`)
-          .once('value')
-        const notifcationsDisabledSnap = await firebaseApp
-          .database()
-          .ref(`disable_notifications/${user.uid}`)
-          .once('value')
+      try {
+        if (user != null) {
+          const grantsSnap = await firebaseApp
+            .database()
+            .ref(`user_grants/${user.uid}`)
+            .once('value')
+          const notifcationsDisabledSnap = await firebaseApp
+            .database()
+            .ref(`disable_notifications/${user.uid}`)
+            .once('value')
 
-        const isAdminSnap = await firebaseApp
-          .database()
-          .ref(`admins/${user.uid}`)
-          .once('value')
+          const isAdminSnap = await firebaseApp
+            .database()
+            .ref(`admins/${user.uid}`)
+            .once('value')
 
-        firebaseApp
-          .database()
-          .ref(`user_grants/${user.uid}`)
-          .on('value', (snap) => {
-            auth.updateAuth({ grants: snap.val() })
+          firebaseApp
+            .database()
+            .ref(`user_grants/${user.uid}`)
+            .on('value', (snap) => {
+              auth.updateAuth({ grants: snap.val() })
+            })
+
+          firebaseApp
+            .database()
+            .ref(`disable_notifications/${user.uid}`)
+            .on('value', (snap) => {
+              auth.updateAuth({ notificationsDisabled: !!snap.val() })
+            })
+
+          firebaseApp
+            .database()
+            .ref(`admins/${user.uid}`)
+            .on('value', (snap) => {
+              auth.updateAuth({ isAdmin: !!snap.val() })
+            })
+
+          auth.updateAuth({
+            ...defaultUserData(user),
+            grants: grantsSnap.val(),
+            notificationsDisabled: notifcationsDisabledSnap.val(),
+            isAdmin: !!isAdminSnap.val(),
+            isGranted,
           })
 
-        firebaseApp
-          .database()
-          .ref(`disable_notifications/${user.uid}`)
-          .on('value', (snap) => {
-            auth.updateAuth({ notificationsDisabled: !!snap.val() })
+          firebaseApp.database().ref(`users/${user.uid}`).update({
+            displayName: user.displayName,
+            uid: user.uid,
+            photoURL: user.photoURL,
+            providers: user.providerData,
+            emailVerified: user.emailVerified,
+            isAnonymous: user.isAnonymous,
+            notificationsDisabled: notifcationsDisabledSnap.val(),
           })
 
-        firebaseApp
-          .database()
-          .ref(`admins/${user.uid}`)
-          .on('value', (snap) => {
-            auth.updateAuth({ isAdmin: !!snap.val() })
-          })
-
-        auth.updateAuth({
-          ...defaultUserData(user),
-          grants: grantsSnap.val(),
-          notificationsDisabled: notifcationsDisabledSnap.val(),
-          isAdmin: !!isAdminSnap.val(),
-          isGranted,
-        })
-
-        firebaseApp.database().ref(`users/${user.uid}`).update({
-          displayName: user.displayName,
-          uid: user.uid,
-          photoURL: user.photoURL,
-          providers: user.providerData,
-          emailVerified: user.emailVerified,
-          isAnonymous: user.isAnonymous,
-          notificationsDisabled: notifcationsDisabledSnap.val(),
-        })
-
-        await firebaseApp
-          .database()
-          .ref(`user_chats/${user.uid}/public_chat`)
-          .update({
-            displayName: 'Public Chat',
-            lastMessage: 'Group chat',
-            path: `group_chat_messages/public_chat`,
-          })
-      } else {
-        firebaseApp.database().ref().off()
-        auth.setAuth(defaultUserData(user))
+          await firebaseApp
+            .database()
+            .ref(`user_chats/${user.uid}/public_chat`)
+            .update({
+              displayName: 'Public Chat',
+              lastMessage: 'Group chat',
+              path: `group_chat_messages/public_chat`,
+            })
+        } else {
+          firebaseApp.database().ref().off()
+          auth.setAuth(defaultUserData(user))
+        }
+      } catch (error) {
+        console.warn(error)
       }
     },
   },
