@@ -1,0 +1,5 @@
+export const LOADING = 'LOADING'
+export const LOADED = 'LOADED'
+export const LOAD_CANCELED = 'LOAD_CANCELED'
+export const LOADING_WITH_ERROR = 'LOADING_WITH_ERROR'
+export const LOADED_WITH_ERROR = 'LOADED_WITH_ERROR'

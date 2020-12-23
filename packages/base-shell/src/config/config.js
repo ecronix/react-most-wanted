@@ -6,6 +6,9 @@ const config = {
   customHooks:{
     useEventListener
   },
+  loader: {
+    loadedWithErrorInterval : 5000,
+  },
   auth: {
     persistKey: 'base-shell:auth',
     signInURL: '/signin',

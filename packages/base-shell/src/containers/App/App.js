@@ -5,6 +5,7 @@ import OnlineProvider from '../../providers/Online/Provider'
 import React, { Suspense, lazy } from 'react'
 import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
 import UpdateProvider from '../../providers/Update/Provider'
+import LoaderProvider from '../../providers/Loader/Provider'
 import defaultConfig from '../../config'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -22,26 +23,28 @@ const App = ({ config: appConfig }) => {
   return (
     <Suspense fallback={<Loading />}>
       <SimpleValuesProvider>
-        <AuthProvider persistKey={persistKey}>
-          <ConfigProvider appConfig={config}>
-            <AddToHomeScreenProvider>
-              <UpdateProvider checkInterval={checkInterval}>
-                <AppContainer>
-                  <Router>
-                    <OnlineProvider>
-                      <Switch>
-                        {LandingPage && (
-                          <Route path="/" exact component={LandingPage} />
-                        )}
-                        <Route component={Layout} />
-                      </Switch>
-                    </OnlineProvider>
-                  </Router>
-                </AppContainer>
-              </UpdateProvider>
-            </AddToHomeScreenProvider>
-          </ConfigProvider>
-        </AuthProvider>
+        <LoaderProvider appConfig={config}>
+          <AuthProvider persistKey={persistKey}>
+            <ConfigProvider appConfig={config}>
+              <AddToHomeScreenProvider>
+                <UpdateProvider checkInterval={checkInterval}>
+                  <AppContainer>
+                    <Router>
+                      <OnlineProvider>
+                        <Switch>
+                          {LandingPage && (
+                            <Route path="/" exact component={LandingPage} />
+                          )}
+                          <Route component={Layout} />
+                        </Switch>
+                      </OnlineProvider>
+                    </Router>
+                  </AppContainer>
+                </UpdateProvider>
+              </AddToHomeScreenProvider>
+            </ConfigProvider>
+          </AuthProvider>
+        </LoaderProvider>
       </SimpleValuesProvider>
     </Suspense>
   )

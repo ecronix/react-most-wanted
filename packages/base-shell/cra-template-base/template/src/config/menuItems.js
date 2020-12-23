@@ -37,6 +37,11 @@ const getMenuItems = (props) => {
       primaryText: intl.formatMessage({ id: 'home' }),
     },
     {
+      value: '/loader_demo_page',
+      visible: auth.isAuthenticated,
+      primaryText: intl.formatMessage({ id: 'loader_demo_page', defaultMessage: 'loader demo page' })
+    },
+    {
       value: '/about',
       visible: true,
       primaryText: intl.formatMessage({ id: 'about' }),
