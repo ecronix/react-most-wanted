@@ -7,7 +7,7 @@ const config = {
     useEventListener
   },
   loader: {
-    loadedWithErrorInterval : 5000,
+    loadedWithErrorInterval : 3000,
   },
   auth: {
     persistKey: 'base-shell:auth',

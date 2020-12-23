@@ -12,7 +12,7 @@ import {
 
 const loaderInitState = {
     name: 'idle',
-    lable: '',
+    type: 'idle',
     isLoading: null,
     isCanceled: null,
     ok: null
@@ -38,7 +38,7 @@ const Provider = ({ appConfig, children }) => {
             dispatch(loadingWithError(name));
             setTimeout(() => { dispatch(loadedWithError(name)) }, loadedWithErrorInterval)
         },
-        getLoader: (name) => (state[name] ? state[name] : { ...state, [name]: { ...loaderInitState } }),
+        getLoader: (name) => (state[name] ? state[name] : { ...loaderInitState }),
         getLoadingPool: () => state.loadingPool,
     }
 

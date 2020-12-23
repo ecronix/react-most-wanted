@@ -11,6 +11,10 @@ const messages = {
   en: 'Englisch',
   de: 'Deutsch',
   ru: 'Russisch',
+  loaderDemoPage2_LOADING: 'WIRD GELADEN',
+  loaderDemoPage2_LOADED: 'GELADEN',
+  loaderDemoPage2_LOADING_WITH_ERROR: 'LADEN MIT FEHLER',
+  loaderDemoPage2_LOADED_WITH_ERROR: 'MIT FEHLER GELADEN',
 }
 
 export default messages
