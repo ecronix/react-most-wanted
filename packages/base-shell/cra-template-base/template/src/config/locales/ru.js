@@ -11,6 +11,10 @@ const messages = {
   en: 'English',
   de: 'Deutsch',
   ru: 'Русский',
+  loaderDemoPage2_LOADING: 'ЗАГРУЗКА',
+  loaderDemoPage2_LOADED: 'ЗАГРУЖЕН',
+  loaderDemoPage2_LOADING_WITH_ERROR: 'ЗАГРУЗКА С ОШИБКОЙ',
+  loaderDemoPage2_LOADED_WITH_ERROR: 'ЗАГРУЖЕН С ОШИБКОЙ',
 }
 
 export default messages

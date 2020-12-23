@@ -6,6 +6,7 @@ export function loading(name) {
         name,
         payload: {
             isLoading: true,
+            type: `${name}_${types.LOADING}`,
             ok: null
         },
     }
@@ -17,6 +18,7 @@ export function loaded(name) {
         name,
         payload: {
             isLoading: false,
+            type: `${name}_${types.LOADED}`,
             ok:true
         },
     }
@@ -28,6 +30,7 @@ export function loadingWithError(name) {
         name,
         payload: {
             isLoading: true,
+            type: `${name}_${types.LOADING_WITH_ERROR}`,
             ok : false
         },
     }
@@ -38,6 +41,7 @@ export function loadedWithError(name) {
         name,
         payload: {
             isLoading: false,
+            type: `${name}_${types.LOADED_WITH_ERROR}`,
             ok : false
         },
     }
