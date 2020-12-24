@@ -71,32 +71,29 @@ const MenuHeader = () => {
         {!isMiniMode && (
           <ListItem className={classes.listItem}>
             {isAuthenticated && !isMiniMode && (
-              <React.Fragment>
-                {authData.photoURL && (
-                  <ListItemAvatar
-                    onClick={() => {
-                      setAuthMenuOpen(!isAuthMenuOpen)
-                    }}
-                  >
-                    <Avatar src={authData.photoURL} alt="user" />
-                  </ListItemAvatar>
-                )}
-                {!authData.photoURL && (
-                  <ListItemAvatar
-                    onClick={() => {
-                      setAuthMenuOpen(!isAuthMenuOpen)
-                    }}
-                  >
-                    <Avatar>
-                      {authData.displayName ? (
-                        authData.displayName[0].toUpperCase()
-                      ) : (
-                        <PersonIcon />
-                      )}
-                    </Avatar>
-                  </ListItemAvatar>
-                )}
-              </React.Fragment>
+              authData.photoURL ? (
+                <ListItemAvatar
+                  onClick={() => {
+                    setAuthMenuOpen(!isAuthMenuOpen)
+                  }}
+                >
+                  <Avatar src={authData.photoURL} alt="user" />
+                </ListItemAvatar>
+              ) : (
+                <ListItemAvatar
+                  onClick={() => {
+                    setAuthMenuOpen(!isAuthMenuOpen)
+                  }}
+                >
+                  <Avatar>
+                    {authData.displayName ? (
+                      authData.displayName[0].toUpperCase()
+                    ) : (
+                      <PersonIcon />
+                    )}
+                  </Avatar>
+                </ListItemAvatar>
+              )
             )}
             {!isMiniMode && (
               <ListItemSecondaryAction>
@@ -160,12 +157,10 @@ const MenuHeader = () => {
                 />
               </ListItemAvatar>) : (
               <ListItemAvatar>
-                <Avatar>
-                  {authData.displayName ? (
-                    authData.displayName[0].toUpperCase()
-                  ) : (
-                    <PersonIcon />
-                  )}
+                <Avatar> {
+                  authData.displayName 
+                    ? authData.displayName[0].toUpperCase()
+                    : <PersonIcon />}
                 </Avatar>
               </ListItemAvatar>
             ))}
@@ -191,13 +186,10 @@ const MenuHeader = () => {
                   setAuthMenuOpen(!isAuthMenuOpen)
                 }}
               >
-                <IconButton>
-                  {isAuthMenuOpen && (
-                    <ArrowDropUpIcon classes={{ root: classes.icon }} />
-                  )}
-                  {!isAuthMenuOpen && (
-                    <ArrowDropDownIcon classes={{ root: classes.icon }} />
-                  )}
+                <IconButton> {
+                  isAuthMenuOpen
+                    ? <ArrowDropUpIcon classes={{ root: classes.icon }} />
+                    : <ArrowDropDownIcon classes={{ root: classes.icon }} />}
                 </IconButton>
               </ListItemSecondaryAction>
             )}
