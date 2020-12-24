@@ -70,7 +70,7 @@ const MenuHeader = () => {
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
         {!isMiniMode && (
           <ListItem className={classes.listItem}>
-            {isAuthenticated && !isMiniMode && (
+            {isAuthenticated && (
               authData.photoURL ? (
                 <ListItemAvatar
                   onClick={() => {
@@ -95,7 +95,6 @@ const MenuHeader = () => {
                 </ListItemAvatar>
               )
             )}
-            {!isMiniMode && (
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
@@ -137,7 +136,6 @@ const MenuHeader = () => {
                   </>
                 )}
               </ListItemSecondaryAction>
-            )}
           </ListItem>
         )}
 
@@ -158,7 +156,7 @@ const MenuHeader = () => {
               </ListItemAvatar>) : (
               <ListItemAvatar>
                 <Avatar> {
-                  authData.displayName 
+                  authData.displayName
                     ? authData.displayName[0].toUpperCase()
                     : <PersonIcon />}
                 </Avatar>
@@ -174,7 +172,7 @@ const MenuHeader = () => {
                   marginLeft:
                     !isMenuOpen && isDesktop && authData.photoURL
                       ? 7
-                      : undefined,
+                      : undefined
                 }}
                 primary={authData.displayName}
                 secondary={authData.email}
