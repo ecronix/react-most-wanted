@@ -63,6 +63,14 @@ const MenuHeader = () => {
   } = useMenu()
 
   const isAuthenticated = auth.isAuthenticated
+  const AvatarConstructor = ({src, alt, avatar}) => {
+    return (
+    <ListItemAvatar
+      onClick={() => setAuthMenuOpen(!isAuthMenuOpen)}>
+      <Avatar src={src} alt={alt}> {avatar} </Avatar>
+    </ListItemAvatar>
+    )
+  }
 
   return (
     <Paper square={true} className={classes.paper}>
@@ -70,35 +78,15 @@ const MenuHeader = () => {
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
         {!isMiniMode && (
           <ListItem className={classes.listItem}>
-            {isAuthenticated && !isMiniMode && (
-              <React.Fragment>
-                {authData.photoURL && (
-                  <ListItemAvatar
-                    onClick={() => {
-                      setAuthMenuOpen(!isAuthMenuOpen)
-                    }}
-                  >
-                    <Avatar src={authData.photoURL} alt="user" />
-                  </ListItemAvatar>
-                )}
-                {!authData.photoURL && (
-                  <ListItemAvatar
-                    onClick={() => {
-                      setAuthMenuOpen(!isAuthMenuOpen)
-                    }}
-                  >
-                    <Avatar>
-                      {authData.displayName ? (
-                        authData.displayName[0].toUpperCase()
-                      ) : (
-                        <PersonIcon />
-                      )}
-                    </Avatar>
-                  </ListItemAvatar>
-                )}
-              </React.Fragment>
-            )}
-            {!isMiniMode && (
+            {isAuthenticated && (
+              authData.photoURL 
+              ? AvatarConstructor({
+                src: authData.photoURL,
+                alt:"user"})
+              : AvatarConstructor({
+                avatar: authData.displayName
+                  ? authData.displayName[0].toUpperCase()
+                  : <PersonIcon />}))}
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
@@ -106,11 +94,9 @@ const MenuHeader = () => {
                   }}
                 >
                   {type === 'light' && (
-                    <Brightness4Icon classes={{ root: classes.icon }} />
-                  )}
+                    <Brightness4Icon classes={{ root: classes.icon }} />)}
                   {type === 'dark' && (
-                    <BrightnessHighIcon classes={{ root: classes.icon }} />
-                  )}
+                    <BrightnessHighIcon classes={{ root: classes.icon }} />)}
                 </IconButton>
                 {isDesktop && (
                   <>
@@ -131,16 +117,13 @@ const MenuHeader = () => {
                       }}
                     >
                       {theme.direction === 'rtl' && (
-                        <ChevronRight classes={{ root: classes.icon }} />
-                      )}
+                        <ChevronRight classes={{ root: classes.icon }} />)}
                       {theme.direction !== 'rtl' && (
-                        <ChevronLeft classes={{ root: classes.icon }} />
-                      )}
+                        <ChevronLeft classes={{ root: classes.icon }} />)}
                     </IconButton>{' '}
                   </>
                 )}
               </ListItemSecondaryAction>
-            )}
           </ListItem>
         )}
 
@@ -151,24 +134,14 @@ const MenuHeader = () => {
             }}
           >
           {!isMenuOpen && isMiniMode && isDesktop && (
-            authData.photoURL ? (
-              <ListItemAvatar>
-                <Avatar
-                  src={authData.photoURL}
-                  alt="person"
-                  //style={{ marginLeft: 0, marginTop: 0 }}
-                />
-              </ListItemAvatar>) : (
-              <ListItemAvatar>
-                <Avatar>
-                  {authData.displayName ? (
-                    authData.displayName[0].toUpperCase()
-                  ) : (
-                    <PersonIcon />
-                  )}
-                </Avatar>
-              </ListItemAvatar>
-            ))}
+            authData.photoURL
+            ? AvatarConstructor({
+              src: authData.photoURL,
+              alt:"user"})
+            : AvatarConstructor({
+              avatar: authData.displayName
+                ? authData.displayName[0].toUpperCase()
+                : <PersonIcon />}))}
             {!isMiniMode && (
               <ListItemText
                 classes={{
@@ -179,8 +152,7 @@ const MenuHeader = () => {
                   marginLeft:
                     !isMenuOpen && isDesktop && authData.photoURL
                       ? 7
-                      : undefined,
-                }}
+                      : undefined}}
                 primary={authData.displayName}
                 secondary={authData.email}
               />
@@ -191,13 +163,10 @@ const MenuHeader = () => {
                   setAuthMenuOpen(!isAuthMenuOpen)
                 }}
               >
-                <IconButton>
-                  {isAuthMenuOpen && (
-                    <ArrowDropUpIcon classes={{ root: classes.icon }} />
-                  )}
-                  {!isAuthMenuOpen && (
-                    <ArrowDropDownIcon classes={{ root: classes.icon }} />
-                  )}
+                <IconButton> {
+                  isAuthMenuOpen
+                    ? <ArrowDropUpIcon classes={{ root: classes.icon }} />
+                    : <ArrowDropDownIcon classes={{ root: classes.icon }} />}
                 </IconButton>
               </ListItemSecondaryAction>
             )}
