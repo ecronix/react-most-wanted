@@ -1,6 +1,3 @@
-import App from './containers/App'
+import config from "./config";
 
-export { default as Activity } from './containers/Activity'
-export { default as Scrollbar } from './components/Scrollbar'
-
-export default App
+export default config;

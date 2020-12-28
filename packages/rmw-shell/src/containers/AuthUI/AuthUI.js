@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
-import { injectIntl } from 'react-intl'
+import React, { useEffect, useCallback } from 'react'
+import { useIntl } from 'react-intl'
+import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
+
 let authUi = null
 
-export class AuthUI extends Component {
-  async componentDidMount() {
-    const { firebaseApp, uiConfig, intl } = this.props
+/*eslint-disable */
+const AuthUI = ({ uiConfig }) => {
+  const intl = useIntl()
+  const { firebaseApp } = useFirebase()
+  const locale = intl.locale
 
+  const initAuth = useCallback(async () => {
     let firebaseui = null
 
     try {
-      const { default: defaultImport } = await import(`./npm__${intl.locale}`)
+      // eslint-disable-next-line
+      const { default: defaultImport } = await import(`./npm__${locale}`)
       firebaseui = defaultImport
     } catch (error) {
+      console.log('error', error)
+      // eslint-disable-next-line
       firebaseui = await import('firebaseui')
     }
 
@@ -19,30 +27,40 @@ export class AuthUI extends Component {
       if (!firebaseui.auth.AuthUI.getInstance()) {
         authUi = new firebaseui.auth.AuthUI(firebaseApp.auth())
       } else {
-        // console.log(firebaseui.auth)
+        authUi = firebaseui.auth.AuthUI.getInstance()
       }
     } catch (err) {
       console.warn(err)
     }
 
-    authUi.start('#firebaseui-auth', uiConfig)
-  }
-
-  componentWillUnmount() {
     try {
-      authUi.reset()
-    } catch (err) {
-      console.warn(err)
+      authUi.start('#firebaseui-auth', uiConfig)
+    } catch (error) {
+      console.warn(error)
     }
-  }
+  }, [locale, firebaseApp])
 
-  render() {
-    return (
-      <div style={{ paddingTop: 35 }}>
-        <div id="firebaseui-auth" />
-      </div>
-    )
-  }
+  useEffect(() => {
+    initAuth()
+
+    return () => {
+      try {
+        if (authUi) {
+          authUi.reset()
+        }
+      } catch (err) {
+        console.warn(err)
+      }
+    }
+  }, [initAuth, firebaseApp, authUi])
+
+  return (
+    <div style={{ paddingTop: 35 }}>
+      <div key={`${intl.locale}`} id="firebaseui-auth" />
+    </div>
+  )
 }
 
-export default injectIntl(AuthUI)
+export default AuthUI
+
+/*eslint-enable */

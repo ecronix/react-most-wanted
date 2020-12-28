@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, useReducer } from 'react'
+import React, {  useEffect, useReducer } from 'react'
 import Context from './Context'
 
 function reducer(state, action) {
   const { type, key, value, persist } = action
-  switch (action.type) {
+  switch (type) {
     case 'add':
       return { ...state, [key]: { value, persist } }
     case 'clear':

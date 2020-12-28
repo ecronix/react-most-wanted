@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
@@ -18,7 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { isDesktopOpen, isMini, setDesktopOpen, setMobileOpen, useMiniMode } =
+  const { menuStore } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()
@@ -43,7 +43,8 @@ const Menu = (props) => {
 
   const handleChange = (event, index) => {
     if (index !== undefined) {
-      setMobileOpen(false)
+     /*  setMobileOpen(false) */
+     console.log("WARNING: GOT HERE AT MENU.JS, SOMETHING TO DO WITH MINI, ATHENA")
     }
     if (index !== undefined && index !== Object(index)) {
       history.push(index)
@@ -65,8 +66,8 @@ const Menu = (props) => {
             items={menuItems}
             onIndexChange={handleChange}
             index={index}
-            key={useMiniMode}
-            useMinified={isMini && !isDesktopOpen}
+            key={menuStore.miniMode}
+            useMinified={menuStore.miniMode}
           />
         </Scrollbar>
       </div>

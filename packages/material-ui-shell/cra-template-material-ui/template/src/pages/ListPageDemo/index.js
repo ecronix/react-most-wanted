@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { ListPage } from 'material-ui-shell/lib/containers/Page'
-import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import { useIntl } from 'react-intl'
-import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 
 import list from './data.json'
+import { IconButton } from '@material-ui/core'
+import { Add } from '@material-ui/icons'
 
 const fields = [
   {
@@ -41,8 +41,8 @@ const fields = [
   },
 ]
 
-const Row = ({ index, style }) => {
-  const { name, amount = '', registered, email } = list[index]
+const Row = ({ index, style, data }) => {
+  const { name, amount = '', registered, email } = data
 
   return (
     <div key={`${name}_${index}`} style={style}>
@@ -75,7 +75,7 @@ const Row = ({ index, style }) => {
   )
 }
 
-export default function () {
+const ListPageDemo = () => {
   const intl = useIntl()
 
   return (
@@ -99,3 +99,4 @@ export default function () {
     />
   )
 }
+export default ListPageDemo

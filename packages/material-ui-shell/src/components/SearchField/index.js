@@ -88,6 +88,7 @@ export default function ({
 
   useEffect(() => {
     setValue(initialValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const hasValue = value && value !== ''

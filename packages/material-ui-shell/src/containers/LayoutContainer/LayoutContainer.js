@@ -10,6 +10,7 @@ import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { useIntl } from 'react-intl'
 import FilterProvider from 'material-ui-shell/lib/providers/Filter/Provider'
+import VirtualListsProvider from 'material-ui-shell/lib/providers/VirtualLists/Provider'
 
 export default function ({ children }) {
   const intl = useIntl()
@@ -26,7 +27,9 @@ export default function ({ children }) {
       <SnackbarProvider maxSnack={3} {...notistack}>
         <UpdateContainer>
           <QuestionDialogsProvider>
-            <FilterProvider>{children}</FilterProvider>
+            <FilterProvider>
+              <VirtualListsProvider>{children}</VirtualListsProvider>
+            </FilterProvider>
           </QuestionDialogsProvider>
         </UpdateContainer>
       </SnackbarProvider>

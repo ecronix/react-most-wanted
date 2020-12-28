@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
 import getMenuItems from './menuItems'

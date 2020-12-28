@@ -2,8 +2,17 @@ import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
 
-const runUpdate = () => {
-  window.update && window.update()
+const runUpdate = (registration) => {
+  try {
+    if (registration) {
+      registration.waiting.postMessage({ type: 'SKIP_WAITING' })
+    }
+    if (window.update) {
+      window.update && window.update()
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const Provider = ({ children, checkInterval }) => {
