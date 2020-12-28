@@ -53,28 +53,24 @@ const MenuHeader = () => {
   const classes = useStyles()
   const {
     isDesktop,
-    // isDesktopOpen,
-    dispatch,
-    menuStore,
     setMenuOpen,
     setMiniMode,
-    // setDesktopOpen,
-    // isMini,
-    // setMini,
+    isMiniMode,
+    isMenuOpen,
+    isMiniSwitchVisibility,
     isAuthMenuOpen,
     setAuthMenuOpen,
-    // useMiniMode,
   } = useMenu()
 
   const isAuthenticated = auth.isAuthenticated
 
   return (
     <Paper square={true} className={classes.paper}>
-      {menuStore.miniMode && isAuthenticated && <div className={classes.toolbar}></div>}
+      {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
-        {!menuStore.miniMode && (
+        {!isMiniMode && (
           <ListItem className={classes.listItem}>
-            {isAuthenticated && !menuStore.miniMode && (
+            {isAuthenticated && !isMiniMode && (
               <React.Fragment>
                 {authData.photoURL && (
                   <ListItemAvatar
@@ -102,7 +98,7 @@ const MenuHeader = () => {
                 )}
               </React.Fragment>
             )}
-            {!menuStore.miniMode && (
+            {!isMiniMode && (
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
@@ -118,11 +114,11 @@ const MenuHeader = () => {
                 </IconButton>
                 {isDesktop && (
                   <>
-                    {menuStore.miniSwitchVisibility && (
+                    {isMiniSwitchVisibility && (
                       <IconButton
                         onClick={() => {
-                          setMiniMode(dispatch, true)
-                          setMenuOpen(dispatch, false)
+                          setMiniMode(true)
+                          setMenuOpen(false)
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -131,7 +127,7 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setMenuOpen(dispatch, false)
+                        setMenuOpen(false)
                       }}
                     >
                       {theme.direction === 'rtl' && (
@@ -154,17 +150,26 @@ const MenuHeader = () => {
               setAuthMenuOpen(!isAuthMenuOpen)
             }}
           >
-            {!menuStore.menuOpen && isDesktop && authData.photoURL && (
+          {!isMenuOpen && isMiniMode && isDesktop && (
+            authData.photoURL ? (
               <ListItemAvatar>
                 <Avatar
                   src={authData.photoURL}
                   alt="person"
                   //style={{ marginLeft: 0, marginTop: 0 }}
                 />
+              </ListItemAvatar>) : (
+              <ListItemAvatar>
+                <Avatar>
+                  {authData.displayName ? (
+                    authData.displayName[0].toUpperCase()
+                  ) : (
+                    <PersonIcon />
+                  )}
+                </Avatar>
               </ListItemAvatar>
-            )}
-
-            {!menuStore.miniMode && (
+            ))}
+            {!isMiniMode && (
               <ListItemText
                 classes={{
                   primary: classes.listItem,
@@ -172,7 +177,7 @@ const MenuHeader = () => {
                 }}
                 style={{
                   marginLeft:
-                    !menuStore.menuOpen && isDesktop && authData.photoURL
+                    !isMenuOpen && isDesktop && authData.photoURL
                       ? 7
                       : undefined,
                 }}
@@ -180,7 +185,7 @@ const MenuHeader = () => {
                 secondary={authData.email}
               />
             )}
-            {menuStore.menuOpen && (
+            {isMenuOpen && (
               <ListItemSecondaryAction
                 onClick={() => {
                   setAuthMenuOpen(!isAuthMenuOpen)

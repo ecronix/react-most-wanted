@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import Post from '../../../components/Post/Post'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
-import moment from 'moment'
 
 const Row = ({ data, index, style }) => {
   const { key } = data
@@ -33,8 +31,6 @@ const Row = ({ data, index, style }) => {
 const Posts = () => {
   const intl = useIntl()
   const history = useHistory()
-  const { auth } = useAuth()
-  const { firebaseApp } = useFirebase()
 
   const getRef = useCallback((firebaseApp) => {
     return firebaseApp
@@ -59,18 +55,8 @@ const Posts = () => {
           }),
         }
       }}
-      onCreateClick={async () => {
-        const { displayName = null, photoURL = null, uid = null } = auth
-
-        const postSnap = await firebaseApp
-          .database()
-          .ref(`user_posts/${auth.uid}`)
-          .push({
-            timestamp: moment().format(),
-            author: { displayName, photoURL, uid },
-          })
-
-        history.push(`/user_posts/edit/${postSnap.key}`)
+      onCreateClick={() => {
+        history.push(`/create_post`)
       }}
     />
   )

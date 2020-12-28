@@ -15,7 +15,19 @@ const AuthUI = ({ uiConfig }) => {
 
     try {
       // eslint-disable-next-line
-      const { default: defaultImport } = await import(`./npm__${locale}`)
+      let localeUI
+
+      if (locale === 'de') {
+        localeUI = await import(`./npm__de`)
+      } else if (locale === 'ru') {
+        localeUI = await import(`./npm__ru`)
+      } else if (locale === 'es') {
+        localeUI = await import(`./npm__es`)
+      } else if (locale === 'en') {
+        localeUI = await import(`./npm__en`)
+      }
+
+      const { default: defaultImport } = localeUI
       firebaseui = defaultImport
     } catch (error) {
       console.log('error', error)

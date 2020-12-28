@@ -18,7 +18,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { menuStore } =
+  const { setMobileMenuOpen, isMiniMode, isMiniSwitchVisibility } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()
@@ -43,8 +43,7 @@ const Menu = (props) => {
 
   const handleChange = (event, index) => {
     if (index !== undefined) {
-     /*  setMobileOpen(false) */
-     console.log("WARNING: GOT HERE AT MENU.JS, SOMETHING TO DO WITH MINI, ATHENA")
+      setMobileMenuOpen(false)
     }
     if (index !== undefined && index !== Object(index)) {
       history.push(index)
@@ -66,8 +65,8 @@ const Menu = (props) => {
             items={menuItems}
             onIndexChange={handleChange}
             index={index}
-            key={menuStore.miniMode}
-            useMinified={menuStore.miniMode}
+            key={isMiniSwitchVisibility}
+            useMinified={isMiniMode}
           />
         </Scrollbar>
       </div>

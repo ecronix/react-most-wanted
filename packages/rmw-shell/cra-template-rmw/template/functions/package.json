@@ -18,7 +18,7 @@
     "camelcase": "^6.0.0",
     "child-process-promise": "^2.2.1",
     "firebase-admin": "^9.1.1",
-    "firebase-function-tools": "^1.1.4",
+    "firebase-function-tools": "^2.0.1",
     "firebase-functions": "^3.6.1",
     "glob": "^7.1.6",
     "mkdirp-promise": "^5.0.1",
@@ -29,7 +29,8 @@
     "uuid": "^8.3.0"
   },
   "devDependencies": {
-    "firebase-functions-test": "^0.2.0"
+    "firebase-functions-test": "^0.2.0",
+    "path": "^0.12.7"
   },
   "private": true
 }
