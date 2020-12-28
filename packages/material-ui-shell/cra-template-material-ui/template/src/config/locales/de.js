@@ -37,7 +37,12 @@ const messages = defineMessages({
   forgot_password:'Vergessen passwort',
   password_reset:'Passwort zurücksetzen',
   password_confirm:'Passwortbestätigung',
-  registration:'Registrierung'
+  registration:'Registrierung',
+  my_account: 'Mein Konto',
+  delete_account_dialog_title: 'Konto löschen?',
+  delete_account_dialog_message:
+    'Dein Konto wird gelöscht und mit ihm alle Daten!',
+  delete_account_dialog_action:'Konto löschen'
 })
 
 export default messages

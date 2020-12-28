@@ -1,19 +1,23 @@
 language: node_js
 node_js:
-  - 8
+  - 12
 
 cache:
   directories:
-    - packages/cra-template-rmw/template/node_modules
-    - packages/cra-template-rmw/template/functions/node_modules
+    - demo/template/node_modules
+    - demo/template/functions/node_modules
 
 before_install:
-  - cd packages/cra-template-rmw/template
+  - npx create-react-app demo-app --template rmw --use-npm
+  - rm -rf demo-app/continuous_deployment
+  - mkdir -p demo-app/continuous_deployment
+  - cp -R packages/rmw-shell/cra-template-rmw/template/continuous_deployment demo-app
+  - cd demo-app
   - chmod +x ./continuous_deployment/before_install.sh
   - ./continuous_deployment/before_install.sh
 
 before_script:
-  - npm test
+  - npm test --passWithNoTests
   - chmod +x ./continuous_deployment/build.sh
   - travis_wait 40 ./continuous_deployment/build.sh
 

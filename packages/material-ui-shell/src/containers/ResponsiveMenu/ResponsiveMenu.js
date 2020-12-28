@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import clsx from 'clsx'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -58,15 +58,15 @@ const ResponsiveMenu = ({ children, width }) => {
   const theme = useTheme()
 
   const {
+    dispatch,
+    menuStore,
     isDesktop,
-    isDesktopOpen,
-    isMobileOpen,
-    isMini,
-    setMobileOpen,
+    setMenuOpen
   } = useMenu()
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!isMobileOpen)
+    setMenuOpen(dispatch, !menuStore.menuOpen)
+    // setMobileOpen(!isMobileOpen)
   }
 
   return (
@@ -84,12 +84,12 @@ const ResponsiveMenu = ({ children, width }) => {
           paper: isDesktop
             ? clsx(
                 classes.drawerPaperOpen,
-                !isDesktopOpen && classes.drawerPaperClose,
-                !isMini && !isDesktopOpen && classes.hide
+                !menuStore.menuOpen && classes.drawerPaperClose,
+                !menuStore.miniMode && !menuStore.menuOpen && classes.hide
               )
             : classes.drawerPaper,
         }}
-        open={isDesktop ? isDesktopOpen : isMobileOpen}
+        open={menuStore.menuOpen}
         onOpen={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.

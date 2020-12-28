@@ -1,26 +1,14 @@
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js')
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js')
+importScripts('https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js')
+importScripts('https://www.gstatic.com/firebasejs/7.24.0/firebase-messaging.js')
 
 firebase.initializeApp({
-  messagingSenderId: '258373383650',
+  apiKey: 'AIzaSyB31cMH9nJnERC1WCWA7lQHnY08voLs-Z0',
+  authDomain: 'react-most-wanted-dev.firebaseapp.com',
+  databaseURL: 'https://react-most-wanted-dev.firebaseio.com',
+  projectId: 'react-most-wanted-dev',
+  storageBucket: 'react-most-wanted-dev.appspot.com',
+  messagingSenderId: '70650394824',
+  appId: '1:70650394824:web:7cd3113c37741efc',
 })
 
 const messaging = firebase.messaging()
-
-messaging.setBackgroundMessageHandler(function(payload) {
-  console.log(
-    '[firebase-messaging-sw.js] Received background message ',
-    payload
-  )
-  // Customize notification here
-  const notificationTitle = 'Background Message Title'
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/apple-touch-icon.png',
-  }
-
-  return self.registration.showNotification(
-    notificationTitle,
-    notificationOptions
-  )
-})

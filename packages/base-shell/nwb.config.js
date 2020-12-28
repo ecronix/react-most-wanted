@@ -7,12 +7,6 @@ module.exports = {
     umd: false,
   },
   webpack: {
-    /*
-    html: {
-      template: 'demo/template/public/index.html',
-    },
-    */
-
     aliases: {
       'base-shell/lib': path.resolve('src'),
     },

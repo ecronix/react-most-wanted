@@ -1,232 +1,222 @@
-import AccountBox from '@material-ui/icons/AccountBox'
-import Activity from '../../containers/Activity'
+import Avatar from '@material-ui/core/Avatar'
+import Paper from '@material-ui/core/Paper'
+import React, { useEffect } from 'react'
+import Typography from '@material-ui/core/Typography'
+import { IconButton } from '@material-ui/core'
+import { useIntl } from 'react-intl'
+import {
+  GoogleIcon,
+  FacebookIcon,
+  GitHubIcon,
+  TwitterIcon,
+} from 'rmw-shell/lib/components/Icons'
+import Page from 'material-ui-shell/lib/containers/Page/Page'
+import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { useParams, useHistory } from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
-import FilterList from '@material-ui/icons/FilterList'
-import IconButton from '@material-ui/core/IconButton'
-import Lock from '@material-ui/icons/Lock'
-import Person from '@material-ui/icons/Person'
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import Scrollbar from '../../components/Scrollbar'
-import SearchField from '../../components/SearchField'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
-import UserForm from '../../components/Forms/UserForm'
-import UserGrants from '../../containers/Users/UserGrants'
-import UserRoles from '../../containers/Users/UserRoles'
-import { change, submit } from 'redux-form'
-import { connect } from 'react-redux'
-import { filterSelectors, filterActions } from 'material-ui-filter'
-import { formValueSelector } from 'redux-form'
-import { getList, isLoading, getPath } from 'firekit'
-import { injectIntl } from 'react-intl'
-import { setSimpleValue } from '../../store/simpleValues/actions'
-import { withFirebase } from 'firekit-provider'
-import { withRouter } from 'react-router-dom'
-import { withTheme, withStyles } from '@material-ui/core/styles'
+import AccountBox from '@material-ui/icons/AccountBox'
+import Lock from '@material-ui/icons/Lock'
+import Person from '@material-ui/icons/Person'
+import Email from '@material-ui/icons/Email'
+import GrantsList from 'rmw-shell/lib/containers/GrantsList'
+import RolesList from 'rmw-shell/lib/containers/RolesList'
+import Zoom from '@material-ui/core/Zoom'
+import SearchField from 'material-ui-shell/lib/components/SearchField'
+import { useFilter } from 'material-ui-shell/lib/providers/Filter'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
 
-const path = '/users'
+export default function () {
+  const intl = useIntl()
+  const history = useHistory()
+  const { watchPath, getPath, firebaseApp } = usePaths()
+  const { watchList, getList } = useLists()
+  const { uid, tab = 'main' } = useParams()
+  const { getFilter, setSearch } = useFilter()
+  const { search = {} } = getFilter(tab)
+  const { value: searchValue = '' } = search
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default
-  },
-  tabs: {
-    flex: 1,
-    width: '100%'
-  },
-  form: {
-    backgroundColor: theme.palette.background.default,
-    margin: 15,
-    display: 'flex',
-    justifyContent: 'center'
+  const grantsPath = `user_grants/${uid}`
+  const rolesPath = `user_roles/${uid}`
+
+  const getProviderIcon = (id) => {
+    if (id === 'password') {
+      return <Email />
+    }
+    if (id === 'google.com') {
+      return <GoogleIcon />
+    }
+    if (id === 'facebook.com') {
+      return <FacebookIcon />
+    }
+    if (id === 'github.com') {
+      return <GitHubIcon />
+    }
+    if (id === 'twitter.com') {
+      return <TwitterIcon />
+    }
+
+    return null
   }
-})
 
-export class User extends Component {
-  state = {
-    values: {}
-  }
+  const path = `users/${uid}`
 
-  componentDidMount() {
-    const { watchList, uid, firebaseApp } = this.props
+  useEffect(() => {
+    watchPath(path)
     watchList('admins')
-    watchList('user_grants')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [path])
 
-    firebaseApp
-      .database()
-      .ref(`users/${uid}`)
-      .on('value', snap => {
-        this.setState({ values: snap.val() })
-      })
-  }
+  const user = getPath(path, {})
+  const admins = getList('admins')
 
-  componentWillUnmount() {
-    const { firebaseApp, uid } = this.props
+  const { photoURL = '', displayName = '', email = '', providerData = [] } =
+    user || {}
 
-    firebaseApp
-      .database()
-      .ref(`users/${uid}`)
-      .off()
-  }
+  let isAdmin = false
 
-  handleTabActive = (e, value) => {
-    const { history, uid, rootPath, rootUid } = this.props
-
-    if (rootPath) {
-      history.push(`${path}/edit/${uid}/${value}/${rootPath}/${rootUid}`)
-    } else {
-      history.push(`${path}/edit/${uid}/${value}`)
+  admins.map((a) => {
+    if (a.key === uid) {
+      isAdmin = true
     }
-  }
+    return a
+  })
 
-  handleAdminChange = (e, isInputChecked) => {
-    const { firebaseApp, match } = this.props
-    const uid = match.params.uid
-
-    if (isInputChecked) {
-      firebaseApp
-        .database()
-        .ref(`/admins/${uid}`)
-        .set(true)
-    } else {
-      firebaseApp
-        .database()
-        .ref(`/admins/${uid}`)
-        .remove()
-    }
-  }
-
-  render() {
-    const {
-      history,
-      intl,
-      theme,
-      match,
-      admins,
-      editType,
-      setFilterIsOpen,
-      hasFilters,
-      isLoading,
-      classes
-    } = this.props
-
-    const uid = match.params.uid
-    let isAdmin = false
-
-    if (admins !== undefined) {
-      for (let admin of admins) {
-        if (admin.key === uid) {
-          isAdmin = true
-          break
-        }
-      }
-    }
-
-    return (
-      <Activity
-        isLoading={isLoading}
-        appBarContent={
-          <div>
-            {editType === 'grants' && (
-              <div style={{ display: 'flex' }}>
-                <SearchField filterName={'user_grants'} />
-
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  onClick={() => setFilterIsOpen('user_grants', true)}
-                >
-                  <FilterList
-                    className="material-icons"
-                    color={hasFilters ? theme.palette.accent1Color : theme.palette.canvasColor}
-                  />
-                </IconButton>
-              </div>
-            )}
-          </div>
-        }
-        onBackClick={() => history.push('/users')}
-        title={intl.formatMessage({ id: 'edit_user' })}
-      >
-        <Scrollbar style={{ height: '100%' }}>
-          <div className={classes.root}>
-            <AppBar position="static">
-              <Tabs value={editType} onChange={this.handleTabActive} fullWidth centered>
-                <Tab value="profile" icon={<Person className="material-icons" />} />
-                <Tab value="roles" icon={<AccountBox className="material-icons" />} />
-                <Tab value="grants" icon={<Lock className="material-icons" />} />
-              </Tabs>
-            </AppBar>
-
-            {editType === 'profile' && (
-              <div className={classes.form}>
-                <UserForm
-                  handleAdminChange={this.handleAdminChange}
-                  isAdmin={isAdmin}
-                  values={this.state.values ? this.state.values : {}}
-                  {...this.props}
+  return (
+    <Page
+      onBackClick={() => {
+        history.goBack()
+      }}
+      pageTitle={intl.formatMessage({
+        id: 'user',
+        defaultMessage: 'User',
+      })}
+      appBarContent={
+        <div>
+          {tab !== 'main' && (
+            <Zoom key={tab} in={tab !== 'main'}>
+              <div>
+                <SearchField
+                  initialValue={searchValue}
+                  onChange={(v) => {
+                    setSearch(tab, v)
+                  }}
                 />
               </div>
-            )}
-            {editType === 'roles' && <UserRoles {...this.props} />}
-            {editType === 'grants' && <UserGrants {...this.props} />}
-          </div>
-        </Scrollbar>
-      </Activity>
-    )
-  }
+            </Zoom>
+          )}
+        </div>
+      }
+      tabs={
+        <AppBar position="static">
+          <Tabs
+            value={tab}
+            onChange={(e, t) => {
+              history.replace(`/users/${uid}/${t}`)
+            }}
+            centered
+          >
+            <Tab value="main" icon={<Person className="material-icons" />} />
+            <Tab
+              value="roles"
+              icon={<AccountBox className="material-icons" />}
+            />
+
+            <Tab value="grants" icon={<Lock className="material-icons" />} />
+          </Tabs>
+        </AppBar>
+      }
+    >
+      <div style={{ height: '100%', overflow: 'hidden' }}>
+        <div style={{ height: '100%' }}>
+          {tab === 'main' && (
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              <Paper
+                elevation={3}
+                style={{
+                  position: 'relative',
+                  //width: 300,
+                  //height: 300,
+                  borderRadius: 18,
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  padding: 18,
+                  minWidth: 250,
+                }}
+              >
+                <Avatar
+                  style={{ width: 120, height: 120, marginTop: -70 }}
+                  alt="User Picture"
+                  src={photoURL}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    marginTop: 18,
+                    marginBottom: 18,
+                  }}
+                >
+                  <Typography variant="h4">{displayName}</Typography>
+                  <Typography variant="h6">{email}</Typography>
+                  <div
+                    style={{
+                      margin: 18,
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {providerData.map((so) => {
+                      return getProviderIcon(so.providerId) ? (
+                        <IconButton color="primary" key={so}>
+                          {getProviderIcon(so.providerId)}
+                        </IconButton>
+                      ) : null
+                    })}
+                  </div>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isAdmin}
+                        onChange={() => {
+                          try {
+                            firebaseApp
+                              .database()
+                              .ref(`admins/${uid}`)
+                              .set(isAdmin ? null : true)
+                          } catch (error) {
+                            console.warn(error)
+                          }
+                        }}
+                        name="checkedA"
+                      />
+                    }
+                    label={intl.formatMessage({
+                      id: 'administrator',
+                      defaultMessage: 'Administrator',
+                    })}
+                  />
+                </div>
+              </Paper>
+            </div>
+          )}
+          {tab === 'roles' && <RolesList path={rolesPath} />}
+          {tab === 'grants' && <GrantsList grantsPath={grantsPath} />}
+        </div>
+      </div>
+    </Page>
+  )
 }
-
-User.propTypes = {
-  history: PropTypes.object,
-  
-  //submit: PropTypes.func.isRequired,
-  theme: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
-  admins: PropTypes.array.isRequired
-}
-
-const selector = formValueSelector('user')
-
-const mapStateToProps = (state, ownProps) => {
-  const { auth, intl, filters } = state
-  const { match } = ownProps
-
-  const uid = match.params.uid
-  const editType = match.params.editType ? match.params.editType : 'data'
-  const { hasFilters } = filterSelectors.selectFilterProps('user_grants', filters)
-  const isLoadingRoles = isLoading(state, 'user_roles')
-  const isLoadingGrants = isLoading(state, 'user_grants')
-  const rootPath = match.params.rootPath
-  const rootUid = match.params.rootUid
-
-  let photoURL = ''
-  let displayName = ''
-
-  if (selector) {
-    photoURL = selector(state, 'photoURL')
-    displayName = selector(state, 'displayName')
-  }
-
-  return {
-    rootPath,
-    rootUid,
-    hasFilters,
-    auth,
-    uid,
-    editType,
-    intl,
-    photoURL,
-    displayName,
-    admins: getList(state, 'admins'),
-    user: getPath(state, `users/${uid}`),
-    isLoading: isLoadingRoles || isLoadingGrants
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  { setSimpleValue, change, submit, ...filterActions }
-)(injectIntl(withRouter(withFirebase(withStyles(styles, { withTheme: true })(withTheme(User))))))

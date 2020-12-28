@@ -1,5 +1,7 @@
 import * as types from './types'
 
+/* eslint-disable */
+
 function query(query, action) {
   const { payload } = action
 
@@ -56,7 +58,6 @@ function filter(filter = {}, action) {
     case types.ON_FILTER_IS_CLOSE:
     case types.ON_FILTER_SORT_FIELD_CHANGED:
     case types.ON_FILTER_SORT_ORIENTATION_CHANGED:
-    case types.ON_SET_SCROLL_OFFSET:
       return { ...filter, ...payload }
 
     case types.ON_ADD_FILTER_QUERY:
@@ -85,7 +86,6 @@ export default function filters(state = {}, action) {
     case types.ON_ADD_FILTER_QUERY:
     case types.ON_EDIT_FILTER_QUERY:
     case types.ON_REMOVE_FILTER_QUERY:
-    case types.ON_SET_SCROLL_OFFSET:
     case types.ON_SET_SEARCH:
     case types.ON_CLEAR:
       return { ...state, [name]: filter(state[name], action) }
@@ -93,3 +93,5 @@ export default function filters(state = {}, action) {
       return state
   }
 }
+
+/* eslint-enable */

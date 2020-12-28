@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import MenuProvider from 'material-ui-shell/lib/providers/Menu/Provider'
 import ThemeProvider from 'material-ui-shell/lib/providers/Theme/Provider'
 import { useConfig } from 'base-shell/lib/providers/Config'

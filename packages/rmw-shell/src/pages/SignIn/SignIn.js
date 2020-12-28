@@ -1,44 +1,47 @@
 import * as firebaseui from 'firebaseui'
-import Activity from '../../containers/Activity'
-import AuthUI from '../../containers/AuthUI/AuthUI'
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import { injectIntl } from 'react-intl'
-import { withAppConfigs } from '../../contexts/AppConfigProvider'
-import { withFirebase } from 'firekit-provider'
+import AuthUI from 'rmw-shell/lib/containers/AuthUI/AuthUI'
+import Page from 'material-ui-shell/lib/containers/Page/Page'
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import { useConfig } from 'base-shell/lib/providers/Config'
+import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
+import { useIntl } from 'react-intl'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
-export class SignIn extends Component {
-  render() {
-    const { intl, firebaseApp, appConfig } = this.props
+const SignIn = () => {
+  const intl = useIntl()
+  const { appConfig } = useConfig()
+  const { firebaseApp } = useFirebase()
+  const { firebase = {} } = appConfig || {}
+  const { firebaseuiProps = {} } = firebase
+  const { setAuthMenuOpen } = useMenu()
 
-    const { firebase_auth_props = {} } = appConfig || {}
-
-    const uiConfig = {
-      signInSuccessUrl: '/',
-      signInFlow: 'popup',
-      callbacks: {
-        signInSuccessWithAuthResult: () => {
-          // initMessaging()
-
-          // To avoid page reload on single page applications
-          return false
-        },
+  const uiConfig = {
+    signInSuccessUrl: '/',
+    signInFlow: 'popup',
+    callbacks: {
+      signInSuccessWithAuthResult: () => {
+        setAuthMenuOpen(false)
+        // To avoid page reload on single page applications
+        return false
       },
-      signInOptions: appConfig.firebase_providers,
-      credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-      ...firebase_auth_props,
-    }
-
-    return (
-      <Activity title={intl.formatMessage({ id: 'sign_in' })}>
-        <AuthUI firebaseApp={firebaseApp} uiConfig={uiConfig} />
-      </Activity>
-    )
+    },
+    credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+    ...firebaseuiProps,
   }
+
+  return (
+    <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
+      <Helmet>
+        <link
+          type="text/css"
+          rel="stylesheet"
+          href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css"
+        />
+      </Helmet>
+      <AuthUI firebaseApp={firebaseApp} uiConfig={uiConfig} />
+    </Page>
+  )
 }
 
-SignIn.propTypes = {
-  intl: PropTypes.object.isRequired,
-}
-
-export default injectIntl(withFirebase(withAppConfigs(SignIn)))
+export default SignIn

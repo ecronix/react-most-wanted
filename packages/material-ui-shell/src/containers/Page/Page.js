@@ -73,6 +73,7 @@ export default function ({
   isLoading,
   appBarContent = null,
   contentStyle,
+  tabs = null,
 }) {
   const isOnline = useOnline()
   const theme = useTheme()
@@ -82,11 +83,10 @@ export default function ({
 
   const {
     isDesktop,
-    isDesktopOpen,
-    setDesktopOpen,
-    isMobileOpen,
-    setMobileOpen,
-    setMini,
+    dispatch,
+    menuStore,
+    setMiniMode,
+    setMenuOpen
   } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''
@@ -97,15 +97,8 @@ export default function ({
 
   const classes = useStyles({ width, offlineIndicatorHeight })
   const handleDrawerMenuClick = () => {
-    if (!isDesktopOpen) {
-      setMini(false)
-      setDesktopOpen(true)
-      if (!isDesktop) {
-        setMobileOpen(!isMobileOpen)
-      }
-    } else {
-      setMobileOpen(!isMobileOpen)
-    }
+    setMiniMode(dispatch, false)
+    setMenuOpen(dispatch, true)
   }
 
   return (
@@ -114,7 +107,7 @@ export default function ({
         position={isDesktop ? 'absolute' : undefined}
         className={
           isDesktop
-            ? clsx(classes.appBar, isDesktopOpen && classes.appBarShift)
+            ? clsx(classes.appBar, menuStore.menuOpen && classes.appBarShift)
             : classes.appBar
         }
       >
@@ -126,7 +119,7 @@ export default function ({
             edge="start"
             className={clsx(
               classes.menuButton,
-              isDesktopOpen && isDesktop && classes.hide,
+              menuStore.menuOpen && isDesktop && classes.hide,
               onBackClick && classes.hide
             )}
           >
@@ -140,7 +133,7 @@ export default function ({
           >
             <ChevronLeft />
           </IconButton>
-          {!onBackClick && isDesktopOpen && false && (
+          {!onBackClick && menuStore.menuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
 
@@ -151,8 +144,8 @@ export default function ({
           {appBarContent}
         </Toolbar>
       </AppBar>
-
       <div className={classes.toolbar} />
+
       {isLoading && <LinearProgress />}
       {!isOnline && (
         <div
@@ -172,6 +165,7 @@ export default function ({
           </Typography>
         </div>
       )}
+      {tabs}
       <div className={classes.content} style={contentStyle}>
         {children}
       </div>

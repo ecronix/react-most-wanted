@@ -1,0 +1,52 @@
+{
+  "package": {
+    "dependencies": {
+      "rmw-shell":"8.x",
+      "@formatjs/intl-relativetimeformat": "8.x",
+      "@date-io/moment": "1.x",
+      "@material-ui/core": "4.x",
+      "@material-ui/icons": "4.x",
+      "@material-ui/lab": "^4.0.0-alpha.56",
+      "@material-ui/pickers": "3.x",
+      "base-shell": "1.x",
+      "chart.js": "2.x",
+      "final-form": "4.x",
+      "final-form-arrays": "3.x",
+      "firebase": "8.x",
+      "firebaseui": "4.x",
+      "github-markdown-css": "4.x",
+      "intl": "1.x",
+      "intl-locales-supported": "1.x",
+      "material-ui-image": "3.x",
+      "material-ui-shell": "1.x",
+      "moment": "2.x",
+      "mui-rff": "3.x",
+      "notistack": "1.x",
+      "react": "17.x",
+        "react-beautiful-dnd": "13.x",
+      "react-chartjs-2": "^2.x",
+      "react-countup": "4.x",
+      "react-custom-scrollbars": "4.x",
+      "react-dom": "17.x",
+      "react-easy-crop": "3.x",
+      "react-final-form": "6.x",
+      "react-final-form-arrays": "3.x",
+      "react-helmet": "6.x",
+      "react-intl": "5.x",
+      "react-ios-pwa-prompt": "1.x",
+      "react-linkify": "^1.0.0-alpha",
+      "react-markdown": "5.x",
+      "react-router-dom": "5.x",
+      "react-virtualized-auto-sizer": "1.x",
+      "react-window": "1.x"
+    },
+    "eslintConfig": {
+      "extends": ["react-app", "react-app/jest"]
+    },
+    "devDependencies":{
+      "@testing-library/jest-dom": "^5.11.4",
+      "@testing-library/react": "^11.1.0",
+      "@testing-library/user-event": "^12.1.10"
+    }
+  }
+}

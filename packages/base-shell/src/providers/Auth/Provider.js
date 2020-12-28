@@ -1,11 +1,23 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import Context from './Context'
+
+function reducer(state, action) {
+  const { type, auth } = action
+  switch (type) {
+    case 'SET_AUTH':
+      return auth
+    case 'UPDATE_AUTH':
+      return { ...state, ...auth }
+    default:
+      throw new Error()
+  }
+}
 
 const Provider = ({ persistKey = 'auth', children }) => {
   const persistAuth = JSON.parse(localStorage.getItem(persistKey))
 
-  const [auth, setAuth] = useState(persistAuth || {})
+  const [auth, dispatch] = useReducer(reducer, persistAuth || {})
 
   useEffect(() => {
     try {
@@ -15,8 +27,18 @@ const Provider = ({ persistKey = 'auth', children }) => {
     }
   }, [auth, persistKey])
 
+  const setAuth = (auth) => {
+    dispatch({ type: 'SET_AUTH', auth })
+  }
+
+  const updateAuth = (auth) => {
+    dispatch({ type: 'UPDATE_AUTH', auth })
+  }
+
   return (
-    <Context.Provider value={{ auth, setAuth }}>{children}</Context.Provider>
+    <Context.Provider value={{ auth, setAuth, updateAuth }}>
+      {children}
+    </Context.Provider>
   )
 }
 

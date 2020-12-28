@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
-import { useHistory, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import LocaleContext from 'base-shell/lib/providers/Locale/Context'
 import ConfigContext from 'base-shell/lib/providers/Config/Context'
 import AuthContext from 'base-shell/lib/providers/Auth/Context'
 
 const Menu = () => {
-  let history = useHistory()
   const intl = useIntl()
 
   const { setLocale, locale = 'en' } = useContext(LocaleContext)
