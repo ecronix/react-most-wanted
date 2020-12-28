@@ -61,14 +61,15 @@ const ResponsiveMenu = ({ children, width }) => {
     dispatch,
     menuStore,
     isDesktop,
-    setMenuOpen
+    isMiniMode,
+    isMenuOpen,
+    isMobileMenuOpen,
+    setMobileMenuOpen,
   } = useMenu()
 
   const handleDrawerToggle = () => {
-    setMenuOpen(dispatch, !menuStore.menuOpen)
-    // setMobileOpen(!isMobileOpen)
+    setMobileMenuOpen(!isMobileMenuOpen)
   }
-
   return (
     <div style={{ boxSizing: 'content-box' }}>
       <SwipeableDrawer
@@ -84,12 +85,12 @@ const ResponsiveMenu = ({ children, width }) => {
           paper: isDesktop
             ? clsx(
                 classes.drawerPaperOpen,
-                !menuStore.menuOpen && classes.drawerPaperClose,
-                !menuStore.miniMode && !menuStore.menuOpen && classes.hide
+                !isMenuOpen && classes.drawerPaperClose,
+                !isMiniMode && !isMenuOpen && classes.hide
               )
             : classes.drawerPaper,
         }}
-        open={menuStore.menuOpen}
+        open={isDesktop ? isMenuOpen : isMobileMenuOpen}
         onOpen={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.

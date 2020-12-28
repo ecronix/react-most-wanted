@@ -3,7 +3,7 @@ import admin from 'firebase-admin'
 import moment from 'moment'
 import nodemailer from 'nodemailer'
 
-const gmail = functions.config().gmail
+const gmail = functions.config().gmail || {}
 
 const mailTransport = nodemailer.createTransport(
   `smtps://${gmail.email}:${gmail.password}@smtp.gmail.com`
