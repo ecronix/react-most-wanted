@@ -9,6 +9,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemAvatar from '@material-ui/core/ListItemAvatar'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import PersonIcon from '@material-ui/icons/Person'
 import { useAuth } from 'base-shell/lib/providers/Auth'
@@ -20,6 +21,10 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
+import { Typography } from '@material-ui/core'
+
+
+import { Switch, useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,6 +34,21 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     color: theme.palette.primary.contrastText,
+    cursor: 'pointer',
+  },
+  breadie: {
+    marginLeft:'2px',
+    display:'inline',
+    fontSize: '12px',
+    color: theme.palette.primary.contrastText,
+    cursor: 'pointer',
+
+  },
+  bread: {
+    marginLeft:'10px',
+    marginRight:'5px',
+    display:'inline',
+    color: '#bdbdbd',
     cursor: 'pointer',
   },
   icon: {
@@ -46,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const MenuHeader = () => {
+  const location = useLocation()
   const theme = useTheme()
   const { auth } = useAuth()
   const { type, setType } = useAppTheme()
@@ -172,6 +193,17 @@ const MenuHeader = () => {
             )}
           </ListItem>
         )}
+        {!isMiniMode && (
+        <>
+          <Divider />
+          <ListItemText 
+            >
+              <Typography className={classes.bread} display="inline">
+                {location.pathname}
+              </Typography>
+            </ListItemText>
+        </>
+      )}
       </List>
     </Paper>
   )
