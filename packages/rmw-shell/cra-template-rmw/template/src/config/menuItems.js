@@ -2,7 +2,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import Assignment from '@material-ui/icons/Assignment'
 import Business from '@material-ui/icons/Business'
 import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import DaschboardIcon from '@material-ui/icons/Dashboard'
+import DashboardIcon from '@material-ui/icons/Dashboard'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import Web from '@material-ui/icons/Web'
 import GetApp from '@material-ui/icons/GetApp'
@@ -129,7 +129,7 @@ const getMenuItems = (props) => {
         id: 'dashboard',
         defaultMessage: 'Dashboard',
       }),
-      leftIcon: <DaschboardIcon />,
+      leftIcon: <DashboardIcon />,
     },
     {
       value: '/about',
@@ -193,7 +193,7 @@ const getMenuItems = (props) => {
     {
       primaryText: intl.formatMessage({
         id: 'documentation',
-        defaultMessage: 'Doumentation',
+        defaultMessage: 'documentation',
       }),
       visible: isAuthorised,
       primaryTogglesNestedList: true,
