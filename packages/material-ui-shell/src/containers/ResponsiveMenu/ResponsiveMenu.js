@@ -58,6 +58,8 @@ const ResponsiveMenu = ({ children, width }) => {
   const theme = useTheme()
 
   const {
+    dispatch,
+    menuStore,
     isDesktop,
     isMiniMode,
     isMenuOpen,
