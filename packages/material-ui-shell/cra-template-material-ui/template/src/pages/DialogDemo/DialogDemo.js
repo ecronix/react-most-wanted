@@ -26,7 +26,7 @@ const DialogDemo = () => {
             message: intl.formatMessage({
               id: 'dialog_message',
               defaultMessage:
-                'Dialog message. You can put as much text as you want here. Ask a question or show a warning befor deleting something. You can also set the action text to somerhing like "YES, Delete" and run that action by passing a "handleAction" prop. This receives a "handleClose" callback with wich you can close the dialog when your action is done.',
+                'Dialog message. You can put as much text as you want here. Ask a question or show a warning before deleting something. You can also set the action text to something like "YES, Delete" and run that action by passing a "handleAction" prop. This receives a "handleClose" callback with which you can close the dialog when your action is done.',
             }),
             action: intl.formatMessage({
               id: 'dialog_action',
