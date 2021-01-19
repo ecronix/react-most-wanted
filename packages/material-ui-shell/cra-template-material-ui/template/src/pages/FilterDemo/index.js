@@ -67,7 +67,7 @@ const FilterDemo = () => {
     },
     {
       name: 'isActive',
-      label: 'Aktive',
+      label: 'Active',
       type: 'bool',
     },
     {
