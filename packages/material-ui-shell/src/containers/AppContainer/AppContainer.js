@@ -13,6 +13,7 @@ export default function ({ children }) {
           <div
             style={{
               display: 'flex',
+              direction:'rtl'
             }}
           >
             {children}

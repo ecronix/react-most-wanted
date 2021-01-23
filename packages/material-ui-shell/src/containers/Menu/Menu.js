@@ -9,9 +9,15 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLocale } from 'base-shell/lib/providers/Locale'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { useTheme } from 'material-ui-shell/lib/providers/Theme'
+
+
+// import { useTheme } from 'material-ui-shell/lib/providers/Theme'
+import { useTheme } from '@material-ui/core/styles'//add
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//replaced
 
 const Menu = (props) => {
+  const theme = useTheme()
+
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
@@ -24,7 +30,9 @@ const Menu = (props) => {
   const { setLocale, locale = 'en' } = useLocale()
   const { menu } = appConfig || {}
   const { MenuHeader, getMenuItems } = menu || {}
-  const themeContext = useTheme()
+  // const themeContext = useTheme()
+  const themeContext = useAppTheme()//replaced
+
   const menuItems = getMenuItems({
     intl,
     locale,
@@ -57,6 +65,7 @@ const Menu = (props) => {
         style={{
           display: 'flex',
           flexDirection: 'column',
+          // direction:'rtl', //maybe unnecessary
           height: '100%',
         }}
       >
