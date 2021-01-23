@@ -14,6 +14,12 @@ import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 // import { useTheme } from 'material-ui-shell/lib/providers/Theme'
 import { useTheme } from '@material-ui/core/styles'//add
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//replaced
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+
 
 const Menu = (props) => {
   const theme = useTheme()
@@ -59,6 +65,7 @@ const Menu = (props) => {
   }
 
   return (
+  <StylesProvider jss={jss}>
     <ResponsiveMenu>
       {MenuHeader && <MenuHeader />}
       <div
@@ -80,6 +87,7 @@ const Menu = (props) => {
         </Scrollbar>
       </div>
     </ResponsiveMenu>
+  </StylesProvider>
   )
 }
 
