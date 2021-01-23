@@ -76,7 +76,6 @@ const ResponsiveMenu = ({ children, width }) => {
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         variant={isDesktop ? 'permanent' : 'temporary'}
-        // className={classes.drawer}
         onClose={handleDrawerToggle}
         anchor={
           !isDesktop ? undefined : theme.direction === 'rtl' ? 'right' : 'left'
