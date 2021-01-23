@@ -15,7 +15,20 @@ const Scrollbar = (props) => {
     [forwardedRef]
   )
 
-  return <Scrollbars hideTracksWhenNotNeeded ref={refSetter} {...rest} />
+  // return <Scrollbars hideTracksWhenNotNeeded ref={refSetter} {...rest} />
+  return (
+  <Scrollbars
+    hideTracksWhenNotNeeded
+    ref={refSetter}
+    renderView={props =>
+      (<div
+        {...props}
+        style={{
+          ...props.style,
+          marginLeft: props.style.marginRight, 
+          marginRight: 0, 
+        }} /> )}
+    {...rest} />)
 }
 
 export default Scrollbar
