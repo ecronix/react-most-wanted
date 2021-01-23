@@ -23,7 +23,6 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const Menu = (props) => {
   const theme = useTheme()
-
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()

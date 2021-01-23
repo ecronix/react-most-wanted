@@ -32,15 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: (props) => `calc(100% - ${props.width}px)`,
-    transform: theme.direction === 'rtl' ? 'translate(-240px)': null, //used to shift over the menu bar
+    //needed to shift the top menu bar to make room for the sidebar in rtl
+    marginRight: theme.direction === 'rtl' ? 240 : 0,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-/*   menuButton: {
-    marginLeft: -12,
-  }, */ // pretty sure this is not necessary
+  menuButton: {
+    marginLeft: 12,
+  },
   hide: {
     display: 'none',
   },
@@ -141,15 +142,10 @@ export default function ({
             onClick={onBackClick}
             className={clsx(classes.menuButton, !onBackClick && classes.hide)}
           >
-            {/* <ChevronLeft /> */}
-            <ChevronRight />
-{/*             {theme.direction === 'rtl' && (
-              <ChevronLeft classes={{ root: classes.icon }} />)}
-            {theme.direction !== 'rtl' && (
-              <ChevronRight classes={{ root: classes.icon }} />)} */}
+            <ChevronLeft />
           </IconButton>
           {!onBackClick && isMenuOpen && false && (
-            <div style={{ marginRight: 32 /* is this necessary?! */}} />
+            <div style={{ marginRight: 32 /*for James: is this necessary?!?! */}} />
           )}
 
           <Typography variant="h6" color="inherit" noWrap>
