@@ -1,5 +1,6 @@
 import AppBar from '@material-ui/core/AppBar'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'//added
 import IconButton from '@material-ui/core/IconButton'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
@@ -31,14 +32,15 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: (props) => `calc(100% - ${props.width}px)`,
+    transform: theme.direction === 'rtl' ? 'translate(-240px)': null, //used to shift over the menu bar
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
+/*   menuButton: {
     marginLeft: -12,
-  },
+  }, */ // pretty sure this is not necessary
   hide: {
     display: 'none',
   },
@@ -139,10 +141,15 @@ export default function ({
             onClick={onBackClick}
             className={clsx(classes.menuButton, !onBackClick && classes.hide)}
           >
-            <ChevronLeft />
+            {/* <ChevronLeft /> */}
+            <ChevronRight />
+{/*             {theme.direction === 'rtl' && (
+              <ChevronLeft classes={{ root: classes.icon }} />)}
+            {theme.direction !== 'rtl' && (
+              <ChevronRight classes={{ root: classes.icon }} />)} */}
           </IconButton>
           {!onBackClick && isMenuOpen && false && (
-            <div style={{ marginRight: 32 }} />
+            <div style={{ marginRight: 32 /* is this necessary?! */}} />
           )}
 
           <Typography variant="h6" color="inherit" noWrap>
