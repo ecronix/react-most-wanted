@@ -193,7 +193,7 @@ const getMenuItems = (props) => {
     {
       primaryText: intl.formatMessage({
         id: 'documentation',
-        defaultMessage: 'documentation',
+        defaultMessage: 'Documentation',
       }),
       visible: isAuthorised,
       primaryTogglesNestedList: true,
