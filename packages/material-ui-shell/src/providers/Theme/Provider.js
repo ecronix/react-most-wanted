@@ -4,9 +4,13 @@ import Context from './Context'
 
 const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const { theme: themeConfig } = appConfig || {}
-  const { defaultThemeID, defaultType } = themeConfig || {}
+  const { defaultThemeID, defaultType, defaultDirection } = themeConfig || {}
   const [themeID, setThemeID] = useState(defaultThemeID)
   const [type, setType] = useState(defaultType)
+
+  const [direction, setDirection] = useState(defaultDirection)//add
+
+
   const themeIDKey = `${persistKey}:themeID`
   const typeKey = `${persistKey}:type`
 
@@ -38,6 +42,14 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     }
   }, [type,typeKey])
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(directionKey, direction)
+    } catch (error) {
+      console.warn(error)
+    }
+  }, [direction,directionKey])//add
+
   return (
     <Context.Provider
       value={{
@@ -45,6 +57,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
         type,
         setThemeID,
         setType,
+        setDirection//addd
       }}
     >
       {children}

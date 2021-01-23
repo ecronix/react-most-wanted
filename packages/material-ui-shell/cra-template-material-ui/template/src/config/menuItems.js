@@ -19,6 +19,9 @@ import Web from '@material-ui/icons/Web'
 import allLocales from './locales'
 import allThemes from './themes'
 
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//add
+
+
 const getMenuItems = (props) => {
   const {
     intl,
@@ -33,6 +36,7 @@ const getMenuItems = (props) => {
   const { themeID, setThemeID } = themeContext
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
+  const { type, setType } = useAppTheme()//add
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -180,6 +184,16 @@ const getMenuItems = (props) => {
           }),
           leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
         },
+/*         {
+          visible: isDesktop ? true : false,
+          onClick: () => {
+            setType(type === 'light' ? 'dark' : 'light')
+          },
+          primaryText: intl.formatMessage({
+            id: 'FOOBARBAZZZZZZZZZZZZZZ',
+          }),
+          leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
+        }, */
       ],
     },
     {
