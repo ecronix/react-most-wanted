@@ -65,6 +65,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
     const { index } = state
 
     delete item.visible
+    console.log("in Selectable menu, direction is", theme.direction)
 
     if (item !== undefined) {
       if (item.subheader !== undefined) {
