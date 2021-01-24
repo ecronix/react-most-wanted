@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuHeader = () => {
   const theme = useTheme()
   const { auth } = useAuth()
-  const { type, setType } = useAppTheme()
+  const { type, setType, direction } = useAppTheme()
   const authData = auth
   const classes = useStyles()
   const {
@@ -61,7 +61,7 @@ const MenuHeader = () => {
     isAuthMenuOpen,
     setAuthMenuOpen,
   } = useMenu()
-
+console.log("yep",direction)
   const isAuthenticated = auth.isAuthenticated
   const AvatarConstructor = ({src, alt, avatar}) => {
     return (

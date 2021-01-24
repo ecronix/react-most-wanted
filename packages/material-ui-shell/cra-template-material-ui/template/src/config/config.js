@@ -26,6 +26,7 @@ const config = {
     themes,
     defaultThemeID: 'default',
     defaultType: 'light',
+    defaultDirection: 'ltr'
   },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),

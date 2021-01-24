@@ -15,11 +15,11 @@ import VirtualListsProvider from 'material-ui-shell/lib/providers/VirtualLists/P
 export default function ({ children }) {
   const intl = useIntl()
   const { appConfig } = useConfig()
-  const { themeID, type } = useTheme()
+  const { themeID, type, direction } = useTheme()
   const { theme: themeConfig, pwa, notistack } = appConfig || {}
   const { useiOSPWAPrompt, iOSPWAPromptProps } = pwa || {}
   const { themes = [] } = themeConfig || {}
-  const theme = getThemeSource(themeID, themes, type)
+  const theme = getThemeSource(themeID, themes, type, direction)
 
   return (
     <ThemeProvider theme={theme}>
