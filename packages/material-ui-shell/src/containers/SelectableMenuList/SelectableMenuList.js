@@ -110,7 +110,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                   style={{ marginRight: useMinified ? 150 : undefined }}
                 >
                   {/* <KeyboardArrowRight color={'action'} /> */}
-                  {theme.direction === 'rtl' && (/* replace */
+                  {theme.direction === 'rtl' && (/* replace above */
                     <KeyboardArrowLeftIcon />)}
                   {theme.direction !== 'rtl' && (
                     <KeyboardArrowRight color={'action'} />)}

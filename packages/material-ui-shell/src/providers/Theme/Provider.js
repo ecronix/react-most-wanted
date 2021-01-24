@@ -7,16 +7,16 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const { defaultThemeID, defaultType, defaultDirection } = themeConfig || {}
   const [themeID, setThemeID] = useState(defaultThemeID)
   const [type, setType] = useState(defaultType)
-
   const [direction, setDirection] = useState(defaultDirection)//add
-
 
   const themeIDKey = `${persistKey}:themeID`
   const typeKey = `${persistKey}:type`
+  const directionKey = `${persistKey}:direction`//add
 
   useEffect(() => {
     const persistThemeID = localStorage.getItem(themeIDKey)
     const persistType = localStorage.getItem(typeKey)
+    const persistDirection = localStorage.getItem(directionKey)//add
 
     if (persistThemeID) {
       setThemeID(persistThemeID)
@@ -24,7 +24,10 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     if (persistType) {
       setType(persistType)
     }
-  }, [themeIDKey,typeKey])
+    if (persistDirection) {
+      setDirection(persistDirection)
+    }
+  }, [themeIDKey,typeKey,directionKey])
 
   useEffect(() => {
     try {
@@ -43,6 +46,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   }, [type,typeKey])
 
   useEffect(() => {
+    console.log("In use effect")
     try {
       localStorage.setItem(directionKey, direction)
     } catch (error) {
@@ -57,6 +61,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
         type,
         setThemeID,
         setType,
+        direction,//add
         setDirection//addd
       }}
     >

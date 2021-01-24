@@ -19,7 +19,10 @@ import Web from '@material-ui/icons/Web'
 import allLocales from './locales'
 import allThemes from './themes'
 
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//add
+//added
+import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
+import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
+// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//add
 
 
 const getMenuItems = (props) => {
@@ -33,10 +36,10 @@ const getMenuItems = (props) => {
     auth: authData,
   } = props
   const { isDesktop, isAuthMenuOpen, setMiniSwitchVisibility, isMiniSwitchVisibility } = menuContext
-  const { themeID, setThemeID } = themeContext
+  const { themeID, setThemeID, direction, setDirection } = themeContext
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
-  const { type, setType } = useAppTheme()//add
+  // const { direction, setDirection } = useAppTheme()//add
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -183,17 +186,16 @@ const getMenuItems = (props) => {
             id: 'menu_mini_mode',
           }),
           leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
-        },
-/*         {
-          visible: isDesktop ? true : false,
+        },//add
+        {
           onClick: () => {
-            setType(type === 'light' ? 'dark' : 'light')
+            setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
           },
           primaryText: intl.formatMessage({
-            id: 'FOOBARBAZZZZZZZZZZZZZZ',
+            id: "Toggle RTL/LTR"
           }),
-          leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
-        }, */
+          leftIcon: direction === 'ltr' ? <FormatTextdirectionLToRIcon /> : <FormatTextdirectionRToLIcon />,
+        },
       ],
     },
     {
