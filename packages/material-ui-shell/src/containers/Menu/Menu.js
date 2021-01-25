@@ -14,15 +14,15 @@ import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 // import { useTheme } from 'material-ui-shell/lib/providers/Theme'
 import { useTheme } from '@material-ui/core/styles'//add
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//replaced
-import { create } from 'jss';
+/* import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
-
+ */
 
 const Menu = (props) => {
-  const theme = useTheme()
+  // const theme = useTheme()
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
@@ -64,15 +64,15 @@ const Menu = (props) => {
   }
 
   return (
-  <StylesProvider jss={jss}>
+  // <StylesProvider jss={jss}>
     <ResponsiveMenu>
       {MenuHeader && <MenuHeader />}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          // direction:'rtl', //maybe unnecessary
           height: '100%',
+          // direction:'rtl', //need this if its not in  HOC
         }}
       >
         <Scrollbar style={{ flex: 1 }}>
@@ -86,7 +86,7 @@ const Menu = (props) => {
         </Scrollbar>
       </div>
     </ResponsiveMenu>
-  </StylesProvider>
+  // </StylesProvider>
   )
 }
 
