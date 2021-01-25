@@ -21,6 +21,14 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import Brightness4Icon from '@material-ui/icons/Brightness4'
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
 
+
+//added
+import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
+import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
+// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//add
+
+
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     backgroundColor: theme.palette.primary.dark,
@@ -48,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuHeader = () => {
   const theme = useTheme()
   const { auth } = useAuth()
-  const { type, setType, direction } = useAppTheme()
+  const { type, setType, setDirection ,direction } = useAppTheme()
   const authData = auth
   const classes = useStyles()
   const {
@@ -61,7 +69,7 @@ const MenuHeader = () => {
     isAuthMenuOpen,
     setAuthMenuOpen,
   } = useMenu()
-console.log("yep",direction)
+console.log("in menuHeader direction:",direction)
   const isAuthenticated = auth.isAuthenticated
   const AvatarConstructor = ({src, alt, avatar}) => {
     return (
@@ -90,6 +98,14 @@ console.log("yep",direction)
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
+                    setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
+                  }}>
+                  {direction === 'ltr' && <FormatTextdirectionLToRIcon />}
+                  {direction === 'rtl' && <FormatTextdirectionRToLIcon />}
+                </IconButton>
+        
+{/*                 <IconButton
+                  onClick={() => {
                     setType(type === 'light' ? 'dark' : 'light')
                   }}
                 >
@@ -97,7 +113,7 @@ console.log("yep",direction)
                     <Brightness4Icon classes={{ root: classes.icon }} />)}
                   {type === 'dark' && (
                     <BrightnessHighIcon classes={{ root: classes.icon }} />)}
-                </IconButton>
+                </IconButton> */}
                 {isDesktop && (
                   <>
                     {isMiniSwitchVisibility && (

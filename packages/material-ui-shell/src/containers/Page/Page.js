@@ -32,8 +32,10 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: (props) => `calc(100% - ${props.width}px)`,
-    //needed to shift the top menu bar to make room for the sidebar in rtl
-    marginRight: theme.direction === 'rtl' ? 240 : 0,
+    //this line is no longer necessary after moving the
+    //StylesProvider jss={jss} into appContainer, keep this
+    //until all bugs are squashed..
+  // marginRight: theme.direction === 'rtl' ? 240 : 0,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -113,7 +115,7 @@ export default function ({
   }
   
   return (
-    <div className={classes.root}>
+    <div className={classes.root} /* style={{direction: theme.direction}} */>
       <AppBar
         position={isDesktop ? 'absolute' : undefined}
         className={
@@ -122,7 +124,7 @@ export default function ({
             : classes.appBar
         }
       >
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             aria-label="open drawer"
