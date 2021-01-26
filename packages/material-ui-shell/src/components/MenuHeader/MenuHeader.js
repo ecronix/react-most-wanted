@@ -1,32 +1,33 @@
 import React from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import ChevronRight from '@material-ui/icons/ChevronRight'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import IconButton from '@material-ui/core/IconButton'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
-import Paper from '@material-ui/core/Paper'
-import PersonIcon from '@material-ui/icons/Person'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import Brightness4Icon from '@material-ui/icons/Brightness4'
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
+import {
+  Avatar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  Paper
+} from '@material-ui/core'
+import {
+  ChevronLeft as ChevronLeft,
+  ChevronRight as ChevronRight,
+  ChromeReaderMode as ChromeReaderMode,
+  Person as PersonIcon,
+  ArrowDropDown as ArrowDropDownIcon,
+  ArrowDropUp as ArrowDropUpIcon,
+  Brightness4 as Brightness4Icon,
+  BrightnessHigh as BrightnessHighIcon,
+} from '@material-ui/icons'
 
 
-//added
 import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
 import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
-// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//add
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuHeader = () => {
   const theme = useTheme()
   const { auth } = useAuth()
-  const { type, setType, setDirection ,direction } = useAppTheme()
+  const { type, setType, direction, setDirection } = useAppTheme()
   const authData = auth
   const classes = useStyles()
   const {
@@ -69,7 +70,7 @@ const MenuHeader = () => {
     isAuthMenuOpen,
     setAuthMenuOpen,
   } = useMenu()
-console.log("in menuHeader direction:",direction)
+
   const isAuthenticated = auth.isAuthenticated
   const AvatarConstructor = ({src, alt, avatar}) => {
     return (
@@ -98,14 +99,6 @@ console.log("in menuHeader direction:",direction)
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
-                    setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
-                  }}>
-                  {direction === 'ltr' && <FormatTextdirectionLToRIcon />}
-                  {direction === 'rtl' && <FormatTextdirectionRToLIcon />}
-                </IconButton>
-        
-{/*                 <IconButton
-                  onClick={() => {
                     setType(type === 'light' ? 'dark' : 'light')
                   }}
                 >
@@ -113,7 +106,7 @@ console.log("in menuHeader direction:",direction)
                     <Brightness4Icon classes={{ root: classes.icon }} />)}
                   {type === 'dark' && (
                     <BrightnessHighIcon classes={{ root: classes.icon }} />)}
-                </IconButton> */}
+                </IconButton>
                 {isDesktop && (
                   <>
                     {isMiniSwitchVisibility && (
@@ -126,6 +119,13 @@ console.log("in menuHeader direction:",direction)
                         <ChromeReaderMode classes={{ root: classes.icon }} />
                       </IconButton>
                     )}
+                    <IconButton
+                      onClick={() => {
+                        setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
+                      }}>
+                      {direction === 'ltr' && <FormatTextdirectionLToRIcon />}
+                      {direction === 'rtl' && <FormatTextdirectionRToLIcon />}
+                    </IconButton>
                     <IconButton
                       color="inherit"
                       onClick={() => {
@@ -194,3 +194,13 @@ console.log("in menuHeader direction:",direction)
 }
 
 export default MenuHeader
+
+/* 
+                <IconButton
+                  onClick={() => {
+                    setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
+                  }}>
+                  {direction === 'ltr' && <FormatTextdirectionLToRIcon />}
+                  {direction === 'rtl' && <FormatTextdirectionRToLIcon />}
+                </IconButton>
+*/

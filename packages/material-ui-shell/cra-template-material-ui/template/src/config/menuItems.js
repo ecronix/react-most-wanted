@@ -19,12 +19,6 @@ import Web from '@material-ui/icons/Web'
 import allLocales from './locales'
 import allThemes from './themes'
 
-//added
-import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
-import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
-// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//add
-
-
 const getMenuItems = (props) => {
   const {
     intl,
@@ -36,10 +30,9 @@ const getMenuItems = (props) => {
     auth: authData,
   } = props
   const { isDesktop, isAuthMenuOpen, setMiniSwitchVisibility, isMiniSwitchVisibility } = menuContext
-  const { themeID, setThemeID, direction, setDirection } = themeContext
+  const { themeID, setThemeID } = themeContext
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
-  // const { direction, setDirection } = useAppTheme()//add
 
   const localeItems = allLocales.map((l) => {
     return {
@@ -186,16 +179,7 @@ const getMenuItems = (props) => {
             id: 'menu_mini_mode',
           }),
           leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
-        },//add
-        {
-          onClick: () => {
-            setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
-          },
-          primaryText: intl.formatMessage({
-            id: "Toggle RTL/LTR"
-          }),
-          leftIcon: direction === 'ltr' ? <FormatTextdirectionLToRIcon /> : <FormatTextdirectionRToLIcon />,
-        },
+        }
       ],
     },
     {

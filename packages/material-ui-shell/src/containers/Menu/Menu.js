@@ -9,20 +9,9 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLocale } from 'base-shell/lib/providers/Locale'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-
-
-// import { useTheme } from 'material-ui-shell/lib/providers/Theme'
-import { useTheme } from '@material-ui/core/styles'//add
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'//replaced
-/* import { create } from 'jss';
-import rtl from 'jss-rtl';
-import { StylesProvider, jssPreset } from '@material-ui/core/styles';
-// Configure JSS
-const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
- */
+import { useTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const Menu = (props) => {
-  // const theme = useTheme()
   const intl = useIntl()
   const history = useHistory()
   const match = useRouteMatch()
@@ -35,8 +24,7 @@ const Menu = (props) => {
   const { setLocale, locale = 'en' } = useLocale()
   const { menu } = appConfig || {}
   const { MenuHeader, getMenuItems } = menu || {}
-  // const themeContext = useTheme()
-  const themeContext = useAppTheme()//replaced
+  const themeContext = useTheme()
 
   const menuItems = getMenuItems({
     intl,
@@ -64,7 +52,6 @@ const Menu = (props) => {
   }
 
   return (
-  // <StylesProvider jss={jss}>
     <ResponsiveMenu>
       {MenuHeader && <MenuHeader />}
       <div
@@ -72,7 +59,6 @@ const Menu = (props) => {
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
-          // direction:'rtl', //need this if its not in  HOC
         }}
       >
         <Scrollbar style={{ flex: 1 }}>
@@ -86,7 +72,6 @@ const Menu = (props) => {
         </Scrollbar>
       </div>
     </ResponsiveMenu>
-  // </StylesProvider>
   )
 }
 
