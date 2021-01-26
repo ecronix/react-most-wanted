@@ -1,7 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-const getThemeSource = (id, ts, type = 'light', direction) => {
-  console.log("in theme, direction:", direction);
+const getThemeSource = (id, ts, type = 'light', direction = 'ltr') => {
   if (ts) {
     for (let i = 0; i < ts.length; i++) {
       if (ts[i]['id'] === id) {

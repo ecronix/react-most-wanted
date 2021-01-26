@@ -2,7 +2,7 @@ import ArrowBack from '@material-ui/icons/ArrowBack'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'//added
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -11,10 +11,17 @@ import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
-import { makeStyles, useTheme } from '@material-ui/core/styles'//added
+import { useTheme } from '@material-ui/core/styles'
+
+
+import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
+import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const [state, setState] = useState({})
+  const { direction, setDirection } = useAppTheme()
 
   //Clears nested state if the root items change
   //Used to open auth menu if we are in a nested menu
@@ -61,11 +68,10 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   }
 
   const getItem = (item, i) => {
-    const theme = useTheme()//added
+    const theme = useTheme()
     const { index } = state
 
     delete item.visible
-    console.log("in Selectable menu, direction is", theme.direction)
 
     if (item !== undefined) {
       if (item.subheader !== undefined) {
@@ -110,8 +116,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                 <IconButton
                   style={{ marginRight: useMinified ? 150 : undefined }}
                 >
-                  {/* <KeyboardArrowRight color={'action'} /> */}
-                  {theme.direction === 'rtl' && (/* replace above */
+                  {theme.direction === 'rtl' && (
                     <KeyboardArrowLeftIcon />)}
                   {theme.direction !== 'rtl' && (
                     <KeyboardArrowRight color={'action'} />)}
@@ -122,7 +127,6 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
         )
       }
     }
-
     return null
   }
 

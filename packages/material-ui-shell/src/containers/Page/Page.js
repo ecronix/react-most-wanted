@@ -1,6 +1,5 @@
 import AppBar from '@material-ui/core/AppBar'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import ChevronRight from '@material-ui/icons/ChevronRight'//added
 import IconButton from '@material-ui/core/IconButton'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
@@ -32,17 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
   appBarShift: {
     width: (props) => `calc(100% - ${props.width}px)`,
-    //this line is no longer necessary after moving the
-    //StylesProvider jss={jss} into appContainer, keep this
-    //until all bugs are squashed..
-  // marginRight: theme.direction === 'rtl' ? 240 : 0,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   menuButton: {
-    marginLeft: 12,
+    marginLeft: -12,
   },
   hide: {
     display: 'none',
@@ -113,9 +108,9 @@ export default function ({
       setMobileMenuOpen(!isMobileMenuOpen)
     }
   }
-  
+
   return (
-    <div className={classes.root} /* style={{direction: theme.direction}} */>
+    <div className={classes.root}>
       <AppBar
         position={isDesktop ? 'absolute' : undefined}
         className={
@@ -138,6 +133,7 @@ export default function ({
           >
             <MenuIcon />
           </IconButton>
+          {/* james- dead code? */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -147,9 +143,9 @@ export default function ({
             <ChevronLeft />
           </IconButton>
           {!onBackClick && isMenuOpen && false && (
-            <div style={{ marginRight: 32 /*for James: is this necessary?!?! */}} />
+            <div style={{ marginRight: 32 }} />
           )}
-
+          {/* james- dead code? */}
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
           </Typography>
