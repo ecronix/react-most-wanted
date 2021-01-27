@@ -21,6 +21,8 @@ import Whatshot from '@material-ui/icons/Whatshot'
 import Chat from '@material-ui/icons/Chat'
 import allLocales from './locales'
 import allThemes from './themes'
+import RTLIcon from '@material-ui/icons/FormatTextdirectionRToL'
+import LTRIcon from '@material-ui/icons/FormatTextdirectionLToR'
 
 const getMenuItems = (props) => {
   const {
@@ -36,13 +38,13 @@ const getMenuItems = (props) => {
   const {
     isDesktop,
     isAuthMenuOpen,
-    dispatch,
-    menuStore,
-    // useMiniMode,
-    // setMiniMode,
+    isMiniSwitchVisibility,
     setAuthMenuOpen,
+    setMiniSwitchVisibility,
   } = menuContext
-  const { themeID = 'en', setThemeID } = themeContext || {}
+
+  const { themeID, setThemeID, isRTL, toggleThis } = themeContext || {}
+
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
   const { auth } = authData
   const { isGranted = () => false, isAdmin = false } = auth || {}
@@ -334,13 +336,25 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            setMiniSwitchVisibility(dispatch, !menuStore.miniSwitchVisibility)
-            console.log('this is somewhere else')
+            setMiniSwitchVisibility(!isMiniSwitchVisibility)
           },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: menuStore.miniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: isMiniSwitchVisibility ? (
+            <MenuOpenIcon />
+          ) : (
+            <ChromeReaderMode />
+          ),
+        },
+        {
+          visible: true,
+          onClick: () => {
+            toggleThis('isRTL')
+            window.location.reload(false)
+          },
+          primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
+          leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,
         },
       ],
     },

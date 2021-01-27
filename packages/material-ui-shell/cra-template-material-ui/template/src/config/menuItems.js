@@ -34,8 +34,10 @@ const getMenuItems = (props) => {
     a2HSContext,
     auth: authData,
   } = props
+
   const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } = menuContext
   const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext
+
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
 
@@ -181,15 +183,17 @@ const getMenuItems = (props) => {
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: isMiniSwitchVisibility ? (
+            <MenuOpenIcon />
+          ) : (
+            <ChromeReaderMode />
+          ),
         },
         {
           onClick: () => {toggleThisTheme('isRTL')},
           primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
-          leftIcon: isRTL
-          ? <LTRIcon/>
-          : <RTLIcon/>
-        }
+          leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,
+        },
       ],
     },
     {
