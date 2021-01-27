@@ -61,7 +61,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   }
 
   const getItem = (item, i) => {
-    const {isRTL} = useAppTheme()
+    const { isRTL } = useAppTheme()
     const { index } = state
 
     delete item.visible
@@ -109,10 +109,9 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                 <IconButton
                   style={{ marginRight: useMinified ? 150 : undefined }}
                 >
-                  {isRTL && (
-                    <KeyboardArrowLeftIcon />)}
-                  {!isRTL && (
-                    <KeyboardArrowRight color={'action'} />)}
+                  {isRTL
+                  ? <KeyboardArrowLeftIcon />
+                  : <KeyboardArrowRight color={'action'} />}
                 </IconButton>
               </ListItemSecondaryAction>
             )}

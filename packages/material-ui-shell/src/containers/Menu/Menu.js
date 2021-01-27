@@ -50,15 +50,19 @@ const Menu = (props) => {
       history.push(index)
     }
   }
+  const {isRTL} = themeContext
 
   return (
     <ResponsiveMenu>
+      <div style={{direction: isRTL ? 'rtl' : 'ltr'}}>
       {MenuHeader && <MenuHeader />}
+      </div>
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
+          direction: isRTL ? 'rtl' : 'ltr'
         }}
       >
         <Scrollbar style={{ flex: 1 }}>

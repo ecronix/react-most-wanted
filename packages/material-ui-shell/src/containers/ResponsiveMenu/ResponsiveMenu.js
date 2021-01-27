@@ -9,6 +9,7 @@ const drawerWidth = 240
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 const useStyles = makeStyles((theme) => ({
   toolbar: {
+    direction: theme.direction,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',

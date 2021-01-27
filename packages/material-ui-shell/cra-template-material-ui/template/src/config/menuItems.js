@@ -187,9 +187,9 @@ const getMenuItems = (props) => {
             toggleThis('isRTL')
           },
           primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
-          leftIcon: isRTL ?
-          <FormatTextdirectionLToRIcon /> :
-          <FormatTextdirectionRToLIcon />
+          leftIcon: isRTL
+          ? <FormatTextdirectionLToRIcon />
+          : <FormatTextdirectionRToLIcon />
         }
       ],
     },
