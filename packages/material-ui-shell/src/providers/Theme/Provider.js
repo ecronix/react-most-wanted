@@ -9,28 +9,23 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const { theme: themeConfig } = appConfig || {}
-  const { defaultThemeID, defaultType, defaultDirection } = themeConfig || {}
+  const { defaultThemeID, defaultType, defaultIsRTL } = themeConfig || {}
   const [themeID, setThemeID] = useState(defaultThemeID)
   const [type, setType] = useState(defaultType)
-  const [direction, setDirection] = useState(defaultDirection)
+  const [isRTL, setIsRTL] = useState(defaultIsRTL)
 
   const themeIDKey = `${persistKey}:themeID`
   const typeKey = `${persistKey}:type`
-  const directionKey = `${persistKey}:direction`
+  const isRTLKey = `${persistKey}:isRTL`
 
-  const toggleRTLmode = () => {
-    console.log('Theme Provider direction:', direction)
-    if(direction === 'rtl') {
-      setDirection('ltr')
-    } else if (direction === 'ltr') {
-      setDirection('rtl')
-    }
+  const toggleThis = (mode) => {
+    if(mode === 'isRTL') setIsRTL(!isRTL)
   }
 
   useEffect(() => {
     const persistThemeID = localStorage.getItem(themeIDKey)
     const persistType = localStorage.getItem(typeKey)
-    const persistDirection = localStorage.getItem(directionKey)
+    const persistIsRTL = localStorage.getItem(isRTLKey)
 
     if (persistThemeID) {
       setThemeID(persistThemeID)
@@ -38,10 +33,11 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     if (persistType) {
       setType(persistType)
     }
-    if (persistDirection) {
-      setDirection(persistDirection)
+    if (persistIsRTL) {
+      //have to convert the stored value back to boolean
+      setIsRTL(persistIsRTL === 'true' ? true : false )
     }
-  }, [themeIDKey,typeKey,directionKey])
+  }, [themeIDKey,typeKey,isRTLKey])
 
   useEffect(() => {
     try {
@@ -61,11 +57,11 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
 
   useEffect(() => {
     try {
-      localStorage.setItem(directionKey, direction)
+      localStorage.setItem(isRTLKey, isRTL)
     } catch (error) {
       console.warn(error)
     }
-  }, [direction,directionKey])
+  }, [isRTL,isRTLKey])
 
   return (
     <Context.Provider
@@ -74,15 +70,14 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
         type,
         setThemeID,
         setType,
-        direction,
-        setDirection,
-        toggleRTLmode
+        isRTL,
+        toggleThis
       }}
     >
     <StylesProvider jss={jss}>
       <div
         style={{
-          direction: direction
+          direction: isRTL ? 'rtl' : 'ltr'
         }}>
         {children}
       </div>

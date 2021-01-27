@@ -19,6 +19,11 @@ import Web from '@material-ui/icons/Web'
 import allLocales from './locales'
 import allThemes from './themes'
 
+
+
+import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
+import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR'
+
 const getMenuItems = (props) => {
   const {
     intl,
@@ -30,7 +35,7 @@ const getMenuItems = (props) => {
     auth: authData,
   } = props
   const { isDesktop, isAuthMenuOpen, setMiniSwitchVisibility, isMiniSwitchVisibility } = menuContext
-  const { themeID, setThemeID } = themeContext
+  const { themeID, setThemeID, isRTL, toggleThis } = themeContext
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
 
@@ -179,6 +184,15 @@ const getMenuItems = (props) => {
             id: 'menu_mini_mode',
           }),
           leftIcon: isMiniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
+        },
+        {
+          onClick: () => {
+            toggleThis('isRTL')
+          },
+          primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
+          leftIcon: isRTL ?
+          <FormatTextdirectionLToRIcon /> :
+          <FormatTextdirectionRToLIcon />
         }
       ],
     },

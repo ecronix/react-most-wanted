@@ -2,7 +2,7 @@ import React from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import {
   Avatar,
@@ -24,11 +24,6 @@ import {
   Brightness4 as Brightness4Icon,
   BrightnessHigh as BrightnessHighIcon,
 } from '@material-ui/icons'
-
-
-import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
-import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const MenuHeader = () => {
-  const theme = useTheme()
+  // const theme = useTheme()
   const { auth } = useAuth()
-  const { type, setType, direction, setDirection } = useAppTheme()
+  const { type, setType, isRTL } = useAppTheme()
   const authData = auth
   const classes = useStyles()
   const {
@@ -120,22 +115,14 @@ const MenuHeader = () => {
                       </IconButton>
                     )}
                     <IconButton
-                      onClick={() => {
-                        setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
-                      }}>
-                      {direction === 'ltr' && <FormatTextdirectionLToRIcon />}
-                      {direction === 'rtl' && <FormatTextdirectionRToLIcon />}
-                    </IconButton>
-                    <IconButton
                       color="inherit"
                       onClick={() => {
                         setMenuOpen(false)
                       }}
                     >
-                      {theme.direction === 'rtl' && (
-                        <ChevronRight classes={{ root: classes.icon }} />)}
-                      {theme.direction !== 'rtl' && (
-                        <ChevronLeft classes={{ root: classes.icon }} />)}
+                      {isRTL
+                      ? <ChevronRight classes={{ root: classes.icon }} />
+                      : <ChevronLeft classes={{ root: classes.icon }} />}
                     </IconButton>{' '}
                   </>
                 )}
@@ -194,13 +181,3 @@ const MenuHeader = () => {
 }
 
 export default MenuHeader
-
-/* 
-                <IconButton
-                  onClick={() => {
-                    setDirection(direction === 'ltr' ? 'rtl' : 'ltr')
-                  }}>
-                  {direction === 'ltr' && <FormatTextdirectionLToRIcon />}
-                  {direction === 'rtl' && <FormatTextdirectionRToLIcon />}
-                </IconButton>
-*/

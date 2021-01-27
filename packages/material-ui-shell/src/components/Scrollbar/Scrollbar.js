@@ -14,8 +14,6 @@ const Scrollbar = (props) => {
     },
     [forwardedRef]
   )
-
-  // return <Scrollbars hideTracksWhenNotNeeded ref={refSetter} {...rest} />
   return (
   <Scrollbars
     hideTracksWhenNotNeeded
