@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 
 const drawerWidth = 240
@@ -57,8 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
-  const theme = useTheme()
-  // const {isRTL} = useAppTheme()
+  const { isRTL } = useAppTheme()
   const {
     isDesktop,
     isMiniMode,
@@ -67,7 +66,6 @@ const ResponsiveMenu = ({ children, width }) => {
   } = useMenu()
 
   const handleDrawerToggle = () => {
-    // setMobileMenuOpen(!isMobileMenuOpen)
     toggleThis('isMobileMenuOpen')
   }
   return (
@@ -77,12 +75,7 @@ const ResponsiveMenu = ({ children, width }) => {
         disableDiscovery={iOS}
         variant={isDesktop ? 'permanent' : 'temporary'}
         onClose={handleDrawerToggle}
-        anchor={
-          //James - change to follow Theme provider pattern vs MUI theme?
-          !isDesktop
-            ? null
-            : theme.direction === 'rtl' ? 'right' : 'left'
-        }
+        anchor={!isDesktop ? undefined : isRTL ? 'right' : 'left'}
         classes={{
           paper: isDesktop
             ? clsx(
