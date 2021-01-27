@@ -1,18 +1,32 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
+//for rtl support
+import { create } from 'jss'
+import rtl from 'jss-rtl'
+import { StylesProvider, jssPreset } from '@material-ui/core/styles'
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const { theme: themeConfig } = appConfig || {}
-  const { defaultThemeID, defaultType } = themeConfig || {}
+  const { defaultThemeID, defaultType, defaultIsRTL } = themeConfig || {}
   const [themeID, setThemeID] = useState(defaultThemeID)
   const [type, setType] = useState(defaultType)
+  const [isRTL, setIsRTL] = useState(defaultIsRTL)
+
   const themeIDKey = `${persistKey}:themeID`
   const typeKey = `${persistKey}:type`
+  const isRTLKey = `${persistKey}:isRTL`
+
+  const toggleThis = (mode) => {
+    if(mode === 'isRTL') setIsRTL(!isRTL)
+  }
 
   useEffect(() => {
     const persistThemeID = localStorage.getItem(themeIDKey)
     const persistType = localStorage.getItem(typeKey)
+    const persistIsRTL = localStorage.getItem(isRTLKey)
 
     if (persistThemeID) {
       setThemeID(persistThemeID)
@@ -20,7 +34,11 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     if (persistType) {
       setType(persistType)
     }
-  }, [themeIDKey,typeKey])
+    if (persistIsRTL) {
+      //have to convert the stored string back to boolean
+      setIsRTL(persistIsRTL === 'true' ? true : false )
+    }
+  }, [themeIDKey,typeKey,isRTLKey])
 
   useEffect(() => {
     try {
@@ -38,6 +56,14 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     }
   }, [type,typeKey])
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(isRTLKey, isRTL)
+    } catch (error) {
+      console.warn(error)
+    }
+  }, [isRTL,isRTLKey])
+
   return (
     <Context.Provider
       value={{
@@ -45,9 +71,18 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
         type,
         setThemeID,
         setType,
+        isRTL,
+        toggleThis
       }}
     >
-      {children}
+    <StylesProvider jss={jss}>
+      <div
+        style={{
+          direction: isRTL ? 'rtl' : 'ltr'
+        }}>
+        {children}
+      </div>
+      </StylesProvider>
     </Context.Provider>
   )
 }

@@ -19,7 +19,9 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "jss-rtl": "^0.3.0"
+  },
   "peerDependencies": {
     "@formatjs/intl-relativetimeformat": "7.x",
     "react-easy-crop": "3.x",

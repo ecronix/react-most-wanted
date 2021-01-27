@@ -1,17 +1,21 @@
-import AppBar from '@material-ui/core/AppBar'
-import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import IconButton from '@material-ui/core/IconButton'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import MenuIcon from '@material-ui/icons/Menu'
 import React, { useContext } from 'react'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import clsx from 'clsx'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useConfig } from 'base-shell/lib/providers/Config'
-import { useIntl } from 'react-intl'
 import { useOnline } from 'base-shell/lib/providers/Online'
+import { useIntl } from 'react-intl'
+import clsx from 'clsx'
+import {
+  AppBar,
+  IconButton,
+  LinearProgress,
+  Toolbar,
+  Typography
+} from '@material-ui/core'
+import {
+  ChevronLeft,
+  Menu as MenuIcon
+} from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,7 +112,7 @@ export default function ({
       setMobileMenuOpen(!isMobileMenuOpen)
     }
   }
-  
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -119,7 +123,7 @@ export default function ({
             : classes.appBar
         }
       >
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -133,6 +137,7 @@ export default function ({
           >
             <MenuIcon />
           </IconButton>
+          {/* james- dead code? */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -144,7 +149,7 @@ export default function ({
           {!onBackClick && isMenuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
-
+          {/* james- dead code? */}
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
           </Typography>
