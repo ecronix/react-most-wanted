@@ -77,6 +77,7 @@ const MenuHeader = () => {
   }
 
   return (
+    // <div style={{direction: 'rtl'}}>
     <Paper square={true} className={classes.paper}>
       {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
@@ -177,6 +178,7 @@ const MenuHeader = () => {
         )}
       </List>
     </Paper>
+    // </div>
   )
 }
 
