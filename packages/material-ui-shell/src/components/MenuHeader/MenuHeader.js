@@ -77,7 +77,7 @@ const MenuHeader = () => {
     </ListItemAvatar>
     )
   }
-console.log(isMiniMode, 'hellena')
+
   return (
     <Paper square={true} className={classes.paper}>
       {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
@@ -111,8 +111,8 @@ console.log(isMiniMode, 'hellena')
                         onClick={() => {
                           // setMiniMode(true)
                           // setMenuOpen(false)
-                          toggleThis('isMiniMode')
-                          toggleThis('isMenuOpen')
+                          toggleThis('isMiniMode', true)
+                          toggleThis('isMenuOpen', false)
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -122,7 +122,7 @@ console.log(isMiniMode, 'hellena')
                       color="inherit"
                       onClick={() => {
                         // setMenuOpen(false)
-                        toggleThis('isMenuOpen')
+                        toggleThis('isMenuOpen', false)
 
                       }}
                     >

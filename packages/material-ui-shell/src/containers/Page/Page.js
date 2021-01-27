@@ -107,8 +107,8 @@ export default function ({
     if (!isMenuOpen) {
       // setMiniMode(false)
       // setMenuOpen(true)
-      toggleThis('isMiniMode')
-      toggleThis('isMenuOpen')
+      toggleThis('isMiniMode', false)
+      toggleThis('isMenuOpen', true)
       if (!isDesktop) {
         // setMobileMenuOpen(!isMobileMenuOpen)
         toggleThis('isMobileMenuOpen')

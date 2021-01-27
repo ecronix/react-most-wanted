@@ -44,7 +44,7 @@ const Menu = (props) => {
   const index = match ? match.path : '/'
 
   const handleChange = (event, index) => {
-    if (index !== undefined) toggleThis('isMobileMenuOpen')
+    if (index !== undefined) toggleThis('isMobileMenuOpen', false)
       // setMobileMenuOpen(false)
     if (index !== undefined && index !== Object(index)) {
       history.push(index)

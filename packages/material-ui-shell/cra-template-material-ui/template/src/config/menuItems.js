@@ -177,7 +177,7 @@ const getMenuItems = (props) => {
         },
         {
           visible: isDesktop ? true : false,
-          onClick: () => {toggleThis(isMiniSwitchVisibility)},
+          onClick: () => {toggleThis('isMiniSwitchVisibility')},
             // setMiniSwitchVisibility(!isMiniSwitchVisibility)
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',

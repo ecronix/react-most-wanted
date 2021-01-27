@@ -1,27 +1,27 @@
-const SET_MINI_MODE = 'SET_MINI_MODE'
-const SET_MENU_OPEN = 'SET_MENU_OPEN'
-const SET_MINI_SWITCH_VISIBILITY = 'SET_MINI_SWITCH_VISIBILITY' 
+const SET_IS_MINI_MODE = 'SET_IS_MINI_MODE'
+const SET_IS_MENU_OPEN = 'SET_IS_MENU_OPEN'
+const SET_IS_MINI_SWITCH_VISIBILITY = 'SET_IS_MINI_SWITCH_VISIBILITY' 
 
-const setMiniMode = (dispatch, payload) => dispatch({ type:SET_MINI_MODE, payload})
-const setMenuOpen = (dispatch, payload) => dispatch({ type:SET_MENU_OPEN, payload})
-const setMiniSwitchVisibility = (dispatch, payload) => dispatch({ type:SET_MINI_SWITCH_VISIBILITY, payload})
+const setIsMiniMode = (dispatch, payload) => dispatch({ type:SET_IS_MINI_MODE, payload})
+const setIsMenuOpen = (dispatch, payload) => dispatch({ type:SET_IS_MENU_OPEN, payload})
+const setIsMiniSwitchVisibility = (dispatch, payload) => dispatch({ type:SET_IS_MINI_SWITCH_VISIBILITY, payload})
 
   const reducer = (state, action) => {
     const { type, payload } = action
   switch (type) {
-    case SET_MINI_MODE:
-      return { ...state, miniMode: payload }
-    case SET_MENU_OPEN:
-      return { ...state, menuOpen: payload }
-    case SET_MINI_SWITCH_VISIBILITY:
-      return { ...state, miniSwitchVisibility: payload }
+    case SET_IS_MINI_MODE:
+      return { ...state, isMiniMode: payload }
+    case SET_IS_MENU_OPEN:
+      return { ...state, isMenuOpen: payload }
+    case SET_IS_MINI_SWITCH_VISIBILITY:
+      return { ...state, isMiniSwitchVisibility: payload }
     default:
       return state
   }
 } 
 export {
   reducer,
-  setMiniMode,
-  setMenuOpen,
-  setMiniSwitchVisibility
+  setIsMiniMode,
+  setIsMenuOpen,
+  setIsMiniSwitchVisibility
 }
