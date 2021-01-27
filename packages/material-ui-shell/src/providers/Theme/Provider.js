@@ -34,7 +34,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
       setType(persistType)
     }
     if (persistIsRTL) {
-      //have to convert the stored value back to boolean
+      //have to convert the stored string back to boolean
       setIsRTL(persistIsRTL === 'true' ? true : false )
     }
   }, [themeIDKey,typeKey,isRTLKey])
