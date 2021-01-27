@@ -63,11 +63,11 @@ const Menu = (props) => {
       >
         <Scrollbar style={{ flex: 1 }}>
           <SelectableMenuList
-            items={menuItems}
+            key={isMiniSwitchVisibility+themeContext.isRTL}
             onIndexChange={handleChange}
-            index={index}
-            key={isMiniSwitchVisibility}
             useMinified={isMiniMode}
+            items={menuItems}
+            index={index}
           />
         </Scrollbar>
       </div>

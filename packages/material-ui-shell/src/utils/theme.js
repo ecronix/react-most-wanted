@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-const getThemeSource = (id, ts, type = 'light', direction = 'ltr') => {
+const getThemeSource = (id, ts, type = 'light', isRTL) => {
   if (ts) {
     for (let i = 0; i < ts.length; i++) {
       if (ts[i]['id'] === id) {
@@ -9,7 +9,9 @@ const getThemeSource = (id, ts, type = 'light', direction = 'ltr') => {
         return createMuiTheme({
           ...source,
           palette: { ...palette, type },
-          direction: direction
+          // direction: direction
+          // isRTL: isRTL
+          direction: isRTL ? 'rtl' : 'ltr'
         })
       }
     }
@@ -17,7 +19,9 @@ const getThemeSource = (id, ts, type = 'light', direction = 'ltr') => {
 
   return createMuiTheme({
     palette: { type },
-    direction: direction
+    // direction: direction 
+    // isRTL: isRTL
+    direction: isRTL ? 'rtl' : 'ltr'
   })
 }
 

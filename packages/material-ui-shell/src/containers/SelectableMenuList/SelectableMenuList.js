@@ -10,18 +10,11 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-
-import { useTheme } from '@material-ui/core/styles'
-
-
-import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
-import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const [state, setState] = useState({})
-  const { direction, setDirection } = useAppTheme()
 
   //Clears nested state if the root items change
   //Used to open auth menu if we are in a nested menu
@@ -68,7 +61,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   }
 
   const getItem = (item, i) => {
-    const theme = useTheme()
+    const {isRTL} = useAppTheme()
     const { index } = state
 
     delete item.visible
@@ -116,9 +109,9 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                 <IconButton
                   style={{ marginRight: useMinified ? 150 : undefined }}
                 >
-                  {theme.direction === 'rtl' && (
+                  {isRTL && (
                     <KeyboardArrowLeftIcon />)}
-                  {theme.direction !== 'rtl' && (
+                  {!isRTL && (
                     <KeyboardArrowRight color={'action'} />)}
                 </IconButton>
               </ListItemSecondaryAction>
