@@ -37,10 +37,11 @@ const getMenuItems = (props) => {
     isDesktop,
     isAuthMenuOpen,
     dispatch,
-    menuStore,
+    menuStore = {},
     // useMiniMode,
     // setMiniMode,
     setAuthMenuOpen,
+    setMiniSwitchVisibility,
   } = menuContext
   const { themeID = 'en', setThemeID } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
@@ -340,7 +341,11 @@ const getMenuItems = (props) => {
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: menuStore.miniSwitchVisibility ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: menuStore.miniSwitchVisibility ? (
+            <MenuOpenIcon />
+          ) : (
+            <ChromeReaderMode />
+          ),
         },
       ],
     },
