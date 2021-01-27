@@ -60,13 +60,10 @@ const ResponsiveMenu = ({ children, width }) => {
   const theme = useTheme()
   // const {isRTL} = useAppTheme()
   const {
-    // dispatch,
-    // menuStore,
     isDesktop,
     isMiniMode,
     isMenuOpen,
     isMobileMenuOpen,
-    // setMobileMenuOpen,
   } = useMenu()
 
   const handleDrawerToggle = () => {

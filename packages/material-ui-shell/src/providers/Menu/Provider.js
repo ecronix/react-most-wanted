@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
 import React, { useState, useEffect, useReducer } from 'react'
+import PropTypes from 'prop-types'
 import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {
@@ -31,23 +31,30 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   })
 
   const props = {
-    //setters
+    //setter
     toggleThis(value, newValue = null){
       console.log('toggle this', value, newValue)
       if(value === 'isMiniMode'){
-        dispatch(setIsMiniMode(newValue !== null ? newValue : !menuStore.isMiniMode))}
+        dispatch(setIsMiniMode(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMiniMode))}
       else if(value === 'isMenuOpen'){
-        dispatch(setIsMenuOpen(newValue !== null ? newValue : !menuStore.isMenuOpen))}
+        dispatch(setIsMenuOpen(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMenuOpen))}
       else if(value === 'isMobileMenuOpen'){
-        dispatch(setIsMobileMenuOpen(newValue !== null ? newValue : !menuStore.isMobileMenuOpen))}
+        dispatch(setIsMobileMenuOpen(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMobileMenuOpen))}
       else if(value === 'isMiniSwitchVisibility'){
-        dispatch(setIsMiniSwitchVisibility(newValue !== null ? newValue : !menuStore.isMiniSwitchVisibility))}
+        dispatch(setIsMiniSwitchVisibility(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMiniSwitchVisibility))}
     },
-/*     setMiniMode: (payload) => dispatch(setMiniMode(payload)),
-    setMenuOpen: (payload) => dispatch(setMenuOpen(payload)),
-    setMobileMenuOpen: (payload) => dispatch(setMobileMenuOpen(payload)),
-    setMiniSwitchVisibility: (payload) =>
-      dispatch(setMiniSwitchVisibility(payload)), */
     //getters
     isMiniMode: menuStore.isMiniMode,
     isMenuOpen: menuStore.isMenuOpen,

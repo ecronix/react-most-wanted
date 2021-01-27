@@ -56,11 +56,8 @@ const MenuHeader = () => {
   const authData = auth
   const classes = useStyles()
   const {
-    isDesktop,
-    // setMiniMode,
-    // setMenuOpen,
     toggleThis,
-
+    isDesktop,
     isMiniMode,
     isMenuOpen,
     isMiniSwitchVisibility,
@@ -109,8 +106,6 @@ const MenuHeader = () => {
                     {isMiniSwitchVisibility && (
                       <IconButton
                         onClick={() => {
-                          // setMiniMode(true)
-                          // setMenuOpen(false)
                           toggleThis('isMiniMode', true)
                           toggleThis('isMenuOpen', false)
                         }}
@@ -121,9 +116,7 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        // setMenuOpen(false)
                         toggleThis('isMenuOpen', false)
-
                       }}
                     >
                       {isRTL

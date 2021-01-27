@@ -34,7 +34,7 @@ const getMenuItems = (props) => {
     a2HSContext,
     auth: authData,
   } = props
-  const { isDesktop, isAuthMenuOpen, /* setMiniSwitchVisibility */ isMiniSwitchVisibility, toggleThis } = menuContext
+  const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } = menuContext
   const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
@@ -178,7 +178,6 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {toggleThis('isMiniSwitchVisibility')},
-            // setMiniSwitchVisibility(!isMiniSwitchVisibility)
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
