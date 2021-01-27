@@ -6,6 +6,8 @@ import {
   Dashboard as DashboardIcon,
   ExitToApp as ExitToAppIcon,
   FilterList,
+  FormatTextdirectionRToL as RTLIcon,
+  FormatTextdirectionLToR as LTRIcon,
   GetApp,
   InfoOutlined,
   Language as LanguageIcon,
@@ -21,8 +23,6 @@ import {
 
 import allLocales from './locales'
 import allThemes from './themes'
-import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
-import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR'
 
 const getMenuItems = (props) => {
   const {
@@ -191,8 +191,8 @@ const getMenuItems = (props) => {
           },
           primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
           leftIcon: isRTL
-          ? <FormatTextdirectionLToRIcon />
-          : <FormatTextdirectionRToLIcon />
+          ? <LTRIcon/>
+          : <RTLIcon/>
         }
       ],
     },
