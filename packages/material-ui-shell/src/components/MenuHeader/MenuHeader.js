@@ -1,25 +1,29 @@
 import React from 'react'
-import Avatar from '@material-ui/core/Avatar'
-import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import ChevronRight from '@material-ui/icons/ChevronRight'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import IconButton from '@material-ui/core/IconButton'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
-import Paper from '@material-ui/core/Paper'
-import PersonIcon from '@material-ui/icons/Person'
+import { makeStyles } from '@material-ui/core/styles'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import Brightness4Icon from '@material-ui/icons/Brightness4'
-import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh'
+import {
+  Avatar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
+  Paper
+} from '@material-ui/core'
+import {
+  ChevronLeft as ChevronLeft,
+  ChevronRight as ChevronRight,
+  ChromeReaderMode as ChromeReaderMode,
+  Person as PersonIcon,
+  ArrowDropDown as ArrowDropDownIcon,
+  ArrowDropUp as ArrowDropUpIcon,
+  Brightness4 as Brightness4Icon,
+  BrightnessHigh as BrightnessHighIcon,
+} from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,9 +50,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const MenuHeader = () => {
-  const theme = useTheme()
+
   const { auth } = useAuth()
-  const { type, setType } = useAppTheme()
+  const { type, setType, isRTL } = useAppTheme()
   const authData = auth
   const classes = useStyles()
   const {
@@ -116,10 +120,9 @@ const MenuHeader = () => {
                         setMenuOpen(false)
                       }}
                     >
-                      {theme.direction === 'rtl' && (
-                        <ChevronRight classes={{ root: classes.icon }} />)}
-                      {theme.direction !== 'rtl' && (
-                        <ChevronLeft classes={{ root: classes.icon }} />)}
+                      {isRTL
+                      ? <ChevronRight classes={{ root: classes.icon }} />
+                      : <ChevronLeft classes={{ root: classes.icon }} />}
                     </IconButton>{' '}
                   </>
                 )}
@@ -163,8 +166,8 @@ const MenuHeader = () => {
                   setAuthMenuOpen(!isAuthMenuOpen)
                 }}
               >
-                <IconButton> {
-                  isAuthMenuOpen
+                <IconButton>
+                  {isAuthMenuOpen
                     ? <ArrowDropUpIcon classes={{ root: classes.icon }} />
                     : <ArrowDropDownIcon classes={{ root: classes.icon }} />}
                 </IconButton>

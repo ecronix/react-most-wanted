@@ -1,14 +1,21 @@
-import ArrowBack from '@material-ui/icons/ArrowBack'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import {
+  KeyboardArrowLeft as KeyboardArrowLeftIcon,
+  KeyboardArrowRight as KeyboardArrowRight,
+  ArrowBack,
+} from '@material-ui/icons'
+import {
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText,
+} from '@material-ui/core'
+
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const [state, setState] = useState({})
@@ -58,6 +65,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   }
 
   const getItem = (item, i) => {
+    const { isRTL } = useAppTheme()
     const { index } = state
 
     delete item.visible
@@ -105,7 +113,9 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                 <IconButton
                   style={{ marginRight: useMinified ? 150 : undefined }}
                 >
-                  <KeyboardArrowRight color={'action'} />
+                  {isRTL
+                  ? <KeyboardArrowLeftIcon />
+                  : <KeyboardArrowRight color={'action'} />}
                 </IconButton>
               </ListItemSecondaryAction>
             )}
@@ -113,7 +123,6 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
         )
       }
     }
-
     return null
   }
 
