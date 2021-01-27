@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -23,7 +23,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   } = menu
 
   const savedState = JSON.parse(localStorage.getItem(persistKey))
-  // const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
 
   const [menuStore, dispatch] = useReducer(reducer, {
     isAuthMenuOpen: initialAuthMenuOpen,
@@ -70,7 +69,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     isMobileMenuOpen: menuStore.isMobileMenuOpen,
     isMiniSwitchVisibility: menuStore.isMiniSwitchVisibility,
   }
-  // const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
 
 
@@ -95,8 +93,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     <Context.Provider
       value={{
         isDesktop,
-/*         isAuthMenuOpen,
-        setAuthMenuOpen, */
         ...props,
       }}
     >

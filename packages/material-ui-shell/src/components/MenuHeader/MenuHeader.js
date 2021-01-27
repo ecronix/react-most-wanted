@@ -62,14 +62,13 @@ const MenuHeader = () => {
     isMenuOpen,
     isMiniSwitchVisibility,
     isAuthMenuOpen,
-    setAuthMenuOpen,
   } = useMenu()
 
   const isAuthenticated = auth.isAuthenticated
   const AvatarConstructor = ({src, alt, avatar}) => {
     return (
     <ListItemAvatar
-      onClick={() => setAuthMenuOpen(!isAuthMenuOpen)}>
+      onClick={() => toggleThis('isAuthMenuOpen')}>
       <Avatar src={src} alt={alt}> {avatar} </Avatar>
     </ListItemAvatar>
     )
@@ -131,7 +130,7 @@ const MenuHeader = () => {
         {isAuthenticated && (
           <ListItem
             onClick={() => {
-              setAuthMenuOpen(!isAuthMenuOpen)
+              toggleThis('isAuthMenuOpen')
             }}
           >
           {!isMenuOpen && isMiniMode && isDesktop && (
@@ -161,7 +160,7 @@ const MenuHeader = () => {
             {isMenuOpen && (
               <ListItemSecondaryAction
                 onClick={() => {
-                  setAuthMenuOpen(!isAuthMenuOpen)
+                  toggleThis('isAuthMenuOpen')
                 }}
               >
                 <IconButton>
