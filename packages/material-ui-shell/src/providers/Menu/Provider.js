@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import {
+  setIsAuthMenuOpen,
   setIsMiniMode,
   setIsMenuOpen,
   setIsMobileMenuOpen,
@@ -13,6 +14,7 @@ import reducer from './store/reducer'
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const { menu } = appConfig || {}
   const {
+    initialAuthMenuOpen,
     initialMiniMode,
     initialMenuOpen,
     initialMobileMenuOpen,
@@ -21,8 +23,10 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   } = menu
 
   const savedState = JSON.parse(localStorage.getItem(persistKey))
+  // const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
 
   const [menuStore, dispatch] = useReducer(reducer, {
+    isAuthMenuOpen: initialAuthMenuOpen,
     isMiniMode: initialMiniMode,
     isMenuOpen: initialMenuOpen,
     isMobileMenuOpen: initialMobileMenuOpen,
@@ -33,8 +37,12 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const props = {
     //setter
     toggleThis(value, newValue = null){
-      console.log('toggle this', value, newValue)
-      if(value === 'isMiniMode'){
+      if(value === 'isAuthMenuOpen'){
+        dispatch(setIsAuthMenuOpen(
+          newValue !== null
+          ? newValue
+          : !menuStore.isAuthMenuOpen))}
+      else if(value === 'isMiniMode'){
         dispatch(setIsMiniMode(
           newValue !== null
           ? newValue
@@ -56,12 +64,13 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
           : !menuStore.isMiniSwitchVisibility))}
     },
     //getters
+    isAuthMenuOpen: menuStore.isAuthMenuOpen,
     isMiniMode: menuStore.isMiniMode,
     isMenuOpen: menuStore.isMenuOpen,
     isMobileMenuOpen: menuStore.isMobileMenuOpen,
     isMiniSwitchVisibility: menuStore.isMiniSwitchVisibility,
   }
-  const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
+  // const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
 
 
@@ -86,8 +95,8 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     <Context.Provider
       value={{
         isDesktop,
-        isAuthMenuOpen,
-        setAuthMenuOpen,
+/*         isAuthMenuOpen,
+        setAuthMenuOpen, */
         ...props,
       }}
     >
