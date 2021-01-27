@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
+//for rtl support
 import { create } from 'jss'
 import rtl from 'jss-rtl'
 import { StylesProvider, jssPreset } from '@material-ui/core/styles'

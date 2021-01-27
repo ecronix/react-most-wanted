@@ -1,8 +1,8 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
-import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 import {
   Avatar,
@@ -77,7 +77,6 @@ const MenuHeader = () => {
   }
 
   return (
-    // <div style={{direction: 'rtl'}}>
     <Paper square={true} className={classes.paper}>
       {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
@@ -167,8 +166,8 @@ const MenuHeader = () => {
                   setAuthMenuOpen(!isAuthMenuOpen)
                 }}
               >
-                <IconButton> {
-                  isAuthMenuOpen
+                <IconButton>
+                  {isAuthMenuOpen
                     ? <ArrowDropUpIcon classes={{ root: classes.icon }} />
                     : <ArrowDropDownIcon classes={{ root: classes.icon }} />}
                 </IconButton>
@@ -178,7 +177,6 @@ const MenuHeader = () => {
         )}
       </List>
     </Paper>
-    // </div>
   )
 }
 
