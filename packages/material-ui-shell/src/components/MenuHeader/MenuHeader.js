@@ -57,8 +57,10 @@ const MenuHeader = () => {
   const classes = useStyles()
   const {
     isDesktop,
-    setMenuOpen,
-    setMiniMode,
+    // setMiniMode,
+    // setMenuOpen,
+    toggleThis,
+
     isMiniMode,
     isMenuOpen,
     isMiniSwitchVisibility,
@@ -75,7 +77,7 @@ const MenuHeader = () => {
     </ListItemAvatar>
     )
   }
-
+console.log(isMiniMode, 'hellena')
   return (
     <Paper square={true} className={classes.paper}>
       {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
@@ -107,8 +109,10 @@ const MenuHeader = () => {
                     {isMiniSwitchVisibility && (
                       <IconButton
                         onClick={() => {
-                          setMiniMode(true)
-                          setMenuOpen(false)
+                          // setMiniMode(true)
+                          // setMenuOpen(false)
+                          toggleThis('isMiniMode')
+                          toggleThis('isMenuOpen')
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -117,7 +121,9 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setMenuOpen(false)
+                        // setMenuOpen(false)
+                        toggleThis('isMenuOpen')
+
                       }}
                     >
                       {isRTL

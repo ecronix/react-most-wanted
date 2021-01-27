@@ -6,12 +6,6 @@ const setMiniMode = (dispatch, payload) => dispatch({ type:SET_MINI_MODE, payloa
 const setMenuOpen = (dispatch, payload) => dispatch({ type:SET_MENU_OPEN, payload})
 const setMiniSwitchVisibility = (dispatch, payload) => dispatch({ type:SET_MINI_SWITCH_VISIBILITY, payload})
 
-
-/*     const initializeState = {
-    miniMode: useMediaQuery('(min-width:600px)'),
-    menuOpen: true,
-    setMiniSwitchVisibility: useMini
-  } */
   const reducer = (state, action) => {
     const { type, payload } = action
   switch (type) {
@@ -25,6 +19,9 @@ const setMiniSwitchVisibility = (dispatch, payload) => dispatch({ type:SET_MINI_
       return state
   }
 } 
-export { reducer,setMiniMode,
+export {
+  reducer,
+  setMiniMode,
   setMenuOpen,
-  setMiniSwitchVisibility /* initialState */ }
+  setMiniSwitchVisibility
+}

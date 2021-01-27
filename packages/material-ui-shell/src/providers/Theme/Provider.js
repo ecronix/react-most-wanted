@@ -19,10 +19,10 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const typeKey = `${persistKey}:type`
   const isRTLKey = `${persistKey}:isRTL`
 
-  const toggleThis = (mode) => {
+  const toggleThisTheme = (mode) => {
     if(mode === 'isRTL') setIsRTL(!isRTL)
   }
-
+  
   useEffect(() => {
     const persistThemeID = localStorage.getItem(themeIDKey)
     const persistType = localStorage.getItem(typeKey)
@@ -72,7 +72,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
         setThemeID,
         setType,
         isRTL,
-        toggleThis
+        toggleThisTheme
       }}
     >
     <StylesProvider jss={jss}>
