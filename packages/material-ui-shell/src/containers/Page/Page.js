@@ -86,14 +86,9 @@ export default function ({
   const { width = 240, offlineIndicatorHeight = 12 } = menu || {}
 
   const {
+    toggleThis,
     isDesktop,
     isMenuOpen,
-    isMobileMenuOpen,
-
-    toggleThis,
-    // setMiniMode,
-    // setMenuOpen
-    // setMobileMenuOpen,
   } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''
@@ -105,18 +100,12 @@ export default function ({
   const classes = useStyles({ width, offlineIndicatorHeight })
   const handleDrawerMenuClick = () => {
     if (!isMenuOpen) {
-      // setMiniMode(false)
-      // setMenuOpen(true)
       toggleThis('isMiniMode', false)
       toggleThis('isMenuOpen', true)
       if (!isDesktop) {
-        // setMobileMenuOpen(!isMobileMenuOpen)
-        toggleThis('isMobileMenuOpen')
-      }
+        toggleThis('isMobileMenuOpen')}
     } else {
-      // setMobileMenuOpen(!isMobileMenuOpen)
-      toggleThis('isMobileMenuOpen')
-    }
+      toggleThis('isMobileMenuOpen')}
   }
 
   return (
@@ -143,7 +132,7 @@ export default function ({
           >
             <MenuIcon />
           </IconButton>
-          {/* james- dead code? */}
+          {/* james- check if this is dead code? */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -155,7 +144,7 @@ export default function ({
           {!onBackClick && isMenuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
-          {/* james- dead code? */}
+          {/* james- check if this is dead code? */}
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
           </Typography>
