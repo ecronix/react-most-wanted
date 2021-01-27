@@ -25,7 +25,7 @@ const config = {
     themes,
     defaultThemeID: 'default',
     defaultType: 'light',
-    defaultIsRTL: false
+    defaultIsRTL: false //change this to true for Right to Left Language support
   },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
