@@ -18,9 +18,6 @@ import ViewList from '@material-ui/icons/ViewList'
 import Web from '@material-ui/icons/Web'
 import allLocales from './locales'
 import allThemes from './themes'
-
-
-
 import FormatTextdirectionRToLIcon from '@material-ui/icons/FormatTextdirectionRToL'
 import FormatTextdirectionLToRIcon from '@material-ui/icons/FormatTextdirectionLToR'
 

@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const MenuHeader = () => {
-  // const theme = useTheme()
+
   const { auth } = useAuth()
   const { type, setType, isRTL } = useAppTheme()
   const authData = auth

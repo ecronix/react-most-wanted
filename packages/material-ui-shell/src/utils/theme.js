@@ -9,8 +9,6 @@ const getThemeSource = (id, ts, type = 'light', isRTL) => {
         return createMuiTheme({
           ...source,
           palette: { ...palette, type },
-          // direction: direction
-          // isRTL: isRTL
           direction: isRTL ? 'rtl' : 'ltr'
         })
       }
@@ -19,8 +17,6 @@ const getThemeSource = (id, ts, type = 'light', isRTL) => {
 
   return createMuiTheme({
     palette: { type },
-    // direction: direction 
-    // isRTL: isRTL
     direction: isRTL ? 'rtl' : 'ltr'
   })
 }
