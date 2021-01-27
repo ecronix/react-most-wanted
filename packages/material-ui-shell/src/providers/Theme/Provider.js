@@ -10,35 +10,37 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const { theme: themeConfig } = appConfig || {}
-  const { defaultThemeID, defaultType, defaultIsRTL } = themeConfig || {}
+  const { defaultThemeID, defaultIsDarkMode , defaultIsRTL } = themeConfig || {}
+
   const [themeID, setThemeID] = useState(defaultThemeID)
-  const [type, setType] = useState(defaultType)
+  const [isDarkMode, setIsDarkMode] = useState(defaultIsDarkMode)
   const [isRTL, setIsRTL] = useState(defaultIsRTL)
 
   const themeIDKey = `${persistKey}:themeID`
-  const typeKey = `${persistKey}:type`
+  const isDarkModeKey = `${persistKey}:isDarkMode`
   const isRTLKey = `${persistKey}:isRTL`
 
   const toggleThisTheme = (mode) => {
     if(mode === 'isRTL') setIsRTL(!isRTL)
+    if(mode === 'isDarkMode') setIsDarkMode(!isDarkMode)
   }
   
   useEffect(() => {
     const persistThemeID = localStorage.getItem(themeIDKey)
-    const persistType = localStorage.getItem(typeKey)
+    const persistIsDarkMode = localStorage.getItem(isDarkModeKey)
     const persistIsRTL = localStorage.getItem(isRTLKey)
 
     if (persistThemeID) {
       setThemeID(persistThemeID)
     }
-    if (persistType) {
-      setType(persistType)
+    if (persistIsDarkMode) {
+      setIsDarkMode(persistIsDarkMode)
     }
     if (persistIsRTL) {
       //have to convert the stored string back to boolean
       setIsRTL(persistIsRTL === 'true' ? true : false )
     }
-  }, [themeIDKey,typeKey,isRTLKey])
+  }, [themeIDKey, isDarkModeKey, isRTLKey])
 
   useEffect(() => {
     try {
@@ -47,14 +49,13 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
       console.warn(error)
     }
   }, [themeID,themeIDKey])
-
-  useEffect(() => {
+    useEffect(() => {
     try {
-      localStorage.setItem(typeKey, type)
+      localStorage.setItem(isDarkModeKey, isDarkMode)
     } catch (error) {
       console.warn(error)
     }
-  }, [type,typeKey])
+  }, [isDarkMode,isDarkModeKey])
 
   useEffect(() => {
     try {
@@ -68,9 +69,8 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
     <Context.Provider
       value={{
         themeID,
-        type,
         setThemeID,
-        setType,
+        isDarkMode,
         isRTL,
         toggleThisTheme
       }}

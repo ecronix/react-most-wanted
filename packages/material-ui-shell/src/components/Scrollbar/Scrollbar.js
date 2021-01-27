@@ -17,7 +17,7 @@ const Scrollbar = (props) => {
     [forwardedRef]
   )
   return (
-    /* native scrollbars need to be conditionally turned off in rtl */
+    /* native scrollbars needs to be conditionally turned off in rtl */
     isRTL
     ? <Scrollbars
     hideTracksWhenNotNeeded

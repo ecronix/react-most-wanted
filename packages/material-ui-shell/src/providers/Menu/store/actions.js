@@ -1,5 +1,12 @@
 import * as types from './types'
 
+export function setIsAuthMenuOpen (payload) {
+  return {
+    type: types.SET_IS_AUTH_MENU_OPEN,
+    payload: payload
+  }
+}
+
 export function setIsMiniMode (payload) {
   return {
     type: types.SET_IS_MINI_MODE,
