@@ -19,7 +19,7 @@ const Menu = (props) => {
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
-  const { setMobileMenuOpen, isMiniMode, isMiniSwitchVisibility } =
+  const { /* setMobileMenuOpen */toggleThis, isMiniMode, isMiniSwitchVisibility } =
     menuContext || {}
   const { appConfig } = useConfig()
   const { setLocale, locale = 'en' } = useLocale()
@@ -44,9 +44,8 @@ const Menu = (props) => {
   const index = match ? match.path : '/'
 
   const handleChange = (event, index) => {
-    if (index !== undefined) {
-      setMobileMenuOpen(false)
-    }
+    if (index !== undefined) toggleThis('isMobileMenuOpen')
+      // setMobileMenuOpen(false)
     if (index !== undefined && index !== Object(index)) {
       history.push(index)
     }
@@ -55,6 +54,7 @@ const Menu = (props) => {
 
   return (
     <ResponsiveMenu>
+      {/*James- this seems redundant with the div below, check */}
       <div style={{direction: isRTL ? 'rtl' : 'ltr'}}>
       {MenuHeader && <MenuHeader />}
       </div>

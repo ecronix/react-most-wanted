@@ -23,20 +23,30 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const savedState = JSON.parse(localStorage.getItem(persistKey))
 
   const [menuStore, dispatch] = useReducer(reducer, {
-    miniMode: initialMiniMode,
-    menuOpen: initialMenuOpen,
-    mobileMenuOpen: initialMobileMenuOpen,
-    miniSwitchVisibility: initialMiniSwitchVisibility,
+    isMiniMode: initialMiniMode,
+    isMenuOpen: initialMenuOpen,
+    isMobileMenuOpen: initialMobileMenuOpen,
+    isMiniSwitchVisibility: initialMiniSwitchVisibility,
     ...savedState,
   })
 
   const props = {
     //setters
-    setMiniMode: (payload) => dispatch(setMiniMode(payload)),
+    toggleThis: (value) => {
+      if(value === 'isMiniMode'){
+        dispatch(setMiniMode(!menuStore.isMiniMode))}
+      else if(value === 'isMenuOpen'){
+        dispatch(setMenuOpen(!menuStore.isMenuOpen))}
+      else if(value === 'isMobileMenuOpen'){
+        dispatch(setMobileMenuOpen(!menuStore.isMobileMenuOpen))}
+      else if(value === 'isMiniSwitchVisibility'){
+        dispatch(setMiniSwitchVisibility(!menuStore.isMiniSwitchVisibility))}
+    },
+/*     setMiniMode: (payload) => dispatch(setMiniMode(payload)),
     setMenuOpen: (payload) => dispatch(setMenuOpen(payload)),
     setMobileMenuOpen: (payload) => dispatch(setMobileMenuOpen(payload)),
     setMiniSwitchVisibility: (payload) =>
-      dispatch(setMiniSwitchVisibility(payload)),
+      dispatch(setMiniSwitchVisibility(payload)), */
     //getters
     isMiniMode: menuStore.miniMode,
     isMenuOpen: menuStore.menuOpen,
@@ -45,6 +55,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   }
   const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width:600px)')
+
 
   useEffect(() => {
     try {

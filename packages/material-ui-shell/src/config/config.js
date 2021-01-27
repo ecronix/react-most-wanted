@@ -19,8 +19,8 @@ const config = {
   menu: {
     width: 240,
     offlineIndicatorHeight: 12,
-    initialMiniMode: false,
-    initialMenuOpen: true,
+    initialMiniMode: true,//false,
+    initialMenuOpen: false,//true,
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
     MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),

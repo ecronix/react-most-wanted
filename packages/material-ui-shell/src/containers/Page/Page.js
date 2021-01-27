@@ -89,9 +89,11 @@ export default function ({
     isDesktop,
     isMenuOpen,
     isMobileMenuOpen,
-    setMobileMenuOpen,
-    setMiniMode,
-    setMenuOpen
+
+    toggleThis,
+    // setMiniMode,
+    // setMenuOpen
+    // setMobileMenuOpen,
   } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''
@@ -103,13 +105,17 @@ export default function ({
   const classes = useStyles({ width, offlineIndicatorHeight })
   const handleDrawerMenuClick = () => {
     if (!isMenuOpen) {
-      setMiniMode(false)
-      setMenuOpen(true)
+      // setMiniMode(false)
+      // setMenuOpen(true)
+      toggleThis('isMiniMode')
+      toggleThis('isMenuOpen')
       if (!isDesktop) {
-        setMobileMenuOpen(!isMobileMenuOpen)
+        // setMobileMenuOpen(!isMobileMenuOpen)
+        toggleThis('isMobileMenuOpen')
       }
     } else {
-      setMobileMenuOpen(!isMobileMenuOpen)
+      // setMobileMenuOpen(!isMobileMenuOpen)
+      toggleThis('isMobileMenuOpen')
     }
   }
 
