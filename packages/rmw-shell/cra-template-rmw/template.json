@@ -1,6 +1,7 @@
 {
   "package": {
     "dependencies": {
+      "jss-rtl": "0.x",
       "rmw-shell":"8.x",
       "@formatjs/intl-relativetimeformat": "8.x",
       "@date-io/moment": "1.x",
@@ -23,7 +24,7 @@
       "mui-rff": "3.x",
       "notistack": "1.x",
       "react": "17.x",
-        "react-beautiful-dnd": "13.x",
+      "react-beautiful-dnd": "13.x",
       "react-chartjs-2": "^2.x",
       "react-countup": "4.x",
       "react-custom-scrollbars": "4.x",
