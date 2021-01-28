@@ -69,7 +69,7 @@ const SignIn = () => {
 
   const authenticate = (user) => {
     setAuth({ isAuthenticated: true, ...user })
-    toggleThis('isAuthMenuOpen')
+    toggleThis('isAuthMenuOpen', false)
 
     let _location = history.location
     let _route = '/home'
