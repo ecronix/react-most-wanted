@@ -20,6 +20,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 import MoreHoriz from '@material-ui/icons/MoreHoriz'
 import Delete from '@material-ui/icons/Delete'
@@ -38,6 +39,7 @@ const Row = ({ data, index, style }) => {
   const history = useHistory()
   const intl = useIntl()
   const { auth } = useAuth()
+  const { isRTL } = useAppTheme()
 
   const {
     displayName = '',
@@ -70,7 +72,7 @@ const Row = ({ data, index, style }) => {
   }
 
   return (
-    <div key={key} style={style}>
+    <div key={key} style={{...style, direction: isRTL ? 'rtl' : 'ltr'}}>
       <ListItem
         button
         selected={key === uid}
