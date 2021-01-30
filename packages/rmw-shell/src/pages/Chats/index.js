@@ -72,7 +72,7 @@ const Row = ({ data, index, style }) => {
   }
 
   return (
-    <div key={key} style={{...style, direction: isRTL ? 'rtl' : 'ltr'}}>
+    <div key={key} style={{...style, direction: isRTL ? 'rtl' : 'ltr'}}>{/* james- revisit this code */}
       <ListItem
         button
         selected={key === uid}
