@@ -9,6 +9,7 @@ import { ListPage } from 'rmw-shell/lib/containers/Page'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const path = 'tasks'
 
@@ -26,9 +27,10 @@ const fields = [
 const Row = ({ data, index, style }) => {
   const { title = '', helper = {}, key } = data
   const history = useHistory()
+  const { isRTL } = useAppTheme()
 
   return (
-    <div key={key} style={style}>
+    <div key={key} style={{...style, direction: isRTL ? 'rtl' : 'ltr'}}>{/* james- revisit this code */}
       <ListItem
         button
         alignItems="flex-start"
