@@ -52,25 +52,23 @@ const useStyles = makeStyles((theme) => ({
 const MenuHeader = () => {
 
   const { auth } = useAuth()
-  const { type, setType, isRTL } = useAppTheme()
+  const { toggleThisTheme, isDarkMode, isRTL } = useAppTheme()
   const authData = auth
   const classes = useStyles()
   const {
+    toggleThis,
     isDesktop,
-    setMenuOpen,
-    setMiniMode,
     isMiniMode,
     isMenuOpen,
     isMiniSwitchVisibility,
     isAuthMenuOpen,
-    setAuthMenuOpen,
   } = useMenu()
 
   const isAuthenticated = auth.isAuthenticated
   const AvatarConstructor = ({src, alt, avatar}) => {
     return (
     <ListItemAvatar
-      onClick={() => setAuthMenuOpen(!isAuthMenuOpen)}>
+      onClick={() => toggleThis('isAuthMenuOpen')}>
       <Avatar src={src} alt={alt}> {avatar} </Avatar>
     </ListItemAvatar>
     )
@@ -83,32 +81,31 @@ const MenuHeader = () => {
         {!isMiniMode && (
           <ListItem className={classes.listItem}>
             {isAuthenticated && (
-              authData.photoURL 
-              ? AvatarConstructor({
-                src: authData.photoURL,
-                alt:"user"})
-              : AvatarConstructor({
-                avatar: authData.displayName
-                  ? authData.displayName[0].toUpperCase()
-                  : <PersonIcon />}))}
+              authData.photoURL
+                ? AvatarConstructor({
+                  src: authData.photoURL,
+                  alt:"user"})
+                : AvatarConstructor({
+                  avatar: authData.displayName
+                    ? authData.displayName[0].toUpperCase()
+                    : <PersonIcon />}))}
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
-                    setType(type === 'light' ? 'dark' : 'light')
+                    toggleThisTheme('isDarkMode')
                   }}
                 >
-                  {type === 'light' && (
-                    <Brightness4Icon classes={{ root: classes.icon }} />)}
-                  {type === 'dark' && (
-                    <BrightnessHighIcon classes={{ root: classes.icon }} />)}
+                  {isDarkMode
+                    ? <BrightnessHighIcon classes={{ root: classes.icon }} />
+                    : <Brightness4Icon classes={{ root: classes.icon }} />}
                 </IconButton>
                 {isDesktop && (
                   <>
                     {isMiniSwitchVisibility && (
                       <IconButton
                         onClick={() => {
-                          setMiniMode(true)
-                          setMenuOpen(false)
+                          toggleThis('isMiniMode', true)
+                          toggleThis('isMenuOpen', false)
                         }}
                       >
                         <ChromeReaderMode classes={{ root: classes.icon }} />
@@ -117,12 +114,12 @@ const MenuHeader = () => {
                     <IconButton
                       color="inherit"
                       onClick={() => {
-                        setMenuOpen(false)
+                        toggleThis('isMenuOpen', false)
                       }}
                     >
                       {isRTL
-                      ? <ChevronRight classes={{ root: classes.icon }} />
-                      : <ChevronLeft classes={{ root: classes.icon }} />}
+                        ? <ChevronRight classes={{ root: classes.icon }} />
+                        : <ChevronLeft classes={{ root: classes.icon }} />}
                     </IconButton>{' '}
                   </>
                 )}
@@ -133,7 +130,7 @@ const MenuHeader = () => {
         {isAuthenticated && (
           <ListItem
             onClick={() => {
-              setAuthMenuOpen(!isAuthMenuOpen)
+              toggleThis('isAuthMenuOpen')
             }}
           >
           {!isMenuOpen && isMiniMode && isDesktop && (
@@ -163,7 +160,7 @@ const MenuHeader = () => {
             {isMenuOpen && (
               <ListItemSecondaryAction
                 onClick={() => {
-                  setAuthMenuOpen(!isAuthMenuOpen)
+                  toggleThis('isAuthMenuOpen')
                 }}
               >
                 <IconButton>
