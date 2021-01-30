@@ -2,8 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+
 
 const drawerWidth = 240
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -55,20 +57,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
-  const theme = useTheme()
-
+  const { isRTL } = useAppTheme()
   const {
-    dispatch,
-    menuStore,
     isDesktop,
     isMiniMode,
     isMenuOpen,
     isMobileMenuOpen,
-    setMobileMenuOpen,
   } = useMenu()
 
   const handleDrawerToggle = () => {
-    setMobileMenuOpen(!isMobileMenuOpen)
+    toggleThis('isMobileMenuOpen')
   }
   return (
     <div style={{ boxSizing: 'content-box' }}>
@@ -77,9 +75,7 @@ const ResponsiveMenu = ({ children, width }) => {
         disableDiscovery={iOS}
         variant={isDesktop ? 'permanent' : 'temporary'}
         onClose={handleDrawerToggle}
-        anchor={
-          !isDesktop ? undefined : theme.direction === 'rtl' ? 'right' : 'left'
-        }
+        anchor={!isDesktop ? undefined : isRTL ? 'right' : 'left'}
         classes={{
           paper: isDesktop
             ? clsx(

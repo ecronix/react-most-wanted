@@ -57,7 +57,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('')
   const [userEmail, setUserEmail] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const { setAuthMenuOpen } = useMenu()
+  const { toggleThis } = useMenu()
   const { setAuth } = useAuth()
 
   function handleSubmit(event) {
@@ -70,11 +70,11 @@ const SignUp = () => {
 
   const authenticate = (user) => {
     setAuth({ isAuthenticated: true, ...user })
+    toggleThis('isAuthMenuOpen', false)
 
-    setAuthMenuOpen(false)
     let _location = history.location
-
     let _route = '/home'
+
     if (_location.state && _location.state.from) {
       _route = _location.state.from.pathname
       history.push(_route)
