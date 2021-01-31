@@ -59,6 +59,7 @@ const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
   const { isRTL } = useAppTheme()
   const {
+    toggleThis,
     isDesktop,
     isMiniMode,
     isMenuOpen,
