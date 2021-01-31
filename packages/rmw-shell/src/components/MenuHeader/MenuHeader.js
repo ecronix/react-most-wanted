@@ -87,7 +87,8 @@ const MenuHeader = () => {
     isAuthMenuOpen,
     isAuthMenuOpen,
     // setAuthMenuOpen,
-  } = useContext(MenuContext)
+  } = useMenu()
+  // } = useContext(MenuContext)
 
   const isAuthenticated = auth.isAuthenticated
 

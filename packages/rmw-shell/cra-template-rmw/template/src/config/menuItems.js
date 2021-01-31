@@ -23,6 +23,7 @@ import allLocales from './locales'
 import allThemes from './themes'
 import RTLIcon from '@material-ui/icons/FormatTextdirectionRToL'
 import LTRIcon from '@material-ui/icons/FormatTextdirectionLToR'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const getMenuItems = (props) => {
   const {
@@ -35,15 +36,21 @@ const getMenuItems = (props) => {
     firebaseApp,
     auth: authData,
   } = props
-  const {
+/*   const {
     isDesktop,
     isAuthMenuOpen,
     isMiniSwitchVisibility,
     setAuthMenuOpen,
     setMiniSwitchVisibility,
-  } = menuContext
+  } = menuContext */
+  const {
+    toggleThis,
+    isDesktop,
+    isMiniSwitchVisibility,
+    isAuthMenuOpen,
+  } = useMenu()
 
-  const { themeID, setThemeID, isRTL, toggleThis } = themeContext || {}
+  const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext || {}
 
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
   const { auth } = authData
@@ -81,7 +88,7 @@ const getMenuItems = (props) => {
   })
 
   const handleSignOut = () => {
-    setAuthMenuOpen(false)
+    toggleThis('isAuthMenuOpen',false)
     firebaseApp.auth().signOut()
     localStorage.clear()
   }
@@ -336,7 +343,8 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            setMiniSwitchVisibility(!isMiniSwitchVisibility)
+            toggleThis('isMiniSwitchVisibility')
+            // setMiniSwitchVisibility(!isMiniSwitchVisibility)
           },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
@@ -350,7 +358,7 @@ const getMenuItems = (props) => {
         {
           visible: true,
           onClick: () => {
-            toggleThis('isRTL')
+            toggleThisTheme('isRTL')
             window.location.reload(false)
           },
           primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
