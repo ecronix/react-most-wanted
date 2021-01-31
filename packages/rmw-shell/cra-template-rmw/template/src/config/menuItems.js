@@ -1,51 +1,63 @@
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import Assignment from '@material-ui/icons/Assignment'
-import Business from '@material-ui/icons/Business'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import Web from '@material-ui/icons/Web'
-import GetApp from '@material-ui/icons/GetApp'
-import InfoOutlined from '@material-ui/icons/InfoOutlined'
-import LanguageIcon from '@material-ui/icons/Language'
-import LockIcon from '@material-ui/icons/Lock'
-import MenuOpenIcon from '@material-ui/icons/MenuOpen'
-import People from '@material-ui/icons/People'
 import React from 'react'
-import Security from '@material-ui/icons/Security'
-import SettingsIcon from '@material-ui/icons/SettingsApplications'
-import Slideshow from '@material-ui/icons/Slideshow'
-import StyleIcon from '@material-ui/icons/Style'
-import CallToAction from '@material-ui/icons/CallToAction'
-import Whatshot from '@material-ui/icons/Whatshot'
-import Chat from '@material-ui/icons/Chat'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import allLocales from './locales'
 import allThemes from './themes'
-import RTLIcon from '@material-ui/icons/FormatTextdirectionRToL'
-import LTRIcon from '@material-ui/icons/FormatTextdirectionLToR'
+
+import {
+  Assignment,
+  Business,
+  ChromeReaderMode,
+  Web,
+  GetApp,
+  InfoOutlined,
+  People,
+  Security,
+  Slideshow,
+  CallToAction,
+  Whatshot,
+  Chat,
+  AccountBox as AccountBoxIcon,
+  Dashboard as DashboardIcon,
+  ExitToApp as ExitToAppIcon,
+  FormatTextdirectionRToL as RTLIcon,
+  FormatTextdirectionLToR as LTRIcon,
+  Language as LanguageIcon,
+  Lock as LockIcon,
+  MenuOpen as MenuOpenIcon,
+  SettingsApplications as SettingsIcon,
+  Style as StyleIcon,
+} from '@material-ui/icons'
 
 const getMenuItems = (props) => {
   const {
     intl,
     updateLocale,
     locale,
-    menuContext,
     themeContext,
     a2HSContext,
     firebaseApp,
     auth: authData,
   } = props
+
+  const menuContext = useMenu()
   const {
-    isDesktop,
     isAuthMenuOpen,
+    isDesktop,
     isMiniSwitchVisibility,
-    setAuthMenuOpen,
-    setMiniSwitchVisibility,
-  } = menuContext
-
-  const { themeID, setThemeID, isRTL, toggleThis } = themeContext || {}
-
-  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
+    toggleThis,
+  } = menuContext || {}
+  const {
+    isRTL,
+    setThemeID,
+    themeID,
+    toggleThisTheme
+  } = themeContext || {}
+  const {
+    isAppInstallable,
+    isAppInstalled,
+    deferredPrompt
+  } = a2HSContext || {}
+  
   const { auth } = authData
   const { isGranted = () => false, isAdmin = false } = auth || {}
 
@@ -81,7 +93,7 @@ const getMenuItems = (props) => {
   })
 
   const handleSignOut = () => {
-    setAuthMenuOpen(false)
+    toggleThis('isAuthMenuOpen',false)
     firebaseApp.auth().signOut()
     localStorage.clear()
   }
@@ -336,7 +348,7 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            setMiniSwitchVisibility(!isMiniSwitchVisibility)
+            toggleThis('isMiniSwitchVisibility')
           },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
@@ -350,7 +362,7 @@ const getMenuItems = (props) => {
         {
           visible: true,
           onClick: () => {
-            toggleThis('isRTL')
+            toggleThisTheme('isRTL')
             window.location.reload(false)
           },
           primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
