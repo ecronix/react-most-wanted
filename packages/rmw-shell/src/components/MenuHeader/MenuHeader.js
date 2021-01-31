@@ -63,11 +63,9 @@ const MenuHeader = () => {
     isMenuOpen,
     isMiniSwitchVisibility,
     isAuthMenuOpen,
-    isAuthMenuOpen,
   } = menuContext || {}
 
   const isAuthenticated = auth.isAuthenticated
-
   return (
     <Paper square={true} className={classes.paper}>
       {isMiniMode && isAuthenticated && <div className={classes.toolbar}></div>}
