@@ -58,13 +58,14 @@ const useStyles = makeStyles((theme) => ({
 const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
   const { isRTL } = useAppTheme()
+  const menuContext = useMenu()
   const {
     toggleThis,
     isDesktop,
     isMiniMode,
     isMenuOpen,
     isMobileMenuOpen,
-  } = useMenu()
+  } = menuContext || {}
 
   const handleDrawerToggle = () => {
     toggleThis('isMobileMenuOpen')
