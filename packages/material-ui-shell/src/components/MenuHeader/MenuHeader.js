@@ -53,6 +53,7 @@ const MenuHeader = () => {
 
   const { auth } = useAuth()
   const { toggleThisTheme, isDarkMode, isRTL } = useAppTheme()
+  const menuContext = useMenu()
   const authData = auth
   const classes = useStyles()
   const {
@@ -62,7 +63,7 @@ const MenuHeader = () => {
     isMenuOpen,
     isMiniSwitchVisibility,
     isAuthMenuOpen,
-  } = useMenu()
+  } = menuContext || {}
 
   const isAuthenticated = auth.isAuthenticated
   const AvatarConstructor = ({src, alt, avatar}) => {
