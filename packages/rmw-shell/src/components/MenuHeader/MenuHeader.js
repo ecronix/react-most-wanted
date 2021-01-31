@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import clsx from 'clsx'
 
@@ -53,13 +52,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const MenuHeader = () => {
-  const theme = useTheme()
-  const { auth } = useAuth()
-  const { appConfig } = useConfig()
-  const { type, setType } = useAppTheme()
-  const { menu } = appConfig || {}
-  const authData = auth
   const classes = useStyles()
+  const authData = auth
+  const menuContext = useMenu()
+  const { auth } = useAuth()
   const {
     toggleThis,
     isDesktop,
@@ -68,7 +64,7 @@ const MenuHeader = () => {
     isMiniSwitchVisibility,
     isAuthMenuOpen,
     isAuthMenuOpen,
-  } = useMenu()
+  } = menuContext || {}
 
   const isAuthenticated = auth.isAuthenticated
 

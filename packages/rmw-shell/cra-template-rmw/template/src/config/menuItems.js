@@ -38,13 +38,14 @@ const getMenuItems = (props) => {
     firebaseApp,
     auth: authData,
   } = props
+
+  const menuContext = useMenu()
   const {
     isAuthMenuOpen,
     isDesktop,
     isMiniSwitchVisibility,
     toggleThis,
-  } = useMenu()
-
+  } = menuContext || {}
   const {
     isRTL,
     setThemeID,
@@ -56,6 +57,7 @@ const getMenuItems = (props) => {
     isAppInstalled,
     deferredPrompt
   } = a2HSContext || {}
+  
   const { auth } = authData
   const { isGranted = () => false, isAdmin = false } = auth || {}
 
