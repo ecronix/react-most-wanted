@@ -1,29 +1,15 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSnackbar, SnackbarContent } from 'notistack'
-/* import Collapse from '@material-ui/core/Collapse'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import CardContent from '@material-ui/core/CardContent'
-import CardActions from '@material-ui/core/CardActions'
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-import Button from '@material-ui/core/Button' */
-/* import Card from '@material-ui/core/Card'
-import Avatar from '@material-ui/core/Avatar'
-import CardMedia from '@material-ui/core/CardMedia'
-import CardHeader from '@material-ui/core/CardHeader'
-import IconButton from '@material-ui/core/IconButton'
-import CloseIcon from '@material-ui/icons/Close' */
 
 import {
-  Card,
   Avatar,
   CardMedia,
-  CardHeader,
   IconButton,
-  CloseIcon
-} from '@material-ui/icons'
+} from '@material-ui/core'
 
 import Notifications from '@material-ui/icons/Notifications'
 import { useHistory } from 'react-router-dom'
