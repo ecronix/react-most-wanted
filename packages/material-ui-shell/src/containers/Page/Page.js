@@ -111,7 +111,7 @@ export default function ({
   return (
     <div className={classes.root}>
       <AppBar
-        position={isDesktop ? 'absolute' : ndefined}
+        position={isDesktop ? 'absolute' : undefined}
         className={
           isDesktop
             ? clsx(classes.appBar, isMenuOpen && classes.appBarShift)
