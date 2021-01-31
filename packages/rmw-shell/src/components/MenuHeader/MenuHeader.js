@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { useConfig } from 'base-shell/lib/providers/Config'
+import React/* , { useContext }  */from 'react'
+// import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
@@ -63,9 +63,7 @@ const MenuHeader = () => {
     isMenuOpen,
     isMiniSwitchVisibility,
     isAuthMenuOpen,
-    isAuthMenuOpen,
   } = menuContext || {}
-
   const isAuthenticated = auth.isAuthenticated
 
   return (
@@ -82,6 +80,7 @@ const MenuHeader = () => {
                       toggleThis('isAuthMenuOpen')
                     }}
                   >
+                    {console.log('test2')}
                     <Avatar src={authData.photoURL} alt="user" />
                   </ListItemAvatar>
                 )}
