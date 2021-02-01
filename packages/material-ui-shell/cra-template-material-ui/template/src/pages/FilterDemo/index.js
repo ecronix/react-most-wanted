@@ -16,6 +16,7 @@ import { FixedSizeList } from 'react-window'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
+// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const filterName = 'test_filter'
 
@@ -28,7 +29,6 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
   return (
     <Scrollbars
       ref={refSetter}
@@ -153,7 +153,7 @@ const FilterDemo = () => {
       <AutoSizer style={{ height: '100%', width: '100%' }}>
         {({ height, width }) => {
           return (
-            <List>
+            <List disablePadding={true}>
               <FixedSizeList
                 className="List"
                 ref={listRef}
