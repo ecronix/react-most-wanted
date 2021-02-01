@@ -16,6 +16,7 @@ import { FixedSizeList } from 'react-window'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
+// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const filterName = 'test_filter'
 
@@ -29,6 +30,16 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // const { isRTL } = useAppTheme()
+/*   return (
+    <Scrollbars
+      ref={refSetter}
+      renderView={props => (<div {...props} style={{ ...props.style, marginLeft: props.style.marginRight, marginRight: 0, }} /> )}
+      style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl' : 'ltr' }}
+      onScroll={onScroll}
+    >
+      {children}
+    </Scrollbars> */
   return (
     <Scrollbars
       ref={refSetter}
@@ -154,6 +165,7 @@ const FilterDemo = () => {
         {({ height, width }) => {
           return (
             <List>
+            {/* <List disablePadding={true}> */}
               <FixedSizeList
                 className="List"
                 ref={listRef}
