@@ -5,14 +5,17 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import { FixedSizeList } from 'react-window'
 import { useState } from 'react'
 import { useVirtualLists } from 'material-ui-shell/lib/providers/VirtualLists'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props
+  const { isRTL } = useAppTheme()
   return (
     <Scrollbar
       {...rest}
       forwardedRef={ref}
-      style={{ ...style, overflow: 'hidden' }}
+      style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl':'ltr' }}
     />
   )
 })
