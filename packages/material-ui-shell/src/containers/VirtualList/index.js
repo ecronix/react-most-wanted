@@ -7,7 +7,6 @@ import { useState } from 'react'
 import { useVirtualLists } from 'material-ui-shell/lib/providers/VirtualLists'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
-
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props
   const { isRTL } = useAppTheme()
