@@ -54,15 +54,15 @@ const Menu = (props) => {
   return (
     <ResponsiveMenu>
       {/*James- this seems redundant with the div below, check later */}
-      <div style={{direction: isRTL ? 'rtl' : 'ltr'}}>
+      {/* <div style={{direction: isRTL ? 'rtl' : 'ltr'}}> */}
       {MenuHeader && <MenuHeader />}
-      </div>
+      {/* </div> */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
-          direction: isRTL ? 'rtl' : 'ltr'
+         /*  direction: isRTL ? 'rtl' : 'ltr' */
         }}
       >
         <Scrollbar style={{ flex: 1 }}>
