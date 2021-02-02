@@ -32,29 +32,21 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
   }, [])
 console.log(style);
   return (
-    isRTL ?
     <Scrollbars
       ref={refSetter}
       renderView={props => (
-        <div {...props} style={{
+        isRTL ? <div {...props} style={{
           ...props.style,
           marginLeft: props.style.marginRight,
-          marginRight: 0, }} />
+          marginRight: 0, }} /> : <div {...props} style={{
+            ...props.style,}} />
       )}
+      // style={{ ...style, overflow: 'hidden' }}
       style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl' : 'ltr' }} //james - test code should fix native scrollbars in demofilter and maybe in RMW demos,
       onScroll={onScroll}
     >
       {children}
     </Scrollbars>
-    : 
-      <Scrollbars
-        ref={refSetter}
-        style={{ ...style, overflow: 'hidden' }}
-        onScroll={onScroll}
-      >
-        {children}
-      </Scrollbars>
-    
   )
 }
 
