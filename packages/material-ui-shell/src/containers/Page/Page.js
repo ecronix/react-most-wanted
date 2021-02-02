@@ -1,17 +1,21 @@
-import AppBar from '@material-ui/core/AppBar'
-import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import IconButton from '@material-ui/core/IconButton'
-import LinearProgress from '@material-ui/core/LinearProgress'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import MenuIcon from '@material-ui/icons/Menu'
 import React, { useContext } from 'react'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import clsx from 'clsx'
+import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
 import { makeStyles, useTheme } from '@material-ui/core/styles'
 import { useConfig } from 'base-shell/lib/providers/Config'
-import { useIntl } from 'react-intl'
 import { useOnline } from 'base-shell/lib/providers/Online'
+import { useIntl } from 'react-intl'
+import clsx from 'clsx'
+import {
+  AppBar,
+  IconButton,
+  LinearProgress,
+  Toolbar,
+  Typography
+} from '@material-ui/core'
+import {
+  ChevronLeft,
+  Menu as MenuIcon
+} from '@material-ui/icons'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,12 +86,9 @@ export default function ({
   const { width = 240, offlineIndicatorHeight = 12 } = menu || {}
 
   const {
+    toggleThis,
     isDesktop,
-    isDesktopOpen,
-    setDesktopOpen,
-    isMobileOpen,
-    setMobileOpen,
-    setMini,
+    isMenuOpen,
   } = useContext(MenuContext)
   const intl = useIntl()
   let headerTitle = ''
@@ -98,15 +99,13 @@ export default function ({
 
   const classes = useStyles({ width, offlineIndicatorHeight })
   const handleDrawerMenuClick = () => {
-    if (!isDesktopOpen) {
-      setMini(false)
-      setDesktopOpen(true)
+    if (!isMenuOpen) {
+      toggleThis('isMiniMode', false)
+      toggleThis('isMenuOpen', true)
       if (!isDesktop) {
-        setMobileOpen(!isMobileOpen)
-      }
+        toggleThis('isMobileMenuOpen')}
     } else {
-      setMobileOpen(!isMobileOpen)
-    }
+      toggleThis('isMobileMenuOpen')}
   }
 
   return (
@@ -115,11 +114,11 @@ export default function ({
         position={isDesktop ? 'absolute' : undefined}
         className={
           isDesktop
-            ? clsx(classes.appBar, isDesktopOpen && classes.appBarShift)
+            ? clsx(classes.appBar, isMenuOpen && classes.appBarShift)
             : classes.appBar
         }
       >
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -127,12 +126,13 @@ export default function ({
             edge="start"
             className={clsx(
               classes.menuButton,
-              isDesktopOpen && isDesktop && classes.hide,
+              isMenuOpen && isDesktop && classes.hide,
               onBackClick && classes.hide
             )}
           >
             <MenuIcon />
           </IconButton>
+          {/* james- check if this is dead code? */}
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -141,10 +141,10 @@ export default function ({
           >
             <ChevronLeft />
           </IconButton>
-          {!onBackClick && isDesktopOpen && false && (
+          {!onBackClick && isMenuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
-
+          {/* james- check if this is dead code? */}
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
           </Typography>

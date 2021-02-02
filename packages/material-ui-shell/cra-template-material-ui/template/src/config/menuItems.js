@@ -1,21 +1,26 @@
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import ChatBubble from '@material-ui/icons/ChatBubble'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import DaschboardIcon from '@material-ui/icons/Dashboard'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import FilterList from '@material-ui/icons/FilterList'
-import GetApp from '@material-ui/icons/GetApp'
-import InfoOutlined from '@material-ui/icons/InfoOutlined'
-import LanguageIcon from '@material-ui/icons/Language'
-import LockIcon from '@material-ui/icons/Lock'
-import MenuOpenIcon from '@material-ui/icons/MenuOpen'
-import QuestionAnswer from '@material-ui/icons/QuestionAnswer'
 import React from 'react'
-import SettingsIcon from '@material-ui/icons/SettingsApplications'
-import StyleIcon from '@material-ui/icons/Style'
-import Tab from '@material-ui/icons/Tab'
-import ViewList from '@material-ui/icons/ViewList'
-import Web from '@material-ui/icons/Web'
+import {
+  AccountBox as AccountBoxIcon,
+  ChatBubble,
+  ChromeReaderMode,
+  Dashboard as DashboardIcon,
+  ExitToApp as ExitToAppIcon,
+  FilterList,
+  FormatTextdirectionRToL as RTLIcon,
+  FormatTextdirectionLToR as LTRIcon,
+  GetApp,
+  InfoOutlined,
+  Language as LanguageIcon,
+  Lock as LockIcon,
+  MenuOpen as MenuOpenIcon,
+  QuestionAnswer,
+  SettingsApplications as SettingsIcon,
+  Style as StyleIcon,
+  Tab,
+  ViewList,
+  Web,
+} from '@material-ui/icons'
+
 import allLocales from './locales'
 import allThemes from './themes'
 
@@ -29,8 +34,10 @@ const getMenuItems = (props) => {
     a2HSContext,
     auth: authData,
   } = props
-  const { isDesktop, isAuthMenuOpen, useMiniMode, setMiniMode } = menuContext
-  const { themeID, setThemeID } = themeContext
+
+  const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } = menuContext
+  const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext
+
   const { auth, setAuth } = authData
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
 
@@ -90,7 +97,7 @@ const getMenuItems = (props) => {
       value: '/home',
       visible: isAuthorised,
       primaryText: intl.formatMessage({ id: 'home' }),
-      leftIcon: <DaschboardIcon />,
+      leftIcon: <DashboardIcon />,
     },
     {
       primaryText: intl.formatMessage({ id: 'demos', defaultMessage: 'Demos' }),
@@ -172,13 +179,20 @@ const getMenuItems = (props) => {
         },
         {
           visible: isDesktop ? true : false,
-          onClick: () => {
-            setMiniMode(!useMiniMode)
-          },
+          onClick: () => {toggleThis('isMiniSwitchVisibility')},
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: isMiniSwitchVisibility ? (
+            <MenuOpenIcon />
+          ) : (
+            <ChromeReaderMode />
+          ),
+        },
+        {
+          onClick: () => {toggleThisTheme('isRTL')},
+          primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
+          leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,
         },
       ],
     },

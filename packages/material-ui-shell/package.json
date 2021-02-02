@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "1.1.26",
+  "version": "1.2.0",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,8 +19,8 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
   "peerDependencies": {
+    "jss-rtl": "0.x",
     "@formatjs/intl-relativetimeformat": "7.x",
     "react-easy-crop": "3.x",
     "@material-ui/core": "4.x",
@@ -41,6 +41,7 @@
     "react-window": "1.x"
   },
   "devDependencies": {
+    "jss-rtl": "^0.3.0",
     "@formatjs/intl-relativetimeformat": "^8.0.1",
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",

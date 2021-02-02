@@ -2,8 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import clsx from 'clsx'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+
 
 const drawerWidth = 240
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -55,41 +57,37 @@ const useStyles = makeStyles((theme) => ({
 
 const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
-  const theme = useTheme()
-
+  const { isRTL } = useAppTheme()
+  const menuContext = useMenu()
   const {
+    toggleThis,
     isDesktop,
-    isDesktopOpen,
-    isMobileOpen,
-    isMini,
-    setMobileOpen,
-  } = useMenu()
+    isMiniMode,
+    isMenuOpen,
+    isMobileMenuOpen,
+  } = menuContext || {}
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!isMobileOpen)
+    toggleThis('isMobileMenuOpen')
   }
-
   return (
     <div style={{ boxSizing: 'content-box' }}>
       <SwipeableDrawer
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         variant={isDesktop ? 'permanent' : 'temporary'}
-        // className={classes.drawer}
         onClose={handleDrawerToggle}
-        anchor={
-          !isDesktop ? undefined : theme.direction === 'rtl' ? 'right' : 'left'
-        }
+        anchor={!isDesktop ? undefined : isRTL ? 'right' : 'left'}
         classes={{
           paper: isDesktop
             ? clsx(
                 classes.drawerPaperOpen,
-                !isDesktopOpen && classes.drawerPaperClose,
-                !isMini && !isDesktopOpen && classes.hide
+                !isMenuOpen && classes.drawerPaperClose,
+                !isMiniMode && !isMenuOpen && classes.hide
               )
             : classes.drawerPaper,
         }}
-        open={isDesktop ? isDesktopOpen : isMobileOpen}
+        open={isDesktop ? isMenuOpen : isMobileMenuOpen}
         onOpen={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.

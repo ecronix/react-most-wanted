@@ -26,7 +26,7 @@ const fields = [
   },
   {
     name: 'isActive',
-    label: 'Aktive',
+    label: 'Active',
     type: 'bool',
   },
   {

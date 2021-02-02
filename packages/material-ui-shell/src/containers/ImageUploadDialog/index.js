@@ -59,11 +59,11 @@ export default function ({
   const { auth, updateAuth } = useAuth()
 
   const {
-    photoURL: currentPhoroURL = '',
+    photoURL: currentPhotoURL = '',
     displayName: currentDisplayName = '',
   } = auth || {}
 
-  const [photoURL, setPhotoURL] = useState(currentPhoroURL)
+  const [photoURL, setPhotoURL] = useState(currentPhotoURL)
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -88,9 +88,9 @@ export default function ({
       setCroppedImage(croppedImage)
 
       if (handleCropSubmit) {
-               handleClose()
-               handleCropSubmit(croppedImage)
-             }
+        handleClose()
+        handleCropSubmit(croppedImage)
+      }
     } catch (e) {
       console.error(e)
     }

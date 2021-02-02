@@ -1,77 +1,99 @@
+import React, { useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
 import Context from './Context'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import {
+  setIsAuthMenuOpen,
+  setIsMiniMode,
+  setIsMenuOpen,
+  setIsMobileMenuOpen,
+  setIsMiniSwitchVisibility,
+} from './store/actions'
+import reducer from './store/reducer'
 
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const { menu } = appConfig || {}
-  const { useMini = true } = menu || {}
-  const [isDesktopOpen, setDesktopOpen] = useState(true)
-  const [isMobileOpen, setMobileOpen] = useState(false)
-  const [useMiniMode, setMiniMode] = useState(useMini)
-  const [isAuthMenuOpen, setAuthMenuOpen] = useState(false)
-  const [isMini, setMini] = useState(false)
+  const {
+    initialAuthMenuOpen,
+    initialMiniMode,
+    initialMenuOpen,
+    initialMobileMenuOpen,
+    initialMiniSwitchVisibility,
+    useWindowWatcher,
+  } = menu
+
+  const savedState = JSON.parse(localStorage.getItem(persistKey))
+
+  const [menuStore, dispatch] = useReducer(reducer, {
+    isAuthMenuOpen: initialAuthMenuOpen,
+    isMiniMode: initialMiniMode,
+    isMenuOpen: initialMenuOpen,
+    isMobileMenuOpen: initialMobileMenuOpen,
+    isMiniSwitchVisibility: initialMiniSwitchVisibility,
+    ...savedState,
+  })
+
+  const props = {
+    //setter
+    toggleThis(value, newValue = null){
+      if(value === 'isAuthMenuOpen'){
+        dispatch(setIsAuthMenuOpen(
+          newValue !== null
+          ? newValue
+          : !menuStore.isAuthMenuOpen))}
+      else if(value === 'isMiniMode'){
+        dispatch(setIsMiniMode(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMiniMode))}
+      else if(value === 'isMenuOpen'){
+        dispatch(setIsMenuOpen(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMenuOpen))}
+      else if(value === 'isMobileMenuOpen'){
+        dispatch(setIsMobileMenuOpen(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMobileMenuOpen))}
+      else if(value === 'isMiniSwitchVisibility'){
+        dispatch(setIsMiniSwitchVisibility(
+          newValue !== null
+          ? newValue
+          : !menuStore.isMiniSwitchVisibility))}
+    },
+    //getters
+    isAuthMenuOpen: menuStore.isAuthMenuOpen,
+    isMiniMode: menuStore.isMiniMode,
+    isMenuOpen: menuStore.isMenuOpen,
+    isMobileMenuOpen: menuStore.isMobileMenuOpen,
+    isMiniSwitchVisibility: menuStore.isMiniSwitchVisibility,
+  }
   const isDesktop = useMediaQuery('(min-width:600px)')
-  const isDesktopKey = `${persistKey}:isDesktopOpen`
-  const isMiniKey = `${persistKey}:isMini`
-  const isUseMiniModeKey = `${persistKey}:isUseMiniModeKey`
 
-  useEffect(() => {
-    const persistDesktopOpen = localStorage.getItem(isDesktopKey)
-    const persistMini = localStorage.getItem(isMiniKey)
-    const persistMiniMode = localStorage.getItem(isUseMiniModeKey)
-    if (persistDesktopOpen) {
-      setDesktopOpen(persistDesktopOpen === 'true')
-    }
-    if (persistMini) {
-      setMini(persistMini === 'true')
-    }
-    if (persistMiniMode) {
-      setMiniMode(persistMiniMode === 'true')
-    }
-  }, [isDesktopKey, isMiniKey, isUseMiniModeKey])
 
   useEffect(() => {
     try {
-      localStorage.setItem(isDesktopKey, JSON.stringify(isDesktopOpen))
+      localStorage.setItem(persistKey, JSON.stringify(menuStore))
     } catch (error) {
       console.warn(error)
     }
-  }, [isDesktopOpen, isDesktopKey])
+  }, [menuStore, persistKey])
 
   useEffect(() => {
-    try {
-      localStorage.setItem(isMiniKey, JSON.stringify(isMini))
-    } catch (error) {
-      console.warn(error)
-    }
-  }, [isMini, isMiniKey])
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(isUseMiniModeKey, JSON.stringify(useMiniMode))
-      if (!useMiniMode) {
-        setMini(useMiniMode)
+    if (useWindowWatcher) {
+      if (!isDesktop) {
+        props.setMenuOpen(false)
+        props.setMiniMode(false)
       }
-    } catch (error) {
-      console.warn(error)
     }
-  }, [useMiniMode, isUseMiniModeKey])
+  }, [isDesktop, props, useWindowWatcher])
 
   return (
     <Context.Provider
       value={{
         isDesktop,
-        isDesktopOpen,
-        isMobileOpen,
-        setDesktopOpen,
-        setMobileOpen,
-        isAuthMenuOpen,
-        setAuthMenuOpen,
-        isMini,
-        setMini,
-        useMiniMode,
-        setMiniMode,
+        ...props,
       }}
     >
       {children}
