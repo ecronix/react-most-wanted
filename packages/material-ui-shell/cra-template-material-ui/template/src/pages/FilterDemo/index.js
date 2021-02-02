@@ -16,11 +16,12 @@ import { FixedSizeList } from 'react-window'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
-// import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const filterName = 'test_filter'
 
 const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
+  const { isRTL } = useAppTheme()
   const refSetter = useCallback((scrollbarsRef) => {
     if (scrollbarsRef) {
       forwardedRef(scrollbarsRef.view)
@@ -29,10 +30,19 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+console.log(style);
   return (
     <Scrollbars
       ref={refSetter}
-      style={{ ...style, overflow: 'hidden' }}
+      renderView={props => (
+        isRTL ? <div {...props} style={{
+          ...props.style,
+          marginLeft: props.style.marginRight,
+          marginRight: 0, }} /> : <div {...props} style={{
+            ...props.style,}} />
+      )}
+      // style={{ ...style, overflow: 'hidden' }}
+      style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl' : 'ltr' }} //james - test code should fix native scrollbars in demofilter and maybe in RMW demos,
       onScroll={onScroll}
     >
       {children}
@@ -94,7 +104,7 @@ const FilterDemo = () => {
 
   const Row = ({ index, style }) => {
     const { name, amount = '', registered, email } = list[index]
-
+    console.log(style, "here");
     return (
       <div key={`${name}_${index}`} style={style}>
         <ListItem alignItems="flex-start">
