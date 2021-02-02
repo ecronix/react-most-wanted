@@ -9,7 +9,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
-
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
 const ResponsiveMenu = lazy(() =>
@@ -32,6 +32,7 @@ const LandingPage = () => {
   const [components, setComponents] = useState(null)
   const [top, setTop] = useState(null)
   const history = useHistory()
+  const { isRTL } = useAppTheme()
 
   const scrollTo = (e) => {
     e &&
@@ -90,13 +91,20 @@ const LandingPage = () => {
               setScrollbar(e)
             }
           }}
+          renderView={props => (
+            isRTL ? <div {...props} style={{
+              ...props.style,
+              marginLeft: props.style.marginRight,
+              marginRight: 0, }} /> : <div {...props} style={{
+                ...props.style,}} />
+          )}
           onScroll={(e) => {
             setTransparent(scrollbar.viewScrollTop < 100)
             setScrolled(true)
           }}
           autoHide
           style={{ width: '100%', height: '100vh' }}
-        >
+        > 
           <AppBar
             style={{
               position: 'fixed',
