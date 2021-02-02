@@ -1,47 +1,63 @@
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import Assignment from '@material-ui/icons/Assignment'
-import Business from '@material-ui/icons/Business'
-import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode'
-import DaschboardIcon from '@material-ui/icons/Dashboard'
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import Web from '@material-ui/icons/Web'
-import GetApp from '@material-ui/icons/GetApp'
-import InfoOutlined from '@material-ui/icons/InfoOutlined'
-import LanguageIcon from '@material-ui/icons/Language'
-import LockIcon from '@material-ui/icons/Lock'
-import MenuOpenIcon from '@material-ui/icons/MenuOpen'
-import People from '@material-ui/icons/People'
 import React from 'react'
-import Security from '@material-ui/icons/Security'
-import SettingsIcon from '@material-ui/icons/SettingsApplications'
-import Slideshow from '@material-ui/icons/Slideshow'
-import StyleIcon from '@material-ui/icons/Style'
-import CallToAction from '@material-ui/icons/CallToAction'
-import Whatshot from '@material-ui/icons/Whatshot'
-import Chat from '@material-ui/icons/Chat'
+import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import allLocales from './locales'
 import allThemes from './themes'
+
+import {
+  Assignment,
+  Business,
+  ChromeReaderMode,
+  Web,
+  GetApp,
+  InfoOutlined,
+  People,
+  Security,
+  Slideshow,
+  CallToAction,
+  Whatshot,
+  Chat,
+  AccountBox as AccountBoxIcon,
+  Dashboard as DashboardIcon,
+  ExitToApp as ExitToAppIcon,
+  FormatTextdirectionRToL as RTLIcon,
+  FormatTextdirectionLToR as LTRIcon,
+  Language as LanguageIcon,
+  Lock as LockIcon,
+  MenuOpen as MenuOpenIcon,
+  SettingsApplications as SettingsIcon,
+  Style as StyleIcon,
+} from '@material-ui/icons'
 
 const getMenuItems = (props) => {
   const {
     intl,
     updateLocale,
     locale,
-    menuContext,
     themeContext,
     a2HSContext,
     firebaseApp,
     auth: authData,
   } = props
+
+  const menuContext = useMenu()
   const {
-    isDesktop,
     isAuthMenuOpen,
-    useMiniMode,
-    setMiniMode,
-    setAuthMenuOpen,
-  } = menuContext
-  const { themeID = 'en', setThemeID } = themeContext || {}
-  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
+    isDesktop,
+    isMiniSwitchVisibility,
+    toggleThis,
+  } = menuContext || {}
+  const {
+    isRTL,
+    setThemeID,
+    themeID,
+    toggleThisTheme
+  } = themeContext || {}
+  const {
+    isAppInstallable,
+    isAppInstalled,
+    deferredPrompt
+  } = a2HSContext || {}
+  
   const { auth } = authData
   const { isGranted = () => false, isAdmin = false } = auth || {}
 
@@ -77,7 +93,7 @@ const getMenuItems = (props) => {
   })
 
   const handleSignOut = () => {
-    setAuthMenuOpen(false)
+    toggleThis('isAuthMenuOpen',false)
     firebaseApp.auth().signOut()
     localStorage.clear()
   }
@@ -129,7 +145,7 @@ const getMenuItems = (props) => {
         id: 'dashboard',
         defaultMessage: 'Dashboard',
       }),
-      leftIcon: <DaschboardIcon />,
+      leftIcon: <DashboardIcon />,
     },
     {
       value: '/about',
@@ -193,7 +209,7 @@ const getMenuItems = (props) => {
     {
       primaryText: intl.formatMessage({
         id: 'documentation',
-        defaultMessage: 'Doumentation',
+        defaultMessage: 'Documentation',
       }),
       visible: isAuthorised,
       primaryTogglesNestedList: true,
@@ -332,12 +348,25 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            setMiniMode(!useMiniMode)
+            toggleThis('isMiniSwitchVisibility')
           },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
-          leftIcon: useMiniMode ? <MenuOpenIcon /> : <ChromeReaderMode />,
+          leftIcon: isMiniSwitchVisibility ? (
+            <MenuOpenIcon />
+          ) : (
+            <ChromeReaderMode />
+          ),
+        },
+        {
+          visible: true,
+          onClick: () => {
+            toggleThisTheme('isRTL')
+            window.location.reload(false)
+          },
+          primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
+          leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,
         },
       ],
     },

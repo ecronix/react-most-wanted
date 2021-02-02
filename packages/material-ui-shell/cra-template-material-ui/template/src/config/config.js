@@ -15,8 +15,7 @@ const config = {
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
     onError: (e) => {
       //console.warn(e)
-
-      return
+      return 
     },
   },
   menu: {
@@ -25,7 +24,8 @@ const config = {
   theme: {
     themes,
     defaultThemeID: 'default',
-    defaultType: 'light',
+    defaultIsDarkMode: false,
+    defaultIsRTL: false //change this to true for default Right to Left Language support
   },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),

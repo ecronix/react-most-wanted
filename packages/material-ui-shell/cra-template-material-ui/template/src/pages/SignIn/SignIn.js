@@ -56,7 +56,7 @@ const SignIn = () => {
   const history = useHistory()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { setAuthMenuOpen } = useMenu()
+  const { toggleThis } = useMenu()
   const { setAuth } = useAuth()
 
   function handleSubmit(event) {
@@ -69,11 +69,11 @@ const SignIn = () => {
 
   const authenticate = (user) => {
     setAuth({ isAuthenticated: true, ...user })
-    setAuthMenuOpen(false)
+    toggleThis('isAuthMenuOpen', false)
 
     let _location = history.location
-
     let _route = '/home'
+
     if (_location.state && _location.state.from) {
       _route = _location.state.from.pathname
       history.push(_route)

@@ -22,5 +22,9 @@ before_script:
   - travis_wait 40 ./continuous_deployment/build.sh
 
 script:
-  - chmod +x ./continuous_deployment/deploy.sh
-  - travis_wait 40 ./continuous_deployment/deploy.sh
+  - chmod +x ./continuous_deployment/deploy_hosting.sh
+  - travis_wait 40 ./continuous_deployment/deploy_hosting.sh
+  - chmod +x ./continuous_deployment/deploy_functions.sh
+  - travis_wait 40 ./continuous_deployment/deploy_functions.sh
+  - chmod +x ./continuous_deployment/browser_stack.sh
+  - travis_wait 40 ./continuous_deployment/browser_stack.sh

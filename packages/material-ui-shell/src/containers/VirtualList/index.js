@@ -5,14 +5,16 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import { FixedSizeList } from 'react-window'
 import { useState } from 'react'
 import { useVirtualLists } from 'material-ui-shell/lib/providers/VirtualLists'
+import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props
+  // const { isRTL } = useAppTheme()
   return (
     <Scrollbar
       {...rest}
       forwardedRef={ref}
-      style={{ ...style, overflow: 'hidden' }}
+      style={{ ...style, overflow: 'hidden'/* , direction: isRTL ? 'rtl':'ltr' */ }} //james- keep as maybe related to <FixedSizeList> props, will remove soon
     />
   )
 })
@@ -22,6 +24,7 @@ export default function (props) {
   const listRef = React.createRef()
   const [ref, setRef] = useState(false)
   const { getOffset, setOffset } = useVirtualLists()
+  const { isRTL } = useAppTheme()
 
   useEffect(() => {
     const scrollOffset = getOffset(name)
@@ -43,11 +46,12 @@ export default function (props) {
   }, [ref])
 
   return (
-    <AutoSizer style={{ height: '100%', width: '100%' }}>
+    <AutoSizer style={{ height: '100%', width: '100%'}}>
       {({ height, width }) => {
         return (
           <List style={{ padding: 0 }}>
             <FixedSizeList
+              direction={isRTL ? 'rtl':'ltr'} //removes native scrollbar
               ref={(r) => {
                 if (r) {
                   listRef.current = r

@@ -4,8 +4,8 @@ import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Button from '@material-ui/core/Button'
 import Home from '@material-ui/icons/Home'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import logo from './404.svg'
 
 const styles = (theme) => ({
   icon: {
@@ -35,10 +35,8 @@ const PageNotFound = ({ intl, classes }) => {
     <Page pageTitle={intl.formatMessage({ id: 'page_not_found' })}>
       <Paper className={classes.paper}>
         <div className={classes.container}>
-          <Typography variant="h2">404</Typography>
-          <Typography variant="h4">
-            {intl.formatMessage({ id: 'page_not_found' })}
-          </Typography>
+          <img style={{ maxHeight: '50%' }} src={logo} alt="logo" />
+
           <Button
             color="secondary"
             aria-label="home"
