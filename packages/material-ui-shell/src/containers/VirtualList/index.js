@@ -9,12 +9,12 @@ import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props
-  // const { isRTL } = useAppTheme()
+  const { isRTL } = useAppTheme()
   return (
     <Scrollbar
       {...rest}
       forwardedRef={ref}
-      style={{ ...style, overflow: 'hidden'/* , direction: isRTL ? 'rtl':'ltr' */ }} //james- keep as maybe related to <FixedSizeList> props, will remove soon
+      style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl':'ltr' }} //james- keep as maybe related to <FixedSizeList> props, will remove soon
     />
   )
 })
@@ -49,7 +49,7 @@ export default function (props) {
     <AutoSizer style={{ height: '100%', width: '100%'}}>
       {({ height, width }) => {
         return (
-          <List style={{ padding: 0, diretion: isRTL ? 'rtl':'ltr' }}>
+          <List style={{ padding: 0/* , direction: isRTL ? 'rtl':'ltr' */ }}>
             <FixedSizeList
               direction={isRTL ? 'rtl':'ltr'} //removes native scrollbar
               ref={(r) => {
