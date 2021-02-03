@@ -49,7 +49,7 @@ export default function (props) {
     <AutoSizer style={{ height: '100%', width: '100%'}}>
       {({ height, width }) => {
         return (
-          <List style={{ padding: 0 }}>
+          <List style={{ padding: 0, diretion: isRTL ? 'rtl':'ltr' }}>
             <FixedSizeList
               direction={isRTL ? 'rtl':'ltr'} //removes native scrollbar
               ref={(r) => {
