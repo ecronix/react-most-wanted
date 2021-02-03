@@ -1,42 +1,33 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import TrackChanges from '@material-ui/icons/TrackChanges'
-import FileCopy from '@material-ui/icons/FileCopy'
-import IconButton from '@material-ui/core/IconButton'
-import MuiAlert from '@material-ui/lab/Alert'
-import Snackbar from '@material-ui/core/Snackbar'
-import { Tooltip } from '@material-ui/core'
-import { makeStyles, withStyles, lighten, darken } from '@material-ui/core/styles'
+import {
+  CheckCircleOutline as CheckCircleOutlineIcon,
+  TrackChanges,
+  FileCopy } from '@material-ui/icons';
+import {
+  Tooltip,
+  Typography,
+  Card,
+  CardContent,
+  IconButton,
+  Button } from '@material-ui/core'
+import {
+  withStyles,
+  lighten,
+  darken } from '@material-ui/core/styles'
 
-
-/* const useStyles = makeStyles((theme) => ({ */
   const LightTooltip = withStyles((theme) => {
   const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken;
-  const getColor = theme.palette.type === 'light' ? darken : lighten
   return {
 tooltip: {
   ...theme.typography.body2,
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: 'transparent',
   display: 'flex',
-  padding: '8px 18px',
-  color: getColor(theme.palette.success.main, 0.2),
-  backgroundColor: getBackgroundColor(theme.palette.success.main, 0.7),
-  '& $icon': {
-    color: theme.palette.success.main,
-  },
+  padding: '6px 10px',
+  backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
 }
 }})(Tooltip);
-/* })) */
 
 const PackageCard = ({ title, command, description, icons }) => {
-
-/*   function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />
-  } */
-  // const classes = useStyles()
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(true)
@@ -69,12 +60,17 @@ const PackageCard = ({ title, command, description, icons }) => {
           </Typography>
           {/* <Tooltip */}
           <LightTooltip
-            title="Copied to clipboard"
+            title={
+            <Button
+              color='inherit'
+              startIcon={<CheckCircleOutlineIcon />}
+            >
+              Copied to clipboard!
+            </Button>
+            }
             placement="bottom"
-            
-            // className={classes.tooltip}
             open={open}
-            leaveDelay={1500}
+            leaveDelay={1000}
             onClose={handleClose} >
           <IconButton
             aria-label="Icon button"
@@ -93,12 +89,6 @@ const PackageCard = ({ title, command, description, icons }) => {
             <FileCopy />
           </IconButton>
           </LightTooltip>
-          {/* </Tooltip> */} 
-{/*           <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Copied to clipboard!
-            </Alert>
-          </Snackbar> */}
         </div>
         <br />
         {icons}
