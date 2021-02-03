@@ -30,7 +30,6 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-console.log(style);
   return (
     <Scrollbars
       ref={refSetter}
