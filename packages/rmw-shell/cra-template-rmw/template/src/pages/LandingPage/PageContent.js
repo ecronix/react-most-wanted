@@ -1,12 +1,41 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import TrackChanges from '@material-ui/icons/TrackChanges'
-import FileCopy from '@material-ui/icons/FileCopy'
-import IconButton from '@material-ui/core/IconButton'
+import {
+  CheckCircleOutline as CheckCircleOutlineIcon,
+  TrackChanges,
+  FileCopy } from '@material-ui/icons';
+import {
+  Tooltip,
+  Typography,
+  Card,
+  CardContent,
+  IconButton,
+  Button } from '@material-ui/core'
+import {
+  withStyles,
+  lighten,
+  darken } from '@material-ui/core/styles'
+
+  const LightTooltip = withStyles((theme) => {
+  const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken;
+  return {
+tooltip: {
+  ...theme.typography.body2,
+  borderRadius: theme.shape.borderRadius,
+  display: 'flex',
+  padding: '6px 10px',
+  backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
+}
+}})(Tooltip);
 
 const PackageCard = ({ title, command, description, icons }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
       <CardContent>
@@ -29,6 +58,20 @@ const PackageCard = ({ title, command, description, icons }) => {
           >
             {command}
           </Typography>
+          {/* <Tooltip */}
+          <LightTooltip
+            title={
+            <Button
+              color='inherit'
+              startIcon={<CheckCircleOutlineIcon />}
+            >
+              Copied to clipboard!
+            </Button>
+            }
+            placement="bottom"
+            open={open}
+            leaveDelay={1000}
+            onClose={handleClose} >
           <IconButton
             aria-label="Icon button"
             onClick={() => {
@@ -40,10 +83,12 @@ const PackageCard = ({ title, command, description, icons }) => {
                   navigator.clipboard.writeText(command)
                 } catch (error) {}
               }
+              handleClick()
             }}
           >
             <FileCopy />
           </IconButton>
+          </LightTooltip>
         </div>
         <br />
         {icons}
