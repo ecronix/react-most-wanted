@@ -28,36 +28,23 @@ import {
   Style as StyleIcon,
 } from '@material-ui/icons'
 
-const GetMenuItems = (props) => {
+const getMenuItems = (props) => {
   const {
     intl,
     updateLocale,
     locale,
     themeContext,
+    menuContext,
     a2HSContext,
     firebaseApp,
     auth: authData,
   } = props
 
-  const menuContext = useMenu()
-  const {
-    isAuthMenuOpen,
-    isDesktop,
-    isMiniSwitchVisibility,
-    toggleThis,
-  } = menuContext || {}
-  const {
-    isRTL,
-    setThemeID,
-    themeID,
-    toggleThisTheme
-  } = themeContext || {}
-  const {
-    isAppInstallable,
-    isAppInstalled,
-    deferredPrompt
-  } = a2HSContext || {}
-  
+  const { isAuthMenuOpen, isDesktop, isMiniSwitchVisibility, toggleThis } =
+    menuContext || {}
+  const { isRTL, setThemeID, themeID, toggleThisTheme } = themeContext || {}
+  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
+
   const { auth } = authData
   const { isGranted = () => false, isAdmin = false } = auth || {}
 
@@ -93,7 +80,7 @@ const GetMenuItems = (props) => {
   })
 
   const handleSignOut = () => {
-    toggleThis('isAuthMenuOpen',false)
+    toggleThis('isAuthMenuOpen', false)
     firebaseApp.auth().signOut()
     localStorage.clear()
   }
@@ -383,4 +370,4 @@ const GetMenuItems = (props) => {
     },
   ]
 }
-export default GetMenuItems
+export default getMenuItems
