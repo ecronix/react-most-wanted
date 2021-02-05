@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
-import GetMenuItems from './menuItems'
+import getMenuItems from './menuItems'
 import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import grants from './grants'
@@ -161,7 +161,7 @@ const config = {
     },
   },
   menu: {
-    GetMenuItems,
+    getMenuItems,
     MenuHeader: lazy(() =>
       import('material-ui-shell/lib/components/MenuHeader/MenuHeader')
     ),
