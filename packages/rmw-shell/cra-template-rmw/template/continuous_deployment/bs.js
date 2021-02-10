@@ -7,25 +7,25 @@ var test = require('./bs_test.js')
 // Input capabilities
 var iPhone = {
   browserName: 'iPhone',
-  device: 'iPhone 7',
+  device: 'iPhone 12',
   realMobile: 'true',
-  os_version: '10.3',
+  os_version: '14.0',
   'browserstack.user': process.argv[2],
   'browserstack.key': process.argv[3],
 }
 
 var android = {
   browserName: 'android',
-  device: 'Samsung Galaxy S8',
+  device: 'Samsung Galaxy S20',
   realMobile: 'true',
-  os_version: '7.0',
+  os_version: '10.0',
   'browserstack.user': process.argv[2],
   'browserstack.key': process.argv[3],
 }
 
 var desktopFF = {
   browserName: 'Firefox',
-  browser_version: '59.0',
+  browser_version: '85.0',
   os: 'Windows',
   os_version: '10',
   resolution: '1024x768',
@@ -35,7 +35,7 @@ var desktopFF = {
 
 var desktopEdge = {
   browserName: 'Edge',
-  browser_version: '16.0',
+  browser_version: '88.0',
   os: 'Windows',
   os_version: '10',
   resolution: '1024x768',
@@ -45,7 +45,7 @@ var desktopEdge = {
 
 var desktopIE = {
   browserName: 'Chrome',
-  browser_version: '69.0',
+  browser_version: '88.0',
   os: 'Windows',
   os_version: '10',
   resolution: '1024x768',
