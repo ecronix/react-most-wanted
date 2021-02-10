@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
