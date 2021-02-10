@@ -1,14 +1,14 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { useSnackbar, SnackbarContent } from 'notistack'
-
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import CheckCircleIcon from '@material-ui/icons/CheckCircle'
+import CloseIcon from '@material-ui/icons/Close'
 
 import {
   Avatar,
   CardMedia,
   IconButton,
+  Card,
+  CardHeader,
 } from '@material-ui/core'
 
 import Notifications from '@material-ui/icons/Notifications'
@@ -37,7 +37,7 @@ const SnackMessage = React.forwardRef((props, ref) => {
   const { payload, id } = props
   const { notification } = payload
   const { title, body, icon, image, click_action } = notification || {}
-  
+
   // const theme = useTheme()
   // const type = theme.palette.type === 'light' ? 'dark' : 'light'
   const { isDarkMode } = useAppTheme()
