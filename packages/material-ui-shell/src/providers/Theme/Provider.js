@@ -34,7 +34,8 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
       setThemeID(persistThemeID)
     }
     if (persistIsDarkMode) {
-      setIsDarkMode(persistIsDarkMode)
+      // convert to boolean
+      setIsDarkMode(persistIsDarkMode === 'true')
     }
     if (persistIsRTL) {
       //have to convert the stored string back to boolean
