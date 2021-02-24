@@ -1,7 +1,6 @@
 import { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
-import getMenuItems from './menuItems'
 import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 
@@ -15,17 +14,17 @@ const config = {
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
     onError: (e) => {
       //console.warn(e)
-      return 
+      return
     },
   },
   menu: {
-    getMenuItems,
+    MenuContent: lazy(() => import('../components/Menu/MenuContent')),
   },
   theme: {
     themes,
     defaultThemeID: 'default',
     defaultIsDarkMode: false,
-    defaultIsRTL: false //change this to true for default Right to Left Language support
+    defaultIsRTL: false, //change this to true for default Right to Left Language support
   },
   pages: {
     LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
