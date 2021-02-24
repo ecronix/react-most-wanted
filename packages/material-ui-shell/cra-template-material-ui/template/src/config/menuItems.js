@@ -35,7 +35,12 @@ const getMenuItems = (props) => {
     auth: authData,
   } = props
 
-  const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } = menuContext
+  const {
+    toggleThis,
+    isDesktop,
+    isAuthMenuOpen,
+    isMiniSwitchVisibility,
+  } = menuContext
   const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext
 
   const { auth, setAuth } = authData
@@ -179,7 +184,9 @@ const getMenuItems = (props) => {
         },
         {
           visible: isDesktop ? true : false,
-          onClick: () => {toggleThis('isMiniSwitchVisibility')},
+          onClick: () => {
+            toggleThis('isMiniSwitchVisibility')
+          },
           primaryText: intl.formatMessage({
             id: 'menu_mini_mode',
           }),
@@ -190,7 +197,9 @@ const getMenuItems = (props) => {
           ),
         },
         {
-          onClick: () => {toggleThisTheme('isRTL')},
+          onClick: () => {
+            toggleThisTheme('isRTL')
+          },
           primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
           leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,
         },

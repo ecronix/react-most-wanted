@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import {
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
-  KeyboardArrowRight as KeyboardArrowRight,
+  KeyboardArrowRight,
   ArrowBack,
 } from '@material-ui/icons'
 import {
@@ -18,15 +18,56 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core'
+import { useLocation } from 'react-router-dom'
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   const [state, setState] = useState({})
+  const { isRTL } = useAppTheme()
+  const { isMiniMode } = useMenu()
+  const { pathname = '' } = useLocation()
+
+  const loopItems = useCallback((items, previousItems = [], title) => {
+    items.map((i) => {
+      const { value = 'none', nestedItems = [], primaryText = '' } = i
+      if (pathname === value) {
+        if (previousItems.length) {
+          setState({
+            index: value,
+            previousItems: [previousItems],
+            items,
+            title,
+          })
+        } else {
+          setState({
+            index: value,
+          })
+        }
+
+        return i
+      }
+
+      if (nestedItems.length) {
+        loopItems(nestedItems, [...previousItems, items], primaryText)
+      }
+      //console.log('i', i)
+      return i
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const list =
+    state.previousItems && state.previousItems.length > 0 ? state.items : items
+
+  useEffect(() => {
+    loopItems(items)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   //Clears nested state if the root items change
   //Used to open auth menu if we are in a nested menu
   //We use just the length because the auth menu has always less items
   useEffect(() => {
-    setState({})
+    //setState({})
   }, [items.length])
 
   const handleNestedItemsClick = (item) => {
@@ -67,8 +108,6 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
   }
 
   const getItem = (item, i) => {
-    const { isRTL } = useAppTheme()
-    const { isMiniMode } = useMenu ()
     const { index } = state
 
     delete item.visible
@@ -84,65 +123,61 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
         return <Divider key={i} inset={item.inset} style={item.style} />
       } else {
         return (
-        <Tooltip
-          disableFocusListener
-          disableTouchListener
-          disableHoverListener={!isMiniMode}
-          aria-label={item.primaryText}
-          placement={isRTL ? 'left':'right' }
-          title={
-            <Typography
-              variant='button'
-              children={item.primaryText}/>}
-          key={i}
-        >
-          <ListItem
-            button
-            selected={index && index === item.value}
+          <Tooltip
+            disableFocusListener
+            disableTouchListener
+            disableHoverListener={!isMiniMode}
+            aria-label={item.primaryText}
+            placement={isRTL ? 'left' : 'right'}
+            title={<Typography variant="button" children={item.primaryText} />}
             key={i}
-            onClick={(e) => {
-              onIndexChange(e, item.value)
-              handleNestedItemsClick(item)
-              if (item.onClick) {
-                item.onClick()
-              }
-            }}
-            onMouseDown={(e) => {
-              if (e.button === 1) {
-                var win = window.open(`${item.value}`, '_blank')
-                win.focus()
-              }
-            }}
           >
-            {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
+            <ListItem
+              button
+              selected={index && index === item.value}
+              key={i}
+              onClick={(e) => {
+                onIndexChange(e, item.value)
+                handleNestedItemsClick(item)
+                if (item.onClick) {
+                  item.onClick()
+                }
+              }}
+              onMouseDown={(e) => {
+                if (e.button === 1) {
+                  var win = window.open(`${item.value}`, '_blank')
+                  win.focus()
+                }
+              }}
+            >
+              {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
 
-            {!useMinified && <ListItemText primary={item.primaryText} />}
+              {!useMinified && <ListItemText primary={item.primaryText} />}
 
-            {item.nestedItems && !useMinified && (
-              <ListItemSecondaryAction
-                onClick={() => {
-                  handleNestedItemsClick(item)
-                }}
-              >
-                <IconButton
-                  style={{ marginRight: useMinified ? 150 : undefined }}
+              {item.nestedItems && !useMinified && (
+                <ListItemSecondaryAction
+                  onClick={() => {
+                    handleNestedItemsClick(item)
+                  }}
                 >
-                  {isRTL
-                  ? <KeyboardArrowLeftIcon />
-                  : <KeyboardArrowRight color={'action'} />}
-                </IconButton>
-              </ListItemSecondaryAction>
-            )}
-          </ListItem>
-        </Tooltip>
+                  <IconButton
+                    style={{ marginRight: useMinified ? 150 : undefined }}
+                  >
+                    {isRTL ? (
+                      <KeyboardArrowLeftIcon />
+                    ) : (
+                      <KeyboardArrowRight color={'action'} />
+                    )}
+                  </IconButton>
+                </ListItemSecondaryAction>
+              )}
+            </ListItem>
+          </Tooltip>
         )
       }
     }
     return null
   }
-
-  const list =
-    state.previousItems && state.previousItems.length > 0 ? state.items : items
 
   return (
     <List value={index} onChange={onIndexChange}>
@@ -162,13 +197,14 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
           <Divider />
         </div>
       )}
-      {list
-        .filter((item) => {
-          return item.visible !== false
-        })
-        .map((item, i) => {
-          return getItem(item, i)
-        })}
+      {list.length &&
+        list
+          .filter((item) => {
+            return item.visible !== false
+          })
+          .map((item, i) => {
+            return getItem(item, i)
+          })}
     </List>
   )
 }

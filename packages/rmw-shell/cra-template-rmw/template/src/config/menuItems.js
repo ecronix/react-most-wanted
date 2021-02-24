@@ -1,5 +1,4 @@
 import React from 'react'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import allLocales from './locales'
 import allThemes from './themes'
 
@@ -45,7 +44,7 @@ const getMenuItems = (props) => {
   const { isRTL, setThemeID, themeID, toggleThisTheme } = themeContext || {}
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext || {}
 
-  const { auth } = authData
+  const { auth } = authData || {}
   const { isGranted = () => false, isAdmin = false } = auth || {}
 
   const localeItems = allLocales.map((l) => {
