@@ -94,6 +94,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
             <Typography
               variant='button'
               children={item.primaryText}/>}
+          key={i}
         >
           <ListItem
             button
