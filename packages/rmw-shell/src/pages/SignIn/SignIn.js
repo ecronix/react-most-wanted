@@ -14,14 +14,14 @@ const SignIn = () => {
   const { firebaseApp } = useFirebase()
   const { firebase = {} } = appConfig || {}
   const { firebaseuiProps = {} } = firebase
-  const { setAuthMenuOpen } = useMenu()
+  const { toggleThis } = useMenu()
 
   const uiConfig = {
     signInSuccessUrl: '/',
     signInFlow: 'popup',
     callbacks: {
       signInSuccessWithAuthResult: () => {
-        setAuthMenuOpen(false)
+        toggleThis('isAuthMenuOpen', false)
         // To avoid page reload on single page applications
         return false
       },
