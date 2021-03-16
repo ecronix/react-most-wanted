@@ -4,6 +4,7 @@ import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuL
 import { useAddToHomeScreen } from 'base-shell/lib/providers/AddToHomeScreen'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
+import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLocale } from 'base-shell/lib/providers/Locale'
@@ -16,6 +17,7 @@ const Menu = (props) => {
   const history = useHistory()
   const match = useRouteMatch()
   const auth = useAuth()
+  const { firebaseApp } = useFirebase()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
   const { toggleThis, isMiniMode, isMiniSwitchVisibility } = menuContext || {}
@@ -32,6 +34,7 @@ const Menu = (props) => {
     appConfig,
     a2HSContext,
     auth,
+    firebaseApp,
     ...props,
   }).filter((item) => {
     return item.visible !== false
