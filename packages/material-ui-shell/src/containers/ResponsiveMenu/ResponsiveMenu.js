@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
-
 const drawerWidth = 240
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 const useStyles = makeStyles((theme) => ({
@@ -59,13 +58,8 @@ const ResponsiveMenu = ({ children, width }) => {
   const classes = useStyles()
   const { isRTL } = useAppTheme()
   const menuContext = useMenu()
-  const {
-    toggleThis,
-    isDesktop,
-    isMiniMode,
-    isMenuOpen,
-    isMobileMenuOpen,
-  } = menuContext || {}
+  const { toggleThis, isDesktop, isMiniMode, isMenuOpen, isMobileMenuOpen } =
+    menuContext || {}
 
   const handleDrawerToggle = () => {
     toggleThis('isMobileMenuOpen')
@@ -87,7 +81,7 @@ const ResponsiveMenu = ({ children, width }) => {
               )
             : classes.drawerPaper,
         }}
-        open={isDesktop ? isMenuOpen : isMobileMenuOpen}
+        open={isDesktop ? !!isMenuOpen : !!isMobileMenuOpen}
         onOpen={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.

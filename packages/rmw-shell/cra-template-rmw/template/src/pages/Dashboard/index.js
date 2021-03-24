@@ -89,7 +89,7 @@ const Dashboard = () => {
             >
               <CardContent>
                 <Typography color="primary" variant="h1">
-                  <CountUp start={0} end={users_count} />
+                  <CountUp start={0} end={users_count || 0} />
                 </Typography>
               </CardContent>
             </div>
