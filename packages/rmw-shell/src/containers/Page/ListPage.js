@@ -16,14 +16,10 @@ const Page = ({
   createGrant,
   listPageProps,
   reverse = false,
+  disableCreate = false,
 }) => {
-  const {
-    watchList,
-    getList,
-    isListLoading,
-    unwatchList,
-    firebaseApp,
-  } = useLists()
+  const { watchList, getList, isListLoading, unwatchList, firebaseApp } =
+    useLists()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth || {}
 
@@ -59,7 +55,7 @@ const Page = ({
         }}
         {...listPageProps}
       />
-      {isGranted(auth, createGrant) && (
+      {isGranted(auth, createGrant) && !disableCreate && (
         <Fab
           color="secondary"
           style={{
