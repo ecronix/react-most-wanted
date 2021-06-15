@@ -19,16 +19,29 @@ const Scrollbar = (props) => {
   return (
     /* native scrollbars needs to be conditionally turned off in rtl */
     <Scrollbars
-    hideTracksWhenNotNeeded
-    ref={refSetter}
-    renderView={props => (
-      isRTL ? <div {...props} style={{
-        ...props.style,
-        marginLeft: props.style.marginRight,
-        marginRight: 0, }} /> : <div {...props} style={{
-          ...props.style,}} />
-    )}
-    {...rest} />
+      hideTracksWhenNotNeeded
+      ref={refSetter}
+      renderView={(props) =>
+        isRTL ? (
+          <div
+            {...props}
+            style={{
+              ...props.style,
+              marginLeft: props.style.marginRight,
+              marginRight: 0,
+            }}
+          />
+        ) : (
+          <div
+            {...props}
+            style={{
+              ...props.style,
+            }}
+          />
+        )
+      }
+      {...rest}
+    />
   )
 }
 

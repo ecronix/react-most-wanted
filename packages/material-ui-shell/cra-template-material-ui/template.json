@@ -2,7 +2,7 @@
   "package": {
     "dependencies": {
       "jss-rtl": "0.x",
-      "@formatjs/intl-relativetimeformat": "7.x",
+      "@formatjs/intl-relativetimeformat": "8.x",
       "@material-ui/core": "4.x",
       "@material-ui/icons": "4.x",
       "base-shell": "1.x",

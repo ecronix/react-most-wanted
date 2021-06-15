@@ -18,6 +18,7 @@ export default function (props) {
     name,
     trailing = null,
     leading = null,
+    disableSearch = false,
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
@@ -31,12 +32,14 @@ export default function (props) {
       appBarContent={
         <Toolbar disableGutters>
           {leading}
-          <SearchField
-            initialValue={searchValue}
-            onChange={(v) => {
-              setSearch(name, v)
-            }}
-          />
+          {!disableSearch && (
+            <SearchField
+              initialValue={searchValue}
+              onChange={(v) => {
+                setSearch(name, v)
+              }}
+            />
+          )}
           {fields.length > 0 && (
             <IconButton color="inherit" onClick={() => openFilter(name)}>
               <FilterList
