@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet'
 import Paper from '@material-ui/core/Paper'
 import { Scrollbars } from 'react-custom-scrollbars'
 import Toolbar from '@material-ui/core/Toolbar'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { ThemeProvider, createTheme } from '@material-ui/core/styles'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
@@ -16,7 +16,7 @@ const ResponsiveMenu = lazy(() =>
   import('rmw-shell/lib/containers/ResponsiveMenu')
 )
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: { main: '#242424' },
     secondary: {
@@ -91,20 +91,32 @@ const LandingPage = () => {
               setScrollbar(e)
             }
           }}
-          renderView={props => (
-            isRTL ? <div {...props} style={{
-              ...props.style,
-              marginLeft: props.style.marginRight,
-              marginRight: 0, }} /> : <div {...props} style={{
-                ...props.style,}} />
-          )}
+          renderView={(props) =>
+            isRTL ? (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                  marginLeft: props.style.marginRight,
+                  marginRight: 0,
+                }}
+              />
+            ) : (
+              <div
+                {...props}
+                style={{
+                  ...props.style,
+                }}
+              />
+            )
+          }
           onScroll={(e) => {
             setTransparent(scrollbar.viewScrollTop < 100)
             setScrolled(true)
           }}
           autoHide
           style={{ width: '100%', height: '100vh' }}
-        > 
+        >
           <AppBar
             style={{
               position: 'fixed',

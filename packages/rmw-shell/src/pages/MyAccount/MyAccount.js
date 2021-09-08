@@ -24,7 +24,7 @@ import {
   GitHubIcon,
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 
 const uuid = () => {

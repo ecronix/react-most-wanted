@@ -14,7 +14,7 @@ import {
 import Notifications from '@material-ui/icons/Notifications'
 import { useHistory } from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/styles'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const SnackMessage = React.forwardRef((props, ref) => {
   // const type = theme.palette.type === 'light' ? 'dark' : 'light'
   const { isDarkMode } = useAppTheme()
 
-  const innerTheme = createMuiTheme({
+  const innerTheme = createTheme({
     palette: {
       type: isDarkMode ? 'light' : 'dark',
     },
