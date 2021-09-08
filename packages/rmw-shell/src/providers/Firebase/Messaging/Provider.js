@@ -7,6 +7,7 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'
 import SnackMessage from 'rmw-shell/lib/components/SnackMessage/SnackMessage'
+import { getMessaging, getToken, onMessage } from 'firebase/messaging'
 
 const isSupported = () =>
   'Notification' in window &&
@@ -53,34 +54,22 @@ const Provider = ({ children, firebaseApp }) => {
   }
 
   const initializeMessaging = async () => {
-    const messaging = firebaseApp.messaging()
+    const messaging = getMessaging(firebaseApp)
     if (publicVapidKey) {
-      messaging.usePublicVapidKey(publicVapidKey)
+      //messaging.usePublicVapidKey(publicVapidKey)
     }
 
-    messaging.onMessage((payload) => {
+    getToken(messaging, { vapidKey: publicVapidKey }).then((t) => {
+      syncToken(t)
+    })
+
+    onMessage(messaging, (payload) => {
       enqueueSnackbar('', {
         content: (key) => {
           return <SnackMessage payload={payload} id={key} />
         },
       })
     })
-
-    messaging.onTokenRefresh(() => {
-      messaging
-        .getToken()
-        .then((t) => syncToken(t))
-        .catch((e) => {
-          console.log('Unable to retrieve refreshed token ', e)
-        })
-    })
-
-    try {
-      const token = await messaging.getToken()
-      await syncToken(token)
-    } catch (error) {
-      console.log('Unable to retrieve token ', error)
-    }
   }
 
   const action = (key) => (

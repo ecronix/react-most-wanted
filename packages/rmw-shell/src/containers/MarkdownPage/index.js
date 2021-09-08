@@ -25,11 +25,7 @@ const MarkdownPage = ({ path, pageProps }) => {
       <Scrollbar>
         <div style={{ backgroundColor: 'white', padding: 12 }}>
           {source && (
-            <ReactMarkdown
-              className="markdown-body"
-              source={source}
-              escapeHtml
-            />
+            <ReactMarkdown className="markdown-body" children={source} />
           )}
         </div>
       </Scrollbar>
