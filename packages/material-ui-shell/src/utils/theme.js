@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 
 const getThemeSource = (id, ts, isDarkMode, isRTL) => {
   if (ts) {
@@ -6,18 +6,18 @@ const getThemeSource = (id, ts, isDarkMode, isRTL) => {
       if (ts[i]['id'] === id) {
         const source = ts[i]['source']
         const palette = source != null ? source.palette : {}
-        return createMuiTheme({
+        return createTheme({
           ...source,
-          palette: {...palette, type: isDarkMode ? 'dark' : 'light'},
-          direction: isRTL ? 'rtl' : 'ltr'
+          palette: { ...palette, type: isDarkMode ? 'dark' : 'light' },
+          direction: isRTL ? 'rtl' : 'ltr',
         })
       }
     }
   }
 
-  return createMuiTheme({
-    palette: {type: isDarkMode ? 'dark' : 'light'},
-    direction: isRTL ? 'rtl' : 'ltr'
+  return createTheme({
+    palette: { type: isDarkMode ? 'dark' : 'light' },
+    direction: isRTL ? 'rtl' : 'ltr',
   })
 }
 
