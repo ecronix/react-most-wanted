@@ -7,6 +7,9 @@ module.exports = {
     umd: false,
   },
   webpack: {
+    extra: {
+      devtool: 'inline-source-map',
+    },
     aliases: {
       'base-shell/lib': path.resolve('src'),
     },
