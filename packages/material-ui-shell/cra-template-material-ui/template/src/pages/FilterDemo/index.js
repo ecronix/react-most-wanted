@@ -33,13 +33,25 @@ const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
   return (
     <Scrollbars
       ref={refSetter}
-      renderView={props => (
-        isRTL ? <div {...props} style={{
-          ...props.style,
-          marginLeft: props.style.marginRight,
-          marginRight: 0, }} /> : <div {...props} style={{
-            ...props.style,}} />
-      )}
+      renderView={(props) =>
+        isRTL ? (
+          <div
+            {...props}
+            style={{
+              ...props.style,
+              marginLeft: props.style.marginRight,
+              marginRight: 0,
+            }}
+          />
+        ) : (
+          <div
+            {...props}
+            style={{
+              ...props.style,
+            }}
+          />
+        )
+      }
       // style={{ ...style, overflow: 'hidden' }}
       style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl' : 'ltr' }} //james - test code should fix native scrollbars in demofilter and maybe in RMW demos,
       onScroll={onScroll}
@@ -103,7 +115,7 @@ const FilterDemo = () => {
 
   const Row = ({ index, style }) => {
     const { name, amount = '', registered, email } = list[index]
-    console.log(style, "here");
+
     return (
       <div key={`${name}_${index}`} style={style}>
         <ListItem alignItems="flex-start">

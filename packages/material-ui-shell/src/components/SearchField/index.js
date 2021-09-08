@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { fade } from '@material-ui/core/styles/colorManipulator'
+import { alpha } from '@material-ui/core/styles/colorManipulator'
 import Search from '@material-ui/icons/Search'
 
 let timeout = null
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 48,
     display: 'block',
     '&:hover': {
-      background: fade(theme.palette.common.white, 0.25),
+      background: alpha(theme.palette.common.white, 0.25),
     },
     '& $input': {
       transition: theme.transitions.create('width'),
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
     minHeight: 48,
     display: 'block',
-    background: fade(theme.palette.common.white, 0.25),
+    background: alpha(theme.palette.common.white, 0.25),
     width: 240,
   },
   search: {
