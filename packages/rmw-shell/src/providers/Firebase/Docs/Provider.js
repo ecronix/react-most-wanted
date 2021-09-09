@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useReducer, useCallback } from 'react'
 import Context from './Context'
+import { doc, onSnapshot, getFirestore } from 'firebase/firestore'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
 const ERROR = 'ERROR'
@@ -60,7 +61,7 @@ const removeInit = (path) => {
   inits[path] = false
 }
 
-const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
+const Provider = ({ children, persistKey = 'firebase_docs' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
 
   useEffect(() => {
@@ -71,22 +72,24 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
     }
   }, [state, persistKey])
 
-  const getRef = useCallback(
-    (path) => {
-      if (typeof path === 'string' || path instanceof String) {
-        return firebaseApp.firestore().doc(path)
-      } else {
-        return path
-      }
-    },
-    [firebaseApp]
-  )
+  const getRef = useCallback((path) => {
+    const db = getFirestore()
+    if (typeof path === 'string' || path instanceof String) {
+      return doc(db, ...path.split('/'))
+    } else if (path instanceof Array) {
+      return doc(db, ...path)
+    } else {
+      return path
+    }
+  }, [])
 
   const getLocation = useCallback((path) => {
     if (typeof path === 'string' || path instanceof String) {
       return path
+    } else if (path instanceof Array) {
+      return path.join('/')
     } else {
-      return firebaseApp.firestore().doc(path).path
+      return doc(path).path
     }
   }, [])
 
@@ -109,7 +112,8 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
         isLoading: true,
       })
 
-      let unsub = ref.onSnapshot(
+      let unsub = onSnapshot(
+        ref,
         (snapshot) => {
           dispatch({
             type: VALUE_CHANGE,
@@ -190,7 +194,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
   return (
     <Context.Provider
       value={{
-        firebaseApp,
         watchDoc,
         unwatchDoc,
         getDoc,
@@ -208,7 +211,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_docs' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider
