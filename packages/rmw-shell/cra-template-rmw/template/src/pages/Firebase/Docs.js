@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import { Typography } from '@material-ui/core'
 import { useIntl } from 'react-intl'
 import { useDocs } from 'rmw-shell/lib/providers/Firebase/Docs'
+import { doc, setDoc, getFirestore } from 'firebase/firestore'
 
 const defaultPath = 'test/doc'
 
@@ -16,7 +17,6 @@ const Docs = () => {
   const [path, setPath] = useState(defaultPath)
   const [value, setValue] = useState('')
   const {
-    firebaseApp,
     watchDoc,
     getDoc,
     clearDoc,
@@ -82,7 +82,9 @@ const Docs = () => {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={() => watchDoc(path)}
+                onClick={() => {
+                  watchDoc(path)
+                }}
               >
                 Watch
               </Button>
@@ -118,12 +120,11 @@ const Docs = () => {
                 color="primary"
                 onClick={() => {
                   try {
-                    firebaseApp.firestore().doc(path).set({ val: value })
+                    const db = getFirestore()
+                    setDoc(doc(db, ...path.split('/')), { val: value })
                   } catch (error) {
                     console.log('error', error)
                   }
-
-                  //firebaseApp.fire().ref(path).set(value)
                 }}
               >
                 set
