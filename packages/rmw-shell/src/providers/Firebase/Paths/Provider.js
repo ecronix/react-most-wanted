@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useReducer, useCallback } from 'react'
 import Context from './Context'
+import { getDatabase, ref, onValue, off } from 'firebase/database'
 
 function reducer(state, action) {
   const {
@@ -46,6 +47,7 @@ function getInitState(persistKey) {
 
 const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
+  const db = getDatabase()
 
   useEffect(() => {
     try {
@@ -66,35 +68,32 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
         isLoading: true,
       })
 
-      firebaseApp
-        .database()
-        .ref(path)
-        .on(
-          'value',
-          (snapshot) => {
-            dispatch({
-              type: 'value_changed',
-              path,
-              value: snapshot.val(),
-              isLoading: false,
-            })
+      onValue(
+        ref(db, path),
+        (snapshot) => {
+          dispatch({
+            type: 'value_changed',
+            path,
+            value: snapshot.val(),
+            isLoading: false,
+          })
 
-            if (onChange) {
-              onChange(snapshot.val())
-            }
-          },
-          (error) => {
-            dispatch({
-              type: 'error_changed',
-              path,
-              isLoading: false,
-              error,
-              hasError: true,
-            })
+          if (onChange) {
+            onChange(snapshot.val())
           }
-        )
+        },
+        (error) => {
+          dispatch({
+            type: 'error_changed',
+            path,
+            isLoading: false,
+            error,
+            hasError: true,
+          })
+        }
+      )
     },
-    [firebaseApp]
+    [db]
   )
 
   const unwatchPath = useCallback(
@@ -102,9 +101,9 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
       if (path.length < 1) {
         return
       }
-      firebaseApp.database().ref(path).off()
+      off(ref(db, path))
     },
-    [firebaseApp]
+    [db]
   )
 
   const getPath = useCallback(
@@ -144,9 +143,9 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
   )
 
   const clearAllPaths = useCallback(() => {
-    firebaseApp.database().ref().off()
+    off(ref(db))
     dispatch({ type: 'clear_all' })
-  }, [firebaseApp])
+  }, [db])
 
   return (
     <Context.Provider
@@ -169,7 +168,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider

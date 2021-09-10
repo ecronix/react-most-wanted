@@ -8,13 +8,15 @@ import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'
 import SnackMessage from 'rmw-shell/lib/components/SnackMessage/SnackMessage'
 import { getMessaging, getToken, onMessage } from 'firebase/messaging'
+import { getDatabase, ref, set } from 'firebase/database'
+import { getApp } from 'firebase/app'
 
 const isSupported = () =>
   'Notification' in window &&
   'serviceWorker' in navigator &&
   'PushManager' in window
 
-const Provider = ({ children, firebaseApp }) => {
+const Provider = ({ children }) => {
   const [token, setToken] = useState(false)
   const intl = useIntl()
   const { appConfig } = useConfig()
@@ -43,10 +45,10 @@ const Provider = ({ children, firebaseApp }) => {
     setToken(token)
     try {
       if (uid) {
-        await firebaseApp
-          .database()
-          .ref(`notification_tokens/${uid}/${token}`)
-          .set(true)
+        await set(
+          ref(getDatabase(), `notification_tokens/${uid}/${token}`),
+          true
+        )
       }
     } catch (error) {
       console.warn(error)
@@ -54,7 +56,7 @@ const Provider = ({ children, firebaseApp }) => {
   }
 
   const initializeMessaging = async () => {
-    const messaging = getMessaging(firebaseApp)
+    const messaging = getMessaging(getApp())
     if (publicVapidKey) {
       //messaging.usePublicVapidKey(publicVapidKey)
     }
@@ -133,7 +135,6 @@ const Provider = ({ children, firebaseApp }) => {
   return (
     <Context.Provider
       value={{
-        firebaseApp,
         requestPermission,
         token,
       }}
@@ -145,7 +146,6 @@ const Provider = ({ children, firebaseApp }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider

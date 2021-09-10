@@ -8,15 +8,16 @@ import TextField from '@material-ui/core/TextField'
 import { Typography } from '@material-ui/core'
 import { useIntl } from 'react-intl'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { getDatabase, ref, set } from 'firebase/database'
 
 const defaultPath = 'test_path'
 
 const Paths = () => {
   const intl = useIntl()
+  const db = getDatabase()
   const [path, setPath] = useState(defaultPath)
   const [value, setValue] = useState('')
   const {
-    firebaseApp,
     watchPath,
     getPath,
     clearPath,
@@ -117,7 +118,7 @@ const Paths = () => {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  firebaseApp.database().ref(path).set(value)
+                  set(ref(db, path), value)
                 }}
               >
                 set
