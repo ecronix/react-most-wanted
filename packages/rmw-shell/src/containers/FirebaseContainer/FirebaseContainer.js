@@ -11,12 +11,10 @@ import StorageProvider from 'rmw-shell/lib/providers/Firebase/Storage/Provider'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 import firebase from 'firebase/compat/app'
-import 'firebase/compat/database'
 import 'firebase/compat/firestore'
 import 'firebase/compat/messaging'
 import 'firebase/compat/functions'
 import 'firebase/compat/storage'
-
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 let firebaseApp = null
@@ -41,7 +39,7 @@ export default function ({ children }) {
     const a = getAuth(firebaseApp)
     const unsubscribe = onAuthStateChanged(a, (user) => {
       if (onAuthStateChanged) {
-        internalOnAuthStateChanged(user, auth, firebaseApp)
+        internalOnAuthStateChanged(user, auth)
       }
     })
 
@@ -50,12 +48,12 @@ export default function ({ children }) {
 
   return (
     <FirebaseProvider firebaseApp={firebaseApp}>
-      <PathsProvider firebaseApp={firebaseApp}>
+      <PathsProvider>
         <ListsProvider firebaseApp={firebaseApp}>
-          <DocsProvider firebaseApp={firebaseApp}>
+          <DocsProvider>
             <ColsProvider firebaseApp={firebaseApp}>
               <StorageProvider firebaseApp={firebaseApp}>
-                <MessagingProvider firebaseApp={firebaseApp}>
+                <MessagingProvider>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     {children}
                   </MuiPickersUtilsProvider>

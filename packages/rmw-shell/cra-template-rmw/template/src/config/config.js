@@ -7,6 +7,7 @@ import grants from './grants'
 import Loading from 'material-ui-shell/lib/components/Loading/Loading'
 import getDefaultRoutes from './getDefaultRoutes'
 import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
+import { getDatabase, ref, onValue, get, update, off } from 'firebase/database'
 
 const config = {
   firebase: {
@@ -74,43 +75,27 @@ const config = {
     redirectTo: '/dashboard',
     persistKey: 'base-shell:auth',
     signInURL: '/signin',
-    onAuthStateChanged: async (user, auth, firebaseApp) => {
+    onAuthStateChanged: async (user, auth) => {
+      const db = getDatabase()
+
       try {
         if (user != null) {
-          const grantsSnap = await firebaseApp
-            .database()
-            .ref(`user_grants/${user.uid}`)
-            .once('value')
-          const notifcationsDisabledSnap = await firebaseApp
-            .database()
-            .ref(`disable_notifications/${user.uid}`)
-            .once('value')
+          const grantsSnap = await get(ref(db, `user_grants/${user.uid}`))
+          const notifcationsDisabledSnap = await get(
+            ref(db, `disable_notifications/${user.uid}`)
+          )
 
-          const isAdminSnap = await firebaseApp
-            .database()
-            .ref(`admins/${user.uid}`)
-            .once('value')
+          const isAdminSnap = await get(ref(db, `admins/${user.uid}`))
 
-          firebaseApp
-            .database()
-            .ref(`user_grants/${user.uid}`)
-            .on('value', (snap) => {
-              auth.updateAuth({ grants: snap.val() })
-            })
-
-          firebaseApp
-            .database()
-            .ref(`disable_notifications/${user.uid}`)
-            .on('value', (snap) => {
-              auth.updateAuth({ notificationsDisabled: !!snap.val() })
-            })
-
-          firebaseApp
-            .database()
-            .ref(`admins/${user.uid}`)
-            .on('value', (snap) => {
-              auth.updateAuth({ isAdmin: !!snap.val() })
-            })
+          onValue(ref(db, `user_grants/${user.uid}`), (snap) => {
+            auth.updateAuth({ grants: snap.val() })
+          })
+          onValue(ref(db, `disable_notifications/${user.uid}`), (snap) => {
+            auth.updateAuth({ notificationsDisabled: !!snap.val() })
+          })
+          onValue(ref(db, `admins/${user.uid}`), (snap) => {
+            auth.updateAuth({ isAdmin: !!snap.val() })
+          })
 
           auth.updateAuth({
             ...defaultUserData(user),
@@ -120,7 +105,7 @@ const config = {
             isGranted,
           })
 
-          firebaseApp.database().ref(`users/${user.uid}`).update({
+          update(ref(db, `users/${user.uid}`), {
             displayName: user.displayName,
             uid: user.uid,
             photoURL: user.photoURL,
@@ -130,16 +115,14 @@ const config = {
             notificationsDisabled: notifcationsDisabledSnap.val(),
           })
 
-          await firebaseApp
-            .database()
-            .ref(`user_chats/${user.uid}/public_chat`)
-            .update({
-              displayName: 'Public Chat',
-              lastMessage: 'Group chat',
-              path: `group_chat_messages/public_chat`,
-            })
+          update(ref(db, `user_chats/${user.uid}/public_chat`), {
+            displayName: 'Public Chat',
+            lastMessage: 'Group chat',
+            path: `group_chat_messages/public_chat`,
+          })
         } else {
-          firebaseApp.database().ref().off()
+          off(ref(db))
+
           auth.setAuth(defaultUserData(user))
         }
       } catch (error) {
