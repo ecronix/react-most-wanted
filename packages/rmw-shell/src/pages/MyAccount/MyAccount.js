@@ -15,7 +15,6 @@ import { IconButton } from '@material-ui/core'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useIntl } from 'react-intl'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 import ImgageUploadDialog from 'rmw-shell/lib/containers/ImageUploadDialog'
 import {
@@ -24,7 +23,18 @@ import {
   GitHubIcon,
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
-import firebase from 'firebase/compat/app'
+import {
+  getAuth,
+  updateProfile,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  PhoneAuthProvider,
+  TwitterAuthProvider,
+  linkWithPopup,
+  deleteUser,
+} from 'firebase/auth'
+import { getDatabase, set, remove, ref } from 'firebase/database'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
 
 const uuid = () => {
@@ -37,11 +47,11 @@ const uuid = () => {
 const MyAccount = () => {
   const intl = useIntl()
   const { appConfig } = useConfig()
-  const { firebaseApp } = useFirebase()
   const { firebase: firebaseConfig } = appConfig || {}
   const { firebaseuiProps } = firebaseConfig || {}
   const { signInOptions = [] } = firebaseuiProps || {}
   const { openDialog } = useQuestions()
+  const database = getDatabase()
 
   const { auth, updateAuth } = useAuth()
   const {
@@ -81,28 +91,26 @@ const MyAccount = () => {
 
   const getProvider = (provider) => {
     if (provider.indexOf('facebook') > -1) {
-      return new firebase.auth.FacebookAuthProvider()
+      return new FacebookAuthProvider()
     }
     if (provider.indexOf('github') > -1) {
-      return new firebase.auth.GithubAuthProvider()
+      return new GithubAuthProvider()
     }
     if (provider.indexOf('google') > -1) {
-      return new firebase.auth.GoogleAuthProvider()
+      return new GoogleAuthProvider()
     }
     if (provider.indexOf('twitter') > -1) {
-      return new firebase.auth.TwitterAuthProvider()
+      return new TwitterAuthProvider()
     }
     if (provider.indexOf('phone') > -1) {
-      return new firebase.auth.PhoneAuthProvider()
+      return new PhoneAuthProvider()
     }
 
     throw new Error('Provider is not supported!')
   }
 
   const handleSave = async () => {
-    await firebaseApp
-      .auth()
-      .currentUser.updateProfile({ displayName, photoURL })
+    await updateProfile(getAuth().currentUser, { displayName, photoURL })
 
     updateAuth({ ...auth, displayName, photoURL })
   }
@@ -124,17 +132,14 @@ const MyAccount = () => {
   const linkUserWithPopup = (p) => {
     const provider = getProvider(p)
 
-    firebaseApp
-      .auth()
-      .currentUser.linkWithPopup(provider)
-      .then(
-        () => {
-          updateAuth({ ...auth, ...firebaseApp.auth().currentUser })
-        },
-        (e) => {
-          console.warn(e)
-        }
-      )
+    linkWithPopup(getAuth().currentUser, provider).then(
+      () => {
+        updateAuth({ ...auth, ...getAuth().currentUser })
+      },
+      (e) => {
+        console.warn(e)
+      }
+    )
   }
 
   const openDeleteDialog = () => {
@@ -172,7 +177,7 @@ const MyAccount = () => {
         defaultMessage: 'REAUTHENTICATE',
       }),
       handleAction: (hc) => {
-        firebaseApp.auth().signOut()
+        getAuth().currentUser.signOut()
         hc()
       },
     })
@@ -180,7 +185,7 @@ const MyAccount = () => {
 
   const handleDelete = async (handleClose) => {
     try {
-      await firebaseApp.auth().currentUser.delete()
+      await deleteUser(getAuth().currentUser)
     } catch ({ code }) {
       if (code === 'auth/requires-recent-login') {
         openReauthenticateDialog()
@@ -191,19 +196,12 @@ const MyAccount = () => {
   }
 
   const handleDisableNotifications = async () => {
-    await firebaseApp
-      .database()
-      .ref(`disable_notifications/${auth.uid}`)
-      .set(true)
-
-    await firebaseApp.database().ref(`notification_tokens/${auth.uid}`).remove()
+    await set(ref(database, `disable_notifications/${auth.uid}`), true)
+    await remove(ref(database, `notification_tokens/${auth.uid}`))
   }
 
   const handleEnableNotifications = async () => {
-    await firebaseApp
-      .database()
-      .ref(`disable_notifications/${auth.uid}`)
-      .set(null)
+    await set(ref(database, `disable_notifications/${auth.uid}`), null)
 
     updateAuth({ ...auth, notificationsDisabled: false })
 

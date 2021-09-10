@@ -72,7 +72,7 @@
     "eslint-loader": "^4.0.2",
     "final-form": "^4.20.2",
     "final-form-arrays": "^3.0.2",
-    "firebase": "^9.0.1",
+    "firebase": "^9.0.2",
     "firebaseui": "^0.600.0",
     "github-markdown-css": "^4.0.0",
     "intl": "^1.2.5",
