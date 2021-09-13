@@ -51,7 +51,7 @@ export default function ({ children }) {
       <PathsProvider>
         <ListsProvider firebaseApp={firebaseApp}>
           <DocsProvider>
-            <ColsProvider firebaseApp={firebaseApp}>
+            <ColsProvider>
               <StorageProvider firebaseApp={firebaseApp}>
                 <MessagingProvider>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
