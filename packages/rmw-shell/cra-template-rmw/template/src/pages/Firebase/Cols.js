@@ -10,6 +10,13 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { useIntl } from 'react-intl'
 import { useCols } from 'rmw-shell/lib/providers/Firebase/Cols'
+import {
+  getFirestore,
+  deleteDoc,
+  doc,
+  addDoc,
+  collection,
+} from 'firebase/firestore'
 
 const defaultPath = 'test'
 
@@ -17,8 +24,8 @@ const Cols = () => {
   const intl = useIntl()
   const [path, setPath] = useState(defaultPath)
   const [value, setValue] = useState('')
+  const db = getFirestore()
   const {
-    firebaseApp,
     watchCol,
     getCol,
     clearCol,
@@ -88,11 +95,7 @@ const Cols = () => {
                     {JSON.stringify(i.data)}
                     <IconButton
                       onClick={() => {
-                        firebaseApp
-                          .firestore()
-                          .collection(path)
-                          .doc(i.id)
-                          .delete()
+                        deleteDoc(doc(db, path, i.id))
                       }}
                     >
                       <Delete color="error" />
@@ -158,11 +161,7 @@ const Cols = () => {
                 variant="contained"
                 color="primary"
                 onClick={async () => {
-                  await firebaseApp
-                    .firestore()
-                    .collection(path)
-                    .doc()
-                    .set({ val: value })
+                  await addDoc(collection(db, path), { val: value })
                   setValue('')
                 }}
               >

@@ -2,6 +2,7 @@
 import Context from './Context'
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect, useReducer } from 'react'
+import { collection, getFirestore, onSnapshot } from 'firebase/firestore'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
 const ERROR = 'ERROR'
@@ -109,8 +110,9 @@ const unwatchCol = (reference) => {
   removeInit(path)
 }
 
-const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
+const Provider = ({ children, persistKey = 'firebase_cols' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
+  const db = getFirestore()
 
   useEffect(() => {
     try {
@@ -123,12 +125,12 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
   const getRef = useCallback(
     (path) => {
       if (typeof path === 'string' || path instanceof String) {
-        return firebaseApp.firestore().collection(path)
+        return collection(db, path)
       } else {
         return path
       }
     },
-    [firebaseApp]
+    [db]
   )
 
   const watchCol = useCallback(
@@ -172,31 +174,35 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
       })
 
       try {
-        const unsub = ref.onSnapshot((snapshot) => {
-          setInit(path, unsub)
-          dispatch({
-            type: LOADING_CHANGED,
-            path,
-            isLoading: false,
-          })
+        const unsub = onSnapshot(
+          ref,
+          (snapshot) => {
+            setInit(path, unsub)
+            dispatch({
+              type: LOADING_CHANGED,
+              path,
+              isLoading: false,
+            })
 
-          snapshot.docChanges().forEach((change) => {
-            if (change.type === 'added') {
-              handleChange(change.doc, CHILD_ADDED)
-            }
-            if (change.type === 'modified') {
-              handleChange(change.doc, CHILD_CHANGED)
-            }
-            if (change.type === 'removed') {
-              handleChange(change.doc, CHILD_REMOVED)
-            }
-          })
-        }, handleError)
+            snapshot.docChanges().forEach((change) => {
+              if (change.type === 'added') {
+                handleChange(change.doc, CHILD_ADDED)
+              }
+              if (change.type === 'modified') {
+                handleChange(change.doc, CHILD_CHANGED)
+              }
+              if (change.type === 'removed') {
+                handleChange(change.doc, CHILD_REMOVED)
+              }
+            })
+          },
+          handleError
+        )
       } catch (error) {
         handleError(error)
       }
     },
-    [getRef]
+    [db, getRef]
   )
 
   const getCol = useCallback(
@@ -239,14 +245,12 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
   )
 
   const clearAllCols = useCallback(() => {
-    firebaseApp.database().ref().off()
     dispatch({ type: CLEAR_ALL })
-  }, [firebaseApp])
+  }, [])
 
   return (
     <Context.Provider
       value={{
-        firebaseApp,
         watchCol,
         unwatchCol,
         getCol,
@@ -264,7 +268,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_cols' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider
