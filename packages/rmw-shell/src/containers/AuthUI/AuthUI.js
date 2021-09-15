@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { useIntl } from 'react-intl'
 import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
+import * as firebaseui from 'firebaseui'
 
 let authUi = null
 
@@ -11,6 +12,7 @@ const AuthUI = ({ uiConfig }) => {
   const locale = intl.locale
 
   const initAuth = useCallback(async () => {
+    /*
     let firebaseui = null
 
     try {
@@ -34,6 +36,7 @@ const AuthUI = ({ uiConfig }) => {
       // eslint-disable-next-line
       firebaseui = await import('firebaseui')
     }
+    */
 
     try {
       if (!firebaseui.auth.AuthUI.getInstance()) {
