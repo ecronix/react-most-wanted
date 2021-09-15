@@ -11,10 +11,12 @@ import StorageProvider from 'rmw-shell/lib/providers/Firebase/Storage/Provider'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import MomentUtils from '@date-io/moment'
 import firebase from 'firebase/compat/app'
+import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
 import 'firebase/compat/messaging'
 import 'firebase/compat/functions'
 import 'firebase/compat/storage'
+import 'firebase/compat/database'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 let firebaseApp = null
