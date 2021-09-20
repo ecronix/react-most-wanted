@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types'
 import React, { useCallback, useReducer } from 'react'
 import Context from './Context'
+import { getApp } from 'firebase/app'
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  uploadString as uploadStringFirebase,
+  getDownloadURL as getDownloadURLFirebase,
+} from 'firebase/storage'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
 const PROGRESS_CHANGED = 'PROGRESS_CHANGED'
@@ -51,7 +59,7 @@ function reducer(state, action) {
   }
 }
 
-const Provider = ({ children, firebaseApp }) => {
+const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {})
 
   const upload = useCallback((path, uploadTask, onUploaded) => {
@@ -83,7 +91,9 @@ const Provider = ({ children, firebaseApp }) => {
         })
       },
       async () => {
-        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL()
+        const downloadURL = await getDownloadURLFirebase(
+          uploadTask.snapshot.ref
+        )
         dispatch({
           type: DOWNLOAD_URL_CHANGE,
           path,
@@ -101,18 +111,27 @@ const Provider = ({ children, firebaseApp }) => {
 
   const uploadFile = useCallback(
     (alias, path, file, metadata, onUploaded) => {
-      const uploadTask = firebaseApp.storage().ref(path).put(file, metadata)
+      const uploadTask = uploadBytesResumable(
+        ref(getStorage(getApp()), path),
+        file,
+        metadata
+      )
       upload(alias, uploadTask, onUploaded)
     },
-    [firebaseApp, upload]
+    [upload]
   )
 
   const uploadString = useCallback(
     (alias, path, string, type, metadata, onUploaded) => {
-      const uploadTask = firebaseApp.storage().ref(path).putString(string, type)
+      const uploadTask = uploadStringFirebase(
+        ref(getStorage(getApp()), path),
+        string,
+        type,
+        metadata
+      )
       upload(alias, uploadTask, onUploaded)
     },
-    [firebaseApp, upload]
+    [upload]
   )
 
   const uploadTask = useCallback(
@@ -168,7 +187,6 @@ const Provider = ({ children, firebaseApp }) => {
   return (
     <Context.Provider
       value={{
-        firebaseApp,
         uploadFile,
         uploadString,
         uploadTask,
@@ -188,7 +206,6 @@ const Provider = ({ children, firebaseApp }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider

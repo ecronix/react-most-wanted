@@ -57,9 +57,6 @@ const Provider = ({ children }) => {
 
   const initializeMessaging = async () => {
     const messaging = getMessaging(getApp())
-    if (publicVapidKey) {
-      //messaging.usePublicVapidKey(publicVapidKey)
-    }
 
     getToken(messaging, { vapidKey: publicVapidKey }).then((t) => {
       syncToken(t)

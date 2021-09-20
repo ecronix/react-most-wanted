@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
+import { getFunctions, httpsCallable } from 'firebase/functions'
 
 const isSupported = () =>
   'Notification' in window &&
@@ -19,7 +20,7 @@ const Messaging = () => {
   const [body, setBody] = useState('Your message')
   const [aktion, setAktion] = useState('/home')
   const { auth } = useAuth()
-  const { firebaseApp, token, requestPermission } = useMessaging()
+  const { token, requestPermission } = useMessaging()
 
   let disabled = true
 
@@ -29,9 +30,10 @@ const Messaging = () => {
   }
 
   const sendMessage = async () => {
-    const httpsMessagesOnCall = firebaseApp
-      .functions()
-      .httpsCallable('https-messagesOnCall')
+    const httpsMessagesOnCall = httpsCallable(
+      getFunctions(),
+      'https-messagesOnCall'
+    )
 
     const payload = {
       token,

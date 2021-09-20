@@ -18,8 +18,7 @@ const Page = ({
   reverse = false,
   disableCreate = false,
 }) => {
-  const { watchList, getList, isListLoading, unwatchList, firebaseApp } =
-    useLists()
+  const { watchList, getList, isListLoading, unwatchList } = useLists()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth || {}
 
@@ -27,11 +26,11 @@ const Page = ({
     let ref = path
 
     if (getRef) {
-      ref = getRef(firebaseApp)
+      ref = getRef()
     }
     watchList(ref, path)
     return () => unwatchList(path)
-  }, [getRef, path, watchList, unwatchList, firebaseApp])
+  }, [getRef, path, watchList, unwatchList])
 
   const source = getList(path).map(({ key, val }) => {
     return { key, ...val }

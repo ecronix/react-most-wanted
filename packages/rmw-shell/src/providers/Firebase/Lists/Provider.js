@@ -2,6 +2,15 @@
 import Context from './Context'
 import PropTypes from 'prop-types'
 import React, { useEffect, useReducer, useCallback } from 'react'
+import {
+  getDatabase,
+  ref,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
+  get,
+  off,
+} from 'firebase/database'
 
 const LOADING_CHANGED = 'LOADING_CHANGED'
 const ERROR = 'ERROR'
@@ -89,6 +98,7 @@ function getInitState(persistKey) {
 
 const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
+  const db = getDatabase()
 
   useEffect(() => {
     try {
@@ -101,12 +111,12 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   const getRef = useCallback(
     (path) => {
       if (typeof path === 'string' || path instanceof String) {
-        return firebaseApp.database().ref(path)
+        return ref(db, path)
       } else {
         return path
       }
     },
-    [firebaseApp]
+    [db]
   )
 
   const getLocation = useCallback(
@@ -114,12 +124,10 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       if (typeof path === 'string' || path instanceof String) {
         return path
       } else {
-        return path
-          .toString()
-          .substring(firebaseApp.database().ref().root.toString().length)
+        return path.toString().substring(ref(db).root.toString().length)
       }
     },
-    [firebaseApp]
+    [db]
   )
 
   const watchList = useCallback(
@@ -171,20 +179,12 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
         isLoading: true,
       })
 
-      ref.on('child_added', (s) => handleChange(s, CHILD_ADDED), handleError)
-      ref.on(
-        'child_changed',
-        (s) => handleChange(s, CHILD_CHANGED),
-        handleError
-      )
-      ref.on(
-        'child_removed',
-        (s) => handleChange(s, CHILD_REMOVED),
-        handleError
-      )
+      onChildAdded(ref, (s) => handleChange(s, CHILD_ADDED), handleError)
+      onChildChanged(ref, (s) => handleChange(s, CHILD_CHANGED), handleError)
+      onChildRemoved(ref, (s) => handleChange(s, CHILD_REMOVED), handleError)
 
       try {
-        const snapshot = await ref.once('value')
+        const snapshot = await get(ref)
         listenForChanges = true
         const list = []
         snapshot.forEach((snap) => {
@@ -212,7 +212,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
       if (path.length < 1) {
         return
       }
-      ref.off()
+      off(ref)
       removeInit(path)
     },
     [getRef, getLocation]
@@ -258,14 +258,13 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
   )
 
   const clearAllLists = useCallback(() => {
-    firebaseApp.database().ref().off()
+    off(ref(db))
     dispatch({ type: CLEAR_ALL })
-  }, [firebaseApp])
+  }, [db])
 
   return (
     <Context.Provider
       value={{
-        firebaseApp,
         watchList,
         unwatchList,
         getList,
@@ -274,6 +273,7 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
         isListLoading,
         hasListError,
         getListError,
+        firebaseApp,
       }}
     >
       {children}
@@ -283,7 +283,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
 
 Provider.propTypes = {
   children: PropTypes.any,
-  firebaseApp: PropTypes.any,
 }
 
 export default Provider

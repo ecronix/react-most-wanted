@@ -8,8 +8,8 @@ import React, { useCallback } from 'react'
 import { ListPage } from 'rmw-shell/lib/containers/Page'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { getDatabase, ref, query, limitToLast } from 'firebase/database'
 
 const path = 'tasks'
 
@@ -30,7 +30,8 @@ const Row = ({ data, index, style }) => {
   const { isRTL } = useAppTheme()
 
   return (
-    <div key={key} style={{...style, direction: isRTL ? 'rtl' : 'ltr'}}>{/* james- revisit this code */}
+    <div key={key} style={{ ...style, direction: isRTL ? 'rtl' : 'ltr' }}>
+      {/* james- revisit this code */}
       <ListItem
         button
         alignItems="flex-start"
@@ -54,11 +55,10 @@ const Row = ({ data, index, style }) => {
 const Tasks = () => {
   const intl = useIntl()
   const history = useHistory()
-  const { firebaseApp } = useFirebase()
 
   const getRef = useCallback(() => {
-    return firebaseApp.database().ref(`public_tasks`).limitToLast(50)
-  }, [firebaseApp])
+    return query(ref(getDatabase(), `public_tasks`), limitToLast(50))
+  }, [])
 
   return (
     <ListPage
