@@ -51,7 +51,7 @@ export default function ({ children }) {
   return (
     <FirebaseProvider firebaseApp={firebaseApp}>
       <PathsProvider>
-        <ListsProvider firebaseApp={firebaseApp}>
+        <ListsProvider>
           <DocsProvider>
             <ColsProvider>
               <StorageProvider firebaseApp={firebaseApp}>

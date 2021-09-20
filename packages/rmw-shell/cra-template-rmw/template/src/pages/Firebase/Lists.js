@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { getDatabase, ref, set, push } from 'firebase/database'
 
 const defaultPath = 'test_list'
 
@@ -18,8 +19,8 @@ const Lists = () => {
   const intl = useIntl()
   const [path, setPath] = useState(defaultPath)
   const [value, setValue] = useState('')
+  const db = getDatabase()
   const {
-    firebaseApp,
     watchList,
     getList,
     clearList,
@@ -98,7 +99,7 @@ const Lists = () => {
                     {JSON.stringify(i.val)}
                     <IconButton
                       onClick={() => {
-                        firebaseApp.database().ref(`${path}/${i.key}`).set(null)
+                        set(ref(db, `${path}/${i.key}`), null)
                       }}
                     >
                       <Delete color="error" />
@@ -122,13 +123,14 @@ const Lists = () => {
                 variant="contained"
                 color="primary"
                 onClick={
-                  () => watchList(firebaseApp.database().ref(path))
+                  () => watchList(path)
+                  //() => watchList(ref(db, path))
                   // OR
                   // watchList(path)
                   // OR using an alias
                   // watchList(path,'your_alias)
                   // OR combination
-                  // watchList('firebaseApp.database().ref(path),'your_alias)
+                  // watchList(ref(db,path),'your_alias')
                 }
               >
                 Watch
@@ -164,7 +166,7 @@ const Lists = () => {
                 variant="contained"
                 color="primary"
                 onClick={async () => {
-                  await firebaseApp.database().ref(path).push(value)
+                  await set(push(ref(db, path)), value)
                   setValue('')
                 }}
               >

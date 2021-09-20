@@ -8,11 +8,11 @@ import CameraAlt from '@material-ui/icons/CameraAlt'
 import Send from '@material-ui/icons/Send'
 import { useIntl } from 'react-intl'
 import IconButton from '@material-ui/core/IconButton'
-import firebase from 'firebase/compat/app'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { getLocation } from 'rmw-shell/lib/utils/location'
 import { CircularProgress } from '@material-ui/core'
+import { getDatabase, ref, set, push, serverTimestamp } from 'firebase/database'
 
 export default function ({ path }) {
   const theme = useTheme()
@@ -21,6 +21,7 @@ export default function ({ path }) {
   const [value, setValue] = useState('')
   const [isUploading, setUploading] = useState(false)
   const { firebaseApp } = useLists()
+  const db = getDatabase()
 
   const uploadSelectedFile = (file) => {
     if (file === null) {
@@ -37,7 +38,7 @@ export default function ({ path }) {
 
     let reader = new FileReader()
 
-    const key = firebaseApp.database().ref('/user_chat_messages/').push().key
+    const key = push(ref(db, '/user_chat_messages/'))
 
     reader.onload = (fileData) => {
       let uploadTask = firebaseApp
@@ -70,7 +71,7 @@ export default function ({ path }) {
 
   const sendMessage = async (props) => {
     let newMessage = {
-      created: firebase.database.ServerValue.TIMESTAMP,
+      created: serverTimestamp(),
       authorName: auth.displayName,
       authorUid: auth.uid,
       authorPhotoUrl: auth.photoURL,
@@ -81,7 +82,7 @@ export default function ({ path }) {
       ...props,
     }
 
-    await firebaseApp.database().ref(`${path}`).push(newMessage)
+    await set(push(ref(db, `${path}`)), newMessage)
     setValue('')
   }
 
