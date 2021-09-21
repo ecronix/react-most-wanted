@@ -3,6 +3,7 @@ import { Form as FinalForm } from 'react-final-form'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import arrayMutators from 'final-form-arrays'
+import { getDatabase, ref, push, update } from 'firebase/database'
 
 const FirebaseForm = ({
   uid,
@@ -15,7 +16,7 @@ const FirebaseForm = ({
   setSubmit,
   ...rest
 }) => {
-  const { watchPath, clearPath, getPath, firebaseApp } = usePaths()
+  const { watchPath, clearPath, getPath } = usePaths()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth || {}
 
@@ -37,10 +38,10 @@ const FirebaseForm = ({
         let newUid = false
 
         if (uid) {
-          await firebaseApp.database().ref(`${path}/${uid}`).update(values)
+          await update(ref(getDatabase(), `${path}/${uid}`), values)
         } else {
           if (isGranted(auth, grants.create)) {
-            const snap = await firebaseApp.database().ref(path).push(values)
+            const snap = await await push(ref(getDatabase(), path), values)
             newUid = snap.key
           } else {
             return

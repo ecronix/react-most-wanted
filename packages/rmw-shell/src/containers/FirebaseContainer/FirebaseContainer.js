@@ -46,6 +46,7 @@ export default function ({ children }) {
     })
 
     return () => unsubscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -54,7 +55,7 @@ export default function ({ children }) {
         <ListsProvider>
           <DocsProvider>
             <ColsProvider>
-              <StorageProvider firebaseApp={firebaseApp}>
+              <StorageProvider>
                 <MessagingProvider>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     {children}

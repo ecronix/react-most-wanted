@@ -6,9 +6,10 @@ import GroupAdd from '@material-ui/icons/GroupAdd'
 import { useHistory } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import UserRow from 'rmw-shell/lib/components/UserRow'
+import { getDatabase, ref, update } from 'firebase/database'
 
 export default function () {
-  const { firebaseApp, watchList, getList, isListLoading } = useLists()
+  const { watchList, getList, isListLoading } = useLists()
   const { auth } = useAuth()
   const intl = useIntl()
   const history = useHistory()
@@ -40,7 +41,7 @@ export default function () {
     isGroup: true,
   })
 
-  const handleRowClick = (user) => {
+  const handleRowClick = async (user) => {
     const { key, displayName, photoURL = '', isGroup } = user
 
     if (isGroup) {
@@ -48,9 +49,7 @@ export default function () {
       return
     }
 
-    const userChatsRef = firebaseApp
-      .database()
-      .ref(`/user_chats/${auth.uid}/${key}`)
+    const userChatsRef = ref(getDatabase(), `/user_chats/${auth.uid}/${key}`)
 
     const chatData = {
       displayName,
@@ -58,7 +57,7 @@ export default function () {
       lastMessage: '',
     }
 
-    userChatsRef.update({ ...chatData })
+    await update(userChatsRef, { ...chatData })
 
     history.push(`/chats/${key}`)
   }

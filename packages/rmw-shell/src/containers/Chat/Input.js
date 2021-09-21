@@ -9,10 +9,16 @@ import Send from '@material-ui/icons/Send'
 import { useIntl } from 'react-intl'
 import IconButton from '@material-ui/core/IconButton'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { getLocation } from 'rmw-shell/lib/utils/location'
 import { CircularProgress } from '@material-ui/core'
 import { getDatabase, ref, set, push, serverTimestamp } from 'firebase/database'
+import {
+  getStorage,
+  ref as storageRef,
+  uploadString,
+  getDownloadURL,
+} from 'firebase/storage'
+import { getApp } from 'firebase/app'
 
 export default function ({ path }) {
   const theme = useTheme()
@@ -20,7 +26,6 @@ export default function ({ path }) {
   const { auth } = useAuth()
   const [value, setValue] = useState('')
   const [isUploading, setUploading] = useState(false)
-  const { firebaseApp } = useLists()
   const db = getDatabase()
 
   const uploadSelectedFile = (file) => {
@@ -38,32 +43,26 @@ export default function ({ path }) {
 
     let reader = new FileReader()
 
-    const key = push(ref(db, '/user_chat_messages/'))
+    const r = push(ref(db, '/user_chat_messages/'))
 
-    reader.onload = (fileData) => {
-      let uploadTask = firebaseApp
-        .storage()
-        .ref(`/user_chats/${auth.uid}/${key}.jpg`)
-        .putString(fileData.target.result, 'data_url')
-
-      uploadTask.on(
-        'state_changed',
-        () => {},
-        (error) => {
-          console.log(error)
-        },
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            sendMessage({
-              type: 'image',
-              message: '',
-              image: downloadURL,
-              key,
-            })
-            setUploading(false)
-          })
-        }
+    reader.onload = async (fileData) => {
+      const snap = await uploadString(
+        storageRef(
+          getStorage(getApp()),
+          `/user_chats/${auth.uid}/${r.key}.jpg`
+        ),
+        fileData.target.result,
+        'data_url'
       )
+
+      const downloadURL = await getDownloadURL(snap.ref)
+      sendMessage({
+        type: 'image',
+        message: '',
+        image: downloadURL,
+        key: r.key,
+      })
+      setUploading(false)
     }
 
     reader.readAsDataURL(file)
@@ -127,7 +126,7 @@ export default function ({ path }) {
           })}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => {
-            if (e.keyCode === 13 && value.trim() != '') {
+            if (e.keyCode === 13 && value.trim() !== '') {
               e.preventDefault()
               sendMessage({ type: 'text', message: value })
             }

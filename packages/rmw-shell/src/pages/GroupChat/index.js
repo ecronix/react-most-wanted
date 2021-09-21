@@ -11,9 +11,10 @@ import TextField from '@material-ui/core/TextField'
 import { Paper } from '@material-ui/core'
 import Page from 'material-ui-shell/lib/containers/Page'
 import UserRow from 'rmw-shell/lib/components/UserRow'
+import { getDatabase, ref, update, push, set } from 'firebase/database'
 
 export default function () {
-  const { firebaseApp, watchList, getList, isListLoading } = useLists()
+  const { watchList, getList, isListLoading } = useLists()
   const { watchPath, getPath, clearPath } = usePaths()
   const { auth } = useAuth()
   const intl = useIntl()
@@ -21,7 +22,7 @@ export default function () {
   const { uid = false } = useParams()
   const [selected, setSelected] = useState({})
   const [step, setStep] = useState(uid !== false ? 1 : 0)
-
+  const db = getDatabase()
   const { name: currentName = '' } = getPath(`group_chats/${uid}`, {}) || {}
   const [name, setName] = useState('')
 
@@ -68,9 +69,10 @@ export default function () {
       setStep(1)
     } else {
       if (uid) {
-        await firebaseApp.database().ref(`group_chats/${uid}`).update({
+        await update(ref(db, `group_chats/${uid}`), {
           name,
         })
+
         history.push('/chats')
       } else {
         let members = { [auth.uid]: true }
@@ -81,17 +83,9 @@ export default function () {
           members[key] = true
           return e
         })
-        const snap = await firebaseApp.database().ref(`group_chats`).push()
-
-        await firebaseApp
-          .database()
-          .ref(`group_chats/${snap.key}/admins/${auth.uid}`)
-          .set(true)
-
-        await firebaseApp.database().ref(`group_chats/${snap.key}`).update({
-          members,
-          name,
-        })
+        const snap = await push(ref(db, `group_chats`))
+        await set(ref(db, `group_chats/${snap.key}/admins/${auth.uid}`), true)
+        await update(ref(db, `group_chats/${snap.key}`), { members, name })
 
         history.push('/chats')
       }

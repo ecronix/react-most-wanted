@@ -17,8 +17,8 @@ import FirebaseFrom from 'rmw-shell/lib/containers/FirebaseForm'
 import Form from 'rmw-shell/lib/components/Forms/Role'
 import IconButton from '@material-ui/core/IconButton'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
+import { getDatabase, ref, set } from 'firebase/database'
 
 const path = 'roles'
 const singular = 'role'
@@ -30,7 +30,6 @@ export default function () {
   const { getFilter, setSearch } = useFilter()
   const { search = {} } = getFilter(tab)
   const { openDialog } = useQuestions()
-  const { firebaseApp } = useFirebase()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth
   const { value: searchValue = '' } = search
@@ -45,7 +44,7 @@ export default function () {
   const openDeleteDialog = () => {
     openDialog({
       handleAction: async (handleClose) => {
-        await firebaseApp.database().ref(`${path}/${uid}`).set(null)
+        await set(ref(getDatabase(), `${path}/${uid}`), null)
         handleClose()
         history.push(`/${path}`)
       },

@@ -26,6 +26,7 @@ import {
   SettingsApplications as SettingsIcon,
   Style as StyleIcon,
 } from '@material-ui/icons'
+import { getAuth } from 'firebase/auth'
 
 const getMenuItems = (props) => {
   const {
@@ -35,7 +36,6 @@ const getMenuItems = (props) => {
     themeContext,
     menuContext,
     a2HSContext,
-    firebaseApp,
     auth: authData,
   } = props
 
@@ -80,7 +80,7 @@ const getMenuItems = (props) => {
 
   const handleSignOut = () => {
     toggleThis('isAuthMenuOpen', false)
-    firebaseApp.auth().signOut()
+    getAuth().signOut()
     localStorage.clear()
   }
 
