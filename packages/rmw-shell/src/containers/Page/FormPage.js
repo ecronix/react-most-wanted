@@ -8,6 +8,7 @@ import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import FirebaseForm from 'rmw-shell/lib/containers/FirebaseForm'
+import { getDatabase, ref, set } from 'firebase/database'
 
 export default function (props) {
   const {
@@ -21,8 +22,9 @@ export default function (props) {
   } = props
   const history = useHistory()
   const { openDialog } = useQuestions()
-  const { getPath, firebaseApp } = usePaths()
+  const { getPath } = usePaths()
   const { auth } = useAuth()
+  const db = getDatabase()
   const { isGranted = () => false } = auth || {}
   let submit
 
@@ -36,7 +38,7 @@ export default function (props) {
   const openDeleteDialog = () => {
     openDialog({
       handleAction: async (handleClose) => {
-        await firebaseApp.database().ref(`${path}/${uid}`).set(null)
+        await set(ref(db, `${path}/${uid}`), null)
         handleClose()
         handleDelete()
       },

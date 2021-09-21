@@ -8,13 +8,15 @@ import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { getDatabase, ref, set } from 'firebase/database'
 
 export default function ({ grantsPath }) {
   const { appConfig } = useConfig()
   const { auth: authConfig } = appConfig || {}
   const { grants = [] } = authConfig || {}
-  const { firebaseApp, watchList, getList: getFirebaseList } = useLists()
+  const { watchList, getList: getFirebaseList } = useLists()
   const { getList } = useFilter()
+  const db = getDatabase()
 
   const roleGrants = getFirebaseList(grantsPath)
 
@@ -49,10 +51,10 @@ export default function ({ grantsPath }) {
           button
           alignItems="flex-start"
           onClick={async () => {
-            await firebaseApp
-              .database()
-              .ref(`${grantsPath}/${name}`)
-              .set(isSelected ? null : true)
+            await set(
+              ref(db, `${grantsPath}/${name}`),
+              isSelected ? null : true
+            )
           }}
         >
           <ListItemIcon>

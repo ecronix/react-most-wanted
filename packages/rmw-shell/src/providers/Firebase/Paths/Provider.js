@@ -45,7 +45,7 @@ function getInitState(persistKey) {
   return persistedValues
 }
 
-const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
+const Provider = ({ children, persistKey = 'firebase_paths' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
   const db = getDatabase()
 
@@ -150,7 +150,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_paths' }) => {
   return (
     <Context.Provider
       value={{
-        firebaseApp,
         watchPath,
         unwatchPath,
         getPath,

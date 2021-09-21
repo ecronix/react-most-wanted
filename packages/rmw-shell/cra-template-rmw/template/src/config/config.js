@@ -158,9 +158,7 @@ const config = {
     PageNotFound: lazy(() => import('../pages/PageNotFound')),
   },
   components: {
-    Menu: lazy(() =>
-      import('rmw-shell/lib/containers/FirebaseMenu/FirebaseMenu')
-    ),
+    Menu: lazy(() => import('material-ui-shell/lib/containers/Menu/Menu')),
     Loading,
   },
 
