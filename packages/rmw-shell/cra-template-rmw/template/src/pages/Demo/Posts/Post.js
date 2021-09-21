@@ -9,7 +9,6 @@ import Delete from '@material-ui/icons/Delete'
 import { useIntl } from 'react-intl'
 import moment from 'moment'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import SimpleEditor from 'rmw-shell/lib/containers/PostEditor'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 
@@ -20,53 +19,23 @@ const Post = () => {
   const { auth } = useAuth()
   const [changed, setChanged] = useState(false)
   const [initialized, setInitialized] = useState(false)
-  const { firebaseApp } = useFirebase()
+
   const [isPublishing, setPublishing] = useState(false)
   const [isPublished, setIsPublished] = useState(false)
   const [post, setPost] = useState(false)
   const { openDialog } = useQuestions()
 
-  const loadPost = useCallback(async () => {
-    const postSnap = await firebaseApp
-      .database()
-      .ref(`user_posts/${auth.uid}/${uid}`)
-      .once('value')
-
-    if (postSnap.exists()) {
-      const s = moment(postSnap.child('start').val())
-      const e = moment(postSnap.child('end').val())
-      setPost({ ...postSnap.child('post').val() })
-      setIsPublished(!!postSnap.child('publishedOn').val())
-      setInitialized(true)
-    }
-  }, [auth.uid, firebaseApp, uid])
-
-  useEffect(() => {
-    if (uid) {
-      loadPost()
-    }
-  }, [loadPost])
+  const loadPost = useCallback(async () => {}, [])
 
   const handlePublish = async () => {
     setPublishing(true)
 
-    const postSnap = await firebaseApp
-      .database()
-      .ref(`user_posts/${auth.uid}/${uid}`)
-      .once('value')
+    const postSnap = null
 
     const publishedOn = moment(undefined).valueOf()
     const order = 0 - publishedOn
 
     if (postSnap.exists()) {
-      await firebaseApp
-        .database()
-        .ref(`posts/${uid}`)
-        .update({ ...postSnap.val(), publishedOn, order })
-      await firebaseApp
-        .database()
-        .ref(`user_posts/${auth.uid}/${uid}`)
-        .update({ publishedOn, order })
     }
 
     setPublishing(false)
@@ -84,7 +53,7 @@ const Post = () => {
           const path = `user_posts/${
             auth.uid
           }/${uid}/${Date.now()}${fileExtension}`
-          let snapshot = await firebaseApp.storage().ref(path).put(file)
+          let snapshot = null
 
           const downloadURL = await snapshot.ref.getDownloadURL()
           const contentType = snapshot.metadata.contentType || null
@@ -108,17 +77,11 @@ const Post = () => {
   }
 
   const onDefferedStateChange = async (post) => {
-    await firebaseApp.database().ref(`posts/${uid}`).update({
-      post,
-    })
-
     setChanged(false)
   }
 
   const handleDelete = async (handleClose) => {
     if (uid) {
-      await firebaseApp.database().ref().child(`posts/${uid}`).remove()
-
       handleClose()
       history.goBack()
     }

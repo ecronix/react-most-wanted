@@ -4,14 +4,12 @@ import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useConfig } from 'base-shell/lib/providers/Config'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 
 const SignIn = () => {
   const intl = useIntl()
   const { appConfig } = useConfig()
-  const { firebaseApp } = useFirebase()
   const { firebase = {} } = appConfig || {}
   const { firebaseuiProps = {} } = firebase
   const { toggleThis } = useMenu()
@@ -39,7 +37,7 @@ const SignIn = () => {
           href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css"
         />
       </Helmet>
-      <AuthUI firebaseApp={firebaseApp} uiConfig={uiConfig} />
+      <AuthUI uiConfig={uiConfig} />
     </Page>
   )
 }
