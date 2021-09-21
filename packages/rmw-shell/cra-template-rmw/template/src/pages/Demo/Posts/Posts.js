@@ -32,13 +32,7 @@ const Posts = () => {
   const intl = useIntl()
   const history = useHistory()
 
-  const getRef = useCallback((firebaseApp) => {
-    return firebaseApp
-      .database()
-      .ref('posts')
-      .orderByChild('order')
-      .limitToLast(300)
-  }, [])
+  const getRef = useCallback(() => {}, [])
 
   return (
     <ListPage
