@@ -96,7 +96,7 @@ function getInitState(persistKey) {
   return persistedValues
 }
 
-const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
+const Provider = ({ children, persistKey = 'firebase_lists' }) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey))
   const db = getDatabase()
 
@@ -273,7 +273,6 @@ const Provider = ({ children, firebaseApp, persistKey = 'firebase_lists' }) => {
         isListLoading,
         hasListError,
         getListError,
-        firebaseApp,
       }}
     >
       {children}

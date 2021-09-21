@@ -125,7 +125,7 @@ const Cols = () => {
                   // OR using an alias
                   // watchCol('test_list','your_alias)
                   // OR combination
-                  // watchCol('firebaseApp.database().ref('test_list'),'your_alias)
+                  // watchCol('ref(db,'test_list'),'your_alias)
                 }
               >
                 Watch

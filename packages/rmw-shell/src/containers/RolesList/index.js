@@ -7,10 +7,12 @@ import React, { useEffect } from 'react'
 import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { getDatabase, ref, set } from 'firebase/database'
 
 export default function ({ path }) {
-  const { firebaseApp, watchList, getList: getFirebaseList } = useLists()
+  const { watchList, getList: getFirebaseList } = useLists()
   const { getList } = useFilter()
+  const db = getDatabase()
 
   const roles = getFirebaseList('roles')
   const userRoles = getFirebaseList(path)
@@ -48,10 +50,7 @@ export default function ({ path }) {
           button
           alignItems="flex-start"
           onClick={async () => {
-            await firebaseApp
-              .database()
-              .ref(`${path}/${key}`)
-              .set(isSelected ? null : true)
+            await set(ref(db, path), isSelected ? null : true)
           }}
         >
           <ListItemIcon>
