@@ -9,7 +9,6 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@material-ui/core/styles'
 import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
 import Linkify from 'react-linkify'
@@ -17,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
+import { getDatabase, ref, update, set } from 'firebase/database'
 
 const getMapLoc = (loc) => {
   let lat = 0
@@ -44,7 +44,6 @@ export default function ({
   const theme = useTheme()
   const { auth } = useAuth()
   const { appConfig } = useConfig()
-  const { firebaseApp } = useLists()
   const {
     authorUid,
     authorPhotoUrl = null,
@@ -64,6 +63,7 @@ export default function ({
   const [anchorEl, setAnchorEl] = useState(null)
   const [showMenu, setShowMenu] = useState(false)
   const open = Boolean(anchorEl)
+  const db = getDatabase()
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -77,15 +77,14 @@ export default function ({
 
   useEffect(() => {
     if (authorUid && auth.uid !== authorUid && !isRead) {
-      firebaseApp.database().ref(`${path}/${uid}`).update({
-        isRead: true,
-      })
-      firebaseApp
-        .database()
-        .ref(`user_chats/${auth.uid}/${authorUid}/unread`)
-        .remove()
+      const db = getDatabase()
+      const updates = {}
+      updates[`${path}/${uid}`] = true
+      updates[`user_chats/${auth.uid}/${authorUid}/unread`] = null
+
+      update(ref(db), updates)
     }
-  }, [firebaseApp, path, uid, authorUid, auth, isRead])
+  }, [path, uid, authorUid, auth, isRead])
 
   const backgroundColor = isMe
     ? theme.palette.grey[500]
@@ -177,7 +176,7 @@ export default function ({
                   key={'delete'}
                   onClick={async () => {
                     handleClose()
-                    await firebaseApp.database().ref(`${path}/${uid}`).set(null)
+                    await set(ref(db), `${path}/${uid}`, null)
                   }}
                 >
                   {intl.formatMessage({
@@ -200,13 +199,11 @@ export default function ({
               cursor: 'pointer',
             }}
             onClick={async () => {
-              await firebaseApp
-                .database()
-                .ref(`user_chats/${auth.uid}/${authorUid}`)
-                .update({
-                  displayName: authorName,
-                  photoURL: authorPhotoUrl,
-                })
+              await update(ref(db, `user_chats/${auth.uid}/${authorUid}`), {
+                displayName: authorName,
+                photoURL: authorPhotoUrl,
+              })
+
               history.push(`/chats/${authorUid}`)
             }}
           >

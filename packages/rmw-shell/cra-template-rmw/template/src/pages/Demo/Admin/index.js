@@ -3,14 +3,13 @@ import Page from 'material-ui-shell/lib/containers/Page'
 import { useIntl } from 'react-intl'
 import { useHistory } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import { useFirebase } from 'rmw-shell/lib/providers/Firebase'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { getFunctions, httpsCallable } from 'firebase/functions'
 
 const Admin = () => {
   const intl = useIntl()
   const [isLoading, setLoading] = useState(false)
   const history = useHistory()
-  const { firebaseApp } = useFirebase()
 
   return (
     <Page
@@ -35,9 +34,10 @@ const Admin = () => {
             color="primary"
             onClick={async () => {
               setLoading(true)
-              const httpsAdminOnCall = firebaseApp
-                .functions()
-                .httpsCallable('https-adminOnCall')
+              const httpsAdminOnCall = httpsCallable(
+                getFunctions(),
+                'https-adminOnCall'
+              )
 
               const { data } = await httpsAdminOnCall()
               const { message } = data || {}

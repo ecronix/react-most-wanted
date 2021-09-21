@@ -28,11 +28,12 @@ import SearchField from 'material-ui-shell/lib/components/SearchField'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
+import { getDatabase, ref, set } from 'firebase/database'
 
 export default function () {
   const intl = useIntl()
   const history = useHistory()
-  const { watchPath, getPath, firebaseApp } = usePaths()
+  const { watchPath, getPath } = usePaths()
   const { watchList, getList } = useLists()
   const { uid, tab = 'main' } = useParams()
   const { getFilter, setSearch } = useFilter()
@@ -73,8 +74,12 @@ export default function () {
   const user = getPath(path, {})
   const admins = getList('admins')
 
-  const { photoURL = '', displayName = '', email = '', providerData = [] } =
-    user || {}
+  const {
+    photoURL = '',
+    displayName = '',
+    email = '',
+    providerData = [],
+  } = user || {}
 
   let isAdmin = false
 
@@ -193,10 +198,10 @@ export default function () {
                         checked={isAdmin}
                         onChange={() => {
                           try {
-                            firebaseApp
-                              .database()
-                              .ref(`admins/${uid}`)
-                              .set(isAdmin ? null : true)
+                            set(
+                              ref(getDatabase(), `admins/${uid}`),
+                              isAdmin ? null : true
+                            )
                           } catch (error) {
                             console.warn(error)
                           }

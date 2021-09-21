@@ -5,20 +5,16 @@ import { useIntl } from 'react-intl'
 import { useHistory, useParams } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import UserRow from 'rmw-shell/lib/components/UserRow'
+import { getDatabase, ref, set } from 'firebase/database'
 
 export default function () {
-  const {
-    watchList,
-    getList,
-    clearList,
-    isListLoading,
-    firebaseApp,
-  } = useLists()
+  const { watchList, getList, clearList, isListLoading } = useLists()
   const { auth } = useAuth()
   const intl = useIntl()
   const history = useHistory()
   const { uid } = useParams()
   const groupMembersPath = `group_chats/${uid}/members`
+  const db = getDatabase()
 
   useEffect(() => {
     watchList('users')
@@ -43,17 +39,10 @@ export default function () {
   }
 
   const handleRowClick = async (user) => {
-    if (isChecked(user.key)) {
-      await firebaseApp
-        .database()
-        .ref(`${groupMembersPath}/${user.key}`)
-        .set(null)
-    } else {
-      await firebaseApp
-        .database()
-        .ref(`${groupMembersPath}/${user.key}`)
-        .set(true)
-    }
+    await set(
+      ref(db, groupMembersPath).child(user.key),
+      isChecked(user.key) ? null : true
+    )
   }
 
   return (

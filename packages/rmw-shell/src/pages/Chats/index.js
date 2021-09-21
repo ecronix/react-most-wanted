@@ -34,6 +34,7 @@ import {
 } from '@material-ui/core'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import moment from 'moment'
+import { getDatabase, ref, set } from 'firebase/database'
 
 const Row = ({ data, index, style }) => {
   const history = useHistory()
@@ -50,7 +51,6 @@ const Row = ({ data, index, style }) => {
     lastCreated = '',
   } = data
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const { firebaseApp } = useLists()
   const { uid = '' } = useParams()
 
   const handleClick = (event) => {
@@ -61,18 +61,19 @@ const Row = ({ data, index, style }) => {
     setAnchorEl(null)
   }
 
-  const handleDeleteChat = () => {
-    firebaseApp.database().ref(`user_chats/${auth.uid}/${key}`).remove()
+  const handleDeleteChat = async () => {
+    await set(ref(getDatabase(), `user_chats/${auth.uid}/${key}`), null)
     handleClose()
   }
 
-  const handleMarkAsUnread = () => {
-    firebaseApp.database().ref(`user_chats/${auth.uid}/${key}/unread`).set(1)
+  const handleMarkAsUnread = async () => {
+    await set(ref(getDatabase(), `user_chats/${auth.uid}/${key}/unread`), 1)
     handleClose()
   }
 
   return (
-    <div key={key} style={{...style, direction: isRTL ? 'rtl' : 'ltr'}}>{/* james- revisit this code */}
+    <div key={key} style={{ ...style, direction: isRTL ? 'rtl' : 'ltr' }}>
+      {/* james- revisit this code */}
       <ListItem
         button
         selected={key === uid}
@@ -222,7 +223,7 @@ export default function () {
     requestPermission()
 
     return () => unwatchList(chatsPath)
-  }, [])
+  }, [chatsPath, unwatchList, watchList, requestPermission])
 
   const chats = getList(chatsPath).map((c) => {
     return { key: c.key, ...c.val }

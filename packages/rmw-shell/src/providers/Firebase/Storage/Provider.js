@@ -122,16 +122,35 @@ const Provider = ({ children }) => {
   )
 
   const uploadString = useCallback(
-    (alias, path, string, type, metadata, onUploaded) => {
-      const uploadTask = uploadStringFirebase(
+    async (alias, path, string, type, metadata, onUploaded) => {
+      dispatch({
+        type: LOADING_CHANGED,
+        path,
+        isUploading: true,
+        progress: 0,
+      })
+
+      const snap = await uploadStringFirebase(
         ref(getStorage(getApp()), path),
         string,
         type,
         metadata
       )
-      upload(alias, uploadTask, onUploaded)
+
+      const downloadURL = await getDownloadURLFirebase(snap.ref)
+      dispatch({
+        type: DOWNLOAD_URL_CHANGE,
+        path,
+        downloadURL,
+        isUploading: false,
+        progress: 100,
+      })
+
+      if (onUploaded) {
+        onUploaded(downloadURL, snap)
+      }
     },
-    [upload]
+    []
   )
 
   const uploadTask = useCallback(

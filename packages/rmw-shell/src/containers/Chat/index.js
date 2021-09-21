@@ -7,6 +7,13 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import { useTheme } from '@material-ui/core/styles'
 import ChatIcon from '@material-ui/icons/Chat'
 import { useIntl } from 'react-intl'
+import {
+  getDatabase,
+  ref,
+  query,
+  orderByKey,
+  limitToLast,
+} from 'firebase/database'
 
 const step = 20
 let currentUser = null
@@ -15,7 +22,7 @@ let currentDate = null
 export default function ({ path }) {
   const intl = useIntl()
   const theme = useTheme()
-  const { firebaseApp, watchList, getList, unwatchList, clearList } = useLists()
+  const { watchList, getList, unwatchList, clearList } = useLists()
   const [size, setSize] = useState(step)
   const [listEnd, setlistEnd] = useState(null)
   const alias = `${path}_${size}`
@@ -32,11 +39,11 @@ export default function ({ path }) {
 
   useEffect(() => {
     if (path) {
-      let messagesRef = firebaseApp
-        .database()
-        .ref(path)
-        .orderByKey()
-        .limitToLast(size)
+      let messagesRef = query(
+        ref(getDatabase(), path),
+        orderByKey(),
+        limitToLast(size)
+      )
 
       watchList(messagesRef, alias)
 
@@ -48,7 +55,7 @@ export default function ({ path }) {
         }
       }
     }
-  }, [path, size, watchList, clearList, alias, firebaseApp, unwatchList])
+  }, [path, size, watchList, clearList, alias, unwatchList])
 
   useEffect(() => {
     scrollToBottom()
