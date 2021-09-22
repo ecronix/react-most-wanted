@@ -11,6 +11,8 @@ The **features** include:
 * [**Firebase**](https://firebase.google.com/): use Firebase's platform as backend and database
 * **And many more**: Firebase and local state sync, authentication, authorization \(roles and permissions\), push notifications UI integration, theming, internationalization, built-in CI/CD, real-time forms...
 
+## [Documentation](https://rmw-1.gitbook.io/react-most-wanted/)
+
 ## Contributing
 
 We appreciate **any** contribution!
