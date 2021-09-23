@@ -10,7 +10,7 @@ The **features** include:
 * [**Material UI**](https://material-ui.com/): Material Design ready-to-use React Components
 * [**Code splitting**](https://webpack.js.org/guides/code-splitting/): MPA \(Multiple Page Application\) ready. A Large codebase can be split into separate bundles that load different parts of the application, lazy-loading the different bundles on demand.
 * [**Firebase**](https://firebase.google.com/): use Firebase's platform as backend and database and has a sync between Firebase and the app state
-  * Authentication and authorization with roles and permissions
+* Authentication and authorization with roles and permissions
 * Push notifications with in App Notificcations UI
 * Theming
 * Internationalizaion
