@@ -35,7 +35,7 @@ See [Contributing](https://github.com/TarikHuber/react-most-wanted/blob/46dcb3da
 
 ![](.gitbook/assets/spaces_gitbook_avatar-rectangle%20%281%29.png)
 
-Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
+Thanks to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
 
 Thanks to [GitBook ](https://www.gitbook.com/)for providing us a great documentation tool.
 
