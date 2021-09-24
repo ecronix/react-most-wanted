@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import Context from './Context'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useMediaQuery } from '@mui/material'
 import {
   setIsAuthMenuOpen,
   setIsMiniMode,
@@ -35,32 +35,34 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
 
   const props = {
     //setter
-    toggleThis(value, newValue = null){
-      if(value === 'isAuthMenuOpen'){
-        dispatch(setIsAuthMenuOpen(
-          newValue !== null
-          ? newValue
-          : !menuStore.isAuthMenuOpen))}
-      else if(value === 'isMiniMode'){
-        dispatch(setIsMiniMode(
-          newValue !== null
-          ? newValue
-          : !menuStore.isMiniMode))}
-      else if(value === 'isMenuOpen'){
-        dispatch(setIsMenuOpen(
-          newValue !== null
-          ? newValue
-          : !menuStore.isMenuOpen))}
-      else if(value === 'isMobileMenuOpen'){
-        dispatch(setIsMobileMenuOpen(
-          newValue !== null
-          ? newValue
-          : !menuStore.isMobileMenuOpen))}
-      else if(value === 'isMiniSwitchVisibility'){
-        dispatch(setIsMiniSwitchVisibility(
-          newValue !== null
-          ? newValue
-          : !menuStore.isMiniSwitchVisibility))}
+    toggleThis(value, newValue = null) {
+      if (value === 'isAuthMenuOpen') {
+        dispatch(
+          setIsAuthMenuOpen(
+            newValue !== null ? newValue : !menuStore.isAuthMenuOpen
+          )
+        )
+      } else if (value === 'isMiniMode') {
+        dispatch(
+          setIsMiniMode(newValue !== null ? newValue : !menuStore.isMiniMode)
+        )
+      } else if (value === 'isMenuOpen') {
+        dispatch(
+          setIsMenuOpen(newValue !== null ? newValue : !menuStore.isMenuOpen)
+        )
+      } else if (value === 'isMobileMenuOpen') {
+        dispatch(
+          setIsMobileMenuOpen(
+            newValue !== null ? newValue : !menuStore.isMobileMenuOpen
+          )
+        )
+      } else if (value === 'isMiniSwitchVisibility') {
+        dispatch(
+          setIsMiniSwitchVisibility(
+            newValue !== null ? newValue : !menuStore.isMiniSwitchVisibility
+          )
+        )
+      }
     },
     //getters
     isAuthMenuOpen: menuStore.isAuthMenuOpen,
@@ -70,7 +72,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     isMiniSwitchVisibility: menuStore.isMiniSwitchVisibility,
   }
   const isDesktop = useMediaQuery('(min-width:600px)')
-
 
   useEffect(() => {
     try {

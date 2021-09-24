@@ -1,19 +1,21 @@
-import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import Cropper from 'react-easy-crop'
-import Dialog from '@material-ui/core/Dialog'
-import CloudUpload from '@material-ui/icons/CloudUpload'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
 import React, { useState, useCallback, useEffect } from 'react'
-import Slide from '@material-ui/core/Slide'
 import getCroppedImg from './getCropImage'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useIntl } from 'react-intl'
-import { useTheme } from '@material-ui/core/styles'
-import { useAuth } from 'base-shell/lib/providers/Auth'
+import { useTheme } from '@emotion/react'
+import {
+  Typography,
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  Slide,
+  useMediaQuery,
+  CircularProgress,
+} from '@mui/material'
+
+import { CloudUpload } from '@mui/icons-material'
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
@@ -31,8 +33,8 @@ const getFiles = (ev) => {
     }
   } else {
     // Use DataTransfer interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-      files.push(ev.dataTransfer.files[i])
+    for (var y = 0; y < ev.dataTransfer.files.length; y++) {
+      files.push(ev.dataTransfer.files[y])
     }
   }
 
@@ -55,15 +57,6 @@ export default function ({
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-
-  const { auth, updateAuth } = useAuth()
-
-  const {
-    photoURL: currentPhotoURL = '',
-    displayName: currentDisplayName = '',
-  } = auth || {}
-
-  const [photoURL, setPhotoURL] = useState(currentPhotoURL)
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -94,7 +87,7 @@ export default function ({
     } catch (e) {
       console.error(e)
     }
-  }, [croppedAreaPixels])
+  }, [croppedAreaPixels, file, handleClose, handleCropSubmit])
 
   return (
     <Dialog
@@ -218,10 +211,7 @@ export default function ({
               display="inline-flex"
               style={{ height: 280 }}
             >
-              <CircularProgress
-                size={280}
-                variant="determinate"
-              />
+              <CircularProgress size={280} variant="determinate" />
               <Box
                 top={0}
                 left={0}
@@ -246,11 +236,7 @@ export default function ({
         <Button onClick={handleClose} color="secondary">
           {intl.formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
         </Button>
-        <Button
-          disabled={!file}
-          onClick={showCroppedImage}
-          color="primary"
-        >
+        <Button disabled={!file} onClick={showCroppedImage} color="primary">
           {intl.formatMessage({ id: 'save', defaultMessage: 'Save' })}
         </Button>
       </DialogActions>

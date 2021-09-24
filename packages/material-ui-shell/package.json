@@ -38,12 +38,22 @@
     "react-markdown": "5.x",
     "react-router-dom": "5.x",
     "react-virtualized-auto-sizer": "1.x",
-    "react-window": "1.x"
+    "react-window": "1.x",
+    "@mui/material": "5.x",
+    "@emotion/react": "11.x",
+    "@emotion/styled": "11.x",
+    "@mui/icons-material": "5.",
+    "@mui/styles": "5.x"
   },
   "devDependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
     "@formatjs/intl-relativetimeformat": "^8.1.5",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.1",
+    "@mui/styles": "^5.0.1",
     "base-shell": "^1.2.24",
     "github-markdown-css": "^4.0.0",
     "intl": "^1.2.5",

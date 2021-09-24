@@ -1,14 +1,17 @@
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogTitle from '@material-ui/core/DialogTitle'
 import React from 'react'
-import Slide from '@material-ui/core/Slide'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useIntl } from 'react-intl'
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@mui/material/styles'
+
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+  useMediaQuery,
+} from '@mui/material'
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />

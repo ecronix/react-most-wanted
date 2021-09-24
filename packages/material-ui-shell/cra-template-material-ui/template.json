@@ -20,7 +20,12 @@
       "react-markdown": "7.x",
       "react-router-dom": "5.x",
       "react-virtualized-auto-sizer": "1.x",
-      "react-window": "1.x"
+      "react-window": "1.x",
+      "@mui/material": "5.x",
+      "@emotion/react": "11.x",
+      "@emotion/styled": "11.x",
+      "@mui/icons-material": "5.",
+      "@mui/styles": "5.x"
     },
     "eslintConfig": {
       "extends": ["react-app", "react-app/jest"]

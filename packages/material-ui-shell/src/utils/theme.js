@@ -1,4 +1,5 @@
-import { createTheme } from '@material-ui/core/styles'
+//import { createTheme } from '@material-ui/core/styles'
+import { createTheme } from '@mui/material/styles'
 
 const getThemeSource = (id, ts, isDarkMode, isRTL) => {
   if (ts) {
@@ -8,7 +9,7 @@ const getThemeSource = (id, ts, isDarkMode, isRTL) => {
         const palette = source != null ? source.palette : {}
         return createTheme({
           ...source,
-          palette: { ...palette, type: isDarkMode ? 'dark' : 'light' },
+          palette: { ...palette, mode: isDarkMode ? 'dark' : 'light' },
           direction: isRTL ? 'rtl' : 'ltr',
         })
       }
@@ -16,7 +17,7 @@ const getThemeSource = (id, ts, isDarkMode, isRTL) => {
   }
 
   return createTheme({
-    palette: { type: isDarkMode ? 'dark' : 'light' },
+    palette: { mode: isDarkMode ? 'dark' : 'light' },
     direction: isRTL ? 'rtl' : 'ltr',
   })
 }

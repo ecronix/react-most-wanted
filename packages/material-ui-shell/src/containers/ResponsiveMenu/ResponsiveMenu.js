@@ -49,6 +49,18 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(1) * 9,
     },
   },
+  drawerPaperClose2: {
+    height: '100vh',
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: 0,
+    [theme.breakpoints.up('sm')]: {
+      width: 0,
+    },
+  },
   hide: {
     display: 'none',
   },
@@ -77,7 +89,7 @@ const ResponsiveMenu = ({ children, width }) => {
             ? clsx(
                 classes.drawerPaperOpen,
                 !isMenuOpen && classes.drawerPaperClose,
-                !isMiniMode && !isMenuOpen && classes.hide
+                !isMiniMode && !isMenuOpen && classes.drawerPaperClose2
               )
             : classes.drawerPaper,
         }}
