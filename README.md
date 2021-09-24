@@ -29,9 +29,15 @@ See [Contributing](https://github.com/TarikHuber/react-most-wanted/blob/46dcb3da
 
 ## Thanks
 
-[![](https://camo.githubusercontent.com/963fdc34956abc2bcb1db1d9db70d4c791956b2fc8dae36836b575b7795efe42/68747470733a2f2f7777772e62726f77736572737461636b2e636f6d2f696d616765732f6d61696c2f62726f77736572737461636b2d6c6f676f2d666f6f7465722e706e67)](https://www.browserstack.com/)
+ 
+
+![](https://camo.githubusercontent.com/963fdc34956abc2bcb1db1d9db70d4c791956b2fc8dae36836b575b7795efe42/68747470733a2f2f7777772e62726f77736572737461636b2e636f6d2f696d616765732f6d61696c2f62726f77736572737461636b2d6c6f676f2d666f6f7465722e706e67)
+
+![](.gitbook/assets/spaces_gitbook_avatar-rectangle%20%281%29.png)
 
 Thank you to [BrowserStack](https://www.browserstack.com/) for providing the infrastructure that allows us to test in real browsers.
+
+Thanks to [GitBook ](https://www.gitbook.com/)for providing us a great documentation tool.
 
 ## License
 
