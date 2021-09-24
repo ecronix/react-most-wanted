@@ -1,19 +1,17 @@
-import Add from '@material-ui/icons/Add'
-import AppBar from '@material-ui/core/AppBar'
-import ClearAll from '@material-ui/icons/ClearAll'
-import SortByAlpha from '@material-ui/icons/SortByAlpha'
-import Close from '@material-ui/icons/Close'
-import Delete from '@material-ui/icons/Delete'
-import Divider from '@material-ui/core/Divider'
-import Drawer from '@material-ui/core/Drawer'
-import Fab from '@material-ui/core/Fab'
-import FormControl from '@material-ui/core/FormControl'
-import IconButton from '@material-ui/core/IconButton'
-import MenuItem from '@material-ui/core/MenuItem'
 import React from 'react'
-import Select from '@material-ui/core/Select'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
+import {
+  AppBar,
+  Divider,
+  Drawer,
+  Fab,
+  FormControl,
+  IconButton,
+  Toolbar,
+  Select,
+  MenuItem,
+  Typography,
+} from '@mui/material'
+import { Add, ClearAll, SortByAlpha, Close, Delete } from '@mui/icons-material'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import { useIntl } from 'react-intl'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
