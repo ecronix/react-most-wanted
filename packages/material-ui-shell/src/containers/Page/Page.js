@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useOnline } from 'base-shell/lib/providers/Online'
 import { useIntl } from 'react-intl'

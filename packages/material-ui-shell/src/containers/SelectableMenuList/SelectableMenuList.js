@@ -17,7 +17,7 @@ import {
   ListItemText,
   Tooltip,
   Typography,
-} from '@material-ui/core'
+} from '@mui/material'
 import { useLocation } from 'react-router-dom'
 
 const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
@@ -160,13 +160,15 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                     handleNestedItemsClick(item)
                   }}
                 >
-                  <IconButton
-                    style={{ marginRight: useMinified ? 150 : undefined }}
-                  >
+                  <IconButton>
                     {isRTL ? (
                       <KeyboardArrowLeftIcon />
                     ) : (
-                      <KeyboardArrowRight color={'action'} />
+                      <KeyboardArrowRight
+                        sx={{
+                          color: (t) => t.palette.text.primary,
+                        }}
+                      />
                     )}
                   </IconButton>
                 </ListItemSecondaryAction>

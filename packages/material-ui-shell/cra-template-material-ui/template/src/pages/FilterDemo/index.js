@@ -1,16 +1,18 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
-import Divider from '@material-ui/core/Divider'
+import {
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from '@mui/material'
+import { FilterList } from '@mui/icons-material'
 import FilterDrawer from 'material-ui-shell/lib/components/FilterDrawer'
-import FilterList from '@material-ui/icons/FilterList'
-import IconButton from '@material-ui/core/IconButton'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React, { useEffect, useCallback } from 'react'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import source from './data.json'
 import { FixedSizeList } from 'react-window'
 import { Scrollbars } from 'react-custom-scrollbars'

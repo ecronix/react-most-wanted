@@ -1,10 +1,9 @@
 import FilterDrawer from 'material-ui-shell/lib/components/FilterDrawer'
-import FilterList from '@material-ui/icons/FilterList'
-import IconButton from '@material-ui/core/IconButton'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React from 'react'
 import SearchField from 'material-ui-shell/lib/components/SearchField'
-import Toolbar from '@material-ui/core/Toolbar'
+import { Toolbar, IconButton } from '@mui/material'
+import { FilterList } from '@mui/icons-material'
 import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 

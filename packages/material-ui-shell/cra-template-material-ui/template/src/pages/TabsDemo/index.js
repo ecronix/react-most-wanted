@@ -1,8 +1,6 @@
-import AppBar from '@material-ui/core/AppBar'
+import { AppBar, Tab, Tabs } from '@mui/material'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React, { useState } from 'react'
-import Tab from '@material-ui/core/Tab'
-import Tabs from '@material-ui/core/Tabs'
 import { useIntl } from 'react-intl'
 
 const TabsDemo = () => {
@@ -22,6 +20,8 @@ const TabsDemo = () => {
             onChange={(e, t) => setTab(t)}
             aria-label="simple tabs example"
             centered
+            textColor="inherit"
+            indicatorColor="secondary"
           >
             <Tab label="Item One" value="one" />
             <Tab label="Item Two" value="two" />

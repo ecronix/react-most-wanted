@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useSnackbar } from 'notistack'
 import { useIntl } from 'react-intl'
-import Button from '@material-ui/core/Button'
+import { Button } from '@mui/material'
 
 const runUpdate = () => {
   window.update && window.update()
