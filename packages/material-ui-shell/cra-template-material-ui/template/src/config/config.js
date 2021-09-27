@@ -18,6 +18,7 @@ const config = {
     },
   },
   menu: {
+    width: 240,
     MenuContent: lazy(() => import('../components/Menu/MenuContent')),
   },
   theme: {

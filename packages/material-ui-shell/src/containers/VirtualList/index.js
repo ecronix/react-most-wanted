@@ -1,5 +1,5 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
-import List from '@material-ui/core/List'
+import { List } from '@mui/material'
 import React, { useEffect } from 'react'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import { FixedSizeList } from 'react-window'
@@ -14,7 +14,7 @@ const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
     <Scrollbar
       {...rest}
       forwardedRef={ref}
-      style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl':'ltr' }} //james- keep as maybe related to <FixedSizeList> props, will remove soon
+      style={{ ...style, overflow: 'hidden', direction: isRTL ? 'rtl' : 'ltr' }} //james- keep as maybe related to <FixedSizeList> props, will remove soon
     />
   )
 })
@@ -46,12 +46,12 @@ export default function (props) {
   }, [ref])
 
   return (
-    <AutoSizer style={{ height: '100%', width: '100%'}}>
+    <AutoSizer style={{ height: '100%', width: '100%' }}>
       {({ height, width }) => {
         return (
-          <List style={{ padding: 0/* , direction: isRTL ? 'rtl':'ltr' */ }}>
+          <List style={{ padding: 0 /* , direction: isRTL ? 'rtl':'ltr' */ }}>
             <FixedSizeList
-              direction={isRTL ? 'rtl':'ltr'} //removes native scrollbar
+              direction={isRTL ? 'rtl' : 'ltr'} //removes native scrollbar
               ref={(r) => {
                 if (r) {
                   listRef.current = r

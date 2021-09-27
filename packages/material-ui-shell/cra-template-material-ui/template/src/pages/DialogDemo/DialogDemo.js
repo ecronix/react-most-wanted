@@ -1,4 +1,4 @@
-import Button from '@material-ui/core/Button'
+import { Button } from '@mui/material'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React from 'react'
 import { useIntl } from 'react-intl'
