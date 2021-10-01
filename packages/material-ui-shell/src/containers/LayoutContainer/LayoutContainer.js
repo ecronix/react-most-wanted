@@ -1,5 +1,5 @@
 import { useConfig } from 'base-shell/lib/providers/Config'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import { CssBaseline } from '@mui/material'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'
 import { useTheme } from 'material-ui-shell/lib/providers/Theme'

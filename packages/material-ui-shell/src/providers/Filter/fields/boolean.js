@@ -1,5 +1,5 @@
 import React from 'react'
-import Switch from '@material-ui/core/Switch'
+import { Switch } from '@mui/material'
 
 const field = {
   operators: [
