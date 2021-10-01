@@ -1,5 +1,5 @@
 import React from 'react'
-import TextField from '@material-ui/core/TextField'
+import { TextField } from '@mui/material'
 
 const field = {
   operators: [

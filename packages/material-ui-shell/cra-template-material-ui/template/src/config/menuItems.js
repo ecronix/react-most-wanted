@@ -19,7 +19,7 @@ import {
   Tab,
   ViewList,
   Web,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 
 import allLocales from './locales'
 import allThemes from './themes'
@@ -35,12 +35,8 @@ const getMenuItems = (props) => {
     auth: authData,
   } = props
 
-  const {
-    toggleThis,
-    isDesktop,
-    isAuthMenuOpen,
-    isMiniSwitchVisibility,
-  } = menuContext
+  const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } =
+    menuContext
   const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext
 
   const { auth, setAuth } = authData
