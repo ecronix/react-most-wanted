@@ -6,7 +6,7 @@ import {
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
   KeyboardArrowRight,
   ArrowBack,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 import {
   Divider,
   IconButton,
