@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
-import { useConfig } from 'base-shell/lib/providers/Config'
+import React from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import clsx from 'clsx'
 
 import {
@@ -13,8 +12,8 @@ import {
   ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
-  Paper
-} from '@material-ui/core'
+  Paper,
+} from '@mui/material'
 import {
   ArrowDropDown as ArrowDropDownIcon,
   ArrowDropUp as ArrowDropUpIcon,
@@ -23,9 +22,8 @@ import {
   ChevronLeft,
   ChevronRight,
   ChromeReaderMode,
-  Person as PersonIcon
-} from '@material-ui/icons'
-
+  Person as PersonIcon,
+} from '@mui/icons-material'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuHeader = () => {
   const classes = useStyles()
-  const authData = auth
   const menuContext = useMenu()
   const { auth } = useAuth()
+  const authData = auth
   const {
     toggleThis,
     isDesktop,
@@ -72,8 +70,8 @@ const MenuHeader = () => {
       <List className={clsx(!isAuthenticated && classes.toolbar)}>
         {!isMiniMode && (
           <ListItem className={classes.listItem}>
-            {isAuthenticated && !isMiniMode &&/*james- !isMiniMode may not be needed */ (
-              <React.Fragment>
+            {isAuthenticated && !isMiniMode && (
+              /*james- !isMiniMode may not be needed */ <React.Fragment>
                 {authData.photoURL && (
                   <ListItemAvatar
                     onClick={() => {
@@ -100,18 +98,20 @@ const MenuHeader = () => {
                 )}
               </React.Fragment>
             )}
-            {!isMiniMode && (/* james - this may be redundant, compare with MUI Menuheader */
+            {!isMiniMode /* james - this may be redundant, compare with MUI Menuheader */ && (
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
                     toggleThisTheme('isDarkMode')
                   }}
                 >
-                  {isDarkMode
-                    ? <BrightnessHighIcon classes={{ root: classes.icon }} />
-                    : <Brightness4Icon classes={{ root: classes.icon }} />}
+                  {isDarkMode ? (
+                    <BrightnessHighIcon classes={{ root: classes.icon }} />
+                  ) : (
+                    <Brightness4Icon classes={{ root: classes.icon }} />
+                  )}
                 </IconButton>
-                {isMenuOpen /* james-pretty sure this isn't needed */&& (
+                {isMenuOpen /* james-pretty sure this isn't needed */ && (
                   <>
                     {isMiniSwitchVisibility && (
                       <IconButton
@@ -129,9 +129,11 @@ const MenuHeader = () => {
                         toggleThis('isMenuOpen', false)
                       }}
                     >
-                      {isRTL
-                        ? <ChevronRight classes={{ root: classes.icon }} />
-                        : <ChevronLeft classes={{ root: classes.icon }} />}
+                      {isRTL ? (
+                        <ChevronRight classes={{ root: classes.icon }} />
+                      ) : (
+                        <ChevronLeft classes={{ root: classes.icon }} />
+                      )}
                     </IconButton>{' '}
                   </>
                 )}
@@ -147,10 +149,7 @@ const MenuHeader = () => {
           >
             {!isMenuOpen && isMiniMode && isDesktop && (
               <ListItemAvatar>
-                <Avatar
-                  src={authData.photoURL}
-                  alt="person"
-                />
+                <Avatar src={authData.photoURL} alt="person" />
               </ListItemAvatar>
             )}
             {!isMiniMode && (
@@ -176,9 +175,11 @@ const MenuHeader = () => {
                 }}
               >
                 <IconButton>
-                  {isAuthMenuOpen
-                    ? <ArrowDropUpIcon classes={{ root: classes.icon }} />
-                    : <ArrowDropDownIcon classes={{ root: classes.icon }} />}
+                  {isAuthMenuOpen ? (
+                    <ArrowDropUpIcon classes={{ root: classes.icon }} />
+                  ) : (
+                    <ArrowDropDownIcon classes={{ root: classes.icon }} />
+                  )}
                 </IconButton>
               </ListItemSecondaryAction>
             )}

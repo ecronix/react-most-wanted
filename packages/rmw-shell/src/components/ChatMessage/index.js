@@ -1,21 +1,21 @@
-import Chip from '@material-ui/core/Chip'
-import Done from '@material-ui/icons/Done'
-import DoneAll from '@material-ui/icons/DoneAll'
-import Paper from '@material-ui/core/Paper'
+import { Done, DoneAll, KeyboardArrowDown } from '@mui/icons-material'
+import {
+  Paper,
+  Typography,
+  IconButton,
+  Menu,
+  MenuItem,
+  Chip,
+} from '@mui/material'
+import { useTheme } from '@mui/material/styles'
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-import { Typography } from '@material-ui/core'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { useTheme } from '@material-ui/core/styles'
 import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
 import Linkify from 'react-linkify'
-import IconButton from '@material-ui/core/IconButton'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
 import { getDatabase, ref, update, set } from 'firebase/database'
 
 const getMapLoc = (loc) => {
