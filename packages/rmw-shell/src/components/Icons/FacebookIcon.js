@@ -1,9 +1,15 @@
 import React from 'react'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import SvgIcon from '@mui/material/SvgIcon'
 
-const FacebookIcon = props => {
+const FacebookIcon = (props) => {
   return (
-    <SvgIcon width={22} height={22} viewBox="0 0 266.893 266.895" enableBackground="new 0 0 266.893 266.895" {...props}>
+    <SvgIcon
+      width={22}
+      height={22}
+      viewBox="0 0 266.893 266.895"
+      enableBackground="new 0 0 266.893 266.895"
+      {...props}
+    >
       <path
         id="Blue_1_"
         d="M248.082,262.307c7.854,0,14.223-6.369,14.223-14.225V18.812

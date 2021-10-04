@@ -1,7 +1,7 @@
 import React from 'react'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import SvgIcon from '@mui/material/SvgIcon'
 
-const RMWIcon = props => {
+const RMWIcon = (props) => {
   return (
     <SvgIcon width={22} height={22} viewBox="0 0 600 600" {...props}>
       <path

@@ -1,19 +1,19 @@
 import React from 'react'
-import IconButton from '@material-ui/core/IconButton'
-import Avatar from '@material-ui/core/Avatar'
-import Typography from '@material-ui/core/Typography'
+import IconButton from '@mui/material/IconButton'
+import Avatar from '@mui/material/Avatar'
+import Typography from '@mui/material/Typography'
 import moment from 'moment'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardContent from '@material-ui/core/CardContent'
-import Chip from '@material-ui/core/Chip'
+import Card from '@mui/material/Card'
+import CardHeader from '@mui/material/CardHeader'
+import CardContent from '@mui/material/CardContent'
+import Chip from '@mui/material/Chip'
 import { injectIntl } from 'react-intl'
-import ExpandMore from '@material-ui/icons/ExpandMore'
-import { makeStyles } from '@material-ui/core/styles'
-import Collapse from '@material-ui/core/Collapse'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import { makeStyles } from '@mui/material/styles'
+import Collapse from '@mui/material/Collapse'
 import Scrollbar from 'rmw-shell/lib/components/Scrollbar'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const getPostData = post => {
+const getPostData = (post) => {
   const { elements = [] } = post || {}
   let title = ''
   let description = ''

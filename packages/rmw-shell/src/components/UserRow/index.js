@@ -1,20 +1,20 @@
 import React from 'react'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
-import Avatar from '@material-ui/core/Avatar'
-import Mail from '@material-ui/icons/Mail'
-import Star from '@material-ui/icons/Star'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import Divider from '@mui/material/Divider'
+import Avatar from '@mui/material/Avatar'
+import Mail from '@mui/icons-material/Mail'
+import Star from '@mui/icons-material/Star'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
 import {
   GoogleIcon,
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
 } from 'rmw-shell/lib/components/Icons'
-import Badge from '@material-ui/core/Badge'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import Checkbox from '@material-ui/core/Checkbox'
+import Badge from '@mui/material/Badge'
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
+import Checkbox from '@mui/material/Checkbox'
 
 const getProviderIcon = (id) => {
   const iconProps = {
