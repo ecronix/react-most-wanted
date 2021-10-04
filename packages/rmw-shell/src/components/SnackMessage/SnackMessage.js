@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import { useSnackbar, SnackbarContent } from 'notistack'
 import CloseIcon from '@mui/icons-material/Close'
 

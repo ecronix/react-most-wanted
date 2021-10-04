@@ -9,7 +9,7 @@ import CardContent from '@mui/material/CardContent'
 import Chip from '@mui/material/Chip'
 import { injectIntl } from 'react-intl'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { makeStyles } from '@mui/material/styles'
+import { makeStyles } from '@mui/styles'
 import Collapse from '@mui/material/Collapse'
 import Scrollbar from 'rmw-shell/lib/components/Scrollbar'
 
