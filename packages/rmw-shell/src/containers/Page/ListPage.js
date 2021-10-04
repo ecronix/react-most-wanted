@@ -1,5 +1,5 @@
-import Add from '@material-ui/icons/Add'
-import Fab from '@material-ui/core/Fab'
+import Add from '@mui/icons-material/Add'
+import Fab from '@mui/material/Fab'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import React, { useEffect } from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'

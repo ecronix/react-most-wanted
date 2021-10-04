@@ -1,20 +1,14 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/material/styles'
 import { useSnackbar, SnackbarContent } from 'notistack'
-import CloseIcon from '@material-ui/icons/Close'
+import CloseIcon from '@mui/icons-material/Close'
 
-import {
-  Avatar,
-  CardMedia,
-  IconButton,
-  Card,
-  CardHeader,
-} from '@material-ui/core'
+import { Avatar, CardMedia, IconButton, Card, CardHeader } from '@mui/material'
 
-import Notifications from '@material-ui/icons/Notifications'
+import Notifications from '@mui/icons-material/Notifications'
 import { useHistory } from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/styles'
-import { createTheme } from '@material-ui/core/styles'
+import { createTheme } from '@mui/material/styles'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
 const useStyles = makeStyles((theme) => ({

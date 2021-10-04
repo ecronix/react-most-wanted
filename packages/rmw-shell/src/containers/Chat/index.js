@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import ChatMessage from 'rmw-shell/lib/components/ChatMessage'
 import Input from './Input'
-import Chip from '@material-ui/core/Chip'
+import Chip from '@mui/material/Chip'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
-import { useTheme } from '@material-ui/core/styles'
-import ChatIcon from '@material-ui/icons/Chat'
+import { useTheme } from '@mui/material/styles'
+import ChatIcon from '@mui/icons-material/Chat'
 import { useIntl } from 'react-intl'
 import {
   getDatabase,
