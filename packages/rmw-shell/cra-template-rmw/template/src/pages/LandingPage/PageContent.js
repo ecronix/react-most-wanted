@@ -12,7 +12,8 @@ import {
   IconButton,
   Button,
 } from '@mui/material'
-import { withStyles, lighten, darken } from '@mui/material/styles'
+import { withStyles } from '@mui/styles'
+import { lighten, darken } from '@mui/material/styles'
 
 const LightTooltip = withStyles((theme) => {
   const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken

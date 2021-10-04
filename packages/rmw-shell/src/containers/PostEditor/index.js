@@ -13,7 +13,7 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon'
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
-import { makeStyles, createStyles, useTheme } from '@mui/material/styles'
+import { makeStyles, createStyles, useTheme } from '@mui/styles'
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {

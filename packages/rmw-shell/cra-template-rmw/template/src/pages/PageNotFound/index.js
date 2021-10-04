@@ -4,7 +4,7 @@ import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Button from '@mui/material/Button'
 import Home from '@mui/icons-material/Home'
 import Paper from '@mui/material/Paper'
-import { withStyles } from '@mui/material/styles'
+import { withStyles } from '@mui/styles'
 import logo from './404.svg'
 
 const styles = (theme) => ({
