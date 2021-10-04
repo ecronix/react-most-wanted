@@ -11,7 +11,7 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { makeStyles, createStyles } from '@mui/material/styles'
+import { makeStyles, createStyles } from '@mui/styles'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
