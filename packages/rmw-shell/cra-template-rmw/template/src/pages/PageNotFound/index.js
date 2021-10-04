@@ -1,10 +1,10 @@
 import React from 'react'
 import { injectIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
-import Button from '@material-ui/core/Button'
-import Home from '@material-ui/icons/Home'
-import Paper from '@material-ui/core/Paper'
-import { withStyles } from '@material-ui/core/styles'
+import Button from '@mui/material/Button'
+import Home from '@mui/icons-material/Home'
+import Paper from '@mui/material/Paper'
+import { withStyles } from '@mui/material/styles'
 import logo from './404.svg'
 
 const styles = (theme) => ({

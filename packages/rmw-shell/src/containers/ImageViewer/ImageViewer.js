@@ -1,11 +1,11 @@
-import Backdrop from '@material-ui/core/Backdrop'
-import Fade from '@material-ui/core/Fade'
+import Backdrop from '@mui/material/Backdrop'
+import Fade from '@mui/material/Fade'
 import Image from 'material-ui-image'
-import Modal from '@material-ui/core/Modal'
+import Modal from '@mui/material/Modal'
 import React, { useState } from 'react'
-import Fab from '@material-ui/core/Fab'
-import CloseIcon from '@material-ui/icons/Close'
-import Slide from '@material-ui/core/Slide'
+import Fab from '@mui/material/Fab'
+import CloseIcon from '@mui/icons-material/Close'
+import Slide from '@mui/material/Slide'
 
 const ImageViewer = ({ src, ...rest }) => {
   const [open, setOpen] = useState(false)

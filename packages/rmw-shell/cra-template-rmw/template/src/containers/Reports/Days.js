@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
-import { useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@mui/material/styles'
 import { Bar } from 'react-chartjs-2'
 
 const currentDate = new Date()

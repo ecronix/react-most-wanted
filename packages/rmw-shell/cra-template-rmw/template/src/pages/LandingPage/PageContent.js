@@ -2,39 +2,39 @@ import React from 'react'
 import {
   CheckCircleOutline as CheckCircleOutlineIcon,
   TrackChanges,
-  FileCopy } from '@material-ui/icons';
+  FileCopy,
+} from '@mui/icons-material'
 import {
   Tooltip,
   Typography,
   Card,
   CardContent,
   IconButton,
-  Button } from '@material-ui/core'
-import {
-  withStyles,
-  lighten,
-  darken } from '@material-ui/core/styles'
+  Button,
+} from '@mui/material'
+import { withStyles, lighten, darken } from '@mui/material/styles'
 
-  const LightTooltip = withStyles((theme) => {
-  const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken;
+const LightTooltip = withStyles((theme) => {
+  const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken
   return {
-tooltip: {
-  ...theme.typography.body2,
-  borderRadius: theme.shape.borderRadius,
-  display: 'flex',
-  padding: '6px 10px',
-  backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
-}
-}})(Tooltip);
+    tooltip: {
+      ...theme.typography.body2,
+      borderRadius: theme.shape.borderRadius,
+      display: 'flex',
+      padding: '6px 10px',
+      backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
+    },
+  }
+})(Tooltip)
 
 const PackageCard = ({ title, command, description, icons }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false)
   const handleClick = () => {
     setOpen(true)
   }
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   return (
     <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
@@ -61,33 +61,31 @@ const PackageCard = ({ title, command, description, icons }) => {
           {/* <Tooltip */}
           <LightTooltip
             title={
-            <Button
-              color='inherit'
-              startIcon={<CheckCircleOutlineIcon />}
-            >
-              Copied to clipboard!
-            </Button>
+              <Button color="inherit" startIcon={<CheckCircleOutlineIcon />}>
+                Copied to clipboard!
+              </Button>
             }
             placement="bottom"
             open={open}
             leaveDelay={1000}
-            onClose={handleClose} >
-          <IconButton
-            aria-label="Icon button"
-            onClick={() => {
-              if (window.clipboardData) {
-                // Internet Explorer
-                window.clipboardData.setData('Text', command)
-              } else {
-                try {
-                  navigator.clipboard.writeText(command)
-                } catch (error) {}
-              }
-              handleClick()
-            }}
+            onClose={handleClose}
           >
-            <FileCopy />
-          </IconButton>
+            <IconButton
+              aria-label="Icon button"
+              onClick={() => {
+                if (window.clipboardData) {
+                  // Internet Explorer
+                  window.clipboardData.setData('Text', command)
+                } else {
+                  try {
+                    navigator.clipboard.writeText(command)
+                  } catch (error) {}
+                }
+                handleClick()
+              }}
+            >
+              <FileCopy />
+            </IconButton>
           </LightTooltip>
         </div>
         <br />
