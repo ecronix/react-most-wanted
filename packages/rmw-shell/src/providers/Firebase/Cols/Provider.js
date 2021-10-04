@@ -202,7 +202,7 @@ const Provider = ({ children, persistKey = 'firebase_cols' }) => {
         handleError(error)
       }
     },
-    [db, getRef]
+    [getRef]
   )
 
   const getCol = useCallback(

@@ -1,13 +1,15 @@
 import React, { useState, lazy, Suspense } from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import {
+  AppBar,
+  CssBaseline,
+  Paper,
+  Toolbar,
+  Button,
+  CircularProgress,
+} from '@mui/material'
 import { Helmet } from 'react-helmet'
-import Paper from '@material-ui/core/Paper'
 import { Scrollbars } from 'react-custom-scrollbars'
-import Toolbar from '@material-ui/core/Toolbar'
-import { ThemeProvider, createTheme } from '@material-ui/core/styles'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Button from '@material-ui/core/Button'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { useHistory } from 'react-router-dom'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 const PageContent = lazy(() => import('./PageContent'))
@@ -123,8 +125,8 @@ const LandingPage = () => {
               top: 0,
               left: 0,
               right: 0,
-              backgroundColor: transparent ? 'transparent' : undefined,
-              boxShadow: transparent ? 'none' : undefined,
+              backgroundColor: transparent ? 'transparent' : '#242424',
+              boxShadow: transparent ? 'none' : '#242424',
               transition: 'background 1s',
             }}
             position="static"
