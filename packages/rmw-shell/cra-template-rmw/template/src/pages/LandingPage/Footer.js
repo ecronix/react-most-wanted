@@ -32,7 +32,6 @@ const Footer = () => {
           bottom: 0,
           left: 0,
           right: 0,
-          backgroundColor: '#242424',
         }}
         id="footer-text"
       >

@@ -18,13 +18,9 @@ const FirebaseStorage = lazy(() => import('../pages/Firebase/Storage'))
 const Dashboard = lazy(() => import('../pages/Dashboard'))
 const Posts = lazy(() => import('../pages/Demo/Posts/Posts'))
 const Post = lazy(() => import('../pages/Demo/Posts/Post'))
-const GettingStarted = lazy(() =>
-  import('../pages/Documentation/GettingStarted')
-)
 
 const routes = [
   <Route path="/about" exact component={About} />,
-  <Route path="/docu/getting_started" exact component={GettingStarted} />,
   <AuthorizedRoute path="/dashboard" exact component={Dashboard} />,
   <AuthorizedRoute path="/firebase_paths" exact component={FirebasePaths} />,
   <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,

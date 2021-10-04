@@ -7,7 +7,7 @@ import { Avatar, CardMedia, IconButton, Card, CardHeader } from '@mui/material'
 
 import Notifications from '@mui/icons-material/Notifications'
 import { useHistory } from 'react-router-dom'
-import { ThemeProvider } from '@material-ui/styles'
+import { ThemeProvider } from '@mui/styles'
 import { createTheme } from '@mui/material/styles'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 
