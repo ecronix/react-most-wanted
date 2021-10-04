@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment, useCallback } from 'react'
 import Context from './Context'
-import Button from '@material-ui/core/Button'
+import { Button } from '@mui/material'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
@@ -27,6 +27,46 @@ const Provider = ({ children }) => {
   const { publicVapidKey } = messagingConfig || {}
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
+  const syncToken = useCallback(
+    () => async (token) => {
+      if (notificationsDisabled) {
+        return
+      }
+
+      setToken(token)
+      try {
+        if (uid) {
+          await set(
+            ref(getDatabase(), `notification_tokens/${uid}/${token}`),
+            true
+          )
+        }
+      } catch (error) {
+        console.warn(error)
+      }
+    },
+    [uid, notificationsDisabled]
+  )
+
+  const initializeMessaging = useCallback(
+    () => async () => {
+      const messaging = getMessaging(getApp())
+
+      getToken(messaging, { vapidKey: publicVapidKey }).then((t) => {
+        syncToken(t)
+      })
+
+      onMessage(messaging, (payload) => {
+        enqueueSnackbar('', {
+          content: (key) => {
+            return <SnackMessage payload={payload} id={key} />
+          },
+        })
+      })
+    },
+    [enqueueSnackbar, publicVapidKey, syncToken]
+  )
+
   useEffect(() => {
     if (
       isSupported() &&
@@ -35,41 +75,7 @@ const Provider = ({ children }) => {
     ) {
       initializeMessaging()
     }
-  }, [])
-
-  const syncToken = async (token) => {
-    if (notificationsDisabled) {
-      return
-    }
-
-    setToken(token)
-    try {
-      if (uid) {
-        await set(
-          ref(getDatabase(), `notification_tokens/${uid}/${token}`),
-          true
-        )
-      }
-    } catch (error) {
-      console.warn(error)
-    }
-  }
-
-  const initializeMessaging = async () => {
-    const messaging = getMessaging(getApp())
-
-    getToken(messaging, { vapidKey: publicVapidKey }).then((t) => {
-      syncToken(t)
-    })
-
-    onMessage(messaging, (payload) => {
-      enqueueSnackbar('', {
-        content: (key) => {
-          return <SnackMessage payload={payload} id={key} />
-        },
-      })
-    })
-  }
+  }, [initializeMessaging, notificationsDisabled])
 
   const action = (key) => (
     <Fragment>

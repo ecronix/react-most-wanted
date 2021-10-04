@@ -1,8 +1,11 @@
-import Checkbox from '@material-ui/core/Checkbox'
-import Divider from '@material-ui/core/Divider'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+import {
+  Checkbox,
+  Divider,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material'
+
 import React, { useEffect } from 'react'
 import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
