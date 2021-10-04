@@ -1,7 +1,6 @@
 import React from 'react'
-import { KeyboardDatePicker as MuiKeyboardDatePicker } from '@material-ui/pickers'
+import { DatePicker } from '@mui/lab'
 import { Field } from 'react-final-form'
-import pickerProviderWrapper from './PickerProvider'
 import { showErrorOnChange } from './Util'
 
 export function KeyboardDatePicker(props) {
@@ -41,10 +40,9 @@ function KeyboardDatePickerWrapper(props) {
   const isError = showError({ meta })
   const { helperText, ...lessrest } = rest
 
-  return pickerProviderWrapper(
-    dateFunsUtils,
+  return (
     React.createElement(
-      MuiKeyboardDatePicker,
+      DatePicker,
       Object.assign(
         {
           disableToolbar: true,

@@ -4,7 +4,7 @@ This should be removed and the native one used ASAP this issues is fixed: https:
 */
 
 import TextField from '@mui/material/TextField'
-import { default as MuiAutocomplete } from '@material-ui/lab/Autocomplete'
+import { Autocomplete as MuiAutocomplete } from '@mui/material'
 import React from 'react'
 import { Field } from 'react-final-form'
 import { showErrorOnChange } from './Util'
