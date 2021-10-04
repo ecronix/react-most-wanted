@@ -7,10 +7,10 @@ import DocsProvider from 'rmw-shell/lib/providers/Firebase/Docs/Provider'
 import ColsProvider from 'rmw-shell/lib/providers/Firebase/Cols/Provider'
 import MessagingProvider from 'rmw-shell/lib/providers/Firebase/Messaging/Provider'
 import StorageProvider from 'rmw-shell/lib/providers/Firebase/Storage/Provider'
-import { MuiPickersUtilsProvider } from '@material-ui/pickers'
-import MomentUtils from '@date-io/moment'
 import { initializeApp, getApps } from 'firebase/app'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
+import DateAdapter from '@mui/lab/AdapterMoment'
 
 export default function ({ children }) {
   const { appConfig } = useConfig()
@@ -44,9 +44,9 @@ export default function ({ children }) {
           <ColsProvider>
             <StorageProvider>
               <MessagingProvider>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
+                <LocalizationProvider dateAdapter={DateAdapter}>
                   {children}
-                </MuiPickersUtilsProvider>
+                </LocalizationProvider>
               </MessagingProvider>
             </StorageProvider>
           </ColsProvider>
