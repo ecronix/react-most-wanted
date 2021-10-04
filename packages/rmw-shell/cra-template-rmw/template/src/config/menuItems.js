@@ -25,7 +25,7 @@ import {
   MenuOpen as MenuOpenIcon,
   SettingsApplications as SettingsIcon,
   Style as StyleIcon,
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 import { getAuth } from 'firebase/auth'
 
 const getMenuItems = (props) => {

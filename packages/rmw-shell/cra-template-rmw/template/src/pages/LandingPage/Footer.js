@@ -1,5 +1,5 @@
 import React from 'react'
-import AppBar from '@material-ui/core/AppBar'
+import AppBar from '@mui/material/AppBar'
 
 const Footer = () => {
   return (

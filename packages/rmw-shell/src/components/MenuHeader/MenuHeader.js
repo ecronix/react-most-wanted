@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/material/styles'
 import clsx from 'clsx'
 
 import {
