@@ -125,8 +125,8 @@ const LandingPage = () => {
               top: 0,
               left: 0,
               right: 0,
-              backgroundColor: transparent ? 'transparent' : '#242424',
-              boxShadow: transparent ? 'none' : '#242424',
+              backgroundColor: transparent ? 'transparent' : undefined,
+              boxShadow: transparent ? 'none' : undefined,
               transition: 'background 1s',
             }}
             position="static"
