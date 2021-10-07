@@ -70,7 +70,6 @@ export default function ({
           }),
           maxHeight: 64,
           marginLeft: -12,
-          display: isMenuOpen && isDesktop && onBackClick ? 'none' : undefined,
         }}
       >
         <Toolbar>

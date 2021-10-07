@@ -33,6 +33,7 @@ const config = {
   },
 }
 export const useFieldForErrors = (name) => useField(name, config)
+
 export const showErrorOnChange = ({
   meta: { submitError, dirtySinceLastSubmit, error, touched, modified },
 }) =>
