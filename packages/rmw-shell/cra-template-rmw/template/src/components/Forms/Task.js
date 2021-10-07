@@ -3,15 +3,16 @@ import {
   Autocomplete,
   KeyboardDatePicker,
   TextField,
+  DatePicker,
 } from 'rmw-shell/lib/components/FormFields'
-
+import Stack from '@mui/material/Stack'
 // eslint-disable-next-line
 const Form = ({ id, handleSubmit, values, users = [] }) => {
   const helpers = users.map((u) => {
     const { key, val } = u
-    const { displayName } = val
+    const { name } = val
 
-    return { label: displayName, value: key }
+    return { label: name, value: key }
   })
 
   return (
@@ -20,7 +21,7 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
       style={{ display: 'flex', justifyContent: 'center' }}
     >
       <button type="submit" style={{ display: 'none' }} />
-      <div>
+      <Stack spacing={3}>
         <TextField
           label="Title"
           name="title"
@@ -29,7 +30,7 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
           required={true}
           fullWidth={true}
         />
-        <br />
+
         <TextField
           label="Description"
           name="description"
@@ -39,20 +40,20 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
           multiline
           minRows={2}
         />
-        <br />
 
-        <KeyboardDatePicker
+        <DatePicker
           label={'Due to'}
           name="due_to"
           inputVariant="outlined"
           margin="normal"
-          format="DD.MM.YYYY"
+          mask="__.__.____"
+          //format="DD.MM.YYYY"
+          autoOk={true}
         />
-        <br />
 
         <Autocomplete
           openOnFocus
-          label="Select Helper"
+          label="Select Company"
           name="helper"
           options={helpers}
           getOptionValue={(option) => option}
@@ -72,7 +73,7 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
             return filtered
           }}
         />
-      </div>
+      </Stack>
     </form>
   )
 }

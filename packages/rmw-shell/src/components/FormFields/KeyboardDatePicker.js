@@ -1,7 +1,8 @@
 import React from 'react'
-import { DatePicker } from '@mui/lab'
+import DatePicker from '@mui/lab/DatePicker'
 import { Field } from 'react-final-form'
 import { showErrorOnChange } from './Util'
+import TextField from '@mui/material/TextField'
 
 export function KeyboardDatePicker(props) {
   const { name, fieldProps, ...rest } = props
@@ -56,6 +57,7 @@ function KeyboardDatePickerWrapper(props) {
           name: name,
           value: value === '' ? null : value,
           inputProps: restInput,
+          renderInput: (params) => <TextField {...params} />,
         },
         lessrest
       )

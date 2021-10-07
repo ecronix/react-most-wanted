@@ -1,27 +1,10 @@
 import React from 'react'
-//import { TextField as SourceField } from 'mui-rff'
-import { TextField as MuiTextField } from '@mui/material'
+import MuiDatePicker from '@mui/lab/DesktopDatePicker'
+import { TextField } from '@mui/material'
 import { showErrorOnChange } from './Util'
 import { Field } from 'react-final-form'
 
-/*
-const identity = (value) => value
-
-const TextField = ({ fieldProps, ...rest }) => {
-  return (
-    <SourceField
-      required
-      fieldProps={{ parse: identity, ...fieldProps }}
-      {...rest}
-    />
-  )
-}
-
-export { TextField }
-export default TextField
-*/
-
-export function TextField(props) {
+export function DatePicker(props) {
   const { name, type, fieldProps, ...rest } = props
 
   return (
@@ -29,7 +12,7 @@ export function TextField(props) {
       name={name}
       type={type}
       render={({ input, meta }) => (
-        <TextFieldWrapper
+        <DatePickerWrapper
           input={input}
           meta={meta}
           name={name}
@@ -42,9 +25,16 @@ export function TextField(props) {
   )
 }
 
-export function TextFieldWrapper(props) {
+export function DatePickerWrapper(props) {
   const {
     input: { name, value, type, onChange, onBlur, onFocus, ...restInput },
+    formatValue = (v) => {
+      if (v && v.isValid()) {
+        return v.format()
+      } else {
+        return null //v?._i
+      }
+    },
     meta,
     required,
     fullWidth = true,
@@ -57,11 +47,13 @@ export function TextFieldWrapper(props) {
   const isError = showError({ meta })
 
   return (
-    <MuiTextField
+    <MuiDatePicker
       fullWidth={fullWidth}
       helperText={isError ? error || submitError : helperText}
       error={isError}
-      onChange={onChange}
+      onChange={(v) => {
+        onChange(formatValue(v))
+      }}
       onBlur={onBlur}
       onFocus={onFocus}
       name={name}
@@ -69,6 +61,7 @@ export function TextFieldWrapper(props) {
       type={type}
       required={required}
       inputProps={{ required, ...restInput }}
+      renderInput={(params) => <TextField {...params} />}
       {...rest}
     />
   )
