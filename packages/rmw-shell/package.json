@@ -83,7 +83,7 @@
     "intl-locales-supported": "^1.8.12",
     "jss-rtl": "^0.3.0",
     "material-ui-image": "^3.3.2",
-    "material-ui-shell": "^2.0.0",
+    "material-ui-shell": "^2.0.1",
     "moment": "^2.29.1",
     "mui-rff": "^3.0.16",
     "notistack": "^2.0.2",

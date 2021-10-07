@@ -1,6 +1,6 @@
 import Backdrop from '@mui/material/Backdrop'
 import Fade from '@mui/material/Fade'
-import Image from 'material-ui-image'
+//import Image from 'material-ui-image'
 import Modal from '@mui/material/Modal'
 import React, { useState } from 'react'
 import Fab from '@mui/material/Fab'
@@ -20,7 +20,7 @@ const ImageViewer = ({ src, ...rest }) => {
 
   return (
     <React.Fragment>
-      <Image src={src} onClick={handleOpen} {...rest} />
+      <img src={src} onClick={handleOpen} {...rest} />
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -74,7 +74,7 @@ const ImageViewer = ({ src, ...rest }) => {
                 width: '100%',
               }}
             >
-              <Image
+              <img
                 color="transparent"
                 iconContainerStyle={{ border: 'none' }}
                 animationDuration={0}

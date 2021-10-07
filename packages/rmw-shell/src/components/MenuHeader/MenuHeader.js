@@ -102,7 +102,7 @@ const MenuHeader = () => {
               <ListItemSecondaryAction>
                 <IconButton
                   onClick={() => {
-                    toggleThisTheme('isDarkMode')
+                    toggleThis('isDarkMode')
                   }}
                 >
                   {isDarkMode ? (

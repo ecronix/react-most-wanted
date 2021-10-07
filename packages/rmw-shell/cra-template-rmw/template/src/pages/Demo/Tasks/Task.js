@@ -15,12 +15,12 @@ const Task = () => {
   const { watchList, unwatchList, getList } = useLists()
 
   useEffect(() => {
-    watchList('users')
+    watchList('companies')
 
-    return () => unwatchList('users')
+    return () => unwatchList('companies')
   }, [watchList, unwatchList])
 
-  const users = getList('users')
+  const users = getList('companies')
 
   const initialValues = { helper: '', title: '' }
 
