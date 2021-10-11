@@ -4,7 +4,7 @@
       "jss-rtl": "0.x",
       "@formatjs/intl-relativetimeformat": "8.x",
       "base-shell": "1.x",
-      "material-ui-shell": "1.x",
+      "material-ui-shell": "2.x",
       "github-markdown-css": "4.x",
       "intl": "1.x",
       "intl-locales-supported": "1.x",
@@ -22,7 +22,7 @@
       "@mui/material": "5.x",
       "@emotion/react": "11.x",
       "@emotion/styled": "11.x",
-      "@mui/icons-material": "5.",
+      "@mui/icons-material": "5.x",
       "@mui/styles": "5.x"
     },
     "eslintConfig": {
