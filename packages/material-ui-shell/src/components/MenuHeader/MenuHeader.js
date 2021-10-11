@@ -22,7 +22,7 @@ import {
   Brightness4 as Brightness4Icon,
   BrightnessHigh as BrightnessHighIcon,
 } from '@mui/icons-material'
-import { useTheme } from '@emotion/react'
+import { useTheme } from '@mui/material/styles'
 
 const MenuHeader = () => {
   const { auth } = useAuth()
