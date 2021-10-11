@@ -39,7 +39,7 @@
       "@mui/material": "5.x",
       "@emotion/react": "11.x",
       "@emotion/styled": "11.x",
-      "@mui/icons-material": "5.",
+      "@mui/icons-material": "5.x",
       "@mui/styles": "5.x",
       "@mui/lab": "^5.0.0-alpha.49"
     },
