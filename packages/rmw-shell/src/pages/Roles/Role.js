@@ -2,9 +2,9 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import { useParams, useHistory } from 'react-router-dom'
-import AppBar from '@mui/material/AppBar'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
+import Divider from '@mui/material/Divider'
 import AccountBox from '@mui/icons-material/AccountBox'
 import Save from '@mui/icons-material/Save'
 import Delete from '@mui/icons-material/Delete'
@@ -19,6 +19,7 @@ import IconButton from '@mui/material/IconButton'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 import { getDatabase, ref, set } from 'firebase/database'
+import Box from '@mui/material/Box'
 
 const path = 'roles'
 const singular = 'role'
@@ -114,7 +115,7 @@ export default function () {
         </div>
       }
       tabs={
-        <AppBar position="static">
+        <Box>
           <Tabs
             value={tab}
             onChange={(e, t) => {
@@ -122,14 +123,12 @@ export default function () {
             }}
             centered
           >
-            <Tab
-              value="main"
-              icon={<AccountBox className="material-icons" />}
-            />
+            <Tab value="main" icon={<AccountBox color="inherit" />} />
 
-            <Tab value="grants" icon={<Lock className="material-icons" />} />
+            <Tab value="grants" icon={<Lock />} />
           </Tabs>
-        </AppBar>
+          <Divider />
+        </Box>
       }
     >
       <div style={{ height: '100%', overflow: 'hidden' }}>
