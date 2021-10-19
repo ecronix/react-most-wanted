@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions'
 import admin from 'firebase-admin'
 import { setClaim, removeClaim } from '../../utils/customClaims'
 
-const wait = t => {
+const wait = (t) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => resolve(), t)
   })
@@ -31,9 +31,9 @@ export default functions
     await wait(random(1000, 4000))
 
     if (snap.after.exists() && value.indexOf('storage') !== -1) {
-      await customClaims.setClaim(uid, grant)
+      await setClaim(uid, grant)
     } else {
-      await customClaims.removeClaim(uid, grant)
+      await removeClaim(uid, grant)
     }
 
     const user = await admin.auth().getUser(uid)
