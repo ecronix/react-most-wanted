@@ -1,11 +1,8 @@
 import React from 'react'
-import {
-  Autocomplete,
-  KeyboardDatePicker,
-  TextField,
-  DatePicker,
-} from 'rmw-shell/lib/components/FormFields'
+import { Autocomplete } from 'rmw-shell/lib/components/FormFields'
 import Stack from '@mui/material/Stack'
+import { TextField, DatePicker } from 'mui-rff'
+
 // eslint-disable-next-line
 const Form = ({ id, handleSubmit, values, users = [] }) => {
   const helpers = users.map((u) => {
