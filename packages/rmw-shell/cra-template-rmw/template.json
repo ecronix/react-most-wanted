@@ -17,7 +17,7 @@
       "material-ui-image": "3.x",
       "material-ui-shell": "1.x",
       "moment": "2.x",
-      "mui-rff": "3.x",
+      "mui-rff": "5.x",
       "notistack": "1.x",
       "react": "17.x",
       "react-beautiful-dnd": "13.x",

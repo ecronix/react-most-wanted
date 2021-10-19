@@ -181,6 +181,8 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <Assignment />,
         },
+        /*
+        // We will publish this when it's done
         {
           value: '/posts',
           visible: isAuthorised,
@@ -190,6 +192,7 @@ const getMenuItems = (props) => {
           }),
           leftIcon: <CallToAction />,
         },
+        */
       ],
     },
 
