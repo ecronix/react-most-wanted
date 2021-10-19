@@ -1,6 +1,6 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-  
+
     /// FUNCTIONS START ///
 
     //Checks if user is signed in
@@ -40,6 +40,13 @@ service cloud.firestore {
       match /{document=**}{
         allow read,write: if isSignedIn();
 
+      }
+    }
+
+    match /users {
+      allow read: if isSignedIn();
+      match /{userUid} {
+        allow read, write: if isOwner(userUid);
       }
     }
 

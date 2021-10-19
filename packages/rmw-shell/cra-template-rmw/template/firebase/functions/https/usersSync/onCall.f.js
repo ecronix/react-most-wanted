@@ -1,0 +1,45 @@
+import * as functions from 'firebase-functions'
+import admin from 'firebase-admin'
+import { listAllUsers } from '../../utils/users'
+import splitStringToArray from '../../utils/splitStringToArray'
+
+export default functions.https.onCall(async (data, context) => {
+  const { auth } = context
+  if (!auth) {
+    throw new functions.https.HttpsError(
+      'failed-precondition',
+      'The function must be called ' + 'while authenticated.'
+    )
+  }
+
+  try {
+    const users = await listAllUsers()
+    console.log('Users:', users.length)
+
+    const promises = []
+
+    for (let i = 0; i < users.length; i++) {
+      const user = users[i]
+      console.log('user', user)
+
+      await admin
+        .firestore()
+        .collection('users')
+        .doc(user.uid)
+        .set(
+          {
+            displayName: user.displayName || '',
+            photoURL: user.photoURL || '',
+            search: splitStringToArray(user.displayName || ''),
+          },
+          { merge: true }
+        )
+    }
+
+    //await Promise.all(promises)
+
+    return { message: 'OK' }
+  } catch (error) {
+    return { error: error.message }
+  }
+})
