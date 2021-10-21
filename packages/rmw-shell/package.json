@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "10.0.1",
+  "version": "10.0.3",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,7 +30,7 @@
     "final-form-arrays": "3.x",
     "firebase": "8.x",
     "firebaseui": "next",
-    "github-markdown-css": "4.x",
+    "github-markdown-css": "5.x",
     "intl": "1.x",
     "intl-locales-supported": "1.x",
     "material-ui-image": "3.x",
@@ -51,7 +51,7 @@
     "react-intl": "5.x",
     "react-ios-pwa-prompt": "1.x",
     "react-linkify": "^1.0.0-alpha",
-    "react-markdown": "5.x",
+    "react-markdown": "7.x",
     "react-router-dom": "5.x",
     "react-virtualized-auto-sizer": "1.x",
     "react-window": "1.x",
@@ -60,7 +60,7 @@
     "@emotion/styled": "11.x",
     "@mui/icons-material": "5.x",
     "@mui/styles": "5.x",
-    "@mui/lab": "^5.0.0-alpha.49"
+    "@mui/lab": "5.x"
   },
   "devDependencies": {
     "@date-io/moment": "^1.3.13",

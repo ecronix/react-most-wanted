@@ -36,13 +36,11 @@ const Admin = () => {
               setLoading(true)
               const httpsAdminOnCall = httpsCallable(
                 getFunctions(),
-                'https-usersSyncOnCall'
+                'https-adminOnCall'
+                //'https-usersSyncOnCall'
               )
 
               const { data } = await httpsAdminOnCall()
-
-              console.log('data', data)
-              return
 
               const { message } = data || {}
 
