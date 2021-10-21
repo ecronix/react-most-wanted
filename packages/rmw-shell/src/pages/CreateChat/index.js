@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import { useIntl } from 'react-intl'
@@ -7,39 +7,86 @@ import { useHistory } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import UserRow from 'rmw-shell/lib/components/UserRow'
 import { getDatabase, ref, update } from 'firebase/database'
+import { useFilter } from 'material-ui-shell/lib/providers/Filter'
+import {
+  collection,
+  getFirestore,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore'
 
 export default function () {
   const { watchList, getList, isListLoading } = useLists()
   const { auth } = useAuth()
   const intl = useIntl()
   const history = useHistory()
+  const [list, setList] = useState([])
+  const { getFilter } = useFilter()
+  const { search = {} } = getFilter('users')
+
+  const runSearch = useMemo(
+    () => async () => {
+      const db = getFirestore()
+      const ref = collection(db, 'users')
+      const q = query(
+        ref,
+        where('search', 'array-contains', search.value || '')
+      )
+      const snap = await getDocs(q)
+
+      const tempLlist = []
+
+      tempLlist.push({
+        key: 'new_group',
+        displayName: intl.formatMessage({
+          id: 'group_chat',
+          defaultMessage: 'Group chat',
+        }),
+        secondaryText: intl.formatMessage({
+          id: 'create_group_chat',
+          defaultMessage: 'Create new group chat',
+        }),
+        search: search.value,
+        icon: <GroupAdd />,
+        isGroup: true,
+      })
+      snap.forEach((doc) => {
+        tempLlist.push({ key: doc.id, ...doc.data() })
+      })
+
+      setList(tempLlist)
+    },
+    [search.value, intl]
+  )
 
   useEffect(() => {
-    watchList('users')
+    if (search.value && search.value !== '') {
+      runSearch()
+    } else {
+      setList([
+        {
+          key: 'new_group',
+          displayName: intl.formatMessage({
+            id: 'group_chat',
+            defaultMessage: 'Group chat',
+          }),
+          secondaryText: intl.formatMessage({
+            id: 'create_group_chat',
+            defaultMessage: 'Create new group chat',
+          }),
+          icon: <GroupAdd />,
+          isGroup: true,
+        },
+      ])
+    }
+  }, [search.value, runSearch, search, intl])
+
+  useEffect(() => {
     watchList('admins')
   }, [watchList])
 
   const admins = getList('admins')
-
-  const list = getList('users')
-    .map(({ key, val }) => {
-      return { key, ...val }
-    })
-    .filter((u) => u.key !== auth.uid)
-
-  list.unshift({
-    key: 'new_group',
-    displayName: intl.formatMessage({
-      id: 'group_chat',
-      defaultMessage: 'Group chat',
-    }),
-    secondaryText: intl.formatMessage({
-      id: 'create_group_chat',
-      defaultMessage: 'Create new group chat',
-    }),
-    icon: <GroupAdd />,
-    isGroup: true,
-  })
 
   const handleRowClick = async (user) => {
     const { key, displayName, photoURL = '', isGroup } = user
