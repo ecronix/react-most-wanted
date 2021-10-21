@@ -7,7 +7,7 @@ import DocsProvider from 'rmw-shell/lib/providers/Firebase/Docs/Provider'
 import ColsProvider from 'rmw-shell/lib/providers/Firebase/Cols/Provider'
 import MessagingProvider from 'rmw-shell/lib/providers/Firebase/Messaging/Provider'
 import StorageProvider from 'rmw-shell/lib/providers/Firebase/Storage/Provider'
-import { initializeApp, getApps } from 'firebase/app'
+import { initializeApp, getApps, getApp } from 'firebase/app'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DateAdapter from '@mui/lab/AdapterMoment'
@@ -19,7 +19,6 @@ export default function ({ children }) {
   const { prod = {}, dev = {} } = firebaseConfig || {}
   const { onAuthStateChanged: internalOnAuthStateChanged } = authConfig || {}
 
-  //Firebase app should be initialized only once
   if (getApps().length === 0) {
     initializeApp(
       process.env.NODE_ENV !== 'production' ? dev.initConfig : prod.initConfig
@@ -27,13 +26,16 @@ export default function ({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(getAuth(), (user) => {
+    const unsubscribe = onAuthStateChanged(getAuth(getApp()), (user) => {
       if (onAuthStateChanged) {
         internalOnAuthStateChanged(user, auth)
       }
     })
 
-    return () => unsubscribe()
+    return () => {
+      unsubscribe()
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

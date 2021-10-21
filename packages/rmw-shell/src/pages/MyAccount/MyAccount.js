@@ -33,6 +33,8 @@ import {
   TwitterAuthProvider,
   linkWithPopup,
   deleteUser,
+  updateCurrentUser,
+  reload,
 } from 'firebase/auth'
 import { getDatabase, set, remove, ref } from 'firebase/database'
 import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
@@ -110,9 +112,10 @@ const MyAccount = () => {
   }
 
   const handleSave = async () => {
-    await updateProfile(getAuth().currentUser, { displayName, photoURL })
-
+    updateProfile(getAuth().currentUser, { displayName, photoURL })
     updateAuth({ ...auth, displayName, photoURL })
+    await updateCurrentUser(getAuth(), getAuth().currentUser)
+    await reload(getAuth().currentUser)
   }
 
   const isLinkedWithProvider = (provider) => {

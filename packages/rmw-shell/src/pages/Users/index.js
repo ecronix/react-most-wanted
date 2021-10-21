@@ -21,20 +21,23 @@ const fields = [
 ]
 
 export default function () {
-  const { watchList, getList, isListLoading } = useLists()
+  const { watchList, getList } = useLists()
   const intl = useIntl()
   const history = useHistory()
   const [list, setList] = useState([])
+  const [isLoading, setLoading] = useState(false)
   const { getFilter } = useFilter()
   const { search = {} } = getFilter('users')
+  const searchValue = search.value
 
   const runSearch = useMemo(
     () => async () => {
+      setLoading(true)
       const db = getFirestore()
       const ref = collection(db, 'users')
       const q = query(
         ref,
-        where('search', 'array-contains', search.value || '')
+        where('search', 'array-contains', searchValue.toLowerCase() || '')
       )
       const snap = await getDocs(q)
 
@@ -44,17 +47,18 @@ export default function () {
       })
 
       setList(tempLlist)
+      setLoading(false)
     },
-    [search.value]
+    [searchValue]
   )
 
   useEffect(() => {
-    if (search.value && search.value !== '') {
+    if (searchValue && searchValue !== '') {
       runSearch()
     } else {
       setList([])
     }
-  }, [search.value, runSearch, search])
+  }, [runSearch, searchValue])
 
   useEffect(() => {
     watchList('admins')
@@ -87,7 +91,7 @@ export default function () {
             },
             { count: list.length }
           ),
-          isLoading: isListLoading('users'),
+          isLoading,
         }
       }}
     />
