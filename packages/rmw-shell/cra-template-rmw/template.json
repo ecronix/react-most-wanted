@@ -11,7 +11,7 @@
       "final-form-arrays": "3.x",
       "firebase": "9.x",
       "firebaseui": "next",
-      "github-markdown-css": "4.x",
+      "github-markdown-css": "5.x",
       "intl": "1.x",
       "intl-locales-supported": "1.x",
       "material-ui-image": "3.x",
@@ -41,7 +41,7 @@
       "@emotion/styled": "11.x",
       "@mui/icons-material": "5.x",
       "@mui/styles": "5.x",
-      "@mui/lab": "^5.0.0-alpha.49"
+      "@mui/lab": "5.x"
     },
     "eslintConfig": {
       "extends": ["react-app", "react-app/jest"]

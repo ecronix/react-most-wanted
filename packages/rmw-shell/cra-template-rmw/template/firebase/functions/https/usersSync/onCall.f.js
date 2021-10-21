@@ -21,13 +21,11 @@ export default functions
 
     try {
       const users = await listAllUsers()
-      console.log('Users:', users.length)
 
       let promises = []
 
       for (let i = 0; i < users.length; i++) {
         const user = users[i]
-        console.log('user', user)
         promises.push(
           admin
             .firestore()
