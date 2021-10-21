@@ -6,16 +6,17 @@ exports = module.exports = database
   .ref('/users/{userUid}')
   .onWrite(async (eventSnapshot, context) => {
     const { userUid } = context.params
-    if (eventSnapshot.after.val()) {
-      const user = eventSnapshot.after.val()
+    if (eventSnapshot.after.exists()) {
+      const { displayName = '', photoURL = '' } =
+        eventSnapshot.after.val() || {}
       await admin
         .firestore()
-        .doc(`/users/${userUid}/`)
+        .doc(`/users/${userUid}`)
         .set(
           {
-            displayName: user.displayName || '',
-            photoURL: user.photoURL || '',
-            search: splitStringToArray(user.displayName || ''),
+            displayName: displayName || '',
+            photoURL: photoURL || '',
+            search: splitStringToArray(displayName || ''),
           },
           { merge: true }
         )

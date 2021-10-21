@@ -24,6 +24,7 @@ export default function () {
   const [list, setList] = useState([])
   const { getFilter } = useFilter()
   const { search = {} } = getFilter('users')
+  const searchValue = search.value
 
   const runSearch = useMemo(
     () => async () => {
@@ -31,7 +32,7 @@ export default function () {
       const ref = collection(db, 'users')
       const q = query(
         ref,
-        where('search', 'array-contains', search.value || '')
+        where('search', 'array-contains', searchValue.toLowerCase() || '')
       )
       const snap = await getDocs(q)
 
@@ -47,7 +48,7 @@ export default function () {
           id: 'create_group_chat',
           defaultMessage: 'Create new group chat',
         }),
-        search: search.value,
+        search: searchValue,
         icon: <GroupAdd />,
         isGroup: true,
       })
@@ -57,11 +58,11 @@ export default function () {
 
       setList(tempLlist)
     },
-    [search.value, intl]
+    [searchValue, intl]
   )
 
   useEffect(() => {
-    if (search.value && search.value !== '') {
+    if (searchValue && searchValue !== '') {
       runSearch()
     } else {
       setList([
@@ -80,7 +81,7 @@ export default function () {
         },
       ])
     }
-  }, [search.value, runSearch, search, intl])
+  }, [searchValue, runSearch, intl, isListLoading])
 
   useEffect(() => {
     watchList('admins')
