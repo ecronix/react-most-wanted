@@ -45,8 +45,8 @@ service cloud.firestore {
 
     match /users {
       allow read: if isSignedIn();
-      match /{userUid} {
-        allow read, write: if isOwner(userUid);
+      match /{document=**} {
+        allow read: if isSignedIn();
       }
     }
 

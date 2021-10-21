@@ -18,6 +18,7 @@ export default function (props) {
     trailing = null,
     leading = null,
     disableSearch = false,
+    disableFilter = false,
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
@@ -39,7 +40,7 @@ export default function (props) {
               }}
             />
           )}
-          {fields.length > 0 && (
+          {fields.length > 0 && !disableFilter && (
             <IconButton color="inherit" onClick={() => openFilter(name)}>
               <FilterList
                 color={queries.length > 0 ? 'secondary' : undefined}
