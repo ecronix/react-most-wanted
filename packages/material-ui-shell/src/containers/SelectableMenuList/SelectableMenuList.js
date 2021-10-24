@@ -132,48 +132,50 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
             title={<Typography variant="button" children={item.primaryText} />}
             key={i}
           >
-            <ListItem
-              button
-              selected={index && index === item.value}
-              key={i}
-              onClick={(e) => {
-                onIndexChange(e, item.value)
-                handleNestedItemsClick(item)
-                if (item.onClick) {
-                  item.onClick()
-                }
-              }}
-              onMouseDown={(e) => {
-                if (e.button === 1) {
-                  var win = window.open(`${item.value}`, '_blank')
-                  win.focus()
-                }
-              }}
-            >
-              {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
+            <List>
+              <ListItem
+                button
+                selected={index && index === item.value}
+                key={i}
+                onClick={(e) => {
+                  onIndexChange(e, item.value)
+                  handleNestedItemsClick(item)
+                  if (item.onClick) {
+                    item.onClick()
+                  }
+                }}
+                onMouseDown={(e) => {
+                  if (e.button === 1) {
+                    var win = window.open(`${item.value}`, '_blank')
+                    win.focus()
+                  }
+                }}
+              >
+                {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
 
-              {!useMinified && <ListItemText primary={item.primaryText} />}
+                {!useMinified && <ListItemText primary={item.primaryText} />}
 
-              {item.nestedItems && !useMinified && (
-                <ListItemSecondaryAction
-                  onClick={() => {
-                    handleNestedItemsClick(item)
-                  }}
-                >
-                  <IconButton>
-                    {isRTL ? (
-                      <KeyboardArrowLeftIcon />
-                    ) : (
-                      <KeyboardArrowRight
-                        sx={{
-                          color: (t) => t.palette.text.primary,
-                        }}
-                      />
-                    )}
-                  </IconButton>
-                </ListItemSecondaryAction>
-              )}
-            </ListItem>
+                {item.nestedItems && !useMinified && (
+                  <ListItemSecondaryAction
+                    onClick={() => {
+                      handleNestedItemsClick(item)
+                    }}
+                  >
+                    <IconButton>
+                      {isRTL ? (
+                        <KeyboardArrowLeftIcon />
+                      ) : (
+                        <KeyboardArrowRight
+                          sx={{
+                            color: (t) => t.palette.text.primary,
+                          }}
+                        />
+                      )}
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                )}
+              </ListItem>
+            </List>
           </Tooltip>
         )
       }
