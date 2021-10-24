@@ -8,7 +8,7 @@ import { useConfig } from 'base-shell/lib/providers/Config'
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
 const CustomSwipeableDrawer = styled(SwipeableDrawer)(
-  ({ theme, isDesktop, isMenuOpen, isMiniMode, width }) => {
+  ({ theme, width, menucontext: { isDesktop, isMenuOpen, isMiniMode } }) => {
     if (isDesktop) {
       return {
         '& .MuiDrawer-paper': {
@@ -61,7 +61,7 @@ const ResponsiveMenu = ({ children }) => {
   return (
     <div style={{ boxSizing: 'content-box' }}>
       <CustomSwipeableDrawer
-        {...menuContext}
+        menucontext={menuContext}
         width={width}
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
