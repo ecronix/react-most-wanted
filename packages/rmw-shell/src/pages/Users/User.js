@@ -2,7 +2,7 @@ import Avatar from '@mui/material/Avatar'
 import Paper from '@mui/material/Paper'
 import React, { useEffect } from 'react'
 import Typography from '@mui/material/Typography'
-import { IconButton } from '@mui/material'
+import { Divider, IconButton } from '@mui/material'
 import { useIntl } from 'react-intl'
 import {
   GoogleIcon,
@@ -14,7 +14,7 @@ import Page from 'material-ui-shell/lib/containers/Page/Page'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useParams, useHistory } from 'react-router-dom'
-import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import AccountBox from '@mui/icons-material/AccountBox'
@@ -116,7 +116,7 @@ export default function () {
         </div>
       }
       tabs={
-        <AppBar position="static">
+        <Box>
           <Tabs
             value={tab}
             onChange={(e, t) => {
@@ -132,7 +132,8 @@ export default function () {
 
             <Tab value="grants" icon={<Lock className="material-icons" />} />
           </Tabs>
-        </AppBar>
+          <Divider />
+        </Box>
       }
     >
       <div style={{ height: '100%', overflow: 'hidden' }}>

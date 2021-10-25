@@ -156,7 +156,7 @@ const getMenuItems = (props) => {
       nestedItems: [
         {
           value: '/admin',
-          visible: !!isAdmin,
+          visible: !isAdmin,
           primaryText: intl.formatMessage({
             id: 'admin',
             defaultMessage: 'Admin',
