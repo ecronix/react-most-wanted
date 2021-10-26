@@ -12,6 +12,11 @@ import {
   Typography,
 } from '@mui/material'
 import { ChevronLeft, Menu as MenuIcon } from '@mui/icons-material'
+import Navbar from 'react-bootstrap/Navbar'
+import Container from 'react-bootstrap/Container'
+import Button from 'react-bootstrap/Button'
+
+import { List as ListIcon } from 'react-bootstrap-icons'
 
 export default function ({
   children,
@@ -58,6 +63,17 @@ export default function ({
         overflow: 'hidden',
       }}
     >
+      <Navbar bg="light">
+        {(isMenuOpen && isDesktop) ||
+          (!onBackClick && (
+            <Button variant="light" onClick={handleDrawerMenuClick}>
+              <ListIcon size={20} />
+            </Button>
+          ))}
+        <div style={{ padding: 8 }}> {headerTitle}</div>
+      </Navbar>
+
+      {/*
       <AppBar
         position={isDesktop ? 'absolute' : undefined}
         sx={{
@@ -84,7 +100,7 @@ export default function ({
                 <MenuIcon />
               </IconButton>
             ))}
-          {/* james- check if this is dead code? */}
+   
           {onBackClick && (
             <IconButton
               color="inherit"
@@ -97,7 +113,7 @@ export default function ({
           {!onBackClick && isMenuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
-          {/* james- check if this is dead code? */}
+ 
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
           </Typography>
@@ -105,6 +121,8 @@ export default function ({
           {appBarContent}
         </Toolbar>
       </AppBar>
+
+          */}
       <div
         style={{
           alignItems: 'center',

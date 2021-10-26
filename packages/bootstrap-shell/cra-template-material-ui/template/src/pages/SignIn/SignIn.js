@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@mui/material'
-import Page from 'material-ui-shell/lib/containers/Page'
+import Page from 'bootstrap-shell/lib/containers/Page'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
