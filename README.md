@@ -12,9 +12,9 @@ The **features** include:
 * [**Firebase**](https://firebase.google.com/): use Firebase's platform as backend and database and has a sync between Firebase and the app state
 * The resulting App is a full functional [**PWA** ](https://web.dev/progressive-web-apps/) (Progressive Web App\) and has a "all 100" Points [**Lighthouse**](https://developers.google.com/web/tools/lighthouse) report
 * Authentication and authorization with roles and permissions
-* Push notifications with in App Notificcations UI
+* Push notifications within App Notifications UI
 * Theming
-* Internationalizaion
+* Internationalization
 * Build in CI/CD with [**Travis**](https://travis-ci.org/) and [**Browserstack**](https://www.browserstack.com/) (optional\)
 * Real-time Forms
 * and many more...
@@ -41,7 +41,7 @@ Thanks to [GitBook ](https://www.gitbook.com/)for providing us a great documenta
 
 ## License
 
- This project uses [MIT license](https://github.com/TarikHuber/react-most-wanted/blob/master/LICENSE).
+ This project uses the [MIT license](https://github.com/TarikHuber/react-most-wanted/blob/master/LICENSE).
 
 
 

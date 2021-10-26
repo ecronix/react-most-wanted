@@ -14,8 +14,6 @@ npx create-react-app my-app --template base
 
 ## mui-shell
 
-
-
 ```text
 npx create-react-app my-app --template material-ui
 ```
