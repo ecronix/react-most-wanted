@@ -9,12 +9,12 @@ The **features** include:
 * Build on [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html)
 * [**Material UI**](https://material-ui.com/): Material Design ready-to-use React Components
 * [**Code splitting**](https://webpack.js.org/guides/code-splitting/): MPA \(Multiple Page Application\) ready. A Large codebase can be split into separate bundles that load different parts of the application, lazy-loading the different bundles on demand.
-* [**Firebase**](https://firebase.google.com/): use Firebase's platform as backend and database and has a sync between Firebase and the app state
-* The resulting App is a full functional [**PWA** ](https://web.dev/progressive-web-apps/) (Progressive Web App\) and has a "all 100" Points [**Lighthouse**](https://developers.google.com/web/tools/lighthouse) report
+* [**Firebase**](https://firebase.google.com/): Use Firebase's platform as a backend and database, with a sync between Firebase and the app state
+* The resulting App is a full functional [**PWA** ](https://web.dev/progressive-web-apps/) (Progressive Web App\) and has an "all 100" Points [**Lighthouse**](https://developers.google.com/web/tools/lighthouse) report
 * Authentication and authorization with roles and permissions
-* Push notifications with in App Notificcations UI
+* Push notifications within App Notifications UI
 * Theming
-* Internationalizaion
+* Internationalization
 * Build in CI/CD with [**Travis**](https://travis-ci.org/) and [**Browserstack**](https://www.browserstack.com/) (optional\)
 * Real-time Forms
 * and many more...
@@ -41,7 +41,7 @@ Thanks to [GitBook ](https://www.gitbook.com/)for providing us a great documenta
 
 ## License
 
- This project uses [MIT license](https://github.com/TarikHuber/react-most-wanted/blob/master/LICENSE).
+ This project uses the [MIT license](https://github.com/TarikHuber/react-most-wanted/blob/master/LICENSE).
 
 
 
