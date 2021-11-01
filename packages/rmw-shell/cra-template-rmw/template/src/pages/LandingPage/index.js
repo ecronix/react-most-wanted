@@ -256,7 +256,19 @@ const LandingPage = () => {
                   </Button>
                 </div>
                 {scrolled && (
-                  <Suspense fallback={<CircularProgress />}>
+                  <Suspense
+                    fallback={
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'center',
+                          marginTop: '125px',    
+                        }}
+                      >
+                        <CircularProgress />
+                      </div>
+                    }
+                  >
                     <PageContent setComponents={setComponents} />
                   </Suspense>
                 )}
