@@ -10,7 +10,7 @@
       "final-form": "4.x",
       "final-form-arrays": "3.x",
       "firebase": "9.x",
-      "firebaseui": "next",
+      "firebaseui": "6.x",
       "github-markdown-css": "5.x",
       "intl": "1.x",
       "intl-locales-supported": "1.x",
