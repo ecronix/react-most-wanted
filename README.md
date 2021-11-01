@@ -8,7 +8,7 @@ The **features** include:
 
 * Build on [**Create React App**](https://reactjs.org/docs/create-a-new-react-app.html)
 * [**Material UI**](https://material-ui.com/): Material Design ready-to-use React Components
-* [**Code splitting**](https://webpack.js.org/guides/code-splitting/): MPA \(Multiple Page Application\) ready. A Large codebase can be split into separate bundles that load different parts of the application, lazy-loading the different bundles on demand.
+* [**Code splitting**](https://webpack.js.org/guides/code-splitting/): MPA \(Multi Page Application\) ready. A Large codebase can be split into separate bundles that load different parts of the application, lazy-loading the different bundles on demand.
 * [**Firebase**](https://firebase.google.com/): Use Firebase's platform as a backend and database, with a sync between Firebase and the app state
 * The resulting App is a full functional [**PWA** ](https://web.dev/progressive-web-apps/) (Progressive Web App\) and has an "all 100" Points [**Lighthouse**](https://developers.google.com/web/tools/lighthouse) report
 * Authentication and authorization with roles and permissions
