@@ -206,7 +206,7 @@ const LandingPage = () => {
                       marginTop: -40,
                     }}
                   >
-                    React Starter-Kit with all Most Wanted features
+                    React Starter-Kit with all the Most Wanted features
                   </h4>
                 </div>
               </div>
