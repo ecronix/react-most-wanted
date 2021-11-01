@@ -242,8 +242,8 @@ const PageContent = ({ setComponents }) => {
           style={{ margin: 16, textAlign: 'center', color: 'grey' }}
         >
           You start easy like with every other template but you can also update
-          the template parts over the time. And with the updates you don't only
-          update the components but also get new features and get bugfixes.
+          the template parts over time. And with the updates you don't only
+          update the components but also get new features and bug fixes.
         </Typography>
         <div style={{ height: 50 }} />
       </div>
