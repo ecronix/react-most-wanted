@@ -5,7 +5,7 @@
       "@formatjs/intl-relativetimeformat": "8.x",
       "base-shell": "1.x",
       "material-ui-shell": "2.x",
-      "github-markdown-css": "4.x",
+      "github-markdown-css": "5.x",
       "intl": "1.x",
       "intl-locales-supported": "1.x",
       "notistack": "2.x",
