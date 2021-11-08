@@ -9,14 +9,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - name: install-rmw-shell
       - run: npx create-react-app demo-app --template rmw --use-npm
-      - run: ls -l
-      - run: cd demo-app
-      - run: ls -l
-      - run: cd firebase
-      - run: ls -l
-      - run: cd functions
+      - name: install firebase functins dependencies
+        working-directory: ./demo-app/firebase/functions
       - run: npm i
-      - run: cd ..
-      - run: cd ..
+      - name: run build
+        working-directory: ./demo-app
       - run: npm run build
