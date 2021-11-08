@@ -19,4 +19,6 @@ jobs:
           process.env.CI = false
           npm run build
           process.env.CI = true
+        env:
+          CI: false
         working-directory: ./demo-app
