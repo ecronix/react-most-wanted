@@ -1,14 +1,15 @@
 import '@formatjs/intl-relativetimeformat/polyfill'
 import LocaleProvider from '../../providers/Locale/Provider'
 import React, { Suspense, useEffect, useState } from 'react'
-import areIntlLocalesSupported from 'intl-locales-supported'
-import intl from 'intl'
+//import areIntlLocalesSupported from 'intl-locales-supported'
+//import intl from 'intl'
 import { IntlProvider } from 'react-intl'
 import { Switch } from 'react-router-dom'
 import { getLocaleMessages } from '../../utils/locale'
 import { useConfig } from '../../providers/Config'
 import { useLocale } from '../../providers/Locale'
 
+/*
 const loadLocalePolyfill = (locale) => {
   // START: Intl polyfill
   // Required for working on Safari
@@ -31,6 +32,8 @@ const loadLocalePolyfill = (locale) => {
   // END: Intl polyfill
 }
 
+*/
+
 export const LayoutContent = () => {
   const [messages, setMessages] = useState([])
   const { appConfig } = useConfig()
@@ -49,7 +52,7 @@ export const LayoutContent = () => {
 
   useEffect(() => {
     const loadPolyfills = async () => {
-      loadLocalePolyfill(locale)
+      //loadLocalePolyfill(locale)
 
       for (let i = 0; i < locales.length; i++) {
         const l = locales[i]
