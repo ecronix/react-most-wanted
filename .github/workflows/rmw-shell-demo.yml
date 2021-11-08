@@ -11,9 +11,9 @@ jobs:
           node-version: '14'
       - name: install-rmw-shell
       - run: npx create-react-app demo-app --template rmw --use-npm
-      - name: install firebase functins dependencies
-        working-directory: ./demo-app/firebase/functions
+      - name: install firebase functins dependencies  
       - run: npm i
+        working-directory: ./demo-app/firebase/functions
       - name: run build
-        working-directory: ./demo-app
       - run: npm run build
+        working-directory: ./demo-app
