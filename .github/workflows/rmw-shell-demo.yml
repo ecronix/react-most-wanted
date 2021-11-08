@@ -3,14 +3,18 @@ on: [push, workflow_dispatch]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
       - run: npx create-react-app demo-app --template rmw --use-npm
+      - run: ls -l
       - run: cd demo-app
+      - run: ls -l
       - run: cd firebase
+      - run: ls -l
       - run: cd functions
       - run: npm i
       - run: cd ..
