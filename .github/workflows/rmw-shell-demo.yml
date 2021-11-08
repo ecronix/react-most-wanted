@@ -14,6 +14,9 @@ jobs:
       - name: install firebase functins dependencies  
         run: npm i
         working-directory: ./demo-app/firebase/functions
-      - name: run build
+      - name: |
+              process.env.CI = false
+              run build
+              process.env.CI = true
         run: npm run build
         working-directory: ./demo-app
