@@ -10,7 +10,9 @@ jobs:
           node-version: '14'
       - run: npx create-react-app demo-app --template rmw --use-npm
       - run: cd demo-app
+      - run: cd firebase
       - run: cd functions
       - run: npm i
+      - run: cd ..
       - run: cd ..
       - run: npm run build
