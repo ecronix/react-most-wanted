@@ -13,6 +13,8 @@ jobs:
         run: npm i
       - name: Update version
         run: npm version patch
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Publish
         run: npm publish
         env:
