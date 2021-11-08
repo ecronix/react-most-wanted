@@ -1,17 +1,18 @@
-name: GitHub Actions Demo
-on: [push]
+name: Demo deployment
+
+on:
+  push:
+    branches: [$default-branch]
+
 jobs:
-  Explore-GitHub-Actions:
+  setup:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+       with:
+          node-version: 14
+      - run: npx create-react-app demo-app --template rmw --use-npm
+      - run: cd demo-app
+      - run: chmod +x ./continuous_deployment/before_install.sh
+      - run: ./continuous_deployment/before_install.sh
