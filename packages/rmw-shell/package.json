@@ -59,7 +59,7 @@
     "@emotion/styled": "11.x",
     "@mui/icons-material": "5.x",
     "@mui/styles": "5.x",
-    "@mui/lab": "5.x"
+    "@mui/lab": "^5.0.0-alpha.49"
   },
   "devDependencies": {
     "@date-io/moment": "^1.3.13",
