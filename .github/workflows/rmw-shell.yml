@@ -1,4 +1,4 @@
-name: rmw-shell-demo
+name: rmw-shell
 on: [push, workflow_dispatch]
 jobs:
   check-bats-version:
