@@ -1,0 +1,19 @@
+name: rmw-shell-demo
+on: [push, workflow_dispatch]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+      - run: npm i
+      - name: Update version
+      - run: npm version patch
+      - name: Publish
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
