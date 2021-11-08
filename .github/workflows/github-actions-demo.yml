@@ -5,14 +5,12 @@ on:
     branches: [$default-branch]
 
 jobs:
-  setup:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      - run: npx create-react-app demo-app --template rmw --use-npm
-      - run: cd demo-app
-      - run: chmod +x ./continuous_deployment/before_install.sh
-      - run: ./continuous_deployment/before_install.sh
+      - run: npm ci
+      - run: npm test
