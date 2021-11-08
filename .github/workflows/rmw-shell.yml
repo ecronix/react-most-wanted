@@ -10,10 +10,10 @@ jobs:
         with:
           node-version: '14'
       - name: Install dependencies
-      - run: npm i
+        run: npm i
       - name: Update version
-      - run: npm version patch
+        run: npm version patch
       - name: Publish
-      - run: npm publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
