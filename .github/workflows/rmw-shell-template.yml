@@ -1,4 +1,4 @@
-name: rmw-shell-demo
+name: rmw-shell-template
 on:
   push:
     paths:
