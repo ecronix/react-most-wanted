@@ -1,6 +1,8 @@
 name: rmw-shell-demo
 on:
-  push:
+  push: 
+    branches:
+      - master
     paths:
       - "packages/rmw-shell/cra-template-rmw/template/**"
       - "packages/rmw-shell/src/**"
