@@ -2,7 +2,8 @@ name: rmw-shell-demo
 on:
   push:
     paths:
-      - "packages/rmw-shell/**"
+      - "packages/rmw-shell/cra-template-rmw/template/**"
+      - "packages/rmw-shell/src/**"
   workflow_dispatch:
     
 jobs:
