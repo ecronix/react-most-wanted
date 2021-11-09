@@ -20,3 +20,9 @@ jobs:
         env:
           CI: false
         working-directory: ./demo-app
+      - name: Deploy
+        run: |
+          firebase use prod
+          firebase deploy --only hosting --token $FIREBASE_TOKEN
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
