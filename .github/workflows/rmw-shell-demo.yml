@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     
 jobs:
-  rmw-shell-demo-deploy:
+  rmw-shell-demo:
     runs-on: ubuntu-latest
     environment: prod
     steps:
