@@ -1,6 +1,8 @@
 name: rmw-shell
 on:
   push:
+    branches:
+      - master
     paths:
       - "packages/rmw-shell/**.json"
   workflow_dispatch:

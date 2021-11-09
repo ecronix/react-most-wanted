@@ -1,6 +1,8 @@
 name: rmw-shell-template
 on:
   push:
+    branches:
+      - master
     paths:
       - "packages/rmw-shell/cra-template-rmw/**.json"
   workflow_dispatch:
@@ -23,3 +25,4 @@ jobs:
         working-directory: ./packages/rmw-shell/cra-template-rmw
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
