@@ -11,24 +11,22 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import { makeStyles, createStyles } from '@mui/styles'
+import { useTheme } from '@emotion/react'
+import { styled } from '@mui/material/styles'
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    sectionDesktop: {
-      display: 'none',
-      [theme.breakpoints.up('md')]: {
-        display: 'flex',
-      },
-    },
-    sectionMobile: {
-      display: 'flex',
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
-    },
-  })
-)
+const DesktopDiv = styled('div')(({ theme }) => ({
+  display: 'none',
+  [theme.breakpoints.up('md')]: {
+    display: 'flex',
+  },
+}))
+
+const MobileDiv = styled('div')(({ theme }) => ({
+  display: 'flex',
+  [theme.breakpoints.up('md')]: {
+    display: 'none',
+  },
+}))
 
 const ResponsiveMenu = ({
   scroll,
@@ -38,8 +36,8 @@ const ResponsiveMenu = ({
   transparent,
   contrastColor = 'white',
 }) => {
-  const classes = useStyles()
   const [isOpen, setOpen] = useState(false)
+  const theme = useTheme()
 
   const handleOpen = (e) => {
     setOpen(true)
@@ -51,10 +49,7 @@ const ResponsiveMenu = ({
 
   return (
     <React.Fragment>
-      <div
-        className={classes.sectionDesktop}
-        style={{ color: transparent ? contrastColor : undefined }}
-      >
+      <DesktopDiv style={{ color: transparent ? contrastColor : undefined }}>
         {sections.map(({ onClick, name, isDivider = false }, i) => {
           if (isDivider) {
             return (
@@ -82,8 +77,8 @@ const ResponsiveMenu = ({
             </Button>
           )
         })}
-      </div>
-      <div className={classes.sectionMobile}>
+      </DesktopDiv>
+      <MobileDiv>
         <IconButton
           aria-label="show more"
           aria-haspopup="true"
@@ -94,7 +89,7 @@ const ResponsiveMenu = ({
             style={{ color: transparent ? contrastColor : undefined }}
           />
         </IconButton>
-      </div>
+      </MobileDiv>
       <Drawer anchor="right" open={isOpen} onClose={handleClose}>
         <List>
           <ListItem button key={'0'} onClick={handleClose}>
