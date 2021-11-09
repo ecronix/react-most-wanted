@@ -1,7 +1,7 @@
 name: rmw-shell
 on: [push, workflow_dispatch]
 jobs:
-  check-bats-version:
+  rmw-shell-npm-publish:
     runs-on: ubuntu-latest
     environment: prod
     steps:
