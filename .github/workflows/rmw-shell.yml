@@ -5,7 +5,7 @@ on:
       - "packages/rmw-shell/**.json"
   workflow_dispatch:
 jobs:
-  rmw-shell-npm-publish:
+  rmw-shell:
     runs-on: ubuntu-latest
     environment: prod
     steps:
