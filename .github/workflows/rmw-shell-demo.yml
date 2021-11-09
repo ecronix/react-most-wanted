@@ -1,5 +1,10 @@
 name: rmw-shell-demo
-on: [push, workflow_dispatch]
+on:
+  push:
+    paths:
+      - "packages/rmw-shell/**"
+  workflow_dispatch:
+    
 jobs:
   rmw-shell-demo-deploy:
     runs-on: ubuntu-latest
