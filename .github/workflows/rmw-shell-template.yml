@@ -1,9 +1,10 @@
-name: rmw-shell
+name: rmw-shell-demo
 on:
   push:
     paths:
-      - "packages/rmw-shell/**.json"
+      - "packages/rmw-shell/cra-template-rmw/**.json"
   workflow_dispatch:
+    
 jobs:
   rmw-shell-npm-publish:
     runs-on: ubuntu-latest
@@ -16,9 +17,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/rmw-shell
+        working-directory: ./packages/rmw-shell/craco-template-rmw
       - name: Publish
         run: npm publish
-        working-directory: ./packages/rmw-shell
+        working-directory: ./packages/rmw-shell/craco-template-rmw
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
