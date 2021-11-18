@@ -1,7 +1,7 @@
 {
   "package": {
     "dependencies": {
-      "jss": "10.x"
+      "jss": "10.x",
       "jss-rtl": "0.x",
       "@formatjs/intl-relativetimeformat": "8.x",
       "base-shell": "1.x",
@@ -33,7 +33,7 @@
       "@babel/core": "7.x",
       "@types/react": "17.x",
       "typescript": "4.x"
-    }
+    },
     "eslintConfig": {
       "extends": ["react-app", "react-app/jest"]
     }
