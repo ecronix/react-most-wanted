@@ -1,6 +1,7 @@
 {
   "package": {
     "dependencies": {
+      "jss": "10.x",
       "jss-rtl": "0.x",
       "@formatjs/intl-relativetimeformat": "8.x",
       "base-shell": "1.x",
@@ -27,6 +28,11 @@
       "bootstrap": "5.x",
       "react-bootstrap": "2.x",
       "react-bootstrap-icons": "1.x"
+    },
+    "devDependencies": {
+      "@babel/core": "7.x",
+      "@types/react": "17.x",
+      "typescript": "4.x"
     },
     "eslintConfig": {
       "extends": ["react-app", "react-app/jest"]
