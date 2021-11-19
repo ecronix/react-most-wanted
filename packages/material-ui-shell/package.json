@@ -21,7 +21,7 @@
   },
   "peerDependencies": {
     "jss-rtl": "0.x",
-    "@formatjs/intl-relativetimeformat": "7.x",
+    "@formatjs/intl-relativetimeformat": "^7.0.0 || ^8.0.0",
     "react-easy-crop": "3.x",
     "base-shell": "1.x",
     "github-markdown-css": "5.x",
@@ -33,7 +33,7 @@
     "react-dom": "17.x",
     "react-intl": "5.x",
     "react-ios-pwa-prompt": "1.x",
-    "react-markdown": "5.x",
+    "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0",
     "react-router-dom": "5.x",
     "react-virtualized-auto-sizer": "1.x",
     "react-window": "1.x",
