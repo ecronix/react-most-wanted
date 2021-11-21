@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "10.0.14",
+  "version": "10.0.16",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -17,7 +17,8 @@
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "version": "echo $npm_package_version"
   },
   "dependencies": {},
   "peerDependencies": {
