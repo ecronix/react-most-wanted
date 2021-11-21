@@ -146,13 +146,13 @@ const SimpleEditor = ({
   const handleAddTitleClick = () => {
     const e = [...elements, { type: 'text', fontSize: 30, marginTop: 30 }]
     setElements(e)
-    handleClose(e)
+    handleClose()
   }
 
   const handleAddTextClick = () => {
     const e = [...elements, { type: 'text' }]
     setElements(e)
-    handleClose(e)
+    handleClose()
   }
 
   const handleRemoveClick = (index) => {

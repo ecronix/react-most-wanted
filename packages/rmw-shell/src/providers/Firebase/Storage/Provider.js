@@ -29,7 +29,6 @@ function reducer(state, action) {
   } = action
   switch (type) {
     case LOADING_CHANGED:
-      return { ...state, [path]: { ...state[path], isUploading, progress } }
     case PROGRESS_CHANGED:
       return { ...state, [path]: { ...state[path], isUploading, progress } }
     case ERROR:
