@@ -16,7 +16,7 @@ If you plan to use the messaging feature don't forget to copy the `publicVapidKe
 
 ## Publishing to Firebase
 
-### [Login to Firebase over youe CLI](https://firebase.google.com/docs/cli)
+### [Login to Firebase over your CLI](https://firebase.google.com/docs/cli)
 
 ### Select Firebase project
 
