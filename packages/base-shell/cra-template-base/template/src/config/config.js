@@ -36,11 +36,11 @@ const config = {
   },
   containers: {
     AppContainer: ({ children }) => (
-      <div>App Container {children} App Container</div>
+      <div>App Container top {children} App Container bottom</div>
     ),
 
     LayoutContainer: ({ children }) => (
-      <div>Layout Container {children} Layout Container</div>
+      <div>Layout Container top {children} Layout Container bottom</div>
     ),
   },
 }

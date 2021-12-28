@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "1.2.28",
+  "version": "2.0.0",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -25,17 +25,17 @@
     "@formatjs/intl-relativetimeformat": "8.x",
     "react": "17.x",
     "react-dom": "17.x",
-    "react-router-dom": "5.x",
+    "react-router-dom": "6.x",
     "react-intl": "5.x"
   },
   "devDependencies": {
-    "@formatjs/intl-relativetimeformat": "^8.1.5",
+    "@formatjs/intl-relativetimeformat": "^9.4.0",
     "intl": "^1.2.5",
     "nwb": "^0.25.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-intl": "^5.22.0",
-    "react-router-dom": "^5.3.0"
+    "react-intl": "^5.24.0",
+    "react-router-dom": "^6.2.1"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",

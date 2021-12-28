@@ -6,7 +6,7 @@ import React, { Suspense, lazy } from 'react'
 import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
 import UpdateProvider from '../../providers/Update/Provider'
 import defaultConfig from '../../config'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 const Layout = lazy(() => import('../../containers/Layout/Layout'))
 
@@ -27,16 +27,23 @@ const App = ({ config: appConfig }) => {
             <AddToHomeScreenProvider>
               <UpdateProvider checkInterval={checkInterval}>
                 <AppContainer>
-                  <Router>
+                  <BrowserRouter>
                     <OnlineProvider>
-                      <Switch>
+                      <Routes>
                         {LandingPage && (
-                          <Route path="/" exact component={LandingPage} />
+                          <Route path="/" exact element={<LandingPage />} />
                         )}
-                        <Route component={Layout} />
-                      </Switch>
+                        <Route
+                          path="*"
+                          element={
+                            <Suspense fallback={<Loading />}>
+                              <Layout />
+                            </Suspense>
+                          }
+                        />
+                      </Routes>
                     </OnlineProvider>
-                  </Router>
+                  </BrowserRouter>
                 </AppContainer>
               </UpdateProvider>
             </AddToHomeScreenProvider>
