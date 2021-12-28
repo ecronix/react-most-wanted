@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 
 const SignIn = () => {
   const { setAuth } = useAuth()
-  let history = useHistory()
+  let navigate = useNavigate()
+  let location = useLocation()
   const intl = useIntl()
   const [username, setUsername] = useState('')
   const [, setPassword] = useState('')
@@ -19,13 +20,13 @@ const SignIn = () => {
 
   const authenticate = (user) => {
     setAuth({ isAuthenticated: true, ...user })
-    let _location = history.location
     let _route = '/home'
-    if (_location.state && _location.state.from) {
-      _route = _location.state.from.pathname
-      history.push(_route)
+    let from = new URLSearchParams(location.search).get('from')
+
+    if (from) {
+      navigate(from, { replace: true })
     } else {
-      history.push(_route)
+      navigate(_route, { replace: true })
     }
   }
 

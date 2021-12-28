@@ -1,38 +1,11 @@
 import '@formatjs/intl-relativetimeformat/polyfill'
 import LocaleProvider from '../../providers/Locale/Provider'
 import React, { Suspense, useEffect, useState } from 'react'
-//import areIntlLocalesSupported from 'intl-locales-supported'
-//import intl from 'intl'
 import { IntlProvider } from 'react-intl'
-import { Switch } from 'react-router-dom'
 import { getLocaleMessages } from '../../utils/locale'
 import { useConfig } from '../../providers/Config'
 import { useLocale } from '../../providers/Locale'
-
-/*
-const loadLocalePolyfill = (locale) => {
-  // START: Intl polyfill
-  // Required for working on Safari
-  // Code from here: https://formatjs.io/guides/runtime-environments/
-  let localesMyAppSupports = [locale]
-
-  if (global.Intl) {
-    // Determine if the built-in `Intl` has the locale data we need.
-    if (!areIntlLocalesSupported(localesMyAppSupports)) {
-      // `Intl` exists, but it doesn't have the data we need, so load the
-      // polyfill and replace the constructors with need with the polyfill's.
-      let IntlPolyfill = intl
-      Intl.NumberFormat = IntlPolyfill.NumberFormat
-      Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat
-    }
-  } else {
-    // No `Intl`, so use and load the polyfill.
-    global.Intl = intl
-  }
-  // END: Intl polyfill
-}
-
-*/
+import { useRoutes } from 'react-router-dom'
 
 export const LayoutContent = () => {
   const [messages, setMessages] = useState([])
@@ -84,14 +57,7 @@ export const LayoutContent = () => {
       <LayoutContainer>
         {Menu && <Menu />}
         <Suspense fallback={<Loading />}>
-          <Switch>
-            {routes.map((Route, i) => {
-              return React.cloneElement(Route, { key: `@customRoutes/${i}` })
-            })}
-            {defaultRoutes.map((Route, i) => {
-              return React.cloneElement(Route, { key: `@defaultRoutes/${i}` })
-            })}
-          </Switch>
+          {useRoutes([...routes, ...defaultRoutes])}
         </Suspense>
       </LayoutContainer>
     </IntlProvider>
