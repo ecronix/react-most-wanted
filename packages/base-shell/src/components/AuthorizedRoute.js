@@ -3,7 +3,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../providers/Auth'
 import { useConfig } from '../providers/Config'
 
-function AuthorizedRoute({ children, redirectTo, ...rest }) {
+function AuthorizedRoute({ children }) {
   const { appConfig } = useConfig()
   const { auth: authConfig } = appConfig || {}
   const { signInURL = '/signin' } = authConfig || {}

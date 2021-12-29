@@ -10,15 +10,17 @@ const Home = lazy(() => import('../pages/Home/Home'))
 const routes = [
   {
     path: '/signin',
+    exact: true,
     element: (
       <UnauthorizedRoute>
         <SignIn />
       </UnauthorizedRoute>
     ),
   },
-  { path: '/about', element: <About /> },
+  { path: '/about', exact: true, element: <About /> },
   {
     path: '/home',
+    exact: true,
     element: (
       <AuthorizedRoute>
         <Home />
