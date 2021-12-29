@@ -6,7 +6,7 @@ import CloseIcon from '@mui/icons-material/Close'
 import { Avatar, CardMedia, IconButton, Card, CardHeader } from '@mui/material'
 
 import Notifications from '@mui/icons-material/Notifications'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ThemeProvider } from '@mui/styles'
 import { createTheme } from '@mui/material/styles'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SnackMessage = React.forwardRef((props, ref) => {
   const classes = useStyles()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { closeSnackbar } = useSnackbar()
   const { payload, id } = props
   const { notification } = payload
@@ -48,7 +48,7 @@ const SnackMessage = React.forwardRef((props, ref) => {
 
   const handleClick = () => {
     const url = new URL(click_action)
-    history.push(url.pathname)
+    navigate(url.pathname)
     handleDismiss()
   }
 

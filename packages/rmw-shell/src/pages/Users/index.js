@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import { useIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import UserRow from 'rmw-shell/lib/components/UserRow'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import {
@@ -23,7 +23,7 @@ const fields = [
 export default function () {
   const { watchList, getList } = useLists()
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [list, setList] = useState([])
   const [isLoading, setLoading] = useState(false)
   const { getFilter } = useFilter()
@@ -67,7 +67,7 @@ export default function () {
   const admins = getList('admins')
 
   const handleRowClick = (data) => {
-    history.push(`/users/${data.key}`)
+    navigate(`/users/${data.key}`)
   }
 
   return (

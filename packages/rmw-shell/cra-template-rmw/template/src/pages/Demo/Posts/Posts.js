@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { ListPage } from 'rmw-shell/lib/containers/Page'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import Post from '../../../components/Post/Post'
@@ -8,10 +8,10 @@ import Post from '../../../components/Post/Post'
 const Row = ({ data, index, style }) => {
   const { key } = data
   const { auth } = useAuth()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handlePostClick = (key, val, index) => {
-    history.push(`/posts/view/${key}`)
+    navigate(`/posts/view/${key}`)
   }
 
   return (
@@ -30,7 +30,7 @@ const Row = ({ data, index, style }) => {
 
 const Posts = () => {
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const getRef = useCallback(() => {}, [])
 
@@ -50,7 +50,7 @@ const Posts = () => {
         }
       }}
       onCreateClick={() => {
-        history.push(`/create_post`)
+        navigate(`/create_post`)
       }}
     />
   )

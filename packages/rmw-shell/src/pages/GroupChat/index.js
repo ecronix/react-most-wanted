@@ -5,7 +5,7 @@ import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import { useIntl } from 'react-intl'
 import Fab from '@mui/material/Fab'
 import ArrowForward from '@mui/icons-material/ArrowForward'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import TextField from '@mui/material/TextField'
 import { Paper } from '@mui/material'
@@ -18,7 +18,7 @@ export default function () {
   const { watchPath, getPath, clearPath } = usePaths()
   const { auth } = useAuth()
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { uid = false } = useParams()
   const [selected, setSelected] = useState({})
   const [step, setStep] = useState(uid !== false ? 1 : 0)
@@ -73,7 +73,7 @@ export default function () {
           name,
         })
 
-        history.push('/chats')
+        navigate('/chats')
       } else {
         let members = { [auth.uid]: true }
 
@@ -87,7 +87,7 @@ export default function () {
         await set(ref(db, `group_chats/${snap.key}/admins/${auth.uid}`), true)
         await update(ref(db, `group_chats/${snap.key}`), { members, name })
 
-        history.push('/chats')
+        navigate('/chats')
       }
     }
   }
@@ -118,7 +118,7 @@ export default function () {
               }),
               isLoading: isListLoading('users'),
               onBackClick: () => {
-                history.goBack()
+                navigate(-1)
               },
             }
           }}

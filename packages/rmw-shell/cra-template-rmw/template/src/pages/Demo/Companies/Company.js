@@ -2,13 +2,13 @@ import Form from '../../../components/Forms/Company'
 import React from 'react'
 import { FormPage } from 'rmw-shell/lib/containers/Page'
 import { useIntl } from 'react-intl'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 const path = 'companies'
 const singular = 'company'
 
 const Company = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const { uid } = useParams()
 
@@ -26,13 +26,13 @@ const Company = () => {
       }}
       handleSubmit={(values, newUid) => {
         if (newUid) {
-          history.replace(`/${path}/${newUid}`)
+          navigate(`/${path}/${newUid}`, { replace: true })
         } else {
-          history.push(`/${path}`)
+          navigate(`/${path}`)
         }
       }}
       handleDelete={() => {
-        history.push(`/${path}`)
+        navigate(`/${path}`)
       }}
       Form={Form}
       grants={{

@@ -3,7 +3,7 @@ import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import { useIntl } from 'react-intl'
 import GroupAdd from '@mui/icons-material/GroupAdd'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import UserRow from 'rmw-shell/lib/components/UserRow'
 import { getDatabase, ref, update } from 'firebase/database'
@@ -20,7 +20,7 @@ export default function () {
   const { watchList, getList, isListLoading } = useLists()
   const { auth } = useAuth()
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [list, setList] = useState([])
   const { getFilter } = useFilter()
   const { search = {} } = getFilter('users')
@@ -93,7 +93,7 @@ export default function () {
     const { key, displayName, photoURL = '', isGroup } = user
 
     if (isGroup) {
-      history.push(`/group_chat`)
+      navigate(`/group_chat`)
       return
     }
 
@@ -107,7 +107,7 @@ export default function () {
 
     await update(userChatsRef, { ...chatData })
 
-    history.push(`/chats/${key}`)
+    navigate(`/chats/${key}`)
   }
 
   return (
@@ -128,7 +128,7 @@ export default function () {
           }),
           isLoading: isListLoading('users'),
           onBackClick: () => {
-            history.goBack()
+            navigate(-1)
           },
         }
       }}

@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-key */
-import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/AuthorizedRoute'
+import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute'
 import React, { lazy } from 'react'
 import { Route } from 'react-router-dom'
 
@@ -20,31 +20,155 @@ const Posts = lazy(() => import('../pages/Demo/Posts/Posts'))
 const Post = lazy(() => import('../pages/Demo/Posts/Post'))
 
 const routes = [
-  <Route path="/about" exact component={About} />,
-  <AuthorizedRoute path="/dashboard" exact component={Dashboard} />,
-  <AuthorizedRoute path="/firebase_paths" exact component={FirebasePaths} />,
-  <AuthorizedRoute path="/firebase_lists" exact component={FirebaseLists} />,
-  <AuthorizedRoute path="/firebase_docs" exact component={FirebaseDocs} />,
-  <AuthorizedRoute path="/firebase_cols" exact component={FirebaseCols} />,
-  <AuthorizedRoute path="/admin" exact component={Admin} />,
-  <AuthorizedRoute path="/companies" exact component={Companies} />,
-  <AuthorizedRoute path="/companies/:uid" exact component={Company} />,
-  <AuthorizedRoute path="/create_company" exact component={Company} />,
-  <AuthorizedRoute path="/tasks" exact component={Tasks} />,
-  <AuthorizedRoute path="/tasks/:uid" exact component={Task} />,
-  <AuthorizedRoute path="/create_task" exact component={Task} />,
-  <AuthorizedRoute path="/posts" exact component={Posts} />,
-  <AuthorizedRoute path="/create_post" exact component={Post} />,
-  <AuthorizedRoute
-    path="/firebase_messaging"
-    exact
-    component={FirebaseMessaging}
-  />,
-  <AuthorizedRoute
-    path="/firebase_storage"
-    exact
-    component={FirebaseStorage}
-  />,
+  {
+    path: '/about',
+    exact: true,
+    element: <About />,
+  },
+  {
+    path: '/dashboard',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Dashboard />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/firebase_paths',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <FirebasePaths />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/firebase_lists',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <FirebaseLists />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/firebase_docs',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <FirebaseDocs />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/firebase_cols',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <FirebaseCols />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/admin',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Admin />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/companies',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Companies />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/companies/:uid',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Company />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/create_company',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Company />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/tasks',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Tasks />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/tasks/:uid',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Task />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/create_task',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Task />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/posts',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Posts />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/create_post',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <Post />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/firebase_messaging',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <FirebaseMessaging />
+      </AuthorizedRoute>
+    ),
+  },
+  {
+    path: '/firebase_storage',
+    exact: true,
+    element: (
+      <AuthorizedRoute>
+        <FirebaseStorage />
+      </AuthorizedRoute>
+    ),
+  },
 ]
 
 export default routes

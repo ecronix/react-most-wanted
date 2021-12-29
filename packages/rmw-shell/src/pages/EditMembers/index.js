@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import { useIntl } from 'react-intl'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import UserRow from 'rmw-shell/lib/components/UserRow'
 import { getDatabase, ref, set } from 'firebase/database'
@@ -11,7 +11,7 @@ export default function () {
   const { watchList, getList, clearList, isListLoading } = useLists()
   const { auth } = useAuth()
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { uid } = useParams()
   const groupMembersPath = `group_chats/${uid}/members`
   const db = getDatabase()
@@ -70,7 +70,7 @@ export default function () {
             }),
             isLoading: isListLoading('users'),
             onBackClick: () => {
-              history.goBack()
+              navigate(-1)
             },
           }
         }}

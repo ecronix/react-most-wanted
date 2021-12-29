@@ -1,7 +1,6 @@
-import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute/AuthorizedRoute'
+import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute'
 import React, { lazy } from 'react'
-import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute/UnauthorizedRoute'
-import { Route } from 'react-router-dom'
+import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute'
 
 const SignIn = lazy(() => import('rmw-shell/lib/pages/SignIn/SignIn'))
 const MyAccount = lazy(() => import('rmw-shell/lib/pages/MyAccount/MyAccount'))
@@ -17,29 +16,156 @@ const EditAdmins = lazy(() => import('rmw-shell/lib/pages/EditAdmins'))
 
 const getDefaultRoutes = (appConfig) => {
   return [
-    <UnauthorizedRoute
-      path="/signin"
-      redirectTo={appConfig?.auth?.redirectTo || '/'}
-      exact
-      component={SignIn}
-    />,
-    <AuthorizedRoute path="/chats" exact component={Chats} />,
-    <AuthorizedRoute path="/chats/:uid" exact component={Chats} />,
-    <AuthorizedRoute path="/create_chat" exact component={CreateChat} />,
-    <AuthorizedRoute path="/edit_members/:uid" exact component={EditMembers} />,
-    <AuthorizedRoute path="/edit_admins/:uid" exact component={EditAdmins} />,
-    <AuthorizedRoute path="/group_chat" exact component={GroupChat} />,
-    <AuthorizedRoute path="/group_chat/:uid" exact component={GroupChat} />,
-    <AuthorizedRoute path="/roles" exact component={Roles} />,
-    <AuthorizedRoute path="/create_role" exact component={Role} />,
-    <AuthorizedRoute path="/roles/:uid" exact component={Role} />,
-    <AuthorizedRoute path="/roles/:uid/:tab" exact component={Role} />,
-    <AuthorizedRoute path="/my_account" exact component={MyAccount} />,
-    <AuthorizedRoute path="/users" exact component={Users} />,
-    <AuthorizedRoute path="/users/:uid" exact component={User} />,
-    <AuthorizedRoute path="/users/:uid/:tab" exact component={User} />,
+    {
+      path: '/signin',
+      exact: true,
+      element: (
+        <UnauthorizedRoute>
+          <SignIn redirectTo={appConfig?.auth?.redirectTo || '/'} />
+        </UnauthorizedRoute>
+      ),
+    },
 
-    <Route component={appConfig?.pages?.PageNotFound} />,
+    {
+      path: '/chats',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Chats />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/chats/:uid',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Chats />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/create_chat',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <CreateChat />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/edit_members/:uid',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <EditMembers />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/edit_admins/:uid',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <EditAdmins />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/group_chat',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <GroupChat />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/group_chat/:uid',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <GroupChat />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/roles',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Roles />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/create_role',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Role />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/roles/:uid',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Role />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/roles/:uid/:tab',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Role />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/my_account',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <MyAccount />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/users',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <Users />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/users/:uid',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <User />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '/users/:uid/:tab',
+      exact: true,
+      element: (
+        <AuthorizedRoute>
+          <User />
+        </AuthorizedRoute>
+      ),
+    },
+    {
+      path: '*',
+
+      element: appConfig?.pages?.PageNotFound,
+    },
   ]
 }
 

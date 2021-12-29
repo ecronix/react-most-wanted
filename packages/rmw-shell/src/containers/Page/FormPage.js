@@ -3,7 +3,7 @@ import IconButton from '@mui/material/IconButton'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React from 'react'
 import Save from '@mui/icons-material/Save'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 import { useAuth } from 'base-shell/lib/providers/Auth'
@@ -20,7 +20,7 @@ export default function (props) {
     grants = {},
     initialValues = {},
   } = props
-  const history = useHistory()
+  const navigate = useNavigate()
   const { openDialog } = useQuestions()
   const { getPath } = usePaths()
   const { auth } = useAuth()
@@ -33,7 +33,7 @@ export default function (props) {
   }
 
   const databasePath = `${path}/${uid}`
-  const data = getPath(databasePath) || initialValues
+  const data = getPath(databasePath, {}) || initialValues
 
   const openDeleteDialog = () => {
     openDialog({
@@ -49,7 +49,7 @@ export default function (props) {
   return (
     <Page
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
       appBarContent={
         <div>

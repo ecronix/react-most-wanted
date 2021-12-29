@@ -2,14 +2,14 @@ import Form from '../../../components/Forms/Task'
 import React, { useEffect } from 'react'
 import { FormPage } from 'rmw-shell/lib/containers/Page'
 import { useIntl } from 'react-intl'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 
 const path = 'tasks'
 const singular = 'task'
 
 const Task = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const { uid } = useParams()
   const { watchList, unwatchList, getList } = useLists()
@@ -40,13 +40,13 @@ const Task = () => {
       handleSubmit={(values, newUid) => {
         console.log('values', values)
         if (newUid) {
-          history.replace(`/${path}/${newUid}`)
+          navigate(`/${path}/${newUid}`, { replace: true })
         } else {
-          history.push(`/${path}`)
+          navigate(`/${path}`)
         }
       }}
       handleDelete={() => {
-        history.push(`/${path}`)
+        navigate(`/${path}`)
       }}
       formProps={{ users }}
       Form={Form}

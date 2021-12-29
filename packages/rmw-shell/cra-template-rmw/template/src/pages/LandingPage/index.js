@@ -10,7 +10,7 @@ import {
 import { Helmet } from 'react-helmet'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
@@ -33,7 +33,7 @@ const LandingPage = () => {
   const [scrolled, setScrolled] = useState(false)
   const [components, setComponents] = useState(null)
   const [top, setTop] = useState(null)
-  const history = useHistory()
+  const navigate = useNavigate()
   const { isRTL } = useAppTheme()
 
   const scrollTo = (e) => {
@@ -47,7 +47,7 @@ const LandingPage = () => {
   const sections = [
     {
       name: 'start',
-      onClick: () => history.push('/dashboard'),
+      onClick: () => navigate('/dashboard'),
     },
     {
       name: 'components',
@@ -249,7 +249,7 @@ const LandingPage = () => {
                     color="secondary"
                     name={'signin'}
                     onClick={() => {
-                      history.push('/dashboard')
+                      navigate('/dashboard')
                     }}
                   >
                     Start
@@ -262,7 +262,7 @@ const LandingPage = () => {
                         style={{
                           display: 'flex',
                           justifyContent: 'center',
-                          marginTop: '125px',    
+                          marginTop: '125px',
                         }}
                       >
                         <CircularProgress />

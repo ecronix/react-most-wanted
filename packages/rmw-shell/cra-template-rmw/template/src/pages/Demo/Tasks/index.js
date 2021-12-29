@@ -6,7 +6,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import React, { useCallback } from 'react'
 import { ListPage } from 'rmw-shell/lib/containers/Page'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { getDatabase, ref, query, limitToLast } from 'firebase/database'
@@ -26,7 +26,7 @@ const fields = [
 
 const Row = ({ data, index, style }) => {
   const { title = '', helper = {}, key } = data
-  const history = useHistory()
+  const navigate = useNavigate()
   const { isRTL } = useAppTheme()
 
   return (
@@ -37,7 +37,7 @@ const Row = ({ data, index, style }) => {
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
-          history.push(`${path}/${key}`)
+          navigate(`/${path}/${key}`)
         }}
       >
         <ListItemAvatar>
@@ -54,7 +54,7 @@ const Row = ({ data, index, style }) => {
 
 const Tasks = () => {
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const getRef = useCallback(() => {
     return query(ref(getDatabase(), `public_tasks`), limitToLast(50))
@@ -78,7 +78,7 @@ const Tasks = () => {
         }
       }}
       onCreateClick={() => {
-        history.push('/create_task')
+        navigate('/create_task')
       }}
     />
   )
