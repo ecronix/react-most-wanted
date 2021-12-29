@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ReactMarkdown from 'react-markdown'
-import 'github-markdown-css'
 
 const loadData = async (path) => {
   const data = await fetch(path)
@@ -23,7 +22,7 @@ const MarkdownPage = ({ path, pageProps }) => {
   return (
     <Page {...pageProps}>
       <Scrollbar>
-        <div style={{ backgroundColor: 'white', padding: 12 }}>
+        <div style={{ padding: 12 }}>
           {source && (
             <ReactMarkdown className="markdown-body" children={source} />
           )}

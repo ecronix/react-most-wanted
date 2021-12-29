@@ -16,7 +16,7 @@ import React, { useEffect } from 'react'
 import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
 import { useTheme } from '@mui/material/styles'
@@ -37,7 +37,7 @@ import moment from 'moment'
 import { getDatabase, ref, set } from 'firebase/database'
 
 const Row = ({ data, index, style }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const { auth } = useAuth()
   const { isRTL } = useAppTheme()
@@ -80,7 +80,7 @@ const Row = ({ data, index, style }) => {
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
-          history.replace(`/chats/${key}`)
+          navigate(`/chats/${key}`)
         }}
       >
         <ListItemAvatar>
@@ -124,7 +124,7 @@ const Row = ({ data, index, style }) => {
               {path !== '' && (
                 <MenuItem
                   onClick={() => {
-                    history.push(`/group_chat/${key}`)
+                    navigate(`/group_chat/${key}`)
                   }}
                 >
                   <ListItemIcon>
@@ -140,7 +140,7 @@ const Row = ({ data, index, style }) => {
               {path !== '' && (
                 <MenuItem
                   onClick={() => {
-                    history.push(`/edit_members/${key}`)
+                    navigate(`/edit_members/${key}`)
                   }}
                 >
                   <ListItemIcon>
@@ -156,7 +156,7 @@ const Row = ({ data, index, style }) => {
               {path !== '' && (
                 <MenuItem
                   onClick={() => {
-                    history.push(`/edit_admins/${key}`)
+                    navigate(`/edit_admins/${key}`)
                   }}
                 >
                   <ListItemIcon>
@@ -208,7 +208,7 @@ const Row = ({ data, index, style }) => {
 
 export default function () {
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { uid = '' } = useParams()
   const { auth } = useAuth()
   const { watchList, getList, unwatchList } = useLists()
@@ -262,7 +262,7 @@ export default function () {
       onBackClick={
         !matches && uid
           ? () => {
-              history.replace('/chats')
+              navigate('/chats', { replace: true })
             }
           : undefined
       }
@@ -286,7 +286,7 @@ export default function () {
               <Fab
                 color="secondary"
                 onClick={() => {
-                  history.push('/create_chat')
+                  navigate('/create_chat')
                 }}
               >
                 <ChatIcon />

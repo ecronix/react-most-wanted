@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import Page from 'material-ui-shell/lib/containers/Page'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CircularProgress from '@mui/material/CircularProgress'
 import Publish from '@mui/icons-material/Publish'
 import IconButton from '@mui/material/IconButton'
@@ -13,7 +13,7 @@ import SimpleEditor from 'rmw-shell/lib/containers/PostEditor'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 
 const Post = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { uid } = useParams()
   const intl = useIntl()
   const { auth } = useAuth()
@@ -39,7 +39,7 @@ const Post = () => {
     }
 
     setPublishing(false)
-    history.goBack()
+    navigate(-1)
   }
 
   const handleImageUpload = (file) => {
@@ -83,7 +83,7 @@ const Post = () => {
   const handleDelete = async (handleClose) => {
     if (uid) {
       handleClose()
-      history.goBack()
+      navigate(-1)
     }
   }
 
@@ -108,7 +108,7 @@ const Post = () => {
   return (
     <Page
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
       appBarContent={
         <div>

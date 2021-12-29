@@ -12,7 +12,7 @@ import Share from '@mui/icons-material/Share'
 import Edit from '@mui/icons-material/Edit'
 import Chip from '@mui/material/Chip'
 import { useIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
@@ -59,7 +59,7 @@ const handleShare = ({ key, title, text }) => {
 }
 
 const Post = ({ uid, val, handlePostClick, index }) => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const intl = useIntl()
   const { auth } = useAuth()
   const {
@@ -79,14 +79,14 @@ const Post = ({ uid, val, handlePostClick, index }) => {
   const matches = useMediaQuery('(min-width:800px)')
 
   const handleProfileClick = () => {
-    //history.push(`/profiles/${authorUid}`)
+    //navigate(`/profiles/${authorUid}`)
   }
 
   const handleEdit = () => {
     if (forPost) {
-      history.push(`/user_comments/edit/${uid}`)
+      navigate(`/user_comments/edit/${uid}`)
     } else {
-      history.push(`/user_posts/edit/${uid}`)
+      navigate(`/user_posts/edit/${uid}`)
     }
   }
 

@@ -12,21 +12,6 @@ import {
   IconButton,
   Button,
 } from '@mui/material'
-import { withStyles } from '@mui/styles'
-import { lighten, darken } from '@mui/material/styles'
-
-const LightTooltip = withStyles((theme) => {
-  const getBackgroundColor = theme.palette.type === 'light' ? lighten : darken
-  return {
-    tooltip: {
-      ...theme.typography.body2,
-      borderRadius: theme.shape.borderRadius,
-      display: 'flex',
-      padding: '6px 10px',
-      backgroundColor: getBackgroundColor(theme.palette.success.main, 0.1),
-    },
-  }
-})(Tooltip)
 
 const PackageCard = ({ title, command, description, icons }) => {
   const [open, setOpen] = React.useState(false)
@@ -60,7 +45,7 @@ const PackageCard = ({ title, command, description, icons }) => {
             {command}
           </Typography>
           {/* <Tooltip */}
-          <LightTooltip
+          <Tooltip
             title={
               <Button color="inherit" startIcon={<CheckCircleOutlineIcon />}>
                 Copied to clipboard!
@@ -87,7 +72,7 @@ const PackageCard = ({ title, command, description, icons }) => {
             >
               <FileCopy />
             </IconButton>
-          </LightTooltip>
+          </Tooltip>
         </div>
         <br />
         {icons}

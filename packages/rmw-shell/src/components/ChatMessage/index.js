@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
 import Linkify from 'react-linkify'
@@ -40,7 +40,7 @@ export default function ({
   userChanged = false,
   dateChanged = false,
 }) {
-  const history = useHistory()
+  const navigate = useNavigate()
   const theme = useTheme()
   const { auth } = useAuth()
   const { appConfig } = useConfig()
@@ -204,7 +204,7 @@ export default function ({
                 photoURL: authorPhotoUrl,
               })
 
-              history.push(`/chats/${authorUid}`)
+              navigate(`/chats/${authorUid}`)
             }}
           >
             <Typography

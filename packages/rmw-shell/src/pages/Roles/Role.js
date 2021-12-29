@@ -1,7 +1,7 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import Divider from '@mui/material/Divider'
@@ -26,7 +26,7 @@ const singular = 'role'
 
 export default function () {
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { uid, tab = 'main' } = useParams()
   const { getFilter, setSearch } = useFilter()
   const { search = {} } = getFilter(tab)
@@ -47,7 +47,7 @@ export default function () {
       handleAction: async (handleClose) => {
         await set(ref(getDatabase(), `${path}/${uid}`), null)
         handleClose()
-        history.push(`/${path}`)
+        navigate(`/${path}`)
       },
       title: intl.formatMessage({
         id: `delete_${singular}_dialog_title`,
@@ -67,7 +67,7 @@ export default function () {
   return (
     <Page
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
       pageTitle={intl.formatMessage({
         id: 'role',
@@ -119,7 +119,7 @@ export default function () {
           <Tabs
             value={tab}
             onChange={(e, t) => {
-              history.replace(`/roles/${uid}/${t}`)
+              navigate(`/roles/${uid}/${t}`, { replace: true })
             }}
             centered
           >
@@ -148,9 +148,9 @@ export default function () {
                 setSubmit={setSubmit}
                 handleSubmit={(values, newUid) => {
                   if (newUid) {
-                    history.replace(`/${path}/${newUid}`)
+                    navigate(`/${path}/${newUid}`, { replace: true })
                   } else {
-                    history.push(`/${path}`)
+                    navigate(`/${path}`)
                   }
                 }}
                 Form={Form}

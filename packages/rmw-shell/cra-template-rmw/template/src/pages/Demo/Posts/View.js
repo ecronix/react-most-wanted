@@ -5,11 +5,11 @@ import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
 import moment from 'moment'
-import { useHistory, useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 
 const View = () => {
-  const history = useHistory()
+  const navigate = useNavigate()
   const { uid } = useParams()
   const { watchPath, getPath, clearPath } = usePaths()
 
@@ -30,7 +30,7 @@ const View = () => {
   return (
     <Page
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
     >
       <Scrollbar>

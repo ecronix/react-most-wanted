@@ -13,7 +13,7 @@ import {
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
 import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
@@ -32,7 +32,7 @@ import { getDatabase, ref, set } from 'firebase/database'
 
 export default function () {
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { watchPath, getPath } = usePaths()
   const { watchList, getList } = useLists()
   const { uid, tab = 'main' } = useParams()
@@ -93,7 +93,7 @@ export default function () {
   return (
     <Page
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
       pageTitle={intl.formatMessage({
         id: 'user',
@@ -120,7 +120,7 @@ export default function () {
           <Tabs
             value={tab}
             onChange={(e, t) => {
-              history.replace(`/users/${uid}/${t}`)
+              navigate(`/users/${uid}/${t}`, { replace: true })
             }}
             centered
           >

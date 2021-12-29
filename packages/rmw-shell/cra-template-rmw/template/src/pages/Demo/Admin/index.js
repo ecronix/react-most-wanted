@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Page from 'material-ui-shell/lib/containers/Page'
 import { useIntl } from 'react-intl'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import CircularProgress from '@mui/material/CircularProgress'
 import { getFunctions, httpsCallable } from 'firebase/functions'
@@ -9,7 +9,7 @@ import { getFunctions, httpsCallable } from 'firebase/functions'
 const Admin = () => {
   const intl = useIntl()
   const [isLoading, setLoading] = useState(false)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   return (
     <Page
@@ -47,7 +47,7 @@ const Admin = () => {
               setLoading(false)
 
               if (message === 'OK') {
-                history.push('/users')
+                navigate('/users')
               }
             }}
           >
