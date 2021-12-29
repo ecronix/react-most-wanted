@@ -2,15 +2,16 @@ import { Button, TextField, Typography } from '@mui/material'
 import Page from 'material-ui-shell/lib/containers/Page'
 import React, { useState } from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useHistory } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme } from '@mui/material/styles'
 import CustomPaper from '../../components/CustomPaper'
 
-const SignUp = () => {
+const SignUp = ({ redirectTo = '/' }) => {
   const intl = useIntl()
-  const history = useHistory()
+  const navigate = useNavigate()
+  const location = useLocation()
   const theme = useTheme()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -31,14 +32,12 @@ const SignUp = () => {
     setAuth({ isAuthenticated: true, ...user })
     toggleThis('isAuthMenuOpen', false)
 
-    let _location = history.location
-    let _route = '/home'
+    let from = new URLSearchParams(location.search).get('from')
 
-    if (_location.state && _location.state.from) {
-      _route = _location.state.from.pathname
-      history.push(_route)
+    if (from) {
+      navigate(from, { replace: true })
     } else {
-      history.push(_route)
+      navigate(redirectTo, { replace: true })
     }
   }
 
@@ -49,7 +48,7 @@ const SignUp = () => {
         defaultMessage: ' Sign up',
       })}
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
     >
       <CustomPaper elevation={6}>

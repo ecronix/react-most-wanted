@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl'
 import Page from 'material-ui-shell/lib/containers/Page'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
 import ReactMarkdown from 'react-markdown'
-import 'github-markdown-css'
 
 const About = () => {
   const [source, setSource] = useState(null)

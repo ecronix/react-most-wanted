@@ -3,19 +3,19 @@ import Page from 'material-ui-shell/lib/containers/Page'
 import { useTheme } from '@mui/material/styles'
 import React, { useState } from 'react'
 import { TextField } from '@mui/material'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import CustomPaper from '../../components/CustomPaper'
 
 const PasswordReset = () => {
   const intl = useIntl()
   const theme = useTheme()
-  const history = useHistory()
+  const navigate = useNavigate()
   const [username, setUsername] = useState('')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    history.replace('/signin')
+    navigate('/signin', { replace: true })
   }
 
   return (
@@ -25,7 +25,7 @@ const PasswordReset = () => {
         defaultMessage: 'Password reset',
       })}
       onBackClick={() => {
-        history.goBack()
+        navigate(-1)
       }}
     >
       <CustomPaper elevation={6}>

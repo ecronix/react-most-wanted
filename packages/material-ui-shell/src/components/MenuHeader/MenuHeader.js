@@ -175,9 +175,12 @@ const MenuHeader = () => {
                     !isMenuOpen && isDesktop && authData.photoURL
                       ? 7
                       : undefined,
+                  textOverflow: 'ellipsis',
                 }}
                 secondaryTypographyProps={{
                   color: (t) => theme.palette.grey.A100,
+                  width: 80,
+                  textOverflow: 'ellipsis',
                 }}
                 primary={authData.displayName}
                 secondary={authData.email}

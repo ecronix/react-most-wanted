@@ -3,16 +3,17 @@ import Page from 'material-ui-shell/lib/containers/Page'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useHistory } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme } from '@mui/material/styles'
 import CustomPaper from '../../components/CustomPaper'
 
-const SignIn = () => {
+const SignIn = ({ redirectTo = '/' }) => {
   const intl = useIntl()
   const theme = useTheme()
-  const history = useHistory()
+  const navigate = useNavigate()
+  let location = useLocation()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const { toggleThis } = useMenu()
@@ -30,14 +31,12 @@ const SignIn = () => {
     setAuth({ isAuthenticated: true, ...user })
     toggleThis('isAuthMenuOpen', false)
 
-    let _location = history.location
-    let _route = '/home'
+    let from = new URLSearchParams(location.search).get('from')
 
-    if (_location.state && _location.state.from) {
-      _route = _location.state.from.pathname
-      history.push(_route)
+    if (from) {
+      navigate(from, { replace: true })
     } else {
-      history.push(_route)
+      navigate(redirectTo, { replace: true })
     }
   }
 

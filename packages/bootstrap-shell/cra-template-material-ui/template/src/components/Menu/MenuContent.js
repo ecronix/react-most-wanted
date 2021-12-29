@@ -4,7 +4,7 @@ import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuL
 import { useAddToHomeScreen } from 'base-shell/lib/providers/AddToHomeScreen'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
-import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useLocale } from 'base-shell/lib/providers/Locale'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
@@ -13,8 +13,8 @@ import getMenuItems from '../../config/menuItems'
 
 const Menu = (props) => {
   const intl = useIntl()
-  const history = useHistory()
-  const match = useRouteMatch()
+  const navigate = useNavigate()
+  const location = useLocation()
   const auth = useAuth()
   const menuContext = useMenu()
   const a2HSContext = useAddToHomeScreen()
@@ -37,14 +37,14 @@ const Menu = (props) => {
     return item.visible !== false
   })
 
-  const index = match ? match.path : '/'
+  const index = location ? location.pathname : '/'
 
   const handleChange = (event, index) => {
     if (index !== undefined) {
       toggleThis('isMobileMenuOpen', false)
     }
     if (index !== undefined && index !== Object(index)) {
-      history.push(index)
+      navigate(index)
     }
   }
 
