@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-key */
 import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute'
 import React, { lazy } from 'react'
-import { Route } from 'react-router-dom'
 
 const About = lazy(() => import('../pages/About'))
 const Admin = lazy(() => import('../pages/Demo/Admin'))
@@ -16,8 +15,6 @@ const FirebaseMessaging = lazy(() => import('../pages/Firebase/Messaging'))
 const FirebasePaths = lazy(() => import('../pages/Firebase/Paths'))
 const FirebaseStorage = lazy(() => import('../pages/Firebase/Storage'))
 const Dashboard = lazy(() => import('../pages/Dashboard'))
-const Posts = lazy(() => import('../pages/Demo/Posts/Posts'))
-const Post = lazy(() => import('../pages/Demo/Posts/Post'))
 
 const routes = [
   {
@@ -133,24 +130,7 @@ const routes = [
       </AuthorizedRoute>
     ),
   },
-  {
-    path: '/posts',
-    exact: true,
-    element: (
-      <AuthorizedRoute>
-        <Posts />
-      </AuthorizedRoute>
-    ),
-  },
-  {
-    path: '/create_post',
-    exact: true,
-    element: (
-      <AuthorizedRoute>
-        <Post />
-      </AuthorizedRoute>
-    ),
-  },
+
   {
     path: '/firebase_messaging',
     exact: true,
