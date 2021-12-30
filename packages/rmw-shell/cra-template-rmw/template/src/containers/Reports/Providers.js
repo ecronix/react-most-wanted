@@ -71,8 +71,17 @@ export default function () {
   }
 
   return (
-    <div style={{ width: '40vh' }}>
-      <Doughnut data={providersComponentData} />
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div style={{ width: '38vh' }}>
+        <Doughnut data={providersComponentData} />
+      </div>
     </div>
   )
 }
