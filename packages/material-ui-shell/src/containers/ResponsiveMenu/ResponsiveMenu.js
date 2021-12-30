@@ -5,7 +5,7 @@ import { useMenu } from 'material-ui-shell/lib/providers/Menu'
 import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { useConfig } from 'base-shell/lib/providers/Config'
 
-const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
+//const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
 const CustomSwipeableDrawer = styled(SwipeableDrawer)(
   ({ theme, width, menucontext: { isDesktop, isMenuOpen, isMiniMode } }) => {
@@ -63,8 +63,8 @@ const ResponsiveMenu = ({ children }) => {
       <CustomSwipeableDrawer
         menucontext={menuContext}
         width={width}
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
+        //disableBackdropTransition={!iOS}
+        //disableDiscovery={iOS}
         variant={isDesktop ? 'permanent' : 'temporary'}
         onClose={handleDrawerToggle}
         anchor={!isDesktop ? undefined : isRTL ? 'right' : 'left'}

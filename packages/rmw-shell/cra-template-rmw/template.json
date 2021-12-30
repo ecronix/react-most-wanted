@@ -2,9 +2,9 @@
   "package": {
     "dependencies": {
       "jss-rtl": "0.x",
-      "rmw-shell":"10.x",
+      "rmw-shell":"11.x",
       "@formatjs/intl-relativetimeformat": "9.x",
-      "base-shell": "1.x",
+      "base-shell": "2.x",
       "chart.js": "3.x",
       "final-form": "4.x",
       "final-form-arrays": "3.x",
@@ -13,7 +13,7 @@
       "github-markdown-css": "5.x",
       "intl": "1.x",
       "material-ui-image": "3.x",
-      "material-ui-shell": "2.x",
+      "material-ui-shell": "3.x",
       "moment": "2.x",
       "mui-rff": "5.x",
       "notistack": "2.x",
@@ -31,7 +31,7 @@
       "react-ios-pwa-prompt": "1.x",
       "react-linkify": "^1.0.0-alpha",
       "react-markdown": "7.x",
-      "react-router-dom": "5.x",
+      "react-router-dom": "6.x",
       "react-virtualized-auto-sizer": "1.x",
       "react-window": "1.x",
       "@mui/material": "5.x",
@@ -47,8 +47,8 @@
     },
     "devDependencies":{
       "@testing-library/jest-dom": "^5.11.4",
-      "@testing-library/react": "^11.1.0",
-      "@testing-library/user-event": "^12.1.10"
+      "@testing-library/react": "^12.1.0",
+      "@testing-library/user-event": "^13.1.10"
     }
   }
 }

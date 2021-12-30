@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -25,7 +25,6 @@
     "react-easy-crop": "4.x",
     "base-shell": "1.x",
     "intl": "1.x",
-    "intl-locales-supported": "1.x",
     "notistack": "2.x",
     "react": "17.x",
     "react-custom-scrollbars": "4.x",
@@ -53,7 +52,6 @@
     "@mui/styles": "^5.2.3",
     "base-shell": "^2.0.1",
     "intl": "^1.2.5",
-    "intl-locales-supported": "^1.8.12",
     "jss-rtl": "^0.3.0",
     "notistack": "^2.0.3",
     "nwb": "^0.25.2",

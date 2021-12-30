@@ -12,7 +12,6 @@ import {
   People,
   Security,
   Slideshow,
-  CallToAction,
   Whatshot,
   Chat,
   AccountBox as AccountBoxIcon,

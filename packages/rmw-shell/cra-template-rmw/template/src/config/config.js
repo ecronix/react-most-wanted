@@ -5,7 +5,6 @@ import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import grants from './grants'
 import Loading from 'material-ui-shell/lib/components/Loading/Loading'
-import getDefaultRoutes from './getDefaultRoutes'
 import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
 import { getDatabase, ref, onValue, get, update, off } from 'firebase/database'
 
@@ -130,7 +129,6 @@ const config = {
       }
     },
   },
-  getDefaultRoutes,
   routes,
   locale: {
     locales,

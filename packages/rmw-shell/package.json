@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "11.0.2",
+  "version": "11.0.4",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -63,8 +63,6 @@
     "@mui/lab": "^5.0.0-alpha.49"
   },
   "devDependencies": {
-    "expect": "^27.4.2",
-    "prop-types": "^15.8.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto": "^4.5.1",
@@ -76,6 +74,7 @@
     "base-shell": "^2.0.1",
     "chart.js": "^3.7.0",
     "eslint-loader": "^4.0.2",
+    "expect": "^27.4.2",
     "final-form": "^4.20.6",
     "final-form-arrays": "^3.0.2",
     "firebase": "^9.6.1",
@@ -84,11 +83,12 @@
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
     "material-ui-image": "^3.3.2",
-    "material-ui-shell": "^3.2.1",
+    "material-ui-shell": "^3.2.2",
     "moment": "^2.29.1",
     "mui-rff": "^5.0.0",
     "notistack": "^2.0.3",
     "nwb": "^0.25.2",
+    "prop-types": "^15.8.0",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-chartjs-2": "^4.0.0",
