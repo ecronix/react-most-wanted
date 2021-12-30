@@ -14,6 +14,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemSecondaryAction,
+  ListItemButton,
   ListItemText,
   Tooltip,
   Typography,
@@ -134,7 +135,7 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
           >
             <List>
               <ListItem
-                button
+                disablePadding
                 selected={index && index === item.value}
                 key={i}
                 onClick={(e) => {
@@ -151,9 +152,12 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
                   }
                 }}
               >
-                {item.leftIcon && <ListItemIcon>{item.leftIcon}</ListItemIcon>}
-
-                {!useMinified && <ListItemText primary={item.primaryText} />}
+                <ListItemButton>
+                  {item.leftIcon && (
+                    <ListItemIcon>{item.leftIcon}</ListItemIcon>
+                  )}
+                  {!useMinified && <ListItemText primary={item.primaryText} />}
+                </ListItemButton>
 
                 {item.nestedItems && !useMinified && (
                   <ListItemSecondaryAction
@@ -188,15 +192,17 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
       {state.items && state.previousItems && state.previousItems.length > 0 && (
         <div>
           <ListItem
-            button
+            disablePadding
             onClick={() => {
               handleBackClick()
             }}
           >
-            <ListItemIcon>
-              <ArrowBack />
-            </ListItemIcon>
-            <ListItemText primary={state.title} />
+            <ListItemButton>
+              <ListItemIcon>
+                <ArrowBack />
+              </ListItemIcon>
+              <ListItemText primary={state.title} />
+            </ListItemButton>
           </ListItem>
           <Divider />
         </div>

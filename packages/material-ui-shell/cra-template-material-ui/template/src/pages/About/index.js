@@ -25,7 +25,7 @@ const About = () => {
       pageTitle={intl.formatMessage({ id: 'about', defaultMessage: 'About' })}
     >
       <Scrollbar>
-        <div style={{ backgroundColor: 'white', padding: 12 }}>
+        <div style={{ padding: 12 }}>
           {source && (
             <ReactMarkdown className="markdown-body" children={source} />
           )}

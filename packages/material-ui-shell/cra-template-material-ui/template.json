@@ -21,6 +21,7 @@
       "@mui/material": "5.x",
       "@emotion/react": "11.x",
       "@emotion/styled": "11.x",
+      "@fontsource/roboto": "4.x",
       "@mui/icons-material": "5.x",
       "@mui/styles": "5.x"
     },
