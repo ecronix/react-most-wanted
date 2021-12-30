@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "3.0.0",
+  "version": "3.2.1",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -39,12 +39,14 @@
     "@mui/material": "5.x",
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
+    "@fontsource/roboto": "4.x",
     "@mui/icons-material": "5.x",
     "@mui/styles": "5.x"
   },
   "devDependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@fontsource/roboto": "^4.5.1",
     "@formatjs/intl-relativetimeformat": "^9.4.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.6",

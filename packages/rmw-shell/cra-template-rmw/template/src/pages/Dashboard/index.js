@@ -88,7 +88,7 @@ const Dashboard = () => {
               }}
             >
               <CardContent>
-                <Typography variant="h1">
+                <Typography variant="h1" fontWeight={'bold'}>
                   <CountUp end={users_count || 0} duration={2} />
                 </Typography>
               </CardContent>
