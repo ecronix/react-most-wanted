@@ -21,6 +21,8 @@ const messages = defineMessages({
   menu: 'Menü',
   menu_mini_mode: 'Mini-Menü',
   offline: 'Offline',
+  tasks: 'Aufgaben',
+  companies: 'Unternehmen',
 })
 
 export default messages

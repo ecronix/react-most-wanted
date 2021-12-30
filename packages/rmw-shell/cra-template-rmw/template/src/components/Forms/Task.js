@@ -3,6 +3,9 @@ import { Autocomplete } from 'rmw-shell/lib/components/FormFields'
 import Stack from '@mui/material/Stack'
 import { TextField, DatePicker } from 'mui-rff'
 
+import deLocale from 'date-fns/locale/de'
+import { useIntl } from 'react-intl'
+
 // eslint-disable-next-line
 const Form = ({ id, handleSubmit, values, users = [] }) => {
   const helpers = users.map((u) => {
@@ -12,6 +15,8 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
     return { label: name, value: key }
   })
 
+  const intl = useIntl()
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -20,7 +25,7 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
       <button type="submit" style={{ display: 'none' }} />
       <Stack spacing={3}>
         <TextField
-          label="Title"
+          label={intl.formatMessage({ id: 'title', defaultMessage: 'Title' })}
           name="title"
           variant="outlined"
           margin="normal"
@@ -29,7 +34,10 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
         />
 
         <TextField
-          label="Description"
+          label={intl.formatMessage({
+            id: 'description',
+            defaultMessage: 'Description',
+          })}
           name="description"
           variant="outlined"
           margin="normal"
@@ -39,18 +47,25 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
         />
 
         <DatePicker
-          label={'Due to'}
+          label={intl.formatMessage({
+            id: 'due_date',
+            defaultMessage: 'Due Date',
+          })}
           name="due_to"
           inputVariant="outlined"
           margin="normal"
           mask="__.__.____"
-          //format="DD.MM.YYYY"
+          format="DD.MM.YYYY"
           autoOk={true}
+          locale={deLocale}
         />
 
         <Autocomplete
           openOnFocus
-          label="Select Company"
+          label={intl.formatMessage({
+            id: 'select_company',
+            defaultMessage: 'Select Company',
+          })}
           name="helper"
           options={helpers}
           getOptionValue={(option) => option}

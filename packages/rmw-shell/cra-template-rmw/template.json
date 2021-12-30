@@ -3,8 +3,7 @@
     "dependencies": {
       "jss-rtl": "0.x",
       "rmw-shell":"10.x",
-      "@formatjs/intl-relativetimeformat": "8.x",
-      "@date-io/moment": "1.x",
+      "@formatjs/intl-relativetimeformat": "9.x",
       "base-shell": "1.x",
       "chart.js": "3.x",
       "final-form": "4.x",
