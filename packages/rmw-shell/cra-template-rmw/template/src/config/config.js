@@ -7,7 +7,7 @@ import grants from './grants'
 import Loading from 'material-ui-shell/lib/components/Loading/Loading'
 import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
 import { getDatabase, ref, onValue, get, update, off } from 'firebase/database'
-import { getDefaultRoutes } from 'rmw-shell/lib/config/getDefaultRoutes'
+import { getDefaultRoutes } from './getDefaultRoutes'
 
 console.log('getDefaultRoutes', getDefaultRoutes)
 
