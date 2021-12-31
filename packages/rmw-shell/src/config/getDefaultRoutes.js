@@ -169,4 +169,4 @@ const getDefaultRoutes = (appConfig) => {
   ]
 }
 
-export default getDefaultRoutes
+export { getDefaultRoutes }
