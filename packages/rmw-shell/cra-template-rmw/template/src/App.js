@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import App from 'base-shell/lib'
-//import config from './config'
-
-import RMWConfig from 'rmw-shell/lib'
-import merge from 'base-shell/lib/utils/config'
-import _config from './config'
-
-const config = merge(RMWConfig, _config)
+import config from './config'
 
 export default class Demo extends Component {
   render() {
