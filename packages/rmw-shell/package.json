@@ -23,7 +23,7 @@
   "dependencies": {},
   "peerDependencies": {
     "jss-rtl": "0.x",
-    "@formatjs/intl-relativetimeformat": "9.x",
+    "@formatjs/intl-relativetimeformat": "^7.0.0 || ^8.0.0 || ^9.0.0",
     "base-shell": "1.x",
     "chart.js": "2.x",
     "final-form": "4.x",

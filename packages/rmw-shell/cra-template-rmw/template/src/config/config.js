@@ -9,8 +9,6 @@ import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
 import { getDatabase, ref, onValue, get, update, off } from 'firebase/database'
 import { getDefaultRoutes } from './getDefaultRoutes'
 
-console.log('getDefaultRoutes', getDefaultRoutes)
-
 const config = {
   firebase: {
     prod: {

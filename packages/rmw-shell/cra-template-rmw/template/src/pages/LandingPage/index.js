@@ -183,7 +183,7 @@ const LandingPage = () => {
                 <img
                   src={'/rmw.svg'}
                   alt="logo"
-                  style={{ height: 150, maxWidth: 280, justifySelf: 'center' }}
+                  style={{ height: 150, width: 150, justifySelf: 'center' }}
                 />
 
                 <div style={{ padding: 8 }}>
