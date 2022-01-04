@@ -1,4 +1,3 @@
-import '@formatjs/intl-relativetimeformat/polyfill'
 import LocaleProvider from '../../providers/Locale/Provider'
 import React, { Suspense, useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
@@ -7,10 +6,10 @@ import { useLocale } from '../../providers/Locale'
 import { useRoutes } from 'react-router-dom'
 import UpdateProvider from '../../providers/Update/Provider'
 import AuthProvider from '../../providers/Auth/Provider'
-import ConfigProvider from '../../providers/Config/Provider'
 import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
 import OnlineProvider from '../../providers/Online/Provider'
 import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
+import { useConfig } from '../../providers/Config'
 
 export const LayoutContent = ({ appConfig = {} }) => {
   const [messages, setMessages] = useState([])
@@ -58,33 +57,32 @@ export const LayoutContent = ({ appConfig = {} }) => {
   return (
     <AuthProvider persistKey={persistKey}>
       <SimpleValuesProvider>
-        <ConfigProvider appConfig={appConfig}>
-          <AddToHomeScreenProvider>
-            <UpdateProvider checkInterval={checkInterval}>
-              <OnlineProvider>
-                <IntlProvider
-                  locale={locale}
-                  key={locale}
-                  messages={messages}
-                  onError={onError}
-                >
-                  <LayoutContainer>
-                    {Menu && <Menu />}
-                    <Suspense fallback={<Loading />}>
-                      {useRoutes([...routes, ...defaultRoutes])}
-                    </Suspense>
-                  </LayoutContainer>
-                </IntlProvider>
-              </OnlineProvider>
-            </UpdateProvider>
-          </AddToHomeScreenProvider>
-        </ConfigProvider>
+        <AddToHomeScreenProvider>
+          <UpdateProvider checkInterval={checkInterval}>
+            <OnlineProvider>
+              <IntlProvider
+                locale={locale}
+                key={locale}
+                messages={messages}
+                onError={onError}
+              >
+                <LayoutContainer>
+                  <Suspense fallback={<Loading />}>{Menu && <Menu />}</Suspense>
+                  <Suspense fallback={<Loading />}>
+                    {useRoutes([...routes, ...defaultRoutes])}
+                  </Suspense>
+                </LayoutContainer>
+              </IntlProvider>
+            </OnlineProvider>
+          </UpdateProvider>
+        </AddToHomeScreenProvider>
       </SimpleValuesProvider>
     </AuthProvider>
   )
 }
 
-export const Layout = ({ appConfig = {} }) => {
+export const Layout = () => {
+  const { appConfig } = useConfig()
   const { locale } = appConfig || {}
   const { defaultLocale, persistKey } = locale || {}
   return (

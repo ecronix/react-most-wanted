@@ -7,13 +7,18 @@ import UpdateContainer from 'material-ui-shell/lib/containers/UpdateContainer/Up
 import QuestionDialogsProvider from 'material-ui-shell/lib/providers/Dialogs/Question/Provider'
 import getThemeSource from 'material-ui-shell/lib/utils/theme'
 import { SnackbarProvider } from 'notistack'
-//import { ThemeProvider } from '@mui/material/styles'
 import { ThemeProvider } from '@mui/material/styles'
 import { useIntl } from 'react-intl'
 import FilterProvider from 'material-ui-shell/lib/providers/Filter/Provider'
 import VirtualListsProvider from 'material-ui-shell/lib/providers/VirtualLists/Provider'
+import MenuProvider from 'material-ui-shell/lib/providers/Menu/Provider'
+import AppThemeProvider from 'material-ui-shell/lib/providers/Theme/Provider'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
-export default function ({ children }) {
+const LayoutContent = ({ children }) => {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { themeID, isDarkMode, isRTL } = useTheme()
@@ -65,5 +70,25 @@ export default function ({ children }) {
         />
       )}
     </ThemeProvider>
+  )
+}
+
+export default function ({ children }) {
+  const { appConfig } = useConfig()
+
+  return (
+    <React.Fragment>
+      <MenuProvider appConfig={appConfig}>
+        <AppThemeProvider appConfig={appConfig}>
+          <div
+            style={{
+              display: 'flex',
+            }}
+          >
+            <LayoutContent>{children}</LayoutContent>
+          </div>
+        </AppThemeProvider>
+      </MenuProvider>
+    </React.Fragment>
   )
 }

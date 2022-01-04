@@ -1,4 +1,6 @@
-import { green, red, pink } from '@mui/material/colors'
+import red from '@mui/material/colors/red'
+import green from '@mui/material/colors/green'
+import pink from '@mui/material/colors/pink'
 
 const themes = [
   {

@@ -163,9 +163,6 @@ const config = {
   },
 
   containers: {
-    AppContainer: lazy(() =>
-      import('material-ui-shell/lib/containers/AppContainer/AppContainer')
-    ),
     LayoutContainer: lazy(() =>
       import('rmw-shell/lib/containers/LayoutContainer/LayoutContainer')
     ),
