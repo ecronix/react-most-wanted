@@ -3,20 +3,28 @@ import LocaleProvider from '../../providers/Locale/Provider'
 import React, { Suspense, useEffect, useState } from 'react'
 import { IntlProvider } from 'react-intl'
 import { getLocaleMessages } from '../../utils/locale'
-import { useConfig } from '../../providers/Config'
 import { useLocale } from '../../providers/Locale'
 import { useRoutes } from 'react-router-dom'
+import UpdateProvider from '../../providers/Update/Provider'
+import AuthProvider from '../../providers/Auth/Provider'
+import ConfigProvider from '../../providers/Config/Provider'
+import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
+import OnlineProvider from '../../providers/Online/Provider'
+import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
 
-export const LayoutContent = () => {
+export const LayoutContent = ({ appConfig = {} }) => {
   const [messages, setMessages] = useState([])
-  const { appConfig } = useConfig()
   const {
     components,
     routes = [],
     containers,
     locale: confLocale,
     getDefaultRoutes,
+    auth,
+    update,
   } = appConfig || {}
+  const { persistKey } = auth || {}
+  const { checkInterval = 5000 } = update || {}
   const { Menu, Loading } = components || {}
   const { locales, onError } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
@@ -48,24 +56,35 @@ export const LayoutContent = () => {
   }, [locale, locales])
 
   return (
-    <IntlProvider
-      locale={locale}
-      key={locale}
-      messages={messages}
-      onError={onError}
-    >
-      <LayoutContainer>
-        {Menu && <Menu />}
-        <Suspense fallback={<Loading />}>
-          {useRoutes([...routes, ...defaultRoutes])}
-        </Suspense>
-      </LayoutContainer>
-    </IntlProvider>
+    <AuthProvider persistKey={persistKey}>
+      <SimpleValuesProvider>
+        <ConfigProvider appConfig={appConfig}>
+          <AddToHomeScreenProvider>
+            <UpdateProvider checkInterval={checkInterval}>
+              <OnlineProvider>
+                <IntlProvider
+                  locale={locale}
+                  key={locale}
+                  messages={messages}
+                  onError={onError}
+                >
+                  <LayoutContainer>
+                    {Menu && <Menu />}
+                    <Suspense fallback={<Loading />}>
+                      {useRoutes([...routes, ...defaultRoutes])}
+                    </Suspense>
+                  </LayoutContainer>
+                </IntlProvider>
+              </OnlineProvider>
+            </UpdateProvider>
+          </AddToHomeScreenProvider>
+        </ConfigProvider>
+      </SimpleValuesProvider>
+    </AuthProvider>
   )
 }
 
-export const Layout = () => {
-  const { appConfig } = useConfig()
+export const Layout = ({ appConfig = {} }) => {
   const { locale } = appConfig || {}
   const { defaultLocale, persistKey } = locale || {}
   return (
