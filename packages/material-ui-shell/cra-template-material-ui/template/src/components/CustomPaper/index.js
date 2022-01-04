@@ -1,4 +1,5 @@
-import { styled, Paper } from '@mui/material'
+import Paper from '@mui/material/Paper'
+import { styled } from '@mui/material'
 
 const CustomPaper = styled(Paper)(({ theme }) => {
   return {

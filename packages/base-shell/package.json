@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "2.1.0",
+  "version": "2.3.1",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,12 +29,12 @@
     "react-intl": "5.x"
   },
   "devDependencies": {
-    "@formatjs/intl-relativetimeformat": "^9.4.0",
+    "@formatjs/intl-relativetimeformat": "^9.4.1",
     "intl": "^1.2.5",
     "nwb": "^0.25.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-intl": "^5.24.0",
+    "react-intl": "^5.24.1",
     "react-router-dom": "^6.2.1"
   },
   "author": "Tarik Huber",

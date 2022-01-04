@@ -1,17 +1,15 @@
 import React, { useState, lazy, Suspense } from 'react'
-import {
-  AppBar,
-  CssBaseline,
-  Paper,
-  Toolbar,
-  Button,
-  CircularProgress,
-} from '@mui/material'
+import AppBar from '@mui/material/AppBar'
+import CssBaseline from '@mui/material/CssBaseline'
+import Paper from '@mui/material/Paper'
+import Toolbar from '@mui/material/Toolbar'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import { Helmet } from 'react-helmet'
 import { Scrollbars } from 'react-custom-scrollbars'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
 const ResponsiveMenu = lazy(() =>
@@ -34,7 +32,6 @@ const LandingPage = () => {
   const [components, setComponents] = useState(null)
   const [top, setTop] = useState(null)
   const navigate = useNavigate()
-  const { isRTL } = useAppTheme()
 
   const scrollTo = (e) => {
     e &&
@@ -93,25 +90,14 @@ const LandingPage = () => {
               setScrollbar(e)
             }
           }}
-          renderView={(props) =>
-            isRTL ? (
-              <div
-                {...props}
-                style={{
-                  ...props.style,
-                  marginLeft: props.style.marginRight,
-                  marginRight: 0,
-                }}
-              />
-            ) : (
-              <div
-                {...props}
-                style={{
-                  ...props.style,
-                }}
-              />
-            )
-          }
+          renderView={(props) => (
+            <div
+              {...props}
+              style={{
+                ...props.style,
+              }}
+            />
+          )}
           onScroll={(e) => {
             setTransparent(scrollbar.viewScrollTop < 100)
             setScrolled(true)
