@@ -1,9 +1,11 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSimpleValues } from 'base-shell/lib/providers/SimpleValues'
+import { useOnline } from 'base-shell/lib/providers/Online'
 
 const HomePage = () => {
   const intl = useIntl()
+  const isOnline = useOnline()
   const { setValue, getValue, clearAll } = useSimpleValues()
 
   const simpleNValueKey = 'nkey'
@@ -15,6 +17,8 @@ const HomePage = () => {
       <br />
       <br />
       Persistent: {getValue(simplePValueKey, 'empty')}
+      <br />
+      {isOnline ? 'online' : 'offline'}
       <br />
       <br />
       <button
