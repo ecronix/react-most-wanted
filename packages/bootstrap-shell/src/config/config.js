@@ -8,7 +8,7 @@ const config = {
     ),
   },
   components: {
-    Loading,
+    //Loading,
     Menu: lazy(() => import('../containers/Menu/Menu')),
   },
   pwa: {

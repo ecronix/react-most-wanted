@@ -6,17 +6,13 @@ export default function ({ children }) {
 
   return (
     <React.Fragment>
-      <MenuProvider appConfig={appConfig}>
-        <ThemeProvider appConfig={appConfig}>
-          <div
-            style={{
-              display: 'flex',
-            }}
-          >
-            {children}
-          </div>
-        </ThemeProvider>
-      </MenuProvider>
+      <div
+        style={{
+          display: 'flex',
+        }}
+      >
+        {children}
+      </div>
     </React.Fragment>
   )
 }
