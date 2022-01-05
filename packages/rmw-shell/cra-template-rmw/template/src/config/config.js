@@ -5,7 +5,11 @@ import themes from './themes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import grants from './grants'
 import Loading from 'material-ui-shell/lib/components/Loading/Loading'
-import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
+import {
+  defaultUserData,
+  isGranted,
+  isAnyGranted,
+} from 'rmw-shell/lib/utils/auth'
 import { getDefaultRoutes } from './getDefaultRoutes'
 
 const config = {
@@ -105,6 +109,7 @@ const config = {
             notificationsDisabled: notifcationsDisabledSnap.val(),
             isAdmin: !!isAdminSnap.val(),
             isGranted,
+            isAnyGranted,
           })
 
           update(ref(db, `users/${user.uid}`), {
