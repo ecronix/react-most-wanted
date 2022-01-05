@@ -1,8 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { SwipeableDrawer, styled } from '@mui/material'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
 import { useConfig } from 'base-shell/lib/providers/Config'
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -24,8 +21,8 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)(
             !isMiniMode && !isMenuOpen
               ? 0
               : !isMenuOpen
-              ? theme.spacing(9)
-              : width,
+                ? theme.spacing(9)
+                : width,
         },
       }
     } else {
