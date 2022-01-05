@@ -22,6 +22,7 @@ const Footer = () => {
       <AppBar
         position="relative"
         style={{
+          backgroundColor: '#242424',
           //position: 'absolute',
           width: '100%',
           padding: 18,

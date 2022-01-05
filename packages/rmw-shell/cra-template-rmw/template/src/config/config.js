@@ -6,7 +6,6 @@ import parseLanguages from 'base-shell/lib/utils/locale'
 import grants from './grants'
 import Loading from 'material-ui-shell/lib/components/Loading/Loading'
 import { defaultUserData, isGranted } from 'rmw-shell/lib/utils/auth'
-import { getDatabase, ref, onValue, get, update, off } from 'firebase/database'
 import { getDefaultRoutes } from './getDefaultRoutes'
 
 const config = {
@@ -76,6 +75,9 @@ const config = {
     persistKey: 'base-shell:auth',
     signInURL: '/signin',
     onAuthStateChanged: async (user, auth) => {
+      const { getDatabase, ref, onValue, get, update, off } = await import(
+        'firebase/database'
+      )
       const db = getDatabase()
 
       try {
