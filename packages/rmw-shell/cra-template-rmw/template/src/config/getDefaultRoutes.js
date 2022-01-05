@@ -13,6 +13,7 @@ const CreateChat = lazy(() => import('rmw-shell/lib/pages/CreateChat'))
 const GroupChat = lazy(() => import('rmw-shell/lib/pages/GroupChat'))
 const EditMembers = lazy(() => import('rmw-shell/lib/pages/EditMembers'))
 const EditAdmins = lazy(() => import('rmw-shell/lib/pages/EditAdmins'))
+const PageNotFound = lazy(() => import('../pages/PageNotFound'))
 
 const getDefaultRoutes = (appConfig) => {
   return [
@@ -164,7 +165,11 @@ const getDefaultRoutes = (appConfig) => {
     {
       path: '*',
 
-      element: appConfig?.pages?.PageNotFound,
+      element: (
+        <AuthorizedRoute>
+          <PageNotFound />
+        </AuthorizedRoute>
+      ),
     },
   ]
 }

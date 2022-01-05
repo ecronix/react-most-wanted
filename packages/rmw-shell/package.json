@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "11.0.9",
+  "version": "11.0.10",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -25,7 +25,7 @@
     "jss-rtl": "0.x",
     "@formatjs/intl-relativetimeformat": "^7.0.0 || ^8.0.0 || ^9.0.0",
     "base-shell": "2.x",
-    "chart.js": "2.x",
+    "chart.js": "3.x",
     "final-form": "4.x",
     "final-form-arrays": "3.x",
     "firebase": "9.x",
