@@ -1,5 +1,4 @@
 import { lazy } from 'react'
-import Loading from '../components/Loading/Loading'
 
 const config = {
   containers: {
@@ -16,20 +15,19 @@ const config = {
     useiOSPWAPrompt: true,
     iOSPWAPromptProps: {},
   },
-  menu: {
-    width: 240,
-    offlineIndicatorHeight: 12,
-    initialAuthMenuOpen: false,
-    initialMiniMode: false,
-    initialMenuOpen: true,
-    initialMobileMenuOpen: false,
-    initialMiniSwitchVisibility: true,
-    MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
-    useWindowWatcher: false,
-  },
+  // menu: {
+  //   width: 240,
+  //   offlineIndicatorHeight: 12,
+  //   initialAuthMenuOpen: false,
+  //   initialMiniMode: false,
+  //   initialMenuOpen: true,
+  //   initialMobileMenuOpen: false,
+  //   initialMiniSwitchVisibility: true,
+  //   MenuHeader: lazy(() => import('../components/MenuHeader/MenuHeader')),
+  //   useWindowWatcher: false,
+  // },
   pages: {
-    LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
-    PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
+    LandingPage: lazy(() => import('../pages/ModalDemo/ModalDemo')),
   },
   update: {
     checkInterval: 3000,
