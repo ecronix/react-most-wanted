@@ -1,19 +1,8 @@
 import React, { useContext } from 'react'
-import MenuContext from 'material-ui-shell/lib/providers/Menu/Context'
-import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useOnline } from 'base-shell/lib/providers/Online'
 import { useIntl } from 'react-intl'
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  LinearProgress,
-  Typography,
-} from '@mui/material'
-import { ChevronLeft, Menu as MenuIcon } from '@mui/icons-material'
 import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 
 import { List as ListIcon } from 'react-bootstrap-icons'
