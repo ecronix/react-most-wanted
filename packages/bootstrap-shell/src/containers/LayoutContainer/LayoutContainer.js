@@ -1,17 +1,8 @@
 import { useConfig } from 'base-shell/lib/providers/Config'
-import { CssBaseline } from '@mui/material'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'
-import { useTheme } from 'material-ui-shell/lib/providers/Theme'
-import UpdateContainer from 'material-ui-shell/lib/containers/UpdateContainer/UpdateContainer'
-import QuestionDialogsProvider from 'material-ui-shell/lib/providers/Dialogs/Question/Provider'
-import getThemeSource from 'material-ui-shell/lib/utils/theme'
 import { SnackbarProvider } from 'notistack'
-//import { ThemeProvider } from '@mui/material/styles'
-import { ThemeProvider } from '@mui/material/styles'
 import { useIntl } from 'react-intl'
-import FilterProvider from 'material-ui-shell/lib/providers/Filter/Provider'
-import VirtualListsProvider from 'material-ui-shell/lib/providers/VirtualLists/Provider'
 
 export default function ({ children }) {
   const intl = useIntl()

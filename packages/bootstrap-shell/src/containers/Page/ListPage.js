@@ -1,17 +1,10 @@
-import FilterDrawer from 'material-ui-shell/lib/components/FilterDrawer'
-import Page from 'material-ui-shell/lib/containers/Page'
 import React from 'react'
-import SearchField from 'material-ui-shell/lib/components/SearchField'
-import { Toolbar, IconButton } from '@mui/material'
-import { FilterList } from '@mui/icons-material'
-import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
-import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 
 export default function (props) {
   const {
     fields = [],
     list: source = [],
-    getPageProps = () => {},
+    getPageProps = () => { },
     listProps,
     Row,
     name,
