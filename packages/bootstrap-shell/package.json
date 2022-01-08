@@ -29,7 +29,6 @@
     "intl-locales-supported": "1.x",
     "notistack": "2.x",
     "react": "17.x",
-    "react-custom-scrollbars": "4.x",
     "react-dom": "17.x",
     "react-intl": "5.x",
     "react-ios-pwa-prompt": "1.x",
@@ -37,11 +36,8 @@
     "react-router-dom": "5.x",
     "react-virtualized-auto-sizer": "1.x",
     "react-window": "1.x",
-    "@mui/material": "5.x",
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
-    "@mui/icons-material": "5.x",
-    "@mui/styles": "5.x",
     "bootstrap": "5.x",
     "react-bootstrap": "2.x",
     "react-bootstrap-icons": "1.x"
@@ -50,16 +46,12 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@formatjs/intl-relativetimeformat": "^8.1.5",
-    "@mui/icons-material": "^5.0.4",
-    "@mui/material": "^5.0.4",
-    "@mui/styles": "^5.0.1",
     "base-shell": "^1.2.25",
     "bootstrap": "^5.1.3",
     "github-markdown-css": "^4.0.0",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.12",
     "jss-rtl": "^0.3.0",
-    "material-ui-shell": "^2.0.11",
     "notistack": "^2.0.3",
     "nwb": "^0.25.2",
     "prettier": "^2.4.1",
@@ -67,7 +59,6 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-bootstrap-icons": "^1.6.1",
-    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^17.0.2",
     "react-easy-crop": "^3.5.3",
     "react-intl": "^5.20.13",
@@ -89,7 +80,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/TarikHuber/react-most-wanted.git",
-    "directory": "packages/material-ui-shell"
+    "directory": "packages/bootstrap-shell"
   },
   "keywords": [
     "react-component"
