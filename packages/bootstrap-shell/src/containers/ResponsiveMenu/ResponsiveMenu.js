@@ -1,8 +1,35 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
+import * as BS from "react-bootstrap"
 
+const ResponsiveMenu = ({ children }) => {
+  const { appConfig } = useConfig()
+  const { menu } = appConfig;
+  const bootstrapClass = menu?.bootstrapClass || "";
+
+  return (
+    <BS.Row>
+      <BS.Nav>
+        <BS.Container>
+          <BS.Row className={bootstrapClass}>
+            {children}
+          </BS.Row>
+        </BS.Container>
+      </BS.Nav>
+    </BS.Row>
+  )
+};
+
+ResponsiveMenu.propTypes = {
+  children: PropTypes.any,
+};
+
+export default ResponsiveMenu
+
+/*
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
+
 
 const CustomSwipeableDrawer = styled(SwipeableDrawer)(
   ({ theme, width, menucontext: { isDesktop, isMenuOpen, isMiniMode } }) => {
@@ -76,8 +103,4 @@ const ResponsiveMenu = ({ children }) => {
     </div>
   )
 }
-ResponsiveMenu.propTypes = {
-  children: PropTypes.any,
-}
-
-export default ResponsiveMenu
+*/
