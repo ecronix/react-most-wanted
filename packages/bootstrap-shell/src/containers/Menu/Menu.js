@@ -2,7 +2,7 @@ import React from 'react'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
 import { useConfig } from 'base-shell/lib/providers/Config'
 
-const Menu = (props) => {
+const Menu = () => {
   const { appConfig } = useConfig()
   const { menu } = appConfig || {}
   const { MenuHeader, MenuContent } = menu || {}
