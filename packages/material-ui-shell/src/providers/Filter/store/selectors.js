@@ -4,7 +4,7 @@ import {
   boolField,
   dateField,
   timeField,
-} from 'material-ui-shell/lib/providers/Filter/fields'
+} from '../fields'
 
 export function getField(name, fields = []) {
   let field = false

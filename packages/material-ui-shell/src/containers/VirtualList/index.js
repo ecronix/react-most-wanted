@@ -1,11 +1,11 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { List } from '@mui/material'
 import React, { useEffect } from 'react'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
+import Scrollbar from '../../components/Scrollbar'
 import { FixedSizeList } from 'react-window'
 import { useState } from 'react'
-import { useVirtualLists } from 'material-ui-shell/lib/providers/VirtualLists'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { useVirtualLists } from '../../providers/VirtualLists'
+import { useTheme as useAppTheme } from '../../providers/Theme'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props

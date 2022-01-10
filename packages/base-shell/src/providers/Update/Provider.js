@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
 
@@ -34,10 +33,6 @@ const Provider = ({ children, checkInterval }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

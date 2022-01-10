@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { useMenu } from '../../providers/Menu'
+import { useTheme as useAppTheme } from '../../providers/Theme'
 import {
   Avatar,
   IconButton,

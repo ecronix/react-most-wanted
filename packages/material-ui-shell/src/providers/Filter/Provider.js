@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useEffect, useReducer } from 'react'
 import Context from './Context'
 import reducer from './store/reducer'
@@ -68,10 +67,6 @@ const Provider = ({ children, persistKey = 'mui_filter' }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

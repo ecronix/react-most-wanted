@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
-import { Scrollbars } from 'react-custom-scrollbars'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { Scrollbars } from 'react-custom-scrollbars-2'
+import { useTheme as useAppTheme } from '../../providers/Theme'
 
 const Scrollbar = (props) => {
   const { forwardedRef = () => {}, ...rest } = props

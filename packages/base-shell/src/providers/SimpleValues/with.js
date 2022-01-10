@@ -5,8 +5,8 @@ const withContainer = (Component) => {
   const ChildComponent = (props) => {
     return (
       <Context.Consumer>
-        {({ locale, setLocale }) => {
-          return <Component locale={locale} setLocale={setLocale} {...props} />
+        {(values) => {
+          return <Component {...values} {...props} />
         }}
       </Context.Consumer>
     )

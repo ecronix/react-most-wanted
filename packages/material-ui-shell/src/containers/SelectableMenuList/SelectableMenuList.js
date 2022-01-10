@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types'
 import React, { useState, useEffect, useCallback } from 'react'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import { useTheme as useAppTheme } from '../../providers/Theme'
+import { useMenu } from '../../providers/Menu'
 import {
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
   KeyboardArrowRight,
@@ -217,12 +216,6 @@ const SelectableMenuList = ({ onIndexChange, useMinified, items, index }) => {
           })}
     </List>
   )
-}
-
-SelectableMenuList.propTypes = {
-  items: PropTypes.array.isRequired,
-  onIndexChange: PropTypes.func.isRequired,
-  index: PropTypes.string.isRequired,
 }
 
 export default SelectableMenuList
