@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useCallback, useReducer } from 'react'
 import Context from './Context'
 import { getApp } from 'firebase/app'
@@ -220,10 +219,6 @@ const Provider = ({ children }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

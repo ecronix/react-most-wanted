@@ -14,7 +14,7 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import ImageViewer from 'rmw-shell/lib/containers/ImageViewer'
+import ImageViewer from '../../containers/ImageViewer'
 import Linkify from 'react-linkify'
 import { getDatabase, ref, update, set } from 'firebase/database'
 

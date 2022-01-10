@@ -9,7 +9,7 @@ import {
 import React, { useEffect } from 'react'
 import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { useLists } from '../../providers/Firebase/Lists'
 import { getDatabase, ref, set } from 'firebase/database'
 
 export default function ({ path }) {

@@ -11,7 +11,7 @@ import {
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
-} from 'rmw-shell/lib/components/Icons'
+} from '../../components/Icons'
 import Badge from '@mui/material/Badge'
 import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
 import Checkbox from '@mui/material/Checkbox'

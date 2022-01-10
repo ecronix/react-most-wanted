@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { useLists } from '../../providers/Firebase/Lists'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import { useIntl } from 'react-intl'
 import { useNavigate } from 'react-router-dom'
-import UserRow from 'rmw-shell/lib/components/UserRow'
+import UserRow from '../../components/UserRow'
 import { useFilter } from 'material-ui-shell/lib/providers/Filter'
 import {
   collection,

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useEffect, useReducer, useCallback } from 'react'
 import Context from './Context'
 import { doc, onSnapshot, getFirestore } from 'firebase/firestore'
@@ -207,10 +206,6 @@ const Provider = ({ children, persistKey = 'firebase_docs' }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

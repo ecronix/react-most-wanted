@@ -1,6 +1,5 @@
 /* eslint-disable default-case */
 import Context from './Context'
-import PropTypes from 'prop-types'
 import React, { useCallback, useEffect, useReducer } from 'react'
 import { collection, getFirestore, onSnapshot } from 'firebase/firestore'
 
@@ -264,10 +263,6 @@ const Provider = ({ children, persistKey = 'firebase_cols' }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

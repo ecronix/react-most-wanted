@@ -3,7 +3,7 @@ import Fab from '@mui/material/Fab'
 import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import React, { useEffect } from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
+import { useLists } from '../../providers/Firebase/Lists'
 
 const Page = ({
   fields = [],

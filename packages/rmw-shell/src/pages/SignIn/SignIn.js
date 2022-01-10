@@ -1,5 +1,5 @@
 import * as firebaseui from 'firebaseui'
-import AuthUI from 'rmw-shell/lib/containers/AuthUI/AuthUI'
+import AuthUI from '../../containers/AuthUI/AuthUI'
 import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React from 'react'
 import { Helmet } from 'react-helmet'

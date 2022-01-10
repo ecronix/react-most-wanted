@@ -16,13 +16,13 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useIntl } from 'react-intl'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
-import ImgageUploadDialog from 'rmw-shell/lib/containers/ImageUploadDialog'
+import ImgageUploadDialog from '../../containers/ImageUploadDialog'
 import {
   GoogleIcon,
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
-} from 'rmw-shell/lib/components/Icons'
+} from '../../components/Icons'
 import {
   getAuth,
   updateProfile,
@@ -37,7 +37,7 @@ import {
   reload,
 } from 'firebase/auth'
 import { getDatabase, set, remove, ref } from 'firebase/database'
-import { useMessaging } from 'rmw-shell/lib/providers/Firebase/Messaging'
+import { useMessaging } from '../../providers/Firebase/Messaging'
 
 const uuid = () => {
   const url = URL.createObjectURL(new Blob())

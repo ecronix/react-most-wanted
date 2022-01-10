@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Form as FinalForm } from 'react-final-form'
-import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { usePaths } from '../../providers/Firebase/Paths'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import arrayMutators from 'final-form-arrays'
 import { getDatabase, ref, push, update } from 'firebase/database'

@@ -9,7 +9,7 @@ import Send from '@mui/icons-material/Send'
 import { useIntl } from 'react-intl'
 import IconButton from '@mui/material/IconButton'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import { getLocation } from 'rmw-shell/lib/utils/location'
+import { getLocation } from '../../utils/location'
 import { CircularProgress } from '@mui/material'
 import { getDatabase, ref, set, push, serverTimestamp } from 'firebase/database'
 import {
