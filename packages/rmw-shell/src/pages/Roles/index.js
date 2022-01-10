@@ -5,7 +5,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemAvatar from '@mui/material/ListItemAvatar'
 import ListItemText from '@mui/material/ListItemText'
 import React from 'react'
-import { ListPage } from 'rmw-shell/lib/containers/Page'
+import { ListPage } from '../../containers/Page'
 import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 

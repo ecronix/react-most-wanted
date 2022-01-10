@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useState, useEffect, Fragment, useCallback } from 'react'
 import Context from './Context'
 import { Button } from '@mui/material'
@@ -6,7 +5,7 @@ import { useConfig } from 'base-shell/lib/providers/Config'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'
-import SnackMessage from 'rmw-shell/lib/components/SnackMessage/SnackMessage'
+import SnackMessage from '../../../components/SnackMessage/SnackMessage'
 import { getMessaging, getToken, onMessage } from 'firebase/messaging'
 import { getDatabase, ref, set } from 'firebase/database'
 import { getApp } from 'firebase/app'
@@ -145,10 +144,6 @@ const Provider = ({ children }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

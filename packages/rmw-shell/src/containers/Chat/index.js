@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useLists } from 'rmw-shell/lib/providers/Firebase/Lists'
-import ChatMessage from 'rmw-shell/lib/components/ChatMessage'
+import { useLists } from '../../providers/Firebase/Lists'
+import ChatMessage from '../../components/ChatMessage'
 import Input from './Input'
 import Chip from '@mui/material/Chip'
 import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'

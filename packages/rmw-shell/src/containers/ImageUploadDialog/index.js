@@ -12,7 +12,7 @@ import Slide from '@mui/material/Slide'
 import getCroppedImg from './getCropImage'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useIntl } from 'react-intl'
-import { useStorage } from 'rmw-shell/lib/providers/Firebase/Storage'
+import { useStorage } from '../../providers/Firebase/Storage'
 import { useTheme } from '@mui/material/styles'
 
 const Transition = React.forwardRef((props, ref) => (

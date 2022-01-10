@@ -4,10 +4,10 @@ import Page from 'material-ui-shell/lib/containers/Page'
 import React from 'react'
 import Save from '@mui/icons-material/Save'
 import { useNavigate } from 'react-router-dom'
-import { usePaths } from 'rmw-shell/lib/providers/Firebase/Paths'
+import { usePaths } from '../../providers/Firebase/Paths'
 import { useQuestions } from 'material-ui-shell/lib/providers/Dialogs/Question'
 import { useAuth } from 'base-shell/lib/providers/Auth'
-import FirebaseForm from 'rmw-shell/lib/containers/FirebaseForm'
+import FirebaseForm from '../../containers/FirebaseForm'
 import { getDatabase, ref, set } from 'firebase/database'
 
 export default function (props) {

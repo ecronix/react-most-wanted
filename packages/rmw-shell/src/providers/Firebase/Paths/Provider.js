@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { useEffect, useReducer, useCallback } from 'react'
 import Context from './Context'
 import { getDatabase, ref, onValue, off } from 'firebase/database'
@@ -163,10 +162,6 @@ const Provider = ({ children, persistKey = 'firebase_paths' }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider
