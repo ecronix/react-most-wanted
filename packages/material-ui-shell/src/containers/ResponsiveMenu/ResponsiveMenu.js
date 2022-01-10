@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { SwipeableDrawer, styled } from '@mui/material'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
+import { useMenu } from '../../providers/Menu'
+import { useTheme as useAppTheme } from '../../providers/Theme'
 import { useConfig } from 'base-shell/lib/providers/Config'
 
 //const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -78,9 +77,6 @@ const ResponsiveMenu = ({ children }) => {
       </CustomSwipeableDrawer>
     </div>
   )
-}
-ResponsiveMenu.propTypes = {
-  children: PropTypes.any,
 }
 
 export default ResponsiveMenu

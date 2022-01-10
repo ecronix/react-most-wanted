@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import React, {  useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import Context from './Context'
 
 function reducer(state, action) {
@@ -73,10 +72,6 @@ const Provider = ({ children, persistKey = 'simple_values' }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

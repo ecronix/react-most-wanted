@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer } from 'react'
-import PropTypes from 'prop-types'
 import Context from './Context'
 import { useMediaQuery } from '@mui/material'
 import {
@@ -100,10 +99,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
       {children}
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

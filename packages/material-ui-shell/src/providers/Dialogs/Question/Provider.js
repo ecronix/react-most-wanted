@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types'
 import React, { useState, Fragment } from 'react'
 import Context from './Context'
-import QuestionDialog from 'material-ui-shell/lib/components/QuestionDialog/QuestionDialog'
+import QuestionDialog from '../../../components/QuestionDialog/QuestionDialog'
 
 const Provider = ({ children }) => {
   const [state, setState] = useState({ isOpen: false })
@@ -31,10 +30,6 @@ const Provider = ({ children }) => {
       </Fragment>
     </Context.Provider>
   )
-}
-
-Provider.propTypes = {
-  children: PropTypes.any,
 }
 
 export default Provider

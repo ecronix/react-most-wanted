@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,13 +19,12 @@
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server"
   },
-  "dependencies": {},
   "peerDependencies": {
     "intl": "1.x",
     "react": "17.x",
     "react-dom": "17.x",
-    "react-router-dom": "6.x",
-    "react-intl": "5.x"
+    "react-intl": "5.x",
+    "react-router-dom": "6.x"
   },
   "devDependencies": {
     "intl": "^1.2.5",
