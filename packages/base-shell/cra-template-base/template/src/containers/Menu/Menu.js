@@ -83,7 +83,6 @@ const Menu = () => {
                   {item.value ? (
                     <NavLink
                       style={{ textDecoration: 'none' }}
-                      activeStyle={{ background: 'grey', color: 'white' }}
                       to={item.value}
                       onClick={(e) => {
                         if (item.onClick) {
