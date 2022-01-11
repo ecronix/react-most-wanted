@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import * as BS from "react-bootstrap";
 import RMWLogo from "../../assets/rmw.svg";
@@ -10,8 +10,6 @@ const Menu = ({ brand }) => {
   const { menu } = appConfig || {};
   const { globalBrand, MenuRight } = menu || {};
   const menuContext = useMenu();
-  console.log(menuContext);
-  //const { toggleThis } = menuContext || {};
 
   const _brand = brand ? brand : globalBrand;
 
