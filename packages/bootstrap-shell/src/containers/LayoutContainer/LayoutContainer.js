@@ -1,16 +1,14 @@
 import { useConfig } from 'base-shell/lib/providers/Config'
 import React from 'react'
-import MenuProvider from 'bootstrap-shell/lib/providers/Menu/Provider'
-import * as BS from "react-bootstrap";
+import MenuProvider from '../../providers/Menu/Provider'
+import * as BS from 'react-bootstrap'
 
 export default function ({ children }) {
   const { appConfig } = useConfig()
 
   return (
-    <BS.ThemeProvider >
-      <MenuProvider>
-        {children}
-      </MenuProvider>
+    <BS.ThemeProvider>
+      <MenuProvider>{children}</MenuProvider>
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
