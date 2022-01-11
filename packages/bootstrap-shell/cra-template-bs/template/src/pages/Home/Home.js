@@ -1,11 +1,9 @@
 import React from 'react'
-import AppContainer from 'bootstrap-shell/lib/containers/AppContainer/AppContainer'
-import Menu from 'bootstrap-shell/lib/containers/Menu/Menu'
+import Page from 'bootstrap-shell/lib/containers/Page'
 
 export default function Home() {
     return (
-        <AppContainer>
-            <Menu />
-        </AppContainer>
+        <Page>
+        </Page>
     )
 }

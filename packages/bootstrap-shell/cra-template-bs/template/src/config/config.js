@@ -1,14 +1,12 @@
 import { lazy } from 'react'
-import parseLanguages from 'base-shell/lib/utils/locale'
+import routes from './routes'
 
 const config = {
     containers: {
-        AppContainer: lazy(() =>
-            import('bootstrap-shell/lib/containers/AppContainer/AppContainer')
-        ),
+        LayoutContainer: lazy(() => import('bootstrap-shell/lib/containers/LayoutContainer/LayoutContainer'))
     },
     components: {
-        Menu: lazy(() => import('bootstrap-shell/lib/containers/Menu/Menu')),
+        Menu: lazy(() => import('bootstrap-shell/lib/components/Menu/Menu')),
     },
     auth: {
         signInURL: '/signin',
@@ -17,36 +15,13 @@ const config = {
         useiOSPWAPrompt: true,
         iOSPWAPromptProps: {},
     },
-    //routes,
+    routes,
     locale: {
-        /*locales,
-        defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
-        onError: (e) => {
-            //console.warn(e)
-            return
-        },*/
     },
     menu: {
-        MenuHeader: lazy(() => import('bootstrap-shell/lib/components/Menu/MenuHeader/MenuHeader')),
-        MenuContent: lazy(() => import('bootstrap-shell/lib/components/Menu/MenuContent/MenuContent')),
-        /*
-        width: 240,
-        offlineIndicatorHeight: 12,
-        initialAuthMenuOpen: false,
-        initialMiniMode: false,
-        initialMenuOpen: true,
-        initialMobileMenuOpen: false,
-        initialMiniSwitchVisibility: true,
-        
-        useWindowWatcher: false,
-        */
+        MenuRight: lazy(() => import('../components/Menu/MenuRight'))
     },
     theme: {
-        /*themes,
-        defaultThemeID: 'default',
-        defaultIsDarkMode: false,
-        defaultIsRTL: false, //change this to true for default Right to Left Language support
-        */
     },
     pages: {
         LandingPage: lazy(() => import('../pages/Home/Home')),
