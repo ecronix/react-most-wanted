@@ -12,6 +12,7 @@ import {
 import reducer from './store/reducer'
 
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
+  console.log("Provider");
   const { menu } = appConfig || {}
   const {
     initialAuthMenuOpen,
@@ -71,6 +72,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     isMobileMenuOpen: menuStore.isMobileMenuOpen,
     isMiniSwitchVisibility: menuStore.isMiniSwitchVisibility,
   }
+
   const isDesktop = useMediaQuery('(min-width:600px)')
 
   useEffect(() => {
