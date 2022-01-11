@@ -47,7 +47,7 @@ const Menu = ({ brand }) => {
       </BS.Container>
     </BS.Navbar>
     {/*Mobile Menu*/}
-    <BS.Col className="top-0 float-right bg-dark p-2 overflow-hidden" style={{ maxHeight: toggleMenu ? 1000 : 0, transition: "max-height 2s ease-in-out" }}>
+    <BS.Col className="top-0 float-right bg-dark p-2 overflow-hidden" style={{ maxHeight: toggleMenu ? 1000 : 0, transition: "max-height 2s linear" }}>
       {routes.filter(({ generateHeaderLink }) => generateHeaderLink).map(({ path, displayName }) => {
         return <BS.Nav.Link key={displayName} href={path} className="text-light">{displayName}</BS.Nav.Link>
       })}
