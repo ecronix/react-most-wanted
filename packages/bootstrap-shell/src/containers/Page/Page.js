@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
-import Menu from '../../components/Menu/Menu';
-import MenuContext from 'bootstrap-shell/lib/providers/Menu/Context';
+import Menu from '../../components/Menu/Menu'
+import { useMenu } from '../..//providers/Menu/Context'
 
 export default function ({
   children,
@@ -16,8 +16,11 @@ export default function ({
   const { menu } = appConfig || {}
   const { width = 240 } = menu || {}
   const { routes } = appConfig || {}
+  const m = useMenu()
 
-  console.log(appConfig);
+  console.log('m', m)
+
+  console.log(appConfig)
   let headerTitle = ''
 
   if (typeof brand === 'string' || brand instanceof String) {
