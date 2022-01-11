@@ -7,7 +7,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { Helmet } from 'react-helmet'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useNavigate } from 'react-router-dom'
-
+ 
 const PageContent = lazy(() => import('./PageContent'))
 const Footer = lazy(() => import('./Footer'))
 const ResponsiveMenu = lazy(() =>
@@ -258,5 +258,6 @@ const LandingPage = () => {
     </React.Fragment>
   )
 }
+
 
 export default LandingPage
