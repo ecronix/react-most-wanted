@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+          registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/rmw-shell/cra-template-rmw
