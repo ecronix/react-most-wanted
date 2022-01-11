@@ -5,7 +5,7 @@
     "react",
     "create-react-app",
     "template",
-    "material-ui"
+    "bootstrap"
   ],
   "description": "The bootstrap template for Create React App.",
   "main": "template.json",
