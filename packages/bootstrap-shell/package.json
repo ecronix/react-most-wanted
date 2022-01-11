@@ -23,7 +23,7 @@
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
     "@formatjs/intl-relativetimeformat": "7.x",
-    "base-shell": "1.x",
+    "base-shell": "2.x",
     "bootstrap": "5.x",
     "github-markdown-css": "4.x",
     "intl": "1.x",
@@ -64,7 +64,7 @@
     "react-intl": "^5.20.13",
     "react-ios-pwa-prompt": "^1.8.4",
     "react-markdown": "^7.0.1",
-    "react-router-dom": "^6.x",
+    "react-router-dom": "^6.2.1",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6"
   },
