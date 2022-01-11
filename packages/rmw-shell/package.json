@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "11.0.18",
+  "version": "11.0.19",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -54,7 +54,7 @@
     "react-ios-pwa-prompt": "1.x",
     "react-linkify": "^1.0.0-alpha",
     "react-markdown": "7.x",
-    "react-router-dom": "5.x",
+    "react-router-dom": "6.x",
     "react-virtualized-auto-sizer": "1.x",
     "react-window": "1.x"
   },
