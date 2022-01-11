@@ -17,7 +17,7 @@ jobs:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
-        run: npm i --force
+        run: npm i
         working-directory: ./packages/rmw-shell
       - name: Publish
         run: npm publish
