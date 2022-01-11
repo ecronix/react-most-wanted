@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from 'react'
 import PropTypes from 'prop-types'
 import Context from './Context'
-import { useMediaQuery } from '@mui/material'
 import {
   setIsAuthMenuOpen,
   setIsMiniMode,
@@ -72,8 +71,6 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     isMobileMenuOpen: menuStore.isMobileMenuOpen,
     isMiniSwitchVisibility: menuStore.isMiniSwitchVisibility,
   }
-
-  const isDesktop = useMediaQuery('(min-width:600px)')
 
   useEffect(() => {
     try {
