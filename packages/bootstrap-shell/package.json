@@ -20,27 +20,27 @@
     "test:watch": "nwb test-react --server"
   },
   "peerDependencies": {
-    "jss-rtl": "0.x",
+    "@emotion/react": "11.x",
+    "@emotion/styled": "11.x",
     "@formatjs/intl-relativetimeformat": "7.x",
-    "react-easy-crop": "3.x",
     "base-shell": "1.x",
+    "bootstrap": "5.x",
     "github-markdown-css": "4.x",
     "intl": "1.x",
     "intl-locales-supported": "1.x",
+    "jss-rtl": "0.x",
     "notistack": "2.x",
     "react": "17.x",
+    "react-bootstrap": "2.x",
+    "react-bootstrap-icons": "1.x",
     "react-dom": "17.x",
+    "react-easy-crop": "3.x",
     "react-intl": "5.x",
     "react-ios-pwa-prompt": "1.x",
     "react-markdown": "5.x",
     "react-router-dom": "5.x",
     "react-virtualized-auto-sizer": "1.x",
-    "react-window": "1.x",
-    "@emotion/react": "11.x",
-    "@emotion/styled": "11.x",
-    "bootstrap": "5.x",
-    "react-bootstrap": "2.x",
-    "react-bootstrap-icons": "1.x"
+    "react-window": "1.x"
   },
   "devDependencies": {
     "@emotion/react": "^11.5.0",
@@ -85,5 +85,7 @@
   "keywords": [
     "react-component"
   ],
-  "dependencies": {}
+  "dependencies": {
+    "react-icons": "^4.3.1"
+  }
 }
