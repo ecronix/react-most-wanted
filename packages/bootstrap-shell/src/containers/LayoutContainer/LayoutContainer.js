@@ -5,7 +5,7 @@ import * as BS from 'react-bootstrap'
 
 export default function ({ children }) {
   const { appConfig } = useConfig()
-
+  console.log("wdwqdqwd")
   return (
     <BS.ThemeProvider>
       <MenuProvider>{children}</MenuProvider>
