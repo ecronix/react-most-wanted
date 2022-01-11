@@ -34,7 +34,7 @@
       "react-ios-pwa-prompt": "1.x",
       "react-linkify": "^1.0.0-alpha",
       "react-markdown": "7.x",
-      "react-router-dom": "5.x",
+      "react-router-dom": "6.x",
       "react-virtualized-auto-sizer": "1.x",
       "react-window": "1.x"
     },
