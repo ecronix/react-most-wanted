@@ -42,6 +42,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   rmw-shell-demo:
+    if: ${{ always() }}
     needs: [rmw-shell-template,rmw-shell]
     runs-on: ubuntu-latest
     environment: prod
