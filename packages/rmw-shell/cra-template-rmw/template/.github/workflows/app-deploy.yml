@@ -11,7 +11,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm i -g firebase-tools
-          npm i --force
+          npm i
       - name: Build
         run: npm run build
         env:
