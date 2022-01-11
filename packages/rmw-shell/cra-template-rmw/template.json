@@ -18,6 +18,7 @@
       "jss-rtl": "0.x",
       "material-ui-image": "3.x",
       "material-ui-shell": "3.x",
+      "rmw-shell": "11.x",
       "moment": "2.x",
       "mui-rff": "5.x",
       "notistack": "2.x",
