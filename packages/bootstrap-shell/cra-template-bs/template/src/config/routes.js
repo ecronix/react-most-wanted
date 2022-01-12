@@ -8,9 +8,9 @@ const routes = [
   {
     generateHeaderLink: true,
     displayName: 'Home',
-    path: '/', // root path
+    path: '/home', // root path
     exact: true,
-    element: <Home redirectTo="#home" />,
+    element: <Home redirectTo="/home" />,
   },
   {
     generateHeaderLink: true,

@@ -12,6 +12,8 @@ const Menu = ({ brand }) => {
   const { globalBrand, MenuRight } = menu || {};
   const menuContext = useMenu();
 
+  console.log('menucontext', menuContext);
+
   // Replace with Provider
   const [toggleMenu, setToggleMenu] = React.useState(false);
 
@@ -55,7 +57,5 @@ const Menu = ({ brand }) => {
     </BS.Col>
   </header>
 }
-
-
 
 export default Menu
