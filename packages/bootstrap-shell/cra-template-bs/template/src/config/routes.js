@@ -6,11 +6,9 @@ import React, { lazy } from 'react'
 const Home = lazy(() => import('../pages/Home/Home'))
 const routes = [
   {
-    generateHeaderLink: true,
-    displayName: 'Home',
     path: '/home', // root path
     exact: true,
-    element: <Home redirectTo="/home" />,
+    element: <Home />,
   },
   {
     generateHeaderLink: true,
