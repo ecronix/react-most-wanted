@@ -24,21 +24,23 @@ export const LayoutContent = ({ appConfig = {} }) => {
   } = appConfig || {}
   const { persistKey } = auth || {}
   const { checkInterval = 5000 } = update || {}
-  const { Menu, Loading } = components || {}
+  const { Menu, Loading = () => <div>Loading...</div> } = components || {}
   const { locales, onError } = confLocale || {}
   const { LayoutContainer = React.Fragment } = containers || {}
   const defaultRoutes = getDefaultRoutes ? getDefaultRoutes(appConfig) : []
-  const { locale } = useLocale()
+  const { locale = {} } = useLocale()
 
   useEffect(() => {
     const loadPolyfills = async () => {
       //loadLocalePolyfill(locale)
 
-      for (let i = 0; i < locales.length; i++) {
-        const l = locales[i]
-        if (l.locale === locale) {
-          if (l.loadData) {
-            await l.loadData
+      if (locale.locales && locale.locales.length > 0) {
+        for (let i = 0; i < locales.length; i++) {
+          const l = locales[i]
+          if (l.locale === locale) {
+            if (l.loadData) {
+              await l.loadData
+            }
           }
         }
       }
