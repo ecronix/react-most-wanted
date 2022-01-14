@@ -11,15 +11,11 @@ const routes = [
     element: <Home />,
   },
   {
-    generateHeaderLink: true,
-    displayName: 'Second',
     path: '/home2', // path /home2
     exact: true,
     element: <Home redirectTo="#home" />,
   },
   {
-    generateHeaderLink: true,
-    displayName: 'Third',
     path: '*', //Page not found
     exact: true,
     element: <Home redirectTo="#home" />,

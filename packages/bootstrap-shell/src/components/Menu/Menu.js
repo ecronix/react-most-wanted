@@ -8,15 +8,13 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 
 const Menu = ({ brand }) => {
   const { appConfig } = useConfig()
-  const { routes } = appConfig || {}
   const { menu } = appConfig || {}
-  const { globalBrand, MenuRight } = menu || {}
+  const { globalBrand, MenuRight, menuItems } = menu || {}
   const menuContext = useMenu();
   const { DISPATCH_ACTION, isMobileMenuOpen } = menuContext;
 
-  console.log(isMobileMenuOpen)
-
   const _brand = brand ? brand : globalBrand
+  console.log(isMobileMenuOpen)
 
   return (
     <header>
@@ -30,19 +28,17 @@ const Menu = ({ brand }) => {
               <BS.Navbar.Toggle aria-controls="basic-navbar-nav" />
               <BS.Navbar.Collapse>
                 <BS.Nav className="d-none d-md-flex d-lg-flex">
-                  {routes
-                    .filter(({ generateHeaderLink }) => generateHeaderLink)
-                    .map(({ path, displayName }) => {
-                      return (
-                        <BS.Nav.Link
-                          key={displayName}
-                          href={path}
-                          className="text-light"
-                        >
-                          {displayName}
-                        </BS.Nav.Link>
-                      )
-                    })}
+                  {menuItems.map(({ path, displayName }) => {
+                    return (
+                      <BS.Nav.Link
+                        key={displayName}
+                        href={path}
+                        className="text-light"
+                      >
+                        {displayName}
+                      </BS.Nav.Link>
+                    )
+                  })}
                 </BS.Nav>
               </BS.Navbar.Collapse>
             </BS.Navbar>
@@ -69,15 +65,13 @@ const Menu = ({ brand }) => {
           transition: 'max-height 2s linear',
         }}
       >
-        {routes
-          .filter(({ generateHeaderLink }) => generateHeaderLink)
-          .map(({ path, displayName }) => {
-            return (
-              <BS.Nav.Link key={displayName} href={path} className="text-light">
-                {displayName}
-              </BS.Nav.Link>
-            )
-          })}
+        {menuItems.map(({ path, displayName }) => {
+          return (
+            <BS.Nav.Link key={displayName} href={path} className="text-light">
+              {displayName}
+            </BS.Nav.Link>
+          )
+        })}
         {MenuRight && <MenuRight />}
       </BS.Col>
     </header>

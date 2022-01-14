@@ -3,6 +3,7 @@ import routes from './routes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import locales from './locales'
 import React from 'react'
+import menuItems from './menuItems'
 
 const Loading = () => <div>Loading...</div>
 
@@ -35,8 +36,8 @@ const config = {
   menu: {
     width: 240,
     initialMobileMenuOpen: false,
-    initialMiniSwitchVisibility: true,
     MenuRight: lazy(() => import('../components/Menu/MenuRight')),
+    menuItems,
   },
   theme: {},
   pages: {
