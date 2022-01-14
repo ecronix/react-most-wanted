@@ -19,9 +19,7 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   const props = {
     DISPATCH_ACTION(value, newValue = null) {
       if (value === SET_IS_MOBILE_MENU_OPEN) {
-        console.log("provider", !menuStore.isMobileMenuOpen)
         dispatch(setIsMobileMenuOpen(!menuStore.isMobileMenuOpen));
-        console.log("menustore", menuStore)
       }
     },
 
