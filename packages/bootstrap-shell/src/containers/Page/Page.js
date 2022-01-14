@@ -16,16 +16,10 @@ const Page = ({
 
   return (
     <React.Fragment>
-      <BS.Container>
-        <BS.Row>
-          <Menu brand={headerTitle} />
-        </BS.Row>
-        <BS.Row>
-          <div style={{ flex: 1, overflow: 'auto', ...contentStyle }}>
-            {children}
-          </div>
-        </BS.Row>
-      </BS.Container>
+      <Menu brand={headerTitle} />
+      <div style={{ flex: 1, overflow: 'auto', ...contentStyle }}>
+        {children}
+      </div>
     </React.Fragment>
   )
 }
