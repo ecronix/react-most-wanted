@@ -8,24 +8,25 @@ import reducer from './store/reducer';
 import { SET_IS_MOBILE_MENU_OPEN } from './store/types';
 
 const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
-  console.log("Provider");
   const { menu } = appConfig || {};
   const { initialMobileMenuOpen } = menu;
   const savedState = JSON.parse(localStorage.getItem(persistKey))
   const [menuStore, dispatch] = useReducer(reducer, {
     isMobileMenuOpen: initialMobileMenuOpen,
     ...savedState,
-  })
+  });
 
   const props = {
     DISPATCH_ACTION(value, newValue = null) {
       if (value === SET_IS_MOBILE_MENU_OPEN) {
-        dispatch(setIsMobileMenuOpen(newValue !== null ? newValue : !menuStore.isMobileMenuOpen));
+        console.log("provider", !menuStore.isMobileMenuOpen)
+        dispatch(setIsMobileMenuOpen(!menuStore.isMobileMenuOpen));
+        console.log("menustore", menuStore)
       }
     },
 
     // getters
-    isMobileMenuOpen: menuStore.setIsMobileMenuOpen,
+    isMobileMenuOpen: menuStore.isMobileMenuOpen,
   }
 
   useEffect(() => {

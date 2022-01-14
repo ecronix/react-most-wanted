@@ -34,10 +34,6 @@ const config = {
   },
   menu: {
     width: 240,
-    offlineIndicatorHeight: 12,
-    initialAuthMenuOpen: false,
-    initialMiniMode: false,
-    initialMenuOpen: true,
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
     MenuRight: lazy(() => import('../components/Menu/MenuRight')),
