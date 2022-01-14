@@ -17,8 +17,10 @@ const menuItems = [
                 path: '/',
                 displayName: 'Dropdown with Link',
                 nested: [
-                    path: '/',
-                    displayName: 'Dropdown Item'
+                    {
+                        path: '/',
+                        displayName: 'Dropdown Item'
+                    }
                 ]
             }
         ]
