@@ -1,5 +1,8 @@
 import { lazy } from 'react'
 import routes from './routes'
+import Loading from '../components/Loading/Loading'
+import locales from './locales'
+import parseLanguages from 'base-shell/lib/utils/locale'
 
 const config = {
     containers: {
@@ -8,6 +11,7 @@ const config = {
         ),
     },
     components: {
+        Loading,
         Menu: lazy(() => import('bootstrap-shell/lib/components/Menu/Menu')),
     },
     auth: {
@@ -18,7 +22,14 @@ const config = {
         iOSPWAPromptProps: {},
     },
     routes,
-    locale: {},
+    locale: {
+        locales,
+        defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
+        onError: (e) => {
+            //console.warn(e)
+            return
+        },
+    },
     menu: {
         MenuRight: lazy(() => import('../components/Menu/MenuRight')),
     },

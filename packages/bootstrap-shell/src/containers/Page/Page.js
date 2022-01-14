@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Menu from '../../components/Menu/Menu'
 import { useMenu } from '../../providers/Menu'
-import LayoutContainer from '../LayoutContainer/LayoutContainer'
+import * as BS from "react-bootstrap"
 
 const Page = ({
   children,
@@ -14,14 +14,18 @@ const Page = ({
     headerTitle = brand
   }
 
-  console.log("Page");
-
   return (
     <React.Fragment>
-      <Menu brand={headerTitle} />
-      <div style={{ flex: 1, overflow: 'auto', ...contentStyle }}>
-        {children}
-      </div>
+      <BS.Container>
+        <BS.Row>
+          <Menu brand={headerTitle} />
+        </BS.Row>
+        <BS.Row>
+          <div style={{ flex: 1, overflow: 'auto', ...contentStyle }}>
+            {children}
+          </div>
+        </BS.Row>
+      </BS.Container>
     </React.Fragment>
   )
 }
