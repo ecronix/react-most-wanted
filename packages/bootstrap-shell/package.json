@@ -61,6 +61,7 @@
     "react-bootstrap-icons": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-easy-crop": "^4.0.1",
+    "react-icons": "^4.3.1",
     "react-intl": "^5.20.13",
     "react-ios-pwa-prompt": "^1.8.4",
     "react-markdown": "^7.0.1",
@@ -84,8 +85,5 @@
   },
   "keywords": [
     "react-component"
-  ],
-  "dependencies": {
-    "react-icons": "^4.3.1"
-  }
+  ]
 }
