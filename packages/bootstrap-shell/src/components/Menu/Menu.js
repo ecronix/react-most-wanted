@@ -1,21 +1,20 @@
 import React from 'react'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import * as BS from 'react-bootstrap'
-//import RMWLogo from "../../assets/rmw.svg";
+import RMWLogo from "../../assets/rmw.svg";
 import { useMenu } from 'bootstrap-shell/lib/providers/Menu'
-//import { GiHamburgerMenu } from 'react-icons/gi'
+import { SET_IS_MOBILE_MENU_OPEN } from "bootstrap-shell/lib/providers/Menu/store/types";
+import { GiHamburgerMenu } from 'react-icons/gi'
 
 const Menu = ({ brand }) => {
   const { appConfig } = useConfig()
   const { routes } = appConfig || {}
   const { menu } = appConfig || {}
   const { globalBrand, MenuRight } = menu || {}
-  const menuContext = useMenu()
+  const menuContext = useMenu();
+  const { DISPATCH_ACTION, isMobileMenuOpen } = menuContext;
 
-  console.log('menucontext', menuContext)
-
-  // Replace with Provider
-  const [toggleMenu, setToggleMenu] = React.useState(false)
+  console.log(isMobileMenuOpen)
 
   const _brand = brand ? brand : globalBrand
 
@@ -26,7 +25,7 @@ const Menu = ({ brand }) => {
           <BS.Col>
             <BS.Navbar>
               <BS.Navbar.Brand href="#home" className="text-white">
-                {/*_brand ? _brand : <img src={RMWLogo} alt="RMW Logo" width="40px" />*/}
+                {brand ? _brand : <img src={RMWLogo} alt="RMW Logo" width="40px" />}
               </BS.Navbar.Brand>
               <BS.Navbar.Toggle aria-controls="basic-navbar-nav" />
               <BS.Navbar.Collapse>
@@ -54,10 +53,10 @@ const Menu = ({ brand }) => {
             </BS.Navbar>
             {/*Mobile Menu*/}
             <BS.Navbar className="d-sm-flex d-md-none d-lg-none justify-content-end">
-              {/*<GiHamburgerMenu
+              <GiHamburgerMenu
                 className="text-white d-sm-block d-md-none d-lg-none"
-                onClick={() => setToggleMenu(!toggleMenu)}
-              />*/}
+                onClick={() => DISPATCH_ACTION(SET_IS_MOBILE_MENU_OPEN)}
+              />
             </BS.Navbar>
           </BS.Col>
         </BS.Container>
@@ -66,7 +65,7 @@ const Menu = ({ brand }) => {
       <BS.Col
         className="top-0 float-right bg-dark p-2 overflow-hidden"
         style={{
-          maxHeight: toggleMenu ? 1000 : 0,
+          maxHeight: isMobileMenuOpen ? 1000 : 0,
           transition: 'max-height 2s linear',
         }}
       >

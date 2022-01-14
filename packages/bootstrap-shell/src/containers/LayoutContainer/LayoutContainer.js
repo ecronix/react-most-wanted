@@ -10,6 +10,7 @@ const LayoutContent = ({ children }) => {
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column'
       }}
     >
       {children}
