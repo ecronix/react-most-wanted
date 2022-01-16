@@ -1,28 +1,68 @@
 const menuItems = [
+    /*
     {
         path: '/',
-        displayName: 'Home'
+        displayName: 'Home',
+        disabled: true,
+        disabledMobile: false,
     },
     {
         path: '/',
         displayName: 'Dropdown with Link',
+        disabled: true,
+        disabledMobile: false,
         nested: [
 
         ]
     },
+    */
     {
-        displayName: 'Dropdown with out Link',
+        displayName: 'Dropdown',
+        disabled: false,
         nested: [
             {
                 path: '/',
-                displayName: 'Dropdown with Link',
+                displayName: 'Dropdown Item',
+                disabled: false,
+            },
+            {
+                path: '/',
+                displayName: 'Dropdown Item',
+                disabled: false,
+            },
+            {
+                path: '/',
+                displayName: 'Dropdown Item',
+                disabled: false,
+            },
+            {
+                displayName: 'Dropdown Item',
+                disabled: false,
                 nested: [
                     {
                         path: '/',
-                        displayName: 'Dropdown Item'
+                        displayName: 'Dropdown Item',
+                        disabled: false,
+                    },
+                    {
+                        path: '/',
+                        displayName: 'Dropdown Item',
+                        disabled: false,
+                        nested: [
+                            {
+                                path: '/',
+                                displayName: 'Dropdown Item',
+                                disabled: false,
+                            },
+                            {
+                                path: '/',
+                                displayName: 'Dropdown Item',
+                                disabled: false,
+                            }
+                        ]
                     }
                 ]
-            }
+            },
         ]
     }
 ]

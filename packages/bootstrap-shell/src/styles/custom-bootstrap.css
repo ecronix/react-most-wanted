@@ -1,0 +1,22 @@
+/*
+    xs = Extra small <576px. Max container width None (auto)
+    sm = Small ≥576px. Max container width 540px.
+    md = Medium ≥768px. Max container width 720px.
+    lg = Large ≥992px. Max container width 960px.
+    xl = Extra large ≥1200px. Max container width 1140px.
+*/
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu[data-bs-popper] {
+  position: absolute;
+  right: 0;
+  top: -3px;
+  left: 99%;
+}
+
+.dropdown-toggle {
+  padding: 0.25rem 1rem !important;
+}
