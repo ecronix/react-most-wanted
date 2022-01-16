@@ -36,7 +36,7 @@ const menuItems = [
                 disabled: false,
             },
             {
-                displayName: 'Dropdown Item',
+                displayName: 'Dropdown Header',
                 disabled: false,
                 nested: [
                     {
@@ -46,7 +46,7 @@ const menuItems = [
                     },
                     {
                         path: '/',
-                        displayName: 'Dropdown Item',
+                        displayName: 'Dropdown Header',
                         disabled: false,
                         nested: [
                             {
