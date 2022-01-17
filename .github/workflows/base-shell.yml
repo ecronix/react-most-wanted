@@ -1,0 +1,43 @@
+name: rmw-shell
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "packages/base-shell/**"
+  workflow_dispatch:
+jobs:
+  rmw-shell:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies
+        run: npm i
+        working-directory: ./packages/rmw-shell
+      - name: Publish
+        run: npm run release
+        working-directory: ./packages/rmw-shell
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  rmw-shell-template:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          registry-url: https://registry.npmjs.org/
+      - name: Install dependencies
+        run: npm i
+        working-directory: ./packages/rmw-shell/cra-template-rmw
+      - name: Publish
+        run: npm run release
+        working-directory: ./packages/rmw-shell/cra-template-rmw
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
