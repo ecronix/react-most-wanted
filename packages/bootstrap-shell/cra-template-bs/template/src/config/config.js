@@ -15,7 +15,6 @@ const config = {
   },
   components: {
     Loading,
-    Menu: lazy(() => import('bootstrap-shell/lib/components/Menu/Menu')),
   },
   auth: {
     signInURL: '/signin',

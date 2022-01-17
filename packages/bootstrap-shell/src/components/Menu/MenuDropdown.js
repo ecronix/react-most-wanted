@@ -7,12 +7,9 @@ export default function MenuDropdown({ navItem, className }) {
         navItem &&
         <BS.NavDropdown className={className} menuVariant='dark' title={navItem.displayName}>
             {navItem?.nested?.map(item => {
-                if (item.nested) {
-                    return <MenuDropdown className="dropdown-submenu" navItem={item} />;
-                }
-                else {
-                    return <BS.NavDropdown.Item href={navItem.path}>{item.displayName}</BS.NavDropdown.Item>
-                }
+                return item.nested ? <MenuDropdown className="dropdown-submenu" navItem={item} />
+                    : <BS.NavDropdown.Item href={item.path}>{item.displayName}</BS.NavDropdown.Item>
+
             })}
         </BS.NavDropdown>
 

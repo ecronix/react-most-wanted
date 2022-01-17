@@ -21,46 +21,19 @@ const menuItems = [
         disabled: false,
         nested: [
             {
-                path: '/',
-                displayName: 'Dropdown Item',
+                path: '/home',
+                displayName: 'Home',
                 disabled: false,
             },
             {
-                path: '/',
-                displayName: 'Dropdown Item',
-                disabled: false,
-            },
-            {
-                path: '/',
-                displayName: 'Dropdown Item',
-                disabled: false,
-            },
-            {
-                displayName: 'Dropdown Header',
+                displayName: 'Demo Pages',
                 disabled: false,
                 nested: [
                     {
-                        path: '/',
-                        displayName: 'Dropdown Item',
+                        path: '/dialog',
+                        displayName: 'Dialog Demo',
                         disabled: false,
                     },
-                    {
-                        path: '/',
-                        displayName: 'Dropdown Header',
-                        disabled: false,
-                        nested: [
-                            {
-                                path: '/',
-                                displayName: 'Dropdown Item',
-                                disabled: false,
-                            },
-                            {
-                                path: '/',
-                                displayName: 'Dropdown Item',
-                                disabled: false,
-                            }
-                        ]
-                    }
                 ]
             },
         ]

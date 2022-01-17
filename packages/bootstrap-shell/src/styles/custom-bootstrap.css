@@ -6,12 +6,20 @@
     xl = Extra large ≥1200px. Max container width 1140px.
 */
 
+:root {
+  --bs-primary: white !important;
+  --bs-primary-rgb: 52, 58, 64 !important;
+}
+
+.dropdown-menu {
+  min-width: 12rem !important;
+}
+
 .dropdown-submenu {
   position: relative;
 }
 
 .dropdown-submenu .dropdown-menu[data-bs-popper] {
-  position: absolute;
   right: 0;
   top: -3px;
   left: 99%;
