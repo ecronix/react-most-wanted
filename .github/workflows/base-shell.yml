@@ -7,7 +7,7 @@ on:
       - "packages/base-shell/**"
   workflow_dispatch:
 jobs:
-  rmw-shell:
+  base-shell:
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -24,7 +24,7 @@ jobs:
         working-directory: ./packages/base-shell
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-  rmw-shell-template:
+  base-shell-template:
     runs-on: ubuntu-latest
     environment: prod
     steps:
