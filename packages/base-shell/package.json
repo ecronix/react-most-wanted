@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,7 +18,8 @@
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
-    "release": "release-it -- patch"
+    "release": "release-it -- patch",
+    "release_ci": "release-it -- patch --ci"
   },
   "peerDependencies": {
     "intl": "1.x",
