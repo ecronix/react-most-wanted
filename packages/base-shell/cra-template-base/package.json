@@ -24,5 +24,11 @@
   "files": [
     "template",
     "template.json"
-  ]
+  ],
+  "scripts": {
+    "release": "release-it -- patch"
+  },
+  "devDependencies": {
+    "release-it": "^14.12.3"
+  }
 }
