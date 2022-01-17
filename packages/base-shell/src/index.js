@@ -1,4 +1,4 @@
 import App from './containers/App/App'
 
-// App.js
+// App
 export default App
