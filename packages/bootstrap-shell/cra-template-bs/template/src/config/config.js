@@ -3,6 +3,7 @@ import routes from './routes'
 import parseLanguages from 'base-shell/lib/utils/locale'
 import locales from './locales'
 import React from 'react'
+import menuItems from './menuItems'
 
 const Loading = () => <div>Loading...</div>
 
@@ -14,7 +15,6 @@ const config = {
   },
   components: {
     Loading,
-    Menu: lazy(() => import('bootstrap-shell/lib/components/Menu/Menu')),
   },
   auth: {
     signInURL: '/signin',
@@ -34,13 +34,9 @@ const config = {
   },
   menu: {
     width: 240,
-    offlineIndicatorHeight: 12,
-    initialAuthMenuOpen: false,
-    initialMiniMode: false,
-    initialMenuOpen: true,
     initialMobileMenuOpen: false,
-    initialMiniSwitchVisibility: true,
     MenuRight: lazy(() => import('../components/Menu/MenuRight')),
+    menuItems,
   },
   theme: {},
   pages: {
