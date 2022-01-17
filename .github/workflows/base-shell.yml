@@ -18,10 +18,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/rmw-shell
+        working-directory: ./packages/base-shell
       - name: Publish
-        run: npm run release
-        working-directory: ./packages/rmw-shell
+        run: npm run release --ci 
+        working-directory: ./packages/base-shell
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   rmw-shell-template:
@@ -35,9 +35,9 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/rmw-shell/cra-template-rmw
+        working-directory: ./packages/base-shell/cra-template-base
       - name: Publish
-        run: npm run release
-        working-directory: ./packages/rmw-shell/cra-template-rmw
+        run: npm run release --ci 
+        working-directory: ./packages/base-shell/cra-template-base
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
