@@ -17,11 +17,13 @@ jobs:
         with:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
+      - name: Install release-it
+        run: npm i -g release-it
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/base-shell
       - name: Publish
-        run: npm run release --ci 
+        run: npm run release
         working-directory: ./packages/base-shell
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -34,11 +36,13 @@ jobs:
         with:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
+      - name: Install release-it
+        run: npm i -g release-it
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/base-shell/cra-template-base
       - name: Publish
-        run: npm run release --ci 
+        run: npm run release 
         working-directory: ./packages/base-shell/cra-template-base
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
