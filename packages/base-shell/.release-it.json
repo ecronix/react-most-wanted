@@ -4,6 +4,7 @@
     "tagAnnotation": "base-schell release ${version}"
   },
   "github": {
-    "release": true
+    "release": true,
+    "releaseName": "base-shell release ${version}"
   }
 }
