@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Menu from '../../components/Menu/Menu'
 import { useMenu } from '../../providers/Menu'
-import LayoutContainer from '../LayoutContainer/LayoutContainer'
+import * as BS from "react-bootstrap"
 
 const Page = ({
   children,
