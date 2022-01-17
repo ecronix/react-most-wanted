@@ -26,6 +26,8 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: git pull
+        run: git pull
       - name: Publish
         run: npm run release
         working-directory: ./packages/base-shell
@@ -49,6 +51,8 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: git pull
+        run: git pull
       - name: Publish
         run: npm run release 
         working-directory: ./packages/base-shell/cra-template-base
