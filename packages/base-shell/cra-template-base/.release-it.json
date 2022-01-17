@@ -1,0 +1,11 @@
+{
+  "git": {
+    "commitMessage": "🚀 release v${version}",
+    "tagAnnotation": "🚀 cra-template-base release ${version}"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "cra-template-base release ${version}",
+    "autoGenerate": false
+  }
+}
