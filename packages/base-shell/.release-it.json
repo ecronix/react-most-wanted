@@ -1,0 +1,11 @@
+{
+  "git": {
+    "commitMessage": "🚀 release v${version}",
+    "tagAnnotation": "🚀 base-schell release ${version}"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "base-shell release ${version}",
+    "autoGenerate": false
+  }
+}

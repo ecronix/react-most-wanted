@@ -1,11 +1,9 @@
 import { useConfig } from 'base-shell/lib/providers/Config'
 import React from 'react'
 import MenuProvider from '../../providers/Menu/Provider'
-import * as BS from 'react-bootstrap'
+import '../../styles/custom-bootstrap.css';
 
 const LayoutContent = ({ children }) => {
-  console.log("Layoutcontent")
-
   return (
     <div
       style={{
@@ -20,7 +18,6 @@ const LayoutContent = ({ children }) => {
 
 export default function ({ children }) {
   const { appConfig } = useConfig()
-  console.log("Layout container");
   return (
     <React.Fragment>
       <MenuProvider appConfig={appConfig}>
