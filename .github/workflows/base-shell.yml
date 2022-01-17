@@ -22,6 +22,10 @@ jobs:
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/base-shell
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Publish
         run: npm run release
         working-directory: ./packages/base-shell
@@ -41,6 +45,10 @@ jobs:
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/base-shell/cra-template-base
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Publish
         run: npm run release 
         working-directory: ./packages/base-shell/cra-template-base
