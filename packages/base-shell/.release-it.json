@@ -1,10 +1,11 @@
 {
   "git": {
-    "commitMessage": "chore: release v${version}",
-    "tagAnnotation": "base-schell release ${version}"
+    "commitMessage": "🚀 release v${version}",
+    "tagAnnotation": "🚀 base-schell release ${version}"
   },
   "github": {
     "release": true,
-    "releaseName": "base-shell release ${version}"
+    "releaseName": "base-shell release ${version}",
+    "autoGenerate": false
   }
 }
