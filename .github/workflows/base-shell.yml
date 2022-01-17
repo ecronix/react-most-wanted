@@ -1,4 +1,4 @@
-name: rmw-shell
+name: base-shell
 on:
   push:
     branches:
