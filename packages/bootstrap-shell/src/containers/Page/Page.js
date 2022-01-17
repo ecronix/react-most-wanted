@@ -14,8 +14,6 @@ const Page = ({
     headerTitle = brand
   }
 
-  console.log("Page");
-
   return (
     <React.Fragment>
       <Menu brand={headerTitle} />
