@@ -1,0 +1,9 @@
+{
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagAnnotation": "base-schell release ${version}"
+  },
+  "github": {
+    "release": true
+  }
+}
