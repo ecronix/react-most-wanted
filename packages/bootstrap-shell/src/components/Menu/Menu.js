@@ -19,11 +19,11 @@ const Menu = ({ brand }) => {
 
   return (
     <header>
-      <BS.Navbar bg="dark">
+      <BS.Navbar className="bg-primary">
         <BS.Container fluid className="justify-content-space-between">
           <BS.Col>
             <BS.Navbar className="navbar-dark">
-              <BS.Navbar.Brand href="#home" className="text-white">
+              <BS.Navbar.Brand href="#home" className="text-secondary">
                 {brand ? _brand : <img src={RMWLogo} alt="RMW Logo" width="40px" />}
               </BS.Navbar.Brand>
               <BS.Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,7 +32,7 @@ const Menu = ({ brand }) => {
                   {menuItems.map(menuItem => {
                     console.log("menu", menuItem.displayName);
                     return menuItem.nested ? <MenuDropdown style={{ position: 'relative' }} key={menuItem.displayName} navItem={menuItem} /> :
-                      <BS.Nav.Link key={menuItem.displayName} href={menuItem.path} className="text-dark">
+                      <BS.Nav.Link key={menuItem.displayName} href={menuItem.path} className="text-secondary">
                         {menuItem.displayName}
                       </BS.Nav.Link>
                   })}
@@ -47,7 +47,7 @@ const Menu = ({ brand }) => {
             {/*Mobile Menu*/}
             <BS.Navbar className="d-sm-flex d-md-none d-lg-none justify-content-end">
               <GiHamburgerMenu
-                className="text-white d-sm-block d-md-none d-lg-none"
+                className="text-secondary d-sm-block d-md-none d-lg-none"
                 onClick={() => DISPATCH_ACTION(SET_IS_MOBILE_MENU_OPEN)}
               />
             </BS.Navbar>
@@ -56,7 +56,7 @@ const Menu = ({ brand }) => {
       </BS.Navbar>
       {/*Mobile Menu*/}
       <BS.Col
-        className="top-0 float-right bg-dark p-2 overflow-hidden"
+        className="d-sm-flex d-md-none d-lg-none top-0 float-right bg-primary p-2 overflow-hidden"
         style={{
           maxHeight: isMobileMenuOpen ? 1000 : 0,
           transition: 'max-height 2s linear',
@@ -65,7 +65,7 @@ const Menu = ({ brand }) => {
         {menuItems.map(menuItem => {
           console.log("menu", menuItem.displayName);
           return menuItem.nested ? <MenuDropdownMobile style={{ position: 'relative' }} key={menuItem.displayName} navItem={menuItem} /> :
-            <BS.Nav.Link key={menuItem.displayName} href={menuItem.path} className="text-dark">
+            <BS.Nav.Link key={menuItem.displayName} href={menuItem.path} className="text-secondary">
               {menuItem.displayName}
             </BS.Nav.Link>
         })}

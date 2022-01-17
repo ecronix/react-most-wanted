@@ -4,6 +4,7 @@ import React, { lazy } from 'react'
 //import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute'
 
 const Home = lazy(() => import('../pages/Home/Home'))
+const Dialog = lazy(() => import('../pages/DialogDemo'))
 const routes = [
   {
     path: '/home', // root path
@@ -11,9 +12,9 @@ const routes = [
     element: <Home />,
   },
   {
-    path: '/home2', // path /home2
+    path: '/dialog', // path /home2
     exact: true,
-    element: <Home redirectTo="#home" />,
+    element: <Dialog redirectTo="/dialog" />,
   },
   {
     path: '*', //Page not found
