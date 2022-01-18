@@ -35,7 +35,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   material-ui-shell-template:
     if: ${{ always() }}
-    needs: [aterial-ui-shell]
+    needs: [material-ui-shell]
     runs-on: ubuntu-latest
     environment: prod
     steps:
