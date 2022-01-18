@@ -1,3 +1,4 @@
+// get the default user data
 const defaultUserData = (user) => {
   if (user != null) {
     return {
