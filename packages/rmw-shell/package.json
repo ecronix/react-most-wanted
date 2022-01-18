@@ -18,7 +18,9 @@
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
     "test:watch": "nwb test-react --server",
-    "version": "echo $npm_package_version"
+    "version": "echo $npm_package_version",
+    "release": "release-it -- patch"
+
   },
   "peerDependencies": {
     "@emotion/react": "11.x",
