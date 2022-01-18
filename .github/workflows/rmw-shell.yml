@@ -4,7 +4,8 @@ on:
     branches:
       - master
     paths:
-      - "packages/rmw-shell/**"
+      - "packages/rmw-shell/src/**"
+      - "packages/rmw-shell/cra-template-rmw/template/**"
   workflow_dispatch:
 jobs:
   rmw-shell:
@@ -18,13 +19,23 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm i
+      - name: Install release-it
+        run: npm i -g release-it
         working-directory: ./packages/rmw-shell
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: git pull
+        run: git pull
       - name: Publish
-        run: npm publish
+        run: npm run release 
         working-directory: ./packages/rmw-shell
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   rmw-shell-template:
+    if: ${{ always() }}
+    needs: [rmw-shell]
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -35,15 +46,23 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm i
+      - name: Install release-it
+        run: npm i -g release-it
         working-directory: ./packages/rmw-shell/cra-template-rmw
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: git pull
+        run: git pull
       - name: Publish
-        run: npm publish
+        run: npm run release 
         working-directory: ./packages/rmw-shell/cra-template-rmw
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   rmw-shell-demo:
     if: ${{ always() }}
-    needs: [rmw-shell-template,rmw-shell]
+    needs: [rmw-shell-template]
     runs-on: ubuntu-latest
     environment: prod
     steps:
