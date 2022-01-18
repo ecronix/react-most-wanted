@@ -27,7 +27,7 @@ const config = {
     locales,
     defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
     onError: (e) => {
-      // Here we can warn the user about translation errors
+      // Here we can warn the user about translation error
       //console.warn(e)
       return
     },
