@@ -27,7 +27,9 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: git pull
-        run: git pull
+        run: | 
+         git pull
+         git diff
       - name: Publish
         run: npm run release 
         working-directory: ./packages/rmw-shell
