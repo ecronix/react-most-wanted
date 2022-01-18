@@ -1,4 +1,4 @@
 import App from './containers/App/App'
 
-// App export
+// App
 export default App
