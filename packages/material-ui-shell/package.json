@@ -17,7 +17,9 @@
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "release": "release-it -- patch"
+
   },
   "peerDependencies": {
     "@emotion/react": "11.x",
