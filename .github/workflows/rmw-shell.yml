@@ -28,10 +28,10 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: git pull
         run: | 
-         git pull
+         git diff
          git add .
          git commit -m "Update rmw-shell"
-         git diff
+         git pull
       - name: Publish
         run: npm run release 
         working-directory: ./packages/rmw-shell
@@ -59,10 +59,10 @@ jobs:
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: git pull
         run: | 
-         git pull
          git add .
          git commit -m "Update rmw-shell-template"
          git diff
+         git pull
       - name: Publish
         run: npm run release 
         working-directory: ./packages/rmw-shell/cra-template-rmw
