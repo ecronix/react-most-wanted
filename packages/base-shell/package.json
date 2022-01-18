@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "2.4.13",
+  "version": "2.4.14",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
