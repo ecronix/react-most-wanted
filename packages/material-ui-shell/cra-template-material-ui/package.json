@@ -18,6 +18,9 @@
   "engines": {
     "node": ">=8"
   },
+  "scripts": {
+    "release": "release-it -- patch"
+  },
   "bugs": {
     "url": "https://github.com/TarikHuber/react-most-wanted/issues"
   },

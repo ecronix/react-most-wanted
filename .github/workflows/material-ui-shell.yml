@@ -1,14 +1,14 @@
-name: base-shell
+name: material-ui-shell
 on:
   push:
     branches:
       - master
     paths:
-      - "packages/base-shell/src/**"
-      - "packages/base-shell/cra-template-base/template/**"
+      - "packages/material-ui-shell/src/**"
+      - "packages/material-ui-shell/cra-template-material-ui/template/**"
   workflow_dispatch:
 jobs:
-  base-shell:
+  material-ui-shell:
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -21,7 +21,7 @@ jobs:
         run: npm i -g release-it
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/base-shell
+        working-directory: ./packages/material-ui-shell
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -30,12 +30,12 @@ jobs:
         run: git pull
       - name: Publish
         run: npm run release
-        working-directory: ./packages/base-shell
+        working-directory: ./packages/material-ui-shell
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-  base-shell-template:
+  material-ui-shell-template:
     if: ${{ always() }}
-    needs: [base-shell]
+    needs: [aterial-ui-shell]
     runs-on: ubuntu-latest
     environment: prod
     steps:
@@ -48,7 +48,7 @@ jobs:
         run: npm i -g release-it
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/base-shell/cra-template-base
+        working-directory: ./packages/material-ui-shell/cra-template-material-ui
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -57,6 +57,6 @@ jobs:
         run: git pull
       - name: Publish
         run: npm run release 
-        working-directory: ./packages/base-shell/cra-template-base
+        working-directory: ./packages/material-ui-shell/cra-template-material-ui
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
