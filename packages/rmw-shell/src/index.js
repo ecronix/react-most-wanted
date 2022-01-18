@@ -1,4 +1,4 @@
 import config from './config'
 
-// config
+// config export
 export default config
