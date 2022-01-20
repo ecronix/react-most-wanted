@@ -1,8 +1,10 @@
 import React, { useContext } from 'react'
+import { useTheme as useAppTheme } from '../../providers/Theme'
 import MenuContext from '../../providers/Menu/Context'
 import { useTheme } from '@mui/material/styles'
 import { useConfig } from 'base-shell/lib/providers/Config'
 import { useOnline } from 'base-shell/lib/providers/Online'
+
 import { useIntl } from 'react-intl'
 import {
   AppBar,
@@ -22,6 +24,7 @@ export default function ({
   contentStyle,
   tabs = null,
 }) {
+  const { isRTL } = useAppTheme()
   const isOnline = useOnline()
   const theme = useTheme()
   const { appConfig } = useConfig()
@@ -69,7 +72,8 @@ export default function ({
             duration: theme.transitions.duration.leavingScreen,
           }),
           maxHeight: 64,
-          marginLeft: -12,
+          marginLeft:isRTL ? 0 : -12,
+          marginRight:isRTL ? 30 : 0,
         }}
       >
         <Toolbar>
