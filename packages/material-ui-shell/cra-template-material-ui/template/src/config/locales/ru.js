@@ -2,6 +2,7 @@ import { defineMessages } from 'react-intl'
 
 const messages = defineMessages({
   app_name: 'React Most Wanted',
+  cancel: 'Отмена',
   sign_in: 'Вход',
   sign_out: 'Выход',
   sign_up: 'Зарегистрироваться',
@@ -24,17 +25,17 @@ const messages = defineMessages({
   menu: 'Меню',
   menu_mini_mode: 'Мини меню',
   offline: 'Офлайн',
-  demos: 'Демонстрации',
-  dialog_demo: 'Демонстрация диалога',
+  demos: 'Демо',
+  dialog_demo: 'Демо диалога',
   dialog_title: 'Заголовок диалога',
   dialog_action: 'Да, удалить',
   dialog_message: `Диалоговое сообщение. Вы можете поместить сюда сколько угодно текста. 
   Задайте вопрос или покажите предупреждение перед удалением чего-либо. 
   Вы также можете задать для текста действия значение что-то вроде «ДА, Удалить», и запустить это действие, передав опору «handleAction». 
   Он получает обратный вызов handleClose, с которым вы можете закрыть диалог, когда ваше действие будет выполнено.`,
-  toast_demo: 'Демонстрация тост',
-  filter_demo: 'Демонстрация фильтра',
-  list_page_demo: 'Демонстрация страницы списка с {count} строками',
+  toast_demo: 'Демо тост',
+  filter_demo: 'Демо фильтра',
+  list_page_demo: 'Демо страницы списка с {count} строками',
   forgot_password: 'Забыли пароль',
   password_reset: 'Сброс пароля',
   password_confirm: 'Подтвердить пароль',
