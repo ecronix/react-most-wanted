@@ -74,7 +74,7 @@ export default function (props) {
           </IconButton>
         </div>
       }
-      {...getPageProps(data)}
+      {...getPageProps({ values: data, submit })}
     >
       <FirebaseForm setSubmit={setSubmit} {...props} />
     </Page>
