@@ -1,7 +1,7 @@
 import Delete from '@mui/icons-material/Delete'
 import IconButton from '@mui/material/IconButton'
 import Page from 'material-ui-shell/lib/containers/Page'
-import React from 'react'
+import React, { useState } from 'react'
 import Save from '@mui/icons-material/Save'
 import { useNavigate } from 'react-router-dom'
 import { usePaths } from '../../providers/Firebase/Paths'
@@ -10,7 +10,7 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import FirebaseForm from '../../containers/FirebaseForm'
 import { getDatabase, ref, set } from 'firebase/database'
 
-export default function (props) {
+export default function FormPage(props) {
   const {
     uid,
     path = 'none',
@@ -24,13 +24,9 @@ export default function (props) {
   const { openDialog } = useQuestions()
   const { getPath } = usePaths()
   const { auth } = useAuth()
+  const [submit, setSubmit] = useState(false)
   const db = getDatabase()
   const { isGranted = () => false } = auth || {}
-  let submit
-
-  const setSubmit = (s) => {
-    submit = s
-  }
 
   const databasePath = `${path}/${uid}`
   const data = getPath(databasePath, {}) || initialValues
@@ -76,7 +72,7 @@ export default function (props) {
       }
       {...getPageProps({ values: data, submit })}
     >
-      <FirebaseForm setSubmit={setSubmit} {...props} />
+      <FirebaseForm setSubmit={setSubmit} submit={submit} {...props} />
     </Page>
   )
 }
