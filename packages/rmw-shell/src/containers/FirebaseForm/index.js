@@ -51,10 +51,11 @@ const FirebaseForm = ({
         handleSubmit(values, newUid)
       }}
       initialValues={data}
-      render={({ handleSubmit, ...r }) => {
-        if (setSubmit) {
-          setSubmit(handleSubmit)
+      render={({ handleSubmit, submit, ...r }) => {
+        if (!submit && setSubmit) {
+          setSubmit(() => handleSubmit)
         }
+
         return <Form handleSubmit={handleSubmit} {...r} {...formProps} />
       }}
       {...rest}
