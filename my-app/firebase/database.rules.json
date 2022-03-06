@@ -1,0 +1,152 @@
+{
+  "rules": {
+    "admins": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "root.child('admins/'+auth.uid).exists()"
+      }
+    },
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && ($uid === auth.uid || root.child('admins/'+auth.uid).exists())"
+      }
+    },
+    "notification_tokens": {
+      "$uid": {
+        ".read": "auth != null && $uid === auth.uid ",
+        ".write": "auth != null && $uid === auth.uid "
+      }
+    },
+    "posts": {
+      ".read": "true",
+      ".indexOn": ["order"],
+      "$uid": {
+        ".indexOn": ["order"],
+        ".write": "auth != null",
+        "likes": {
+          "$authUid": {
+            ".write": "auth != null && $authUid===auth.uid"
+          }
+        },
+        "$other": {
+          ".write": "(data.child('author').child('uid').val() === auth.uid || newData.child('author').child('uid').val() === auth.uid) || (root.child('admins/'+auth.uid).exists())"
+        }
+      }
+    },
+    "disable_notifications": {
+      "$uid": {
+        ".read": "auth != null && $uid === auth.uid ",
+        ".write": "auth != null && $uid === auth.uid "
+      }
+    },
+    "user_chats": {
+      "$uid": {
+        ".read": "auth != null && $uid===auth.uid",
+        ".write": "auth != null && $uid===auth.uid"
+      }
+    },
+    "group_chats": {
+      "$uid": {
+        ".read": "auth != null && data.child('members/'+auth.uid).exists()",
+        ".write":"data.child('admins/'+auth.uid).exists() || !data.exists()"
+      }    
+    },
+    "group_chat_messages": {
+      "$groupUid": {
+        ".read": "auth != null && (root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists() || root.child('group_chats/'+$groupUid+'/members/all').exists())",
+        ".write": "auth != null && (root.child('group_chats/'+$groupUid+'/members/'+auth.uid).exists() || root.child('group_chats/'+$groupUid+'/members/all').exists())"
+      }    
+    },
+    "user_chat_messages": {
+      "$uid": {
+        ".read": "auth != null && $uid===auth.uid",
+        ".write": "auth != null && $uid===auth.uid"
+      }
+    },
+    "email_notifications": {
+      "$uid": {
+        ".read": "auth != null && $uid===auth.uid",
+        ".write": "auth != null && $uid===auth.uid"
+      }
+    },
+    "test_path": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "test_list": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "users_count": {
+      ".read": true,
+      ".write": false
+    },
+    "provider_count": {
+      ".read": true,
+      ".write": false
+    },
+    "roles": {
+      ".read": "auth != null && root.child('admins/'+auth.uid).exists()",
+      "$uid": {
+        ".write": "auth != null && root.child('admins/'+auth.uid).exists()"
+      }
+    },
+    "role_grants": {
+      ".read": "auth != null && root.child('admins/'+auth.uid).exists()",
+      "$uid": {
+        ".write": "auth != null && root.child('admins/'+auth.uid).exists()"
+      }
+    },
+    "user_grants": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && root.child('admins/'+auth.uid).exists()"
+      }
+    },
+    "user_roles": {
+      ".read": "auth != null && root.child('admins/'+auth.uid).exists()",
+      "$uid": {
+        ".write": "auth != null && root.child('admins/'+auth.uid).exists()"
+      }
+    },
+    "public_tasks": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "public_tasks_count": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "companies": {
+      ".read": "(auth != null && root.child('admins/'+auth.uid).exists()) || root.child('user_grants/'+auth.uid+'/read_companies').exists()",
+      "$uid": {
+        ".write": "(auth != null && root.child('admins/'+auth.uid).exists()) || (data.exists() && newData.exists() && root.child('user_grants/'+auth.uid+'/edit_company').exists()) || (!data.exists() && newData.exists() && root.child('user_grants/'+auth.uid+'/create_company').exists()) || (data.exists() && !newData.exists() && root.child('user_grants/'+auth.uid+'/delete_company').exists())"
+      }
+    },
+    "public_chats": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "private_chats": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "private_chat_members": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "messages": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "user_registrations_per_day": {
+      ".read": true,
+      ".write": false
+    },
+    "user_registrations_per_month": {
+      ".read": true,
+      ".write": false
+    }
+  }
+}

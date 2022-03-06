@@ -1,0 +1,76 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@fontsource/roboto": "^4.5.3",
+    "@mui/icons-material": "^5.4.4",
+    "@mui/lab": "^5.0.0-alpha.49",
+    "@mui/material": "^5.4.4",
+    "@mui/styles": "^5.4.4",
+    "base-shell": "^2.4.14",
+    "chart.js": "^3.7.1",
+    "final-form": "^4.20.6",
+    "final-form-arrays": "^3.0.2",
+    "firebase": "^9.6.8",
+    "firebaseui": "^6.0.1",
+    "github-markdown-css": "^5.1.0",
+    "intl": "^1.2.5",
+    "jss-rtl": "^0.3.0",
+    "material-ui-image": "^3.3.2",
+    "material-ui-shell": "^3.3.5",
+    "moment": "^2.29.1",
+    "mui-rff": "^5.0.0",
+    "notistack": "^2.0.3",
+    "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-chartjs-2": "^4.0.1",
+    "react-countup": "^6.1.1",
+    "react-custom-scrollbars-2": "^4.4.0",
+    "react-dom": "^17.0.2",
+    "react-easy-crop": "^4.1.3",
+    "react-final-form": "^6.5.8",
+    "react-final-form-arrays": "^3.1.3",
+    "react-helmet": "^6.1.0",
+    "react-intl": "^5.24.6",
+    "react-ios-pwa-prompt": "^1.8.4",
+    "react-linkify": "^1.0.0-alpha",
+    "react-markdown": "^7.1.2",
+    "react-router-dom": "^6.2.2",
+    "react-scripts": "5.0.0",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-window": "^1.8.6",
+    "rmw-shell": "^11.0.28"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@testing-library/user-event": "^13.5.0"
+  }
+}
