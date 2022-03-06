@@ -4,6 +4,7 @@ import ListPage from 'material-ui-shell/lib/containers/Page/ListPage'
 import React, { useEffect } from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useLists } from '../../providers/Firebase/Lists'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const Page = ({
   fields = [],
@@ -17,10 +18,12 @@ const Page = ({
   listPageProps,
   reverse = false,
   disableCreate = false,
+  fabLabel = null,
 }) => {
   const { watchList, getList, isListLoading, unwatchList } = useLists()
   const { auth } = useAuth()
   const { isGranted = () => false } = auth || {}
+  const matches = useMediaQuery('(min-width:400px)')
 
   useEffect(() => {
     let ref = path
@@ -56,6 +59,7 @@ const Page = ({
       />
       {isGranted(auth, createGrant) && !disableCreate && (
         <Fab
+          variant={matches ? 'extended' : undefined}
           color="secondary"
           style={{
             position: 'absolute',
@@ -64,7 +68,7 @@ const Page = ({
           }}
           onClick={onCreateClick}
         >
-          <Add />
+          <Add /> {matches ? fabLabel : null}
         </Fab>
       )}
     </React.Fragment>

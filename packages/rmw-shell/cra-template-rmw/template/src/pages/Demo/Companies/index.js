@@ -53,6 +53,7 @@ const Companies = () => {
   return (
     <ListPage
       fields={fields}
+      fabLabel={intl.formatMessage({ id: 'add', defaultMessage: 'Add' })}
       path="companies"
       createGrant="create_company"
       Row={Row}
