@@ -59,7 +59,7 @@ const Page = ({
       />
       {isGranted(auth, createGrant) && !disableCreate && (
         <Fab
-          variant={matches ? 'extended' : undefined}
+          variant={matches && fabLabel ? 'extended' : undefined}
           color="secondary"
           style={{
             position: 'absolute',
