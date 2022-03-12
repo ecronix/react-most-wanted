@@ -21,13 +21,17 @@ const Provider = ({ children }) => {
   const { appConfig } = useConfig()
   const { auth = {} } = useAuth()
   const { uid, notificationsDisabled = false } = auth || {}
-  const { firebase } = appConfig || {}
+  const { firebase: firebaseConfig } = appConfig || {}
+  const { prod = {}, dev = {} } = firebaseConfig || {}
+
+  const firebase = process.env.NODE_ENV !== 'production' ? dev : prod
+
   const { messaging: messagingConfig } = firebase || {}
   const { publicVapidKey } = messagingConfig || {}
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
 
   const syncToken = useCallback(
-    () => async (token) => {
+    async (token) => {
       if (notificationsDisabled) {
         return
       }
@@ -47,24 +51,21 @@ const Provider = ({ children }) => {
     [uid, notificationsDisabled]
   )
 
-  const initializeMessaging = useCallback(
-    () => async () => {
-      const messaging = getMessaging(getApp())
+  const initializeMessaging = useCallback(async () => {
+    const messaging = getMessaging()
 
-      getToken(messaging, { vapidKey: publicVapidKey }).then((t) => {
-        syncToken(t)
+    onMessage(messaging, (payload) => {
+      enqueueSnackbar('', {
+        content: (key) => {
+          return <SnackMessage payload={payload} id={key} />
+        },
       })
+    })
 
-      onMessage(messaging, (payload) => {
-        enqueueSnackbar('', {
-          content: (key) => {
-            return <SnackMessage payload={payload} id={key} />
-          },
-        })
-      })
-    },
-    [enqueueSnackbar, publicVapidKey, syncToken]
-  )
+    const token = await getToken(messaging, { vapidKey: publicVapidKey })
+
+    syncToken(token)
+  }, [enqueueSnackbar, publicVapidKey, syncToken])
 
   useEffect(() => {
     if (
@@ -108,10 +109,13 @@ const Provider = ({ children }) => {
   )
 
   const requestPermission = () => {
+    console.log('test 2', 'Notification' in window)
     if (!('Notification' in window)) {
       console.log('This browser does not support desktop notification')
       return
     }
+
+    console.log('test 3', Notification.permission)
 
     if (Notification.permission === 'default') {
       enqueueSnackbar(
@@ -130,6 +134,7 @@ const Provider = ({ children }) => {
         }
       )
     } else if (Notification.permission === 'granted') {
+      console.log('Notifications are enabled')
       initializeMessaging()
     }
   }

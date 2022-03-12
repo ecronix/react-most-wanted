@@ -29,7 +29,7 @@ const config = {
           'BEthk1-Qmoh9opZbi1AUZpxANTu6djVRDph4MLpyO2Qk6Dglm1Sa8Yt_pYi4EhYi3Tj-xgLqUktlbNuP_RP6gto',
       },
     },
-    dev: {
+    devp: {
       initConfig: {
         apiKey: 'AIzaSyBQAmNJ2DbRyw8PqdmNWlePYtMP0hUcjpY',
         authDomain: 'react-most-wanted-3b1b2.firebaseapp.com',
@@ -44,7 +44,7 @@ const config = {
           'BEthk1-Qmoh9opZbi1AUZpxANTu6djVRDph4MLpyO2Qk6Dglm1Sa8Yt_pYi4EhYi3Tj-xgLqUktlbNuP_RP6gto',
       },
     },
-    devd: {
+    dev: {
       initConfig: {
         apiKey: 'AIzaSyB31cMH9nJnERC1WCWA7lQHnY08voLs-Z0',
         authDomain: 'react-most-wanted-dev.firebaseapp.com',
@@ -56,7 +56,7 @@ const config = {
       },
       messaging: {
         publicVapidKey:
-          'BGddXH_O6qLmcingsSJx-R3hC8U9yUr2mW4ko63fF__e50WvfRcBfZu_JyBzLI35DNUE5x_9CPBqe64BWniCxV0',
+          'BCSF2KOsR9kL-K141KkVnn_sawQgRt4sKwUENE3sARIxuoGubecyK_BmNempPqspfnXlypfLnAf33IfQd5FKju4',
       },
     },
     firebaseuiProps: {

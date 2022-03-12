@@ -98,7 +98,10 @@ const Messaging = () => {
                 style={{ margin: 5 }}
                 variant="contained"
                 color="primary"
-                onClick={requestPermission}
+                onClick={() => {
+                  console.log('test')
+                  requestPermission()
+                }}
               >
                 Request Permission
               </Button>
