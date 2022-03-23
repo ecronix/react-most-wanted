@@ -29,7 +29,7 @@ export default function ({
   const theme = useTheme()
   const { appConfig } = useConfig()
   const { menu } = appConfig || {}
-  const { width = 240 } = menu || {}
+  const { width = 240, appBarLeadingContent = null } = menu || {}
 
   const { toggleThis, isDesktop, isMenuOpen } = useContext(MenuContext)
   const intl = useIntl()
@@ -72,8 +72,8 @@ export default function ({
             duration: theme.transitions.duration.leavingScreen,
           }),
           maxHeight: 64,
-          marginLeft:isRTL ? 0 : -12,
-          marginRight:isRTL ? 30 : 0,
+          marginLeft: isRTL ? 0 : -12,
+          marginRight: isRTL ? 30 : 0,
         }}
       >
         <Toolbar>
@@ -101,6 +101,7 @@ export default function ({
           {!onBackClick && isMenuOpen && false && (
             <div style={{ marginRight: 32 }} />
           )}
+          {appBarLeadingContent}
           {/* james- check if this is dead code? */}
           <Typography variant="h6" color="inherit" noWrap>
             {headerTitle}
