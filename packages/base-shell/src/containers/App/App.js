@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import ConfigProvider from '../../providers/Config/Provider'
 
 const Layout = lazy(() => import('../../containers/Layout/Layout'))
@@ -15,7 +15,7 @@ const App = ({ config: appConfig }) => {
     <Suspense fallback={<Loading />}>
       <ConfigProvider appConfig={config}>
         <AppContainer>
-          <BrowserRouter>
+          <HashRouter>
             <Routes>
               {LandingPage && (
                 <Route path="/" exact element={<LandingPage />} />
@@ -29,7 +29,7 @@ const App = ({ config: appConfig }) => {
                 }
               />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
         </AppContainer>
       </ConfigProvider>
     </Suspense>
