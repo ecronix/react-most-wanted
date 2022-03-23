@@ -35,7 +35,7 @@ const messages = defineMessages({
   toast_demo: 'Demo Toast',
   filter_demo: 'Demo filter',
   list_page_demo: 'List Page Demo mit {count} Zeilen',
-  forgot_password: 'Vergessen passwort',
+  forgot_password: 'Passwort vergessen',
   password_reset: 'Passwort zurücksetzen',
   password_confirm: 'Passwortbestätigung',
   registration: 'Registrierung',
