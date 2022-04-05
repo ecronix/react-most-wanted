@@ -77,45 +77,46 @@ const Provider = ({ children }) => {
     }
   }, [initializeMessaging, notificationsDisabled])
 
-  const action = (key) => (
-    <Fragment>
-      <Button
-        onClick={async () => {
-          if (isSupported()) {
-            closeSnackbar(key)
-            const permission = await Notification.requestPermission()
-            if (permission === 'granted') {
-              initializeMessaging()
+  const requestPermission = ({ onDismiss = () => {} }) => {
+    const action = (key) => (
+      <Fragment>
+        <Button
+          onClick={async () => {
+            if (isSupported()) {
+              closeSnackbar(key)
+              const permission = await Notification.requestPermission()
+              if (permission === 'granted') {
+                initializeMessaging()
+              }
             }
-          }
-        }}
-        style={{ margin: 8 }}
-        //color="inherit"
-        variant="contained"
-        size="small"
-      >
-        {intl.formatMessage({ id: 'enable', defaultMessage: 'Enable' })}
-      </Button>
-      <Button
-        onClick={() => {
-          closeSnackbar(key)
-        }}
-        size="small"
-        color="secondary"
-      >
-        {intl.formatMessage({ id: 'no_thanks', defaultMessage: 'No, thanks' })}
-      </Button>
-    </Fragment>
-  )
+          }}
+          style={{ margin: 8 }}
+          //color="inherit"
+          variant="contained"
+          size="small"
+        >
+          {intl.formatMessage({ id: 'enable', defaultMessage: 'Enable' })}
+        </Button>
+        <Button
+          onClick={() => {
+            onDismiss && onDismiss()
+            closeSnackbar(key)
+          }}
+          size="small"
+          color="secondary"
+        >
+          {intl.formatMessage({
+            id: 'no_thanks',
+            defaultMessage: 'No, thanks',
+          })}
+        </Button>
+      </Fragment>
+    )
 
-  const requestPermission = () => {
-    console.log('test 2', 'Notification' in window)
     if (!('Notification' in window)) {
       console.log('This browser does not support desktop notification')
       return
     }
-
-    console.log('test 3', Notification.permission)
 
     if (Notification.permission === 'default') {
       enqueueSnackbar(
