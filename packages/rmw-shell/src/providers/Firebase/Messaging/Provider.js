@@ -77,7 +77,8 @@ const Provider = ({ children }) => {
     }
   }, [initializeMessaging, notificationsDisabled])
 
-  const requestPermission = ({ onDismiss = () => {} }) => {
+  const requestPermission = (p) => {
+    const { onDismiss = () => {} } = p || {}
     const action = (key) => (
       <Fragment>
         <Button
