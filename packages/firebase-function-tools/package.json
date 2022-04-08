@@ -34,7 +34,7 @@
     "fs": "0.0.1-security",
     "glob": "^7.1.6",
     "mkdirp-promise": "^5.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "nodemailer": "^6.4.2",
     "nwb": "0.23.x",
     "react": "^16.12.0",
