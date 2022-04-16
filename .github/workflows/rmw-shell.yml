@@ -24,6 +24,7 @@ jobs:
         working-directory: ./packages/rmw-shell
       - name: git config
         run: |
+          npm config set legacy-peer-deps true
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: git pull
