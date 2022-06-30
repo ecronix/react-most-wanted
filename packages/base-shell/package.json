@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "2.4.14",
+  "version": "2.5.0",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -22,19 +22,19 @@
   },
   "peerDependencies": {
     "intl": "1.x",
-    "react": "17.x",
-    "react-dom": "17.x",
-    "react-intl": "5.x",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "react-intl": "6.x",
     "react-router-dom": "6.x"
   },
   "devDependencies": {
     "intl": "^1.2.5",
     "nwb": "^0.25.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-intl": "^5.24.2",
-    "react-router-dom": "^6.2.1",
-    "release-it": "^14.12.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intl": "^6.0.4",
+    "react-router-dom": "^6.3.0",
+    "release-it": "^15.1.1"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
