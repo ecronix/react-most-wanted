@@ -21,7 +21,7 @@ jobs:
         run: npm i -g release-it
         working-directory: ./packages/material-ui-shell
       - name: Install dependencies
-        run: npm i
+        run: npm i --force
         working-directory: ./packages/material-ui-shell
       - name: git config
         run: |
@@ -50,7 +50,7 @@ jobs:
         run: npm i -g release-it
         working-directory: ./packages/material-ui-shell/cra-template-material-ui
       - name: Install dependencies
-        run: npm i
+        run: npm i --force
         working-directory: ./packages/material-ui-shell/cra-template-material-ui
       - name: git config
         run: |
