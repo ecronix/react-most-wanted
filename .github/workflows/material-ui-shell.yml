@@ -15,21 +15,11 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
-          registry-url: https://registry.npmjs.org/
-      - name: Install release-it
-        run: npm i -g release-it
-        working-directory: ./packages/material-ui-shell
+          node-version: "16"
+          registry-url: https://registry.npmjs.org/l
       - name: Install dependencies
-        run: npm i --force
+        run: npm i
         working-directory: ./packages/material-ui-shell
-      - name: git config
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        working-directory: ./packages/material-ui-shell
-      - name: git pull
-        run: git pull
       - name: Publish
         run: npm publish
         working-directory: ./packages/material-ui-shell
@@ -44,22 +34,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: "16"
           registry-url: https://registry.npmjs.org/
-      - name: Install release-it
-        run: npm i -g release-it
-        working-directory: ./packages/material-ui-shell/cra-template-material-ui
       - name: Install dependencies
-        run: npm i --force
+        run: npm i
         working-directory: ./packages/material-ui-shell/cra-template-material-ui
-      - name: git config
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: git pull
-        run: git pull
       - name: Publish
-        run: npm run release 
+        run: npm run release
         working-directory: ./packages/material-ui-shell/cra-template-material-ui
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

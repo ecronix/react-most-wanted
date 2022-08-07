@@ -1,4 +1,4 @@
-import AutoSizer from 'react-virtualized-auto-sizer'
+import AutoSizer from 'lp-react-virtualized-auto-sizer-react-18'
 import { List } from '@mui/material'
 import React, { useEffect } from 'react'
 import Scrollbar from '../../components/Scrollbar'

@@ -7,7 +7,6 @@
       "@fontsource/roboto": "4.x",
       "@mui/icons-material": "5.x",
       "@mui/material": "5.x",
-      "@mui/styles": "5.x",
       "base-shell": "2.x",
       "intl": "1.x",
       "jss-rtl": "0.x",
@@ -20,7 +19,7 @@
       "react-ios-pwa-prompt": "1.x",
       "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
       "react-router-dom": "6.x",
-      "react-virtualized-auto-sizer": "1.x",
+      "lp-react-virtualized-auto-sizer-react-18": "1.x",
       "react-window": "1.x"
     },
     "eslintConfig": {

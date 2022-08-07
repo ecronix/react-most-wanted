@@ -1,4 +1,4 @@
-import AutoSizer from 'react-virtualized-auto-sizer'
+import AutoSizer from 'lp-react-virtualized-auto-sizer-react-18'
 import {
   Divider,
   IconButton,

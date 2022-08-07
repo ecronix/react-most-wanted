@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "3.4.5",
+  "version": "3.4.6",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -26,10 +26,10 @@
     "@fontsource/roboto": "4.x",
     "@mui/icons-material": "5.x",
     "@mui/material": "5.x",
-    "@mui/styles": "5.x",
     "base-shell": "2.x",
     "intl": "1.x",
     "jss-rtl": "0.x",
+    "lp-react-virtualized-auto-sizer-react-18": "1.x",
     "notistack": "2.x",
     "react": "16.x || 17.x || 18.x",
     "react-custom-scrollbars-2": "4.x",
@@ -39,7 +39,6 @@
     "react-ios-pwa-prompt": "1.x",
     "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
     "react-router-dom": "6.x",
-    "react-virtualized-auto-sizer": "1.x",
     "react-window": "1.x"
   },
   "devDependencies": {
@@ -48,10 +47,10 @@
     "@fontsource/roboto": "^4.5.7",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.3",
-    "@mui/styles": "^5.9.3",
-    "base-shell": "^2.5.1",
+    "base-shell": "^2.5.5",
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
+    "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
     "notistack": "^2.0.5",
     "nwb": "^0.25.2",
     "prettier": "^2.7.1",
@@ -64,7 +63,6 @@
     "react-ios-pwa-prompt": "^1.8.4",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^6.3.0",
-    "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.7"
   },
   "author": "Tarik Huber",
