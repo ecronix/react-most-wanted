@@ -20,22 +20,13 @@ jobs:
       - name: Install dependencies
         run: npm i --force
         working-directory: ./packages/rmw-shell
-      - name: Install release-it
-        run: npm i -g release-it
-        working-directory: ./packages/rmw-shell
       - name: git config
         run: |
           npm config set legacy-peer-deps true
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: git pull
-        run: | 
-         git diff
-         git add .
-         git commit -m "Update rmw-shell"
-         git pull
       - name: Publish
-        run: npm run release 
+        run: npm publish 
         working-directory: ./packages/rmw-shell
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
@@ -53,23 +44,12 @@ jobs:
       - name: Install dependencies
         run: npm i --force
         working-directory: ./packages/rmw-shell/cra-template-rmw
-      - name: Install release-it
-        run: npm i -g release-it
-        working-directory: ./packages/rmw-shell/cra-template-rmw
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: git pull
-        working-directory: ./packages/rmw-shell/cra-template-rmw
-        run: | 
-         git add .
-         git commit -m "Update rmw-shell-template"
-         git diff
-         git pull
-         
       - name: Publish
-        run: npm run release 
+        run: npm publish 
         working-directory: ./packages/rmw-shell/cra-template-rmw
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
