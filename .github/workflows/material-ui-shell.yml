@@ -19,6 +19,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install release-it
         run: npm i -g release-it
+        working-directory: ./packages/material-ui-shell
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/material-ui-shell
@@ -26,6 +27,7 @@ jobs:
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+        working-directory: ./packages/material-ui-shell
       - name: git pull
         run: git pull
       - name: Publish
@@ -46,6 +48,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install release-it
         run: npm i -g release-it
+        working-directory: ./packages/material-ui-shell/cra-template-material-ui
       - name: Install dependencies
         run: npm i
         working-directory: ./packages/material-ui-shell/cra-template-material-ui
