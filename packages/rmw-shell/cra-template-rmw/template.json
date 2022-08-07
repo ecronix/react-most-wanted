@@ -8,7 +8,7 @@
       "@mui/icons-material": "5.x",
       "@mui/lab": "^5.0.0-alpha.49",
       "@mui/material": "5.x",
-      "@mui/x-date-pickers": "5.x",
+      "@mui/x-date-pickers": "^5.0.0-alpha.7",
       "@mui/styles": "5.x",
       "base-shell": "2.x",
       "chart.js": "3.x",

@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell",
-  "version": "11.1.1",
+  "version": "11.1.2",
   "description": "React template with Material UI, Firebase, routing...",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -29,7 +29,7 @@
     "@mui/lab": "^5.0.0-alpha.49",
     "@mui/material": "5.x",
     "@mui/styles": "5.x",
-    "@mui/x-date-pickers": "5.x",
+    "@mui/x-date-pickers": "^5.0.0-alpha.7",
     "base-shell": "2.x",
     "chart.js": "3.x",
     "final-form": "^4.x",
