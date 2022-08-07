@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
+          working-directory: ./packages/base-shell
       - name: Install release-it
         run: npm i -g release-it
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/base-shell
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -44,11 +44,11 @@ jobs:
         with:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
+          working-directory: ./packages/base-shell/cra-template-base
       - name: Install release-it
         run: npm i -g release-it
       - name: Install dependencies
         run: npm i
-        working-directory: ./packages/base-shell/cra-template-base
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
