@@ -1,22 +1,22 @@
-import React from 'react'
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
-import TrackChanges from '@mui/icons-material/TrackChanges'
-import FileCopy from '@mui/icons-material/FileCopy'
-import Tooltip from '@mui/material/Tooltip'
-import Typography from '@mui/material/Typography'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import IconButton from '@mui/material/IconButton'
-import Button from '@mui/material/Button'
+import React from "react";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import TrackChanges from "@mui/icons-material/TrackChanges";
+import FileCopy from "@mui/icons-material/FileCopy";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 
 const PackageCard = ({ title, command, description, icons }) => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
   const handleClick = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <Card elevation={4} style={{ margin: 18, maxWidth: 350 }}>
@@ -26,9 +26,9 @@ const PackageCard = ({ title, command, description, icons }) => {
         </Typography>
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            backgroundColor: '#F3F4F4',
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: "#F3F4F4",
             padding: 8,
           }}
         >
@@ -57,13 +57,13 @@ const PackageCard = ({ title, command, description, icons }) => {
               onClick={() => {
                 if (window.clipboardData) {
                   // Internet Explorer
-                  window.clipboardData.setData('Text', command)
+                  window.clipboardData.setData("Text", command);
                 } else {
                   try {
-                    navigator.clipboard.writeText(command)
+                    navigator.clipboard.writeText(command);
                   } catch (error) {}
                 }
-                handleClick()
+                handleClick();
               }}
             >
               <FileCopy />
@@ -78,8 +78,8 @@ const PackageCard = ({ title, command, description, icons }) => {
         </Typography>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
 const PageContent = ({ setComponents }) => {
   return (
@@ -88,7 +88,7 @@ const PageContent = ({ setComponents }) => {
       <Typography
         variant="h3"
         //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
+        style={{ margin: 16, textAlign: "center" }}
       >
         A solution for every project
       </Typography>
@@ -96,7 +96,7 @@ const PageContent = ({ setComponents }) => {
         variant="h5"
         component="div"
         color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
+        style={{ margin: 16, textAlign: "center" }}
       >
         Choose from 3 different starter kits. From a basic one to a full
         featured application.
@@ -105,25 +105,25 @@ const PageContent = ({ setComponents }) => {
 
       <div
         style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          alignItems: 'space-around',
-          flexWrap: 'wrap',
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "space-around",
+          flexWrap: "wrap",
         }}
       >
         <PackageCard
-          title={'base-shell'}
-          command={'npx create-react-app my-app --template base'}
+          title={"base-shell"}
+          command={"npx create-react-app base-app --template base"}
           description={
-            'The basic react setup: routing, internationalization and async load.'
+            "The basic react setup: routing, internationalization and async load."
           }
           icons={
             <div
               style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
               }}
             >
               <img
@@ -135,17 +135,17 @@ const PageContent = ({ setComponents }) => {
           }
         />
         <PackageCard
-          title={'material-ui-shell'}
-          command={'npx create-react-app my-app --template material-ui'}
+          title={"material-ui-shell"}
+          command={"npx create-react-app mui-app --template material-ui"}
           description={
-            'Includes all features from the base shell expanded with Material-UI.'
+            "Includes all features from the base shell expanded with Material-UI."
           }
           icons={
             <div
               style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
               }}
             >
               <img
@@ -158,15 +158,15 @@ const PageContent = ({ setComponents }) => {
           }
         />
         <PackageCard
-          title={'rmw-shell'}
-          command={'npx create-react-app my-app --template rmw'}
-          description={'Base shell + Material UI shell + Firebase'}
+          title={"rmw-shell"}
+          command={"npx create-react-app my-app --template rmw"}
+          description={"Base shell + Material UI shell + Firebase"}
           icons={
             <div
               style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-around',
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
               }}
             >
               <img
@@ -184,43 +184,43 @@ const PageContent = ({ setComponents }) => {
       <div
         ref={(r) => {
           if (r) {
-            setComponents(r)
+            setComponents(r);
           }
         }}
         style={{
           //height: 400,
-          backgroundColor: '#2D2D2D',
-          backgroundImage: 'radial-gradient( #4F4F4F,#242424)',
+          backgroundColor: "#2D2D2D",
+          backgroundImage: "radial-gradient( #4F4F4F,#242424)",
         }}
       >
         <div style={{ height: 30 }} />
         <Typography
           variant="h3"
           //color="textSecondary"
-          style={{ margin: 16, textAlign: 'center', color: 'white' }}
+          style={{ margin: 16, textAlign: "center", color: "white" }}
         >
           Not just a template
         </Typography>
         <Typography
           variant="h5"
           component="div"
-          style={{ margin: 16, textAlign: 'center', color: 'grey' }}
+          style={{ margin: 16, textAlign: "center", color: "grey" }}
         >
           But also not a framework.
         </Typography>
         <div
           style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <TrackChanges style={{ fontSize: 150, color: 'white' }} />
+          <TrackChanges style={{ fontSize: 150, color: "white" }} />
         </div>
         <Typography
           variant="h5"
           component="div"
-          style={{ margin: 16, textAlign: 'center', color: 'grey' }}
+          style={{ margin: 16, textAlign: "center", color: "grey" }}
         >
           You start easy like with every other template but you can also update
           the template parts over time. And with the updates you don't only
@@ -233,7 +233,7 @@ const PageContent = ({ setComponents }) => {
       <Typography
         variant="h3"
         //color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
+        style={{ margin: 16, textAlign: "center" }}
       >
         Only the best
       </Typography>
@@ -241,7 +241,7 @@ const PageContent = ({ setComponents }) => {
         variant="h5"
         component="div"
         color="textSecondary"
-        style={{ margin: 16, textAlign: 'center' }}
+        style={{ margin: 16, textAlign: "center" }}
       >
         Every template is a collection of very carefully picked packages and
         projects. Only the creme de la creme of the react ecosystem
@@ -249,10 +249,10 @@ const PageContent = ({ setComponents }) => {
       <div style={{ height: 30 }} />
       <div
         style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-around',
-          flexWrap: 'wrap',
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
         }}
       >
         <img src="react.png" alt="react" style={{ width: 150 }} />
@@ -261,7 +261,7 @@ const PageContent = ({ setComponents }) => {
       </div>
       <div style={{ height: 50 }} />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default PageContent
+export default PageContent;
