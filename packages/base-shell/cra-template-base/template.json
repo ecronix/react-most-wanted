@@ -6,7 +6,7 @@
       "react": "17.x || 18.x",
       "react-dom": "17.x || 18.x",
       "react-router-dom": "6.x",
-      "react-intl": "5.x"
+      "react-intl": "6.x"
     },
     "eslintConfig": {
       "extends": ["react-app", "react-app/jest"]
