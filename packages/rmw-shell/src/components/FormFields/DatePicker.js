@@ -1,11 +1,11 @@
-import React from 'react'
-import MuiDatePicker from '@mui/lab/DesktopDatePicker'
-import { TextField } from '@mui/material'
-import { showErrorOnChange } from './Util'
-import { Field } from 'react-final-form'
+import React from "react";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
+import { TextField } from "@mui/material";
+import { showErrorOnChange } from "./Util";
+import { Field } from "react-final-form";
 
 export function DatePicker(props) {
-  const { name, type, fieldProps, ...rest } = props
+  const { name, type, fieldProps, ...rest } = props;
 
   return (
     <Field
@@ -22,7 +22,7 @@ export function DatePicker(props) {
       )}
       {...fieldProps}
     />
-  )
+  );
 }
 
 export function DatePickerWrapper(props) {
@@ -30,9 +30,9 @@ export function DatePickerWrapper(props) {
     input: { name, value, type, onChange, onBlur, onFocus, ...restInput },
     formatValue = (v) => {
       if (v && v.isValid()) {
-        return v.format()
+        return v.format();
       } else {
-        return null //v?._i
+        return null; //v?._i
       }
     },
     meta,
@@ -41,18 +41,18 @@ export function DatePickerWrapper(props) {
     helperText,
     showError = showErrorOnChange,
     ...rest
-  } = props
+  } = props;
 
-  const { error, submitError } = meta
-  const isError = showError({ meta })
+  const { error, submitError } = meta;
+  const isError = showError({ meta });
 
   return (
-    <MuiDatePicker
+    <DesktopDatePicker
       fullWidth={fullWidth}
       helperText={isError ? error || submitError : helperText}
       error={isError}
       onChange={(v) => {
-        onChange(formatValue(v))
+        onChange(formatValue(v));
       }}
       onBlur={onBlur}
       onFocus={onFocus}
@@ -64,5 +64,5 @@ export function DatePickerWrapper(props) {
       renderInput={(params) => <TextField {...params} />}
       {...rest}
     />
-  )
+  );
 }

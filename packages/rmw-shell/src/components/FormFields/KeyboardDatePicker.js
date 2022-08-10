@@ -1,11 +1,11 @@
-import React from 'react'
-import DatePicker from '@mui/lab/DatePicker'
-import { Field } from 'react-final-form'
-import { showErrorOnChange } from './Util'
-import TextField from '@mui/material/TextField'
+import React from "react";
+import { DatePicker } from "@mui/x-date-pickers";
+import { Field } from "react-final-form";
+import { showErrorOnChange } from "./Util";
+import TextField from "@mui/material/TextField";
 
 export function KeyboardDatePicker(props) {
-  const { name, fieldProps, ...rest } = props
+  const { name, fieldProps, ...rest } = props;
   return React.createElement(
     Field,
     Object.assign(
@@ -19,16 +19,16 @@ export function KeyboardDatePicker(props) {
       },
       fieldProps
     )
-  )
+  );
 }
 function KeyboardDatePickerWrapper(props) {
   const {
     input: { name, onChange, value, ...restInput },
     formatValue = (v) => {
       if (v && v.isValid()) {
-        return v.format()
+        return v.format();
       } else {
-        return null //v?._i
+        return null; //v?._i
       }
     },
     meta,
@@ -36,10 +36,10 @@ function KeyboardDatePickerWrapper(props) {
     locale,
     showError = showErrorOnChange,
     ...rest
-  } = props
-  const { error, submitError } = meta
-  const isError = showError({ meta })
-  const { helperText, ...lessrest } = rest
+  } = props;
+  const { error, submitError } = meta;
+  const isError = showError({ meta });
+  const { helperText, ...lessrest } = rest;
 
   return (
     React.createElement(
@@ -52,10 +52,10 @@ function KeyboardDatePickerWrapper(props) {
           helperText: isError ? error || submitError : helperText,
           error: isError,
           onChange: (v) => {
-            onChange(formatValue(v))
+            onChange(formatValue(v));
           },
           name: name,
-          value: value === '' ? null : value,
+          value: value === "" ? null : value,
           inputProps: restInput,
           renderInput: (params) => <TextField {...params} />,
         },
@@ -63,5 +63,5 @@ function KeyboardDatePickerWrapper(props) {
       )
     ),
     locale
-  )
+  );
 }

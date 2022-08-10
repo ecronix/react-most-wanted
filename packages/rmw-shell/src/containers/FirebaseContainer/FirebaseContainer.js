@@ -1,43 +1,43 @@
-import React, { useEffect } from 'react'
-import { useConfig } from 'base-shell/lib/providers/Config'
-import { useAuth } from 'base-shell/lib/providers/Auth'
-import PathsProvider from '../../providers/Firebase/Paths/Provider'
-import ListsProvider from '../../providers/Firebase/Lists/Provider'
-import DocsProvider from '../../providers/Firebase/Docs/Provider'
-import ColsProvider from '../../providers/Firebase/Cols/Provider'
-import MessagingProvider from '../../providers/Firebase/Messaging/Provider'
-import StorageProvider from '../../providers/Firebase/Storage/Provider'
-import { initializeApp, getApps, getApp } from 'firebase/app'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import LocalizationProvider from '@mui/lab/LocalizationProvider'
-import DateAdapter from '@mui/lab/AdapterMoment'
+import React, { useEffect } from "react";
+import { useConfig } from "base-shell/lib/providers/Config";
+import { useAuth } from "base-shell/lib/providers/Auth";
+import PathsProvider from "../../providers/Firebase/Paths/Provider";
+import ListsProvider from "../../providers/Firebase/Lists/Provider";
+import DocsProvider from "../../providers/Firebase/Docs/Provider";
+import ColsProvider from "../../providers/Firebase/Cols/Provider";
+import MessagingProvider from "../../providers/Firebase/Messaging/Provider";
+import StorageProvider from "../../providers/Firebase/Storage/Provider";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterMoment as DateAdapter } from "@mui/x-date-pickers/AdapterMoment";
 
 export default function ({ children }) {
-  const { appConfig } = useConfig()
-  const auth = useAuth()
-  const { firebase: firebaseConfig, auth: authConfig = {} } = appConfig || {}
-  const { prod = {}, dev = {} } = firebaseConfig || {}
-  const { onAuthStateChanged: internalOnAuthStateChanged } = authConfig || {}
+  const { appConfig } = useConfig();
+  const auth = useAuth();
+  const { firebase: firebaseConfig, auth: authConfig = {} } = appConfig || {};
+  const { prod = {}, dev = {} } = firebaseConfig || {};
+  const { onAuthStateChanged: internalOnAuthStateChanged } = authConfig || {};
 
   if (getApps().length === 0) {
     initializeApp(
-      process.env.NODE_ENV !== 'production' ? dev.initConfig : prod.initConfig
-    )
+      process.env.NODE_ENV !== "production" ? dev.initConfig : prod.initConfig
+    );
   }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(getApp()), (user) => {
       if (onAuthStateChanged) {
-        internalOnAuthStateChanged(user, auth)
+        internalOnAuthStateChanged(user, auth);
       }
-    })
+    });
 
     return () => {
-      unsubscribe()
-    }
+      unsubscribe();
+    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <PathsProvider>
@@ -55,5 +55,5 @@ export default function ({ children }) {
         </DocsProvider>
       </ListsProvider>
     </PathsProvider>
-  )
+  );
 }
