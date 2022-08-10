@@ -1,49 +1,55 @@
-import React, { useState } from 'react'
-import Input from '@mui/material/Input'
-import { useTheme } from '@mui/material/styles'
-import Fab from '@mui/material/Fab'
-import Mic from '@mui/icons-material/Mic'
-import MyLocation from '@mui/icons-material/MyLocation'
-import CameraAlt from '@mui/icons-material/CameraAlt'
-import Send from '@mui/icons-material/Send'
-import { useIntl } from 'react-intl'
-import IconButton from '@mui/material/IconButton'
-import { useAuth } from 'base-shell/lib/providers/Auth'
-import { getLocation } from '../../utils/location'
-import { CircularProgress } from '@mui/material'
-import { getDatabase, ref, set, push, serverTimestamp } from 'firebase/database'
+import React, { useState } from "react";
+import Input from "@mui/material/Input";
+import { useTheme } from "@mui/material/styles";
+import Fab from "@mui/material/Fab";
+import Mic from "@mui/icons-material/Mic";
+import MyLocation from "@mui/icons-material/MyLocation";
+import CameraAlt from "@mui/icons-material/CameraAlt";
+import Send from "@mui/icons-material/Send";
+import { useIntl } from "react-intl";
+import IconButton from "@mui/material/IconButton";
+import { useAuth } from "base-shell/lib/providers/Auth";
+import { getLocation } from "../../utils/location";
+import { CircularProgress } from "@mui/material";
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  serverTimestamp,
+} from "firebase/database";
 import {
   getStorage,
   ref as storageRef,
   uploadString,
   getDownloadURL,
-} from 'firebase/storage'
-import { getApp } from 'firebase/app'
+} from "firebase/storage";
+import { getApp } from "firebase/app";
 
 export default function ({ path }) {
-  const theme = useTheme()
-  const intl = useIntl()
-  const { auth } = useAuth()
-  const [value, setValue] = useState('')
-  const [isUploading, setUploading] = useState(false)
-  const db = getDatabase()
+  const theme = useTheme();
+  const intl = useIntl();
+  const { auth } = useAuth();
+  const [value, setValue] = useState("");
+  const [isUploading, setUploading] = useState(false);
+  const db = getDatabase();
 
   const uploadSelectedFile = (file) => {
     if (file === null) {
-      return
+      return;
     }
 
     if ((file.size / 1024 / 1024).toFixed(4) > 20) {
       //file larger than 10mb
-      alert(intl.formatMessage({ id: 'max_file_size' }))
-      return
+      alert(intl.formatMessage({ id: "max_file_size" }));
+      return;
     }
 
-    setUploading(true)
+    setUploading(true);
 
-    let reader = new FileReader()
+    let reader = new FileReader();
 
-    const r = push(ref(db, '/user_chat_messages/'))
+    const r = push(ref(db, "/user_chat_messages/"));
 
     reader.onload = async (fileData) => {
       const snap = await uploadString(
@@ -52,21 +58,21 @@ export default function ({ path }) {
           `/user_chats/${auth.uid}/${r.key}.jpg`
         ),
         fileData.target.result,
-        'data_url'
-      )
+        "data_url"
+      );
 
-      const downloadURL = await getDownloadURL(snap.ref)
+      const downloadURL = await getDownloadURL(snap.ref);
       sendMessage({
-        type: 'image',
-        message: '',
+        type: "image",
+        message: "",
         image: downloadURL,
         key: r.key,
-      })
-      setUploading(false)
-    }
+      });
+      setUploading(false);
+    };
 
-    reader.readAsDataURL(file)
-  }
+    reader.readAsDataURL(file);
+  };
 
   const sendMessage = async (props) => {
     let newMessage = {
@@ -75,23 +81,26 @@ export default function ({ path }) {
       authorUid: auth.uid,
       authorPhotoUrl: auth.photoURL,
       languageCode: intl.formatMessage({
-        id: 'current_locale',
-        defaultMessage: 'en-US',
+        id: "current_locale",
+        defaultMessage: "en-US",
       }),
       ...props,
-    }
+    };
 
-    await set(push(ref(db, `${path}`)), newMessage)
-    setValue('')
-  }
+    console.log("path", path);
+    console.log("newMessage", newMessage);
+
+    await set(push(ref(db, `${path}`)), newMessage);
+    setValue("");
+  };
 
   return (
     <div
       style={{
-        display: 'flex',
+        display: "flex",
         padding: 4,
         paddingBottom: 8,
-        alignItems: 'center',
+        alignItems: "center",
       }}
     >
       <div
@@ -102,16 +111,16 @@ export default function ({ path }) {
           paddingRight: 8,
           backgroundColor: theme.palette.grey[300],
           borderRadius: 22,
-          height: '100%',
+          height: "100%",
           flex: 1,
-          display: 'flex',
+          display: "flex",
         }}
       >
         <Input
           style={{
             height: 50,
             left: 15,
-            color: 'black',
+            color: "black",
           }}
           multiline
           rowsMax="2"
@@ -121,33 +130,33 @@ export default function ({ path }) {
           value={value}
           autoComplete="off"
           placeholder={intl.formatMessage({
-            id: 'write_message_hint',
-            defaultMessage: 'Write message',
+            id: "write_message_hint",
+            defaultMessage: "Write message",
           })}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => {
-            if (e.keyCode === 13 && value.trim() !== '') {
-              e.preventDefault()
-              sendMessage({ type: 'text', message: value })
+            if (e.keyCode === 13 && value.trim() !== "") {
+              e.preventDefault();
+              sendMessage({ type: "text", message: value });
             }
           }}
           type="Text"
         />
 
         <input
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           accept="image/*"
           id="icon-button-file"
           type="file"
           onChange={(e) => {
-            uploadSelectedFile(e.target.files[0])
+            uploadSelectedFile(e.target.files[0]);
           }}
         />
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <div>
@@ -179,16 +188,16 @@ export default function ({ path }) {
           size="small"
           onClick={async () => {
             try {
-              const { coords } = await getLocation()
-              const lat = coords?.latitude
-              const long = coords?.longitude
+              const { coords } = await getLocation();
+              const lat = coords?.latitude;
+              const long = coords?.longitude;
               sendMessage({
-                type: 'location',
-                message: '',
+                type: "location",
+                message: "",
                 location: `https://www.google.com/maps/place/${lat}+${long}/@${lat},${long}`,
                 location_lat: lat,
                 location_lng: long,
-              })
+              });
             } catch (error) {}
           }}
         >
@@ -198,16 +207,16 @@ export default function ({ path }) {
 
       <Fab
         onClick={
-          value !== ''
-            ? () => sendMessage({ type: 'text', message: value })
+          value !== ""
+            ? () => sendMessage({ type: "text", message: value })
             : undefined
         }
         color="secondary"
         size="medium"
       >
-        {value === '' && <Mic />}
-        {value !== '' && <Send />}
+        {value === "" && <Mic />}
+        {value !== "" && <Send />}
       </Fab>
     </div>
-  )
+  );
 }
