@@ -6,9 +6,8 @@
       "@emotion/styled": "11.x",
       "@fontsource/roboto": "4.x",
       "@mui/icons-material": "5.x",
-      "@mui/lab": "^5.0.0-alpha.49",
       "@mui/material": "5.x",
-      "@mui/x-date-pickers": "^5.0.0-alpha.7",
+      "@mui/x-date-pickers": "^5.0.0-beta.4",
       "@mui/styles": "5.x",
       "base-shell": "2.x",
       "chart.js": "3.x",
@@ -39,7 +38,7 @@
       "react-linkify": "^1.0.0-alpha",
       "react-markdown": "8.x",
       "react-router-dom": "6.x",
-      "react-virtualized-auto-sizer": "1.x",
+      "lp-react-virtualized-auto-sizer-react-18": "1.x",
       "react-window": "1.x"
     },
     "eslintConfig": {

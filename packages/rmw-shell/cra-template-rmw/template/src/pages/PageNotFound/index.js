@@ -1,6 +1,6 @@
 import { Button, Paper, Typography } from "@mui/material";
 import { Home } from "@mui/icons-material";
-import { Page } from "material-ui-shell/lib/containers/Page";
+import Page from "material-ui-shell/lib/containers/Page/Page";
 import React from "react";
 import { useIntl } from "react-intl";
 
