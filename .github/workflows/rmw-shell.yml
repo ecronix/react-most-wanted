@@ -81,6 +81,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
+      - name: git config
+        run: |
+          npm config set legacy-peer-deps true
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: install-rmw-shell
         run: npx create-react-app demo-app --template rmw --use-npm
       - name: install firebase functins dependencies
