@@ -1,34 +1,34 @@
-import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute'
-import React, { lazy } from 'react'
-import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute'
+import AuthorizedRoute from "base-shell/lib/components/AuthorizedRoute";
+import React, { lazy } from "react";
+import UnauthorizedRoute from "base-shell/lib/components/UnauthorizedRoute";
 
-const SignIn = lazy(() => import('rmw-shell/lib/pages/SignIn/SignIn'))
-const MyAccount = lazy(() => import('rmw-shell/lib/pages/MyAccount/MyAccount'))
-const Users = lazy(() => import('rmw-shell/lib/pages/Users'))
-const User = lazy(() => import('rmw-shell/lib/pages/Users/User'))
-const Roles = lazy(() => import('rmw-shell/lib/pages/Roles'))
-const Role = lazy(() => import('rmw-shell/lib/pages/Roles/Role'))
-const Chats = lazy(() => import('rmw-shell/lib/pages/Chats'))
-const CreateChat = lazy(() => import('rmw-shell/lib/pages/CreateChat'))
-const GroupChat = lazy(() => import('rmw-shell/lib/pages/GroupChat'))
-const EditMembers = lazy(() => import('rmw-shell/lib/pages/EditMembers'))
-const EditAdmins = lazy(() => import('rmw-shell/lib/pages/EditAdmins'))
-const PageNotFound = lazy(() => import('../pages/PageNotFound'))
+const SignIn = lazy(() => import("rmw-shell/lib/pages/SignIn/SignIn"));
+const MyAccount = lazy(() => import("rmw-shell/lib/pages/MyAccount/MyAccount"));
+const Users = lazy(() => import("rmw-shell/lib/pages/Users"));
+const User = lazy(() => import("rmw-shell/lib/pages/Users/User"));
+const Roles = lazy(() => import("rmw-shell/lib/pages/Roles"));
+const Role = lazy(() => import("rmw-shell/lib/pages/Roles/Role"));
+const Chats = lazy(() => import("rmw-shell/lib/pages/Chats"));
+const CreateChat = lazy(() => import("rmw-shell/lib/pages/CreateChat"));
+const GroupChat = lazy(() => import("rmw-shell/lib/pages/GroupChat"));
+const EditMembers = lazy(() => import("rmw-shell/lib/pages/EditMembers"));
+const EditAdmins = lazy(() => import("rmw-shell/lib/pages/EditAdmins"));
+const PageNotFound = lazy(() => import("../pages/PageNotFound"));
 
 const getDefaultRoutes = (appConfig) => {
   return [
     {
-      path: '/signin',
+      path: "/signin",
       exact: true,
       element: (
         <UnauthorizedRoute>
-          <SignIn redirectTo={appConfig?.auth?.redirectTo || '/'} />
+          <SignIn redirectTo={appConfig?.auth?.redirectTo || "/"} />
         </UnauthorizedRoute>
       ),
     },
 
     {
-      path: '/chats',
+      path: "/chats",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -37,7 +37,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/chats/:uid',
+      path: "/chats/:uid",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -46,7 +46,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/create_chat',
+      path: "/create_chat",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -55,7 +55,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/edit_members/:uid',
+      path: "/edit_members/:uid",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -64,7 +64,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/edit_admins/:uid',
+      path: "/edit_admins/:uid",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -73,7 +73,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/group_chat',
+      path: "/group_chat",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -82,7 +82,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/group_chat/:uid',
+      path: "/group_chat/:uid",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -91,7 +91,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/roles',
+      path: "/roles",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -100,7 +100,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/create_role',
+      path: "/create_role",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -109,7 +109,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/roles/:uid',
+      path: "/roles/:uid",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -118,7 +118,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/roles/:uid/:tab',
+      path: "/roles/:uid/:tab",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -127,7 +127,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/my_account',
+      path: "/my_account",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -136,7 +136,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/users',
+      path: "/users",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -145,7 +145,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/users/:uid',
+      path: "/users/:uid",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -154,7 +154,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '/users/:uid/:tab',
+      path: "/users/:uid/:tab",
       exact: true,
       element: (
         <AuthorizedRoute>
@@ -163,7 +163,7 @@ const getDefaultRoutes = (appConfig) => {
       ),
     },
     {
-      path: '*',
+      path: "*",
 
       element: (
         <AuthorizedRoute>
@@ -171,7 +171,7 @@ const getDefaultRoutes = (appConfig) => {
         </AuthorizedRoute>
       ),
     },
-  ]
-}
+  ];
+};
 
-export { getDefaultRoutes }
+export { getDefaultRoutes };

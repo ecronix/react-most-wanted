@@ -1,17 +1,17 @@
-import React from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../providers/Auth'
-import { useConfig } from '../providers/Config'
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../providers/Auth";
+import { useConfig } from "../providers/Config";
 
 function AuthorizedRoute({ children }) {
-  const { appConfig } = useConfig()
-  const { auth: authConfig } = appConfig || {}
-  const { signInURL = '/signin' } = authConfig || {}
-  const { auth } = useAuth()
-  const location = useLocation()
+  const { appConfig } = useConfig();
+  const { auth: authConfig } = appConfig || {};
+  const { signInURL = "/signin" } = authConfig || {};
+  const { auth } = useAuth();
+  const location = useLocation();
 
   if (auth.isAuthenticated) {
-    return children
+    return children;
   } else {
     return (
       <Navigate
@@ -23,8 +23,8 @@ function AuthorizedRoute({ children }) {
         }}
         replace
       />
-    )
+    );
   }
 }
 
-export default AuthorizedRoute
+export default AuthorizedRoute;
