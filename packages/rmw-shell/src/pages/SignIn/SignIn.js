@@ -1,35 +1,40 @@
-import * as firebaseui from 'firebaseui'
-import AuthUI from '../../containers/AuthUI/AuthUI'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import { useConfig } from 'base-shell/lib/providers/Config'
-import { useIntl } from 'react-intl'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import * as firebaseui from "firebaseui";
+import AuthUI from "../../containers/AuthUI/AuthUI";
+import Page from "material-ui-shell/lib/containers/Page/Page";
+import React from "react";
+import { Helmet } from "react-helmet";
+import { useConfig } from "base-shell/lib/providers/Config";
+import { useIntl } from "react-intl";
+import { useMenu } from "material-ui-shell/lib/providers/Menu";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SignIn = () => {
-  const intl = useIntl()
-  const { appConfig } = useConfig()
-  const { firebase = {} } = appConfig || {}
-  const { firebaseuiProps = {} } = firebase
-  const { toggleThis } = useMenu()
+  const intl = useIntl();
+  const { appConfig } = useConfig();
+  const { firebase = {}, auth } = appConfig || {};
+  const { redirectTo = "/" } = auth || {};
+  const { firebaseuiProps = {} } = firebase;
+  const { toggleThis } = useMenu();
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = new URLSearchParams(location.search).get("from") || redirectTo;
 
   const uiConfig = {
-    signInSuccessUrl: '/',
-    signInFlow: 'popup',
+    signInSuccessUrl: from,
+    signInFlow: "popup",
     callbacks: {
       signInSuccessWithAuthResult: () => {
-        toggleThis('isAuthMenuOpen', false)
+        toggleThis("isAuthMenuOpen", false);
         // To avoid page reload on single page applications
-        return false
+        return false;
       },
     },
     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
     ...firebaseuiProps,
-  }
+  };
 
   return (
-    <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
+    <Page pageTitle={intl.formatMessage({ id: "sign_in" })}>
       <Helmet>
         <link
           type="text/css"
@@ -39,7 +44,7 @@ const SignIn = () => {
       </Helmet>
       <AuthUI uiConfig={uiConfig} />
     </Page>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
