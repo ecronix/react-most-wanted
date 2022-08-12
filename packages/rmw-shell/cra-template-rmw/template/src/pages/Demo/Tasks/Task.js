@@ -4,6 +4,7 @@ import { FormPage } from "rmw-shell/lib/containers/Page";
 import { useIntl } from "react-intl";
 import { useParams, useNavigate } from "react-router-dom";
 import { useLists } from "rmw-shell/lib/providers/Firebase/Lists";
+import moment from "moment";
 
 const path = "tasks";
 const singular = "task";
@@ -29,6 +30,12 @@ const Task = () => {
       path={"public_tasks"}
       uid={uid}
       initialValues={initialValues}
+      parseValues={(values) => {
+        const { due_to } = values;
+
+        console.log("parse values", values);
+        return { ...values, due_to: moment(due_to).format() };
+      }}
       getPageProps={(values) => {
         return {
           pageTitle: intl.formatMessage({
