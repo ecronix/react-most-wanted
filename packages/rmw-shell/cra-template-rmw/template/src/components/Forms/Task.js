@@ -1,31 +1,31 @@
-import React from 'react'
-import { Autocomplete } from 'rmw-shell/lib/components/FormFields'
-import Stack from '@mui/material/Stack'
-import { TextField, DatePicker } from 'mui-rff'
-
-import deLocale from 'date-fns/locale/de'
-import { useIntl } from 'react-intl'
+import React from "react";
+import { Autocomplete } from "rmw-shell/lib/components/FormFields";
+import Stack from "@mui/material/Stack";
+import { TextField, DatePicker } from "mui-rff";
+import { AdapterMoment as DateAdapter } from "@mui/x-date-pickers/AdapterMoment";
+import deLocale from "date-fns/locale/de";
+import { useIntl } from "react-intl";
 
 // eslint-disable-next-line
 const Form = ({ id, handleSubmit, values, users = [] }) => {
   const helpers = users.map((u) => {
-    const { key, val } = u
-    const { name } = val
+    const { key, val } = u;
+    const { name } = val;
 
-    return { label: name, value: key }
-  })
+    return { label: name, value: key };
+  });
 
-  const intl = useIntl()
+  const intl = useIntl();
 
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ display: 'flex', justifyContent: 'center' }}
+      style={{ display: "flex", justifyContent: "center" }}
     >
-      <button type="submit" style={{ display: 'none' }} />
+      <button type="submit" style={{ display: "none" }} />
       <Stack spacing={3}>
         <TextField
-          label={intl.formatMessage({ id: 'title', defaultMessage: 'Title' })}
+          label={intl.formatMessage({ id: "title", defaultMessage: "Title" })}
           name="title"
           variant="outlined"
           margin="normal"
@@ -35,8 +35,8 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
 
         <TextField
           label={intl.formatMessage({
-            id: 'description',
-            defaultMessage: 'Description',
+            id: "description",
+            defaultMessage: "Description",
           })}
           name="description"
           variant="outlined"
@@ -48,8 +48,8 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
 
         <DatePicker
           label={intl.formatMessage({
-            id: 'due_date',
-            defaultMessage: 'Due Date',
+            id: "due_date",
+            defaultMessage: "Due Date",
           })}
           name="due_to"
           inputVariant="outlined"
@@ -58,20 +58,21 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
           format="DD.MM.YYYY"
           autoOk={true}
           locale={deLocale}
+          dateFunsUtils={DateAdapter}
         />
 
         <Autocomplete
           openOnFocus
           label={intl.formatMessage({
-            id: 'select_company',
-            defaultMessage: 'Select Company',
+            id: "select_company",
+            defaultMessage: "Select Company",
           })}
           name="helper"
           options={helpers}
           getOptionValue={(option) => option}
-          getOptionLabel={(option) => option.label || ''}
+          getOptionLabel={(option) => option.label || ""}
           getOptionSelected={(o, v) => {
-            return o.value === v.value
+            return o.value === v.value;
           }}
           filterOptions={(options, params) => {
             const filtered = options.filter((v) => {
@@ -79,15 +80,15 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
                 JSON.stringify(v)
                   .toUpperCase()
                   .indexOf(params.inputValue.toUpperCase()) !== -1
-              )
-            })
+              );
+            });
 
-            return filtered
+            return filtered;
           }}
         />
       </Stack>
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;
