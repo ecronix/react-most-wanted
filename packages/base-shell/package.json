@@ -1,6 +1,6 @@
 {
   "name": "base-shell",
-  "version": "2.5.8",
+  "version": "2.5.9",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -32,9 +32,9 @@
     "nwb": "^0.25.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intl": "^6.0.5",
+    "react-intl": "^6.1.0",
     "react-router-dom": "^6.3.0",
-    "release-it": "^15.2.0"
+    "release-it": "^15.4.1"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
