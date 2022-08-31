@@ -47,7 +47,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
-    "base-shell": "^2.5.8",
+    "base-shell": "^2.5.9",
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
     "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
