@@ -20,7 +20,7 @@
     "firebase-admin": "^10.0.0",
     "firebase-function-tools": "^2.0.1",
     "firebase-functions": "^3.22.0",
-    "glob": "^7.1.6",
+    "glob": "^7.2.3",
     "mkdirp-promise": "^5.0.1",
     "moment": "^2.29.4",
     "nodemailer": "^6.7.8",
