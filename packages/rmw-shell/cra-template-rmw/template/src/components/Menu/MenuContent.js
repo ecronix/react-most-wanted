@@ -1,27 +1,27 @@
-import React from 'react'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar/Scrollbar'
-import SelectableMenuList from 'material-ui-shell/lib/containers/SelectableMenuList'
-import { useAddToHomeScreen } from 'base-shell/lib/providers/AddToHomeScreen'
-import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useConfig } from 'base-shell/lib/providers/Config'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { useIntl } from 'react-intl'
-import { useLocale } from 'base-shell/lib/providers/Locale'
-import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { useTheme as useAppTheme } from 'material-ui-shell/lib/providers/Theme'
-import getMenuItems from '../../config/menuItems'
+import React from "react";
+import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
+import SelectableMenuList from "material-ui-shell/lib/containers/SelectableMenuList";
+import { useAddToHomeScreen } from "base-shell/lib/providers/AddToHomeScreen";
+import { useAuth } from "base-shell/lib/providers/Auth";
+import { useConfig } from "base-shell/lib/providers/Config";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useIntl } from "react-intl";
+import { useLocale } from "base-shell/lib/providers/Locale";
+import { useMenu } from "material-ui-shell/lib/providers/Menu";
+import { useTheme as useAppTheme } from "material-ui-shell/lib/providers/Theme";
+import getMenuItems from "../../config/menuItems";
 
 const Menu = (props) => {
-  const intl = useIntl()
-  const navigate = useNavigate()
-  const location = useLocation()
-  const auth = useAuth()
-  const menuContext = useMenu()
-  const a2HSContext = useAddToHomeScreen()
-  const { toggleThis, isMiniMode, isMiniSwitchVisibility } = menuContext || {}
-  const { appConfig } = useConfig()
-  const { setLocale, locale = 'en' } = useLocale()
-  const themeContext = useAppTheme()
+  const intl = useIntl();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const auth = useAuth();
+  const menuContext = useMenu();
+  const a2HSContext = useAddToHomeScreen();
+  const { toggleThis, isMiniMode, isMiniSwitchVisibility } = menuContext || {};
+  const { appConfig } = useConfig();
+  const { setLocale, locale = "en" } = useLocale();
+  const themeContext = useAppTheme();
 
   const menuItems = getMenuItems({
     intl,
@@ -32,28 +32,29 @@ const Menu = (props) => {
     appConfig,
     a2HSContext,
     auth,
+    navigate,
     ...props,
   }).filter((item) => {
-    return item.visible !== false
-  })
+    return item.visible !== false;
+  });
 
-  const index = location ? location.pathname : '/'
+  const index = location ? location.pathname : "/";
 
   const handleChange = (event, index) => {
     if (index !== undefined) {
-      toggleThis('isMobileMenuOpen', false)
+      toggleThis("isMobileMenuOpen", false);
     }
     if (index !== undefined && index !== Object(index)) {
-      navigate(index)
+      navigate(index);
     }
-  }
+  };
 
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
         /*  direction: isRTL ? 'rtl' : 'ltr' */
       }}
     >
@@ -67,7 +68,7 @@ const Menu = (props) => {
         />
       </Scrollbar>
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
