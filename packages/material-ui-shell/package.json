@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell",
-  "version": "3.4.8",
+  "version": "3.4.9",
   "description": "material-ui-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -47,7 +47,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.10",
-    "base-shell": "^2.5.9",
+    "base-shell": "^2.5.10",
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
     "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
