@@ -178,6 +178,10 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
         isLoading: true,
       });
 
+      onChildAdded(ref, (s) => handleChange(s, CHILD_ADDED), handleError);
+      onChildChanged(ref, (s) => handleChange(s, CHILD_CHANGED), handleError);
+      onChildRemoved(ref, (s) => handleChange(s, CHILD_REMOVED), handleError);
+
       try {
         try {
           const list = [];
@@ -206,10 +210,6 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
       } catch (error) {
         handleError(error);
       }
-
-      onChildAdded(ref, (s) => handleChange(s, CHILD_ADDED), handleError);
-      onChildChanged(ref, (s) => handleChange(s, CHILD_CHANGED), handleError);
-      onChildRemoved(ref, (s) => handleChange(s, CHILD_REMOVED), handleError);
     },
     [getLocation, getRef]
   );
