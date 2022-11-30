@@ -74,10 +74,17 @@ function reducer(state, action) {
     case CHILD_ADDED:
     case CHILD_CHANGED:
     case CHILD_REMOVED:
-      return {
-        ...state,
-        [path]: { ...state[path], value: list(state[path].value, action) },
-      };
+      console.log("state[path]", state[path]);
+      if (state[path]) {
+        return {
+          ...state,
+          //TO DO: a bug happens if state[path] is undefined
+          [path]: { ...state[path], value: list(state[path].value, action) },
+        };
+      } else {
+        return state;
+      }
+
     case CLEAR_ALL:
       return {};
     default:
