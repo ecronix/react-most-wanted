@@ -17,7 +17,7 @@
     "babel-runtime": "^6.26.0",
     "camelcase": "^6.0.0",
     "child-process-promise": "^2.2.1",
-    "firebase-admin": "^10.0.0",
+    "firebase-admin": "^11.4.1",
     "firebase-function-tools": "^2.0.1",
     "firebase-functions": "^3.22.0",
     "glob": "^7.1.6",
