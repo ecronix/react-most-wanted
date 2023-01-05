@@ -44,7 +44,7 @@ const SignIn = ({ redirectTo = '/' }) => {
     <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
       <CustomPaper elevation={6}>
         <div
-          sytle={{
+          style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
