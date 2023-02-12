@@ -29,6 +29,6 @@
     "release": "release-it -- patch"
   },
   "devDependencies": {
-    "release-it": "^14.12.3"
+    "release-it": "^15.6.0"
   }
 }
