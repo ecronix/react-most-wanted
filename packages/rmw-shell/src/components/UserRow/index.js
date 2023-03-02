@@ -1,45 +1,45 @@
-import React from 'react'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import Divider from '@mui/material/Divider'
-import Avatar from '@mui/material/Avatar'
-import Mail from '@mui/icons-material/Mail'
-import Star from '@mui/icons-material/Star'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
+import React from "react";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import Avatar from "@mui/material/Avatar";
+import Mail from "@mui/icons-material/Mail";
+import Star from "@mui/icons-material/Star";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
 import {
   GoogleIcon,
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
-} from '../../components/Icons'
-import Badge from '@mui/material/Badge'
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction'
-import Checkbox from '@mui/material/Checkbox'
+} from "../../components/Icons";
+import Badge from "@mui/material/Badge";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import Checkbox from "@mui/material/Checkbox";
 
 const getProviderIcon = (id) => {
   const iconProps = {
-    color: 'primary',
+    color: "primary",
     style: {
       height: 20,
       width: 20,
     },
+  };
+
+  if (id === "google.com") {
+    return <GoogleIcon key={id} {...iconProps} />;
+  }
+  if (id === "facebook.com") {
+    return <FacebookIcon key={id} {...iconProps} />;
+  }
+  if (id === "github.com") {
+    return <GitHubIcon key={id} {...iconProps} />;
+  }
+  if (id === "twitter.com") {
+    return <TwitterIcon key={id} {...iconProps} />;
   }
 
-  if (id === 'google.com') {
-    return <GoogleIcon key={id} {...iconProps} />
-  }
-  if (id === 'facebook.com') {
-    return <FacebookIcon key={id} {...iconProps} />
-  }
-  if (id === 'github.com') {
-    return <GitHubIcon key={id} {...iconProps} />
-  }
-  if (id === 'twitter.com') {
-    return <TwitterIcon key={id} {...iconProps} />
-  }
-
-  return <Mail key={id} {...iconProps} />
-}
+  return <Mail key={id} {...iconProps} />;
+};
 
 const Row = ({
   data,
@@ -51,22 +51,22 @@ const Row = ({
   hasCheckbox = false,
 }) => {
   const {
-    displayName = '',
+    displayName = "",
     key,
     photoURL,
     providerData = [],
     icon,
     secondaryText,
-  } = data
+  } = data;
 
-  let isAdmin = false
+  let isAdmin = false;
 
   admins.map((a) => {
     if (a.key === key) {
-      isAdmin = true
+      isAdmin = true;
     }
-    return a
-  })
+    return a;
+  });
 
   return (
     <div key={key} style={style}>
@@ -74,14 +74,14 @@ const Row = ({
         button
         alignItems="flex-start"
         style={{ height: 82 }}
-        onClick={() => handleRowClick(data)}
+        //onClick={() => handleRowClick(data)}
       >
         <ListItemAvatar>
           <Badge
             invisible={!isAdmin}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
+              vertical: "top",
+              horizontal: "left",
             }}
             badgeContent={
               <Star
@@ -105,7 +105,7 @@ const Row = ({
             providerData.length > 0 ? (
               <React.Fragment>
                 {providerData.map((p) => {
-                  return getProviderIcon(p.providerId)
+                  return getProviderIcon(p.providerId);
                 })}
               </React.Fragment>
             ) : (
@@ -125,7 +125,7 @@ const Row = ({
       </ListItem>
       <Divider variant="inset" />
     </div>
-  )
-}
+  );
+};
 
-export default Row
+export default Row;

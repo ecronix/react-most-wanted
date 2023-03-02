@@ -4,48 +4,49 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from '@mui/material'
+} from "@mui/material";
 
-import React, { useEffect } from 'react'
-import VirtualList from 'material-ui-shell/lib/containers/VirtualList'
-import { useFilter } from 'material-ui-shell/lib/providers/Filter'
-import { useLists } from '../../providers/Firebase/Lists'
-import { getDatabase, ref, set } from 'firebase/database'
+import React, { useEffect } from "react";
+import VirtualList from "material-ui-shell/lib/containers/VirtualList";
+import { useFilter } from "material-ui-shell/lib/providers/Filter";
+import { useLists } from "../../providers/Firebase/Lists";
+import { getDatabase, ref, set } from "firebase/database";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function ({ path }) {
-  const { watchList, getList: getFirebaseList } = useLists()
-  const { getList } = useFilter()
-  const db = getDatabase()
+  const { watchList, getList: getFirebaseList } = useLists();
+  const { getList } = useFilter();
+  const db = getDatabase();
 
-  const roles = getFirebaseList('roles')
-  const userRoles = getFirebaseList(path)
+  const roles = getFirebaseList("roles");
+  const userRoles = getFirebaseList(path);
 
   const list = getList(
-    'roles',
+    "roles",
     roles.map((r) => {
-      return { key: r.key, ...r.val }
+      return { key: r.key, ...r.val };
     }),
-    [{ name: 'name' }]
-  )
+    [{ name: "name" }]
+  );
 
   useEffect(() => {
-    watchList('roles')
-    watchList(path)
+    watchList("roles");
+    watchList(path);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path])
+  }, [path, watchList]);
 
   const Row = ({ index, style, data }) => {
-    const { key, name = '' } = data
+    const { key, name = "" } = data;
 
-    let isSelected = false
+    let isSelected = false;
 
     userRoles.map((rg) => {
       if (rg.key === key) {
-        isSelected = true
+        isSelected = true;
       }
 
-      return rg
-    })
+      return rg;
+    });
 
     return (
       <div key={`${name}_${index}`} style={style}>
@@ -53,7 +54,9 @@ export default function ({ path }) {
           button
           alignItems="flex-start"
           onClick={async () => {
-            await set(ref(db, path), isSelected ? null : true)
+            console.log("clicked", isSelected, path);
+            await set(ref(db, `${path}/${key}`), isSelected ? null : true);
+            console.log("clicked2");
           }}
         >
           <ListItemIcon>
@@ -68,8 +71,8 @@ export default function ({ path }) {
         </ListItem>
         <Divider />
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <VirtualList
@@ -78,5 +81,5 @@ export default function ({ path }) {
       listProps={{ itemSize: 72 }}
       Row={Row}
     />
-  )
+  );
 }
