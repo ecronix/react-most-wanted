@@ -54,9 +54,7 @@ export default function ({ path }) {
           button
           alignItems="flex-start"
           onClick={async () => {
-            console.log("clicked", isSelected, path);
             await set(ref(db, `${path}/${key}`), isSelected ? null : true);
-            console.log("clicked2");
           }}
         >
           <ListItemIcon>
