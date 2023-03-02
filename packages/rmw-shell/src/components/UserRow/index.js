@@ -74,7 +74,7 @@ const Row = ({
         button
         alignItems="flex-start"
         style={{ height: 82 }}
-        //onClick={() => handleRowClick(data)}
+        onClick={() => handleRowClick(data)}
       >
         <ListItemAvatar>
           <Badge
