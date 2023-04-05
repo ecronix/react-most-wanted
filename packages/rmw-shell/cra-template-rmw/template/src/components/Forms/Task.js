@@ -1,10 +1,18 @@
 import React from "react";
-import { Autocomplete } from "rmw-shell/lib/components/FormFields";
+import { Autocomplete, AvatarImage } from "rmw-shell/lib/components/FormFields";
 import Stack from "@mui/material/Stack";
 import { TextField, DatePicker } from "mui-rff";
 import { AdapterMoment as DateAdapter } from "@mui/x-date-pickers/AdapterMoment";
 import deLocale from "date-fns/locale/de";
 import { useIntl } from "react-intl";
+import { Box } from "@mui/material";
+
+const uuid = () => {
+  const url = URL.createObjectURL(new Blob());
+  const [id] = url.toString().split("/").reverse();
+  URL.revokeObjectURL(url);
+  return id;
+};
 
 // eslint-disable-next-line
 const Form = ({ id, handleSubmit, values, users = [] }) => {
@@ -24,6 +32,9 @@ const Form = ({ id, handleSubmit, values, users = [] }) => {
     >
       <button type="submit" style={{ display: "none" }} />
       <Stack spacing={3}>
+        <Box sx={{ margin: 1 }}>
+          <AvatarImage name="photoURL" path={`users/123/${uuid()}.jpeg`} />
+        </Box>
         <TextField
           label={intl.formatMessage({ id: "title", defaultMessage: "Title" })}
           name="title"
