@@ -6,18 +6,18 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import {
   Home as HomeIcon,
-  Newspaper as NewspaperIcon,
-  Scoreboard as ScoreboardIcon,
-  Collections as CollectionsIcon,
-  Article as ArticleIcon,
-  Phone as PhoneIcon,
-  Navigation as NavigationIcon,
-  Info as InfoIcon,
+  DashboardTwoToneIcon as DashboardTwoToneIcon,
+  CollectionsTwoToneIcon as CollectionsTwoToneIcon,
+  InfoTwoToneIcon as InfoTwoToneIcon,
+  ChatTwoToneIcon as ChatTwoToneIcon,
+  DvrTwoToneIcon as DvrTwoToneIcon,
+  WhatshotTwoToneIcon as WhatshotTwoToneIcon,
+  PhoneIcon as PhoneIcon,
 } from '@mui/icons-material'
 
 export default function Links() {
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', paddingTop: 1, textDecoration: 'none', color: '#1a1a1add', fontSize: '30px', alignItems: 'center' }}>
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', paddingTop: 1, textDecoration: 'none', color: '#1A2027dd', fontSize: '30px', alignItems: 'center' }}>
       <ListItem alignItems="flex-start" >
         <ListItemAvatar>
           
@@ -28,7 +28,7 @@ export default function Links() {
       <a href="/Home"
         style={{
           textDecoration: 'none',
-          color: '#1a1a1add',
+          color: '#1A2027dd',
         }}>
         <ListItem
           alignItems="flex-start"
@@ -39,9 +39,9 @@ export default function Links() {
             paddingBottom: 1,
             alignItems: 'center',
             borderRadius: '10px', 
-            border: '1px solid #1a1a1a33',
+            border: '1px solid #1A202733',
             '&:hover': {
-              backgroundColor: '#9affa3'
+              backgroundColor: '#1A2027'
             },
           }}>
           <ListItemAvatar>
@@ -50,47 +50,7 @@ export default function Links() {
           <ListItemText primary="Home" />
         </ListItem>
       </a>
-      <a href="/News" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
-        <ListItem
-                  alignItems="flex-start"
-                  sx={{
-                    marginTop: 1,
-                    marginBottom: 1,
-                    paddingTop: 1,
-                    paddingBottom: 1,
-                    alignItems: 'center',
-                    borderRadius: '10px', 
-                    border: '1px solid #1a1a1a33',
-                    '&:hover': {
-                      backgroundColor: '#9affa3'
-                    },
-                  }}>          <ListItemAvatar>
-                    <NewspaperIcon />
-                  </ListItemAvatar>
-                  <ListItemText primary="News" />
-                </ListItem>
-              </a> 
-              <a href="/Cardings" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
-        <ListItem
-                  alignItems="flex-start"
-                  sx={{
-                    marginTop: 1,
-                    marginBottom: 1,
-                    paddingTop: 1,
-                    paddingBottom: 1,
-                    alignItems: 'center',
-                    borderRadius: '10px', 
-                    border: '1px solid #1a1a1a33',
-                    '&:hover': {
-                      backgroundColor: '#9affa3'
-                    },
-                  }}>          <ListItemAvatar>
-            <ScoreboardIcon />
-          </ListItemAvatar>
-          <ListItemText primary="Cardings" />
-        </ListItem>
-      </a>
-      <a href="/Gallery" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
+      <a href="/Dashboard" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
         <ListItem
           alignItems="flex-start"
           sx={{
@@ -100,18 +60,39 @@ export default function Links() {
             paddingBottom: 1,
             alignItems: 'center',
             borderRadius: '10px', 
-            border: '1px solid #1a1a1a33',
+            border: '1px solid #1A202733',
             '&:hover': {
-              backgroundColor: '#9affa3'
+              backgroundColor: '#1A202733'
             },
           }}>
           <ListItemAvatar>
-            <CollectionsIcon />
+            <DashboardTwoToneIcon />
+          </ListItemAvatar>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+      </a> 
+      <a href="/Gallery" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
+        <ListItem
+          alignItems="flex-start"
+          sx={{
+            marginTop: 1,
+            marginBottom: 1,
+            paddingTop: 1,
+            paddingBottom: 1,
+            alignItems: 'center',
+            borderRadius: '10px', 
+            border: '1px solid #1A202733',
+            '&:hover': {
+              backgroundColor: '#1A202733'
+            },
+          }}>
+          <ListItemAvatar>
+            <CollectionsTwoToneIcon />
           </ListItemAvatar>
           <ListItemText primary="Gallery" />
         </ListItem>
       </a>
-      <a href="/Constitution" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
+      <a href="/About" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
         <ListItem
           alignItems="flex-start"
           sx={{
@@ -121,18 +102,18 @@ export default function Links() {
             paddingBottom: 1,
             alignItems: 'center',
             borderRadius: '10px', 
-            border: '1px solid #1a1a1a33',
+            border: '1px solid #1A202733',
             '&:hover': {
-              backgroundColor: '#9affa3'
+              backgroundColor: '#1A202733'
             },
           }}>
           <ListItemAvatar>
-            <ArticleIcon />
+            <InfoTwoToneIcon />
           </ListItemAvatar>
-          <ListItemText primary="Constitution" />
+          <ListItemText primary="About" />
         </ListItem>
       </a>
-      <a href="/Directions" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
+      <a href="/Chats" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
         <ListItem
           alignItems="flex-start"
           sx={{
@@ -142,18 +123,18 @@ export default function Links() {
             paddingBottom: 1,
             alignItems: 'center',
             borderRadius: '10px', 
-            border: '1px solid #1a1a1a33',
+            border: '1px solid #1A202733',
             '&:hover': {
-              backgroundColor: '#9affa3'
+              backgroundColor: '#1A202733'
             },
           }}>
           <ListItemAvatar>
-            <NavigationIcon />
+            <ChatTwoToneIcon />
           </ListItemAvatar>
-          <ListItemText primary="Directions" />
+          <ListItemText primary="Chats" />
         </ListItem>
       </a>
-      <a href="/Popia" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
+      <a href="/Demos" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
         <ListItem
           alignItems="flex-start"
           sx={{
@@ -163,18 +144,18 @@ export default function Links() {
             paddingBottom: 1,
             alignItems: 'center',
             borderRadius: '10px', 
-            border: '1px solid #1a1a1a33',
+            border: '1px solid #1A202733',
             '&:hover': {
-              backgroundColor: '#9affa3'
+              backgroundColor: '#1A202733'
             },
           }}>
           <ListItemAvatar>
-            <InfoIcon />
+            <DvrTwoToneIcon />
           </ListItemAvatar>
-          <ListItemText primary="Popia Notice" />
+          <ListItemText primary="Demos" />
         </ListItem>
       </a>
-      <a href="/Contact" style={{ textDecoration: 'none', color: '#1a1a1add' }}>
+      <a href="/Firebase" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
         <ListItem
           alignItems="flex-start"
           sx={{
@@ -184,9 +165,30 @@ export default function Links() {
             paddingBottom: 1,
             alignItems: 'center',
             borderRadius: '10px', 
-            border: '1px solid #1a1a1a33',
+            border: '1px solid #1A202733',
             '&:hover': {
-              backgroundColor: '#9affa3'
+              backgroundColor: '#1A202733'
+            },
+          }}>
+          <ListItemAvatar>
+            <WhatshotTwoToneIcon />
+          </ListItemAvatar>
+          <ListItemText primary="Firebase" />
+        </ListItem>
+      </a>
+      <a href="/Contact" style={{ textDecoration: 'none', color: '#1A2027dd' }}>
+        <ListItem
+          alignItems="flex-start"
+          sx={{
+            marginTop: 1,
+            marginBottom: 1,
+            paddingTop: 1,
+            paddingBottom: 1,
+            alignItems: 'center',
+            borderRadius: '10px', 
+            border: '1px solid #1A202733',
+            '&:hover': {
+              backgroundColor: '#1A202733'
             },
           }}>
           <ListItemAvatar>

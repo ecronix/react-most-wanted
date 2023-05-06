@@ -17,10 +17,10 @@ import FaxTwoToneIcon from '@mui/icons-material/FaxTwoTone';
 
 
 const data = [
-  { icon: <MapTwoToneIcon />, label: '40 8th Avenue Northmead Benoni' },
-  { icon: <DraftsTwoToneIcon />, label: 'PO Box 15570 Farrarmere 1518 Gauteng' },
-  { icon: <LocalPhoneTwoToneIcon />, label: '+27 11 849 9919' },
-  { icon: <FaxTwoToneIcon />, label: '+27 11 849 8595' },
+  { icon: <MapTwoToneIcon />, label: 'Physical Address' },
+  { icon: <DraftsTwoToneIcon />, label: 'Postal Address' },
+  { icon: <LocalPhoneTwoToneIcon />, label: 'Telephone Number' },
+  { icon: <FaxTwoToneIcon />, label: 'Fax Number' },
 ];
 
 const FireNav = styled(List)({
@@ -52,8 +52,8 @@ export default function CustomizedList() {
           },
           palette: {
             mode: 'dark',
-            primary: { main: 'rgba(68, 201, 79, .98)' },
-            background: { paper: 'rgba(5, 52, 15, .95)' },
+            primary: { main: '#1A2027' },
+            background: { paper: '#1A202722' },
           },
         })}
       >
@@ -63,7 +63,7 @@ export default function CustomizedList() {
               <StadiumIcon style={{ fontSize: 40 }} />
               <ListItemText
                 sx={{ my: 0 }}
-                primary="Northmead Bowling Club"
+                primary="React-Most-Wanted"
                 primaryTypographyProps={{
                   fontSize: 20,
                   fontWeight: 'medium',
@@ -76,10 +76,10 @@ export default function CustomizedList() {
             <ListItem component="div" disablePadding>
               <ListItemButton sx={{ height: 56 }}>
                 <ListItemIcon>
-                  <Home color="white" />
+                  <Home color="#f1f1f1" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Founded: 1938"
+                  primary="Mission"
                   primaryTypographyProps={{
                     color: 'primary',
                     fontSize: 15,
@@ -92,7 +92,7 @@ export default function CustomizedList() {
             <Divider />
             <Box
               sx={{
-                bgcolor: open ? 'rgba(71, 130, 71, 0.2)' : null,
+                bgcolor: open ? '#1A202722' : null,
                 pb: open ? 2 : 0,
               }}
             >
@@ -111,7 +111,7 @@ export default function CustomizedList() {
                 data.map((item) => (
                   <ListItemButton
                     key={item.label}
-                    sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.9)' }}
+                    sx={{ py: 0, minHeight: 32, color: '#f1f1f1' }}
                   >
                     <ListItemIcon sx={{ color: 'inherit' }}>
                       {item.icon}

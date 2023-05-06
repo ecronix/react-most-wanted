@@ -34,10 +34,10 @@ export default function AlignItemsList() {
       <Divider variant="inset" component="li" />
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="Mitch Surley" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Summer BBQ"
+          primary="Mitch Surley"
           secondary={
             <React.Fragment>
               <Typography
@@ -46,9 +46,9 @@ export default function AlignItemsList() {
                 variant="body2"
                 color="text.primary"
               >
-                to Scott, Alex, Jennifer
+                Skip
               </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
+              {" — Let's bring this puppy home…"}
             </React.Fragment>
           }
         />
@@ -56,10 +56,10 @@ export default function AlignItemsList() {
       <Divider variant="inset" component="li" />
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+          <Avatar alt="Mitch Surley" src="/static/images/avatar/1.jpg" />
         </ListItemAvatar>
         <ListItemText
-          primary="Oui Oui"
+          primary="Mitch Surley"
           secondary={
             <React.Fragment>
               <Typography
@@ -68,13 +68,14 @@ export default function AlignItemsList() {
                 variant="body2"
                 color="text.primary"
               >
-                Sandra Adams
+                Skip
               </Typography>
-              {' — Do you have Paris recommendations? Have you ever…'}
+              {" — Let's bring this puppy home…"}
             </React.Fragment>
           }
         />
       </ListItem>
+      <Divider variant="inset" component="li" />
     </List>
   );
 }

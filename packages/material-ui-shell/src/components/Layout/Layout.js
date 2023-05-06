@@ -3,11 +3,6 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Autocomplete from '../Autocomplete/Autocomplete'
-import BusinessCard from '../BusinessCard/BusinessCard'
-import Members from '../Members/Members'
-import Links from 'components/Links/Links'
-import { Divider } from '@mui/material';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -22,20 +17,38 @@ export default function AutoGrid() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
         <Grid item xs={2.5}>
-          <Item elevation={6} style={{ height: '92vh', marginTop: '4px', marginLeft: '4px', marginRight: '0' }}>
-            <Links />
+          <Item 
+            elevation={6}
+            style={{ 
+              height: '92vh',
+              marginTop: '4px',
+              marginLeft: '4px',
+              marginRight: '0'
+            }}>
           </Item>
         </Grid>
         <Grid item xs={7}>
-          <Item elevation={6} style={{ height: '92vh', marginTop: '4px', marginLeft: '0', marginRight: '0', overflow: 'scroll', scrollBat: 'none' }}>
-            <Autocomplete  />
+          <Item 
+            elevation={6}
+            style={{ 
+              height: '92vh',
+              marginTop: '4px',
+              marginLeft: '0',
+              marginRight: '0',
+              overflow: 'scroll',
+              scrollBar: 'none'
+            }}>
           </Item>
         </Grid>
         <Grid item xs={2.5}>
-          <Item elevation={6} style={{ height: '92vh', marginTop: '4px', marginLeft: '0', marginRight: '4px' }}>
-            <BusinessCard />
-            <Members />
-            <Divider />
+          <Item 
+            elevation={6}
+            style={{ 
+              height: '92vh',
+              marginTop: '4px',
+              marginLeft: '0',
+              marginRight: '4px'
+            }}>
           </Item>
         </Grid>
       </Grid>

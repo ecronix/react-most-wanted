@@ -3,17 +3,17 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import NewspaperTwoToneIcon from '@mui/icons-material/NewspaperTwoTone';
-import ScoreboardTwoToneIcon from '@mui/icons-material/ScoreboardTwoTone';
+import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import DashboardTwoToneIcon from '@mui/icons-material/DashboardTwoTone';
 import CollectionsTwoToneIcon from '@mui/icons-material/CollectionsTwoTone';
-import ReceiptLongTwoToneIcon from '@mui/icons-material/ReceiptLongTwoTone';
-import AssistantDirectionTwoToneIcon from '@mui/icons-material/AssistantDirectionTwoTone';
-import AlternateEmailTwoToneIcon from '@mui/icons-material/AlternateEmailTwoTone';
-import PrivacyTipTwoToneIcon from '@mui/icons-material/PrivacyTipTwoTone';
+import InfoTwoToneIcon from '@mui/icons-material/InfoTwoTone';
+import ChatTwoToneIcon from '@mui/icons-material/ChatTwoTone';
+import DvrTwoToneIcon from '@mui/icons-material/DvrTwoTone';
+import WhatshotTwoToneIcon from '@mui/icons-material/WhatshotTwoTone';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#f1f1f1',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
@@ -23,9 +23,9 @@ const Item = styled(Paper)(({ theme }) => ({
 const LandingPage = () => {
   return (
     <Box sx={{ flexGrow: 1, position: 'relative', display: 'flex', flexDirection: 'column', margin: 15, padding: 5, marginTop: 5, textDecoration: 'none' }}>
-      <h1 style={{ fontSize: '3.5rem', marginTop: -40, marginBottom: 60, textAlign: 'center', color: 'rgba(0,0,0,0.8)' }}>Welcome to Northmead Bowling Club</h1>
+      <h1 style={{ fontSize: '3.5rem', marginTop: -40, marginBottom: 60, textAlign: 'center', color: 'rgba(0,0,0,0.8)' }}>Welcome to React-Most-Wanted</h1>
       <Grid container spacing={1}>
-        <a href="/News">
+        <a href="/home">
         <Grid style={{ 
           position: 'relative',
           display: 'flex',
@@ -46,7 +46,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -55,10 +55,10 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>News</Item>
-            <NewspaperTwoToneIcon
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Home Page</Item>
+            <HomeTwoToneIcon
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -70,7 +70,7 @@ const LandingPage = () => {
             </Paper>
           </Grid>
         </a>
-        <a href="/Cardings">
+        <a href="/Dashboard">
         <Grid style={{ 
           position: 'relative',
           display: 'flex',
@@ -91,7 +91,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -100,10 +100,10 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Cardings</Item>
-            <ScoreboardTwoToneIcon
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Dashboard</Item>
+            <DashboardTwoToneIcon
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -136,7 +136,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -145,9 +145,9 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Photo Gallery</Item>
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Gallery</Item>
             <CollectionsTwoToneIcon
               style={{
                 position: 'relative',
@@ -160,7 +160,7 @@ const LandingPage = () => {
             </Paper>
           </Grid>
         </a>
-        <a href="/Constitution">
+        <a href="/About">
         <Grid style={{ 
           position: 'relative',
           display: 'flex',
@@ -181,7 +181,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -190,10 +190,10 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Club Constitution</Item>
-            <ReceiptLongTwoToneIcon
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>About</Item>
+            <InfoTwoToneIcon
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -205,7 +205,7 @@ const LandingPage = () => {
             </Paper>
           </Grid>
         </a>
-        <a href="/Directions">
+        <a href="/Chats">
         <Grid style={{ 
           position: 'relative',
           display: 'flex',
@@ -226,7 +226,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -235,10 +235,10 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Directions</Item>
-            <AssistantDirectionTwoToneIcon
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Chats</Item>
+            <ChatTwoToneIcon
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -250,7 +250,7 @@ const LandingPage = () => {
             </Paper>
           </Grid>
         </a>
-        <a href="/Contact">
+        <a href="/Demos">
         <Grid style={{ 
           position: 'relative',
           display: 'flex',
@@ -271,7 +271,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -280,10 +280,10 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Contact Us</Item>
-            <AlternateEmailTwoToneIcon
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Demos</Item>
+            <DvrTwoToneIcon
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -295,7 +295,7 @@ const LandingPage = () => {
             </Paper>
           </Grid>
         </a>
-        <a href="/Popia">
+        <a href="/Firebase">
         <Grid style={{ 
           position: 'relative',
           display: 'flex',
@@ -316,7 +316,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -325,10 +325,10 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Popia Notice</Item>
-            <PrivacyTipTwoToneIcon
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Firebase</Item>
+            <WhatshotTwoToneIcon
               style={{
                 position: 'relative',
                 display: 'flex',
@@ -361,7 +361,7 @@ const LandingPage = () => {
                 m: 1,
                 width: 285,
                 height: 300,
-                backgroundColor: 'rgba(0,255,0,0.1)'
+                backgroundColor: 'rgba(255,255,255,0.1)'
               }}
             >
             <Item style={{
@@ -370,9 +370,9 @@ const LandingPage = () => {
               width: 285,
               height: 50,
               fontSize: '1.5rem',
-              backgroundColor: 'green',
-              color: 'white'
-            }}>Sign Up / Login</Item>
+              backgroundColor: '#1A2027',
+              color: '#f1f1f1'
+            }}>Sign Up / Sign In</Item>
             <AccountCircleTwoToneIcon
               style={{
                 position: 'relative',

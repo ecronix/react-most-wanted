@@ -16,8 +16,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://www.northmeadbowls.co.za">
-        Northmead Bowling Club
+      <Link color="inherit" href="#">
+        React-Most-Wanted
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -50,10 +50,10 @@ export default function Album() {
               color="text.primary"
               gutterBottom
             >
-              Northmead Bowling Club Photo Album
+              React-Most-Wanted Photo Album
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              A collection of memories over the years
+              A collection of memories
             </Typography>
             <Stack
               sx={{ pt: 4 }}
