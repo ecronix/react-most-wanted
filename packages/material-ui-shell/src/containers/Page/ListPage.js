@@ -14,11 +14,14 @@ export default function (props) {
     getPageProps = () => {},
     listProps,
     Row,
+
     name,
     trailing = null,
     leading = null,
     disableSearch = false,
     disableFilter = false,
+    top = null,
+    bottom = null,
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
@@ -52,7 +55,9 @@ export default function (props) {
       }
       {...getPageProps(list)}
     >
+      {top}
       <VirtualList list={list} name={name} listProps={listProps} Row={Row} />
+      {bottom}
 
       {fields.length > 0 && <FilterDrawer fields={fields} name={name} />}
     </Page>
