@@ -78,6 +78,7 @@ const ListPageDemo = () => {
       list={list}
       fields={fields}
       Row={Row}
+      top={<div>TOP</div>}
       listProps={{ itemSize: 91 }}
       getPageProps={(list) => {
         return {
