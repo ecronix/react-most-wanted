@@ -14,7 +14,6 @@ export default function (props) {
     getPageProps = () => {},
     listProps,
     Row,
-
     name,
     trailing = null,
     leading = null,
@@ -22,12 +21,13 @@ export default function (props) {
     disableFilter = false,
     top = null,
     bottom = null,
+    parseList=l=>l
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
   const { value: searchValue = '' } = search
 
-  const list = getList(name, source, fields)
+  const list = parseList(getList(name, source, fields))
 
   return (
     <Page
