@@ -11,6 +11,7 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment as DateAdapter } from "@mui/x-date-pickers/AdapterMoment";
+import { useLocale } from "base-shell/lib/providers/Locale";
 
 export default function ({ children }) {
   const { appConfig } = useConfig();
@@ -18,6 +19,7 @@ export default function ({ children }) {
   const { firebase: firebaseConfig, auth: authConfig = {} } = appConfig || {};
   const { prod = {}, dev = {} } = firebaseConfig || {};
   const { onAuthStateChanged: internalOnAuthStateChanged } = authConfig || {};
+  const { locale = "en" } = useLocale();
 
   if (getApps().length === 0) {
     initializeApp(
@@ -46,7 +48,10 @@ export default function ({ children }) {
           <ColsProvider>
             <StorageProvider>
               <MessagingProvider>
-                <LocalizationProvider dateAdapter={DateAdapter}>
+                <LocalizationProvider
+                  dateAdapter={DateAdapter}
+                  adapterLocale={locale}
+                >
                   {children}
                 </LocalizationProvider>
               </MessagingProvider>
