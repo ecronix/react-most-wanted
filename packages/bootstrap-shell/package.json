@@ -65,7 +65,7 @@
     "react-intl": "^6.2.1",
     "react-ios-pwa-prompt": "^1.8.4",
     "react-markdown": "^8.0.3",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.11.2",
     "react-virtualized-auto-sizer": "^1.0.6",
     "react-window": "^1.8.6"
   },
