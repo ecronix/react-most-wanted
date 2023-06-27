@@ -57,7 +57,7 @@
     "prettier": "^2.4.1",
     "raw-loader": "^4.0.2",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.0.2",
+    "react-bootstrap": "^2.7.4",
     "react-bootstrap-icons": "^1.6.1",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^4.0.1",
