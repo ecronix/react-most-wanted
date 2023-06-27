@@ -12,6 +12,7 @@ export default function (props) {
     fields = [],
     list: source = [],
     getPageProps = () => {},
+    listContainerStyle = {},
     listProps,
     Row,
     name,
@@ -21,7 +22,7 @@ export default function (props) {
     disableFilter = false,
     top = null,
     bottom = null,
-    parseList=l=>l
+    parseList = (l) => l,
   } = props
   const { openFilter, getList, getFilter, setSearch } = useFilter()
   const { queries = [], search = {} } = getFilter(name)
@@ -56,7 +57,9 @@ export default function (props) {
       {...getPageProps(list)}
     >
       {top}
+
       <VirtualList list={list} name={name} listProps={listProps} Row={Row} />
+
       {bottom}
 
       {fields.length > 0 && <FilterDrawer fields={fields} name={name} />}
