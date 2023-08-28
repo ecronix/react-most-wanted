@@ -5,13 +5,15 @@ import { useConfig } from 'base-shell/lib/providers/Config'
 const Menu = (props) => {
   const { appConfig } = useConfig()
   const { menu } = appConfig || {}
-  const { MenuHeader, MenuContent } = menu || {}
+  const { MenuHeader, MenuContent, BaseMenu } = menu || {}
+
+  const Menu = BaseMenu || ResponsiveMenu
 
   return (
-    <ResponsiveMenu>
+    <Menu>
       {MenuHeader && <MenuHeader />}
       {MenuContent && <MenuContent />}
-    </ResponsiveMenu>
+    </Menu>
   )
 }
 
