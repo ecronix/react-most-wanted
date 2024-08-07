@@ -1,44 +1,46 @@
-import React, { useEffect, useReducer } from 'react'
-import Context from './Context'
+import React, { useEffect, useReducer } from "react";
+import Context from "./Context";
 
 function reducer(state, action) {
-  const { type, auth } = action
+  const { type, auth } = action;
   switch (type) {
-    case 'SET_AUTH':
-      return auth
-    case 'UPDATE_AUTH':
-      return { ...state, ...auth }
+    case "SET_AUTH":
+      return auth;
+    case "UPDATE_AUTH":
+      return { ...state, ...auth };
     default:
-      throw new Error()
+      throw new Error();
   }
 }
 
-const Provider = ({ persistKey = 'auth', children }) => {
-  const persistAuth = JSON.parse(localStorage.getItem(persistKey))
+const Provider = ({ persistKey = "auth", children }) => {
+  const persistAuth = JSON.parse(
+    localStorage.getItem(persistKey)?.replace("undefined", "{}") || "{}"
+  );
 
-  const [auth, dispatch] = useReducer(reducer, persistAuth || {})
+  const [auth, dispatch] = useReducer(reducer, persistAuth || {});
 
   useEffect(() => {
     try {
-      localStorage.setItem(persistKey, JSON.stringify(auth))
+      localStorage.setItem(persistKey, JSON.stringify(auth));
     } catch (error) {
-      console.warn(error)
+      console.warn(error);
     }
-  }, [auth, persistKey])
+  }, [auth, persistKey]);
 
   const setAuth = (auth) => {
-    dispatch({ type: 'SET_AUTH', auth })
-  }
+    dispatch({ type: "SET_AUTH", auth });
+  };
 
   const updateAuth = (auth) => {
-    dispatch({ type: 'UPDATE_AUTH', auth })
-  }
+    dispatch({ type: "UPDATE_AUTH", auth });
+  };
 
   return (
     <Context.Provider value={{ auth, setAuth, updateAuth }}>
       {children}
     </Context.Provider>
-  )
-}
+  );
+};
 
-export default Provider
+export default Provider;
