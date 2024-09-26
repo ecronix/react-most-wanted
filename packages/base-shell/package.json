@@ -1,16 +1,19 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.5.14",
+  "version": "2.5.18",
   "description": "base-shell React component",
-  "main": "lib/index.js",
-  "module": "es/index.js",
   "type": "module",
   "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
+    "dist"
   ],
+  "main": "dist/base-shell.umd.js",
+  "module": "dist/base-shell.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/base-shell.es.js",
+      "require": "./dist/base-shell.umd.cjs"
+    }
+  },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -27,8 +30,8 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "intl": "^1.2.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-intl": "^6.7.0",
     "react-router-dom": "^6.26.2",
     "release-it": "^17.6.0",
@@ -39,7 +42,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TarikHuber/react-most-wanted.git",
+    "url": "git+https://github.com/TarikHuber/react-most-wanted.git",
     "directory": "packages/base-shell"
   },
   "keywords": [
