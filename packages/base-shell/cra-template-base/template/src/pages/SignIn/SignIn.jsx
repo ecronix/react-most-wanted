@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useIntl } from "react-intl";
-import { useAuth } from "base-shell/lib/providers/Auth";
+import { useAuth } from "@ecronix/base-shell/providers/Auth";
 
 const SignIn = () => {
   const { setAuth } = useAuth();

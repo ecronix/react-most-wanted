@@ -1,9 +1,10 @@
 {
-  "name": "base-shell",
+  "name": "@ecronix/base-shell",
   "version": "2.5.14",
   "description": "base-shell React component",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "type": "module",
   "files": [
     "css",
     "es",
@@ -11,14 +12,10 @@
     "umd"
   ],
   "scripts": {
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "prepublishOnly": "npm run build",
-    "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server",
-    "release": "release-it -- patch"
+    "build": "vite build",
+    "dev": "vite",
+    "release": "release-it",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
     "intl": "1.x",
@@ -28,13 +25,14 @@
     "react-router-dom": "6.x"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
     "intl": "^1.2.5",
-    "nwb": "^0.25.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-intl": "^6.2.1",
-    "react-router-dom": "^6.4.2",
-    "release-it": "^15.5.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-intl": "^6.7.0",
+    "react-router-dom": "^6.26.2",
+    "release-it": "^17.6.0",
+    "vite": "^5.4.8"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
