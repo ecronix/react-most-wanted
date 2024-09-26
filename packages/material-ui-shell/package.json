@@ -1,10 +1,19 @@
 {
-  "name": "material-ui-shell",
+  "name": "@ecronix/material-ui-shell",
   "version": "3.4.14",
   "description": "material-ui-shell React component",
-  "main": "lib/index.js",
-  "module": "es/index.js",
   "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/material-ui-shell.umd.js",
+  "module": "dist/material-ui-shell.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/material-ui-shell.es.js",
+      "require": "./dist/material-ui-shell.umd.cjs"
+    }
+  },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
