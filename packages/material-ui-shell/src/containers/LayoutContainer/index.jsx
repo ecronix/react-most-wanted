@@ -3,9 +3,9 @@ import { CssBaseline } from '@mui/material'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'
 import { useTheme } from '../../providers/Theme'
-import UpdateContainer from '../../containers/UpdateContainer/UpdateContainer'
+import UpdateContainer from '../../containers/UpdateContainer'
 import QuestionDialogsProvider from '../../providers/Dialogs/Question/Provider'
-import getThemeSource from '../../utils/theme'
+import { getThemeSource } from '../../utils'
 import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@mui/material/styles'
 import { useIntl } from 'react-intl'
@@ -73,10 +73,8 @@ const LayoutContent = ({ children }) => {
   )
 }
 
-export default function ({ children }) {
+export default function LayoutContainer({ children }) {
   const { appConfig } = useConfig()
-
-  console.log('material config', appConfig)
 
   return (
     <React.Fragment>

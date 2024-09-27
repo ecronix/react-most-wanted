@@ -17,7 +17,7 @@ const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
 ))
 
-const QuestionDialog = ({
+export default function QuestionDialog({
   isProcessing = false,
   isOpen = false,
   id = '',
@@ -27,7 +27,7 @@ const QuestionDialog = ({
   handleAction = () => {},
   handleClose = () => {},
   ...rest
-}) => {
+}) {
   const intl = useIntl()
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
@@ -65,5 +65,3 @@ const QuestionDialog = ({
     </Dialog>
   )
 }
-
-export default QuestionDialog

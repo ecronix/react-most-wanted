@@ -1,5 +1,5 @@
 import { AppBar, Tab, Tabs } from '@mui/material'
-import Page from '@ecronix/material-ui-shell/containers/Page'
+import Page from '@ecronix/material-ui-shell/pages/Page'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 

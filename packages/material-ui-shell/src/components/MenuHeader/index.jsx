@@ -24,7 +24,7 @@ import {
 } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
 
-const MenuHeader = () => {
+export default function MenuHeader() {
   const { auth } = useAuth()
   const { toggleThisTheme, isDarkMode, isRTL } = useAppTheme()
   const menuContext = useMenu()
@@ -207,5 +207,3 @@ const MenuHeader = () => {
     </Paper>
   )
 }
-
-export default MenuHeader

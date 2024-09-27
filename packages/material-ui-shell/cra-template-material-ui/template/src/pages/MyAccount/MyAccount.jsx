@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { useAuth } from '@ecronix/base-shell/providers'
 import { useIntl } from 'react-intl'
 import { useQuestions } from '@ecronix/material-ui-shell/providers/Dialogs/Question'
-import ImgageUploadDialog from '@ecronix/material-ui-shell/containers/ImageUploadDialog'
+import { ImageUploadDialog } from '@ecronix/material-ui-shell/containers'
 
 const MyAccount = () => {
   const intl = useIntl()
@@ -158,7 +158,7 @@ const MyAccount = () => {
           </Zoom>
         </Paper>
         {
-          <ImgageUploadDialog
+          <ImageUploadDialog
             isOpen={isImageDialogOpen}
             handleClose={() => setImageDialogOpen(false)}
             handleCropSubmit={handleImageChange}

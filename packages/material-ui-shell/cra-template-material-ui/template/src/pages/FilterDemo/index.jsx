@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { FilterList } from '@mui/icons-material'
 import FilterDrawer from '@ecronix/material-ui-shell/components/FilterDrawer'
-import Page from '@ecronix/material-ui-shell/containers/Page'
+import Page from '@ecronix/material-ui-shell/pages/Page'
 import React, { useEffect, useCallback } from 'react'
 import SearchField from '@ecronix/material-ui-shell/components/SearchField'
 import source from './data.json'

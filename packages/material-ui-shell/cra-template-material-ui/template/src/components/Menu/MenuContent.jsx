@@ -1,5 +1,5 @@
 import React from 'react'
-import Scrollbar from '@ecronix/material-ui-shell/components/Scrollbar/Scrollbar'
+import Scrollbar from '@ecronix/material-ui-shell/components/Scrollbar'
 import SelectableMenuList from '@ecronix/material-ui-shell/containers/SelectableMenuList'
 import {
   useAddToHomeScreen,
