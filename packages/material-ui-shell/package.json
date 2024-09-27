@@ -1,69 +1,97 @@
 {
-  "name": "material-ui-shell",
-  "version": "3.4.14",
+  "name": "@ecronix/material-ui-shell",
+  "version": "3.5.5",
   "description": "material-ui-shell React component",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "type": "module",
   "files": [
-    "css",
-    "es",
-    "lib",
-    "umd"
+    "dist"
   ],
+  "main": "dist/material-ui-shell.js",
   "scripts": {
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "prepublishOnly": "npm run build",
-    "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server",
-    "release": "release-it -- patch"
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "release": "release-it",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/material-ui-shell.js"
+    },
+    "./components": {
+      "import": "./dist/components.js"
+    },
+    "./components/*": {
+      "import": "./dist/components/*.js"
+    },
+    "./providers": {
+      "import": "./dist/providers.js"
+    },
+    "./providers/*": {
+      "import": "./dist/providers/*.js"
+    },
+    "./utils": {
+      "import": "./dist/utils.js"
+    },
+    "./utils/*": {
+      "import": "./dist/utils/*.js"
+    },
+    "./containers": {
+      "import": "./dist/containers.js"
+    },
+    "./containers/*": {
+      "import": "./dist/containers/*.js"
+    },
+    "./pages/*": {
+      "import": "./dist/pages/*.js"
+    }
   },
   "peerDependencies": {
+    "@ecronix/base-shell": "2.x",
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
-    "@fontsource/roboto": "4.x",
-    "@mui/icons-material": "5.x",
-    "@mui/material": "5.x",
-    "base-shell": "2.x",
+    "@fontsource/roboto": "5.x",
+    "@mui/icons-material": "6.x",
+    "@mui/material": "6.x",
     "intl": "1.x",
     "jss-rtl": "0.x",
     "lp-react-virtualized-auto-sizer-react-18": "1.x",
-    "notistack": "2.x",
+    "notistack": "3.x",
     "react": "16.x || 17.x || 18.x",
     "react-custom-scrollbars-2": "4.x",
     "react-dom": "16.x || 17.x || 18.x",
-    "react-easy-crop": "4.x",
+    "react-easy-crop": "5.x",
     "react-intl": "6.x",
-    "react-ios-pwa-prompt": "1.x",
-    "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
+    "react-ios-pwa-prompt": "2.x",
+    "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
     "react-router-dom": "6.x",
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@fontsource/roboto": "^4.5.8",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.10",
-    "base-shell": "^2.5.10",
+    "@ecronix/base-shell": "2.6.3",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.1.0",
+    "@mui/icons-material": "^6.1.1",
+    "@mui/material": "^6.1.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "glob": "^11.0.0",
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
     "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
-    "notistack": "^2.0.8",
-    "nwb": "^0.25.2",
-    "prettier": "^2.7.1",
+    "notistack": "^3.0.1",
+    "prettier": "^3.3.3",
     "raw-loader": "^4.0.2",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-custom-scrollbars-2": "^4.5.0",
-    "react-dom": "^18.2.0",
-    "react-easy-crop": "^4.6.1",
-    "react-intl": "^6.2.1",
-    "react-ios-pwa-prompt": "^1.8.4",
-    "react-markdown": "^8.0.3",
-    "react-router-dom": "^6.4.2",
-    "react-window": "^1.8.7"
+    "react-dom": "^18.3.1",
+    "react-easy-crop": "^5.0.8",
+    "react-intl": "^6.7.0",
+    "react-ios-pwa-prompt": "^2.0.6",
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.26.2",
+    "react-window": "^1.8.10",
+    "vite": "^5.4.8"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",

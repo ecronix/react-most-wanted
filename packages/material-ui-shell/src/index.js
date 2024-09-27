@@ -1,3 +1,4 @@
-import config from './config'
-
-export default config
+export * from './components'
+export * from './containers'
+export * from './providers'
+export * from './utils'

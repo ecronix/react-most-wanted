@@ -1,4 +1,4 @@
-import App from "./containers/App/App";
-
-// App
-export default App;
+export * from "./components";
+export * from "./containers";
+export * from "./providers";
+export * from "./utils";
