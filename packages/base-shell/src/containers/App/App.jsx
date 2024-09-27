@@ -1,8 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ConfigProvider from "../../providers/Config/Provider";
-
-const Layout = lazy(() => import("../../containers/Layout/Layout"));
+import { default as Layout } from "@ecronix/base-shell/containers/Layout/Layout";
 
 const App = ({ config: appConfig }) => {
   const config = { ...appConfig };
