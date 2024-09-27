@@ -150,8 +150,8 @@ const config = {
     },
   },
   menu: {
-    MenuContent: () => <div>Menu Content</div>,
-    MenuHeader: () => <div>Menu Header</div>,
+    MenuContent: lazy(() => import("../components/Menu/MenuContent")),
+    MenuHeader: lazy(() => import("@ecronix/material-ui-shell/MenuHeader")),
   },
   theme: {
     themes,
@@ -163,13 +163,14 @@ const config = {
     PageNotFound: lazy(() => import("../pages/PageNotFound")),
   },
   components: {
-    Menu: () => <div>Menu</div>,
+    Menu: lazy(() => import("@ecronix/material-ui-shell/Menu")),
     Loading,
   },
 
   containers: {
-    LayoutContainer: ({ children }) => (
-      <div>Layout Container top {children} Layout Container bottom</div>
+    LayoutContainer: lazy(
+      () =>
+        import("@ecronix/rmw-shell/containers/LayoutContainer/LayoutContainer"),
     ),
   },
 };
