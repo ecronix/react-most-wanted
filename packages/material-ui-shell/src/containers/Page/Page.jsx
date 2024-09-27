@@ -49,7 +49,7 @@ export default function ({
       toggleThis('isMobileMenuOpen')
     }
   }
-  return <p>Page</p>
+
   return (
     <div
       style={{
