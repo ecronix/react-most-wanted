@@ -2,15 +2,16 @@ import { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
 import themes from './themes'
-import { parseLanguages } from '@ecronix/base-shell'
+import { parseLanguages } from '@ecronix/base-shell/utils'
 import Loading from '../components/Loading/Loading'
 
 const config = {
   containers: {
-    LayoutContainer: lazy(() =>
-      import(
-        '@ecronix/material-ui-shell/containers/LayoutContainer/LayoutContainer'
-      )
+    LayoutContainer: lazy(
+      () =>
+        import(
+          '@ecronix/material-ui-shell/containers/LayoutContainer/LayoutContainer'
+        )
     ),
   },
   components: {
@@ -42,8 +43,9 @@ const config = {
     initialMenuOpen: true,
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
-    MenuHeader: lazy(() =>
-      import('@ecronix/material-ui-shell/components/MenuHeader/MenuHeader')
+    MenuHeader: lazy(
+      () =>
+        import('@ecronix/material-ui-shell/components/MenuHeader/MenuHeader')
     ),
     MenuContent: lazy(() => import('../components/Menu/MenuContent')),
     useWindowWatcher: false,
