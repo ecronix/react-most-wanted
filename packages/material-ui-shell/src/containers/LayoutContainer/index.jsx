@@ -1,4 +1,4 @@
-import { useConfig } from '@ecronix/base-shell/providers'
+import { useConfig } from '@ecronix/base-shell'
 import { CssBaseline } from '@mui/material'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'

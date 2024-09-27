@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { useTheme as useAppTheme } from '../../providers'
 import MenuContext from '../../providers/Menu/Context'
 import { useTheme } from '@mui/material/styles'
-import { useConfig, useOnline } from '@ecronix/base-shell/providers'
+import { useConfig, useOnline } from '@ecronix/base-shell'
 
 import { useIntl } from 'react-intl'
 import {

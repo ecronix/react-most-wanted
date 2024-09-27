@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import { useConfig } from '@ecronix/base-shell/providers'
+import { useConfig } from '@ecronix/base-shell'
 import { useSnackbar } from 'notistack'
 import { useIntl } from 'react-intl'
 import { Button } from '@mui/material'

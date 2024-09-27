@@ -1,6 +1,6 @@
 import React from 'react'
 import ResponsiveMenu from '../ResponsiveMenu'
-import { useConfig } from '@ecronix/base-shell/providers'
+import { useConfig } from '@ecronix/base-shell'
 
 export default function Menu() {
   const { appConfig } = useConfig()

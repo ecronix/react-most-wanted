@@ -6,7 +6,7 @@ import {
   useAuth,
   useConfig,
   useLocale,
-} from '@ecronix/base-shell/providers'
+} from '@ecronix/base-shell'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useMenu } from '@ecronix/material-ui-shell/providers/Menu'
