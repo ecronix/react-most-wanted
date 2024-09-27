@@ -72,5 +72,5 @@ export {
   formatMessage,
   getLocaleMessages,
   //loadLocalePolyfill
+  parseLanguages
 }
-export default parseLanguages
