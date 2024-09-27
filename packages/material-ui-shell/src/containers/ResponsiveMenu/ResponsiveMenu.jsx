@@ -6,44 +6,46 @@ import { useConfig } from '@ecronix/base-shell'
 
 //const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
-const CustomSwipeableDrawer = styled(SwipeableDrawer)(
-  ({ theme, width, menucontext: { isDesktop, isMenuOpen, isMiniMode } }) => {
-    if (isDesktop) {
-      return {
-        '& .MuiDrawer-paper': {
-          position: 'relative',
-          whiteSpace: 'nowrap',
-          height: '100vh',
-          overflowX: 'hidden',
-          transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-          }),
-          width:
-            !isMiniMode && !isMenuOpen
-              ? 0
-              : !isMenuOpen
+const CustomSwipeableDrawer = styled(SwipeableDrawer)(({
+  theme,
+  width,
+  menucontext: { isDesktop, isMenuOpen, isMiniMode },
+}) => {
+  if (isDesktop) {
+    return {
+      '& .MuiDrawer-paper': {
+        position: 'relative',
+        whiteSpace: 'nowrap',
+        height: '100vh',
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width:
+          !isMiniMode && !isMenuOpen
+            ? 0
+            : !isMenuOpen
               ? theme.spacing(9)
               : width,
+      },
+    }
+  } else {
+    return {
+      '& .MuiDrawer-paper': {
+        height: '100vh',
+        width,
+        [theme.breakpoints.up('md')]: {
+          position: 'relative',
         },
-      }
-    } else {
-      return {
-        '& .MuiDrawer-paper': {
-          height: '100vh',
-          width,
-          [theme.breakpoints.up('md')]: {
-            position: 'relative',
-          },
-          transition: theme.transitions.create('width', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-          }),
-        },
-      }
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
     }
   }
-)
+})
 
 const ResponsiveMenu = ({ children }) => {
   const { isRTL } = useAppTheme()
