@@ -1,6 +1,6 @@
 import React from 'react'
 import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
-import { useConfig } from '@ecronix/base-shell'
+import { useConfig } from '@ecronix/base-shell/providers'
 
 const Menu = (props) => {
   const { appConfig } = useConfig()

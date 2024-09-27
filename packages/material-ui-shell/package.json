@@ -56,7 +56,7 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "2.5.24",
+    "@ecronix/base-shell": "2.6.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
