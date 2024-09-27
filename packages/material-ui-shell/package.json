@@ -1,19 +1,12 @@
 {
   "name": "@ecronix/material-ui-shell",
-  "version": "3.4.14",
+  "version": "3.4.31",
   "description": "material-ui-shell React component",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "dist/material-ui-shell.umd.js",
-  "module": "dist/material-ui-shell.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/material-ui-shell.es.js",
-      "require": "./dist/material-ui-shell.umd.cjs"
-    }
-  },
+  "main": "dist/material-ui-shell.js",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -21,28 +14,49 @@
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./Menu": {
+      "import": "./dist/Menu.js"
+    },
+    "./MenuHeader": {
+      "import": "./dist/MenuHeader.js"
+    },
+    "./Loading": {
+      "import": "./dist/Loading.js"
+    },
+    "./Page": {
+      "import": "./dist/Page.js"
+    },
+    "./ListPage": {
+      "import": "./dist/ListPage.js"
+    }
+  },
   "peerDependencies": {
+    "@ecronix/base-shell": "2.x",
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
-    "@fontsource/roboto": "4.x",
-    "@mui/icons-material": "5.x",
-    "@mui/material": "5.x",
+    "@fontsource/roboto": "5.x",
+    "@mui/icons-material": "6.x",
+    "@mui/material": "6.x",
     "intl": "1.x",
     "jss-rtl": "0.x",
     "lp-react-virtualized-auto-sizer-react-18": "1.x",
-    "notistack": "2.x",
+    "notistack": "3.x",
     "react": "16.x || 17.x || 18.x",
     "react-custom-scrollbars-2": "4.x",
     "react-dom": "16.x || 17.x || 18.x",
-    "react-easy-crop": "4.x",
+    "react-easy-crop": "5.x",
     "react-intl": "6.x",
-    "react-ios-pwa-prompt": "1.x",
-    "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
+    "react-ios-pwa-prompt": "2.x",
+    "react-markdown": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0",
     "react-router-dom": "6.x",
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "^2.5.18",
+    "@ecronix/base-shell": "2.5.24",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",

@@ -12,9 +12,15 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: '@ecronix/material-ui-shell',
-      fileName: (format) => `material-ui-shell.${format}.js`,
+      entry: [
+        resolve(__dirname, 'src/index.js'),
+        resolve(__dirname, 'src/containers/Page/Page.jsx'),
+        resolve(__dirname, 'src/containers/Page/ListPage.jsx'),
+        resolve(__dirname, 'src/components/MenuHeader/MenuHeader.jsx'),
+        resolve(__dirname, 'src/containers/Menu/Menu.jsx'),
+        resolve(__dirname, 'src/components/Loading/Loading.jsx'),
+      ],
+      formats: ['es'],
     },
     rollupOptions: {
       external: [
@@ -23,6 +29,7 @@ export default defineConfig({
         'react-dom',
         'react-intl',
         'react-router-dom',
+        '@ecronix/base-shell',
       ],
       output: {
         globals: {
@@ -31,6 +38,7 @@ export default defineConfig({
           'react-intl': 'ReactIntl',
           'react-router-dom': 'ReactRouterDom',
           intl: 'Intl',
+          '@ecronix/base-shell': 'BaseShell',
         },
       },
     },
