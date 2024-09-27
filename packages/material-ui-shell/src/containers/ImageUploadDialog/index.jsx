@@ -41,7 +41,7 @@ const getFiles = (ev) => {
   return files
 }
 
-export default function ({
+export default function ImageUploadDialog({
   isOpen = false,
   handleClose,
   handleCropSubmit,

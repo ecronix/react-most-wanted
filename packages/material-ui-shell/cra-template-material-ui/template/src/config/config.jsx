@@ -8,15 +8,12 @@ import Loading from '../components/Loading/Loading'
 const config = {
   containers: {
     LayoutContainer: lazy(
-      () =>
-        import(
-          '@ecronix/material-ui-shell/containers/LayoutContainer/LayoutContainer'
-        )
+      () => import('@ecronix/material-ui-shell/containers/LayoutContainer')
     ),
   },
   components: {
     Loading,
-    Menu: lazy(() => import('@ecronix/material-ui-shell/containers/Menu/Menu')),
+    Menu: lazy(() => import('@ecronix/material-ui-shell/containers/Menu')),
   },
   auth: {
     signInURL: '/signin',
@@ -44,8 +41,7 @@ const config = {
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
     MenuHeader: lazy(
-      () =>
-        import('@ecronix/material-ui-shell/components/MenuHeader/MenuHeader')
+      () => import('@ecronix/material-ui-shell/components/MenuHeader')
     ),
     MenuContent: lazy(() => import('../components/Menu/MenuContent')),
     useWindowWatcher: false,

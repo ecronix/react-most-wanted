@@ -1,10 +1,9 @@
 import React from 'react'
-import ResponsiveMenu from '../ResponsiveMenu/ResponsiveMenu'
+import ResponsiveMenu from '../ResponsiveMenu'
 import { useConfig } from '@ecronix/base-shell/providers'
 
-const Menu = (props) => {
+export default function Menu() {
   const { appConfig } = useConfig()
-  console.log('Menu appConfig', appConfig) //
   const { menu } = appConfig || {}
   const { MenuHeader, MenuContent, BaseMenu } = menu || {}
 
@@ -17,5 +16,3 @@ const Menu = (props) => {
     </Menu>
   )
 }
-
-export default Menu

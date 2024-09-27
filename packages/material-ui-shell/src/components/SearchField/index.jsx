@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme, isOpen }) => {
   }
 })
 
-export default function ({
+export default function SearchField({
   onChange,
   initialValue = '',
   alwaysOpen,

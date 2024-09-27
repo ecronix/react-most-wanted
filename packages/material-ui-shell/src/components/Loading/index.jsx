@@ -1,7 +1,7 @@
 import React from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 
-export default function CircularIndeterminate() {
+export default function Loading() {
   return (
     <div
       style={{

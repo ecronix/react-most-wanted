@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles'
 
-const getThemeSource = (id, ts, isDarkMode, isRTL) => {
+export const getThemeSource = (id, ts, isDarkMode, isRTL) => {
   if (ts) {
     for (let i = 0; i < ts.length; i++) {
       if (ts[i]['id'] === id) {
@@ -20,5 +20,3 @@ const getThemeSource = (id, ts, isDarkMode, isRTL) => {
     direction: isRTL ? 'rtl' : 'ltr',
   })
 }
-
-export default getThemeSource

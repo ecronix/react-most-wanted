@@ -1,5 +1,5 @@
 import { Button } from '@mui/material'
-import Page from '@ecronix/material-ui-shell/containers/Page'
+import Page from '@ecronix/material-ui-shell/pages/Page'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'

@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react'
 import Context from './Context'
-import QuestionDialog from '../../../components/QuestionDialog/QuestionDialog'
+import QuestionDialog from '../../../components/QuestionDialog'
 
 const Provider = ({ children }) => {
   const [state, setState] = useState({ isOpen: false })

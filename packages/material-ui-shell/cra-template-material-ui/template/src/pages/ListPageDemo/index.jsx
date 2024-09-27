@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListPage } from '@ecronix/material-ui-shell/containers/Page'
+import ListPage from '@ecronix/material-ui-shell/pages/ListPage'
 import { ListItem, ListItemText, Typography, Divider } from '@mui/material'
 import { useIntl } from 'react-intl'
 import list from './data.json'

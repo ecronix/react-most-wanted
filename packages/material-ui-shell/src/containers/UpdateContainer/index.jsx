@@ -8,7 +8,7 @@ const runUpdate = () => {
   window.update && window.update()
 }
 
-export default function ({ children }) {
+export default function UpdateContainer({ children }) {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()

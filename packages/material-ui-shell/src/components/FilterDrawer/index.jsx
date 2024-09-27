@@ -14,9 +14,9 @@ import {
 import { Add, ClearAll, SortByAlpha, Close, Delete } from '@mui/icons-material'
 import { useFilter } from '../../providers/Filter'
 import { useIntl } from 'react-intl'
-import Scrollbar from '../../components/Scrollbar'
+import Scrollbar from '../Scrollbar'
 
-export default function ({ name, width = 250, fields = [] }) {
+export default function FilterDrawer({ name, width = 250, fields = [] }) {
   const intl = useIntl()
   const {
     isFilterOpen,
