@@ -1,6 +1,6 @@
 import Add from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
-import { ListPage } from "@ecronix/material-ui-shell";
+import ListPage from "@ecronix/material-ui-shell/ListPage";
 import React, { useEffect } from "react";
 import { useAuth } from "@ecronix/base-shell";
 import { useLists } from "../../providers/Firebase/Lists";

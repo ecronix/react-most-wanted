@@ -1,6 +1,6 @@
 import Delete from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { Page } from "@ecronix/material-ui-shell";
+import Page from "@ecronix/material-ui-shell/Page";
 import React, { useState } from "react";
 import Save from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";

@@ -1,6 +1,6 @@
 import { Button, Paper, Typography } from "@mui/material";
 import { Home } from "@mui/icons-material";
-import { Page } from "@ecronix/material-ui-shell";
+import Page from "@ecronix/material-ui-shell/Page";
 import React from "react";
 import { useIntl } from "react-intl";
 

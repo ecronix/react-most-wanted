@@ -5,7 +5,7 @@ import Fab from "@mui/material/Fab";
 import InputBase from "@mui/material/InputBase";
 import NotificationsOff from "@mui/icons-material/NotificationsOff";
 import Notifications from "@mui/icons-material/Notifications";
-import { Page } from "@ecronix/material-ui-shell";
+import Page from "@ecronix/material-ui-shell/Page";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import Save from "@mui/icons-material/Save";
