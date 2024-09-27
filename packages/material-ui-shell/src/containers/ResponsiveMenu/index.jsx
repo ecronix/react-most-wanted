@@ -2,7 +2,7 @@ import React from 'react'
 import { SwipeableDrawer, styled } from '@mui/material'
 import { useMenu } from '../../providers/Menu'
 import { useTheme as useAppTheme } from '../../providers/Theme'
-import { useConfig } from '@ecronix/base-shell/providers'
+import { useConfig } from '@ecronix/base-shell'
 
 //const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
