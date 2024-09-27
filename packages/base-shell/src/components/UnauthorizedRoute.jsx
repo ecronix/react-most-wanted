@@ -4,7 +4,7 @@ import { useAuth } from "../providers/Auth";
 import { useConfig } from "../providers/Config";
 import { useLocation } from "react-router-dom";
 
-function UnauthorizedRoute({ children, redirectTo = "/", ...rest }) {
+export function UnauthorizedRoute({ children, redirectTo = "/", ...rest }) {
   const { appConfig } = useConfig();
   let location = useLocation();
   const { auth: authConfig } = appConfig || {};
@@ -19,5 +19,3 @@ function UnauthorizedRoute({ children, redirectTo = "/", ...rest }) {
     return <Navigate to={from} replace />;
   }
 }
-
-export default UnauthorizedRoute;

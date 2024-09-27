@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path, { resolve } from "path";
+import { globSync } from "glob";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,11 +14,7 @@ export default defineConfig({
   build: {
     minify: false,
     lib: {
-      entry: [
-        resolve(__dirname, "src", "index.js"),
-        resolve(__dirname, "src", "containers/App/App.jsx"),
-        resolve(__dirname, "src", "containers/Layout/Layout.jsx"),
-      ],
+      entry: [],
       formats: ["es"],
     },
     rollupOptions: {
@@ -28,6 +25,13 @@ export default defineConfig({
         "react-intl",
         "react-router-dom",
       ],
+      input: {
+        providers: resolve(__dirname, "src", "providers/index.js"),
+        utils: resolve(__dirname, "src", "utils/index.js"),
+        "containers/App": resolve(__dirname, "src", "containers/App.jsx"),
+        "containers/Layout": resolve(__dirname, "src", "containers/Layout.jsx"),
+        components: resolve(__dirname, "src", "components/index.js"),
+      },
       output: {
         globals: {
           react: "React",

@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.5.25",
+  "version": "2.6.0",
   "description": "base-shell React component",
   "type": "module",
   "files": [
@@ -8,14 +8,20 @@
   ],
   "main": "dist/base-shell.js",
   "exports": {
-    ".": {
-      "import": "./dist/index.js"
+    "./providers": {
+      "import": "./dist/providers.js"
     },
-    "./App": {
-      "import": "./dist/App.js"
+    "./utils": {
+      "import": "./dist/utils.js"
     },
-    "./Layout": {
-      "import": "./dist/Layout.js"
+    "./components": {
+      "import": "./dist/components.js"
+    },
+    "./containers/App": {
+      "import": "./dist/containers/App.js"
+    },
+    "./containers/Layout": {
+      "import": "./dist/containers/Layout.js"
     }
   },
   "scripts": {
@@ -38,7 +44,6 @@
     "react-dom": "^18.2.0",
     "react-intl": "^6.7.0",
     "react-router-dom": "^6.26.2",
-    "release-it": "^17.6.0",
     "vite": "^5.4.8"
   },
   "author": "Tarik Huber",

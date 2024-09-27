@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../providers/Auth";
 import { useConfig } from "../providers/Config";
 
-function AuthorizedRoute({ children }) {
+export function AuthorizedRoute({ children }) {
   const { appConfig } = useConfig();
   const { auth: authConfig } = appConfig || {};
   const { signInURL = "/signin" } = authConfig || {};
@@ -26,5 +26,3 @@ function AuthorizedRoute({ children }) {
     );
   }
 }
-
-export default AuthorizedRoute;
