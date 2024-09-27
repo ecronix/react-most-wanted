@@ -20,6 +20,7 @@ export default defineConfig({
     },
     rollupOptions: {
       input: {
+        "base-shell": resolve(__dirname, "src", "providers/index.js"),
         providers: resolve(__dirname, "src", "providers/index.js"),
         utils: resolve(__dirname, "src", "utils/index.js"),
         components: resolve(__dirname, "src", "components/index.js"),
