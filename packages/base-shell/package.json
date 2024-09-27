@@ -1,27 +1,36 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "base-shell React component",
   "type": "module",
   "files": [
     "dist"
   ],
-  "module": "dist/base-shell.js",
+  "main": "dist/base-shell.js",
   "exports": {
+    ".": {
+      "import": "./dist/base-shell.js"
+    },
     "./providers": {
       "import": "./dist/providers.js"
+    },
+    "./providers/*": {
+      "import": "./dist/providers/*.js"
     },
     "./utils": {
       "import": "./dist/utils.js"
     },
+    "./utils/*": {
+      "import": "./dist/utils/*.js"
+    },
     "./components": {
       "import": "./dist/components.js"
     },
-    "./containers/App": {
-      "import": "./dist/containers/App.js"
+    "./components/*": {
+      "import": "./dist/components/*.js"
     },
-    "./containers/Layout": {
-      "import": "./dist/containers/Layout.js"
+    "./containers/*": {
+      "import": "./dist/containers/*.js"
     }
   },
   "scripts": {
