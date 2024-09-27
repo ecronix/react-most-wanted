@@ -76,6 +76,8 @@ const LayoutContent = ({ children }) => {
 export default function ({ children }) {
   const { appConfig } = useConfig()
 
+  console.log('material config', appConfig)
+
   return (
     <React.Fragment>
       <MenuProvider appConfig={appConfig}>
