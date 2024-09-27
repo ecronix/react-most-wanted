@@ -1,18 +1,17 @@
-import LocaleProvider from '../../providers/Locale/Provider'
-import React, { Suspense, useEffect, useState } from 'react'
-import { IntlProvider } from 'react-intl'
-import { getLocaleMessages } from '../../utils/locale'
-import { useLocale } from '../../providers/Locale'
-import { useRoutes } from 'react-router-dom'
-import UpdateProvider from '../../providers/Update/Provider'
-import AuthProvider from '../../providers/Auth/Provider'
-import AddToHomeScreenProvider from '../../providers/AddToHomeScreen/Provider'
-import OnlineProvider from '../../providers/Online/Provider'
-import SimpleValuesProvider from '../../providers/SimpleValues/Provider'
-import { useConfig } from '../../providers/Config'
+import React, { Suspense, useEffect, useState } from "react";
+import { useRoutes } from "react-router-dom";
+import { IntlProvider } from "react-intl";
+import { getLocaleMessages } from "../utils";
+import { useLocale, useConfig } from "../providers";
+import UpdateProvider from "../providers/Update/Provider";
+import AuthProvider from "../providers/Auth/Provider";
+import AddToHomeScreenProvider from "../providers/AddToHomeScreen/Provider";
+import OnlineProvider from "../providers/Online/Provider";
+import SimpleValuesProvider from "../providers/SimpleValues/Provider";
+import LocaleProvider from "../providers/Locale/Provider";
 
 export const LayoutContent = ({ appConfig = {} }) => {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([]);
   const {
     components,
     routes = [],
@@ -21,14 +20,14 @@ export const LayoutContent = ({ appConfig = {} }) => {
     getDefaultRoutes,
     auth,
     update,
-  } = appConfig || {}
-  const { persistKey } = auth || {}
-  const { checkInterval = 5000 } = update || {}
-  const { Menu, Loading = () => <div>Loading...</div> } = components || {}
-  const { locales, onError } = confLocale || {}
-  const { LayoutContainer = React.Fragment } = containers || {}
-  const defaultRoutes = getDefaultRoutes ? getDefaultRoutes(appConfig) : []
-  const { locale = {} } = useLocale()
+  } = appConfig || {};
+  const { persistKey } = auth || {};
+  const { checkInterval = 5000 } = update || {};
+  const { Menu, Loading = () => <div>Loading...</div> } = components || {};
+  const { locales, onError } = confLocale || {};
+  const { LayoutContainer = React.Fragment } = containers || {};
+  const defaultRoutes = getDefaultRoutes ? getDefaultRoutes(appConfig) : [];
+  const { locale = {} } = useLocale();
 
   useEffect(() => {
     const loadPolyfills = async () => {
@@ -36,25 +35,25 @@ export const LayoutContent = ({ appConfig = {} }) => {
 
       if (locale.locales && locale.locales.length > 0) {
         for (let i = 0; i < locales.length; i++) {
-          const l = locales[i]
+          const l = locales[i];
           if (l.locale === locale) {
             if (l.loadData) {
-              await l.loadData
+              await l.loadData;
             }
           }
         }
       }
-    }
-    loadPolyfills()
-  }, [locale, locales])
+    };
+    loadPolyfills();
+  }, [locale, locales]);
 
   useEffect(() => {
     const loadMessages = async () => {
-      const messages = await getLocaleMessages(locale, locales)
-      setMessages(messages)
-    }
-    loadMessages()
-  }, [locale, locales])
+      const messages = await getLocaleMessages(locale, locales);
+      setMessages(messages);
+    };
+    loadMessages();
+  }, [locale, locales]);
 
   return (
     <AuthProvider persistKey={persistKey}>
@@ -80,18 +79,18 @@ export const LayoutContent = ({ appConfig = {} }) => {
         </AddToHomeScreenProvider>
       </SimpleValuesProvider>
     </AuthProvider>
-  )
-}
+  );
+};
 
 export const Layout = () => {
-  const { appConfig } = useConfig()
-  const { locale } = appConfig || {}
-  const { defaultLocale, persistKey } = locale || {}
+  const { appConfig } = useConfig();
+  const { locale } = appConfig || {};
+  const { defaultLocale, persistKey } = locale || {};
   return (
     <LocaleProvider defaultLocale={defaultLocale} persistKey={persistKey}>
       <LayoutContent appConfig={appConfig} />
     </LocaleProvider>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

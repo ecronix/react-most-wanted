@@ -1,8 +1,8 @@
-import React from 'react'
-import Context from './Context'
+import React from "react";
+import Context from "./Context";
 
 const Provider = ({ appConfig, children }) => {
-  return <Context.Provider value={{ appConfig }}>{children}</Context.Provider>
-}
+  return <Context.Provider value={{ appConfig }}>{children}</Context.Provider>;
+};
 
-export default Provider
+export default Provider;

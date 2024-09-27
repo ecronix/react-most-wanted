@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-key */
 import React, { lazy } from "react";
-import AuthorizedRoute from "@ecronix/base-shell/components/AuthorizedRoute";
-import UnauthorizedRoute from "@ecronix/base-shell/components/UnauthorizedRoute";
+import {
+  AuthorizedRoute,
+  UnauthorizedRoute,
+} from "@ecronix/base-shell/components";
 
 const SignIn = lazy(() => import("../pages/SignIn/SignIn"));
 const About = lazy(() => import("../pages/About/About"));
