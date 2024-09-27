@@ -1,6 +1,6 @@
 import { Avatar, Fab, InputBase, Paper, Zoom, Typography } from '@mui/material'
 import { Camera, Delete, Save, Person as PersonIcon } from '@mui/icons-material'
-import Page from '@ecronix/material-ui-shell/containers/Page/Page'
+import Page from '@ecronix/material-ui-shell/pages/Page'
 import React, { useState } from 'react'
 import { useAuth } from '@ecronix/base-shell/providers'
 import { useIntl } from 'react-intl'

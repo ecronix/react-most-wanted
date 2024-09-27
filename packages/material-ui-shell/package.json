@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/material-ui-shell",
-  "version": "3.4.32",
+  "version": "3.5.1",
   "description": "material-ui-shell React component",
   "type": "module",
   "files": [
@@ -13,26 +13,6 @@
     "preview": "vite preview",
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    },
-    "./Menu": {
-      "import": "./dist/Menu.js"
-    },
-    "./MenuHeader": {
-      "import": "./dist/MenuHeader.js"
-    },
-    "./Loading": {
-      "import": "./dist/Loading.js"
-    },
-    "./Page": {
-      "import": "./dist/Page.js"
-    },
-    "./ListPage": {
-      "import": "./dist/ListPage.js"
-    }
   },
   "peerDependencies": {
     "@ecronix/base-shell": "2.x",
@@ -63,6 +43,7 @@
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
     "@vitejs/plugin-react": "^4.3.1",
+    "glob": "^11.0.0",
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
     "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
