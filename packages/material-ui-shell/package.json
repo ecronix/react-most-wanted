@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/material-ui-shell",
-  "version": "3.5.2",
+  "version": "3.5.3",
   "description": "material-ui-shell React component",
   "type": "module",
   "files": [
@@ -14,6 +14,7 @@
     "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "module": "dist/material-ui-shell.js",
   "exports": {
     "./components": {
       "import": "./dist/components.js"
@@ -48,7 +49,7 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "2.6.1",
+    "@ecronix/base-shell": "2.6.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",

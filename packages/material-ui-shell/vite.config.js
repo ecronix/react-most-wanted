@@ -20,6 +20,7 @@ export default defineConfig({
     },
     rollupOptions: {
       input: {
+        'material-ui-shell': resolve(__dirname, 'src', 'index.js'),
         providers: resolve(__dirname, 'src', 'providers/index.js'),
         components: resolve(__dirname, 'src', 'components/index.js'),
         utils: resolve(__dirname, 'src', 'utils/index.js'),
