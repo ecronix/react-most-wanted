@@ -4,7 +4,7 @@ import routes from "./routes";
 import defaultRoutes from "./defaultRoutes";
 import getMenuItems from "./menuItems";
 import LandingPage from "../pages/LandingPage/LandingPage";
-import parseLanguages from "@ecronix/base-shell/utils/locale";
+import { parseLanguages } from "@ecronix/base-shell";
 
 const Loading = () => <div>Loading...</div>;
 

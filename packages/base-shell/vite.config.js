@@ -12,9 +12,12 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.js"),
-      name: "@ecronix/base-shell",
-      fileName: (format) => `base-shell.${format}.js`,
+      entry: [
+        resolve(__dirname, "src", "index.js"),
+        resolve(__dirname, "src", "containers/App/App.jsx"),
+        resolve(__dirname, "src", "containers/Layout/Layout.jsx"),
+      ],
+      formats: ["es"],
     },
     rollupOptions: {
       external: [

@@ -1,17 +1,21 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.5.18",
+  "version": "2.5.24",
   "description": "base-shell React component",
   "type": "module",
   "files": [
     "dist"
   ],
-  "main": "dist/base-shell.umd.js",
-  "module": "dist/base-shell.es.js",
+  "main": "dist/base-shell.js",
   "exports": {
     ".": {
-      "import": "./dist/base-shell.es.js",
-      "require": "./dist/base-shell.umd.cjs"
+      "import": "./dist/index.js"
+    },
+    "./App": {
+      "import": "./dist/App.js"
+    },
+    "./Layout": {
+      "import": "./dist/Layout.js"
     }
   },
   "scripts": {
