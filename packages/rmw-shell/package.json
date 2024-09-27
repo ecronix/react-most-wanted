@@ -59,8 +59,8 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "../base-shell",
-    "@ecronix/material-ui-shell": "../material-ui-shell",
+    "@ecronix/base-shell": "^2.5.25",
+    "@ecronix/material-ui-shell": "^3.4.32",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
