@@ -1,11 +1,11 @@
-import FilterDrawer from '../components/FilterDrawer'
-import Page from './Page'
+import FilterDrawer from '../../components/FilterDrawer'
+import Page from '../Page'
 import React from 'react'
-import SearchField from '../components/SearchField'
+import SearchField from '../../components/SearchField'
 import { Toolbar, IconButton } from '@mui/material'
 import { FilterList } from '@mui/icons-material'
-import VirtualList from '../containers/VirtualList'
-import { useFilter } from '../providers'
+import VirtualList from '../../containers/VirtualList'
+import { useFilter } from '../../providers'
 
 export default function (props) {
   const {

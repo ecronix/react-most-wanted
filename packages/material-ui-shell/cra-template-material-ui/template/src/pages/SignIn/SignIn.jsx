@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@mui/material'
-import Page from '@ecronix/material-ui-shell/containers/Page'
+import Page from '@ecronix/material-ui-shell/pages/Page'
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@ecronix/base-shell/providers'

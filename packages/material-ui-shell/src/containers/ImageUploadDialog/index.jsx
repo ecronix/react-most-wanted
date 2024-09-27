@@ -52,7 +52,7 @@ export default function ImageUploadDialog({
   const theme = useTheme()
   const [isOver, setIsOver] = useState(false)
   const [file, setFile] = useState(false)
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const [croppedImage, setCroppedImage] = useState(false)
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
