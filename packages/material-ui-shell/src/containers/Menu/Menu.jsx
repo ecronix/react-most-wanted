@@ -4,6 +4,7 @@ import { useConfig } from '@ecronix/base-shell'
 
 const Menu = (props) => {
   const { appConfig } = useConfig()
+  console.log('Menu appConfig', appConfig) //
   const { menu } = appConfig || {}
   const { MenuHeader, MenuContent, BaseMenu } = menu || {}
 
