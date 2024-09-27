@@ -1,8 +1,8 @@
-import { useContext } from 'react'
-import Context from './Context'
-export { default as withCols } from './with.js'
-export { default } from './Provider.js'
+import { useContext } from "react";
+import Context from "./Context";
+export { default as withCols } from "./with";
+export { default } from "./Provider";
 
 export function useCols() {
-  return useContext(Context)
+  return useContext(Context);
 }

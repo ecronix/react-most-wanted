@@ -4,7 +4,7 @@ import CountUp from "react-countup";
 import Days from "../../containers/Reports/Days";
 import Months from "../../containers/Reports/Months";
 import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import Providers from "../../containers/Reports/Providers";
 import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";

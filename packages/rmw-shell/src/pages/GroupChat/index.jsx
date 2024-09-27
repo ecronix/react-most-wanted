@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLists } from "../../providers/Firebase/Lists";
 import { usePaths } from "../../providers/Firebase/Paths";
-import ListPage from "@ecronix/material-ui-shell/ListPage";
+import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
 import { useIntl } from "react-intl";
 import Fab from "@mui/material/Fab";
 import ArrowForward from "@mui/icons-material/ArrowForward";
@@ -9,7 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "@ecronix/base-shell";
 import TextField from "@mui/material/TextField";
 import { Paper } from "@mui/material";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import UserRow from "../../components/UserRow";
 import { getDatabase, ref, update, push, set } from "firebase/database";
 

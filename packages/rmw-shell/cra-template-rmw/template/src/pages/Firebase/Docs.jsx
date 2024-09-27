@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
