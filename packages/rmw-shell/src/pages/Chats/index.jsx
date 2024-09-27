@@ -12,7 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import { VirtualList } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import React, { useEffect } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useAuth } from "@ecronix/base-shell";

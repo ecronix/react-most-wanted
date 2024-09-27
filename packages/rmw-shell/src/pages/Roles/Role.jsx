@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import { useParams, useNavigate } from "react-router-dom";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";

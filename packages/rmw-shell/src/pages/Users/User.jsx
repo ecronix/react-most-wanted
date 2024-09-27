@@ -10,7 +10,7 @@ import {
   GitHubIcon,
   TwitterIcon,
 } from "../../components/Icons";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import { usePaths } from "../../providers/Firebase/Paths";
 import { useLists } from "../../providers/Firebase/Lists";
 import { useParams, useNavigate } from "react-router-dom";

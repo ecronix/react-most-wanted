@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";

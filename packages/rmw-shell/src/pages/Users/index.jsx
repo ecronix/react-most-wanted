@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLists } from "../../providers/Firebase/Lists";
 import { useFilter } from "@ecronix/material-ui-shell";
-import ListPage from "@ecronix/material-ui-shell/ListPage";
+import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import UserRow from "../../components/UserRow";

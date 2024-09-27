@@ -1,6 +1,6 @@
 import * as firebaseui from "firebaseui";
 import AuthUI from "../../containers/AuthUI/AuthUI";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useConfig } from "@ecronix/base-shell";

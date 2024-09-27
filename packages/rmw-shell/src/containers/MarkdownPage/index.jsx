@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/Page";
+import Page from "@ecronix/material-ui-shell/pages/Page";
 import ReactMarkdown from "react-markdown";
 
 const loadData = async (path) => {

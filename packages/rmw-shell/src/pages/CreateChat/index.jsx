@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useLists } from "../../providers/Firebase/Lists";
-import ListPage from "@ecronix/material-ui-shell/ListPage";
+import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
 import { useIntl } from "react-intl";
 import GroupAdd from "@mui/icons-material/GroupAdd";
 import { useNavigate } from "react-router-dom";
