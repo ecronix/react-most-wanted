@@ -1,14 +1,14 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { IntlProvider } from "react-intl";
-import { getLocaleMessages } from "../utils";
-import { useLocale, useConfig } from "../providers";
-import UpdateProvider from "../providers/Update/Provider";
-import AuthProvider from "../providers/Auth/Provider";
-import AddToHomeScreenProvider from "../providers/AddToHomeScreen/Provider";
-import OnlineProvider from "../providers/Online/Provider";
-import SimpleValuesProvider from "../providers/SimpleValues/Provider";
-import LocaleProvider from "../providers/Locale/Provider";
+import { getLocaleMessages } from "../../utils";
+import { useLocale, useConfig } from "../../providers";
+import UpdateProvider from "../../providers/Update/Provider";
+import AuthProvider from "../../providers/Auth/Provider";
+import AddToHomeScreenProvider from "../../providers/AddToHomeScreen/Provider";
+import OnlineProvider from "../../providers/Online/Provider";
+import SimpleValuesProvider from "../../providers/SimpleValues/Provider";
+import LocaleProvider from "../../providers/Locale/Provider";
 
 export const LayoutContent = ({ appConfig = {} }) => {
   const [messages, setMessages] = useState([]);

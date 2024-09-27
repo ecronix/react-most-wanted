@@ -1,2 +1,2 @@
-export { AuthorizedRoute } from "./AuthorizedRoute";
-export { UnauthorizedRoute } from "./UnauthorizedRoute";
+export { default as AuthorizedRoute } from "./AuthorizedRoute";
+export { default as UnauthorizedRoute } from "./UnauthorizedRoute";

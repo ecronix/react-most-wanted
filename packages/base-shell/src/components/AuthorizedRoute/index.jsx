@@ -1,9 +1,8 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../providers/Auth";
-import { useConfig } from "../providers/Config";
+import { useAuth, useConfig } from "../../providers";
 
-export function AuthorizedRoute({ children }) {
+export default function AuthorizedRoute({ children }) {
   const { appConfig } = useConfig();
   const { auth: authConfig } = appConfig || {};
   const { signInURL = "/signin" } = authConfig || {};

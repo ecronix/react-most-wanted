@@ -1,10 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../providers/Auth";
-import { useConfig } from "../providers/Config";
+import { useAuth, useConfig } from "@ecronix/base-shell/providers";
 import { useLocation } from "react-router-dom";
 
-export function UnauthorizedRoute({ children, redirectTo = "/", ...rest }) {
+export default function UnauthorizedRoute({
+  children,
+  redirectTo = "/",
+  ...rest
+}) {
   const { appConfig } = useConfig();
   let location = useLocation();
   const { auth: authConfig } = appConfig || {};
