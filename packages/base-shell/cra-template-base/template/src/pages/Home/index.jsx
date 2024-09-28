@@ -1,7 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { useSimpleValues } from "@ecronix/base-shell/providers/SimpleValues";
-import { useOnline } from "@ecronix/base-shell/providers/Online";
+import { useSimpleValues, useOnline } from "@ecronix/base-shell";
 
 const HomePage = () => {
   const intl = useIntl();
