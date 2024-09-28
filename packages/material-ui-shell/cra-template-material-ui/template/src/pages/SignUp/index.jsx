@@ -1,10 +1,10 @@
 import { Button, TextField, Typography } from '@mui/material'
-import Page from '@ecronix/material-ui-shell/pages/Page'
+import { Page } from '@ecronix/material-ui-shell'
 import React, { useState } from 'react'
 import { useAuth } from '@ecronix/base-shell'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
-import { useMenu } from '@ecronix/material-ui-shell/providers/Menu'
+import { useMenu } from '@ecronix/material-ui-shell'
 import { useTheme } from '@mui/material/styles'
 import CustomPaper from '../../components/CustomPaper'
 

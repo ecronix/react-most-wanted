@@ -1,22 +1,19 @@
 /* eslint-disable react/jsx-key */
 import React, { lazy } from 'react'
-import {
-  AuthorizedRoute,
-  UnauthorizedRoute,
-} from '@ecronix/base-shell/components'
+import { AuthorizedRoute, UnauthorizedRoute } from '@ecronix/base-shell'
 
-const SignIn = lazy(() => import('../pages/SignIn/SignIn'))
+const SignIn = lazy(() => import('../pages/SignIn'))
 
-const SignUp = lazy(() => import('../pages/SignUp/SignUp'))
-const PasswordReset = lazy(() => import('../pages/PasswordReset/PasswordReset'))
+const SignUp = lazy(() => import('../pages/SignUp'))
+const PasswordReset = lazy(() => import('../pages/PasswordReset'))
 const About = lazy(() => import('../pages/About'))
-const Home = lazy(() => import('../pages/Home/Home'))
-const DialogDemo = lazy(() => import('../pages/DialogDemo/DialogDemo'))
-const ToastDemo = lazy(() => import('../pages/ToastDemo/ToastDemo'))
+const Home = lazy(() => import('../pages/Home'))
+const DialogDemo = lazy(() => import('../pages/DialogDemo'))
+const ToastDemo = lazy(() => import('../pages/ToastDemo'))
 const FilterDemo = lazy(() => import('../pages/FilterDemo'))
 const ListPageDemo = lazy(() => import('../pages/ListPageDemo'))
 const TabsDemo = lazy(() => import('../pages/TabsDemo'))
-const MyAccount = lazy(() => import('../pages/MyAccount/MyAccount'))
+const MyAccount = lazy(() => import('../pages/MyAccount'))
 
 const routes = [
   {

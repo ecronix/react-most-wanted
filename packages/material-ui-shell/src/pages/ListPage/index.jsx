@@ -5,7 +5,7 @@ import SearchField from '../../components/SearchField'
 import { Toolbar, IconButton } from '@mui/material'
 import { FilterList } from '@mui/icons-material'
 import VirtualList from '../../containers/VirtualList'
-import { useFilter } from '../../providers'
+import { useFilter } from '@ecronix/material-ui-shell'
 
 export default function (props) {
   const {

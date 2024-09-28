@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material'
 import { Add, ClearAll, SortByAlpha, Close, Delete } from '@mui/icons-material'
-import { useFilter } from '../../providers/Filter'
+import { useFilter } from '@ecronix/material-ui-shell'
 import { useIntl } from 'react-intl'
 import Scrollbar from '../Scrollbar'
 

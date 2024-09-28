@@ -9,16 +9,18 @@ import {
   Typography,
 } from '@mui/material'
 import { FilterList } from '@mui/icons-material'
-import FilterDrawer from '@ecronix/material-ui-shell/components/FilterDrawer'
-import Page from '@ecronix/material-ui-shell/pages/Page'
+import {
+  FilterDrawer,
+  Page,
+  SearchField,
+  useFilter,
+  useTheme as useAppTheme,
+} from '@ecronix/material-ui-shell'
 import React, { useEffect, useCallback } from 'react'
-import SearchField from '@ecronix/material-ui-shell/components/SearchField'
 import source from './data.json'
 import { FixedSizeList } from 'react-window'
 import { Scrollbars } from 'react-custom-scrollbars-2'
-import { useFilter } from '@ecronix/material-ui-shell/providers/Filter'
 import { useIntl } from 'react-intl'
-import { useTheme as useAppTheme } from '@ecronix/material-ui-shell/providers/Theme'
 
 const filterName = 'test_filter'
 

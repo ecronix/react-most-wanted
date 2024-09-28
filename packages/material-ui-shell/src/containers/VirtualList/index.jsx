@@ -4,8 +4,10 @@ import React, { useEffect } from 'react'
 import Scrollbar from '../../components/Scrollbar'
 import { FixedSizeList } from 'react-window'
 import { useState } from 'react'
-import { useVirtualLists } from '../../providers/VirtualLists'
-import { useTheme as useAppTheme } from '../../providers/Theme'
+import {
+  useTheme as useAppTheme,
+  useVirtualLists,
+} from '@ecronix/material-ui-shell'
 
 const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   const { style, ...rest } = props

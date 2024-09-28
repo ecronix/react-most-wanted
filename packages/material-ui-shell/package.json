@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/material-ui-shell",
-  "version": "3.5.5",
+  "version": "3.5.6",
   "description": "material-ui-shell React component",
   "type": "module",
   "files": [
@@ -18,26 +18,8 @@
     ".": {
       "import": "./dist/material-ui-shell.js"
     },
-    "./components": {
-      "import": "./dist/components.js"
-    },
     "./components/*": {
       "import": "./dist/components/*.js"
-    },
-    "./providers": {
-      "import": "./dist/providers.js"
-    },
-    "./providers/*": {
-      "import": "./dist/providers/*.js"
-    },
-    "./utils": {
-      "import": "./dist/utils.js"
-    },
-    "./utils/*": {
-      "import": "./dist/utils/*.js"
-    },
-    "./containers": {
-      "import": "./dist/containers.js"
     },
     "./containers/*": {
       "import": "./dist/containers/*.js"
@@ -68,7 +50,7 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "2.6.3",
+    "@ecronix/base-shell": "^2.6.5",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",

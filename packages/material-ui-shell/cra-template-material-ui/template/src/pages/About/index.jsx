@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import Page from '@ecronix/material-ui-shell/pages/Page'
-import Scrollbar from '@ecronix/material-ui-shell/components/Scrollbar'
+import { Page, Scrollbar } from '@ecronix/material-ui-shell'
 import ReactMarkdown from 'react-markdown'
 
 const About = () => {
