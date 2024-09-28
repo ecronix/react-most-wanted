@@ -1,9 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import App from "./cra-template-base/template/src/App";
+import App from "@ecronix/base-shell/containers/App";
+import config from "./config";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <App config={config} />
   </StrictMode>,
 );

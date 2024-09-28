@@ -3,8 +3,8 @@ import locales from "./locales";
 import routes from "./routes";
 import defaultRoutes from "./defaultRoutes";
 import getMenuItems from "./menuItems";
-import LandingPage from "../pages/LandingPage/LandingPage";
-import { parseLanguages } from "@ecronix/base-shell/utils";
+import LandingPage from "../pages/LandingPage";
+import { parseLanguages } from "@ecronix/base-shell";
 
 const Loading = () => <div>Loading...</div>;
 
@@ -31,10 +31,10 @@ const config = {
   },
   pages: {
     LandingPage: LandingPage,
-    PageNotFound: lazy(() => import("../pages/PageNotFound/PageNotFound")),
+    PageNotFound: lazy(() => import("../pages/PageNotFound")),
   },
   components: {
-    Menu: lazy(() => import("../containers/Menu/Menu")),
+    Menu: lazy(() => import("../containers/Menu")),
     Loading,
   },
   containers: {

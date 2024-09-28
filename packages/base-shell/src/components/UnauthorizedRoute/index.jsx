@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuth, useConfig } from "@ecronix/base-shell/providers";
+import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useLocation } from "react-router-dom";
 
 export default function UnauthorizedRoute({
