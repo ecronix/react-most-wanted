@@ -14,7 +14,7 @@ const ResponsiveMenu = lazy(
   () => import("@ecronix/rmw-shell/containers/ResponsiveMenu"),
 );
 
-const LandingPage = () => {
+export default function LandingPage() {
   const [scrollbar, setScrollbar] = useState(null);
   const [transparent, setTransparent] = useState(true);
   const [scrolled, setScrolled] = useState(false);
@@ -257,6 +257,4 @@ const LandingPage = () => {
       </Scrollbars>
     </React.Fragment>
   );
-};
-
-export default LandingPage;
+}

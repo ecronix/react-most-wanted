@@ -1,10 +1,10 @@
 import { Button, Paper, Typography } from "@mui/material";
 import { Home } from "@mui/icons-material";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Page } from "@ecronix/material-ui-shell";
 import React from "react";
 import { useIntl } from "react-intl";
 
-const PageNotFound = () => {
+export const NotFoundPage = () => {
   const intl = useIntl();
 
   return (
@@ -42,5 +42,3 @@ const PageNotFound = () => {
     </Page>
   );
 };
-
-export default PageNotFound;

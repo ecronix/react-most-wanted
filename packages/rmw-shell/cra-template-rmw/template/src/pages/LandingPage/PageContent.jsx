@@ -81,7 +81,7 @@ const PackageCard = ({ title, command, description, icons }) => {
   );
 };
 
-const PageContent = ({ setComponents }) => {
+export default function PageContent({ setComponents }) {
   return (
     <React.Fragment>
       <div style={{ height: 20 }} />
@@ -262,6 +262,4 @@ const PageContent = ({ setComponents }) => {
       <div style={{ height: 50 }} />
     </React.Fragment>
   );
-};
-
-export default PageContent;
+}

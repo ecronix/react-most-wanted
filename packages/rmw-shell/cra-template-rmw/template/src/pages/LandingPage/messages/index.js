@@ -1,4 +1,4 @@
-import parseLanguages, { formatMessage } from "@ecronix/rmw-shell/utils/locale";
+import { parseLanguages, formatMessage } from "@ecronix/rmw-shell";
 import messages_de from "./de.json";
 import messages_en from "./en.json";
 import messages_bs from "./bs.json";

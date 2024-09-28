@@ -2,14 +2,13 @@ import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import Delete from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useIntl } from "react-intl";
-import { useCols } from "@ecronix/rmw-shell/providers/Firebase/Cols";
+import { useFirebaseCols } from "@ecronix/rmw-shell";
 import {
   getFirestore,
   deleteDoc,
@@ -33,7 +32,7 @@ const Cols = () => {
     isColLoading,
     hasColError,
     unwatchCol,
-  } = useCols();
+  } = useFirebaseCols();
 
   const list = getCol(path);
   const error = JSON.stringify(getColError(path));

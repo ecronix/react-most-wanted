@@ -3,17 +3,6 @@
   "version": "11.2.25",
   "description": "React template with Material UI, Firebase, routing...",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/rmw-shell.umd.js",
-  "module": "dist/rmw-shell.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/rmw-shell.es.js",
-      "require": "./dist/rmw-shell.umd.cjs"
-    }
-  },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -22,12 +11,29 @@
     "version": "echo $npm_package_version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/rmw-shell.js",
+  "exports": {
+    ".": {
+      "import": "./dist/rmw-shell.js"
+    },
+    "./pages/*": {
+      "import": "./dist/pages/*"
+    },
+    "./containers/*": {
+      "import": "./dist/containers/*"
+    }
+  },
   "peerDependencies": {
+    "@ecronix/base-shell": "2.x",
+    "@ecronix/material-ui-shell": "3.x",
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
     "@fontsource/roboto": "4.x",
     "@mui/icons-material": "5.x",
-    "@mui/material": "5.x",
+    "@mui/material": "5.x || 6.x",
     "@mui/styles": "5.x",
     "chart.js": "3.x",
     "final-form": "^4.x",
@@ -39,7 +45,7 @@
     "jss-rtl": "0.x",
     "lp-react-virtualized-auto-sizer-react-18": "1.x",
     "moment": "2.x",
-    "mui-rff": "5.x",
+    "mui-rff": "7.x",
     "notistack": "2.x",
     "react": "17.x || 18.x",
     "react-beautiful-dnd": "13.x",
@@ -59,8 +65,8 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "^2.6.3",
-    "@ecronix/material-ui-shell": "^3.5.5",
+    "@ecronix/base-shell": "^2.6.5",
+    "@ecronix/material-ui-shell": "^3.5.6",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
@@ -76,13 +82,13 @@
     "firebase": "^10.13.2",
     "firebaseui": "^6.1.0",
     "github-markdown-css": "^5.7.0",
+    "glob": "^11.0.0",
     "intl": "^1.2.5",
     "jss-rtl": "^0.3.0",
     "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
     "moment": "^2.30.1",
     "mui-rff": "^8.0.0",
     "notistack": "^3.0.1",
-    "nwb": "^0.25.2",
     "react": "^18.3.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-chartjs-2": "^5.2.0",

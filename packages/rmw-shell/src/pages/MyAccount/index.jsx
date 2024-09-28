@@ -5,7 +5,7 @@ import Fab from "@mui/material/Fab";
 import InputBase from "@mui/material/InputBase";
 import NotificationsOff from "@mui/icons-material/NotificationsOff";
 import Notifications from "@mui/icons-material/Notifications";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Page } from "@ecronix/material-ui-shell";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import Save from "@mui/icons-material/Save";
@@ -15,13 +15,13 @@ import { IconButton } from "@mui/material";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useIntl } from "react-intl";
 import { useQuestions } from "@ecronix/material-ui-shell";
-import ImgageUploadDialog from "../../containers/ImageUploadDialog";
+import { ImageUploadDialogContainer } from "@ecronix/rmw-shell";
 import {
   GoogleIcon,
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
-} from "../../components/Icons";
+} from "@ecronix/rmw-shell";
 import {
   getAuth,
   updateProfile,
@@ -36,7 +36,7 @@ import {
   reload,
 } from "firebase/auth";
 import { getDatabase, set, remove, ref } from "firebase/database";
-import { useMessaging } from "../../providers/Firebase/Messaging";
+import { useFirebaseMessaging } from "@ecronix/rmw-shell";
 
 const uuid = () => {
   const url = URL.createObjectURL(new Blob());
@@ -45,7 +45,7 @@ const uuid = () => {
   return id;
 };
 
-const MyAccount = () => {
+export default function MyAccountPage() {
   const intl = useIntl();
   const { appConfig } = useConfig();
   const { firebase: firebaseConfig } = appConfig || {};
@@ -64,7 +64,7 @@ const MyAccount = () => {
   const [displayName, setDisplayName] = useState(currentDisplayName);
   const [photoURL, setPhotoURL] = useState(currentPhoroURL);
   const [isImageDialogOpen, setImageDialogOpen] = useState(false);
-  const { requestPermission } = useMessaging();
+  const { requestPermission } = useFirebaseMessaging();
 
   const hasChange =
     displayName !== currentDisplayName || photoURL !== currentPhoroURL;
@@ -336,7 +336,7 @@ const MyAccount = () => {
           </Zoom>
         </Paper>
 
-        <ImgageUploadDialog
+        <ImageUploadDialogContainer
           isOpen={isImageDialogOpen}
           handleClose={() => setImageDialogOpen(false)}
           handleCropSubmit={handleImageChange}
@@ -345,6 +345,4 @@ const MyAccount = () => {
       </div>
     </Page>
   );
-};
-
-export default MyAccount;
+}

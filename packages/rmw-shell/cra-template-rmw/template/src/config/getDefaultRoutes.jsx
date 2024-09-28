@@ -2,9 +2,7 @@ import { AuthorizedRoute, UnauthorizedRoute } from "@ecronix/base-shell";
 import React, { lazy } from "react";
 
 const SignIn = lazy(() => import("@ecronix/rmw-shell/pages/SignIn"));
-const MyAccount = lazy(
-  () => import("@ecronix/rmw-shell/pages/MyAccount/MyAccount"),
-);
+const MyAccount = lazy(() => import("@ecronix/rmw-shell/pages/MyAccount"));
 const Users = lazy(() => import("@ecronix/rmw-shell/pages/Users"));
 const User = lazy(() => import("@ecronix/rmw-shell/pages/Users/User"));
 const Roles = lazy(() => import("@ecronix/rmw-shell/pages/Roles"));

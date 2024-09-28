@@ -3,6 +3,6 @@ import Context from "./Context";
 export { default as withStorage } from "./with";
 export { default } from "./Provider";
 
-export function useStorage() {
+export function useFirebaseStorage() {
   return useContext(Context);
 }

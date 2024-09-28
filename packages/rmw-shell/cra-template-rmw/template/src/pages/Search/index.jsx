@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useIntl } from "react-intl";
-import Page from "@ecronix/material-ui-shell";
+import { Page } from "@ecronix/material-ui-shell";
 import SearchBar from "./SearchBar";
 import { withFirebase } from "firekit-provider";
 import { Divider, List, ListItem, ListItemText } from "@material-ui/core";
-import Scrollbar from "@ecronix/rmw-shell/components/Scrollbar";
+import { Scrollbar } from "@ecronix/rmw-shell";
 
 const Search = ({ firebaseApp }) => {
   const intl = useIntl();

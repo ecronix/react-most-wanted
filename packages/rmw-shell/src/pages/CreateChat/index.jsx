@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useLists } from "../../providers/Firebase/Lists";
-import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
+import { ListPage } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import GroupAdd from "@mui/icons-material/GroupAdd";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@ecronix/base-shell";
-import UserRow from "../../components/UserRow";
+import { UserRow } from "@ecronix/rmw-shell";
 import { getDatabase, ref, update } from "firebase/database";
 import { useFilter } from "@ecronix/material-ui-shell";
 import {
@@ -16,8 +16,8 @@ import {
   where,
 } from "firebase/firestore";
 
-export default function () {
-  const { watchList, getList, isListLoading } = useLists();
+export default function CreateChatPage() {
+  const { watchList, getList, isListLoading } = useFirebaseLists();
   const { auth } = useAuth();
   const intl = useIntl();
   const navigate = useNavigate();

@@ -1,28 +1,28 @@
-import AccountBoxIcon from '@mui/icons-material/AccountBox'
-import Avatar from '@mui/material/Avatar'
-import Divider from '@mui/material/Divider'
-import ListItem from '@mui/material/ListItem'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import ListItemText from '@mui/material/ListItemText'
-import React from 'react'
-import { ListPage } from '../../containers/Page'
-import { useNavigate } from 'react-router-dom'
-import { useIntl } from 'react-intl'
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import React from "react";
+import { ListPage } from "@ecronix/rmw-shell";
+import { useNavigate } from "react-router-dom";
+import { useIntl } from "react-intl";
 
 const fields = [
   {
-    name: 'name',
-    label: 'Name',
+    name: "name",
+    label: "Name",
   },
   {
-    name: 'description',
-    label: 'Description',
+    name: "description",
+    label: "Description",
   },
-]
+];
 
 const Row = ({ data, index, style }) => {
-  const { name = '', description = '', key } = data
-  const navigate = useNavigate()
+  const { name = "", description = "", key } = data;
+  const navigate = useNavigate();
 
   return (
     <div key={key} style={style}>
@@ -31,7 +31,7 @@ const Row = ({ data, index, style }) => {
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
-          navigate(`/roles/${key}/main`)
+          navigate(`/roles/${key}/main`);
         }}
       >
         <ListItemAvatar>
@@ -43,12 +43,12 @@ const Row = ({ data, index, style }) => {
       </ListItem>
       <Divider variant="inset" />
     </div>
-  )
-}
+  );
+};
 
-export default function () {
-  const intl = useIntl()
-  const navigate = useNavigate()
+export default function RolesPage() {
+  const intl = useIntl();
+  const navigate = useNavigate();
 
   return (
     <ListPage
@@ -60,14 +60,14 @@ export default function () {
       getPageProps={() => {
         return {
           pageTitle: intl.formatMessage({
-            id: 'roles',
-            defaultMessage: 'Roles',
+            id: "roles",
+            defaultMessage: "Roles",
           }),
-        }
+        };
       }}
       onCreateClick={() => {
-        navigate('/create_role')
+        navigate("/create_role");
       }}
     />
-  )
+  );
 }

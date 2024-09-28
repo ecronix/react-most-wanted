@@ -7,9 +7,9 @@ import grants from "./grants";
 import { Loading } from "@ecronix/material-ui-shell";
 import {
   defaultUserData,
-  isGranted,
-  isAnyGranted,
-} from "@ecronix/rmw-shell/utils/auth";
+  isAuthGranted,
+  isAnyAuthGranted,
+} from "@ecronix/rmw-shell";
 import { getDefaultRoutes } from "./getDefaultRoutes";
 
 const config = {
@@ -108,8 +108,8 @@ const config = {
             grants: grantsSnap.val(),
             notificationsDisabled: notifcationsDisabledSnap.val(),
             isAdmin: !!isAdminSnap.val(),
-            isGranted,
-            isAnyGranted,
+            isAuthGranted,
+            isAnyAuthGranted,
           });
 
           update(ref(db, `users/${user.uid}`), {
@@ -170,10 +170,7 @@ const config = {
   },
 
   containers: {
-    LayoutContainer: lazy(
-      () =>
-        import("@ecronix/rmw-shell/containers/LayoutContainer/LayoutContainer"),
-    ),
+    LayoutContainer: lazy(() => import("@ecronix/rmw-shell/containers/Layout")),
   },
 };
 

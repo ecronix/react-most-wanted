@@ -1,30 +1,29 @@
 const getUsersPreferredLanguages = () => {
   if (navigator.languages !== undefined) {
-    return navigator.languages
+    return navigator.languages;
   } else if (navigator.language !== undefined) {
-    return [navigator.language]
+    return [navigator.language];
   } else {
-    return undefined
+    return undefined;
   }
-}
+};
 
 const parseLanguages = (acceptedLangs, defaultLang = false) => {
-  const userPref = getUsersPreferredLanguages()
+  const userPref = getUsersPreferredLanguages();
 
   const match = userPref
     ? userPref.find((lang) => acceptedLangs.includes(lang))
-    : undefined
+    : undefined;
 
   if (match === undefined && defaultLang !== false) {
-    return defaultLang
+    return defaultLang;
   }
 
-  return match
-}
+  return match;
+};
 
 const formatMessage = (messages = [], id) => {
-  return messages[id] || id
-}
+  return messages[id] || id;
+};
 
-export { formatMessage }
-export default parseLanguages
+export { formatMessage, parseLanguages };

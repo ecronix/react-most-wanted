@@ -11,7 +11,7 @@ import {
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
-} from "../../components/Icons";
+} from "@ecronix/rmw-shell";
 import Badge from "@mui/material/Badge";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import Checkbox from "@mui/material/Checkbox";
@@ -41,7 +41,7 @@ const getProviderIcon = (id) => {
   return <Mail key={id} {...iconProps} />;
 };
 
-const Row = ({
+export const UserRow = ({
   data,
   index,
   style,
@@ -127,5 +127,3 @@ const Row = ({
     </div>
   );
 };
-
-export default Row;

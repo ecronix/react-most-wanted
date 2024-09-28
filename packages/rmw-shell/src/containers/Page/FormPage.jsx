@@ -1,16 +1,16 @@
 import Delete from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Page } from "@ecronix/material-ui-shell";
 import React, { useState } from "react";
 import Save from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
-import { usePaths } from "../../providers/Firebase/Paths";
+import { useFirebasePaths } from "@ecronix/rmw-shell";
 import { useQuestions } from "@ecronix/material-ui-shell";
 import { useAuth } from "@ecronix/base-shell";
-import FirebaseForm from "../../containers/FirebaseForm";
+import { FirebaseFromContainer } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function FormPage(props) {
+export default function FormPageContainer(props) {
   const {
     uid,
     path = "none",
@@ -26,11 +26,11 @@ export default function FormPage(props) {
   } = props;
   const navigate = useNavigate();
   const { openDialog } = useQuestions();
-  const { getPath } = usePaths();
+  const { getPath } = useFirebasePaths();
   const { auth } = useAuth();
   const [submit, setSubmit] = useState(false);
   const db = getDatabase();
-  const { isGranted = () => false } = auth || {};
+  const { isAuthGranted = () => false } = auth || {};
 
   const databasePath = `${path}/${uid}`;
   const data = getPath(databasePath, {}) || initialValues;
@@ -55,7 +55,7 @@ export default function FormPage(props) {
         <div>
           {useSave && (
             <IconButton
-              disabled={!isGranted(auth, grants.create) && !alwaysAllowSave}
+              disabled={!isAuthGranted(auth, grants.create) && !alwaysAllowSave}
               color="inherit"
               onClick={(e) => {
                 submit(e);
@@ -68,7 +68,8 @@ export default function FormPage(props) {
           {useDelete && (
             <IconButton
               disabled={
-                !uid || (!isGranted(auth, grants.delete) && !alwaysAllowDelete)
+                !uid ||
+                (!isAuthGranted(auth, grants.delete) && !alwaysAllowDelete)
               }
               color="inherit"
               onClick={() => {
@@ -82,7 +83,7 @@ export default function FormPage(props) {
       }
       {...getPageProps({ values: data, submit })}
     >
-      <FirebaseForm setSubmit={setSubmit} submit={submit} {...props} />
+      <FirebaseFromContainer setSubmit={setSubmit} submit={submit} {...props} />
     </Page>
   );
 }

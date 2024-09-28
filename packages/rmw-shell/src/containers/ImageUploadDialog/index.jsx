@@ -1,60 +1,60 @@
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import CircularProgress from '@mui/material/CircularProgress'
-import Cropper from 'react-easy-crop'
-import Dialog from '@mui/material/Dialog'
-import CloudUpload from '@mui/icons-material/CloudUpload'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import React, { useState, useCallback, useEffect } from 'react'
-import Slide from '@mui/material/Slide'
-import getCroppedImg from './getCropImage'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useIntl } from 'react-intl'
-import { useStorage } from '../../providers/Firebase/Storage'
-import { useTheme } from '@mui/material/styles'
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Cropper from "react-easy-crop";
+import Dialog from "@mui/material/Dialog";
+import CloudUpload from "@mui/icons-material/CloudUpload";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import React, { useState, useCallback, useEffect } from "react";
+import Slide from "@mui/material/Slide";
+import getCroppedImg from "./getCropImage";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useIntl } from "react-intl";
+import { useFirebaseStorage } from "@ecronix/rmw-shell";
+import { useTheme } from "@mui/material/styles";
 
 const Transition = React.forwardRef((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
-))
+));
 
 const getFiles = (ev) => {
-  const files = []
+  const files = [];
   if (ev.dataTransfer.items) {
     // Use DataTransferItemList interface to access the file(s)
     for (var i = 0; i < ev.dataTransfer.items.length; i++) {
       // If dropped items aren't files, reject them
-      if (ev.dataTransfer.items[i].kind === 'file') {
-        files.push(ev.dataTransfer.items[i].getAsFile())
+      if (ev.dataTransfer.items[i].kind === "file") {
+        files.push(ev.dataTransfer.items[i].getAsFile());
       }
     }
   } else {
     // Use DataTransfer interface to access the file(s)
     for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-      files.push(ev.dataTransfer.files[i])
+      files.push(ev.dataTransfer.files[i]);
     }
   }
 
-  return files
-}
+  return files;
+};
 
-export default function ({
+export default function ImageUploadDialogContainer({
   isOpen = false,
   handleClose,
   handleCropSubmit,
   path,
   cropperProps,
 }) {
-  const intl = useIntl()
-  const theme = useTheme()
-  const [isOver, setIsOver] = useState(false)
-  const [file, setFile] = useState(false)
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  const [croppedImage, setCroppedImage] = useState(false)
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
-  const [zoom, setZoom] = useState(1)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+  const intl = useIntl();
+  const theme = useTheme();
+  const [isOver, setIsOver] = useState(false);
+  const [file, setFile] = useState(false);
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [croppedImage, setCroppedImage] = useState(false);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const {
     getUploadError,
     isUploading,
@@ -62,49 +62,49 @@ export default function ({
     uploadString,
     clearUpload,
     getUploadProgress,
-  } = useStorage()
+  } = useFirebaseStorage();
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-  }, [])
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
 
   const clear = () => {
-    clearUpload()
-    setCroppedImage(false)
-    setFile(false)
-    setCroppedAreaPixels(null)
-    setIsOver(false)
-  }
+    clearUpload();
+    setCroppedImage(false);
+    setFile(false);
+    setCroppedAreaPixels(null);
+    setIsOver(false);
+  };
 
   useEffect(() => {
-    clear()
-    return clear
-  }, [path])
+    clear();
+    return clear;
+  }, [path]);
 
   const showCroppedImage = useCallback(async () => {
     try {
-      const croppedImage = await getCroppedImg(file, croppedAreaPixels, 0)
+      const croppedImage = await getCroppedImg(file, croppedAreaPixels, 0);
 
-      setCroppedImage(croppedImage)
+      setCroppedImage(croppedImage);
       uploadString(
         path,
         path,
         croppedImage,
-        'data_url',
+        "data_url",
         {
-          contentType: 'image/jpeg',
+          contentType: "image/jpeg",
         },
         (downloadURL) => {
           if (handleCropSubmit) {
-            handleClose()
-            handleCropSubmit(downloadURL)
+            handleClose();
+            handleCropSubmit(downloadURL);
           }
-        }
-      )
+        },
+      );
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }, [croppedAreaPixels])
+  }, [croppedAreaPixels]);
 
   return (
     <Dialog
@@ -118,72 +118,72 @@ export default function ({
       <DialogContent>
         <div
           style={{
-            width: '100%',
-            height: '100%',
+            width: "100%",
+            height: "100%",
             minWidth: 350,
             padding: 0,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           {!file && (
             <div
               onDrop={(e) => {
-                e.preventDefault()
+                e.preventDefault();
 
-                const files = getFiles(e)
+                const files = getFiles(e);
                 if (files.length) {
-                  var reader = new FileReader()
+                  var reader = new FileReader();
 
                   reader.onload = (e) => {
-                    setFile(e.target.result)
-                  }
+                    setFile(e.target.result);
+                  };
 
-                  reader.readAsDataURL(files[0])
+                  reader.readAsDataURL(files[0]);
                 }
               }}
               onDragOver={(e) => {
-                e.preventDefault()
-                setIsOver(true)
+                e.preventDefault();
+                setIsOver(true);
               }}
               onDragLeave={(e) => {
-                e.preventDefault()
-                setIsOver(false)
+                e.preventDefault();
+                setIsOver(false);
               }}
               style={{
-                width: '100%',
+                width: "100%",
                 minHeight: 350,
-                borderStyle: 'dashed',
-                borderColor: isOver ? 'red' : 'grey',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
+                borderStyle: "dashed",
+                borderColor: isOver ? "red" : "grey",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
               }}
             >
               <CloudUpload color="disabled" style={{ height: 60, width: 60 }} />
-              <Typography variant="h6" style={{ color: 'grey' }}>
+              <Typography variant="h6" style={{ color: "grey" }}>
                 {intl.formatMessage({
-                  id: 'file_upload_text',
-                  defaultMessage: 'Drop image here or ',
+                  id: "file_upload_text",
+                  defaultMessage: "Drop image here or ",
                 })}
               </Typography>
               <input
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 accept="image/*"
                 id="contained-button-file"
                 multiple
                 type="file"
                 onChange={(e) => {
                   if (e.target.files) {
-                    var reader = new FileReader()
+                    var reader = new FileReader();
 
                     reader.onload = (e) => {
-                      setFile(e.target.result)
-                    }
+                      setFile(e.target.result);
+                    };
 
-                    reader.readAsDataURL(e.target.files[0])
+                    reader.readAsDataURL(e.target.files[0]);
                   }
                 }}
               />
@@ -202,10 +202,10 @@ export default function ({
           {file && !croppedImage && (
             <div
               style={{
-                position: 'relative',
+                position: "relative",
                 height: 300,
-                width: '100%',
-                background: 'black',
+                width: "100%",
+                background: "black",
               }}
             >
               <Cropper
@@ -230,7 +230,7 @@ export default function ({
             >
               <CircularProgress
                 size={280}
-                color={hasUploadError(path) ? 'secondary' : 'primary'}
+                color={hasUploadError(path) ? "secondary" : "primary"}
                 variant="determinate"
                 value={getUploadProgress(path)}
               />
@@ -245,7 +245,7 @@ export default function ({
                 justifyContent="center"
               >
                 <img
-                  style={{ height: 250, borderRadius: '50%' }}
+                  style={{ height: 250, borderRadius: "50%" }}
                   src={croppedImage}
                   alt="img"
                 />
@@ -261,16 +261,16 @@ export default function ({
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="secondary">
-          {intl.formatMessage({ id: 'cancel', defaultMessage: 'Cancel' })}
+          {intl.formatMessage({ id: "cancel", defaultMessage: "Cancel" })}
         </Button>
         <Button
           disabled={isUploading(path) || hasUploadError(path) || !file}
           onClick={showCroppedImage}
           color="primary"
         >
-          {intl.formatMessage({ id: 'save', defaultMessage: 'Save' })}
+          {intl.formatMessage({ id: "save", defaultMessage: "Save" })}
         </Button>
       </DialogActions>
     </Dialog>
-  )
+  );
 }

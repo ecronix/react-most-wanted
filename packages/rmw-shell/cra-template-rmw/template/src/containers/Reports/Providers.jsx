@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useIntl } from "react-intl";
-import { usePaths } from "@ecronix/rmw-shell/providers/Firebase/Paths";
+import { useFirebasePaths } from "@ecronix/rmw-shell";
 import { useTheme } from "@mui/material/styles";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -31,7 +31,7 @@ const getProviderColor = (provider, defaultColor) => {
 export default function () {
   const intl = useIntl();
   const theme = useTheme();
-  const { watchPath, getPath, unwatchPath } = usePaths();
+  const { watchPath, getPath, unwatchPath } = useFirebasePaths();
   const providers = getPath(providerPath, {});
 
   useEffect(() => {

@@ -1,51 +1,51 @@
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
-import ChevronRight from '@mui/icons-material/ChevronRight'
-import Reorder from '@mui/icons-material/Reorder'
-import React, { useState } from 'react'
-import { Typography } from '@mui/material'
-import Drawer from '@mui/material/Drawer'
-import Divider from '@mui/material/Divider'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
-import { useTheme } from '@emotion/react'
-import { styled } from '@mui/material/styles'
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronRight from "@mui/icons-material/ChevronRight";
+import Reorder from "@mui/icons-material/Reorder";
+import React, { useState } from "react";
+import { Typography } from "@mui/material";
+import Drawer from "@mui/material/Drawer";
+import Divider from "@mui/material/Divider";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import { useTheme } from "@emotion/react";
+import { styled } from "@mui/material/styles";
 
-const DesktopDiv = styled('div')(({ theme }) => ({
-  display: 'none',
-  [theme.breakpoints.up('md')]: {
-    display: 'flex',
+const DesktopDiv = styled("div")(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.up("md")]: {
+    display: "flex",
   },
-}))
+}));
 
-const MobileDiv = styled('div')(({ theme }) => ({
-  display: 'flex',
-  [theme.breakpoints.up('md')]: {
-    display: 'none',
+const MobileDiv = styled("div")(({ theme }) => ({
+  display: "flex",
+  [theme.breakpoints.up("md")]: {
+    display: "none",
   },
-}))
+}));
 
-const ResponsiveMenu = ({
+export default function ResponsiveMenu({
   scroll,
   sections = [],
   handleMenuClose,
   statemobileMoreAnchorEl,
   transparent,
-  contrastColor = 'white',
-}) => {
-  const [isOpen, setOpen] = useState(false)
-  const theme = useTheme()
+  contrastColor = "white",
+}) {
+  const [isOpen, setOpen] = useState(false);
+  const theme = useTheme();
 
   const handleOpen = (e) => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
 
   const handleClose = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <React.Fragment>
@@ -62,7 +62,7 @@ const ResponsiveMenu = ({
                   backgroundColor: transparent ? contrastColor : null,
                 }}
               />
-            )
+            );
           }
 
           return (
@@ -75,7 +75,7 @@ const ResponsiveMenu = ({
             >
               <Typography variant="h6">{name}</Typography>
             </Button>
-          )
+          );
         })}
       </DesktopDiv>
       <MobileDiv>
@@ -92,36 +92,34 @@ const ResponsiveMenu = ({
       </MobileDiv>
       <Drawer anchor="right" open={isOpen} onClose={handleClose}>
         <List>
-          <ListItem button key={'0'} onClick={handleClose}>
+          <ListItem button key={"0"} onClick={handleClose}>
             <ListItemIcon>
               <ChevronRight />
             </ListItemIcon>
           </ListItem>
           <Divider />
           {sections.map(
-            ({ name = '', onClick, icon, isDivider = false }, i) => {
+            ({ name = "", onClick, icon, isDivider = false }, i) => {
               if (isDivider) {
-                return <Divider key={`divider_${i}`} />
+                return <Divider key={`divider_${i}`} />;
               }
               return (
                 <ListItem
                   button
                   key={name}
                   onClick={() => {
-                    handleClose()
-                    setTimeout(onClick, 1)
+                    handleClose();
+                    setTimeout(onClick, 1);
                   }}
                 >
                   <ListItemIcon>{icon || <Reorder />}</ListItemIcon>
                   <ListItemText primary={name} />
                 </ListItem>
-              )
-            }
+              );
+            },
           )}
         </List>
       </Drawer>
     </React.Fragment>
-  )
+  );
 }
-
-export default ResponsiveMenu

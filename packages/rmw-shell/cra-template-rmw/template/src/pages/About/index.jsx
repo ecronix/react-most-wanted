@@ -1,8 +1,8 @@
 import React from "react";
-import MarkdownPage from "@ecronix/rmw-shell/containers/MarkdownPage";
+import { MarkdownPage } from "@ecronix/rmw-shell";
 import { useIntl } from "react-intl";
 
-const Page = () => {
+export default function AboutPage() {
   const intl = useIntl();
   return (
     <MarkdownPage
@@ -14,6 +14,4 @@ const Page = () => {
       }
     />
   );
-};
-
-export default Page;
+}

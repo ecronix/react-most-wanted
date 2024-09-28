@@ -3,13 +3,12 @@ import CardContent from "@mui/material/CardContent";
 import CountUp from "react-countup";
 import Days from "../../containers/Reports/Days";
 import Months from "../../containers/Reports/Months";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 import Providers from "../../containers/Reports/Providers";
 import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { useIntl } from "react-intl";
-import { usePaths } from "@ecronix/rmw-shell/providers/Firebase/Paths";
+import { useFirebasePaths } from "@ecronix/rmw-shell";
 
 const ReportContainer = ({ children }) => {
   return (
@@ -28,9 +27,9 @@ const ReportContainer = ({ children }) => {
   );
 };
 
-const Dashboard = () => {
+export default function DashboardPage() {
   const intl = useIntl();
-  const { watchPath, getPath, unwatchPath } = usePaths();
+  const { watchPath, getPath, unwatchPath } = useFirebasePaths();
   const users_count = getPath("users_count", 0);
 
   useEffect(() => {
@@ -117,6 +116,4 @@ const Dashboard = () => {
       </Scrollbar>
     </Page>
   );
-};
-
-export default Dashboard;
+}

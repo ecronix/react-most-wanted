@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Box, TextField as MuiTextField } from "@mui/material";
 import Fab from "@mui/material/Fab";
 import Camera from "@mui/icons-material/CameraAlt";
-import { showErrorOnChange } from "./Util";
 import { Field } from "react-final-form";
 import Avatar from "@mui/material/Avatar";
-import ImgageUploadDialog from "../../containers/ImageUploadDialog";
+import { ImageUploadDialogContainer } from "@ecronix/rmw-shell";
 
 export function AvatarImage(props) {
   const [isImageDialogOpen, setImageDialogOpen] = useState(false);
@@ -45,7 +44,7 @@ export function AvatarImage(props) {
                 <Camera />
               </Fab>
             </Box>
-            <ImgageUploadDialog
+            <ImageUploadDialogContainer
               isOpen={isImageDialogOpen}
               handleClose={() => setImageDialogOpen(false)}
               handleCropSubmit={handleImageChange}
