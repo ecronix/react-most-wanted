@@ -1,12 +1,12 @@
 import Add from "@mui/icons-material/Add";
 import Fab from "@mui/material/Fab";
-import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
+import { ListPage } from "@ecronix/material-ui-shell";
 import React, { useEffect } from "react";
 import { useAuth } from "@ecronix/base-shell";
-import { useLists } from "../../providers/Firebase/Lists";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const Page = ({
+export default function ListPageContainer({
   fields = [],
   path = "none",
   getRef = false,
@@ -19,10 +19,10 @@ const Page = ({
   reverse = false,
   disableCreate = false,
   fabLabel = null,
-}) => {
-  const { watchList, getList, isListLoading, unwatchList } = useLists();
+}) {
+  const { watchList, getList, isListLoading, unwatchList } = useFirebaseLists();
   const { auth } = useAuth();
-  const { isGranted = () => false } = auth || {};
+  const { isAuthGranted = () => false } = auth || {};
   const matches = useMediaQuery("(min-width:400px)");
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Page = ({
         }}
         {...listPageProps}
       />
-      {isGranted(auth, createGrant) && !disableCreate && (
+      {isAuthGranted(auth, createGrant) && !disableCreate && (
         <Fab
           variant={matches && fabLabel ? "extended" : undefined}
           color="secondary"
@@ -73,6 +73,4 @@ const Page = ({
       )}
     </React.Fragment>
   );
-};
-
-export default Page;
+}

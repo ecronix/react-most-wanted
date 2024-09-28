@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import React, { useCallback } from "react";
-import { ListPage } from "@ecronix/rmw-shell/containers/Page";
+import { ListPage } from "@ecronix/rmw-shell";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 import { useTheme as useAppTheme } from "@ecronix/material-ui-shell";
@@ -33,7 +33,6 @@ const Row = ({ data, index, style }) => {
     <div key={key} style={{ ...style, direction: isRTL ? "rtl" : "ltr" }}>
       {/* james- revisit this code */}
       <ListItem
-        button
         alignItems="flex-start"
         style={{ height: 72 }}
         onClick={() => {
@@ -52,7 +51,7 @@ const Row = ({ data, index, style }) => {
   );
 };
 
-const Tasks = () => {
+export default function TasksPage() {
   const intl = useIntl();
   const navigate = useNavigate();
 
@@ -82,6 +81,4 @@ const Tasks = () => {
       }}
     />
   );
-};
-
-export default Tasks;
+}

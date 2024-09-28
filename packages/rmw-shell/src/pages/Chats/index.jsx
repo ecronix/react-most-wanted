@@ -1,5 +1,5 @@
 import Avatar from "@mui/material/Avatar";
-import Chat from "../../containers/Chat";
+import { ChatContainer } from "@ecronix/rmw-shell";
 import ChatIcon from "@mui/icons-material/Chat";
 import Group from "@mui/icons-material/Group";
 import Security from "@mui/icons-material/Security";
@@ -11,17 +11,18 @@ import Fab from "@mui/material/Fab";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
-import { VirtualList } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import {
+  VirtualList,
+  Page,
+  useTheme as useAppTheme,
+} from "@ecronix/material-ui-shell";
 import React, { useEffect } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useAuth } from "@ecronix/base-shell";
 import { useNavigate, useParams } from "react-router-dom";
 import { useIntl } from "react-intl";
-import { useLists } from "../../providers/Firebase/Lists";
+import { useFirebaseLists, useFirebaseMessaging } from "@ecronix/rmw-shell";
 import { useTheme } from "@mui/material/styles";
-import { useTheme as useAppTheme } from "@ecronix/material-ui-shell";
-import { useMessaging } from "../../providers/Firebase/Messaging";
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
 import Delete from "@mui/icons-material/Delete";
 import History from "@mui/icons-material/History";
@@ -206,13 +207,13 @@ const Row = ({ data, index, style }) => {
   );
 };
 
-export default function () {
+export default function ChatsPage() {
   const intl = useIntl();
   const navigate = useNavigate();
   const { uid = "" } = useParams();
   const { auth } = useAuth();
-  const { watchList, getList, unwatchList } = useLists();
-  const { requestPermission } = useMessaging();
+  const { watchList, getList, unwatchList } = useFirebaseLists();
+  const { requestPermission } = useFirebaseMessaging();
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -297,7 +298,7 @@ export default function () {
         )}
         {showMessages && (
           <div style={{ flex: 1 }}>
-            <Chat path={path} />
+            <ChatContainer path={path} />
           </div>
         )}
       </div>

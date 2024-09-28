@@ -1,22 +1,22 @@
-export const geocodeAddress = (address, onSuccess, onError) => {
-  let geocoder = new window.google.maps.Geocoder()
+export const getGeocodeAddress = (address, onSuccess, onError) => {
+  let geocoder = new window.google.maps.Geocoder();
   geocoder.geocode({ address }, (results, status) => {
-    if (status === 'OK' && onSuccess && onSuccess instanceof Function) {
+    if (status === "OK" && onSuccess && onSuccess instanceof Function) {
       onSuccess(
         {
           lat: results[0].geometry.location.lat(),
           lng: results[0].geometry.location.lng(),
         },
         results,
-        status
-      )
+        status,
+      );
     } else {
       if (onError && onError instanceof Function) {
-        onError(status)
+        onError(status);
       }
     }
-  })
-}
+  });
+};
 
 export const getLocation = (config) => {
   return new Promise((resolve, reject) => {
@@ -25,6 +25,6 @@ export const getLocation = (config) => {
       timeout: 5000,
       maximumAge: 3000,
       ...config,
-    })
-  })
-}
+    });
+  });
+};

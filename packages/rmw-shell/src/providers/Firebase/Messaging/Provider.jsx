@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useIntl } from "react-intl";
 import { useSnackbar } from "notistack";
-import SnackMessage from "../../../components/SnackMessage/SnackMessage";
+import { SnackMessage } from "@ecronix/rmw-shell";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getDatabase, ref, set } from "firebase/database";
 import { getApp } from "firebase/app";

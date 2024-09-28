@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
 import ReactMarkdown from "react-markdown";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 
 const loadData = async (path) => {
   const data = await fetch(path);
@@ -10,7 +9,7 @@ const loadData = async (path) => {
 };
 
 // eslint-disable-next-lin
-const MarkdownPage = ({ path, pageProps }) => {
+export default function MarkdownPageContainer({ path, pageProps }) {
   const [source, setSource] = useState(null);
 
   useEffect(() => {
@@ -30,6 +29,4 @@ const MarkdownPage = ({ path, pageProps }) => {
       </Scrollbar>
     </Page>
   );
-};
-
-export default MarkdownPage;
+}

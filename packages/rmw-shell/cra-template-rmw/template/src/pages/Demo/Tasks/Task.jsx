@@ -1,19 +1,19 @@
 import Form from "../../../components/Forms/Task";
 import React, { useEffect } from "react";
-import { FormPage } from "@ecronix/rmw-shell/containers/Page";
+import { FormPage } from "@ecronix/rmw-shell";
 import { useIntl } from "react-intl";
 import { useParams, useNavigate } from "react-router-dom";
-import { useLists } from "@ecronix/rmw-shell/providers/Firebase/Lists";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
 import moment from "moment";
 
 const path = "tasks";
 const singular = "task";
 
-const Task = () => {
+export default function TaskPage() {
   const navigate = useNavigate();
   const intl = useIntl();
   const { uid } = useParams();
-  const { watchList, unwatchList, getList } = useLists();
+  const { watchList, unwatchList, getList } = useFirebaseLists();
 
   useEffect(() => {
     watchList("companies");
@@ -77,6 +77,4 @@ const Task = () => {
       }}
     />
   );
-};
-
-export default Task;
+}

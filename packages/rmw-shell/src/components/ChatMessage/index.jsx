@@ -13,7 +13,7 @@ import moment from "moment";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
-import ImageViewer from "../../containers/ImageViewer";
+import { ImageViewerContainer } from "@ecronix/rmw-shell";
 import Linkify from "react-linkify";
 import { getDatabase, ref, update, set } from "firebase/database";
 
@@ -32,7 +32,7 @@ const getMapLoc = (loc) => {
   return { lat, lng };
 };
 
-export default function ({
+export function ChatMessage({
   message: data,
   path,
   uid,
@@ -231,7 +231,7 @@ export default function ({
           )}
           {type === "image" && (
             <div>
-              <ImageViewer
+              <ImageViewerContainer
                 style={{
                   height: "auto",
                   maxWidth: 300,

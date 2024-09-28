@@ -1,13 +1,12 @@
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { useIntl } from "react-intl";
-import { usePaths } from "@ecronix/rmw-shell/providers/Firebase/Paths";
+import { useFirebasePaths } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
 const defaultPath = "test_path";
@@ -25,7 +24,7 @@ const Paths = () => {
     isPathLoading,
     hasPathError,
     unwatchPath,
-  } = usePaths();
+  } = useFirebasePaths();
 
   const databaseValue = JSON.stringify(getPath(path, "no value"));
   const error = JSON.stringify(getPathError(path));

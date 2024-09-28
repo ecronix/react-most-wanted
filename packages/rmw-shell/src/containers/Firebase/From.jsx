@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Form as FinalForm } from "react-final-form";
-import { usePaths } from "../../providers/Firebase/Paths";
+import { useFirebasePaths } from "@ecronix/rmw-shell";
 import { useAuth } from "@ecronix/base-shell";
 import arrayMutators from "final-form-arrays";
 import { getDatabase, ref, push, set, update } from "firebase/database";
 
-const FirebaseForm = ({
+export default function FirebaseFromContainer({
   uid,
   path = "none",
   handleSubmit = () => {},
@@ -16,10 +16,10 @@ const FirebaseForm = ({
   parseValues = (v) => v,
   setSubmit,
   ...rest
-}) => {
-  const { watchPath, clearPath, getPath } = usePaths();
+}) {
+  const { watchPath, clearPath, getPath } = useFirebasePaths();
   const { auth } = useAuth();
-  const { isGranted = () => false } = auth || {};
+  const { isAuthGranted = () => false } = auth || {};
 
   const databasePath = `${path}/${uid}`;
   const data = getPath(databasePath) || initialValues;
@@ -47,7 +47,7 @@ const FirebaseForm = ({
         if (uid) {
           await set(ref(getDatabase(), `${path}/${uid}`), values);
         } else {
-          if (isGranted(auth, grants.create)) {
+          if (isAuthGranted(auth, grants.create)) {
             const snap = await await push(ref(getDatabase(), path), values);
             newUid = snap.key;
           } else {
@@ -68,6 +68,4 @@ const FirebaseForm = ({
       {...rest}
     />
   );
-};
-
-export default FirebaseForm;
+}

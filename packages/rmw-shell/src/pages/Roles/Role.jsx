@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Page } from "@ecronix/material-ui-shell";
 import { useParams, useNavigate } from "react-router-dom";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -12,8 +12,7 @@ import Lock from "@mui/icons-material/Lock";
 import GrantsList from "../../containers/GrantsList";
 import Zoom from "@mui/material/Zoom";
 import { SearchField, useFilter } from "@ecronix/material-ui-shell";
-import FirebaseFrom from "../../containers/FirebaseForm";
-import Form from "../../components/Forms/Role";
+import { FirebaseFromContainer } from "@ecronix/rmw-shell";
 import IconButton from "@mui/material/IconButton";
 import { useAuth } from "@ecronix/base-shell";
 import { useQuestions } from "@ecronix/material-ui-shell";
@@ -23,7 +22,7 @@ import Box from "@mui/material/Box";
 const path = "roles";
 const singular = "role";
 
-export default function () {
+export default function RolePage() {
   const intl = useIntl();
   const navigate = useNavigate();
   const { uid, tab = "main" } = useParams();
@@ -31,7 +30,7 @@ export default function () {
   const { search = {} } = getFilter(tab);
   const { openDialog } = useQuestions();
   const { auth } = useAuth();
-  const { isGranted = () => false } = auth;
+  const { isAuthGranted = () => false } = auth;
   const { value: searchValue = "" } = search;
   let submit;
 
@@ -79,8 +78,8 @@ export default function () {
               <div>
                 <IconButton
                   disabled={
-                    (!uid && !isGranted(auth, `create_${singular}`)) ||
-                    !isGranted(auth, `edit_${singular}`)
+                    (!uid && !isAuthGranted(auth, `create_${singular}`)) ||
+                    !isAuthGranted(auth, `edit_${singular}`)
                   }
                   color="inherit"
                   onClick={(e) => submit(e)}
@@ -88,7 +87,7 @@ export default function () {
                   <Save />
                 </IconButton>
                 <IconButton
-                  disabled={!uid || !isGranted(auth, `delete_${singular}`)}
+                  disabled={!uid || !isAuthGranted(auth, `delete_${singular}`)}
                   color="inherit"
                   onClick={() => {
                     openDeleteDialog();
@@ -141,7 +140,7 @@ export default function () {
                 height: "100%",
               }}
             >
-              <FirebaseFrom
+              <FirebaseFromContainer
                 path={`${path}`}
                 uid={uid}
                 setSubmit={setSubmit}

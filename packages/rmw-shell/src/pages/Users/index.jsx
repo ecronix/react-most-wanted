@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useLists } from "../../providers/Firebase/Lists";
-import { useFilter } from "@ecronix/material-ui-shell";
-import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
+import { useFilter, ListPage } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import UserRow from "../../components/UserRow";
+import { UserRow } from "@ecronix/rmw-shell";
 import {
   collection,
   getFirestore,
@@ -20,8 +19,8 @@ const fields = [
   },
 ];
 
-export default function () {
-  const { watchList, getList } = useLists();
+export default function UsersPage() {
+  const { watchList, getList } = useFirebaseLists();
   const intl = useIntl();
   const navigate = useNavigate();
   const [list, setList] = useState([]);

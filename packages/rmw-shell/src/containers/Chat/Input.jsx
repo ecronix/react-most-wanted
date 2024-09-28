@@ -9,7 +9,7 @@ import Send from "@mui/icons-material/Send";
 import { useIntl } from "react-intl";
 import IconButton from "@mui/material/IconButton";
 import { useAuth } from "@ecronix/base-shell";
-import { getLocation } from "../../utils/location";
+import { getLocation } from "@ecronix/rmw-shell";
 import { CircularProgress } from "@mui/material";
 import {
   getDatabase,
@@ -26,7 +26,7 @@ import {
 } from "firebase/storage";
 import { getApp } from "firebase/app";
 
-export default function ({ path }) {
+export default function InputContainer({ path }) {
   const theme = useTheme();
   const intl = useIntl();
   const { auth } = useAuth();

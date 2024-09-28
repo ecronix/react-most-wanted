@@ -1,13 +1,13 @@
-import React from 'react'
-import { TextField } from 'mui-rff'
+import React from "react";
+import { TextField } from "mui-rff";
 
-export default function ({ handleSubmit }) {
+export function FormsRole({ handleSubmit }) {
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ display: 'flex', justifyContent: 'center' }}
+      style={{ display: "flex", justifyContent: "center" }}
     >
-      <button type="submit" style={{ display: 'none' }} />
+      <button type="submit" style={{ display: "none" }} />
       <div>
         <TextField
           label="Name"
@@ -29,5 +29,5 @@ export default function ({ handleSubmit }) {
         />
       </div>
     </form>
-  )
+  );
 }

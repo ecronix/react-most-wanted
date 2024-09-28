@@ -3,14 +3,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Delete from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Code from "@mui/icons-material/Code";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useIntl } from "react-intl";
-import { useLists } from "@ecronix/rmw-shell/providers/Firebase/Lists";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set, push } from "firebase/database";
 
 const defaultPath = "test_list";
@@ -28,7 +27,7 @@ const Lists = () => {
     isListLoading,
     hasListError,
     unwatchList,
-  } = useLists();
+  } = useFirebaseLists();
 
   const list = getList(path);
   const error = JSON.stringify(getListError(path));

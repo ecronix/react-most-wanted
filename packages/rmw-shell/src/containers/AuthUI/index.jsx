@@ -6,12 +6,10 @@ import { getAuth } from "firebase/auth";
 let authUi = null;
 
 /*eslint-disable */
-const AuthUI = ({ uiConfig }) => {
+export default function AuthUIContainer({ uiConfig }) {
   if (!uiConfig) {
     return null;
   }
-
-  console.log("uiConfig", uiConfig);
 
   const intl = useIntl();
   const locale = intl.locale;
@@ -55,8 +53,6 @@ const AuthUI = ({ uiConfig }) => {
       <div key={`${intl.locale}`} id="firebaseui-auth" />
     </div>
   );
-};
-
-export default AuthUI;
+}
 
 /*eslint-enable */

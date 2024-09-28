@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useIntl } from "react-intl";
-import { usePaths } from "@ecronix/rmw-shell/providers/Firebase/Paths";
+import { useFirebasePaths } from "@ecronix/rmw-shell";
 import { useTheme } from "@mui/material/styles";
 import {
   Chart as ChartJS,
@@ -33,7 +33,7 @@ const monthsPath = `/user_registrations_per_month/${currentYear}`;
 export default function () {
   const intl = useIntl();
   const theme = useTheme();
-  const { watchPath, getPath, unwatchPath } = usePaths();
+  const { watchPath, getPath, unwatchPath } = useFirebasePaths();
   const months = getPath(monthsPath, {});
 
   useEffect(() => {

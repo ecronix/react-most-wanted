@@ -9,10 +9,9 @@ import {
   FacebookIcon,
   GitHubIcon,
   TwitterIcon,
-} from "../../components/Icons";
-import Page from "@ecronix/material-ui-shell/pages/Page";
-import { usePaths } from "../../providers/Firebase/Paths";
-import { useLists } from "../../providers/Firebase/Lists";
+} from "@ecronix/rmw-shell";
+import { Page } from "@ecronix/material-ui-shell";
+import { useFirebasePaths, useFirebaseLists } from "@ecronix/rmw-shell";
 import { useParams, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -21,19 +20,18 @@ import AccountBox from "@mui/icons-material/AccountBox";
 import Lock from "@mui/icons-material/Lock";
 import Person from "@mui/icons-material/Person";
 import Email from "@mui/icons-material/Email";
-import GrantsList from "../../containers/GrantsList";
-import RolesList from "../../containers/RolesList";
+import { GrantsListContainer, RolesListContainer } from "@ecronix/rmw-shell";
 import Zoom from "@mui/material/Zoom";
 import { SearchField, useFilter } from "@ecronix/material-ui-shell";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function () {
+export default function User() {
   const intl = useIntl();
   const navigate = useNavigate();
-  const { watchPath, getPath } = usePaths();
-  const { watchList, getList } = useLists();
+  const { watchPath, getPath } = useFirebasePaths();
+  const { watchList, getList } = useFirebaseLists();
   const { uid, tab = "main" } = useParams();
   const { getFilter, setSearch } = useFilter();
   const { search = {} } = getFilter(tab);
@@ -218,8 +216,8 @@ export default function () {
               </Paper>
             </div>
           )}
-          {tab === "roles" && <RolesList path={rolesPath} />}
-          {tab === "grants" && <GrantsList grantsPath={grantsPath} />}
+          {tab === "roles" && <RolesListContainer path={rolesPath} />}
+          {tab === "grants" && <GrantsListContainer grantsPath={grantsPath} />}
         </div>
       </div>
     </Page>

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SnackMessage = React.forwardRef((props, ref) => {
+export const SnackMessage = React.forwardRef((props, ref) => {
   const classes = useStyles();
   const navigate = useNavigate();
   const { closeSnackbar } = useSnackbar();
@@ -87,5 +87,3 @@ const SnackMessage = React.forwardRef((props, ref) => {
     </ThemeProvider>
   );
 });
-
-export default SnackMessage;

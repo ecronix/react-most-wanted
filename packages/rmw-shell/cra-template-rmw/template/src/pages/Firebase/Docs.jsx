@@ -1,13 +1,12 @@
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { useIntl } from "react-intl";
-import { useDocs } from "@ecronix/rmw-shell/providers/Firebase/Docs";
+import { useFirebaseDocs } from "@ecronix/rmw-shell";
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 
 const defaultPath = "test/doc";
@@ -24,7 +23,7 @@ const Docs = () => {
     isDocLoading,
     hasDocError,
     unwatchDoc,
-  } = useDocs();
+  } = useFirebaseDocs();
 
   const databaseValue = JSON.stringify(getDoc(path, "no value"));
   const error = JSON.stringify(getDocError(path));

@@ -10,53 +10,53 @@ const defaultUserData = (user) => {
       uid: user.uid,
       providerData: user.providerData,
       isAuthenticated: true,
-    }
+    };
   } else {
     return {
       isAuthenticated: false,
-    }
+    };
   }
-}
+};
 
-const isGranted = (auth, grant) => {
-  const { grants = [], isAdmin = false } = auth || {}
+const isAuthGranted = (auth, grant) => {
+  const { grants = [], isAdmin = false } = auth || {};
 
   if (isAdmin) {
-    return true
+    return true;
   }
 
   if (!grants) {
-    return false
+    return false;
   }
 
-  return !!grants[grant]
-}
+  return !!grants[grant];
+};
 
-const isAnyGranted = (auth, grantsToCheck = []) => {
-  const { grants = [], isAdmin = false } = auth || {}
+const isAnyAuthGranted = (auth, grantsToCheck = []) => {
+  const { grants = [], isAdmin = false } = auth || {};
 
   if (isAdmin) {
-    return true
+    return true;
   }
 
   if (!grants) {
-    return false
+    return false;
   }
   if (!grantsToCheck) {
-    return false
+    return false;
   }
 
-  let granted = false
+  let granted = false;
 
   for (let i = 0; i < grantsToCheck.length; i++) {
-    const grant = grantsToCheck[i]
+    const grant = grantsToCheck[i];
 
-    if (isGranted(auth, grant)) {
-      granted = true
+    if (isAuthGranted(auth, grant)) {
+      granted = true;
     }
   }
 
-  return granted
-}
+  return granted;
+};
 
-export { defaultUserData, isGranted, isAnyGranted }
+export { defaultUserData, isAuthGranted, isAnyAuthGranted };

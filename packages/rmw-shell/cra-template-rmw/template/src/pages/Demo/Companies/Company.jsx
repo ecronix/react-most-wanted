@@ -1,13 +1,13 @@
 import Form from "../../../components/Forms/Company";
 import React from "react";
-import { FormPage } from "@ecronix/rmw-shell/containers/Page";
+import { FormPage } from "@ecronix/rmw-shell";
 import { useIntl } from "react-intl";
 import { useParams, useNavigate } from "react-router-dom";
 
 const path = "companies";
 const singular = "company";
 
-const Company = () => {
+export default function CompanyPage() {
   const navigate = useNavigate();
   const intl = useIntl();
   const { uid } = useParams();
@@ -55,6 +55,4 @@ const Company = () => {
       }}
     />
   );
-};
-
-export default Company;
+}

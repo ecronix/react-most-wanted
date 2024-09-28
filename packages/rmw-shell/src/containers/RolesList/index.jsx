@@ -8,12 +8,12 @@ import {
 
 import React, { useEffect } from "react";
 import { VirtualList, useFilter } from "@ecronix/material-ui-shell";
-import { useLists } from "../../providers/Firebase/Lists";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function ({ path }) {
-  const { watchList, getList: getFirebaseList } = useLists();
+export default function RolesListContainer({ path }) {
+  const { watchList, getList: getFirebaseList } = useFirebaseLists();
   const { getList } = useFilter();
   const db = getDatabase();
 

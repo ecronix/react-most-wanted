@@ -1,6 +1,6 @@
 import * as firebaseui from "firebaseui";
-import AuthUI from "../../containers/AuthUI/AuthUI";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { AuthUIContainer } from "@ecronix/rmw-shell";
+import { Page } from "@ecronix/material-ui-shell";
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useConfig } from "@ecronix/base-shell";
@@ -8,7 +8,7 @@ import { useIntl } from "react-intl";
 import { useMenu } from "@ecronix/material-ui-shell";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const SignIn = () => {
+export default function SignInPage() {
   const intl = useIntl();
   const { appConfig } = useConfig();
   const { firebase = {}, auth } = appConfig || {};
@@ -42,9 +42,7 @@ const SignIn = () => {
           href="https://www.gstatic.com/firebasejs/ui/4.6.1/firebase-ui-auth.css"
         />
       </Helmet>
-      <AuthUI uiConfig={uiConfig} />
+      <AuthUIContainer uiConfig={uiConfig} />
     </Page>
   );
-};
-
-export default SignIn;
+}

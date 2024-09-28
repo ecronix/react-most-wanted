@@ -1,12 +1,11 @@
 import Button from "@mui/material/Button";
-import { Scrollbar } from "@ecronix/material-ui-shell";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Scrollbar, Page } from "@ecronix/material-ui-shell";
 import Paper from "@mui/material/Paper";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import { useIntl } from "react-intl";
-import { useStorage } from "@ecronix/rmw-shell/providers/Firebase/Storage";
+import { useFirebaseStorage } from "@ecronix/rmw-shell";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
@@ -23,7 +22,7 @@ const Storage = () => {
     uploadFile,
     clearUpload,
     getUploadProgress,
-  } = useStorage();
+  } = useFirebaseStorage();
 
   const databaseValue = getDownloadURL(path);
   const error = JSON.stringify(getUploadError(path));

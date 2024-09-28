@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLists } from "../../providers/Firebase/Lists";
-import { usePaths } from "../../providers/Firebase/Paths";
-import ListPage from "@ecronix/material-ui-shell/pages/ListPage";
+import { useFirebaseLists, useFirebasePaths } from "@ecronix/rmw-shell";
+import { ListPage } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import Fab from "@mui/material/Fab";
 import ArrowForward from "@mui/icons-material/ArrowForward";
@@ -9,13 +8,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "@ecronix/base-shell";
 import TextField from "@mui/material/TextField";
 import { Paper } from "@mui/material";
-import Page from "@ecronix/material-ui-shell/pages/Page";
-import UserRow from "../../components/UserRow";
+import { Page } from "@ecronix/material-ui-shell";
+import { UserRow } from "@ecronix/rmw-shell";
 import { getDatabase, ref, update, push, set } from "firebase/database";
 
-export default function () {
-  const { watchList, getList, isListLoading } = useLists();
-  const { watchPath, getPath, clearPath } = usePaths();
+export default function GroupChatPage() {
+  const { watchList, getList, isListLoading } = useFirebaseLists();
+  const { watchPath, getPath, clearPath } = useFirebasePaths();
   const { auth } = useAuth();
   const intl = useIntl();
   const navigate = useNavigate();

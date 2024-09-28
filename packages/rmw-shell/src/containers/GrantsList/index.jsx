@@ -6,14 +6,14 @@ import ListItemText from "@mui/material/ListItemText";
 import React, { useEffect } from "react";
 import { VirtualList, useFilter } from "@ecronix/material-ui-shell";
 import { useConfig } from "@ecronix/base-shell";
-import { useLists } from "../../providers/Firebase/Lists";
+import { useFirebaseLists } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function ({ grantsPath }) {
+export default function GrantsListContainer({ grantsPath }) {
   const { appConfig } = useConfig();
   const { auth: authConfig } = appConfig || {};
   const { grants = [] } = authConfig || {};
-  const { watchList, getList: getFirebaseList } = useLists();
+  const { watchList, getList: getFirebaseList } = useFirebaseLists();
   const { getList } = useFilter();
   const db = getDatabase();
 

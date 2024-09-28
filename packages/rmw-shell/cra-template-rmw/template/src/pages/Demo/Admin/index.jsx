@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Page from "@ecronix/material-ui-shell/pages/Page";
+import { Page } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getFunctions, httpsCallable } from "firebase/functions";
 
-const Admin = () => {
+export default function AdminPage() {
   const intl = useIntl();
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -60,6 +60,4 @@ const Admin = () => {
       </div>
     </Page>
   );
-};
-
-export default Admin;
+}
