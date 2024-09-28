@@ -1,7 +1,6 @@
 import React from 'react'
 import { useAuth } from '@ecronix/base-shell'
-import { useMenu } from '../../providers/Menu'
-import { useTheme as useAppTheme } from '../../providers/Theme'
+import { useMenu, useTheme as useAppTheme } from '@ecronix/material-ui-shell'
 import {
   Avatar,
   IconButton,

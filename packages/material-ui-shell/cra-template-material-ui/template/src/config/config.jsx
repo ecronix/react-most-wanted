@@ -2,8 +2,8 @@ import { lazy } from 'react'
 import locales from './locales'
 import routes from './routes'
 import themes from './themes'
-import { parseLanguages } from '@ecronix/base-shell/utils'
-import Loading from '../components/Loading/Loading'
+import { parseLanguages } from '@ecronix/base-shell'
+import { Loading } from '@ecronix/material-ui-shell'
 
 const config = {
   containers: {
@@ -43,7 +43,7 @@ const config = {
     MenuHeader: lazy(
       () => import('@ecronix/material-ui-shell/components/MenuHeader')
     ),
-    MenuContent: lazy(() => import('../components/Menu/MenuContent')),
+    MenuContent: lazy(() => import('../components/Menu')),
     useWindowWatcher: false,
   },
   theme: {
@@ -53,8 +53,8 @@ const config = {
     defaultIsRTL: false, //change this to true for default Right to Left Language support
   },
   pages: {
-    LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
-    PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
+    LandingPage: lazy(() => import('../pages/LandingPage')),
+    PageNotFound: lazy(() => import('../pages/PageNotFound')),
   },
 }
 

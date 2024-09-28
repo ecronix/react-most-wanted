@@ -1,11 +1,13 @@
 import { Avatar, Fab, InputBase, Paper, Zoom, Typography } from '@mui/material'
 import { Camera, Delete, Save, Person as PersonIcon } from '@mui/icons-material'
-import Page from '@ecronix/material-ui-shell/pages/Page'
+import {
+  Page,
+  useQuestions,
+  ImageUploadDialog,
+} from '@ecronix/material-ui-shell'
 import React, { useState } from 'react'
 import { useAuth } from '@ecronix/base-shell'
 import { useIntl } from 'react-intl'
-import { useQuestions } from '@ecronix/material-ui-shell/providers/Dialogs/Question'
-import { ImageUploadDialog } from '@ecronix/material-ui-shell/containers'
 
 const MyAccount = () => {
   const intl = useIntl()

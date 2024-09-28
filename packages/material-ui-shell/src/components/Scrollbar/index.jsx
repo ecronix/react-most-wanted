@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2'
-import { useTheme as useAppTheme } from '../../providers/Theme'
+import { useTheme as useAppTheme } from '@ecronix/material-ui-shell'
 
 export default function Scrollbar(props) {
   const { forwardedRef = () => {}, ...rest } = props

@@ -1,7 +1,6 @@
 import React from 'react'
 import { SwipeableDrawer, styled } from '@mui/material'
-import { useMenu } from '../../providers/Menu'
-import { useTheme as useAppTheme } from '../../providers/Theme'
+import { useMenu, useTheme as useAppTheme } from '@ecronix/material-ui-shell'
 import { useConfig } from '@ecronix/base-shell'
 
 //const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)

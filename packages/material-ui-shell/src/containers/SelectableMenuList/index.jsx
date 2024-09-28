@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { useTheme as useAppTheme } from '../../providers/Theme'
-import { useMenu } from '../../providers/Menu'
+import { useTheme as useAppTheme, useMenu } from '@ecronix/material-ui-shell'
 import {
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
   KeyboardArrowRight,

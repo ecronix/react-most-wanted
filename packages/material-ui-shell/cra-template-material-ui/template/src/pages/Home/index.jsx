@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material'
-import Page from '@ecronix/material-ui-shell/pages/Page'
+import { Page } from '@ecronix/material-ui-shell'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
