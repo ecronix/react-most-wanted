@@ -81,7 +81,7 @@ export const LayoutContent = ({ appConfig = {} }) => {
   );
 };
 
-export const Layout = () => {
+export const LayoutContainer = () => {
   const { appConfig } = useConfig();
   const { locale } = appConfig || {};
   const { defaultLocale, persistKey } = locale || {};
@@ -91,5 +91,3 @@ export const Layout = () => {
     </LocaleProvider>
   );
 };
-
-export default Layout;

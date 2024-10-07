@@ -2,7 +2,7 @@ import React from "react";
 import { useIntl } from "react-intl";
 import { useSimpleValues, useOnline } from "@ecronix/base-shell";
 
-const HomePage = () => {
+export const HomePage = () => {
   const intl = useIntl();
   const isOnline = useOnline();
   const { setValue, getValue, clearAll } = useSimpleValues();
@@ -54,4 +54,3 @@ const HomePage = () => {
     </div>
   );
 };
-export default HomePage;

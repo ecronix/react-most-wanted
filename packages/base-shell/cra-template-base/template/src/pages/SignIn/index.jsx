@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useIntl } from "react-intl";
 import { useAuth } from "@ecronix/base-shell";
 
-const SignIn = () => {
+export const SignInPage = () => {
   const { setAuth } = useAuth();
   let navigate = useNavigate();
   let location = useLocation();
@@ -55,5 +55,3 @@ const SignIn = () => {
     </div>
   );
 };
-
-export default SignIn;

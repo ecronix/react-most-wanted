@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.6.5",
+  "version": "2.6.6",
   "description": "base-shell React component",
   "type": "module",
   "files": [
@@ -10,12 +10,6 @@
   "exports": {
     ".": {
       "import": "./dist/base-shell.js"
-    },
-    "./components/*": {
-      "import": "./dist/components/*.js"
-    },
-    "./containers/*": {
-      "import": "./dist/containers/*.js"
     }
   },
   "scripts": {
