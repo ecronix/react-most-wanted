@@ -1,19 +1,17 @@
 /* eslint-disable react/jsx-key */
 import React, { lazy } from 'react'
 import { AuthorizedRoute, UnauthorizedRoute } from '@ecronix/base-shell'
-
-const SignIn = lazy(() => import('../pages/SignIn'))
-
-const SignUp = lazy(() => import('../pages/SignUp'))
-const PasswordReset = lazy(() => import('../pages/PasswordReset'))
-const About = lazy(() => import('../pages/About'))
-const Home = lazy(() => import('../pages/Home'))
-const DialogDemo = lazy(() => import('../pages/DialogDemo'))
-const ToastDemo = lazy(() => import('../pages/ToastDemo'))
-const FilterDemo = lazy(() => import('../pages/FilterDemo'))
-const ListPageDemo = lazy(() => import('../pages/ListPageDemo'))
-const TabsDemo = lazy(() => import('../pages/TabsDemo'))
-const MyAccount = lazy(() => import('../pages/MyAccount'))
+import { SignInPage } from '../pages/SignIn'
+import { SignUpPage } from '../pages/SignUp'
+import { PasswordResetPage } from '../pages/PasswordReset'
+import { AboutPage } from '../pages/About'
+import { MyAccountPage } from '../pages/MyAccount'
+import { HomePage } from '../pages/Home'
+import { DialogDemoPage } from '../pages/DialogDemo'
+import { ToastDemoPage } from '../pages/ToastDemo'
+import { FilterDemoPage } from '../pages/FilterDemo'
+import { ListPageDemoPage } from '../pages/ListPageDemo'
+import { TabsDemoPage } from '../pages/TabsDemo'
 
 const routes = [
   {
@@ -21,7 +19,7 @@ const routes = [
     exact: true,
     element: (
       <UnauthorizedRoute>
-        <SignIn redirectTo="/home" />
+        <SignInPage redirectTo="/home" />
       </UnauthorizedRoute>
     ),
   },
@@ -30,7 +28,7 @@ const routes = [
     exact: true,
     element: (
       <UnauthorizedRoute>
-        <SignUp redirectTo="/home" />
+        <SignUpPage redirectTo="/home" />
       </UnauthorizedRoute>
     ),
   },
@@ -39,21 +37,21 @@ const routes = [
     exact: true,
     element: (
       <UnauthorizedRoute>
-        <PasswordReset redirectTo="/home" />
+        <PasswordResetPage redirectTo="/home" />
       </UnauthorizedRoute>
     ),
   },
   {
     path: '/about',
     exact: true,
-    element: <About />,
+    element: <AboutPage />,
   },
   {
     path: '/my_account',
     exact: true,
     element: (
       <AuthorizedRoute>
-        <MyAccount />
+        <MyAccountPage />
       </AuthorizedRoute>
     ),
   },
@@ -62,7 +60,7 @@ const routes = [
     exact: true,
     element: (
       <AuthorizedRoute>
-        <Home />
+        <HomePage />
       </AuthorizedRoute>
     ),
   },
@@ -71,7 +69,7 @@ const routes = [
     exact: true,
     element: (
       <AuthorizedRoute>
-        <DialogDemo />
+        <DialogDemoPage />
       </AuthorizedRoute>
     ),
   },
@@ -80,7 +78,7 @@ const routes = [
     exact: true,
     element: (
       <AuthorizedRoute>
-        <ToastDemo />
+        <ToastDemoPage />
       </AuthorizedRoute>
     ),
   },
@@ -89,7 +87,7 @@ const routes = [
     exact: true,
     element: (
       <AuthorizedRoute>
-        <FilterDemo />
+        <FilterDemoPage />
       </AuthorizedRoute>
     ),
   },
@@ -98,7 +96,7 @@ const routes = [
     exact: true,
     element: (
       <AuthorizedRoute>
-        <ListPageDemo />
+        <ListPageDemoPage />
       </AuthorizedRoute>
     ),
   },
@@ -107,7 +105,7 @@ const routes = [
     exact: true,
     element: (
       <AuthorizedRoute>
-        <TabsDemo />
+        <TabsDemoPage />
       </AuthorizedRoute>
     ),
   },

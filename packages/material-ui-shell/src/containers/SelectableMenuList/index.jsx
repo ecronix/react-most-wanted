@@ -19,7 +19,7 @@ import {
 } from '@mui/material'
 import { useLocation } from 'react-router-dom'
 
-export default function SelectableMenuList({
+export function SelectableMenuListContainer({
   onIndexChange,
   useMinified,
   items,

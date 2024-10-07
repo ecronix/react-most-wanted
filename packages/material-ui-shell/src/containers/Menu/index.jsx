@@ -1,13 +1,13 @@
 import React from 'react'
-import ResponsiveMenu from '../ResponsiveMenu'
+import { ResponsiveMenuContainer } from '@ecronix/material-ui-shell'
 import { useConfig } from '@ecronix/base-shell'
 
-export default function Menu() {
+export function MenuContainer() {
   const { appConfig } = useConfig()
   const { menu } = appConfig || {}
   const { MenuHeader, MenuContent, BaseMenu } = menu || {}
 
-  const Menu = BaseMenu || ResponsiveMenu
+  const Menu = BaseMenu || ResponsiveMenuContainer
 
   return (
     <Menu>

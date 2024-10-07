@@ -1,13 +1,12 @@
 import FilterDrawer from '../../components/FilterDrawer'
-import Page from '../Page'
+import { Page } from '@ecronix/material-ui-shell'
 import React from 'react'
 import SearchField from '../../components/SearchField'
 import { Toolbar, IconButton } from '@mui/material'
 import { FilterList } from '@mui/icons-material'
-import VirtualList from '../../containers/VirtualList'
-import { useFilter } from '@ecronix/material-ui-shell'
+import { useFilter, VirtualListContainer } from '@ecronix/material-ui-shell'
 
-export default function (props) {
+export function ListPage(props) {
   const {
     fields = [],
     list: source = [],
@@ -58,7 +57,12 @@ export default function (props) {
     >
       {top}
 
-      <VirtualList list={list} name={name} listProps={listProps} Row={Row} />
+      <VirtualListContainer
+        list={list}
+        name={name}
+        listProps={listProps}
+        Row={Row}
+      />
 
       {bottom}
 

@@ -3,7 +3,7 @@ import { Page, useQuestions } from '@ecronix/material-ui-shell'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-const DialogDemo = () => {
+export const DialogDemoPage = () => {
   const intl = useIntl()
   const { openDialog, setProcessing } = useQuestions()
 
@@ -49,4 +49,3 @@ const DialogDemo = () => {
     </Page>
   )
 }
-export default DialogDemo

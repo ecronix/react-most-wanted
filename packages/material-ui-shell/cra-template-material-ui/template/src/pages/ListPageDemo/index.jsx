@@ -69,7 +69,7 @@ const Row = ({ index, style, data }) => {
   )
 }
 
-const ListPageDemo = () => {
+export const ListPageDemoPage = () => {
   const intl = useIntl()
 
   return (
@@ -94,4 +94,3 @@ const ListPageDemo = () => {
     />
   )
 }
-export default ListPageDemo

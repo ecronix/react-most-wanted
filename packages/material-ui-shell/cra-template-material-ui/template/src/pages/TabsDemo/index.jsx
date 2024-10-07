@@ -3,7 +3,7 @@ import { Page } from '@ecronix/material-ui-shell'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-const TabsDemo = () => {
+export const TabsDemoPage = () => {
   const [tab, setTab] = useState('one')
   const intl = useIntl()
 
@@ -38,4 +38,3 @@ const TabsDemo = () => {
     </Page>
   )
 }
-export default TabsDemo

@@ -8,7 +8,7 @@ import { useMenu } from '@ecronix/material-ui-shell'
 import { useTheme } from '@mui/material/styles'
 import CustomPaper from '../../components/CustomPaper'
 
-const SignUp = ({ redirectTo = '/' }) => {
+export const SignUpPage = ({ redirectTo = '/' }) => {
   const intl = useIntl()
   const navigate = useNavigate()
   const location = useLocation()
@@ -147,5 +147,3 @@ const SignUp = ({ redirectTo = '/' }) => {
     </Page>
   )
 }
-
-export default SignUp

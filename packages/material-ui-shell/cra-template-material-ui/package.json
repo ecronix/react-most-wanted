@@ -12,7 +12,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/TarikHuber/react-most-wanted",
-    "directory": "packages/base-shell/cra-template-material-ui"
+    "directory": "packages/material-ui-shell/cra-template-material-ui"
   },
   "license": "MIT",
   "engines": {

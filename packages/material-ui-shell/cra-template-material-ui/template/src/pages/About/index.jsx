@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 import { Page, Scrollbar } from '@ecronix/material-ui-shell'
 import ReactMarkdown from 'react-markdown'
 
-const About = () => {
+export const AboutPage = () => {
   const [source, setSource] = useState(null)
   const intl = useIntl()
 
@@ -33,4 +33,3 @@ const About = () => {
     </Page>
   )
 }
-export default About
