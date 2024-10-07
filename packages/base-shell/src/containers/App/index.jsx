@@ -1,9 +1,9 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ConfigProvider from "@ecronix/base-shell/providers/Config/Provider";
-import { default as Layout } from "@ecronix/base-shell/containers/Layout";
+import { LayoutContainer } from "@ecronix/base-shell";
 
-const App = ({ config: appConfig }) => {
+export const AppContainer = ({ config: appConfig }) => {
   const config = { ...appConfig };
   const { pages, components, containers } = config;
   const { LandingPage = false } = pages || {};
@@ -23,7 +23,7 @@ const App = ({ config: appConfig }) => {
                 path="*"
                 element={
                   <Suspense fallback={<Loading />}>
-                    <Layout appConfig={config} />
+                    <LayoutContainer appConfig={config} />
                   </Suspense>
                 }
               />
@@ -34,5 +34,3 @@ const App = ({ config: appConfig }) => {
     </Suspense>
   );
 };
-
-export default App;

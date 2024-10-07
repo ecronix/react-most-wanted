@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const LandingPage = () => {
+export const LandingPage = () => {
   return (
     <div>
       Landing Page
@@ -9,7 +9,5 @@ const LandingPage = () => {
         <Link to="/home">Home</Link>
       </div>
     </div>
-  )
-}
-
-export default LandingPage
+  );
+};

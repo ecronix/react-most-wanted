@@ -5,7 +5,7 @@ import LocaleContext from "@ecronix/base-shell/providers/Locale/Context";
 import ConfigContext from "@ecronix/base-shell/providers/Config/Context";
 import AuthContext from "@ecronix/base-shell/providers/Auth/Context";
 
-const Menu = () => {
+export const MenuContainer = () => {
   const intl = useIntl();
 
   const { setLocale, locale = "en" } = useContext(LocaleContext);
@@ -105,5 +105,3 @@ const Menu = () => {
     </div>
   );
 };
-
-export default Menu;

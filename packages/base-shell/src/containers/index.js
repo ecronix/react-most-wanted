@@ -1,2 +1,2 @@
-export { default as Layout } from "./Layout";
-export { default as App } from "./App";
+export * from "./Layout";
+export * from "./App";

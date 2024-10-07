@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 
-export default function AuthorizedRoute({ children }) {
+export function AuthorizedRoute({ children }) {
   const { appConfig } = useConfig();
   const { auth: authConfig } = appConfig || {};
   const { signInURL = "/signin" } = authConfig || {};
