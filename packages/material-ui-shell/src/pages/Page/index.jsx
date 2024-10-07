@@ -14,7 +14,7 @@ import {
 } from '@mui/material'
 import { ChevronLeft, Menu as MenuIcon } from '@mui/icons-material'
 
-export default function ({
+export function Page({
   children,
   pageTitle,
   onBackClick,

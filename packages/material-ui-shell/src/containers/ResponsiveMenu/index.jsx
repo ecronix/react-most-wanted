@@ -46,7 +46,7 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)(({
   }
 })
 
-export default function ResponsiveMenu({ children }) {
+export function ResponsiveMenuContainer({ children }) {
   const { isRTL } = useAppTheme()
   const config = useConfig()
   const width = config?.appConfig?.menu?.width || 240

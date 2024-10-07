@@ -1,5 +1,5 @@
 import React from 'react'
 
-export default function () {
+export function LandingPage() {
   return <div>Landing Page MUI</div>
 }

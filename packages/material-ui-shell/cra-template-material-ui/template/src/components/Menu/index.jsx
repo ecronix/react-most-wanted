@@ -1,5 +1,8 @@
 import React from 'react'
-import { Scrollbar, SelectableMenuList } from '@ecronix/material-ui-shell'
+import {
+  Scrollbar,
+  SelectableMenuListContainer,
+} from '@ecronix/material-ui-shell'
 import {
   useAddToHomeScreen,
   useAuth,
@@ -10,7 +13,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useTheme as useAppTheme, useMenu } from '@ecronix/material-ui-shell'
 import getMenuItems from '../../config/menuItems'
-const Menu = (props) => {
+export const Menu = (props) => {
   const intl = useIntl()
   const navigate = useNavigate()
   const location = useLocation()
@@ -57,7 +60,7 @@ const Menu = (props) => {
       }}
     >
       <Scrollbar style={{ flex: 1 }}>
-        <SelectableMenuList
+        <SelectableMenuListContainer
           key={isMiniSwitchVisibility + themeContext.isRTL}
           onIndexChange={handleChange}
           useMinified={isMiniMode}
@@ -68,5 +71,3 @@ const Menu = (props) => {
     </div>
   )
 }
-
-export default Menu

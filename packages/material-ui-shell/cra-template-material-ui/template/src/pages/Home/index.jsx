@@ -3,7 +3,7 @@ import { Page } from '@ecronix/material-ui-shell'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-const HomePage = () => {
+export const HomePage = () => {
   const intl = useIntl()
 
   return (
@@ -12,4 +12,3 @@ const HomePage = () => {
     </Page>
   )
 }
-export default HomePage

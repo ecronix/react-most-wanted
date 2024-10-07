@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const LandingPage = () => {
+export const LandingPage = () => {
   return (
     <div
       style={{
@@ -24,4 +24,3 @@ const LandingPage = () => {
     </div>
   )
 }
-export default LandingPage

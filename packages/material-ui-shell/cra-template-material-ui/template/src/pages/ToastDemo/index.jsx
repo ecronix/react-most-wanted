@@ -4,7 +4,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSnackbar } from 'notistack'
 
-const ToastDemo = () => {
+export const ToastDemoPage = () => {
   const intl = useIntl()
   const { enqueueSnackbar } = useSnackbar()
 
@@ -32,4 +32,3 @@ const ToastDemo = () => {
     </Page>
   )
 }
-export default ToastDemo

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import CustomPaper from '../../components/CustomPaper'
 
-const PasswordReset = () => {
+export const PasswordResetPage = () => {
   const intl = useIntl()
   const theme = useTheme()
   const navigate = useNavigate()
@@ -84,5 +84,3 @@ const PasswordReset = () => {
     </Page>
   )
 }
-
-export default PasswordReset

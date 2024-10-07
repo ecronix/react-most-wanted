@@ -3,13 +3,13 @@ import { Camera, Delete, Save, Person as PersonIcon } from '@mui/icons-material'
 import {
   Page,
   useQuestions,
-  ImageUploadDialog,
+  ImageUploadDialogContainer,
 } from '@ecronix/material-ui-shell'
 import React, { useState } from 'react'
 import { useAuth } from '@ecronix/base-shell'
 import { useIntl } from 'react-intl'
 
-const MyAccount = () => {
+export const MyAccountPage = () => {
   const intl = useIntl()
   const { openDialog } = useQuestions()
 
@@ -160,7 +160,7 @@ const MyAccount = () => {
           </Zoom>
         </Paper>
         {
-          <ImageUploadDialog
+          <ImageUploadDialogContainer
             isOpen={isImageDialogOpen}
             handleClose={() => setImageDialogOpen(false)}
             handleCropSubmit={handleImageChange}
@@ -170,5 +170,3 @@ const MyAccount = () => {
     </Page>
   )
 }
-
-export default MyAccount

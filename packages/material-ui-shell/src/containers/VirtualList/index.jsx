@@ -21,7 +21,7 @@ const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => {
   )
 })
 
-export default function VirtualList(props) {
+export function VirtualListContainer(props) {
   const { list = [], listProps, Row, name, preserveScroll = true } = props
   const listRef = React.createRef()
   const [ref, setRef] = useState(false)

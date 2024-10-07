@@ -2,8 +2,7 @@ import { useConfig } from '@ecronix/base-shell'
 import { CssBaseline } from '@mui/material'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'
-import { useTheme } from '@ecronix/material-ui-shell'
-import UpdateContainer from '../../containers/UpdateContainer'
+import { useTheme, UpdateContainer } from '@ecronix/material-ui-shell'
 import QuestionDialogsProvider from '@ecronix/material-ui-shell/providers/Dialogs/Question/Provider'
 import { getThemeSource } from '../../utils'
 import { SnackbarProvider } from 'notistack'
@@ -73,7 +72,7 @@ const LayoutContent = ({ children }) => {
   )
 }
 
-export default function LayoutContainer({ children }) {
+export function LayoutContainer({ children }) {
   const { appConfig } = useConfig()
 
   return (
