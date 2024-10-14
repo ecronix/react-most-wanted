@@ -12,7 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import {
-  VirtualList,
+  VirtualListContainer,
   Page,
   useTheme as useAppTheme,
 } from "@ecronix/material-ui-shell";
@@ -207,7 +207,7 @@ const Row = ({ data, index, style }) => {
   );
 };
 
-export default function ChatsPage() {
+export function ChatsPage() {
   const intl = useIntl();
   const navigate = useNavigate();
   const { uid = "" } = useParams();
@@ -278,7 +278,7 @@ export default function ChatsPage() {
               height: "100%",
             }}
           >
-            <VirtualList
+            <VirtualListContainer
               list={chats}
               name={"user_chats"}
               listProps={{ itemSize: 72 }}

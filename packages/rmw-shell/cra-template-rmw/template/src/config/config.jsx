@@ -4,13 +4,15 @@ import routes from "./routes";
 import themes from "./themes";
 import { parseLanguages } from "@ecronix/base-shell";
 import grants from "./grants";
-import { Loading } from "@ecronix/material-ui-shell";
+import { Loading, MenuHeader, MenuContainer } from "@ecronix/material-ui-shell";
 import {
   defaultUserData,
   isAuthGranted,
   isAnyAuthGranted,
 } from "@ecronix/rmw-shell";
 import { getDefaultRoutes } from "./getDefaultRoutes";
+import { LayoutContainer } from "@ecronix/rmw-shell";
+import { NotFoundPage } from "../pages/PageNotFound";
 
 const config = {
   firebase: {
@@ -151,9 +153,7 @@ const config = {
   },
   menu: {
     MenuContent: lazy(() => import("../components/Menu/MenuContent")),
-    MenuHeader: lazy(
-      () => import("@ecronix/material-ui-shell/components/MenuHeader"),
-    ),
+    MenuHeader,
   },
   theme: {
     themes,
@@ -162,15 +162,15 @@ const config = {
   },
   pages: {
     LandingPage: lazy(() => import("../pages/LandingPage")),
-    PageNotFound: lazy(() => import("../pages/PageNotFound")),
+    PageNotFound: NotFoundPage,
   },
   components: {
-    Menu: lazy(() => import("@ecronix/material-ui-shell/containers/Menu")),
+    Menu: MenuContainer,
     Loading,
   },
 
   containers: {
-    LayoutContainer: lazy(() => import("@ecronix/rmw-shell/containers/Layout")),
+    LayoutContainer,
   },
 };
 

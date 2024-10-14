@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import React from "react";
-import { ListPage } from "@ecronix/rmw-shell";
+import { ListPageContainer } from "@ecronix/rmw-shell";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 
@@ -51,7 +51,7 @@ export default function CompaniesPage() {
   const navigate = useNavigate();
 
   return (
-    <ListPage
+    <ListPageContainer
       fields={fields}
       fabLabel={intl.formatMessage({ id: "add", defaultMessage: "Add" })}
       path="companies"

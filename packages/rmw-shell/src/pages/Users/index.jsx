@@ -19,7 +19,7 @@ const fields = [
   },
 ];
 
-export default function UsersPage() {
+export function UsersPage() {
   const { watchList, getList } = useFirebaseLists();
   const intl = useIntl();
   const navigate = useNavigate();

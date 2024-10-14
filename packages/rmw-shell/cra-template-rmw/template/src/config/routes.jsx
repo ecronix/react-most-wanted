@@ -1,20 +1,19 @@
 /* eslint-disable react/jsx-key */
 import { AuthorizedRoute } from "@ecronix/base-shell";
-import React, { lazy } from "react";
-
-const About = lazy(() => import("../pages/About"));
-const Admin = lazy(() => import("../pages/Demo/Admin"));
-const Companies = lazy(() => import("../pages/Demo/Companies"));
-const Company = lazy(() => import("../pages/Demo/Companies/Company"));
-const Tasks = lazy(() => import("../pages/Demo/Tasks"));
-const Task = lazy(() => import("../pages/Demo/Tasks/Task"));
-const FirebaseCols = lazy(() => import("../pages/Firebase/Cols"));
-const FirebaseDocs = lazy(() => import("../pages/Firebase/Docs"));
-const FirebaseLists = lazy(() => import("../pages/Firebase/Lists"));
-const FirebaseMessaging = lazy(() => import("../pages/Firebase/Messaging"));
-const FirebasePaths = lazy(() => import("../pages/Firebase/Paths"));
-const FirebaseStorage = lazy(() => import("../pages/Firebase/Storage"));
-const Dashboard = lazy(() => import("../pages/Dashboard"));
+import React from "react";
+import About from "../pages/About";
+import Admin from "../pages/Demo/Admin";
+import Companies from "../pages/Demo/Companies";
+import Company from "../pages/Demo/Companies/Company";
+import Tasks from "../pages/Demo/Tasks";
+import Task from "../pages/Demo/Tasks/Task";
+import FirebaseCols from "../pages/Firebase/Cols";
+import FirebaseDocs from "../pages/Firebase/Docs";
+import FirebaseLists from "../pages/Firebase/Lists";
+import FirebaseMessaging from "../pages/Firebase/Messaging";
+import FirebasePaths from "../pages/Firebase/Paths";
+import FirebaseStorage from "../pages/Firebase/Storage";
+import Dashboard from "../pages/Dashboard";
 
 const routes = [
   {

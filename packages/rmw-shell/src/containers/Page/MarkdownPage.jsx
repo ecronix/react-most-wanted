@@ -9,7 +9,7 @@ const loadData = async (path) => {
 };
 
 // eslint-disable-next-lin
-export default function MarkdownPageContainer({ path, pageProps }) {
+export function MarkdownPageContainer({ path, pageProps }) {
   const [source, setSource] = useState(null);
 
   useEffect(() => {

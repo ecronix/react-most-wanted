@@ -1,6 +1,6 @@
 import Form from "../../../components/Forms/Task";
 import React, { useEffect } from "react";
-import { FormPage } from "@ecronix/rmw-shell";
+import { FormPageContainer } from "@ecronix/rmw-shell";
 import { useIntl } from "react-intl";
 import { useParams, useNavigate } from "react-router-dom";
 import { useFirebaseLists } from "@ecronix/rmw-shell";
@@ -26,7 +26,7 @@ export default function TaskPage() {
   const initialValues = { helper: "", title: "" };
 
   return (
-    <FormPage
+    <FormPageContainer
       path={"public_tasks"}
       uid={uid}
       initialValues={initialValues}

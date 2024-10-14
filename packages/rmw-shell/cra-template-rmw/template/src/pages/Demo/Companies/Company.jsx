@@ -1,6 +1,6 @@
 import Form from "../../../components/Forms/Company";
 import React from "react";
-import { FormPage } from "@ecronix/rmw-shell";
+import { FormPageContainer } from "@ecronix/rmw-shell";
 import { useIntl } from "react-intl";
 import { useParams, useNavigate } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function CompanyPage() {
   const { uid } = useParams();
 
   return (
-    <FormPage
+    <FormPageContainer
       path={`${path}`}
       uid={uid}
       getPageProps={(values) => {

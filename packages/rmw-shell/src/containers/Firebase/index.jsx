@@ -12,7 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment as DateAdapter } from "@mui/x-date-pickers/AdapterMoment";
 import { useLocale } from "@ecronix/base-shell";
 
-export default function FirbaseContainer({ children }) {
+export function FirebaseContainer({ children }) {
   const { appConfig } = useConfig();
   const auth = useAuth();
   const { firebase: firebaseConfig, auth: authConfig = {} } = appConfig || {};

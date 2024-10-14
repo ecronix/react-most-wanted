@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useFirebaseLists } from "@ecronix/rmw-shell";
 import { ChatMessage } from "@ecronix/rmw-shell";
-import Input from "./Input";
+import { InputContainer } from "./Input";
 import Chip from "@mui/material/Chip";
 import { Scrollbar } from "@ecronix/material-ui-shell";
 import { useTheme } from "@mui/material/styles";
@@ -19,7 +19,7 @@ const step = 20;
 let currentUser = null;
 let currentDate = null;
 
-export default function ChatContainer({ path }) {
+export function ChatContainer({ path }) {
   const intl = useIntl();
   const theme = useTheme();
   const { watchList, getList, unwatchList, clearList } = useFirebaseLists();

@@ -26,7 +26,7 @@ import {
 } from "firebase/storage";
 import { getApp } from "firebase/app";
 
-export default function InputContainer({ path }) {
+export function InputContainer({ path }) {
   const theme = useTheme();
   const intl = useIntl();
   const { auth } = useAuth();

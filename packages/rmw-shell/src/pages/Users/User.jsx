@@ -27,7 +27,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function User() {
+export function UserPage() {
   const intl = useIntl();
   const navigate = useNavigate();
   const { watchPath, getPath } = useFirebasePaths();

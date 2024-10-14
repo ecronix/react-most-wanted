@@ -6,7 +6,7 @@ import Fab from "@mui/material/Fab";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 
-export default function ImageViewerContainer({ src, ...rest }) {
+export function ImageViewerContainer({ src, ...rest }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {

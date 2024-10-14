@@ -16,7 +16,7 @@ import {
   where,
 } from "firebase/firestore";
 
-export default function CreateChatPage() {
+export function CreateChatPage() {
   const { watchList, getList, isListLoading } = useFirebaseLists();
   const { auth } = useAuth();
   const intl = useIntl();

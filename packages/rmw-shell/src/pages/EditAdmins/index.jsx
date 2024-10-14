@@ -7,7 +7,7 @@ import { useAuth } from "@ecronix/base-shell";
 import { UserRow } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function EditAdminsPage() {
+export function EditAdminsPage() {
   const { watchList, getList, clearList, isListLoading } = useFirebaseLists();
   const { auth } = useAuth();
   const intl = useIntl();

@@ -28,7 +28,7 @@ const MobileDiv = styled("div")(({ theme }) => ({
   },
 }));
 
-export default function ResponsiveMenu({
+export function ResponsiveMenuContainer({
   scroll,
   sections = [],
   handleMenuClose,

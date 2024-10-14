@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth";
 let authUi = null;
 
 /*eslint-disable */
-export default function AuthUIContainer({ uiConfig }) {
+export function AuthUIContainer({ uiConfig }) {
   if (!uiConfig) {
     return null;
   }
