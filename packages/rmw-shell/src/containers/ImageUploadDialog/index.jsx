@@ -39,7 +39,7 @@ const getFiles = (ev) => {
   return files;
 };
 
-export default function ImageUploadDialogContainer({
+export function ImageUploadDialogContainer({
   isOpen = false,
   handleClose,
   handleCropSubmit,

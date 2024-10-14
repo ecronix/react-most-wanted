@@ -1,19 +1,19 @@
-export { default as ChatsPage } from "./Chats";
+export * from "./Chats";
 
-export { default as CreateChatPage } from "./CreateChat";
+export * from "./CreateChat";
 
-export { default as EditAdminsPage } from "./EditAdmins";
+export * from "./EditAdmins";
 
-export { default as EditMembersPage } from "./EditMembers";
+export * from "./EditMembers";
 
-export { default as GroupChatPage } from "./GroupChat";
+export * from "./GroupChat";
 
-export { default as MyAccountPage } from "./MyAccount";
+export * from "./MyAccount";
 
-export { default as RolesPage } from "./Roles";
-export { default as RolePage } from "./Roles/Role";
+export * from "./Roles";
+export * from "./Roles/Role";
 
-export { default as SignInPage } from "./SignIn";
+export * from "./SignIn";
 
-export { default as UsersPage } from "./Users";
-export { default as UserPage } from "./Users/User";
+export * from "./Users";
+export * from "./Users/User";

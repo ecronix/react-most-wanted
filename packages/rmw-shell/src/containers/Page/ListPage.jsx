@@ -6,7 +6,7 @@ import { useAuth } from "@ecronix/base-shell";
 import { useFirebaseLists } from "@ecronix/rmw-shell";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-export default function ListPageContainer({
+export function ListPageContainer({
   fields = [],
   path = "none",
   getRef = false,

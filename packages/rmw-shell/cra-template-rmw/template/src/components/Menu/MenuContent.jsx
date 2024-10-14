@@ -1,5 +1,8 @@
 import React from "react";
-import { Scrollbar, SelectableMenuList } from "@ecronix/material-ui-shell";
+import {
+  Scrollbar,
+  SelectableMenuListContainer,
+} from "@ecronix/material-ui-shell";
 import {
   useAddToHomeScreen,
   useAuth,
@@ -59,7 +62,7 @@ const Menu = (props) => {
       }}
     >
       <Scrollbar style={{ flex: 1 }}>
-        <SelectableMenuList
+        <SelectableMenuListContainer
           key={isMiniSwitchVisibility + themeContext.isRTL}
           onIndexChange={handleChange}
           useMinified={isMiniMode}

@@ -1,18 +1,19 @@
+import React from "react";
 import { AuthorizedRoute, UnauthorizedRoute } from "@ecronix/base-shell";
-import React, { lazy } from "react";
-
-const SignIn = lazy(() => import("@ecronix/rmw-shell/pages/SignIn"));
-const MyAccount = lazy(() => import("@ecronix/rmw-shell/pages/MyAccount"));
-const Users = lazy(() => import("@ecronix/rmw-shell/pages/Users"));
-const User = lazy(() => import("@ecronix/rmw-shell/pages/Users/User"));
-const Roles = lazy(() => import("@ecronix/rmw-shell/pages/Roles"));
-const Role = lazy(() => import("@ecronix/rmw-shell/pages/Roles/Role"));
-const Chats = lazy(() => import("@ecronix/rmw-shell/pages/Chats"));
-const CreateChat = lazy(() => import("@ecronix/rmw-shell/pages/CreateChat"));
-const GroupChat = lazy(() => import("@ecronix/rmw-shell/pages/GroupChat"));
-const EditMembers = lazy(() => import("@ecronix/rmw-shell/pages/EditMembers"));
-const EditAdmins = lazy(() => import("@ecronix/rmw-shell/pages/EditAdmins"));
-const PageNotFound = lazy(() => import("../pages/PageNotFound"));
+import {
+  SignInPage,
+  MyAccountPage,
+  UsersPage,
+  UserPage,
+  RolesPage,
+  RolePage,
+  ChatsPage,
+  CreateChatPage,
+  GroupChatPage,
+  EditMembersPage,
+  EditAdminsPage,
+} from "@ecronix/rmw-shell";
+import { NotFoundPage } from "../pages/PageNotFound";
 
 const getDefaultRoutes = (appConfig) => {
   return [
@@ -21,7 +22,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <UnauthorizedRoute>
-          <SignIn redirectTo={appConfig?.auth?.redirectTo || "/"} />
+          <SignInPage redirectTo={appConfig?.auth?.redirectTo || "/"} />
         </UnauthorizedRoute>
       ),
     },
@@ -31,7 +32,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Chats />
+          <ChatsPage />
         </AuthorizedRoute>
       ),
     },
@@ -40,7 +41,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Chats />
+          <ChatsPage />
         </AuthorizedRoute>
       ),
     },
@@ -49,7 +50,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <CreateChat />
+          <CreateChatPage />
         </AuthorizedRoute>
       ),
     },
@@ -58,7 +59,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <EditMembers />
+          <EditMembersPage />
         </AuthorizedRoute>
       ),
     },
@@ -67,7 +68,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <EditAdmins />
+          <EditAdminsPage />
         </AuthorizedRoute>
       ),
     },
@@ -76,7 +77,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <GroupChat />
+          <GroupChatPage />
         </AuthorizedRoute>
       ),
     },
@@ -85,7 +86,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <GroupChat />
+          <GroupChatPage />
         </AuthorizedRoute>
       ),
     },
@@ -94,7 +95,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Roles />
+          <RolesPage />
         </AuthorizedRoute>
       ),
     },
@@ -103,7 +104,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Role />
+          <RolePage />
         </AuthorizedRoute>
       ),
     },
@@ -112,7 +113,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Role />
+          <RolePage />
         </AuthorizedRoute>
       ),
     },
@@ -121,7 +122,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Role />
+          <RolePage />
         </AuthorizedRoute>
       ),
     },
@@ -130,7 +131,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <MyAccount />
+          <MyAccountPage />
         </AuthorizedRoute>
       ),
     },
@@ -139,7 +140,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <Users />
+          <UsersPage />
         </AuthorizedRoute>
       ),
     },
@@ -148,7 +149,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <User />
+          <UserPage />
         </AuthorizedRoute>
       ),
     },
@@ -157,7 +158,7 @@ const getDefaultRoutes = (appConfig) => {
       exact: true,
       element: (
         <AuthorizedRoute>
-          <User />
+          <UserPage />
         </AuthorizedRoute>
       ),
     },
@@ -166,7 +167,7 @@ const getDefaultRoutes = (appConfig) => {
 
       element: (
         <AuthorizedRoute>
-          <PageNotFound />
+          <NotFoundPage />
         </AuthorizedRoute>
       ),
     },

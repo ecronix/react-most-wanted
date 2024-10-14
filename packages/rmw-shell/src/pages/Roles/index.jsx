@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import React from "react";
-import { ListPage } from "@ecronix/rmw-shell";
+import { ListPage } from "@ecronix/material-ui-shell";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 
@@ -46,7 +46,7 @@ const Row = ({ data, index, style }) => {
   );
 };
 
-export default function RolesPage() {
+export function RolesPage() {
   const intl = useIntl();
   const navigate = useNavigate();
 

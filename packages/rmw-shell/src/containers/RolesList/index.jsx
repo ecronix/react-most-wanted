@@ -7,12 +7,12 @@ import {
 } from "@mui/material";
 
 import React, { useEffect } from "react";
-import { VirtualList, useFilter } from "@ecronix/material-ui-shell";
+import { VirtualListContainer, useFilter } from "@ecronix/material-ui-shell";
 import { useFirebaseLists } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function RolesListContainer({ path }) {
+export function RolesListContainer({ path }) {
   const { watchList, getList: getFirebaseList } = useFirebaseLists();
   const { getList } = useFilter();
   const db = getDatabase();
@@ -72,7 +72,7 @@ export default function RolesListContainer({ path }) {
   };
 
   return (
-    <VirtualList
+    <VirtualListContainer
       list={list}
       name="roles"
       listProps={{ itemSize: 72 }}

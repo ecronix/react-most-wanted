@@ -5,7 +5,7 @@ import { useAuth } from "@ecronix/base-shell";
 import arrayMutators from "final-form-arrays";
 import { getDatabase, ref, push, set, update } from "firebase/database";
 
-export default function FirebaseFromContainer({
+export function FirebaseFromContainer({
   uid,
   path = "none",
   handleSubmit = () => {},

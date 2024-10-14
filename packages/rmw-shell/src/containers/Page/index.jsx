@@ -1,3 +1,3 @@
-export { default as ListPage } from "./ListPage";
-export { default as FormPage } from "./FormPage";
-export { default as MarkdownPage } from "./MarkdownPage";
+export * from "./ListPage";
+export * from "./FormPage";
+export * from "./MarkdownPage";

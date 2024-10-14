@@ -8,7 +8,7 @@ import { useIntl } from "react-intl";
 import { useMenu } from "@ecronix/material-ui-shell";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function SignInPage() {
+export function SignInPage() {
   const intl = useIntl();
   const { appConfig } = useConfig();
   const { firebase = {}, auth } = appConfig || {};

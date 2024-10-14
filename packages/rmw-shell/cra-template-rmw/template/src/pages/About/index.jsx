@@ -1,11 +1,11 @@
 import React from "react";
-import { MarkdownPage } from "@ecronix/rmw-shell";
+import { MarkdownPageContainer } from "@ecronix/rmw-shell";
 import { useIntl } from "react-intl";
 
 export default function AboutPage() {
   const intl = useIntl();
   return (
-    <MarkdownPage
+    <MarkdownPageContainer
       pageProps={{
         pageTitle: intl.formatMessage({ id: "about", defaultMessage: "About" }),
       }}

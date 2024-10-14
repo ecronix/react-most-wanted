@@ -10,7 +10,7 @@ import { useAuth } from "@ecronix/base-shell";
 import { FirebaseFromContainer } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function FormPageContainer(props) {
+export function FormPageContainer(props) {
   const {
     uid,
     path = "none",

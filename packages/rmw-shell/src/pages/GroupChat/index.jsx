@@ -12,7 +12,7 @@ import { Page } from "@ecronix/material-ui-shell";
 import { UserRow } from "@ecronix/rmw-shell";
 import { getDatabase, ref, update, push, set } from "firebase/database";
 
-export default function GroupChatPage() {
+export function GroupChatPage() {
   const { watchList, getList, isListLoading } = useFirebaseLists();
   const { watchPath, getPath, clearPath } = useFirebasePaths();
   const { auth } = useAuth();

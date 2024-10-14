@@ -4,12 +4,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import React, { useEffect } from "react";
-import { VirtualList, useFilter } from "@ecronix/material-ui-shell";
+import { VirtualListContainer, useFilter } from "@ecronix/material-ui-shell";
 import { useConfig } from "@ecronix/base-shell";
 import { useFirebaseLists } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
 
-export default function GrantsListContainer({ grantsPath }) {
+export function GrantsListContainer({ grantsPath }) {
   const { appConfig } = useConfig();
   const { auth: authConfig } = appConfig || {};
   const { grants = [] } = authConfig || {};
@@ -72,7 +72,7 @@ export default function GrantsListContainer({ grantsPath }) {
   };
 
   return (
-    <VirtualList
+    <VirtualListContainer
       list={list}
       name="grants"
       listProps={{ itemSize: 72 }}

@@ -4,7 +4,7 @@ import { Page } from "@ecronix/material-ui-shell";
 import React from "react";
 import { useIntl } from "react-intl";
 
-export const NotFoundPage = () => {
+export function NotFoundPage() {
   const intl = useIntl();
 
   return (
@@ -41,4 +41,4 @@ export const NotFoundPage = () => {
       </Paper>
     </Page>
   );
-};
+}

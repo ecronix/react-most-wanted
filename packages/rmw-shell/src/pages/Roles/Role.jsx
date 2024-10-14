@@ -9,7 +9,7 @@ import AccountBox from "@mui/icons-material/AccountBox";
 import Save from "@mui/icons-material/Save";
 import Delete from "@mui/icons-material/Delete";
 import Lock from "@mui/icons-material/Lock";
-import GrantsList from "../../containers/GrantsList";
+import { GrantsListContainer } from "../../containers/GrantsList";
 import Zoom from "@mui/material/Zoom";
 import { SearchField, useFilter } from "@ecronix/material-ui-shell";
 import { FirebaseFromContainer } from "@ecronix/rmw-shell";
@@ -22,7 +22,7 @@ import Box from "@mui/material/Box";
 const path = "roles";
 const singular = "role";
 
-export default function RolePage() {
+export function RolePage() {
   const intl = useIntl();
   const navigate = useNavigate();
   const { uid, tab = "main" } = useParams();
@@ -156,7 +156,7 @@ export default function RolePage() {
             </div>
           )}
 
-          {tab === "grants" && <GrantsList grantsPath={grantsPath} />}
+          {tab === "grants" && <GrantsListContainer grantsPath={grantsPath} />}
         </div>
       </div>
     </Page>

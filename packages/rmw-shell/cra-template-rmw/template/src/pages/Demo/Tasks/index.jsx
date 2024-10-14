@@ -5,7 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import React, { useCallback } from "react";
-import { ListPage } from "@ecronix/rmw-shell";
+import { ListPageContainer } from "@ecronix/rmw-shell";
 import { useNavigate } from "react-router-dom";
 import { useIntl } from "react-intl";
 import { useTheme as useAppTheme } from "@ecronix/material-ui-shell";
@@ -60,7 +60,7 @@ export default function TasksPage() {
   }, []);
 
   return (
-    <ListPage
+    <ListPageContainer
       reverse
       fields={fields}
       path={"public_tasks"}

@@ -7,12 +7,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Helmet } from "react-helmet";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useNavigate } from "react-router-dom";
+import { ResponsiveMenuContainer } from "@ecronix/rmw-shell";
 
 const PageContent = lazy(() => import("./PageContent"));
 const Footer = lazy(() => import("./Footer"));
-const ResponsiveMenu = lazy(
-  () => import("@ecronix/rmw-shell/containers/ResponsiveMenu"),
-);
 
 export default function LandingPage() {
   const [scrollbar, setScrollbar] = useState(null);
@@ -126,7 +124,7 @@ export default function LandingPage() {
             <div style={{ flex: 1 }} />
 
             <Suspense fallback={<CircularProgress />}>
-              <ResponsiveMenu sections={sections} />
+              <ResponsiveMenuContainer sections={sections} />
             </Suspense>
           </Toolbar>
         </AppBar>

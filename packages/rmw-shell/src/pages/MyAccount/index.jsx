@@ -45,7 +45,7 @@ const uuid = () => {
   return id;
 };
 
-export default function MyAccountPage() {
+export function MyAccountPage() {
   const intl = useIntl();
   const { appConfig } = useConfig();
   const { firebase: firebaseConfig } = appConfig || {};
