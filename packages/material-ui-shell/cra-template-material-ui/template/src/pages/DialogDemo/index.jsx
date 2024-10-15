@@ -1,11 +1,11 @@
 import { Button } from '@mui/material'
-import { Page, useQuestions } from '@ecronix/material-ui-shell'
+import { Page, useQuestionsDialog } from '@ecronix/material-ui-shell'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 export const DialogDemoPage = () => {
   const intl = useIntl()
-  const { openDialog, setProcessing } = useQuestions()
+  const { openDialog, setProcessing } = useQuestionsDialog()
 
   return (
     <Page

@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 import Context from './Context'
-export { default as withTheme } from './with'
-export { default } from './Provider'
+import Provider from './Provider'
 
-export function useTheme() {
+function useTheme() {
   return useContext(Context)
 }
+
+export { useTheme, Context as ThemeContext, Provider as ThemeProvider }

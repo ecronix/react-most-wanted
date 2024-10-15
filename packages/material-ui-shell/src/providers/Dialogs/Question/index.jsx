@@ -1,8 +1,13 @@
 import { useContext } from 'react'
 import Context from './Context'
-export { default as withQuestions } from './with'
-export { default } from './Provider'
+import Provider from './Provider'
 
-export function useQuestions() {
+function useQuestionsDialog() {
   return useContext(Context)
+}
+
+export {
+  useQuestionsDialog,
+  Context as QuestionsDialogContext,
+  Provider as QuestionsDialogProvider,
 }

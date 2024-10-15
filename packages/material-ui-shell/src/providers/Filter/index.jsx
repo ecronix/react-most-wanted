@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 import Context from './Context'
-export { default as withFilter } from './with'
-export { default } from './Provider'
+import Provider from './Provider'
 
-export function useFilter() {
+function useFilter() {
   return useContext(Context)
 }
+
+export { useFilter, Context as FilterContext, Provider as FilterProvider }

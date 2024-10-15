@@ -2,7 +2,7 @@ import { Avatar, Fab, InputBase, Paper, Zoom, Typography } from '@mui/material'
 import { Camera, Delete, Save, Person as PersonIcon } from '@mui/icons-material'
 import {
   Page,
-  useQuestions,
+  useQuestionsDialog,
   ImageUploadDialogContainer,
 } from '@ecronix/material-ui-shell'
 import React, { useState } from 'react'
@@ -11,7 +11,7 @@ import { useIntl } from 'react-intl'
 
 export const MyAccountPage = () => {
   const intl = useIntl()
-  const { openDialog } = useQuestions()
+  const { openDialog } = useQuestionsDialog()
 
   const { auth, updateAuth, setAuth } = useAuth()
   const {
