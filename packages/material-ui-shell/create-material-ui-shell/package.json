@@ -1,0 +1,20 @@
+{
+  "name": "@ecronix/create-material-ui-shell",
+  "version": "1.0.0",
+  "description": "A template to create new projects based on @ecronix/material-ui-shell",
+  "bin": {
+    "create-my-template": "index.js"
+  },
+  "main": "index.js",
+  "dependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "ecronix",
+    "material-ui-shell",
+    "react-most-wanted"
+  ],
+  "author": "Abdallah",
+  "license": "MIT"
+}
