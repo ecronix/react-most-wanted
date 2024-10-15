@@ -1,7 +1,6 @@
 {
   "name": "@ecronix/create-base-shell",
-  "version": "1.0.3",
-  "type": "module",
+  "version": "1.0.4",
   "description": "A template to create new projects based on @ecronix/base-shell",
   "bin": {
     "create-my-template": "index.js"
@@ -13,7 +12,8 @@
   },
   "keywords": [
     "ecronix",
-    "base-shell"
+    "base-shell",
+    "react-most-wanted"
   ],
   "author": "Abdallah",
   "license": "MIT"
