@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withLocale } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useLocale() {
+function useLocale() {
   return useContext(Context);
 }
+
+export { useLocale, Context as LocaleContext, Provider as LocaleProvider };

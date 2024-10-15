@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ConfigProvider from "@ecronix/base-shell/providers/Config/Provider";
-import { LayoutContainer } from "@ecronix/base-shell";
+import { LayoutContainer, ConfigProvider } from "@ecronix/base-shell";
 
 export const AppContainer = ({ config: appConfig }) => {
   const config = { ...appConfig };

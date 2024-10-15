@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { useIntl } from "react-intl";
 import { NavLink } from "react-router-dom";
-import LocaleContext from "@ecronix/base-shell/providers/Locale/Context";
-import ConfigContext from "@ecronix/base-shell/providers/Config/Context";
-import AuthContext from "@ecronix/base-shell/providers/Auth/Context";
+import { AuthContext, LocaleContext, ConfigContext } from "@ecronix/base-shell";
 
 export const MenuContainer = () => {
   const intl = useIntl();

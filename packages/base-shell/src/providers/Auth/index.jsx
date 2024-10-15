@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withAuth } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useAuth() {
+function useAuth() {
   return useContext(Context);
 }
+
+export { useAuth, Context as AuthContext, Provider as AuthProvider };
