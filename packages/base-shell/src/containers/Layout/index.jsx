@@ -2,12 +2,14 @@ import React, { Suspense, useEffect, useState } from "react";
 import { useRoutes } from "react-router-dom";
 import { IntlProvider } from "react-intl";
 import { useLocale, useConfig, getLocaleMessages } from "@ecronix/base-shell";
-import UpdateProvider from "@ecronix/base-shell/providers/Update/Provider";
-import AuthProvider from "@ecronix/base-shell/providers/Auth/Provider";
-import AddToHomeScreenProvider from "@ecronix/base-shell/providers/AddToHomeScreen/Provider";
-import OnlineProvider from "@ecronix/base-shell/providers/Online/Provider";
-import SimpleValuesProvider from "@ecronix/base-shell/providers/SimpleValues/Provider";
-import LocaleProvider from "@ecronix/base-shell/providers/Locale/Provider";
+import {
+  AddToHomeScreenProvider,
+  AuthProvider,
+  UpdateProvider,
+  OnlineProvider,
+  SimpleValuesProvider,
+  LocaleProvider,
+} from "@ecronix/base-shell";
 
 export const LayoutContent = ({ appConfig = {} }) => {
   const [messages, setMessages] = useState([]);

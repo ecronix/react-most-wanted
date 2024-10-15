@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withSimpleValues } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useSimpleValues() {
+function useSimpleValues() {
   return useContext(Context);
 }
+
+export {
+  useSimpleValues,
+  Context as SimpleValuesContext,
+  Provider as SimpleValuesProvider,
+};

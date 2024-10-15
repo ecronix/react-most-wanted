@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withAddToHomeScreen } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useAddToHomeScreen() {
+function useAddToHomeScreen() {
   return useContext(Context);
 }
+
+export {
+  useAddToHomeScreen,
+  Context as AddToHomeScreenContext,
+  Provider as AddToHomeScreenProvider,
+};

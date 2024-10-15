@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withOnline } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useOnline() {
+function useOnline() {
   return useContext(Context);
 }
+
+export { useOnline, Context as OnlineContext, Provider as OnlineProvider };
