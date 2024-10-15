@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 import Context from './Context'
-export { default as withMenu } from './with'
-export { default } from './Provider'
+import Provider from './Provider'
 
-export function useMenu() {
+function useMenu() {
   return useContext(Context)
 }
+
+export { useMenu, Context as MenuContext, Provider as MenuProvider }

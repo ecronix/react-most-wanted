@@ -2,16 +2,21 @@ import { useConfig } from '@ecronix/base-shell'
 import { CssBaseline } from '@mui/material'
 import PWAPrompt from 'react-ios-pwa-prompt'
 import React from 'react'
-import { useTheme, UpdateContainer } from '@ecronix/material-ui-shell'
-import QuestionDialogsProvider from '@ecronix/material-ui-shell/providers/Dialogs/Question/Provider'
+import {
+  useTheme,
+  UpdateContainer,
+  QuestionsDialogProvider,
+} from '@ecronix/material-ui-shell'
 import { getThemeSource } from '../../utils'
 import { SnackbarProvider } from 'notistack'
 import { ThemeProvider } from '@mui/material/styles'
 import { useIntl } from 'react-intl'
-import FilterProvider from '@ecronix/material-ui-shell/providers/Filter/Provider'
-import VirtualListsProvider from '@ecronix/material-ui-shell/providers/VirtualLists/Provider'
-import MenuProvider from '@ecronix/material-ui-shell/providers/Menu/Provider'
-import AppThemeProvider from '@ecronix/material-ui-shell/providers/Theme/Provider'
+import {
+  FilterProvider,
+  VirtualListsProvider,
+  MenuProvider,
+  ThemeProvider as AppThemeProvider,
+} from '@ecronix/material-ui-shell'
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
@@ -31,11 +36,11 @@ const LayoutContent = ({ children }) => {
       <CssBaseline />
       <SnackbarProvider maxSnack={3} {...notistack}>
         <UpdateContainer>
-          <QuestionDialogsProvider>
+          <QuestionsDialogProvider>
             <FilterProvider>
               <VirtualListsProvider>{children}</VirtualListsProvider>
             </FilterProvider>
-          </QuestionDialogsProvider>
+          </QuestionsDialogProvider>
         </UpdateContainer>
       </SnackbarProvider>
       {useiOSPWAPrompt && (

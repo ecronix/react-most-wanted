@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
-import { useTheme as useAppTheme } from '@ecronix/material-ui-shell'
-import MenuContext from '@ecronix/material-ui-shell/providers/Menu/Context'
+import {
+  useTheme as useAppTheme,
+  MenuContext,
+} from '@ecronix/material-ui-shell'
 import { useTheme } from '@mui/material/styles'
 import { useConfig, useOnline } from '@ecronix/base-shell'
 

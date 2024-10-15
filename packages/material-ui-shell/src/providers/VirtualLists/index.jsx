@@ -1,8 +1,13 @@
 import { useContext } from 'react'
 import Context from './Context'
-export { default as withVirtualLists } from './with'
-export { default } from './Provider'
+import Provider from './Provider'
 
-export function useVirtualLists() {
+function useVirtualLists() {
   return useContext(Context)
+}
+
+export {
+  useVirtualLists,
+  Context as VirtualListsContext,
+  Provider as VirtualListsProvider,
 }
