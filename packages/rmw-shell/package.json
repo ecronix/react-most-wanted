@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/rmw-shell",
-  "version": "11.2.39",
+  "version": "11.2.40",
   "description": "React template with Material UI, Firebase, routing...",
   "type": "module",
   "scripts": {
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@ecronix/base-shell": "^2.6.14",
-    "@ecronix/material-ui-shell": "^3.5.13",
+    "@ecronix/material-ui-shell": "^3.5.15",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
