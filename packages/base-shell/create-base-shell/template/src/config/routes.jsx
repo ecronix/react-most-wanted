@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-key */
-import React, { lazy } from "react";
+import React from "react";
 import { AuthorizedRoute, UnauthorizedRoute } from "@ecronix/base-shell";
 import { SignInPage } from "../pages/SignIn";
 import { HomePage } from "../pages/Home";

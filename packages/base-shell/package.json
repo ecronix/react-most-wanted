@@ -15,7 +15,6 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "release": "release-it",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
@@ -32,7 +31,9 @@
     "react-dom": "^18.2.0",
     "react-intl": "^6.7.0",
     "react-router-dom": "^6.26.2",
-    "vite": "^5.4.8"
+    "rollup-plugin-visualizer": "^5.12.0",
+    "vite": "^5.4.8",
+    "vite-plugin-externalize-deps": "^0.8.0"
   },
   "author": "Tarik Huber",
   "homepage": "https://www.react-most-wanted.com/",
@@ -43,8 +44,8 @@
     "directory": "packages/base-shell"
   },
   "keywords": [
-    "shell",
-    "react",
-    "starterkit"
+    "ecronix",
+    "react-most-wanted",
+    "base-shell"
   ]
 }
