@@ -15,7 +15,7 @@ import { SearchField, useFilter } from "@ecronix/material-ui-shell";
 import { FirebaseFromContainer } from "@ecronix/rmw-shell";
 import IconButton from "@mui/material/IconButton";
 import { useAuth } from "@ecronix/base-shell";
-import { useQuestions } from "@ecronix/material-ui-shell";
+import { useQuestionsDialog } from "@ecronix/material-ui-shell";
 import { getDatabase, ref, set } from "firebase/database";
 import Box from "@mui/material/Box";
 

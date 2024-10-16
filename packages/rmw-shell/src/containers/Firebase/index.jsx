@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useConfig, useAuth } from "@ecronix/base-shell";
-import PathsProvider from "@ecronix/rmw-shell/providers/Firebase/Paths/Provider";
-import ListsProvider from "@ecronix/rmw-shell/providers/Firebase/Lists/Provider";
-import DocsProvider from "@ecronix/rmw-shell/providers/Firebase/Docs/Provider";
-import ColsProvider from "@ecronix/rmw-shell/providers/Firebase/Cols/Provider";
-import MessagingProvider from "@ecronix/rmw-shell/providers/Firebase/Messaging/Provider";
-import StorageProvider from "@ecronix/rmw-shell/providers/Firebase/Storage/Provider";
+import {
+  FirebasePathsProvider as PathsProvider,
+  FirebaseListsProvider as ListsProvider,
+  FirebaseDocsProvider as DocsProvider,
+  FirebaseColsProvider as ColsProvider,
+  FirebaseMessagingProvider as MessagingProvider,
+  FirebaseStorageProvider as StorageProvider,
+} from "@ecronix/rmw-shell";
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

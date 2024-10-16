@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withMessaging } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useFirebaseMessaging() {
+function useFirebaseMessaging() {
   return useContext(Context);
 }
+
+export {
+  useFirebaseMessaging,
+  Provider as FirebaseMessagingProvider,
+  Context as FirebaseMessagingContext,
+};

@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withLists } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useFirebaseLists() {
+function useFirebaseLists() {
   return useContext(Context);
 }
+
+export {
+  useFirebaseLists,
+  Provider as FirebaseListsProvider,
+  Context as FirebaseListsContext,
+};
