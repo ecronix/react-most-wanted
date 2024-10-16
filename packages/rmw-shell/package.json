@@ -25,7 +25,7 @@
     "@ecronix/material-ui-shell": "3.x",
     "@emotion/react": "11.x",
     "@emotion/styled": "11.x",
-    "@fontsource/roboto": "4.x",
+    "@fontsource/roboto": "4.x || 5.x",
     "@mui/icons-material": "5.x",
     "@mui/material": "5.x || 6.x",
     "@mui/styles": "5.x",
