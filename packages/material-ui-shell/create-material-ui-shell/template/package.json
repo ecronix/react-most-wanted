@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "This project was bootstrapped with [@ecronix/material-ui](https://github.com/ecronix/react-most-wanted)",
   "type": "module",
+  "private": "true",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
