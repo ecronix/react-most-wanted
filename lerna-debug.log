@@ -1,0 +1,23 @@
+0 silly argv {
+0 silly argv   _: [ 'version' ],
+0 silly argv   lernaVersion: '8.1.8',
+0 silly argv   '$0': '/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/.bin/lerna'
+0 silly argv }
+1 notice cli v8.1.8
+2 verbose packageConfigs Resolving packages based on package.json "workspaces" configuration.
+3 verbose rootPath /Users/aabedraba/github/ecronix/react-most-wanted
+4 info versioning independent
+5 silly isAnythingCommitted
+6 verbose isAnythingCommitted 1
+7 silly getCurrentBranch
+8 verbose currentBranch convert-to-vite
+9 silly remoteBranchExists
+10 silly isBehindUpstream
+11 error Error: Command was killed with SIGINT (User interruption with CTRL-C): git remote update
+11 error Fetching origin
+11 error     at makeError (/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/execa/lib/error.js:59:11)
+11 error     at module.exports.sync (/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/execa/index.js:186:17)
+11 error     at Object.execSync (/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/lerna/dist/index.js:1579:31)
+11 error     at updateRemote (/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/lerna/dist/index.js:9196:18)
+11 error     at isBehindUpstream (/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/lerna/dist/index.js:9186:3)
+11 error     at VersionCommand.initialize (/Users/aabedraba/github/ecronix/react-most-wanted/node_modules/lerna/dist/index.js:9477:57)
