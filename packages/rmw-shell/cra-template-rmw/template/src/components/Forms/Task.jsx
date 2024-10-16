@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  Autocomplete,
-  AvatarImage,
-} from "@ecronix/rmw-shell/components/FormFields";
+import { Autocomplete, AvatarImage } from "@ecronix/rmw-shell";
 import Stack from "@mui/material/Stack";
 import { TextField, DatePicker } from "mui-rff";
 import { AdapterMoment as DateAdapter } from "@mui/x-date-pickers/AdapterMoment";

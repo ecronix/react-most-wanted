@@ -14,7 +14,7 @@ import Zoom from "@mui/material/Zoom";
 import { IconButton } from "@mui/material";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useIntl } from "react-intl";
-import { useQuestions } from "@ecronix/material-ui-shell";
+import { useQuestionsDialog } from "@ecronix/material-ui-shell";
 import { ImageUploadDialogContainer } from "@ecronix/rmw-shell";
 import {
   GoogleIcon,
@@ -51,7 +51,7 @@ export function MyAccountPage() {
   const { firebase: firebaseConfig } = appConfig || {};
   const { firebaseuiProps } = firebaseConfig || {};
   const { signInOptions = [] } = firebaseuiProps || {};
-  const { openDialog } = useQuestions();
+  const { openDialog } = useQuestionsDialog();
   const database = getDatabase();
 
   const { auth, updateAuth } = useAuth();

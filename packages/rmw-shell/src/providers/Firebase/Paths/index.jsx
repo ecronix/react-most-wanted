@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withPaths } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useFirebasePaths() {
+function useFirebasePaths() {
   return useContext(Context);
 }
+
+export {
+  useFirebasePaths,
+  Provider as FirebasePathsProvider,
+  Context as FirebasePathsContext,
+};

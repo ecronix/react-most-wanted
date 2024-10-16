@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withCols } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useFirebaseCols() {
+function useFirebaseCols() {
   return useContext(Context);
 }
+
+export {
+  useFirebaseCols,
+  Provider as FirebaseColsProvider,
+  Context as FirebaseColsContext,
+};

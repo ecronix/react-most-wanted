@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import Context from "./Context";
-export { default as withDocs } from "./with";
-export { default } from "./Provider";
+import Provider from "./Provider";
 
-export function useFirebaseDocs() {
+function useFirebaseDocs() {
   return useContext(Context);
 }
+
+export {
+  useFirebaseDocs,
+  Provider as FirebaseDocsProvider,
+  Context as FirebaseDocsContext,
+};

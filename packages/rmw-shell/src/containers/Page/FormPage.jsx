@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Save from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
 import { useFirebasePaths } from "@ecronix/rmw-shell";
-import { useQuestions } from "@ecronix/material-ui-shell";
+import { useQuestionsDialog } from "@ecronix/material-ui-shell";
 import { useAuth } from "@ecronix/base-shell";
 import { FirebaseFromContainer } from "@ecronix/rmw-shell";
 import { getDatabase, ref, set } from "firebase/database";
@@ -25,7 +25,7 @@ export function FormPageContainer(props) {
     alwaysAllowDelete = false,
   } = props;
   const navigate = useNavigate();
-  const { openDialog } = useQuestions();
+  const { openDialog } = useQuestionsDialog();
   const { getPath } = useFirebasePaths();
   const { auth } = useAuth();
   const [submit, setSubmit] = useState(false);
