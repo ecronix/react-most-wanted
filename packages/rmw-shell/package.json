@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/rmw-shell",
-  "version": "11.2.25",
+  "version": "11.2.26",
   "description": "React template with Material UI, Firebase, routing...",
   "type": "module",
   "scripts": {
