@@ -6,7 +6,7 @@
     "create-my-template": "index.js"
   },
   "main": "index.js",
-  "peerDependencies": {
+  "dependencies": {
     "base-shell-template": "1.0.1"
   },
   "scripts": {
