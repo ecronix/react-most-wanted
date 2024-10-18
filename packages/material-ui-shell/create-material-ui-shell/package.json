@@ -6,7 +6,7 @@
     "create-my-template": "index.js"
   },
   "main": "index.js",
-  "dependencies": {
+  "devDependencies": {
     "material-ui-shell-template": "1.0.3"
   },
   "scripts": {
