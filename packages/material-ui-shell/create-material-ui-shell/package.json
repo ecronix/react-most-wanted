@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "devDependencies": {
-    "material-ui-shell-template": "1.0.3"
+    "material-ui-shell-template": "^1.0.3"
   },
   "scripts": {
     "start": "node index.js"
