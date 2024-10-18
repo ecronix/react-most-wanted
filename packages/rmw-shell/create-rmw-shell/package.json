@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/create-rmw-shell",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A template to create new projects based on @ecronix/rmw-shell",
   "bin": {
     "create-my-template": "index.js"
