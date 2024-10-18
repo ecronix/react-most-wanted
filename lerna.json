@@ -2,11 +2,14 @@
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "version": "independent",
   "packages": [
-    "packages/base-shell/create-base-shell/template",
-    "packages/material-ui-shell/create-material-ui-shell/template",
-    "packages/rmw-shell/create-rmw-shell/template",
     "packages/base-shell",
+    "packages/base-shell/create-base-shell",
+    "packages/base-shell/create-base-shell/template",
     "packages/material-ui-shell",
-    "packages/rmw-shell"
+    "packages/material-ui-shell/create-material-ui-shell",
+    "packages/material-ui-shell/create-material-ui-shell/template",
+    "packages/rmw-shell",
+    "packages/rmw-shell/create-rmw-shell",
+    "packages/rmw-shell/create-rmw-shell/template"
   ]
 }
