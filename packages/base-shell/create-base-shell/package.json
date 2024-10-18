@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "devDependencies": {
-    "base-shell-template": "1.0.1"
+    "base-shell-template": "^1.0.1"
   },
   "scripts": {
     "start": "node index.js"
