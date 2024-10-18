@@ -16,7 +16,7 @@
     "build": "vite build",
     "dev": "vite",
     "cypress:run": "cypress run",
-    "setup-template": "npm create @ecronix/base-shell template-app",
+    "setup-template": "npm create @ecronix/base-shell -y template-app",
     "start-template": "cd template-app && npm run dev",
     "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && rm -rf template-app"
   },
