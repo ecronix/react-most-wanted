@@ -6,10 +6,10 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "preview": "vite preview",
-    "release": "release-it",
-    "version": "echo $npm_package_version",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:run": "cypress run",
+    "setup-template": "npm create @ecronix/rmw-shell -y template-app",
+    "start-template": "cd template-app && npm run dev",
+    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && rm -rf template-app"
   },
   "files": [
     "dist"
@@ -72,6 +72,7 @@
     "@mui/x-date-pickers": "^7.20.0",
     "@vitejs/plugin-react": "^4.3.2",
     "chart.js": "^4.4.5",
+    "cypress": "^13.15.0",
     "expect": "^29.7.0",
     "final-form": "^4.20.10",
     "final-form-arrays": "^3.1.0",
@@ -101,6 +102,7 @@
     "react-router-dom": "^6.27.0",
     "react-window": "^1.8.10",
     "rollup-plugin-visualizer": "^5.12.0",
+    "start-server-and-test": "^2.0.8",
     "vite": "^5.4.9",
     "vite-plugin-externalize-deps": "^0.8.0"
   },
