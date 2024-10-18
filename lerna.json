@@ -1,6 +1,11 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
   "version": "independent",
+  "command": {
+    "publish": {
+      "gitReset": false
+    }
+  },
   "packages": [
     "packages/base-shell",
     "packages/base-shell/create-base-shell",
