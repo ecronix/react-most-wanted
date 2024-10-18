@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/create-base-shell",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A template to create new projects based on @ecronix/base-shell",
   "bin": {
     "create-my-template": "index.js"
