@@ -7,6 +7,9 @@
   },
   "main": "index.js",
   "dependencies": {},
+  "peerDependencies": {
+    "material-ui-shell-template": "1.0.3"
+  },
   "scripts": {
     "start": "node index.js"
   },
