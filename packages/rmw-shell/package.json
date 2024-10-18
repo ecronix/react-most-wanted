@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/rmw-shell",
-  "version": "11.2.46",
+  "version": "11.2.47",
   "description": "React template with Material UI, Firebase, routing...",
   "type": "module",
   "scripts": {
@@ -61,8 +61,8 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "^2.6.18",
-    "@ecronix/material-ui-shell": "^3.5.19",
+    "@ecronix/base-shell": "^2.6.19",
+    "@ecronix/material-ui-shell": "^3.5.20",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
@@ -114,5 +114,5 @@
   "keywords": [
     "react-component"
   ],
-  "gitHead": "df4574d55b76cea65859255882eb97e598c5e777"
+  "gitHead": "e0c94113805431c3a591c773c139b49a1ccaaa2b"
 }

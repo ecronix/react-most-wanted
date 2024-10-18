@@ -1,13 +1,13 @@
 {
   "name": "@ecronix/create-material-ui-shell",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A template to create new projects based on @ecronix/material-ui-shell",
   "bin": {
     "create-my-template": "index.js"
   },
   "main": "index.js",
   "devDependencies": {
-    "material-ui-shell-template": "^1.0.3"
+    "material-ui-shell-template": "^1.0.8"
   },
   "scripts": {
     "start": "node index.js"
@@ -19,5 +19,5 @@
   ],
   "author": "Abdallah",
   "license": "MIT",
-  "gitHead": "df4574d55b76cea65859255882eb97e598c5e777"
+  "gitHead": "e0c94113805431c3a591c773c139b49a1ccaaa2b"
 }
