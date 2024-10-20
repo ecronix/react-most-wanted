@@ -1,13 +1,13 @@
 {
   "name": "@ecronix/create-rmw-shell",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "A template to create new projects based on @ecronix/rmw-shell",
   "bin": {
     "create-my-template": "index.js"
   },
   "main": "index.js",
   "devDependencies": {
-    "rmw-shell-template": "^1.0.18"
+    "rmw-shell-template": "^1.0.19"
   },
   "scripts": {
     "start": "node index.js",
