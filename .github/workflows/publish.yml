@@ -14,6 +14,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: Install dependencies
         run: npm ci
       - name: Run tests
@@ -24,3 +28,38 @@ jobs:
         run: npx lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  rmw-shell-demo:
+    if: ${{ always() }}
+    needs: [rmw-shell-template]
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - name: install-rmw-shell
+        run: npx create @ecronix/rmw-shell@latest demo-app
+      - name: install firebase functins dependencies
+        run: npm i
+        working-directory: ./demo-app/firebase/functions
+      - name: run build
+        run: |
+          npm run build
+        env:
+          CI: false
+        working-directory: ./demo-app
+      - name: Install firebase tools
+        run: npm i -g firebase-tools
+      - name: Deploy
+        run: |
+          firebase use prod
+          firebase deploy --only hosting --token $FIREBASE_TOKEN
+        working-directory: ./demo-app
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
