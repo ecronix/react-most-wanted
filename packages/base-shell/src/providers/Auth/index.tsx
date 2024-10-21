@@ -2,6 +2,10 @@ import React, { useContext } from "react";
 import Context, { AuthContextType } from "./Context";
 import Provider from "./Provider";
 
+/**
+    * Hook to use the AuthContext
+    * @returns {AuthContextType} The AuthContext
+*/
 function useAuth(): AuthContextType {
   const context = useContext(Context);
 
