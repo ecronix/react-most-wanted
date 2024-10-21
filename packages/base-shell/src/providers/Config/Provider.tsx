@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import Context from "./Context";
-import { AppConfig } from "@ecronix/base-shell/containers";
+import { AppConfig } from "@ecronix/base-shell";
 
 interface ProviderProps {
   appConfig: AppConfig;
