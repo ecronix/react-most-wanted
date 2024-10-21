@@ -13,7 +13,7 @@
     }
   },
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
     "setup-template": "npm create @ecronix/base-shell@latest -y template-app",
