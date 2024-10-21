@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@ecronix/base-shell": "^2.6.38"
+    "@ecronix/base-shell": "^2.6.40"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4",

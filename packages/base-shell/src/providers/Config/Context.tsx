@@ -1,4 +1,4 @@
-import { AppConfig } from "@ecronix/base-shell/containers";
+import { AppConfig } from "@ecronix/base-shell";
 import React from "react";
 
 export interface ConfigContextType {
