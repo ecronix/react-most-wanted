@@ -8,7 +8,7 @@
   ],
   "main": "dist/material-ui-shell.js",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
     "setup-template": "npm create @ecronix/material-ui-shell@latest -y template-app",
@@ -17,7 +17,8 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/material-ui-shell.js"
+      "import": "./dist/material-ui-shell.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "peerDependencies": {
