@@ -1,6 +1,6 @@
 {
   "name": "material-ui-shell-template",
-  "version": "1.0.24-alpha.0",
+  "version": "1.0.24-alpha.1",
   "description": "This project was bootstrapped with [@ecronix/material-ui](https://github.com/ecronix/react-most-wanted)",
   "type": "module",
   "private": "true",
@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@ecronix/material-ui-shell": "^3.5.36-alpha.0"
+    "@ecronix/material-ui-shell": "^3.5.36-alpha.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4",
