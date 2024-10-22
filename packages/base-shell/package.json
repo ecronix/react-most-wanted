@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.6.42",
+  "version": "2.6.43",
   "description": "base-shell React component",
   "type": "module",
   "files": [
