@@ -35,17 +35,5 @@ function useAuth(): AuthContextType {
 
   return context;
 }
-/**
- * Custom hook for accessing authentication context.
- */
-export { useAuth };
 
-/**
- * The authentication context object.
- */
-export { Context as AuthContext };
-
-/**
- * The authentication provider component.
- */
-export { Provider as AuthProvider };
+export { useAuth, Context as AuthContext, Provider as AuthProvider };
