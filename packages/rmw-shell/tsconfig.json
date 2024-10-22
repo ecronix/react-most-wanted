@@ -2,10 +2,10 @@
   "extends": "../../base-tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@ecronix/base-shell": ["./src"],
-      "@ecronix/base-shell/*": ["./src/*"]
+      "@ecronix/rmw-shell": ["./src"],
+      "@ecronix/rmw-shell/*": ["./src/*"]
     },
-    "declarationDir": "./dist/types",
+    "declarationDir": "./dist/types"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

@@ -4,7 +4,7 @@
   "description": "React template with Material UI, Firebase, routing...",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
     "setup-template": "npm create @ecronix/rmw-shell@latest -y template-app",
@@ -17,7 +17,8 @@
   "main": "dist/rmw-shell.js",
   "exports": {
     ".": {
-      "import": "./dist/rmw-shell.js"
+      "import": "./dist/rmw-shell.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "peerDependencies": {

@@ -17,11 +17,12 @@ export default defineConfig({
     alias: {
       "@ecronix/rmw-shell": path.resolve(__dirname, "src"),
     },
+    extensions: ['.js', '.ts', '.jsx', '.tsx'],
   },
   build: {
     minify: false,
     lib: {
-      entry: path.resolve(__dirname, "src/index.js"),
+      entry: path.resolve(__dirname, "src/index.ts"),
       name: "rmw-shell",
       formats: ["es"],
     },

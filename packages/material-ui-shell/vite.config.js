@@ -11,11 +11,12 @@ export default defineConfig({
     alias: {
       '@ecronix/material-ui-shell': path.resolve(__dirname, 'src'),
     },
+    extensions: ['.js', '.ts', '.jsx', '.tsx'],
   },
   build: {
     minify: false,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.js'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'material-ui-shell',
       formats: ['es'],
     },
