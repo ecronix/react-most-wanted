@@ -4,7 +4,7 @@
   "description": "React template with Material UI, Firebase, routing...",
   "type": "module",
   "scripts": {
-    "build": "vite build && tsc",
+    "build:package": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
     "setup-template": "npm create @ecronix/rmw-shell@latest -y template-app",

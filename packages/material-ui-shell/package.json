@@ -8,7 +8,7 @@
   ],
   "main": "dist/material-ui-shell.js",
   "scripts": {
-    "build": "vite build && tsc",
+    "build:package": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
     "setup-template": "npm create @ecronix/material-ui-shell@latest -y template-app",
