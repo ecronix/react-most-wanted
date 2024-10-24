@@ -14,6 +14,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -21,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        run: npx lerna run test --since master
+        run: npx lerna run test:e2e --since master
       - name: Build packages
         run: npx lerna run build:packages --since master
       - name: Publish packages
@@ -44,7 +45,7 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: install-rmw-shell
-        run: npx create @ecronix/rmw-shell@latest demo-app
+        run: npm create @ecronix/rmw-shell@latest demo-app
       - name: install firebase functins dependencies
         run: npm i
         working-directory: ./demo-app/firebase/functions
