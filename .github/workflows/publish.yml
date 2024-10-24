@@ -23,7 +23,7 @@ jobs:
       - name: Run tests
         run: npx lerna run test --since master
       - name: Build packages
-        run: npx lerna run build
+        run: npx lerna run build:packages --since master
       - name: Publish packages
         run: npx lerna publish from-package --yes
         env:
@@ -31,7 +31,7 @@ jobs:
 
   rmw-shell-demo:
     if: ${{ always() }}
-    needs: [rmw-shell-template]
+    needs: [publish_packages]
     runs-on: ubuntu-latest
     environment: prod
     steps:
