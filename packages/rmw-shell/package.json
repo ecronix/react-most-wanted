@@ -43,7 +43,7 @@
     "jss-rtl": "0.x",
     "lp-react-virtualized-auto-sizer-react-18": "1.x",
     "moment": "2.x",
-    "mui-rff": "7.x || 8.x",
+    "mui-rff": "8.x",
     "notistack": "2.x || 3.x",
     "react": "17.x || 18.x",
     "react-beautiful-dnd": "13.x",
