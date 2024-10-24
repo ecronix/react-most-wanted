@@ -26,7 +26,7 @@ jobs:
       - name: Build packages
         run: npx lerna run build:packages --since master
       - name: Publish packages
-        run: npx lerna publish from-package --yes
+        run: npx lerna publish patch --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
