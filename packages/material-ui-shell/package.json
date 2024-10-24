@@ -11,9 +11,10 @@
     "build:package": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
-    "setup-template": "npm create @ecronix/material-ui-shell@$(git branch --show-current) -y template-app",
-    "start-template": "cd template-app && npm run dev",
-    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && rm -rf template-app"
+    "setup-template": "npm link && cd create-material-ui-shell/template && npm link @ecronix/material-ui-shell && npm install",
+    "start-template": "cd create-material-ui-shell/template && npm run dev",
+    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && npm run test-cleanup",
+    "test-cleanup": "cd create-material-ui-shell/template && rm package-lock.json"
   },
   "exports": {
     ".": {

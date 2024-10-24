@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/base-shell",
-  "version": "2.6.47",
+  "version": "2.6.49-master.0",
   "description": "base-shell React component",
   "type": "module",
   "files": [
@@ -18,9 +18,10 @@
     "build:package": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
-    "setup-template": "npm create @ecronix/base-shell@$(git branch --show-current) -y template-app",
-    "start-template": "cd template-app && npm run dev",
-    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && rm -rf template-app"
+    "setup-template": "npm link && cd create-base-shell/template && npm link @ecronix/base-shell && npm install",
+    "start-template": "cd create-base-shell/template && npm run dev",
+    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && npm run test-cleanup",
+    "test-cleanup": "cd create-base-shell/template && rm package-lock.json"
   },
   "peerDependencies": {
     "intl": "1.x",

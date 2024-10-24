@@ -7,9 +7,10 @@
     "build:package": "vite build && tsc",
     "dev": "vite",
     "cypress:run": "cypress run",
-    "setup-template": "npm create @ecronix/rmw-shell@$(git branch --show-current) -y template-app",
-    "start-template": "cd template-app && npm run dev",
-    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && rm -rf template-app"
+    "setup-template": "npm link && cd create-rmw-shell/template && npm link @ecronix/rmw-shell && npm install",
+    "start-template": "cd create-rmw-shell/template && npm run dev",
+    "test:e2e": "npm run setup-template && start-server-and-test start-template http://localhost:5173 cypress:run && npm run test-cleanup",
+    "test-cleanup": "cd create-rmw-shell/template && rm package-lock.json"
   },
   "files": [
     "dist"
