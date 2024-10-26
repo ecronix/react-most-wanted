@@ -16,4 +16,4 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run tests
-        run: npx lerna run test --since master
+        run: npx lerna run test:package --since master
