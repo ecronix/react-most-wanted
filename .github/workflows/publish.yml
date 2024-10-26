@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
+          registry-url: "https://registry.npmjs.org"
+          scope: "@ecronix"
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
@@ -31,8 +33,8 @@ jobs:
       - name: Publish packages
         run: npx lerna publish patch --yes
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
 
   rmw-shell-demo:
     if: ${{ always() }}
