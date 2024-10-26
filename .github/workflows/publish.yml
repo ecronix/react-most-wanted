@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+
 jobs:
   publish_packages:
     runs-on: ubuntu-latest
@@ -29,6 +32,7 @@ jobs:
         run: npx lerna publish patch --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   rmw-shell-demo:
     if: ${{ always() }}
