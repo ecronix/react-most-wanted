@@ -1,13 +1,13 @@
 {
   "name": "@ecronix/create-material-ui-shell",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "description": "A template to create new projects based on @ecronix/material-ui-shell",
   "bin": {
     "create-my-template": "index.js"
   },
   "main": "index.js",
   "devDependencies": {
-    "material-ui-shell-template": "^1.0.32"
+    "material-ui-shell-template": "^1.0.33"
   },
   "scripts": {
     "start": "node index.js"

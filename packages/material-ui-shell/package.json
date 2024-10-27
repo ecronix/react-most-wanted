@@ -1,6 +1,6 @@
 {
   "name": "@ecronix/material-ui-shell",
-  "version": "3.5.45",
+  "version": "3.5.46",
   "description": "material-ui-shell React component",
   "type": "module",
   "files": [
@@ -44,7 +44,7 @@
     "react-window": "1.x"
   },
   "devDependencies": {
-    "@ecronix/base-shell": "^2.6.54",
+    "@ecronix/base-shell": "^2.6.55",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
