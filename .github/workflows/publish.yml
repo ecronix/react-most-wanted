@@ -26,9 +26,13 @@ jobs:
       - name: "NPM Identity"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          BLA: as
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
           cat .npmrc
+          echo ${{ secrets.NPM_TOKEN }}
+          echo $BLA
+
       # - name: Install dependencies
       #   run: npm ci
       # - name: Run tests
