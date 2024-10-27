@@ -35,7 +35,7 @@ jobs:
       - name: Build packages
         run: npx lerna run build:packages --since master
       - name: Publish packages
-        run: npx lerna publish patch --yes
+        run: npx lerna publish patch --no-verify-access --yes
 
   rmw-shell-demo:
     if: ${{ always() }}
