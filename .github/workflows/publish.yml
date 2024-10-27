@@ -18,12 +18,13 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          registry-url: "https://registry.npmjs.org"
-          scope: "@ecronix"
       - name: git config
         run: |
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install dependencies
         run: npm ci
       - name: Run tests
@@ -32,9 +33,6 @@ jobs:
         run: npx lerna run build:packages --since master
       - name: Publish packages
         run: npx lerna publish patch --yes
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
 
   rmw-shell-demo:
     if: ${{ always() }}
