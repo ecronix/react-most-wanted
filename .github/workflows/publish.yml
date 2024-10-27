@@ -34,9 +34,9 @@ jobs:
       - name: Run tests
         run: npx lerna run test:e2e --since master
       - name: Build packages
-        run: npx lerna run build:package --since master
+        run: npx lerna run build:package
       - name: Publish packages
-        run: npx lerna publish patch --no-verify-access --yes
+        run: npx lerna publish patch --yes
 
   rmw-shell-demo:
     if: ${{ always() }}
