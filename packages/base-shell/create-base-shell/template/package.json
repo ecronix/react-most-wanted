@@ -1,6 +1,6 @@
 {
   "name": "base-shell-template",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "This project was bootstrapped with [@ecronix/base-shell](https://github.com/ecronix/react-most-wanted)",
   "private": "true",
   "type": "module",
@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@ecronix/base-shell": "^2.6.52"
+    "@ecronix/base-shell": "^2.6.53"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4",
