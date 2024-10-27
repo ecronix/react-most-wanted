@@ -43,6 +43,9 @@ jobs:
     needs: [publish_packages]
     runs-on: ubuntu-latest
     environment: prod
+    defaults:
+      run:
+        working-directory: ./packages/rmw-shell/create-rmw-shell/template
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -53,22 +56,17 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - name: install-rmw-shell
-        run: npm create @ecronix/rmw-shell@latest demo-app
+        run: npm install
       - name: install firebase functins dependencies
         run: npm i
-        working-directory: ./demo-app/firebase/functions
       - name: run build
         run: |
           npm run build
-        env:
-          CI: false
-        working-directory: ./demo-app
       - name: Install firebase tools
         run: npm i -g firebase-tools
       - name: Deploy
         run: |
           firebase use prod
           firebase deploy --only hosting --token $FIREBASE_TOKEN
-        working-directory: ./demo-app
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
