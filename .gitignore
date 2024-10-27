@@ -3,3 +3,4 @@ npm-debug.log*
 .dccache
 .DS_Store
 lerna-dubug.log
+.npmrc
