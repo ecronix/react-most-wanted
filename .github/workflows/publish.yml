@@ -28,46 +28,47 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npx lerna run test:e2e --since master
-      - name: Build packages
-        run: npx lerna run build:packages --since master
-      - name: Publish packages
-        run: npx lerna publish patch --no-verify-access --yes
+          cat .npmrc
+      # - name: Install dependencies
+      #   run: npm ci
+      # - name: Run tests
+      #   run: npx lerna run test:e2e --since master
+      # - name: Build packages
+      #   run: npx lerna run build:packages --since master
+      # - name: Publish packages
+      #   run: npx lerna publish patch --no-verify-access --yes
 
-  rmw-shell-demo:
-    if: ${{ always() }}
-    needs: [publish_packages]
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: git config
-        run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-      - name: install-rmw-shell
-        run: npm create @ecronix/rmw-shell@latest demo-app
-      - name: install firebase functins dependencies
-        run: npm i
-        working-directory: ./demo-app/firebase/functions
-      - name: run build
-        run: |
-          npm run build
-        env:
-          CI: false
-        working-directory: ./demo-app
-      - name: Install firebase tools
-        run: npm i -g firebase-tools
-      - name: Deploy
-        run: |
-          firebase use prod
-          firebase deploy --only hosting --token $FIREBASE_TOKEN
-        working-directory: ./demo-app
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  # rmw-shell-demo:
+  #   if: ${{ always() }}
+  #   needs: [publish_packages]
+  #   runs-on: ubuntu-latest
+  #   environment: prod
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-node@v4
+  #       with:
+  #         node-version: "20"
+  #     - name: git config
+  #       run: |
+  #         git config user.name "${GITHUB_ACTOR}"
+  #         git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+  #     - name: install-rmw-shell
+  #       run: npm create @ecronix/rmw-shell@latest demo-app
+  #     - name: install firebase functins dependencies
+  #       run: npm i
+  #       working-directory: ./demo-app/firebase/functions
+  #     - name: run build
+  #       run: |
+  #         npm run build
+  #       env:
+  #         CI: false
+  #       working-directory: ./demo-app
+  #     - name: Install firebase tools
+  #       run: npm i -g firebase-tools
+  #     - name: Deploy
+  #       run: |
+  #         firebase use prod
+  #         firebase deploy --only hosting --token $FIREBASE_TOKEN
+  #       working-directory: ./demo-app
+  #       env:
+  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
