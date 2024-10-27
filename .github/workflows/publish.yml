@@ -23,6 +23,7 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           echo //registry.npmjs.org/:_authToken=${NPM_TOKEN} > .npmrc
+          cat .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Install dependencies
