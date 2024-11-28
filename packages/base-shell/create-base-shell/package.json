@@ -1,13 +1,13 @@
 {
   "name": "@ecronix/create-base-shell",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "description": "A template to create new projects based on @ecronix/base-shell",
   "bin": {
     "create-my-template": "index.js"
   },
   "main": "index.js",
   "devDependencies": {
-    "base-shell-template": "^1.0.37"
+    "base-shell-template": "^1.0.38"
   },
   "scripts": {
     "start": "node index.js"

@@ -1,6 +1,6 @@
 {
   "name": "rmw-shell-template",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "description": "This project was bootstrapped with [@ecronix/rmw-shell](https://github.com/ecronix/react-most-wanted)",
   "private": "true",
   "type": "module",
@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@ecronix/rmw-shell": "^11.2.80"
+    "@ecronix/rmw-shell": "^11.2.81"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4",
