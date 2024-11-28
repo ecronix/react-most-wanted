@@ -1,0 +1,15 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/rmw-shell",
+    "packages/material-ui-shell",
+    "packages/base-shell"
+  ],
+  "devDependencies": {
+    "lerna": "^8.1.8"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
+  }
+}

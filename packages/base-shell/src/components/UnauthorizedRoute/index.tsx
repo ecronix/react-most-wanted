@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useLocation } from "react-router-dom";
 
-export function UnauthorizedRoute({ children, redirectTo = "/", ...rest }) {
+export function UnauthorizedRoute({ children, redirectTo = "/", ...rest }: any) {
   const { appConfig } = useConfig();
   let location = useLocation();
   const { auth: authConfig } = appConfig || {};
