@@ -1,7 +1,7 @@
 {
   "name": "@ecronix/rmw-shell",
   "version": "11.2.80",
-  "description": "React template with Material UI, Firebase, routing...",
+  "description": "React template with Material UI, Firebase, routing.",
   "type": "module",
   "scripts": {
     "build:package": "vite build && tsc",
