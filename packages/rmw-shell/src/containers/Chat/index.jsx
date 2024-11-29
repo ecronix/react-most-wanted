@@ -42,7 +42,7 @@ export function ChatContainer({ path }) {
       let messagesRef = query(
         ref(getDatabase(), path),
         orderByKey(),
-        limitToLast(size),
+        limitToLast(size)
       );
 
       watchList(messagesRef, alias);
@@ -174,7 +174,7 @@ export function ChatContainer({ path }) {
         </Scrollbar>
       </div>
       <div>
-        <Input path={path} />
+        <InputContainer path={path} />
       </div>
     </div>
   );
