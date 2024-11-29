@@ -1,7 +1,12 @@
 import React, { useEffect, useReducer } from "react";
 import Context from "./Context";
 
-function reducer(state, action) {
+type ReducerAction = {
+  type: string;
+  auth: any;
+};
+
+function reducer(state: any, action: ReducerAction) {
   const { type, auth } = action;
   switch (type) {
     case "SET_AUTH":
@@ -13,7 +18,10 @@ function reducer(state, action) {
   }
 }
 
-const Provider = ({ persistKey = "auth", children }) => {
+const Provider: React.FC<{
+  children: React.ReactNode;
+  persistKey: string;
+}> = ({ persistKey = "auth", children }) => {
   const persistAuth = JSON.parse(
     localStorage.getItem(persistKey)?.replace("undefined", "{}") || "{}"
   );
@@ -28,11 +36,11 @@ const Provider = ({ persistKey = "auth", children }) => {
     }
   }, [auth, persistKey]);
 
-  const setAuth = (auth) => {
+  const setAuth = (auth: any) => {
     dispatch({ type: "SET_AUTH", auth });
   };
 
-  const updateAuth = (auth) => {
+  const updateAuth = (auth: any) => {
     dispatch({ type: "UPDATE_AUTH", auth });
   };
 

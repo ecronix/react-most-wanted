@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Context from "./Context";
 
-const Provider = ({
+export interface LocaleProviderProps {
+  children: React.ReactNode;
+  defaultLocale?: string;
+  persistKey?: string;
+}
+
+const Provider: React.FC<LocaleProviderProps> = ({
   children,
   defaultLocale = "en",
   persistKey = "locale",

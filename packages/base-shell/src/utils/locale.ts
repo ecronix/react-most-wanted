@@ -1,6 +1,6 @@
 //import areIntlLocalesSupported from 'intl-locales-supported'
 //import intl from 'intl'
-import { defineMessages } from 'react-intl'
+import { defineMessages } from "react-intl";
 
 /*
 const loadLocalePolyfill = (locale) => {
@@ -28,49 +28,53 @@ const loadLocalePolyfill = (locale) => {
 
 const getUsersPreferredLanguages = () => {
   if (navigator.languages !== undefined) {
-    return navigator.languages
+    return navigator.languages;
   } else if (navigator.language !== undefined) {
-    return [navigator.language]
+    return [navigator.language];
   } else {
-    return undefined
+    return undefined;
   }
-}
+};
 
-const parseLanguages = (acceptedLangs, defaultLang = false) => {
-  const userPref = getUsersPreferredLanguages()
+const parseLanguages = (acceptedLangs: string[], defaultLang: string = "") => {
+  const userPref = getUsersPreferredLanguages();
 
   const match = userPref
     ? userPref.find((lang) => acceptedLangs.includes(lang))
-    : undefined
+    : undefined;
 
-  if (match === undefined && defaultLang !== false) {
-    return defaultLang
+  if (match === undefined && defaultLang !== "") {
+    return defaultLang;
   }
 
-  return match
-}
+  return match;
+};
 
-const getLocaleMessages = async (l, ls) => {
+const getLocaleMessages = async (
+  l: string,
+  ls: { locale: string; messages: any }[]
+) => {
   if (ls) {
     for (let i = 0; i < ls.length; i++) {
-      if (ls[i]['locale'] === l) {
-        const { default: messages } = await defineMessages(ls[i].messages)
+      if (ls[i]["locale"] === l) {
+        const { default: messages } = await defineMessages(ls[i].messages);
 
-        return messages
+        return messages;
       }
     }
   }
 
-  return {}
-}
+  return {};
+};
 
-const formatMessage = (messages = [], id) => {
-  return messages[id] || id
-}
+// TODO possibly unused - unused in base-shell
+const formatMessage = (messages = [], id: any) => {
+  return messages[id] || id;
+};
 
 export {
-  formatMessage,
+  // formatMessage,
   getLocaleMessages,
   //loadLocalePolyfill
-  parseLanguages
-}
+  parseLanguages,
+};

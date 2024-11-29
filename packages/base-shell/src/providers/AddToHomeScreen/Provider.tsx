@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 import Context from "./Context";
 
-const initialState = {
-  deferredPrompt: () => {},
+const initialState: AddToHomeScreenStateProps = {
+  deferredPrompt: undefined,
   isAppInstallable: false,
   isAppInstalled: false,
 };
 
-const Provider = ({ children }) => {
-  const [state, setA2HPState] = useState(initialState);
+export type AddToHomeScreenStateProps = {
+  deferredPrompt?: Event | undefined;
+  isAppInstallable?: boolean;
+  isAppInstalled?: boolean;
+};
+
+const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [state, setA2HPState] =
+    useState<AddToHomeScreenStateProps>(initialState);
 
   window.addEventListener("beforeinstallprompt", (e) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt

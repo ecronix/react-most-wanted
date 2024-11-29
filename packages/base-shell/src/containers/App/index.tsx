@@ -11,15 +11,19 @@ export interface AppConfig {
     LandingPage?: React.ComponentType;
   };
   components?: {
+    Menu?: React.ComponentType;
     Loading?: React.ComponentType;
   };
   containers?: {
     AppContainer?: React.ComponentType;
+    LayoutContainer?: React.ComponentType;
   };
   [key: string]: any;
 }
 
-export const AppContainer: React.FC<AppContainerProps> = ({ config: appConfig }) => {
+export const AppContainer: React.FC<AppContainerProps> = ({
+  config: appConfig,
+}) => {
   const config: AppConfig = { ...appConfig };
   const { pages, components, containers } = config;
   const { LandingPage = false } = pages || {};
@@ -32,14 +36,12 @@ export const AppContainer: React.FC<AppContainerProps> = ({ config: appConfig })
         <AppContainer>
           <BrowserRouter>
             <Routes>
-            {LandingPage && (
-              <Route path="/" element={<LandingPage />} />
-            )}
+              {LandingPage && <Route path="/" element={<LandingPage />} />}
               <Route
                 path="*"
                 element={
                   <Suspense fallback={<Loading />}>
-                  <LayoutContainer />
+                    <LayoutContainer />
                   </Suspense>
                 }
               />

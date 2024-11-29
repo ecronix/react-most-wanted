@@ -4,8 +4,21 @@ export interface AuthContextType {
   auth: {
     isAuthenticated: boolean;
   };
+  /**
+   * @description Set auth to provided auth parameter
+   * @param auth
+   */
+  setAuth: (auth: any) => void;
+
+  /**
+   * @description Update auth to provided auth parameter
+   * @param auth
+   */
+  updateAuth: (auth: any) => void;
 }
 
-const ConfigContext = React.createContext<AuthContextType | undefined>(undefined);
+const ConfigContext = React.createContext<AuthContextType | undefined>(
+  undefined
+);
 
 export default ConfigContext;

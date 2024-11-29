@@ -1,4 +1,4 @@
-export const merge = (obj1, obj2) => {
+export const merge = (obj1: Record<string, any>, obj2: Record<string, any>) => {
   let temp = { ...obj1, ...obj2 };
 
   Object.keys(temp).forEach((key) => {
