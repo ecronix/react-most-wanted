@@ -1,7 +1,13 @@
 import React, { useReducer } from 'react'
 import Context from './Context'
 
-function reducer(state, action) {
+type ReducerAction = {
+  type: string
+  name: string
+  offset: any
+}
+
+function reducer(state: any, action: ReducerAction) {
   const { type, name, offset } = action
   switch (type) {
     case 'SET_OFFSET':
@@ -11,14 +17,14 @@ function reducer(state, action) {
   }
 }
 
-const Provider = ({ children }) => {
+const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {})
 
-  const setOffset = (name, offset) => {
+  const setOffset = (name: string, offset: any) => {
     dispatch({ type: 'SET_OFFSET', name, offset })
   }
 
-  const getOffset = (name) => {
+  const getOffset = (name: string) => {
     return state[name] || 0
   }
 

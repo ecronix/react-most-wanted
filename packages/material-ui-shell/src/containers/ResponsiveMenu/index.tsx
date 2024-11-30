@@ -5,7 +5,19 @@ import { useConfig } from '@ecronix/base-shell'
 
 //const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
-const CustomSwipeableDrawer = styled(SwipeableDrawer)(({
+interface CustomSwipeableDrawerProps {
+  theme: any
+  width: number | string
+  menucontext: {
+    isDesktop: boolean
+    isMenuOpen: boolean
+    isMiniMode: boolean
+  }
+}
+
+const CustomSwipeableDrawer = styled(
+  SwipeableDrawer
+)<CustomSwipeableDrawerProps>(({
   theme,
   width,
   menucontext: { isDesktop, isMenuOpen, isMiniMode },
@@ -46,7 +58,11 @@ const CustomSwipeableDrawer = styled(SwipeableDrawer)(({
   }
 })
 
-export function ResponsiveMenuContainer({ children }) {
+export function ResponsiveMenuContainer({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   const { isRTL } = useAppTheme()
   const config = useConfig()
   const width = config?.appConfig?.menu?.width || 240

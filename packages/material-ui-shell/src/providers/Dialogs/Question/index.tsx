@@ -3,7 +3,13 @@ import Context from './Context'
 import Provider from './Provider'
 
 function useQuestionsDialog() {
-  return useContext(Context)
+  const context = useContext(Context)
+  if (context === undefined) {
+    throw new Error(
+      'useQuestionsDialog must be used within a QuestionsDialogProvider'
+    )
+  }
+  return context
 }
 
 export {

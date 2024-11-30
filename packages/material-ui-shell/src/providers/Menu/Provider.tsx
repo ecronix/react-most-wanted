@@ -10,7 +10,17 @@ import {
 } from './store/actions'
 import reducer from './store/reducer'
 
-const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
+type ProviderProps = {
+  children: React.ReactNode
+  persistKey?: string
+  appConfig: any
+}
+
+const Provider: React.FC<ProviderProps> = ({
+  appConfig,
+  children,
+  persistKey = 'menu',
+}) => {
   const { menu } = appConfig || {}
   const {
     initialAuthMenuOpen,
@@ -32,9 +42,16 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
     ...savedState,
   })
 
+  enum togglerTypes {
+    isAuthMenuOpen = 'isAuthMenuOpen',
+    isMiniMode = 'isMiniMode',
+    isMenuOpen = 'isMenuOpen',
+    isMobileMenuOpen = 'isMobileMenuOpen',
+    isMiniSwitchVisibility = 'isMiniSwitchVisibility',
+  }
   const props = {
     //setter
-    toggleThis(value, newValue = null) {
+    toggleThis(value: togglerTypes, newValue: boolean | null = null) {
       if (value === 'isAuthMenuOpen') {
         dispatch(
           setIsAuthMenuOpen(
@@ -83,8 +100,10 @@ const Provider = ({ appConfig, children, persistKey = 'menu' }) => {
   useEffect(() => {
     if (useWindowWatcher) {
       if (!isDesktop) {
-        props.setMenuOpen(false)
-        props.setMiniMode(false)
+        // props.setMenuOpen(false)
+        // props.setMiniMode(false)
+        props.toggleThis(togglerTypes.isMiniMode, false)
+        props.toggleThis(togglerTypes.isMenuOpen, false)
       }
     }
   }, [isDesktop, props, useWindowWatcher])

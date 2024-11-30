@@ -1,6 +1,11 @@
 import { createTheme } from '@mui/material/styles'
 
-export const getThemeSource = (id, ts, isDarkMode, isRTL) => {
+export const getThemeSource = (
+  id: string,
+  ts,
+  isDarkMode: boolean,
+  isRTL: boolean
+) => {
   if (ts) {
     for (let i = 0; i < ts.length; i++) {
       if (ts[i]['id'] === id) {

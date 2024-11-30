@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
 
-const Provider = ({ children, persistKey = 'theme', appConfig }) => {
+type ProviderProps = {
+  children: React.ReactNode
+  persistKey?: string
+  appConfig: any
+}
+const Provider: React.FC<ProviderProps> = ({
+  children,
+  persistKey = 'theme',
+  appConfig,
+}) => {
   const { theme: themeConfig } = appConfig || {}
   const { defaultThemeID, defaultIsDarkMode, defaultIsRTL } = themeConfig || {}
 
@@ -13,7 +22,7 @@ const Provider = ({ children, persistKey = 'theme', appConfig }) => {
   const isDarkModeKey = `${persistKey}:isDarkMode`
   const isRTLKey = `${persistKey}:isRTL`
 
-  const toggleThisTheme = (mode) => {
+  const toggleThisTheme = (mode: 'isRTL' | 'isDarkMode') => {
     if (mode === 'isRTL') setIsRTL(!isRTL)
     if (mode === 'isDarkMode') setIsDarkMode(!isDarkMode)
   }

@@ -22,7 +22,9 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
-const LayoutContent = ({ children }) => {
+const LayoutContent: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { themeID, isDarkMode, isRTL } = useTheme()
@@ -77,7 +79,11 @@ const LayoutContent = ({ children }) => {
   )
 }
 
-export function LayoutContainer({ children }) {
+type LCProps = {
+  children: React.ReactNode
+}
+
+export function LayoutContainer({ children }: LCProps): JSX.Element {
   const { appConfig } = useConfig()
 
   return (

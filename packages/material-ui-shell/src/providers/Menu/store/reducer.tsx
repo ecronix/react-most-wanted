@@ -1,10 +1,26 @@
 import * as types from './types'
 
-export default function reducer(state = {}, action) {
+type ReducerAction = {
+  type: string
+  payload: boolean
+}
+
+export type MenuReducerState = {
+  isAuthMenuOpen?: boolean
+  isMiniMode?: boolean
+  isMenuOpen?: boolean
+  isMobileMenuOpen?: boolean
+  isMiniSwitchVisibility?: boolean
+}
+
+export default function reducer(
+  state: MenuReducerState = {},
+  action: ReducerAction
+) {
   const { type, payload } = action
   switch (type) {
     case types.SET_IS_AUTH_MENU_OPEN:
-      return { ...state, isAuthMenuOpen: payload}
+      return { ...state, isAuthMenuOpen: payload }
     case types.SET_IS_MINI_MODE:
       return { ...state, isMiniMode: payload }
     case types.SET_IS_MENU_OPEN:

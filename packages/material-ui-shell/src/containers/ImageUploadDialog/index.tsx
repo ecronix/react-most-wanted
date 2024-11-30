@@ -1,6 +1,6 @@
 import Cropper from 'react-easy-crop'
-import React, { useState, useCallback, useEffect } from 'react'
-import getCroppedImg from './getCropImage'
+import React, { useState, useCallback, useEffect, Ref } from 'react'
+import getCroppedImg, { IPixelCrop } from './getCropImage'
 import { useIntl } from 'react-intl'
 import { useTheme } from '@emotion/react'
 import {
@@ -13,15 +13,20 @@ import {
   Slide,
   useMediaQuery,
   CircularProgress,
+  SlideProps,
 } from '@mui/material'
 
 import { CloudUpload } from '@mui/icons-material'
+import { TransitionProps } from '@mui/material/transitions'
 
-const Transition = React.forwardRef((props, ref) => (
-  <Slide direction="up" {...props} ref={ref} />
-))
+type TransitionComponentProps = TransitionProps & {
+  children: React.ReactElement
+}
+const Transition = React.forwardRef<unknown, TransitionComponentProps>(
+  (props, ref) => <Slide direction="up" {...props} ref={ref} />
+)
 
-const getFiles = (ev) => {
+const getFiles = (ev: React.DragEvent<HTMLDivElement>) => {
   const files = []
   if (ev.dataTransfer.items) {
     // Use DataTransferItemList interface to access the file(s)
@@ -41,30 +46,46 @@ const getFiles = (ev) => {
   return files
 }
 
+type ImageUploadDialogContainerProps = {
+  isOpen: boolean
+  handleClose: () => void
+  handleCropSubmit: (image: string) => void
+  path: string
+  cropperProps: any
+}
+
 export function ImageUploadDialogContainer({
   isOpen = false,
   handleClose,
   handleCropSubmit,
   path,
   cropperProps,
-}) {
+}: ImageUploadDialogContainerProps) {
   const intl = useIntl()
   const theme = useTheme()
   const [isOver, setIsOver] = useState(false)
-  const [file, setFile] = useState(false)
+  const [file, setFile] = useState<string | null | undefined>(null)
   const fullScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-  const [croppedImage, setCroppedImage] = useState(false)
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [croppedImage, setCroppedImage] = useState<string | null>(null)
+  const [crop, setCrop] = useState<Omit<IPixelCrop, 'width' | 'height'>>({
+    x: 0,
+    y: 0,
+  })
   const [zoom, setZoom] = useState(1)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<IPixelCrop | null>(
+    null
+  )
 
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    setCroppedAreaPixels(croppedAreaPixels)
-  }, [])
+  const onCropComplete = useCallback(
+    (_croppedArea: never, croppedAreaPixels: IPixelCrop) => {
+      setCroppedAreaPixels(croppedAreaPixels)
+    },
+    []
+  )
 
   const clear = () => {
-    setCroppedImage(false)
-    setFile(false)
+    setCroppedImage(null)
+    setFile(null)
     setCroppedAreaPixels(null)
     setIsOver(false)
   }
@@ -76,6 +97,10 @@ export function ImageUploadDialogContainer({
 
   const showCroppedImage = useCallback(async () => {
     try {
+      if (!file || !croppedAreaPixels) {
+        throw new Error('Invalid parameters when showing cropped image')
+      }
+
       const croppedImage = await getCroppedImg(file, croppedAreaPixels, 0)
 
       setCroppedImage(croppedImage)
@@ -120,10 +145,10 @@ export function ImageUploadDialogContainer({
                   var reader = new FileReader()
 
                   reader.onload = (e) => {
-                    setFile(e.target.result)
+                    setFile(e.target?.result as string)
                   }
 
-                  reader.readAsDataURL(files[0])
+                  reader.readAsDataURL(files[0]!)
                 }
               }}
               onDragOver={(e) => {
@@ -163,7 +188,7 @@ export function ImageUploadDialogContainer({
                     var reader = new FileReader()
 
                     reader.onload = (e) => {
-                      setFile(e.target.result)
+                      setFile(e.target?.result as string)
                     }
 
                     reader.readAsDataURL(e.target.files[0])

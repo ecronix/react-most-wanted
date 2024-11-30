@@ -1,4 +1,4 @@
-const createImage = (url) =>
+const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image()
     image.addEventListener('load', () => resolve(image))
@@ -7,17 +7,28 @@ const createImage = (url) =>
     image.src = url
   })
 
-function getRadianAngle(degreeValue) {
+function getRadianAngle(degreeValue: number): number {
   return (degreeValue * Math.PI) / 180
+}
+
+export interface IPixelCrop {
+  width: number
+  height: number
+  x: number
+  y: number
 }
 
 /**
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
- * @param {File} image - Image File url
+ * @param {string} imageSrc - Image File url
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
  */
-export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
+export default async function getCroppedImg(
+  imageSrc: string,
+  pixelCrop: IPixelCrop,
+  rotation: number = 0
+): Promise<string> {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
@@ -29,6 +40,10 @@ export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
   // image to rotate in without being clipped by canvas context
   canvas.width = safeArea
   canvas.height = safeArea
+
+  if (!ctx) {
+    throw new Error('Canvas context is null')
+  }
 
   // translate canvas context to a central location on image to allow rotating around the center.
   ctx.translate(safeArea / 2, safeArea / 2)
