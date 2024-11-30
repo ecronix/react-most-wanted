@@ -1,3 +1,4 @@
+import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
 import {
   boolField,
   dateField,
@@ -18,7 +19,6 @@ export function getField(name: string, fields: FieldType[] = []) {
     throw new Error('Invalid field provided in getField()')
   }
 
-  if (!field) return undefined
   fields.map((f: FieldType) => {
     const { type = 'text' } = f
     if (f.name === name) {
@@ -45,7 +45,7 @@ export function getField(name: string, fields: FieldType[] = []) {
 type FilterType = {
   queries?: any
   sortField?: string
-  sortOrientation?: 1 | -1
+  sortOrientation?: SortOrientationType
   search?: any
 }
 export function getList(

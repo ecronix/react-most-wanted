@@ -1,5 +1,9 @@
 import React from 'react'
 import { Switch } from '@mui/material'
+import {
+  Operators,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/providers/common.type'
 
 const field = {
   operators: [
@@ -7,7 +11,10 @@ const field = {
     { value: '!=', label: '!=' },
   ],
   defaultOperator: '=',
-  filter: (value, q) => {
+  filter: (
+    value: boolean,
+    q: { operator: Operators; value: boolean | string }
+  ) => {
     const { operator, value: qv } = q
     if (qv !== '') {
       const queryValue = !!qv
@@ -23,10 +30,13 @@ const field = {
       return true
     }
   },
-  sort: (orientation, a, b) => {
+  sort: (orientation: SortOrientationType, a: number, b: number) => {
     return (a - b) * orientation
   },
-  render: ({ value = '' }, onChange) => {
+  render: (
+    { value = '' },
+    onChange: ({ value }: { value: boolean }) => void
+  ) => {
     return (
       <div
         style={{

@@ -1,3 +1,4 @@
+import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
 import * as types from './types'
 
 export function openFilter(name: string) {
@@ -33,7 +34,7 @@ export function setFilterSortField(name: string, sortField: string) {
 
 export function setFilterSortOrientation(
   name: string,
-  sortOrientation: 1 | -1
+  sortOrientation: SortOrientationType
 ) {
   return {
     type: types.ON_FILTER_SORT_FIELD_CHANGED,

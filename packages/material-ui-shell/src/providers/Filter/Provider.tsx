@@ -14,6 +14,7 @@ import {
 } from './store/actions'
 import { getList, getField, FieldType } from './store/selectors'
 import { IProviderProps } from '../IProviderProps'
+import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
 
 function getInitState(persistKey: string) {
   const pkString = localStorage.getItem(persistKey)
@@ -49,8 +50,10 @@ const Provider: React.FC<IProviderProps> = ({
 
     setFilterSortField: (name: string, sortField: string) =>
       dispatch(setFilterSortField(name, sortField)),
-    setFilterSortOrientation: (name: string, sortOrientation: 1 | -1) =>
-      dispatch(setFilterSortOrientation(name, sortOrientation)),
+    setFilterSortOrientation: (
+      name: string,
+      sortOrientation: SortOrientationType
+    ) => dispatch(setFilterSortOrientation(name, sortOrientation)),
     addFilterQuery: (name: string, query: any) =>
       dispatch(addFilterQuery(name, query)),
     removeFilterQuery: (name: string, index: number) =>

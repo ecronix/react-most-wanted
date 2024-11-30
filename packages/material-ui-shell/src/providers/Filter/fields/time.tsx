@@ -1,5 +1,6 @@
 import React from 'react'
 import { TextField } from '@mui/material'
+import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
 
 const field = {
   operators: [
@@ -37,7 +38,7 @@ const field = {
       return true
     }
   },
-  sort: (orientation: 1 | -1, aRaw: string, bRaw: string) => {
+  sort: (orientation: SortOrientationType, aRaw: string, bRaw: string) => {
     const a = new Date(aRaw).getTime()
     const b = new Date(bRaw).getTime()
     var result = a < b ? -1 : a > b ? 1 : 0

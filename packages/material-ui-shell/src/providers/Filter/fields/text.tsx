@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { FormatSize } from '@mui/icons-material'
+import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
 
 const field = {
   operators: [
@@ -14,7 +15,10 @@ const field = {
     { value: '!like', label: '!like' },
   ],
   defaultOperator: 'like',
-  filter: (rawValue = '', q) => {
+  filter: (
+    rawValue = '',
+    q: { operator: string; value: string; isCaseSensitive: boolean }
+  ) => {
     const { operator, value: qv, isCaseSensitive = false } = q
 
     if (qv !== '') {
@@ -49,11 +53,14 @@ const field = {
       return true
     }
   },
-  sort: (orientation, a, b) => {
+  sort: (orientation: SortOrientationType, a: number, b: number) => {
     var result = a < b ? -1 : a > b ? 1 : 0
     return result * orientation
   },
-  render: ({ value = '', isCaseSensitive = false }, onChange) => {
+  render: (
+    { value = '', isCaseSensitive = false },
+    onChange: (data: any) => void
+  ) => {
     return (
       <TextField
         variant="outlined"

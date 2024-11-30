@@ -1,5 +1,9 @@
 import React from 'react'
 import { TextField } from '@mui/material'
+import {
+  Operators,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/providers/common.type'
 
 const field = {
   operators: [
@@ -13,10 +17,13 @@ const field = {
     { value: '!like', label: '!like' },
   ],
   defaultOperator: '=',
-  filter: (value, q) => {
+  filter: (
+    value: number,
+    q: { operator: Operators; value: number | string }
+  ) => {
     const { operator, value: qv } = q
     if (qv !== '') {
-      const queryValue = parseFloat(qv)
+      const queryValue = typeof qv === 'string' ? parseFloat(qv) : qv
       switch (operator) {
         case '=':
           return value === queryValue
@@ -41,10 +48,10 @@ const field = {
       return true
     }
   },
-  sort: (orientation, a, b) => {
+  sort: (orientation: SortOrientationType, a: number, b: number) => {
     return (a - b) * orientation
   },
-  render: ({ value = '' }, onChange) => {
+  render: ({ value = '' }, onChange: (data: any) => void) => {
     return (
       <TextField
         variant="outlined"

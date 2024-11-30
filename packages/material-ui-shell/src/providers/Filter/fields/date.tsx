@@ -1,5 +1,9 @@
 import React from 'react'
 import { TextField } from '@mui/material'
+import {
+  Operators,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/providers/common.type'
 
 const field = {
   operators: [
@@ -11,8 +15,13 @@ const field = {
     { value: '>=', label: '>=' },
   ],
   defaultOperator: '=',
-  filter: (rawValue, q) => {
+
+  filter: (
+    rawValue: any,
+    q: { operator: Operators; value: number | string }
+  ) => {
     const { operator, value: qv } = q
+
     if (qv !== '') {
       const queryValue = new Date(qv).getTime()
       const value = new Date(rawValue).getTime()
@@ -36,13 +45,16 @@ const field = {
       return true
     }
   },
-  sort: (orientation, aRaw, bRaw) => {
+  sort: (orientation: SortOrientationType, aRaw: string, bRaw: string) => {
     const a = new Date(aRaw).getTime()
     const b = new Date(bRaw).getTime()
     var result = a < b ? -1 : a > b ? 1 : 0
     return result * orientation
   },
-  render: ({ value = '', isCaseSensitive = false }, onChange) => {
+  render: (
+    { value = '', _isCaseSensitive = false },
+    onChange: (data: any) => void
+  ) => {
     return (
       <TextField
         type="date"
