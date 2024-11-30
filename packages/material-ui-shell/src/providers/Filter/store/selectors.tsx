@@ -1,8 +1,25 @@
-import { numberField } from '../fields/index'
+import {
+  boolField,
+  dateField,
+  numberField,
+  textField,
+  timeField,
+} from '../fields/index'
 
-export function getField(name, fields = []) {
-  let field = false
-  fields.map((f) => {
+export type FieldType = {
+  name: string
+  type: 'text' | 'number' | 'bool' | 'time' | 'date'
+  sort?: any
+  filter?: any
+}
+export function getField(name: string, fields: FieldType[] = []) {
+  let field: FieldType | undefined = fields.find((f) => f.name === name)
+  if (!field) {
+    throw new Error('Invalid field provided in getField()')
+  }
+
+  if (!field) return undefined
+  fields.map((f: FieldType) => {
     const { type = 'text' } = f
     if (f.name === name) {
       let defaultProps = {}
@@ -25,7 +42,17 @@ export function getField(name, fields = []) {
   return field
 }
 
-export function getList(filter = {}, list = [], fields = []) {
+type FilterType = {
+  queries?: any
+  sortField?: string
+  sortOrientation?: 1 | -1
+  search?: any
+}
+export function getList(
+  filter: FilterType = {},
+  list = [],
+  fields: FieldType[] = []
+) {
   let result = [...list]
   const {
     queries = [],
@@ -72,9 +99,9 @@ export function getList(filter = {}, list = [], fields = []) {
   }
 
   if (sortFieldName && sortFieldName !== '') {
-    const sortField = getField(sortFieldName, fields)
+    const sortField: FieldType | undefined = getField(sortFieldName, fields)
 
-    if (result !== undefined && sortField.sort !== undefined) {
+    if (sortField && result !== undefined && sortField.sort !== undefined) {
       result.sort((a, b) =>
         sortField.sort(sortOrientation, a[sortFieldName], b[sortFieldName])
       )

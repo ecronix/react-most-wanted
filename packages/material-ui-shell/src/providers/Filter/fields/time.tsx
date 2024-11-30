@@ -11,7 +11,7 @@ const field = {
     { value: '>=', label: '>=' },
   ],
   defaultOperator: '=',
-  filter: (rawValue, q) => {
+  filter: (rawValue: any, q: { operator: string; value: string }) => {
     const { operator, value: qv } = q
     if (qv !== '') {
       const queryValue = qv ? parseInt(qv.split(':').join('')) : 0
@@ -37,13 +37,13 @@ const field = {
       return true
     }
   },
-  sort: (orientation, aRaw, bRaw) => {
+  sort: (orientation: 1 | -1, aRaw: string, bRaw: string) => {
     const a = new Date(aRaw).getTime()
     const b = new Date(bRaw).getTime()
     var result = a < b ? -1 : a > b ? 1 : 0
     return result * orientation
   },
-  render: ({ value = '', isCaseSensitive = false }, onChange) => {
+  render: ({ value = '', _isCaseSensitive = false }, onChange: any) => {
     return (
       <TextField
         InputLabelProps={{

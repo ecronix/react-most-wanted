@@ -47,7 +47,7 @@ const config = {
     initialMiniSwitchVisibility: true,
     MenuHeader,
     MenuContent: Menu,
-    useWindowWatcher: false,
+    useWindowWatcher: true,
   },
   theme: {
     themes,

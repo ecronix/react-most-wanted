@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
+import { IProviderProps } from '../IProviderProps'
 
-type ProviderProps = {
-  children: React.ReactNode
-  persistKey?: string
-  appConfig: any
-}
-const Provider: React.FC<ProviderProps> = ({
+const Provider: React.FC<IProviderProps> = ({
   children,
   persistKey = 'theme',
   appConfig,

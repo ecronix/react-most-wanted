@@ -9,14 +9,9 @@ import {
   setIsMiniSwitchVisibility,
 } from './store/actions'
 import reducer from './store/reducer'
+import { IProviderProps } from '../IProviderProps'
 
-type ProviderProps = {
-  children: React.ReactNode
-  persistKey?: string
-  appConfig: any
-}
-
-const Provider: React.FC<ProviderProps> = ({
+const Provider: React.FC<IProviderProps> = ({
   appConfig,
   children,
   persistKey = 'menu',
@@ -31,7 +26,9 @@ const Provider: React.FC<ProviderProps> = ({
     useWindowWatcher,
   } = menu
 
-  const savedState = JSON.parse(localStorage.getItem(persistKey))
+  const pkString = localStorage.getItem(persistKey)
+
+  const savedState = pkString !== null ? JSON.parse(pkString) : null
 
   const [menuStore, dispatch] = useReducer(reducer, {
     isAuthMenuOpen: initialAuthMenuOpen,
@@ -99,14 +96,10 @@ const Provider: React.FC<ProviderProps> = ({
 
   useEffect(() => {
     if (useWindowWatcher) {
-      if (!isDesktop) {
-        // props.setMenuOpen(false)
-        // props.setMiniMode(false)
-        props.toggleThis(togglerTypes.isMiniMode, false)
-        props.toggleThis(togglerTypes.isMenuOpen, false)
-      }
+      props.toggleThis(togglerTypes.isMiniMode, false)
+      props.toggleThis(togglerTypes.isMenuOpen, isDesktop)
     }
-  }, [isDesktop, props, useWindowWatcher])
+  }, [isDesktop, useWindowWatcher])
 
   return (
     <Context.Provider

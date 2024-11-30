@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react'
 import Context from './Context'
+import { IProviderProps } from '../IProviderProps'
 
 type ReducerAction = {
   type: string
@@ -17,7 +18,7 @@ function reducer(state: any, action: ReducerAction) {
   }
 }
 
-const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Provider: React.FC<IProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {})
 
   const setOffset = (name: string, offset: any) => {

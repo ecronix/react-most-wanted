@@ -2,7 +2,14 @@ import * as types from './types'
 
 /* eslint-disable */
 
-function query(query, action) {
+type ActionType = {
+  payload?: any
+  index?: number
+  type: string
+  name: string
+}
+
+function query(query: any, action: ActionType) {
   const { payload } = action
 
   switch (action.type) {
@@ -15,7 +22,7 @@ function query(query, action) {
   }
 }
 
-function queries(queries = [], action) {
+function queries(queries = [], action: ActionType) {
   const { index } = action
 
   switch (action.type) {
@@ -38,7 +45,7 @@ function queries(queries = [], action) {
   }
 }
 
-function search(search = {}, action) {
+function search(search = {}, action: ActionType) {
   const { payload } = action
 
   switch (action.type) {
@@ -50,7 +57,10 @@ function search(search = {}, action) {
   }
 }
 
-function filter(filter = {}, action) {
+function filter(
+  filter: { queries?: any; search?: string; fields?: any } = {},
+  action: ActionType
+) {
   const { payload } = action
 
   switch (action.type) {
@@ -76,7 +86,7 @@ function filter(filter = {}, action) {
   }
 }
 
-export default function filters(state = {}, action) {
+export default function filters(state: any = {}, action: ActionType) {
   const { name } = action
   switch (action.type) {
     case types.ON_FILTER_IS_OPEN:

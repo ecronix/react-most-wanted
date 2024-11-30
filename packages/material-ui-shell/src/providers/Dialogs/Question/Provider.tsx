@@ -1,8 +1,9 @@
 import React, { useState, Fragment } from 'react'
 import Context from './Context'
 import QuestionDialog from '../../../components/QuestionDialog'
+import { IProviderProps } from '../../IProviderProps'
 
-const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Provider: React.FC<IProviderProps> = ({ children }) => {
   const [state, setState] = useState({ isOpen: false })
   const [isProcessing, setIsProcessing] = useState(false)
 
