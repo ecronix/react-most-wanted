@@ -15,8 +15,19 @@ import { Add, ClearAll, SortByAlpha, Close, Delete } from '@mui/icons-material'
 import { useFilter } from '@ecronix/material-ui-shell'
 import { useIntl } from 'react-intl'
 import Scrollbar from '../Scrollbar'
+import { FieldType, OperatorType } from '@ecronix/material-ui-shell/common.type'
 
-export default function FilterDrawer({ name, width = 250, fields = [] }) {
+type FilterDrawerProps = {
+  name: string
+  width?: number
+  fields: FieldType[]
+}
+
+export default function FilterDrawer({
+  name,
+  width = 250,
+  fields = [],
+}: FilterDrawerProps) {
   const intl = useIntl()
   const {
     isFilterOpen,
@@ -124,7 +135,7 @@ export default function FilterDrawer({ name, width = 250, fields = [] }) {
           </div>
           <div style={{ height: '100%', flex: 1 }}>
             <Scrollbar>
-              {queries.map((q, i) => {
+              {queries.map((q: any, i: number) => {
                 const field = getField(q.field, fields)
 
                 return (
@@ -180,7 +191,7 @@ export default function FilterDrawer({ name, width = 250, fields = [] }) {
                             }
                             displayEmpty
                           >
-                            {field.operators.map((o) => (
+                            {field.operators.map((o: OperatorType) => (
                               <MenuItem key={o.value} value={o.value}>
                                 {o.label}
                               </MenuItem>
@@ -194,7 +205,7 @@ export default function FilterDrawer({ name, width = 250, fields = [] }) {
                     </div>
 
                     {field &&
-                      field.render(q, (changes) =>
+                      field.render(q, (changes: any) =>
                         editFilterQuery(name, i, { ...q, ...changes })
                       )}
                     <Divider style={{ marginTop: 6 }} />

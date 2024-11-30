@@ -1,8 +1,9 @@
 import { createTheme } from '@mui/material/styles'
+import { ThemeType } from '../common.type'
 
 export const getThemeSource = (
   id: string,
-  ts,
+  ts: ThemeType[],
   isDarkMode: boolean,
   isRTL: boolean
 ) => {

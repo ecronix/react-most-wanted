@@ -12,9 +12,12 @@ import {
   setFilterSortOrientation,
   setSearch,
 } from './store/actions'
-import { getList, getField, FieldType } from './store/selectors'
-import { IProviderProps } from '../IProviderProps'
-import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
+import { getList, getField } from './store/selectors'
+import {
+  FieldType,
+  IProviderProps,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/common.type'
 
 function getInitState(persistKey: string) {
   const pkString = localStorage.getItem(persistKey)

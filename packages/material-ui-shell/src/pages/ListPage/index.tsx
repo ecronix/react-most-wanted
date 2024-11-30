@@ -6,12 +6,28 @@ import { Toolbar, IconButton } from '@mui/material'
 import { FilterList } from '@mui/icons-material'
 import { useFilter, VirtualListContainer } from '@ecronix/material-ui-shell'
 
-export function ListPage(props) {
+type ListPageProps = {
+  fields: any
+  list: any
+  getPageProps: (data: any) => {}
+  listContainerStyle: any
+  listProps: any
+  Row: any
+  name: string
+  trailing: string | null
+  leading: any | null
+  disableSearch: boolean
+  disableFilter: boolean
+  top: React.ReactNode
+  bottom: React.ReactNode
+  parseList: (data: any) => void
+}
+
+export function ListPage(props: ListPageProps) {
   const {
     fields = [],
     list: source = [],
     getPageProps = () => {},
-    listContainerStyle = {},
     listProps,
     Row,
     name,

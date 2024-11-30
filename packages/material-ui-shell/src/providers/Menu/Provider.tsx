@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer } from 'react'
-import Context from './Context'
+import Context, { togglerTypes } from './Context'
 import { useMediaQuery } from '@mui/material'
 import {
   setIsAuthMenuOpen,
@@ -9,7 +9,7 @@ import {
   setIsMiniSwitchVisibility,
 } from './store/actions'
 import reducer from './store/reducer'
-import { IProviderProps } from '../IProviderProps'
+import { IProviderProps } from '@ecronix/material-ui-shell/common.type'
 
 const Provider: React.FC<IProviderProps> = ({
   appConfig,
@@ -39,37 +39,30 @@ const Provider: React.FC<IProviderProps> = ({
     ...savedState,
   })
 
-  enum togglerTypes {
-    isAuthMenuOpen = 'isAuthMenuOpen',
-    isMiniMode = 'isMiniMode',
-    isMenuOpen = 'isMenuOpen',
-    isMobileMenuOpen = 'isMobileMenuOpen',
-    isMiniSwitchVisibility = 'isMiniSwitchVisibility',
-  }
   const props = {
     //setter
     toggleThis(value: togglerTypes, newValue: boolean | null = null) {
-      if (value === 'isAuthMenuOpen') {
+      if (value === togglerTypes.isAuthMenuOpen) {
         dispatch(
           setIsAuthMenuOpen(
             newValue !== null ? newValue : !menuStore.isAuthMenuOpen
           )
         )
-      } else if (value === 'isMiniMode') {
+      } else if (value === togglerTypes.isMiniMode) {
         dispatch(
           setIsMiniMode(newValue !== null ? newValue : !menuStore.isMiniMode)
         )
-      } else if (value === 'isMenuOpen') {
+      } else if (value === togglerTypes.isMenuOpen) {
         dispatch(
           setIsMenuOpen(newValue !== null ? newValue : !menuStore.isMenuOpen)
         )
-      } else if (value === 'isMobileMenuOpen') {
+      } else if (value === togglerTypes.isMobileMenuOpen) {
         dispatch(
           setIsMobileMenuOpen(
             newValue !== null ? newValue : !menuStore.isMobileMenuOpen
           )
         )
-      } else if (value === 'isMiniSwitchVisibility') {
+      } else if (value === togglerTypes.isMiniSwitchVisibility) {
         dispatch(
           setIsMiniSwitchVisibility(
             newValue !== null ? newValue : !menuStore.isMiniSwitchVisibility

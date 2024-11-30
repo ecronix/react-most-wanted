@@ -22,6 +22,19 @@ import {
   BrightnessHigh as BrightnessHighIcon,
 } from '@mui/icons-material'
 import { useTheme } from '@mui/material/styles'
+import { togglerTypes } from '@ecronix/material-ui-shell/providers/Menu/Context'
+
+type AvatarConstructorType =
+  | {
+      src?: never
+      alt?: never
+      avatar: string | JSX.Element
+    }
+  | {
+      src: string
+      alt: string
+      avatar?: never
+    }
 
 export default function MenuHeader() {
   const { auth } = useAuth()
@@ -39,12 +52,17 @@ export default function MenuHeader() {
   } = menuContext || {}
 
   const isAuthenticated = auth.isAuthenticated
-  const AvatarConstructor = ({ src, alt, avatar }) => {
+  const AvatarConstructor: React.FC<AvatarConstructorType> = ({
+    src,
+    alt,
+    avatar,
+  }) => {
     return (
-      <ListItemAvatar onClick={() => toggleThis('isAuthMenuOpen')}>
-        <Avatar src={src} alt={alt}>
+      <ListItemAvatar onClick={() => toggleThis(togglerTypes.isAuthMenuOpen)}>
+        {/* <Avatar src={src} alt={alt}>
           {avatar}
-        </Avatar>
+        </Avatar> */}
+        {avatar ? <Avatar>{avatar}</Avatar> : <Avatar src={src} alt={alt} />}
       </ListItemAvatar>
     )
   }
@@ -119,8 +137,8 @@ export default function MenuHeader() {
                   {isMiniSwitchVisibility && (
                     <IconButton
                       onClick={() => {
-                        toggleThis('isMiniMode', true)
-                        toggleThis('isMenuOpen', false)
+                        toggleThis(togglerTypes.isMiniMode, true)
+                        toggleThis(togglerTypes.isMenuOpen, false)
                       }}
                     >
                       <ChromeReaderMode sx={{ ...styles.icon }} />
@@ -129,7 +147,7 @@ export default function MenuHeader() {
                   <IconButton
                     color="inherit"
                     onClick={() => {
-                      toggleThis('isMenuOpen', false)
+                      toggleThis(togglerTypes.isMenuOpen, false)
                     }}
                   >
                     {isRTL ? (
@@ -147,7 +165,7 @@ export default function MenuHeader() {
         {isAuthenticated && (
           <ListItem
             onClick={() => {
-              toggleThis('isAuthMenuOpen')
+              toggleThis(togglerTypes.isAuthMenuOpen)
             }}
           >
             {!isMenuOpen &&
@@ -177,7 +195,7 @@ export default function MenuHeader() {
                   textOverflow: 'ellipsis',
                 }}
                 secondaryTypographyProps={{
-                  color: (t) => theme.palette.grey.A100,
+                  color: theme.palette.grey.A100,
                   width: 80,
                   textOverflow: 'ellipsis',
                 }}
@@ -188,7 +206,7 @@ export default function MenuHeader() {
             {isMenuOpen && (
               <ListItemSecondaryAction
                 onClick={() => {
-                  toggleThis('isAuthMenuOpen')
+                  toggleThis(togglerTypes.isAuthMenuOpen)
                 }}
               >
                 <IconButton>

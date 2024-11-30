@@ -1,6 +1,8 @@
-import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
 import React from 'react'
-import { FieldType } from './store/selectors'
+import {
+  FieldType,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/common.type'
 
 export interface FilterContextType {
   openFilter: (name: string) => void

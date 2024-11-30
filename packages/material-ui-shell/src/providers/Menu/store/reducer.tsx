@@ -1,3 +1,4 @@
+import { MenuContextType } from '../Context'
 import * as types from './types'
 
 type ReducerAction = {
@@ -5,16 +6,8 @@ type ReducerAction = {
   payload: boolean
 }
 
-export type MenuReducerState = {
-  isAuthMenuOpen?: boolean
-  isMiniMode?: boolean
-  isMenuOpen?: boolean
-  isMobileMenuOpen?: boolean
-  isMiniSwitchVisibility?: boolean
-}
-
 export default function reducer(
-  state: MenuReducerState = {},
+  state: Partial<MenuContextType> = {},
   action: ReducerAction
 ) {
   const { type, payload } = action

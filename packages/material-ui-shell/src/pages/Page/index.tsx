@@ -1,8 +1,5 @@
-import React, { useContext } from 'react'
-import {
-  useTheme as useAppTheme,
-  MenuContext,
-} from '@ecronix/material-ui-shell'
+import React from 'react'
+import { useTheme as useAppTheme, useMenu } from '@ecronix/material-ui-shell'
 import { useTheme } from '@mui/material/styles'
 import { useConfig, useOnline } from '@ecronix/base-shell'
 
@@ -15,7 +12,17 @@ import {
   Typography,
 } from '@mui/material'
 import { ChevronLeft, Menu as MenuIcon } from '@mui/icons-material'
+import { togglerTypes } from '@ecronix/material-ui-shell/providers/Menu/Context'
 
+type PageProps = {
+  children: React.ReactNode
+  pageTitle?: string | String
+  onBackClick?: () => void
+  isLoading?: boolean
+  appBarContent?: any
+  contentStyle?: any
+  tabs?: any
+}
 export function Page({
   children,
   pageTitle,
@@ -24,7 +31,7 @@ export function Page({
   appBarContent = null,
   contentStyle,
   tabs = null,
-}) {
+}: PageProps) {
   const { isRTL } = useAppTheme()
   const isOnline = useOnline()
   const theme = useTheme()
@@ -32,23 +39,24 @@ export function Page({
   const { menu } = appConfig || {}
   const { width = 240, appBarLeadingContent = null } = menu || {}
 
-  const { toggleThis, isDesktop, isMenuOpen } = useContext(MenuContext)
+  // const { toggleThis, isDesktop, isMenuOpen } = useContext(MenuContext)
+  const { toggleThis, isDesktop, isMenuOpen } = useMenu()
   const intl = useIntl()
   let headerTitle = ''
 
   if (typeof pageTitle === 'string' || pageTitle instanceof String) {
-    headerTitle = pageTitle
+    headerTitle = pageTitle as string
   }
 
   const handleDrawerMenuClick = () => {
     if (!isMenuOpen) {
-      toggleThis('isMiniMode', false)
-      toggleThis('isMenuOpen', true)
+      toggleThis(togglerTypes.isMiniMode, false)
+      toggleThis(togglerTypes.isMenuOpen, true)
       if (!isDesktop) {
-        toggleThis('isMobileMenuOpen')
+        toggleThis(togglerTypes.isMobileMenuOpen)
       }
     } else {
-      toggleThis('isMobileMenuOpen')
+      toggleThis(togglerTypes.isMobileMenuOpen)
     }
   }
 

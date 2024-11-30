@@ -19,18 +19,24 @@ import {
 } from '@mui/material'
 import { useLocation } from 'react-router-dom'
 
+type PropTypes = {
+  onIndexChange: () => void
+  useMinified: boolean
+  items: any[]
+  index: number
+}
 export function SelectableMenuListContainer({
   onIndexChange,
   useMinified,
   items,
   index,
-}) {
+}: PropTypes) {
   const [state, setState] = useState({})
   const { isRTL } = useAppTheme()
   const { isMiniMode } = useMenu()
   const { pathname = '' } = useLocation()
 
-  const loopItems = useCallback((items, previousItems = [], title) => {
+  const loopItems = useCallback((items, previousItems = [], title: string) => {
     items.map((i) => {
       const { value = 'none', nestedItems = [], primaryText = '' } = i
       if (pathname === value) {
@@ -118,13 +124,14 @@ export function SelectableMenuListContainer({
 
     if (item !== undefined) {
       if (item.subheader !== undefined) {
+        // Removed inset={item.inset} doesn't exist
         return (
-          <div key={i} inset={item.inset} style={item.style}>
+          <div key={i} style={item.style}>
             {item.subheader}
           </div>
         )
       } else if (item.divider !== undefined) {
-        return <Divider key={i} inset={item.inset} style={item.style} />
+        return <Divider key={i} style={item.style} /> // Removed inset={item.inset} doesn't exist
       } else {
         return (
           <Tooltip
@@ -151,7 +158,7 @@ export function SelectableMenuListContainer({
                 onMouseDown={(e) => {
                   if (e.button === 1) {
                     var win = window.open(`${item.value}`, '_blank')
-                    win.focus()
+                    win?.focus()
                   }
                 }}
               >

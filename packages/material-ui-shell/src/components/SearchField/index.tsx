@@ -3,9 +3,9 @@ import { Search as SearchIcon } from '@mui/icons-material'
 import { styled, alpha } from '@mui/material/styles'
 import { InputBase } from '@mui/material'
 
-let timeout = null
+let timeout: NodeJS.Timeout | null = null
 
-const Search = styled('div')(({ theme, isOpen }) => {
+const Search = styled('div')<{ isOpen: boolean }>(({ theme, isOpen }) => {
   return {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -34,7 +34,10 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }))
 
-const StyledInputBase = styled(InputBase)(({ theme, isOpen }) => {
+const StyledInputBase = styled(InputBase)<{ isOpen: boolean }>(({
+  theme,
+  isOpen,
+}) => {
   return {
     color: 'inherit',
     '& .MuiInputBase-input': {
@@ -53,12 +56,18 @@ const StyledInputBase = styled(InputBase)(({ theme, isOpen }) => {
   }
 })
 
+type SearchFieldProps = {
+  onChange: (v: string) => void
+  initialValue: string
+  alwaysOpen?: boolean
+  deferTime?: number
+}
 export default function SearchField({
   onChange,
   initialValue = '',
   alwaysOpen,
   deferTime = 1000,
-}) {
+}: SearchFieldProps) {
   const [value, setValue] = useState('')
   useEffect(() => {
     setValue(initialValue)
@@ -68,7 +77,7 @@ export default function SearchField({
   const hasValue = value && value !== ''
   const isOpen = hasValue || alwaysOpen
 
-  const handleChange = (v) => {
+  const handleChange = (v: string) => {
     if (timeout) {
       clearTimeout(timeout)
     }
@@ -83,16 +92,16 @@ export default function SearchField({
   }
 
   return (
-    <Search isOpen={isOpen}>
+    <Search isOpen={isOpen ?? false}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        isOpen={isOpen}
+        isOpen={isOpen ?? false}
         autoComplete="off"
         id="search-input"
         value={value}
-        ref={(node) => {
+        ref={(node: HTMLElement | null) => {
           if (node && initialValue && initialValue !== '') {
             node.focus()
           }

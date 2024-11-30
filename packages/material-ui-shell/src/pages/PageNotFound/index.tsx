@@ -4,7 +4,7 @@ import { Page } from '@ecronix/material-ui-shell'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-export const NotFoundPage = () => {
+export const NotFoundPage: React.FC = () => {
   const intl = useIntl()
 
   return (

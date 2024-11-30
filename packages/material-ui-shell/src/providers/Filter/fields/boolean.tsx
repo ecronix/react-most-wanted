@@ -2,14 +2,15 @@ import React from 'react'
 import { Switch } from '@mui/material'
 import {
   Operators,
+  OperatorType,
   SortOrientationType,
-} from '@ecronix/material-ui-shell/providers/common.type'
+} from '@ecronix/material-ui-shell/common.type'
 
 const field = {
   operators: [
     { value: '=', label: '=' },
     { value: '!=', label: '!=' },
-  ],
+  ] as OperatorType[],
   defaultOperator: '=',
   filter: (
     value: boolean,

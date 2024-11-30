@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import Context from './Context'
 import QuestionDialog from '../../../components/QuestionDialog'
-import { IProviderProps } from '../../IProviderProps'
+import { IProviderProps } from '@ecronix/material-ui-shell/common.type'
 
 const Provider: React.FC<IProviderProps> = ({ children }) => {
   const [state, setState] = useState({ isOpen: false })

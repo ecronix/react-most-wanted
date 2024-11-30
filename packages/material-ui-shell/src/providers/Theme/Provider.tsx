@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Context from './Context'
-import { IProviderProps } from '../IProviderProps'
+import { IProviderProps } from '@ecronix/material-ui-shell/common.type'
 
 const Provider: React.FC<IProviderProps> = ({
   children,

@@ -1,7 +1,10 @@
 import React from 'react'
 import { IconButton, InputAdornment, TextField } from '@mui/material'
 import { FormatSize } from '@mui/icons-material'
-import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
+import {
+  OperatorType,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/common.type'
 
 const field = {
   operators: [
@@ -13,7 +16,7 @@ const field = {
     { value: '>=', label: '>=' },
     { value: 'like', label: 'like' },
     { value: '!like', label: '!like' },
-  ],
+  ] as OperatorType[],
   defaultOperator: 'like',
   filter: (
     rawValue = '',

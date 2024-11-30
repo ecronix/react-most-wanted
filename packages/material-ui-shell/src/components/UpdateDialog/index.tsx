@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useTheme } from '@mui/material/styles'
 import {
@@ -11,15 +11,19 @@ import {
   useMediaQuery,
 } from '@mui/material'
 
-export default function UpdateDialog({ isUpdateAvailable, runUpdate }) {
-  const [open, setOpen] = React.useState(undefined)
+type UpdateDialogProps = {
+  isUpdateAvailable: boolean
+  runUpdate: () => void
+}
+
+export default function UpdateDialog({
+  isUpdateAvailable,
+  runUpdate,
+}: UpdateDialogProps) {
+  const [open, setOpen] = useState<boolean | undefined>(undefined)
   const intl = useIntl()
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
-
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
 
   const handleClose = () => {
     setOpen(false)

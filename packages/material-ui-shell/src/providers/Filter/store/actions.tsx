@@ -1,4 +1,4 @@
-import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
+import { SortOrientationType } from '@ecronix/material-ui-shell/common.type'
 import * as types from './types'
 
 export function openFilter(name: string) {

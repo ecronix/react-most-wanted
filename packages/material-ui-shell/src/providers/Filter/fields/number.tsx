@@ -2,8 +2,9 @@ import React from 'react'
 import { TextField } from '@mui/material'
 import {
   Operators,
+  OperatorType,
   SortOrientationType,
-} from '@ecronix/material-ui-shell/providers/common.type'
+} from '@ecronix/material-ui-shell/common.type'
 
 const field = {
   operators: [
@@ -15,7 +16,7 @@ const field = {
     { value: '>=', label: '>=' },
     { value: 'like', label: 'like' },
     { value: '!like', label: '!like' },
-  ],
+  ] as OperatorType[],
   defaultOperator: '=',
   filter: (
     value: number,

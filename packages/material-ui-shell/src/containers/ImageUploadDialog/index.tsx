@@ -1,5 +1,5 @@
 import Cropper from 'react-easy-crop'
-import React, { useState, useCallback, useEffect, Ref } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import getCroppedImg, { IPixelCrop } from './getCropImage'
 import { useIntl } from 'react-intl'
 import { useTheme } from '@emotion/react'
@@ -13,15 +13,11 @@ import {
   Slide,
   useMediaQuery,
   CircularProgress,
-  SlideProps,
 } from '@mui/material'
 
 import { CloudUpload } from '@mui/icons-material'
-import { TransitionProps } from '@mui/material/transitions'
+import { TransitionComponentProps } from '@ecronix/material-ui-shell/common.type'
 
-type TransitionComponentProps = TransitionProps & {
-  children: React.ReactElement
-}
 const Transition = React.forwardRef<unknown, TransitionComponentProps>(
   (props, ref) => <Slide direction="up" {...props} ref={ref} />
 )

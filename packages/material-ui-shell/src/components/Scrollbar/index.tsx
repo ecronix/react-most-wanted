@@ -2,12 +2,12 @@ import React, { useCallback } from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import { useTheme as useAppTheme } from '@ecronix/material-ui-shell'
 
-export default function Scrollbar(props) {
+export default function Scrollbar(props: any) {
   const { forwardedRef = () => {}, ...rest } = props
   const { isRTL } = useAppTheme()
 
   const refSetter = useCallback(
-    (scrollbarsRef) => {
+    (scrollbarsRef: any) => {
       if (scrollbarsRef) {
         forwardedRef(scrollbarsRef.view)
       } else {

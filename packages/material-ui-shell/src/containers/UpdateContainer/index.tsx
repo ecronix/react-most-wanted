@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react'
 import { useConfig } from '@ecronix/base-shell'
-import { useSnackbar } from 'notistack'
+import { SnackbarKey, useSnackbar } from 'notistack'
 import { useIntl } from 'react-intl'
 import { Button } from '@mui/material'
 
@@ -8,14 +8,14 @@ const runUpdate = () => {
   window.update && window.update()
 }
 
-export function UpdateContainer({ children }) {
+export function UpdateContainer({ children }: { children: React.ReactNode }) {
   const intl = useIntl()
   const { appConfig } = useConfig()
   const { enqueueSnackbar, closeSnackbar } = useSnackbar()
   const { update } = appConfig || {}
   const { checkInterval = 3000, repeatInterval = 300000 } = update || {}
 
-  const action = (key) => (
+  const action = (key: SnackbarKey) => (
     <Fragment>
       <Button
         variant="contained"

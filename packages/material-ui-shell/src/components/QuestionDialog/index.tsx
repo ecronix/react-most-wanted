@@ -12,10 +12,11 @@ import {
   Slide,
   useMediaQuery,
 } from '@mui/material'
+import { TransitionComponentProps } from '@ecronix/material-ui-shell/common.type'
 
-const Transition = React.forwardRef((props, ref) => (
-  <Slide direction="up" {...props} ref={ref} />
-))
+const Transition = React.forwardRef<unknown, TransitionComponentProps>(
+  (props, ref) => <Slide direction="up" {...props} ref={ref} />
+)
 
 export default function QuestionDialog({
   isProcessing = false,
@@ -24,7 +25,7 @@ export default function QuestionDialog({
   message = '',
   title = '',
   action = '',
-  handleAction = () => {},
+  handleAction = (handleClose: () => void) => {},
   handleClose = () => {},
   ...rest
 }) {

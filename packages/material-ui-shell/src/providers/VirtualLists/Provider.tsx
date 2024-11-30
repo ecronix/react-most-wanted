@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
 import Context from './Context'
-import { IProviderProps } from '../IProviderProps'
+import { IProviderProps } from '@ecronix/material-ui-shell/common.type'
 
 type ReducerAction = {
   type: string

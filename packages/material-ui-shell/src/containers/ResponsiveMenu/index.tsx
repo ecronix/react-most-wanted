@@ -2,17 +2,17 @@ import React from 'react'
 import { SwipeableDrawer, styled } from '@mui/material'
 import { useMenu, useTheme as useAppTheme } from '@ecronix/material-ui-shell'
 import { useConfig } from '@ecronix/base-shell'
+import {
+  MenuContextType,
+  togglerTypes,
+} from '@ecronix/material-ui-shell/providers/Menu/Context'
 
 //const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
 interface CustomSwipeableDrawerProps {
-  theme: any
+  theme?: any
   width: number | string
-  menucontext: {
-    isDesktop: boolean
-    isMenuOpen: boolean
-    isMiniMode: boolean
-  }
+  menucontext: MenuContextType
 }
 
 const CustomSwipeableDrawer = styled(
@@ -71,7 +71,7 @@ export function ResponsiveMenuContainer({
     menuContext || {}
 
   const handleDrawerToggle = () => {
-    toggleThis('isMobileMenuOpen')
+    toggleThis(togglerTypes.isMobileMenuOpen)
   }
 
   return (

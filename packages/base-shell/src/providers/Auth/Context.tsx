@@ -3,7 +3,11 @@ import React from "react";
 export interface AuthContextType {
   auth: {
     isAuthenticated: boolean;
+    photoURL: string;
+    displayName: string;
+    email: string;
   };
+
   /**
    * @description Set auth to provided auth parameter
    * @param auth

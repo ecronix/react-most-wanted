@@ -1,6 +1,9 @@
 import React from 'react'
 import { TextField } from '@mui/material'
-import { SortOrientationType } from '@ecronix/material-ui-shell/providers/common.type'
+import {
+  OperatorType,
+  SortOrientationType,
+} from '@ecronix/material-ui-shell/common.type'
 
 const field = {
   operators: [
@@ -10,7 +13,7 @@ const field = {
     { value: '!=', label: '!=' },
     { value: '<=', label: '<=' },
     { value: '>=', label: '>=' },
-  ],
+  ] as OperatorType[],
   defaultOperator: '=',
   filter: (rawValue: any, q: { operator: string; value: string }) => {
     const { operator, value: qv } = q
