@@ -33,3 +33,27 @@ export type ThemeType = {
     }
   }
 }
+
+export type MenuItemType =
+  | {
+      value: string
+      nestedItems?: never
+      visible?: boolean
+      primaryText: string
+      subheader?: string
+      leftIcon: React.ReactNode
+      onClick?: () => void
+      divider?: boolean
+      style?: React.CSSProperties
+    }
+  | {
+      value?: never
+      nestedItems: MenuItemType[]
+      visible?: boolean
+      primaryText: string
+      subheader?: string
+      leftIcon: React.ReactNode
+      onClick?: () => void
+      divider?: boolean
+      style?: React.CSSProperties
+    }

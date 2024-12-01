@@ -4,6 +4,7 @@ import {
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
   KeyboardArrowRight,
   ArrowBack,
+  Login,
 } from '@mui/icons-material'
 import {
   Divider,
@@ -18,12 +19,23 @@ import {
   Typography,
 } from '@mui/material'
 import { useLocation } from 'react-router-dom'
+import { MenuItemType } from '@ecronix/material-ui-shell/common.type'
 
 type PropTypes = {
-  onIndexChange: () => void
+  onIndexChange: (
+    e: React.FormEvent<HTMLUListElement | HTMLLIElement>,
+    v: string
+  ) => React.FormEventHandler<HTMLUListElement | HTMLLIElement>
   useMinified: boolean
   items: any[]
   index: number
+}
+type StateType = {
+  previousItems?: MenuItemType[][]
+  items?: MenuItemType[]
+  previousTitles?: string[]
+  title?: string
+  index?: number | string
 }
 export function SelectableMenuListContainer({
   onIndexChange,
@@ -31,45 +43,54 @@ export function SelectableMenuListContainer({
   items,
   index,
 }: PropTypes) {
-  const [state, setState] = useState({})
+  const [state, setState] = useState<StateType>({})
   const { isRTL } = useAppTheme()
   const { isMiniMode } = useMenu()
   const { pathname = '' } = useLocation()
 
-  const loopItems = useCallback((items, previousItems = [], title: string) => {
-    items.map((i) => {
-      const { value = 'none', nestedItems = [], primaryText = '' } = i
-      if (pathname === value) {
-        if (previousItems.length) {
-          setState({
-            index: value,
-            previousItems: [previousItems],
-            items,
-            title,
-          })
-        } else {
-          setState({
-            index: value,
-          })
+  const loopItems = useCallback(
+    (
+      items: MenuItemType[],
+      previousItems: MenuItemType[] = [],
+      title: string
+    ) => {
+      items.map((i) => {
+        const { value = 'none', nestedItems = [], primaryText = '' } = i
+        if (pathname === value) {
+          if (previousItems.length) {
+            setState({
+              index: value,
+              previousItems: [previousItems],
+              items,
+              title,
+            })
+          } else {
+            setState({
+              index: value,
+            })
+          }
+
+          return i
         }
 
+        if (nestedItems.length) {
+          loopItems(nestedItems, [...previousItems, ...items], primaryText)
+        }
+        //console.log('i', i)
         return i
-      }
+      })
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    []
+  )
 
-      if (nestedItems.length) {
-        loopItems(nestedItems, [...previousItems, items], primaryText)
-      }
-      //console.log('i', i)
-      return i
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const list =
-    state.previousItems && state.previousItems.length > 0 ? state.items : items
+  const list: MenuItemType[] =
+    state.previousItems && state.items && state.previousItems.length > 0
+      ? state.items
+      : items
 
   useEffect(() => {
-    loopItems(items)
+    loopItems(items, [], '')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -80,7 +101,7 @@ export function SelectableMenuListContainer({
     //setState({})
   }, [items.length])
 
-  const handleNestedItemsClick = (item) => {
+  const handleNestedItemsClick = (item: MenuItemType) => {
     if (item.nestedItems) {
       let previousItems = state.previousItems || []
       let previousTitles = state.previousTitles || []
@@ -117,7 +138,7 @@ export function SelectableMenuListContainer({
     setState({ ...state, items, previousItems, previousTitles, title })
   }
 
-  const getItem = (item, i) => {
+  const getItem = (item: MenuItemType, i: number) => {
     const { index } = state
 
     delete item.visible
@@ -146,16 +167,18 @@ export function SelectableMenuListContainer({
             <List>
               <ListItem
                 disablePadding
-                selected={index && index === item.value}
+                // selected={index && index === item.value}
                 key={i}
-                onClick={(e) => {
-                  onIndexChange(e, item.value)
+                onClick={(e: React.FormEvent<HTMLLIElement>) => {
+                  onIndexChange(e, item.value!)
                   handleNestedItemsClick(item)
                   if (item.onClick) {
                     item.onClick()
                   }
                 }}
-                onMouseDown={(e) => {
+                onMouseDown={(
+                  e: React.MouseEvent<HTMLLIElement, MouseEvent>
+                ) => {
                   if (e.button === 1) {
                     var win = window.open(`${item.value}`, '_blank')
                     win?.focus()
@@ -198,7 +221,12 @@ export function SelectableMenuListContainer({
   }
 
   return (
-    <List value={index} onChange={onIndexChange}>
+    <List
+      // value={index}
+      onChange={(e: React.FormEvent<HTMLUListElement>) =>
+        onIndexChange(e, index.toString())
+      }
+    >
       {state.items && state.previousItems && state.previousItems.length > 0 && (
         <div>
           <ListItem

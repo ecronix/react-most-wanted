@@ -93,6 +93,7 @@ const getMenuItems = (props) => {
       },
     ]
   }
+
   return [
     {
       value: '/home',
