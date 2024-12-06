@@ -32,6 +32,8 @@ const LayoutContent: React.FC<{ children: React.ReactNode }> = ({
   const { useiOSPWAPrompt, iOSPWAPromptProps } = pwa || {}
   const { themes = [] } = themeConfig || {}
   const theme = getThemeSource(themeID, themes, isDarkMode, isRTL)
+  console.log('theme')
+  console.log(theme)
 
   return (
     <ThemeProvider theme={theme}>

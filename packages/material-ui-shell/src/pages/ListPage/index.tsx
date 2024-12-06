@@ -1,5 +1,5 @@
 import FilterDrawer from '../../components/FilterDrawer'
-import { Page } from '@ecronix/material-ui-shell'
+import { Page, RowProps } from '@ecronix/material-ui-shell'
 import React from 'react'
 import SearchField from '../../components/SearchField'
 import { Toolbar, IconButton } from '@mui/material'
@@ -7,20 +7,20 @@ import { FilterList } from '@mui/icons-material'
 import { useFilter, VirtualListContainer } from '@ecronix/material-ui-shell'
 
 type ListPageProps = {
-  fields: any
-  list: any
+  fields?: any
+  list?: any
   getPageProps: (data: any) => {}
-  listContainerStyle: any
+  listContainerStyle?: any
   listProps: any
-  Row: any
+  Row: React.FC<RowProps>
   name: string
-  trailing: string | null
-  leading: any | null
-  disableSearch: boolean
-  disableFilter: boolean
-  top: React.ReactNode
-  bottom: React.ReactNode
-  parseList: (data: any) => void
+  trailing?: string | null
+  leading?: any | null
+  disableSearch?: boolean
+  disableFilter?: boolean
+  top?: React.ReactNode
+  bottom?: React.ReactNode
+  parseList?: (data: any) => void
 }
 
 export function ListPage(props: ListPageProps) {

@@ -23,10 +23,15 @@ const CustomScrollbarsVirtualList = React.forwardRef((props: any, ref) => {
   )
 })
 
+export type RowProps = {
+  data: any
+  index: number
+  style: Object
+}
 type VirtualListContainerProps = {
   list: any
-  listProps: any[]
-  Row: React.FC<{ data: any }>
+  listProps: Object
+  Row: React.FC<RowProps>
   name: string
   preserveScroll?: boolean
 }

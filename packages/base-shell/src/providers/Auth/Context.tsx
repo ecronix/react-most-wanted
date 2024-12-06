@@ -1,12 +1,19 @@
 import React from "react";
 
-export interface AuthContextType {
-  auth: {
-    isAuthenticated: boolean;
-    photoURL: string;
-    displayName: string;
-    email: string;
-  };
+export type ProviderData = { providerId: string };
+export type AuthType = {
+  isAuthenticated: boolean;
+  photoURL: string;
+  displayName: string;
+  email: string;
+  uid: string;
+  isAdmin?: boolean;
+  providerData?: ProviderData[];
+};
+
+// TODO Fix isAuthGranted import everywhere
+export interface IAuthContext {
+  auth: AuthType;
 
   /**
    * @description Set auth to provided auth parameter
@@ -19,10 +26,10 @@ export interface AuthContextType {
    * @param auth
    */
   updateAuth: (auth: any) => void;
+
+  isAuthGranted?: (auth: AuthType, type: string) => boolean;
 }
 
-const ConfigContext = React.createContext<AuthContextType | undefined>(
-  undefined
-);
+const ConfigContext = React.createContext<IAuthContext | undefined>(undefined);
 
 export default ConfigContext;
