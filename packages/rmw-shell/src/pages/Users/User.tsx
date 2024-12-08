@@ -26,6 +26,7 @@ import { SearchField, useFilter } from "@ecronix/material-ui-shell";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { getDatabase, ref, set } from "firebase/database";
+import { AuthType } from "@ecronix/base-shell/dist/types/providers/Auth/Context";
 
 export function UserPage() {
   const intl = useIntl();
@@ -68,7 +69,7 @@ export function UserPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [path]);
 
-  const user = getPath(path, {});
+  const user = getPath(path);
   const admins = getList("admins");
 
   const {
@@ -182,7 +183,7 @@ export function UserPage() {
                       alignItems: "center",
                     }}
                   >
-                    {providerData.map((so) => {
+                    {providerData.map((so: any) => {
                       return getProviderIcon(so.providerId) ? (
                         <IconButton color="primary" key={so}>
                           {getProviderIcon(so.providerId)}

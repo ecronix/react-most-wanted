@@ -3,22 +3,23 @@ import Context from "./Context";
 import { Button } from "@mui/material";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 import { useIntl } from "react-intl";
-import { useSnackbar } from "notistack";
+import { SnackbarKey, useSnackbar } from "notistack";
 import { SnackMessage } from "@ecronix/rmw-shell";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getDatabase, ref, set } from "firebase/database";
 import { getApp } from "firebase/app";
+import { IProviderProps } from "@ecronix/material-ui-shell";
 
 const isSupported = () =>
   "Notification" in window &&
   "serviceWorker" in navigator &&
   "PushManager" in window;
 
-const Provider = ({ children }) => {
-  const [token, setToken] = useState(false);
+const Provider = ({ children }: IProviderProps) => {
+  const [token, setToken] = useState<string | null>(null);
   const intl = useIntl();
   const { appConfig } = useConfig();
-  const { auth = {} } = useAuth();
+  const { auth } = useAuth();
   const { uid, notificationsDisabled = false } = auth || {};
   const { firebase: firebaseConfig } = appConfig || {};
   const { prod = {}, dev = {} } = firebaseConfig || {};
@@ -30,7 +31,7 @@ const Provider = ({ children }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const syncToken = useCallback(
-    async (token) => {
+    async (token: string) => {
       if (notificationsDisabled) {
         return;
       }
@@ -40,14 +41,14 @@ const Provider = ({ children }) => {
         if (uid) {
           await set(
             ref(getDatabase(), `notification_tokens/${uid}/${token}`),
-            true,
+            true
           );
         }
       } catch (error) {
         console.warn(error);
       }
     },
-    [uid, notificationsDisabled],
+    [uid, notificationsDisabled]
   );
 
   const initializeMessaging = useCallback(async () => {
@@ -76,9 +77,9 @@ const Provider = ({ children }) => {
     }
   }, [initializeMessaging, notificationsDisabled]);
 
-  const requestPermission = (p) => {
+  const requestPermission = (p?: { onDismiss: () => void }) => {
     const { onDismiss = () => {} } = p || {};
-    const action = (key) => (
+    const action = (key: SnackbarKey) => (
       <Fragment>
         <Button
           onClick={async () => {
@@ -132,7 +133,7 @@ const Provider = ({ children }) => {
             horizontal: "center",
           },
           action,
-        },
+        }
       );
     } else if (Notification.permission === "granted") {
       console.log("Notifications are enabled");

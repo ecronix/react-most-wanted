@@ -34,12 +34,13 @@ export function EditMembersPage() {
     })
     .filter((u) => u.key !== auth.uid);
 
-  const isChecked = (key) => {
+  const isChecked = (key: string) => {
     return members.find((m) => m.key === key);
   };
 
   const handleRowClick = async (user) => {
     await set(
+      //@ts-ignore
       ref(db, groupMembersPath).child(user.key),
       isChecked(user.key) ? null : true
     );

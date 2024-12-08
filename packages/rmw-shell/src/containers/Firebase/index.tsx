@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useConfig, useAuth } from "@ecronix/base-shell";
+import { useConfig, useAuth, AppConfig } from "@ecronix/base-shell";
 import {
   FirebasePathsProvider as PathsProvider,
   FirebaseListsProvider as ListsProvider,
@@ -30,7 +30,8 @@ export function FirebaseContainer({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(getAuth(getApp()), (user) => {
-      if (onAuthStateChanged) {
+      if (onAuthStateChanged !== null) {
+        // TODO Check if works -> added !== null
         internalOnAuthStateChanged(user, auth);
       }
     });

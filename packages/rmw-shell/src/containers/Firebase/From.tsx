@@ -5,6 +5,17 @@ import { useAuth } from "@ecronix/base-shell";
 import arrayMutators from "final-form-arrays";
 import { getDatabase, ref, push, set, update } from "firebase/database";
 
+type FirebaseFromContainerProps = {
+  uid: string;
+  path: string;
+  handleSubmit: (values: any, id: string) => void;
+  Form: any;
+  grants: any;
+  formProps: any;
+  initialValues: any;
+  parseValues: (v: string) => string;
+  setSubmit: (v: any) => void;
+};
 export function FirebaseFromContainer({
   uid,
   path = "none",
@@ -16,7 +27,7 @@ export function FirebaseFromContainer({
   parseValues = (v) => v,
   setSubmit,
   ...rest
-}) {
+}: FirebaseFromContainerProps) {
   const { watchPath, clearPath, getPath } = useFirebasePaths();
   const { auth, isAuthGranted = () => false } = useAuth();
 
@@ -35,7 +46,7 @@ export function FirebaseFromContainer({
       mutators={{ ...arrayMutators }}
       keepDirtyOnReinitialize
       onSubmit={async (rawValues) => {
-        let newUid = false;
+        let newUid: string | null = null;
         let values = rawValues;
         if (parseValues) {
           values = parseValues(values);
@@ -54,7 +65,7 @@ export function FirebaseFromContainer({
           }
         }
 
-        handleSubmit(values, newUid);
+        handleSubmit(values, newUid!);
       }}
       initialValues={data}
       render={({ handleSubmit, submit, ...r }) => {

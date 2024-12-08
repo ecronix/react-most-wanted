@@ -9,6 +9,8 @@ export type AuthType = {
   uid: string;
   isAdmin?: boolean;
   providerData?: ProviderData[];
+  notificationsDisabled?: boolean;
+  grants?: string[];
 };
 
 // TODO Fix isAuthGranted import everywhere

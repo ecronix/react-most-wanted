@@ -34,6 +34,8 @@ import {
   deleteUser,
   updateCurrentUser,
   reload,
+  Auth,
+  User,
 } from "firebase/auth";
 import { getDatabase, set, remove, ref } from "firebase/database";
 import { useFirebaseMessaging } from "@ecronix/rmw-shell";
@@ -69,11 +71,11 @@ export function MyAccountPage() {
   const hasChange =
     displayName !== currentDisplayName || photoURL !== currentPhoroURL;
 
-  const handleImageChange = (image) => {
+  const handleImageChange = (image: string) => {
     setPhotoURL(image);
   };
 
-  const getProviderIcon = (id) => {
+  const getProviderIcon = (id: string) => {
     if (id === "google.com") {
       return <GoogleIcon />;
     }
@@ -111,10 +113,10 @@ export function MyAccountPage() {
   };
 
   const handleSave = async () => {
-    updateProfile(getAuth().currentUser, { displayName, photoURL });
+    updateProfile(getAuth().currentUser as User, { displayName, photoURL });
     updateAuth({ ...auth, displayName, photoURL });
     await updateCurrentUser(getAuth(), getAuth().currentUser);
-    await reload(getAuth().currentUser);
+    await reload(getAuth().currentUser as User);
   };
 
   const isLinkedWithProvider = (provider: string) => {
@@ -134,7 +136,7 @@ export function MyAccountPage() {
   const linkUserWithPopup = (p) => {
     const provider = getProvider(p);
 
-    linkWithPopup(getAuth().currentUser, provider).then(
+    linkWithPopup(getAuth().currentUser as User, provider).then(
       () => {
         updateAuth({ ...auth, ...getAuth().currentUser });
       },
@@ -178,7 +180,7 @@ export function MyAccountPage() {
         id: "reauthenticate_account_dialog_action",
         defaultMessage: "REAUTHENTICATE",
       }),
-      handleAction: (hc) => {
+      handleAction: (hc: () => void) => {
         getAuth().currentUser.signOut();
         hc();
       },
@@ -187,8 +189,8 @@ export function MyAccountPage() {
 
   const handleDelete = async (handleClose: () => void) => {
     try {
-      await deleteUser(getAuth().currentUser);
-    } catch ({ code }) {
+      await deleteUser(getAuth().currentUser as User);
+    } catch ({ code }: any) {
       if (code === "auth/requires-recent-login") {
         openReauthenticateDialog();
       }
@@ -310,7 +312,7 @@ export function MyAccountPage() {
 
             <Typography variant="h6">{email}</Typography>
             <div style={{ margin: 18, display: "flex", alignItems: "center" }}>
-              {signInOptions.map((so) => {
+              {signInOptions.map((so: any) => {
                 return getProviderIcon(so) ? (
                   <IconButton
                     disabled={isLinkedWithProvider(so)}

@@ -3,7 +3,14 @@ import Context from "./Context";
 import Provider from "./Provider";
 
 function useFirebaseMessaging() {
-  return useContext(Context);
+  const context = useContext(Context);
+
+  if (context === undefined) {
+    throw new Error(
+      "useFirebaseMessaging must be used within a FirebaseMessagingContext"
+    );
+  }
+  return context;
 }
 
 export {

@@ -16,7 +16,7 @@ type FormPageContainerProps = {
   getPageProps: () => {};
   handleDelete: () => {};
   deleteDialogProps: Object;
-  grants: Object;
+  grants: Object; // TODO Check because in config grants are string[]
   initialValues: Object;
   useSave: boolean;
   useDelete: boolean;
@@ -45,11 +45,11 @@ export function FormPageContainer(props: FormPageContainerProps) {
   const db = getDatabase();
 
   const databasePath = `${path}/${uid}`;
-  const data = getPath(databasePath, {}) || initialValues;
+  const data = getPath(databasePath) || initialValues;
 
   const openDeleteDialog = () => {
     openDialog({
-      handleAction: async (handleClose) => {
+      handleAction: async (handleClose: () => void) => {
         await set(ref(db, `${path}/${uid}`), null);
         handleClose();
         handleDelete();

@@ -65,7 +65,7 @@ export function UsersPage() {
 
   const admins = getList("admins");
 
-  const handleRowClick = (data) => {
+  const handleRowClick = (data: any) => {
     console.log("data", data);
     navigate(`/users/${data.key}`);
   };

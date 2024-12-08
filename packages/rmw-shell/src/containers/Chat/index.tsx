@@ -157,7 +157,7 @@ export function ChatContainer({ path }: { path: string }) {
                     path={path}
                     userChanged={userChanged}
                     dateChanged={dateChanged}
-                    scrollToBottom={scrollToBottom}
+                    scrollToBottom={scrollToBottom} // TODO Check it is passed to ChatMessage but it is not used - probably should remove
                   />
                 );
               })}

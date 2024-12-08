@@ -9,44 +9,56 @@ import {
   onChildRemoved,
   get,
   off,
+  DatabaseReference,
+  Query,
 } from "firebase/database";
+import { DocumentData } from "firebase/firestore";
+import { ActionTypeBase } from "../..";
+import { IProviderProps } from "@ecronix/material-ui-shell";
 
-const LOADING_CHANGED = "LOADING_CHANGED";
-const ERROR = "ERROR";
-const VALUE_CHANGE = "VALUE_CHANGED";
-const CLEAR = "CLEAR";
-const CLEAR_ALL = "CLEAR_ALL";
-const CHILD_ADDED = "CHILD_ADDED";
-const CHILD_CHANGED = "CHILD_CHANGED";
-const CHILD_REMOVED = "CHILD_REMOVED";
+enum ActionTypes {
+  LOADING_CHANGED = "LOADING_CHANGED",
+  ERROR = "ERROR",
+  VALUE_CHANGE = "VALUE_CHANGED",
+  CLEAR = "CLEAR",
+  CLEAR_ALL = "CLEAR_ALL",
+  CHILD_ADDED = "CHILD_ADDED",
+  CHILD_CHANGED = "CHILD_CHANGED",
+  CHILD_REMOVED = "CHILD_REMOVED",
+}
 
-const inits = {};
+type ActionType = ActionTypeBase & {
+  type: ActionTypes;
+  path: string;
+};
 
-const setInit = (path) => {
+const inits: DocumentData = {};
+
+const setInit = (path: string) => {
   inits[path] = true;
 };
 
-const removeInit = (path) => {
+const removeInit = (path: string) => {
   inits[path] = false;
 };
 
-function list(list = [], action) {
+function list(list: DocumentData[] = [], action: ActionType) {
   const { payload } = action;
   switch (action.type) {
-    case CHILD_ADDED:
+    case ActionTypes.CHILD_ADDED:
       return list.findIndex((d) => d.key === payload.key) === -1
         ? [...list, payload]
         : [...list];
 
-    case CHILD_CHANGED:
+    case ActionTypes.CHILD_CHANGED:
       return list.map((child) => (payload.key === child.key ? payload : child));
 
-    case CHILD_REMOVED:
+    case ActionTypes.CHILD_REMOVED:
       return list.filter((child) => payload.key !== child.key);
   }
 }
 
-function reducer(state, action) {
+function reducer(state: DocumentData, action: ActionType) {
   const {
     type,
     path,
@@ -56,24 +68,24 @@ function reducer(state, action) {
     hasError = false,
   } = action;
   switch (type) {
-    case LOADING_CHANGED:
+    case ActionTypes.LOADING_CHANGED:
       return { ...state, [path]: { ...state[path], isLoading } };
-    case ERROR:
+    case ActionTypes.ERROR:
       return {
         ...state,
         [path]: { ...state[path], error, hasError, isLoading },
       };
-    case VALUE_CHANGE:
+    case ActionTypes.VALUE_CHANGE:
       return {
         ...state,
         [path]: { ...state[path], value, isLoading, error, hasError },
       };
-    case CLEAR:
+    case ActionTypes.CLEAR:
       const { [path]: clearedKey, ...rest } = state;
       return { ...rest };
-    case CHILD_ADDED:
-    case CHILD_CHANGED:
-    case CHILD_REMOVED:
+    case ActionTypes.CHILD_ADDED:
+    case ActionTypes.CHILD_CHANGED:
+    case ActionTypes.CHILD_REMOVED:
       console.log("state[path]", state[path]);
       if (state[path]) {
         return {
@@ -85,24 +97,28 @@ function reducer(state, action) {
         return state;
       }
 
-    case CLEAR_ALL:
+    case ActionTypes.CLEAR_ALL:
       return {};
     default:
       throw new Error();
   }
 }
 
-function getInitState(persistKey) {
+function getInitState(persistKey: string) {
   let persistedValues = {};
   try {
-    persistedValues = JSON.parse(localStorage.getItem(persistKey)) || {};
+    const pkString = localStorage.getItem(persistKey);
+    persistedValues = pkString ? JSON.parse(pkString) : null;
   } catch (error) {
     console.warn(error);
   }
   return persistedValues;
 }
 
-const Provider = ({ children, persistKey = "firebase_lists" }) => {
+const Provider = ({
+  children,
+  persistKey = "firebase_lists",
+}: IProviderProps) => {
   const [state, dispatch] = useReducer(reducer, getInitState(persistKey));
   const db = getDatabase();
 
@@ -115,8 +131,8 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
   }, [state, persistKey]);
 
   const getRef = useCallback(
-    (path) => {
-      if (typeof path === "string" || path instanceof String) {
+    (path: string | DatabaseReference | Query) => {
+      if (typeof path === "string") {
         return ref(db, path);
       } else {
         return path;
@@ -126,8 +142,8 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
   );
 
   const getLocation = useCallback(
-    (path) => {
-      if (typeof path === "string" || path instanceof String) {
+    (path: string | DatabaseReference | Query) => {
+      if (typeof path === "string") {
         return path;
       } else {
         return path.toString().substring(ref(db).root.toString().length);
@@ -137,7 +153,7 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
   );
 
   const watchList = useCallback(
-    async (reference, alias) => {
+    async (reference: string | DatabaseReference | Query, alias?: string) => {
       const ref = getRef(reference);
       const path = alias || getLocation(reference);
 
@@ -156,9 +172,9 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
       // but we can use this to not change the state after the inital call
       // because we already have all data we got trough the once call
 
-      const handleError = (error) => {
+      const handleError = (error: Error) => {
         dispatch({
-          type: ERROR,
+          type: ActionTypes.ERROR,
           path,
           isLoading: false,
           error,
@@ -167,7 +183,7 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
         removeInit(path);
       };
 
-      const handleChange = (s, type) => {
+      const handleChange = (s: DocumentData, type: ActionTypes) => {
         if (listenForChanges) {
           dispatch({
             type,
@@ -180,18 +196,30 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
       setInit(path);
 
       dispatch({
-        type: LOADING_CHANGED,
+        type: ActionTypes.LOADING_CHANGED,
         path,
         isLoading: true,
       });
 
-      onChildAdded(ref, (s) => handleChange(s, CHILD_ADDED), handleError);
-      onChildChanged(ref, (s) => handleChange(s, CHILD_CHANGED), handleError);
-      onChildRemoved(ref, (s) => handleChange(s, CHILD_REMOVED), handleError);
+      onChildAdded(
+        ref,
+        (s) => handleChange(s, ActionTypes.CHILD_ADDED),
+        handleError
+      );
+      onChildChanged(
+        ref,
+        (s) => handleChange(s, ActionTypes.CHILD_CHANGED),
+        handleError
+      );
+      onChildRemoved(
+        ref,
+        (s) => handleChange(s, ActionTypes.CHILD_REMOVED),
+        handleError
+      );
 
       try {
         try {
-          const list = [];
+          const list: DocumentData[] = [];
 
           const snapshot = await get(getRef(reference));
           snapshot.forEach((snap) => {
@@ -199,7 +227,7 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
           });
 
           dispatch({
-            type: VALUE_CHANGE,
+            type: ActionTypes.VALUE_CHANGE,
             path,
             value: list,
             isLoading: false,
@@ -208,21 +236,22 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
           console.log("Error loading inital data", error);
         } finally {
           dispatch({
-            type: LOADING_CHANGED,
+            type: ActionTypes.LOADING_CHANGED,
             isLoading: false,
+            path, // TODO check if path should be here
           });
         }
 
         listenForChanges = true;
       } catch (error) {
-        handleError(error);
+        handleError(error as Error);
       }
     },
     [getLocation, getRef]
   );
 
   const unwatchList = useCallback(
-    (reference) => {
+    (reference: string | DatabaseReference | Query) => {
       const ref = getRef(reference);
       const path = getLocation(reference);
 
@@ -236,47 +265,47 @@ const Provider = ({ children, persistKey = "firebase_lists" }) => {
   );
 
   const getList = useCallback(
-    (path) => {
+    (path: string): any[] => {
       return state[path] && state[path].value ? state[path].value : [];
     },
     [state]
   );
 
   const isListLoading = useCallback(
-    (path) => {
+    (path: string) => {
       return state[path] ? state[path].isLoading : false;
     },
     [state]
   );
 
   const getListError = useCallback(
-    (path) => {
+    (path: string) => {
       return state[path] ? state[path].error : false;
     },
     [state]
   );
 
   const hasListError = useCallback(
-    (path) => {
+    (path: string) => {
       return state[path] ? state[path].hasError : false;
     },
     [state]
   );
 
   const clearList = useCallback(
-    (reference) => {
+    (reference: string) => {
       const ref = getRef(reference);
       const path = getLocation(reference);
 
       unwatchList(ref);
-      dispatch({ type: CLEAR, path });
+      dispatch({ type: ActionTypes.CLEAR, path });
     },
     [getRef, getLocation, unwatchList]
   );
 
   const clearAllLists = useCallback(() => {
     off(ref(db));
-    dispatch({ type: CLEAR_ALL });
+    dispatch({ type: ActionTypes.CLEAR_ALL, path: "" });
   }, [db]);
 
   return (

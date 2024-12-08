@@ -3,7 +3,14 @@ import Context from "./Context";
 import Provider from "./Provider";
 
 function useFirebasePaths() {
-  return useContext(Context);
+  const context = useContext(Context);
+
+  if (context === undefined) {
+    throw new Error(
+      "useFirebasePaths must be used within a FirebasePathsContext"
+    );
+  }
+  return context;
 }
 
 export {

@@ -70,7 +70,7 @@ function AutocompleteWrapper(props: AutocompleteWrapperProps) {
     ...rest
   } = props;
 
-  function getValue(values) {
+  function getValue(values: any) {
     if (!getOptionValue) {
       return values;
     }
@@ -87,6 +87,7 @@ function AutocompleteWrapper(props: AutocompleteWrapperProps) {
   const { variant, ...restTextFieldProps } = textFieldProps || {};
 
   // yuck...
+  // Value is any by docs https://mui.com/material-ui/api/autocomplete/
   let defaultValue: null | any[] | any = null;
   if (!getOptionValue) {
     defaultValue = value;
@@ -97,7 +98,7 @@ function AutocompleteWrapper(props: AutocompleteWrapperProps) {
         if (!defaultValue) {
           defaultValue = [];
         }
-        value.forEach((v) => {
+        value.forEach((v: any) => {
           if (getOptionSelected?.(optionValue, v)) {
             defaultValue?.push(option);
           }

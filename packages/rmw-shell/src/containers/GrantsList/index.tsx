@@ -21,7 +21,7 @@ export function GrantsListContainer({ grantsPath }: { grantsPath: string }) {
 
   const list = getList(
     "grants",
-    grants.map((g) => {
+    grants.map((g: string) => {
       return { name: g };
     }),
     [{ name: "name" }]

@@ -12,9 +12,9 @@ type ListPageContainerProps = {
   getRef: (() => React.Ref<HTMLElement>) | any;
   Row: React.FC<RowProps>;
   listProps?: Object;
-  getPageProps: () => void;
+  getPageProps: (list: any[]) => any;
   onCreateClick: () => void;
-  createGrant: boolean;
+  createGrant: string;
   listPageProps: any[];
   reverse: boolean;
   disableCreate: boolean;

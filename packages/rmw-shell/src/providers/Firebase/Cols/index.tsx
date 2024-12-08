@@ -3,7 +3,14 @@ import Context from "./Context";
 import Provider from "./Provider";
 
 function useFirebaseCols() {
-  return useContext(Context);
+  const context = useContext(Context);
+
+  if (context === undefined) {
+    throw new Error(
+      "useFirebaseCols must be used within a FirebaseColsContext"
+    );
+  }
+  return context;
 }
 
 export {

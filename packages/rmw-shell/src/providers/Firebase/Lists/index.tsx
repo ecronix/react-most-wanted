@@ -3,7 +3,14 @@ import Context from "./Context";
 import Provider from "./Provider";
 
 function useFirebaseLists() {
-  return useContext(Context);
+  const context = useContext(Context);
+
+  if (context === undefined) {
+    throw new Error(
+      "useFirebaseLists must be used within a FirebaseListsContext"
+    );
+  }
+  return context;
 }
 
 export {

@@ -38,6 +38,7 @@ type ChatMessageProps = {
   uid: string;
   userChanged: boolean;
   dateChanged: boolean;
+  scrollToBottom: any; // TODO Check it is passed in container/chat but it is not used - probably should remove
 };
 export function ChatMessage({
   message: data,
@@ -236,7 +237,7 @@ export function ChatMessage({
             //   target: "_blank",
             // }}
             >
-              <Typography variant="body2">{message} olx.ba</Typography>
+              <Typography variant="body2">{message}</Typography>
             </Linkify>
           )}
           {type === "image" && (

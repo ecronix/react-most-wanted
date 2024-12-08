@@ -3,8 +3,9 @@ export const getGeocodeAddress = (
   onSuccess: (data: any, results: any, status: any) => void,
   onError: (status: any) => void
 ) => {
+  //@ts-ignore
   let geocoder = new window.google.maps.Geocoder();
-  geocoder.geocode({ address }, (results, status) => {
+  geocoder.geocode({ address }, (results: any[], status: string) => {
     if (status === "OK" && onSuccess && onSuccess instanceof Function) {
       onSuccess(
         {

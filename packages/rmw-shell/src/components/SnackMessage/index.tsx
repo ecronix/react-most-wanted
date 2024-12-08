@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
-import { useSnackbar, SnackbarContent } from "notistack";
+import { useSnackbar, SnackbarContent, SnackbarKey } from "notistack";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { Avatar, CardMedia, IconButton, Card, CardHeader } from "@mui/material";
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const SnackMessage = React.forwardRef(
   (
-    props: { payload: any; id: string },
+    props: { payload: any; id: SnackbarKey },
     ref: React.LegacyRef<HTMLDivElement> | undefined
   ) => {
     const classes = useStyles();
