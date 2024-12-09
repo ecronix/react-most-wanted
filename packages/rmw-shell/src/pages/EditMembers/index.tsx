@@ -40,7 +40,7 @@ export function EditMembersPage() {
 
   const handleRowClick = async (user) => {
     await set(
-      //@ts-ignore
+      // @ts-ignore
       ref(db, groupMembersPath).child(user.key),
       isChecked(user.key) ? null : true
     );

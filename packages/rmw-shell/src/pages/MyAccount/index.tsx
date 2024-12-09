@@ -106,6 +106,7 @@ export function MyAccountPage() {
       return new TwitterAuthProvider();
     }
     if (provider.indexOf("phone") > -1) {
+      //@ts-ignore
       return new PhoneAuthProvider();
     }
 
@@ -133,7 +134,7 @@ export function MyAccountPage() {
     }
   };
 
-  const linkUserWithPopup = (p) => {
+  const linkUserWithPopup = (p: string) => {
     const provider = getProvider(p);
 
     linkWithPopup(getAuth().currentUser as User, provider).then(
@@ -181,6 +182,7 @@ export function MyAccountPage() {
         defaultMessage: "REAUTHENTICATE",
       }),
       handleAction: (hc: () => void) => {
+        //@ts-ignore
         getAuth().currentUser.signOut();
         hc();
       },

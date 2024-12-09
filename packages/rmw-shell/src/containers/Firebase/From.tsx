@@ -10,10 +10,10 @@ type FirebaseFromContainerProps = {
   path: string;
   handleSubmit: (values: any, id: string) => void;
   Form: any;
-  grants: any;
-  formProps: any;
-  initialValues: any;
-  parseValues: (v: string) => string;
+  grants?: any;
+  formProps?: any;
+  initialValues?: any;
+  parseValues?: (v: string) => string;
   setSubmit: (v: any) => void;
 };
 export function FirebaseFromContainer({

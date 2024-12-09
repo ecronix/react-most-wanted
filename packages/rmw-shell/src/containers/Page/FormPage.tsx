@@ -16,7 +16,10 @@ type FormPageContainerProps = {
   getPageProps: () => {};
   handleDelete: () => {};
   deleteDialogProps: Object;
-  grants: Object; // TODO Check because in config grants are string[]
+  grants: {
+    create?: string;
+    delete?: string;
+  }; // TODO Check because in config grants are string[]
   initialValues: Object;
   useSave: boolean;
   useDelete: boolean;
@@ -67,7 +70,9 @@ export function FormPageContainer(props: FormPageContainerProps) {
         <div>
           {useSave && (
             <IconButton
-              disabled={!isAuthGranted(auth, grants.create) && !alwaysAllowSave}
+              disabled={
+                !isAuthGranted(auth, grants.create!) && !alwaysAllowSave
+              }
               color="inherit"
               onClick={(e) => {
                 submit(e);
@@ -81,7 +86,7 @@ export function FormPageContainer(props: FormPageContainerProps) {
             <IconButton
               disabled={
                 !uid ||
-                (!isAuthGranted(auth, grants.delete) && !alwaysAllowDelete)
+                (!isAuthGranted(auth, grants.delete!) && !alwaysAllowDelete)
               }
               color="inherit"
               onClick={() => {

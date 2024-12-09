@@ -134,7 +134,7 @@ const Provider = ({
   );
 
   const getPath = useCallback(
-    (path: string, defaultValue?: string): string => {
+    (path: string, defaultValue?: string | Object): string => {
       return state[path] ? state[path].value : defaultValue;
     },
     [state]

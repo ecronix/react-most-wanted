@@ -140,7 +140,7 @@ export function RolePage() {
             >
               <FirebaseFromContainer
                 path={`${path}`}
-                uid={uid}
+                uid={uid!}
                 setSubmit={setSubmit}
                 handleSubmit={(values, newUid) => {
                   if (newUid) {

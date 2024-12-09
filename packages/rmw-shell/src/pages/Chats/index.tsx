@@ -53,9 +53,8 @@ const Row: React.FC<RowProps> = ({ data, index, style }: RowProps) => {
     lastCreated = "",
   } = data;
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { uid = "" } = useParams();
 
-  const handleClick = (event) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
