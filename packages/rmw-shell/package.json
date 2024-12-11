@@ -72,6 +72,8 @@
     "@mui/material": "^6.1.4",
     "@mui/styles": "^6.1.4",
     "@mui/x-date-pickers": "^7.20.0",
+    "@types/react-helmet": "^6.1.11",
+    "@types/react-linkify": "^1.0.4",
     "@vitejs/plugin-react": "^4.3.2",
     "chart.js": "^4.4.5",
     "cypress": "^13.15.0",

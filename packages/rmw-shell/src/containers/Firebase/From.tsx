@@ -3,18 +3,19 @@ import { Form as FinalForm } from "react-final-form";
 import { useFirebasePaths } from "@ecronix/rmw-shell";
 import { useAuth } from "@ecronix/base-shell";
 import arrayMutators from "final-form-arrays";
-import { getDatabase, ref, push, set, update } from "firebase/database";
+import { getDatabase, ref, push, set } from "firebase/database";
 
 type FirebaseFromContainerProps = {
   uid: string;
   path: string;
-  handleSubmit: (values: any, id: string) => void;
-  Form: any;
+  handleSubmit?: (values: any, id: string) => void;
+  Form?: any;
   grants?: any;
   formProps?: any;
   initialValues?: any;
   parseValues?: (v: string) => string;
-  setSubmit: (v: any) => void;
+  setSubmit: (v: (e: any) => void) => void;
+  submit?: ((e: any) => void) | null;
 };
 export function FirebaseFromContainer({
   uid,
@@ -68,8 +69,9 @@ export function FirebaseFromContainer({
         handleSubmit(values, newUid!);
       }}
       initialValues={data}
-      render={({ handleSubmit, submit, ...r }) => {
-        if (!submit && setSubmit) {
+      // TODO submit -> submitting check if its working
+      render={({ handleSubmit, submitting, ...r }) => {
+        if (!submitting && setSubmit) {
           setSubmit(() => handleSubmit);
         }
 

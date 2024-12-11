@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useFirebaseLists, useFirebasePaths } from "@ecronix/rmw-shell";
+import {
+  useFirebaseLists,
+  useFirebasePaths,
+  UserRowData,
+} from "@ecronix/rmw-shell";
 import { ListPage } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import Fab from "@mui/material/Fab";
@@ -18,9 +22,9 @@ export function GroupChatPage() {
   const { auth } = useAuth();
   const intl = useIntl();
   const navigate = useNavigate();
-  const { uid = false } = useParams();
+  const { uid = null } = useParams();
   const [selected, setSelected] = useState<Record<string, any>>({});
-  const [step, setStep] = useState(uid !== false ? 1 : 0);
+  const [step, setStep] = useState(uid !== null ? 1 : 0);
   const db = getDatabase();
   const { name: currentName = "" } = getPath(`group_chats/${uid}`, {}) || {};
   const [name, setName] = useState("");
@@ -52,7 +56,7 @@ export function GroupChatPage() {
     })
     .filter((u) => u.key !== auth.uid);
 
-  const handleRowClick = (user) => {
+  const handleRowClick = (user: UserRowData) => {
     const key = user.key;
 
     if (!selected[key]) {

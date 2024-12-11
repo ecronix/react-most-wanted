@@ -16,6 +16,7 @@ import Badge from "@mui/material/Badge";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import Checkbox from "@mui/material/Checkbox";
 import { SvgIconProps } from "@mui/material";
+import { AuthUser } from "@ecronix/base-shell/dist/types/providers/Auth/Context";
 
 const getProviderIcon = (id: string) => {
   const iconProps: SvgIconProps = {
@@ -42,22 +43,19 @@ const getProviderIcon = (id: string) => {
   return <Mail key={id} {...iconProps} />;
 };
 
-type DataType = {
-  displayName: string;
+export type UserRowData = AuthUser & {
   key: string;
-  photoURL: string;
-  providerData: any[];
   icon: string;
   secondaryText: string;
 };
 
 type UserRowProps = {
-  data: DataType;
-  index: number;
-  style: Object;
+  data: UserRowData;
+  index?: number;
+  style?: Object;
   admins: any[];
   isChecked?: boolean;
-  handleRowClick: (data: DataType) => void;
+  handleRowClick: (data: UserRowData) => void;
   hasCheckbox?: boolean;
 };
 export const UserRow = ({

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { useFirebaseLists } from "@ecronix/rmw-shell";
+import { useFirebaseLists, UserRowData } from "@ecronix/rmw-shell";
 import { ListPage } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import GroupAdd from "@mui/icons-material/GroupAdd";
@@ -15,7 +15,6 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { AuthType } from "@ecronix/base-shell/dist/types/providers/Auth/Context";
 
 export function CreateChatPage() {
   const { watchList, getList, isListLoading } = useFirebaseLists();
@@ -90,9 +89,7 @@ export function CreateChatPage() {
 
   const admins = getList("admins");
 
-  const handleRowClick = async (
-    user: AuthType & { key: string; isGroup: boolean }
-  ) => {
+  const handleRowClick = async (user: UserRowData & { isGroup?: boolean }) => {
     const { key, displayName, photoURL = "", isGroup } = user;
 
     if (isGroup) {

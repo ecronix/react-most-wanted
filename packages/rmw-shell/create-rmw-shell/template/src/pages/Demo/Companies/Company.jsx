@@ -16,7 +16,7 @@ export default function CompanyPage() {
     <FormPageContainer
       path={`${path}`}
       uid={uid}
-      getPageProps={(values) => {
+      getPageProps={(_values) => {
         return {
           pageTitle: intl.formatMessage({
             id: path,

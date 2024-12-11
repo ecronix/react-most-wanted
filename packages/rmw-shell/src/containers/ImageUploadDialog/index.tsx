@@ -75,6 +75,7 @@ export function ImageUploadDialogContainer({
     hasUploadError,
     uploadString,
     clearUpload,
+    clearAllUploads,
     getUploadProgress,
   } = useFirebaseStorage();
 
@@ -86,7 +87,9 @@ export function ImageUploadDialogContainer({
   );
 
   const clear = () => {
-    clearUpload();
+    //TODO check - possibly call clearAllUploads
+    // clearUpload();
+    clearAllUploads();
     setCroppedImage(null);
     setFile(null);
     setCroppedAreaPixels(null);

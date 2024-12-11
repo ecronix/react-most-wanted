@@ -86,17 +86,18 @@ export function Page({
         }}
       >
         <Toolbar>
-          {(isMenuOpen && isDesktop) ||
-            (!onBackClick && (
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerMenuClick}
-                edge="start"
-              >
-                <MenuIcon />
-              </IconButton>
-            ))}
+          {isMenuOpen && isDesktop
+            ? null
+            : !onBackClick && (
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={handleDrawerMenuClick}
+                  edge="start"
+                >
+                  <MenuIcon />
+                </IconButton>
+              )}
           {/* james- check if this is dead code? */}
           {onBackClick && (
             <IconButton

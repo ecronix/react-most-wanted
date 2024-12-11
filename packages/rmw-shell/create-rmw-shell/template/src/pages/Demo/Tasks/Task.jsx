@@ -36,7 +36,7 @@ export default function TaskPage() {
         console.log("parse values", values);
         return { ...values, due_to: moment(due_to).format() };
       }}
-      getPageProps={(values) => {
+      getPageProps={(_values) => {
         return {
           pageTitle: intl.formatMessage({
             id: path,

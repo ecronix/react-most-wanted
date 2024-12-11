@@ -1,7 +1,7 @@
 import React from "react";
 
 export type ProviderData = { providerId: string };
-export type AuthType = {
+export type AuthUser = {
   isAuthenticated: boolean;
   photoURL: string;
   displayName: string;
@@ -15,7 +15,7 @@ export type AuthType = {
 
 // TODO Fix isAuthGranted import everywhere
 export interface IAuthContext {
-  auth: AuthType;
+  auth: AuthUser;
 
   /**
    * @description Set auth to provided auth parameter
@@ -29,7 +29,7 @@ export interface IAuthContext {
    */
   updateAuth: (auth: any) => void;
 
-  isAuthGranted?: (auth: AuthType, type: string) => boolean;
+  isAuthGranted?: (auth: AuthUser, type: string) => boolean;
 }
 
 const ConfigContext = React.createContext<IAuthContext | undefined>(undefined);

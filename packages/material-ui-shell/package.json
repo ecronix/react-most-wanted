@@ -22,6 +22,7 @@
       "types": "./dist/types/index.d.ts"
     }
   },
+  "typings": "./dist/types/index.d.ts",
   "peerDependencies": {
     "@ecronix/base-shell": "2.x",
     "@emotion/react": "11.x",

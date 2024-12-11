@@ -23,6 +23,16 @@ type ActionType = ActionTypeBase & {
   type: ActionTypes;
   path: string;
 };
+type StateType = {
+  error?: boolean;
+  hasError?: boolean;
+  isLoading?: boolean;
+  value: {
+    admins?: any;
+    members?: any;
+    name?: string;
+  };
+};
 function reducer(state: DocumentData, action: ActionType) {
   const {
     type,
@@ -134,7 +144,7 @@ const Provider = ({
   );
 
   const getPath = useCallback(
-    (path: string, defaultValue?: string | Object): string => {
+    (path: string, defaultValue?: any): any => {
       return state[path] ? state[path].value : defaultValue;
     },
     [state]

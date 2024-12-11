@@ -107,6 +107,7 @@ export function MyAccountPage() {
     }
     if (provider.indexOf("phone") > -1) {
       //@ts-ignore
+      // TODO provide auth
       return new PhoneAuthProvider();
     }
 
@@ -183,6 +184,7 @@ export function MyAccountPage() {
       }),
       handleAction: (hc: () => void) => {
         //@ts-ignore
+        // .signOut() doesn't exist on type User
         getAuth().currentUser.signOut();
         hc();
       },

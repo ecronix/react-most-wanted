@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useFirebaseLists } from "@ecronix/rmw-shell";
+import { useFirebaseLists, UserRowData } from "@ecronix/rmw-shell";
 import { ListPage } from "@ecronix/material-ui-shell";
 import { useIntl } from "react-intl";
 import { useNavigate, useParams } from "react-router-dom";
@@ -38,8 +38,9 @@ export function EditMembersPage() {
     return members.find((m) => m.key === key);
   };
 
-  const handleRowClick = async (user) => {
+  const handleRowClick = async (user: UserRowData) => {
     await set(
+      // TODO .child does not exist on ref()
       // @ts-ignore
       ref(db, groupMembersPath).child(user.key),
       isChecked(user.key) ? null : true

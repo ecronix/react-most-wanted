@@ -5,7 +5,6 @@ import {
   onSnapshot,
   getFirestore,
   DocumentData,
-  DocumentReference,
 } from "firebase/firestore";
 import { IProviderProps } from "@ecronix/material-ui-shell";
 import { ActionTypeBase } from "../../index.js";
@@ -95,7 +94,7 @@ const Provider = ({
     if (typeof path === "string") {
       return doc(db, "/", ...path.split("/"));
     } else if (path instanceof Array) {
-      return doc(db, "/", ...path); // TODO how to test this
+      return doc(db, "/", ...path); // TODO how to test this = added "/" as starting path per docs
     } else {
       return path;
     }

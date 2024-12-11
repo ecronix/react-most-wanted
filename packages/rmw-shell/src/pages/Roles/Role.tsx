@@ -1,6 +1,6 @@
 import React from "react";
 import { useIntl } from "react-intl";
-import { Page } from "@ecronix/material-ui-shell";
+import { Page, useQuestionsDialog } from "@ecronix/material-ui-shell";
 import { useParams, useNavigate } from "react-router-dom";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -12,7 +12,7 @@ import Lock from "@mui/icons-material/Lock";
 import { GrantsListContainer } from "../../containers/GrantsList";
 import Zoom from "@mui/material/Zoom";
 import { SearchField, useFilter } from "@ecronix/material-ui-shell";
-import { FirebaseFromContainer } from "@ecronix/rmw-shell";
+import { FirebaseFromContainer, FormsRole } from "@ecronix/rmw-shell";
 import IconButton from "@mui/material/IconButton";
 import { useAuth } from "@ecronix/base-shell";
 import { getDatabase, ref, set } from "firebase/database";
@@ -27,12 +27,13 @@ export function RolePage() {
   const { uid, tab = "main" } = useParams();
   const { getFilter, setSearch } = useFilter();
   const { search = {} } = getFilter(tab);
-  const { openDialog } = useQuestions();
+  // TODO check since it was useQuestions() which is undefined
+  const { openDialog } = useQuestionsDialog();
   const { auth, isAuthGranted = () => false } = useAuth();
   const { value: searchValue = "" } = search;
-  let submit: () => void;
+  let submit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 
-  const setSubmit = (s: () => void) => {
+  const setSubmit = (s: (e: any) => void) => {
     submit = s;
   };
 
@@ -149,7 +150,8 @@ export function RolePage() {
                     navigate(`/${path}`);
                   }
                 }}
-                Form={Form}
+                // TODO check - it was Form instead of FormsRole but was not imported from anywhere
+                Form={FormsRole}
               />
             </div>
           )}

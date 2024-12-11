@@ -13,7 +13,7 @@ import { getDatabase, ref, set } from "firebase/database";
 type FormPageContainerProps = {
   uid: string;
   path: string;
-  getPageProps: () => {};
+  getPageProps: (data: Object) => Record<string, any>;
   handleDelete: () => {};
   deleteDialogProps: Object;
   grants: {
@@ -44,7 +44,7 @@ export function FormPageContainer(props: FormPageContainerProps) {
   const { openDialog } = useQuestionsDialog();
   const { getPath } = useFirebasePaths();
   const { auth, isAuthGranted = () => false } = useAuth();
-  const [submit, setSubmit] = useState(false);
+  const [submit, setSubmit] = useState<((e: any) => void) | null>(null);
   const db = getDatabase();
 
   const databasePath = `${path}/${uid}`;
@@ -75,7 +75,7 @@ export function FormPageContainer(props: FormPageContainerProps) {
               }
               color="inherit"
               onClick={(e) => {
-                submit(e);
+                submit?.(e);
               }}
             >
               <Save />

@@ -95,7 +95,7 @@ const Row: React.FC<RowProps> = ({ data, index, style }: RowProps) => {
         <ListItemText
           primary={displayName}
           secondary={
-            <div
+            <span
               style={{
                 textOverflow: "ellipsis",
                 overflow: "hidden",
@@ -104,7 +104,7 @@ const Row: React.FC<RowProps> = ({ data, index, style }: RowProps) => {
               }}
             >
               {lastMessage}
-            </div>
+            </span>
           }
         />
         <ListItemSecondaryAction>
@@ -260,7 +260,6 @@ export function ChatsPage() {
     )
     */
   }
-
   return (
     <Page
       onBackClick={

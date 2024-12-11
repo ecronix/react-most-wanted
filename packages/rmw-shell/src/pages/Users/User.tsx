@@ -26,7 +26,6 @@ import { SearchField, useFilter } from "@ecronix/material-ui-shell";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { getDatabase, ref, set } from "firebase/database";
-import { AuthType } from "@ecronix/base-shell/dist/types/providers/Auth/Context";
 
 export function UserPage() {
   const intl = useIntl();

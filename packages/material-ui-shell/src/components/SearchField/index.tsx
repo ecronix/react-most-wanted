@@ -5,13 +5,11 @@ import { InputBase } from '@mui/material'
 
 let timeout: NodeJS.Timeout | null = null
 
-const Search = styled('div')<{ isOpen: boolean }>(({ theme, isOpen }) => {
+const Search = styled('div')<{ open: boolean }>(({ theme, open }) => {
   return {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: isOpen
-      ? alpha(theme.palette.common.white, 0.15)
-      : undefined,
+    backgroundColor: open ? alpha(theme.palette.common.white, 0.15) : undefined,
     '&:hover': {
       backgroundColor: alpha(theme.palette.common.white, 0.25),
     },
@@ -34,9 +32,9 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   justifyContent: 'center',
 }))
 
-const StyledInputBase = styled(InputBase)<{ isOpen: boolean }>(({
+const StyledInputBase = styled(InputBase)<{ open: boolean }>(({
   theme,
-  isOpen,
+  open,
 }) => {
   return {
     color: 'inherit',
@@ -47,7 +45,7 @@ const StyledInputBase = styled(InputBase)<{ isOpen: boolean }>(({
       transition: theme.transitions.create('width'),
       width: '100%',
       [theme.breakpoints.up('sm')]: {
-        width: isOpen ? '20ch' : '0ch',
+        width: open ? '20ch' : '0ch',
         '&:focus': {
           width: '20ch',
         },
@@ -92,12 +90,12 @@ export default function SearchField({
   }
 
   return (
-    <Search isOpen={isOpen ?? false}>
+    <Search open={isOpen ?? false}>
       <SearchIconWrapper>
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        isOpen={isOpen ?? false}
+        open={isOpen ?? false}
         autoComplete="off"
         id="search-input"
         value={value}
