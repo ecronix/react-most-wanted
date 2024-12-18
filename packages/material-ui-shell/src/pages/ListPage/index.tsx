@@ -10,7 +10,6 @@ type ListPageProps = {
   fields?: any
   list?: any
   getPageProps: (data: any) => {}
-  listContainerStyle?: any
   listProps: any
   Row: React.FC<RowProps>
   name: string
@@ -23,6 +22,44 @@ type ListPageProps = {
   parseList?: (data: any) => void
 }
 
+/**
+ * `ListPage` component that renders a page containing a list of items with optional search, filter, and custom top/bottom content.
+ * It provides functionality for managing list data, applying search filters, and rendering custom row components.
+ *
+ * @example
+ * return (
+ *   <ListPage
+ *     name="myList"
+ *     fields={myFields}
+ *     list={myListData}
+ *     getPageProps={(data) => ({ title: 'My List Page', data })}
+ *     listProps={{ someProp: 'value' }}
+ *     Row={RowComponent}
+ *     disableSearch={false}
+ *     disableFilter={false}
+ *     top={<CustomTopContent />}
+ *     bottom={<CustomBottomContent />}
+ *     parseList={(data) => data.filter(item => item.active)}
+ *   />
+ * )
+ *
+ * @param {Object} props - Component props.
+ * @param {any[]} [props.fields=[]] - Fields to be used for filtering or displaying data in the list.
+ * @param {any[]} [props.list=[]] - The source list of items to display.
+ * @param {(data: any) => {}} props.getPageProps - A function to get additional page props (e.g., title, other page settings).
+ * @param {any} props.listProps - Properties to pass to the list rendering component.
+ * @param {React.FC<RowProps>} props.Row - The row component to render each item in the list.
+ * @param {string} props.name - The name identifier for the list, used for managing search and filters.
+ * @param {string | null} [props.trailing=null] - Optional content to render at the trailing (right) side of the app bar.
+ * @param {React.ReactNode | null} [props.leading=null] - Optional content to render at the leading (left) side of the app bar.
+ * @param {boolean} [props.disableSearch=false] - Flag to disable the search functionality.
+ * @param {boolean} [props.disableFilter=false] - Flag to disable the filter functionality.
+ * @param {React.ReactNode} [props.top=null] - Optional content to display at the top of the list page.
+ * @param {React.ReactNode} [props.bottom=null] - Optional content to display at the bottom of the list page.
+ * @param {(data: any) => any} [props.parseList=(l) => l] - A function to parse or transform the list data before rendering.
+ *
+ * @returns The rendered `ListPage` component with a list, optional filters, search, and custom content.
+ */
 export function ListPage(props: ListPageProps) {
   const {
     fields = [],

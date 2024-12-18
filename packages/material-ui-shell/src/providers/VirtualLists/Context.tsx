@@ -2,7 +2,7 @@ import React from 'react'
 
 export interface VirtualListsContextType {
   /**
-   * @description Set offset
+   * @description Set offset for provided name to provided value
    * @param name
    * @param offset
    */

@@ -9,6 +9,7 @@ export enum togglerTypes {
 }
 
 export type MenuContextType = {
+  /** Method for updating context values. Use `togglerTypes` enum to access properties. Provide new value to set to specified property */
   toggleThis: (value: togglerTypes, newValue?: boolean | null) => void
   isDesktop: boolean
   isAuthMenuOpen?: boolean

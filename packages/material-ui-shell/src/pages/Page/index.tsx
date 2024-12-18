@@ -23,6 +23,36 @@ type PageProps = {
   contentStyle?: any
   tabs?: any
 }
+
+/**
+ * `Page` component that provides a layout structure with an app bar, optional back button,
+ * loading indicator, offline status, and customizable content area.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Page
+ *     pageTitle="My Custom Page"
+ *     onBackClick={() => console.log('Back button clicked')}
+ *     isLoading={false}
+ *     appBarContent={<Button color="inherit">App Bar Button</Button>}
+ *     tabs={<div>My Custom Tabs</div>}
+ *   >
+ *     <div>This is the content of the page.</div>
+ *   </Page>
+ * )
+ *
+ * @param {Object} props - Component props.
+ * @param {React.ReactNode} props.children - The content to render within the page.
+ * @param {string | String} [props.pageTitle] - The title to display in the app bar.
+ * @param [props.onBackClick] - A callback function to handle the back button click event.
+ * @param {boolean} [props.isLoading] - A flag to indicate whether the page is in a loading state.
+ * @param {React.ReactNode} [props.appBarContent=null] - Content to be placed within the app bar (e.g., buttons, icons).
+ * @param {React.CSSProperties} [props.contentStyle] - Additional styles to apply to the content area of the page.
+ * @param {React.ReactNode} [props.tabs=null] - Tabs content to be rendered below the app bar (optional).
+ *
+ * @returns The rendered `Page` component.
+ */
 export function Page({
   children,
   pageTitle,
