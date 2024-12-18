@@ -16,6 +16,27 @@ type UpdateDialogProps = {
   runUpdate: () => void
 }
 
+/**
+ * A functional React component that renders a dialog to notify the user about an available update.
+ *
+ * The `UpdateDialog` component provides options to proceed with an update or postpone it.
+ * It handles various UI states including responsiveness and localization.
+ *
+ * @param {UpdateDialogProps} props - The properties passed to the `UpdateDialog` component.
+ * @param {boolean} props.isUpdateAvailable - Indicates whether an update is available. If true, the dialog opens.
+ * @param props.runUpdate - Callback function to run the update when the "Update" button is clicked.
+ *
+ * @returns The rendered update dialog component.
+ *
+ * @example
+ * <UpdateDialog
+ *   isUpdateAvailable={true}
+ *   runUpdate={() => {
+ *     console.log('Running update...');
+ *   }}
+ * />
+ */
+
 export default function UpdateDialog({
   isUpdateAvailable,
   runUpdate,

@@ -4,7 +4,6 @@ import {
   KeyboardArrowLeft as KeyboardArrowLeftIcon,
   KeyboardArrowRight,
   ArrowBack,
-  Login,
 } from '@mui/icons-material'
 import {
   Divider,
@@ -37,6 +36,29 @@ type StateType = {
   title?: string
   index?: number | string
 }
+
+/**
+ * @description Menu list container component takeing in account RTL properties from theme and
+ * isMiniMode property from menu context
+ * @param {PropTypes} props - properties passed in component
+ * @param  props.onIndexChange - method triggered on index change on List component from @mui/material
+ * @param {boolean} props.useMinfied - defines if minified menu should be displayed
+ * @param  props.items - Menu items to be renderd
+ * @param  props.index - optional parameter
+ *
+ * @example
+ * <SelectableMenuListContainer
+ *   key={isMiniSwitchVisibility + themeContext.isRTL}
+ *   onIndexChange={handleChange}
+ *   useMinified={isMiniMode}
+ *   items={menuItems}
+ *   index={index}
+ * />
+ * @returns
+ *
+ * @see {useMenu} - for referencing isMiniMode
+ * @see {useAppTheme} - for referencing isRTL
+ */
 export function SelectableMenuListContainer({
   onIndexChange,
   useMinified,

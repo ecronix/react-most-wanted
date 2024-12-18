@@ -23,11 +23,27 @@ type FilterDrawerProps = {
   fields: FieldType[]
 }
 
+/**
+ * A functional React component for rendering a filter drawer.
+ *
+ * The `FilterDrawer` is a customizable drawer that displays filter fields
+ * based on the provided configuration. It supports optional width customization.
+ *
+ * @param {FilterDrawerProps} props - The properties passed to the `FilterDrawer` component.
+ * @param {string} props.name - The name of the filter drawer, used for identification purposes.
+ * @param {number} [props.width=250] - The width of the drawer in pixels. Defaults to 250px.
+ * @param {FieldType[]} props.fields - An array of field definitions to display within the drawer.
+ *
+ * @returns {JSX.Element} The rendered filter drawer component.
+ *
+ * @example
+ * <FilterDrawer name="Product Filters" fields={fields} />
+ */
 export default function FilterDrawer({
   name,
   width = 250,
   fields = [],
-}: FilterDrawerProps) {
+}: FilterDrawerProps): JSX.Element {
   const intl = useIntl()
   const {
     isFilterOpen,

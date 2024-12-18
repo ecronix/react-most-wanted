@@ -50,6 +50,22 @@ type ImageUploadDialogContainerProps = {
   cropperProps: any
 }
 
+/**
+ *
+ * @description Dialog for uploading image
+ * @example
+ * <ImageUploadDialogContainer
+ * isOpen={isImageDialogOpen}
+ *    handleClose={() => setImageDialogOpen(false)}
+ *    handleCropSubmit={handleImageChange}
+ * />
+ *
+ * @param {ImageUploadDialogContainerProps} props
+ * @param {boolean} props.isOpen - Boolean flag indicating if Dialog is open
+ * @param props.handleClose - Method for closing Dialog
+ * @param props.handleCropSubmit - Method for submitting Dialog
+ * @param {string} props.path - Path of image - on change clear all states on Dialog
+ */
 export function ImageUploadDialogContainer({
   isOpen = false,
   handleClose,

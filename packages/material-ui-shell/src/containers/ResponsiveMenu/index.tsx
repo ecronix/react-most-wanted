@@ -58,6 +58,10 @@ const CustomSwipeableDrawer = styled(
   }
 })
 
+/**
+ * @description Wraps provided component in swipable drawer from @mui/material
+ * @param props.children - Children passed in compontent
+ */
 export function ResponsiveMenuContainer({
   children,
 }: {

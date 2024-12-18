@@ -85,6 +85,24 @@ type LCProps = {
   children: React.ReactNode
 }
 
+/**
+ * A functional React component that provides a layout container for the application.
+ * LayoutContainer is provided in app configuration under container section
+ *
+ * The `LayoutContainer` component is responsible for wrapping the children with necessary providers
+ * such as the `MenuProvider` and `AppThemeProvider`. It also integrates the `LayoutContent` component
+ * for setting up the theme and other configurations.
+ *
+ * @param {LCProps} props - The properties passed to the `LayoutContainer` component.
+ * @param {React.ReactNode} props.children - The child elements to be rendered inside the container.
+ *
+ * @returns  The rendered layout container with applied theme and menu context.
+ *
+ * @example
+ * <LayoutContainer>
+ *   <MyComponent />
+ * </LayoutContainer>
+ */
 export function LayoutContainer({ children }: LCProps): JSX.Element {
   const { appConfig } = useConfig()
 

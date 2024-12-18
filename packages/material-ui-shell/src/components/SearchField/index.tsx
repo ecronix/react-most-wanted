@@ -60,6 +60,28 @@ type SearchFieldProps = {
   alwaysOpen?: boolean
   deferTime?: number
 }
+
+/**
+ * React component for a search input field with deferred updates.
+ *
+ * The `SearchField` component provides an input field for searching with customizable
+ * initial value, deferred execution of the `onChange` callback, and options to always keep the field open.
+ *
+ * @param {SearchFieldProps} props - The properties passed to the `SearchField` component.
+ * @param props.onChange - A callback function that is triggered when the input value changes.
+ *   The callback is executed after a specified delay (`deferTime`).
+ * @param {string} props.initialValue - The initial value of the search input field.
+ * @param {boolean} [props.alwaysOpen=false] - If true, the search input is always displayed as open.
+ * @param {number} [props.deferTime=1000] - The delay (in milliseconds) before the `onChange` callback is executed.
+ *
+ * @returns The rendered search input field.
+ *
+ * @example
+ * <SearchField
+ *   initialValue="example"
+ *   onChange={(value) => console.log('Search input changed:', value)}
+ * />
+ */
 export default function SearchField({
   onChange,
   initialValue = '',

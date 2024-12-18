@@ -1,9 +1,13 @@
 // @ts-ignore
 import AutoSizer from 'lp-react-virtualized-auto-sizer-react-18'
 import { List } from '@mui/material'
-import React, { useEffect, MutableRefObject } from 'react'
+import React, { useEffect, MutableRefObject, ComponentType } from 'react'
 import Scrollbar from '../../components/Scrollbar'
-import { FixedSizeList, FixedSizeList as FixedSizeListType } from 'react-window'
+import {
+  FixedSizeList,
+  FixedSizeList as FixedSizeListType,
+  ReactElementType,
+} from 'react-window'
 
 import { useState } from 'react'
 import {
@@ -68,7 +72,8 @@ export function VirtualListContainer(props: VirtualListContainerProps) {
       {({ height, width }: { height: number; width: number }) => {
         return (
           <List style={{ padding: 0 /* , direction: isRTL ? 'rtl':'ltr' */ }}>
-            <FixedSizeList
+            {/* @ts-ignore */}
+            <FixedSizeList // Having issues with typescript and react v18
               direction={isRTL ? 'rtl' : 'ltr'} //removes native scrollbar
               ref={(r) => {
                 if (r) {
@@ -80,7 +85,7 @@ export function VirtualListContainer(props: VirtualListContainerProps) {
               itemCount={list.length}
               itemSize={100}
               width={width}
-              outerElementType={CustomScrollbarsVirtualList}
+              outerElementType={CustomScrollbarsVirtualList as ReactElementType}
               {...listProps}
             >
               {(p) => <Row {...p} data={list[p.index]} />}

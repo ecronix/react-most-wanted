@@ -1,7 +1,11 @@
 import React from 'react'
 import CircularProgress from '@mui/material/CircularProgress'
 
-export default function Loading() {
+/**
+ * @description Circular loading indicator.
+ * @returns CircularProgress component with size of 50
+ */
+export default function Loading(): JSX.Element {
   return (
     <div
       style={{

@@ -8,6 +8,22 @@ const runUpdate = () => {
   window.update && window.update()
 }
 
+/**
+ * @description React component that manages the update process.
+ * The `UpdateContainer` component checks for updates periodically and shows a notification
+ * if an update is available. It provides buttons to either update immediately or defer the update.
+ * The update process is handled by a global `window.update` function, if available.
+ *
+ * @param {UpdateContainerProps} props - The properties passed to the `UpdateContainer` component.
+ * @param {React.ReactNode} props.children - The child elements to be rendered inside the container.
+ *
+ * @returns The rendered update container which wraps its children.
+ *
+ * @example
+ * <UpdateContainer>
+ *   <MyComponent />
+ * </UpdateContainer>
+ */
 export function UpdateContainer({ children }: { children: React.ReactNode }) {
   const intl = useIntl()
   const { appConfig } = useConfig()

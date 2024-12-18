@@ -36,7 +36,16 @@ type AvatarConstructorType =
       avatar?: never
     }
 
-export default function MenuHeader() {
+/**
+ * @description React component used as header in menus. Component is intented to be provided
+ * in menu in configuration file. If MenuHeader is present in config.menu it will be rendered in MenuContainer
+ *
+ * @returns {JSX.Element} Menu header component takeing in account configuration from menuContext
+ *
+ * @see {MenuContainer} See menu container for usage reference
+ * @see {useMenu} for reference what is taken in account
+ */
+export default function MenuHeader(): JSX.Element {
   const { auth } = useAuth()
   const { toggleThisTheme, isDarkMode, isRTL } = useAppTheme()
   const menuContext = useMenu()
