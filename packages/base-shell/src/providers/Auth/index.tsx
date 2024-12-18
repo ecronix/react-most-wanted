@@ -23,7 +23,6 @@ import Provider from "./Provider";
  * - login: A function to log in the user
  * - logout: A function to log out the user
  *
- * @see {@link AuthProvider} for providing the authentication context
  * @see {@link IAuthContext} for the shape of the returned context
  */
 function useAuth(): IAuthContext {

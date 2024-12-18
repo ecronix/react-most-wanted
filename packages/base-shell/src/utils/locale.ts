@@ -36,6 +36,26 @@ const getUsersPreferredLanguages = () => {
   }
 };
 
+/**
+ * Determines the best matching language based on user preferences and accepted languages.
+ *
+ * This function attempts to find a match between the user's preferred languages and a list
+ * of accepted languages. If no match is found and a default language is provided, it returns
+ * the default language. Otherwise, it returns `undefined`.
+ *
+ * @param acceptedLangs - An array of language codes (e.g., ['en', 'fr', 'de']) that are supported by the application.
+ * @param defaultLang - (Optional) A default language code to fall back to if no match is found.
+ *                      Defaults to an empty string.
+ *
+ * @returns A string representing the matched language or the default language if no match is found.
+ * If no match is found and no default language is provided, it returns `undefined`.
+ *
+ * @example
+ * const acceptedLangs = ['en', 'fr', 'de'];
+ * const defaultLang = 'en';
+ *
+ * const preferredLang = parseLanguages(acceptedLangs, defaultLang);
+ */
 const parseLanguages = (acceptedLangs: string[], defaultLang: string = "") => {
   const userPref = getUsersPreferredLanguages();
 
@@ -50,6 +70,31 @@ const parseLanguages = (acceptedLangs: string[], defaultLang: string = "") => {
   return match;
 };
 
+/**
+ * Asynchronously retrieves localized messages for a specified locale.
+ *
+ * This function searches through a list of locale objects to find a matching locale.
+ * If a match is found, it dynamically imports and resolves the corresponding
+ * messages using the `defineMessages` function from react-intl. If no match is found or the list
+ * of locales is not provided, it returns an empty object.
+ *
+ * @param {string} l - The locale string to search for (e.g., 'en', 'fr').
+ * @param ls - An array of locale objects, where each object contains:
+ *   - `locale`: The locale identifier as a string.
+ *   - `messages`: The path or reference to the locale's message definitions.
+ *
+ * @returns A promise that resolves to the localized messages for the given locale.
+ * If the locale is not found, the promise resolves to an empty object.
+ *
+ * @example
+ * const { locale }: LocaleContextType = useLocale();
+ *
+ * getLocaleMessages(locale, locales).then((messages) => {
+ *   console.log(messages);
+ * });
+ *
+ * @see {defineMessages} - Method from react-intl
+ */
 const getLocaleMessages = async (
   l: string,
   ls: { locale: string; messages: any }[]

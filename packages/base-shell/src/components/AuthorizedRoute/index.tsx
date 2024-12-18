@@ -2,11 +2,21 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useAuth, useConfig } from "@ecronix/base-shell";
 
 /**
- * @description
- * A component that ensures only authenticated user can access page wrapped by this component
+ * A route component that renders its children for authenticated users only.
  *
- * @param {React.ReactNode} children - The content to render if the user is authenticated.
- * @returns {React.ReactNode} The rendered children or a redirect to the sign-in page.
+ * If the user is authenticated, the children components are rendered.
+ * If unauthenticated, the user is redirected to the sign-in page with the
+ * current path included as a query parameter for redirection after login.
+ *
+ * @param {object} props - The properties passed to the `AuthorizedRoute` component.
+ * @param {React.ReactNode} props.children - The components to render if the user is authenticated.
+ *
+ * @returns {JSX.Element} The rendered children for authorized users or a `<Navigate>` component for redirection.
+ *
+ * @example
+ * <AuthorizedRoute>
+ *   <Dashboard />
+ * </AuthorizedRoute>
  */
 
 export function AuthorizedRoute({

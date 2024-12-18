@@ -15,6 +15,9 @@ export type AuthUser = {
 
 // TODO Fix isAuthGranted import everywhere
 export interface IAuthContext {
+  /**
+   * @description Authorized user object
+   */
   auth: AuthUser;
 
   /**

@@ -3,8 +3,6 @@ import Context from "./Context";
 
 export interface OnlineProviderProps {
   children: React.ReactNode;
-  defaultLocale?: string;
-  persistKey?: string;
 }
 
 const Provider: React.FC<OnlineProviderProps> = ({ children }) => {

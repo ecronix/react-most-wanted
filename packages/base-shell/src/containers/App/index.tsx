@@ -21,6 +21,21 @@ export interface AppConfig {
   [key: string]: any;
 }
 
+/**
+ * React component that serves as the main container for the application.
+ *
+ * This component receives configuration data as props and manages the
+ * high-level layout or setup for the application.
+ *
+ * @param {AppContainerProps} props - The properties passed to the `AppContainer` component.
+ * @param {AppConfig} props.config - The application configuration object.
+ *
+ * @returns The rendered application container with embedded router and Loading component.
+ *
+ * @example
+ *
+ * <AppContainer config={appConfig} />
+ */
 export const AppContainer: React.FC<AppContainerProps> = ({
   config: appConfig,
 }) => {

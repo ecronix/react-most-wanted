@@ -59,5 +59,8 @@
     "react-most-wanted",
     "base-shell"
   ],
-  "gitHead": "a90224fcc897992ad6bb85e613ae50a24aa2a936"
+  "gitHead": "a90224fcc897992ad6bb85e613ae50a24aa2a936",
+  "dependencies": {
+    "@rollup/rollup-darwin-x64": "^4.27.4"
+  }
 }
