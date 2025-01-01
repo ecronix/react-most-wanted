@@ -69,7 +69,7 @@ function reducer(state: DocumentData, action: ActionType) {
   } = action;
   switch (type) {
     case ActionTypes.LOADING_CHANGED:
-      return { ...state, [path]: { ...state[path], isLoading } };
+      return { ...state, [path]: { ...state?.[path], isLoading } };
     case ActionTypes.ERROR:
       return {
         ...state,

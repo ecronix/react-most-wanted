@@ -44,7 +44,7 @@ function reducer(state: DocumentData, action: ActionType) {
   } = action;
   switch (type) {
     case ActionTypes.LOADING_CHANGED:
-      return { ...state, [path]: { ...state[path], isLoading } };
+      return { ...state, [path]: { ...state?.[path], isLoading } };
     case ActionTypes.ERROR_CHANGED:
       return {
         ...state,
@@ -145,28 +145,28 @@ const Provider = ({
 
   const getPath = useCallback(
     (path: string, defaultValue?: any): any => {
-      return state[path] ? state[path].value : defaultValue;
+      return state?.[path] ? state[path].value : defaultValue;
     },
     [state]
   );
 
   const isPathLoading = useCallback(
     (path: string): boolean => {
-      return state[path] ? state[path].isLoading : false;
+      return state?.[path] ? state[path].isLoading : false;
     },
     [state]
   );
 
   const getPathError = useCallback(
     (path: string) => {
-      return state[path] ? state[path].error : false;
+      return state?.[path] ? state[path].error : false;
     },
     [state]
   );
 
   const hasPathError = useCallback(
     (path: string): boolean => {
-      return state[path] ? state[path].hasError : false;
+      return state?.[path] ? state[path].hasError : false;
     },
     [state]
   );
