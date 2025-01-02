@@ -10,7 +10,6 @@
     "lerna": "^8.1.8"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "*",
-    "@rollup/rollup-darwin-x64": "^4.29.1"
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
