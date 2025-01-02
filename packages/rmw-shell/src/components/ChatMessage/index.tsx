@@ -232,10 +232,12 @@ export function ChatMessage({
             // Even properties exist in documentation examples
             // http://tasti.github.io/react-linkify/
             // It does not exist in Class and it doesn't work
+            // @ts-ignore
             <Linkify
-            // properties={{
-            //   target: "_blank",
-            // }}
+              // @ts-ignore
+              properties={{
+                target: "_blank",
+              }}
             >
               <Typography variant="body2">{message}</Typography>
             </Linkify>

@@ -72,6 +72,7 @@
     "@mui/material": "^6.1.4",
     "@mui/styles": "^6.1.4",
     "@mui/x-date-pickers": "^7.20.0",
+    "@types/react": "^18.3.12",
     "@types/react-helmet": "^6.1.11",
     "@types/react-linkify": "^1.0.4",
     "@vitejs/plugin-react": "^4.3.2",

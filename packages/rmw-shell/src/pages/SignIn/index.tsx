@@ -34,6 +34,7 @@ export function SignInPage() {
 
   return (
     <Page pageTitle={intl.formatMessage({ id: "sign_in" })}>
+      {/* @ts-ignore */}
       <Helmet>
         <link
           type="text/css"
