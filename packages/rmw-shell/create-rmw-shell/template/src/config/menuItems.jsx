@@ -332,7 +332,7 @@ const getMenuItems = (props) => {
           visible: true,
           onClick: () => {
             toggleThisTheme("isRTL");
-            window.location.reload(false);
+            // window.location.reload(false);
           },
           primaryText: `${isRTL ? "LTR" : "RTL"} mode`,
           leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,

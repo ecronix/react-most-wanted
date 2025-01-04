@@ -18,16 +18,16 @@ const Provider: React.FC<IProviderProps> = ({
   const isDarkModeKey = `${persistKey}:isDarkMode`
   const isRTLKey = `${persistKey}:isRTL`
 
+  const persistThemeID = localStorage.getItem(themeIDKey)
+  const persistIsDarkMode = localStorage.getItem(isDarkModeKey)
+  const persistIsRTL = localStorage.getItem(isRTLKey)
+
   const toggleThisTheme = (mode: 'isRTL' | 'isDarkMode') => {
     if (mode === 'isRTL') setIsRTL(!isRTL)
     if (mode === 'isDarkMode') setIsDarkMode(!isDarkMode)
   }
 
   useEffect(() => {
-    const persistThemeID = localStorage.getItem(themeIDKey)
-    const persistIsDarkMode = localStorage.getItem(isDarkModeKey)
-    const persistIsRTL = localStorage.getItem(isRTLKey)
-
     if (persistThemeID) {
       setThemeID(persistThemeID)
     }

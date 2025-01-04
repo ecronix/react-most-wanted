@@ -73,12 +73,12 @@ function reducer(state: DocumentData, action: ActionType) {
     case ActionTypes.ERROR:
       return {
         ...state,
-        [path]: { ...state[path], error, hasError, isLoading },
+        [path]: { ...state?.[path], error, hasError, isLoading },
       };
     case ActionTypes.VALUE_CHANGE:
       return {
         ...state,
-        [path]: { ...state[path], value, isLoading, error, hasError },
+        [path]: { ...state?.[path], value, isLoading, error, hasError },
       };
     case ActionTypes.CLEAR:
       const { [path]: clearedKey, ...rest } = state;
@@ -87,7 +87,7 @@ function reducer(state: DocumentData, action: ActionType) {
     case ActionTypes.CHILD_CHANGED:
     case ActionTypes.CHILD_REMOVED:
       console.log("state[path]", state[path]);
-      if (state[path]) {
+      if (state?.[path]) {
         return {
           ...state,
           //TO DO: a bug happens if state[path] is undefined
@@ -266,28 +266,28 @@ const Provider = ({
 
   const getList = useCallback(
     (path: string): any[] => {
-      return state[path] && state[path].value ? state[path].value : [];
+      return state?.[path] && state[path]?.value ? state[path].value : [];
     },
     [state]
   );
 
   const isListLoading = useCallback(
     (path: string) => {
-      return state[path] ? state[path].isLoading : false;
+      return state?.[path] ? state[path].isLoading : false;
     },
     [state]
   );
 
   const getListError = useCallback(
     (path: string) => {
-      return state[path] ? state[path].error : false;
+      return state?.[path] ? state[path].error : false;
     },
     [state]
   );
 
   const hasListError = useCallback(
     (path: string) => {
-      return state[path] ? state[path].hasError : false;
+      return state?.[path] ? state[path].hasError : false;
     },
     [state]
   );
